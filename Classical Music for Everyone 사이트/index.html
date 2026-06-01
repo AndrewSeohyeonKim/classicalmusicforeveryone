@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Classical Music for Everyone — A community music initiative in Ireland</title>
+<meta name="description" content="Classical Music for Everyone (CMFE) is a Dublin-based community music initiative making classical music accessible to everyone — regardless of age, background, mobility, or prior musical knowledge." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#faf6ef; --ivory-2:#f3ece0; --paper:#fffdf9;
+    --ink:#352724; --ink-soft:#5a4a46;
+    --wine:#6b2230; --wine-dark:#511a25; --wine-soft:#8c3a48;
+    --gold:#9a7b3f; --gold-soft:#b89a5e; --line:#e4d8c6;
+    --shadow:0 18px 50px -28px rgba(53,20,28,.45);
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Inter','Noto Sans KR',system-ui,sans-serif;
+    --kr:'Noto Sans KR','Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--ivory);line-height:1.65;-webkit-font-smoothing:antialiased}
+  .kr{font-family:var(--kr);color:var(--ink-soft)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  section{padding:92px 0}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:.2px}
+  .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px}
+  .lead{font-size:19px;color:var(--ink-soft);max-width:680px}
+  .btn{display:inline-block;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.3px;padding:13px 26px;border-radius:4px;transition:.2s;cursor:pointer;border:1px solid transparent}
+  .btn-primary{background:var(--wine);color:#fff}
+  .btn-primary:hover{background:var(--wine-dark)}
+  .btn-ghost{border-color:var(--gold);color:var(--gold)}
+  .btn-ghost:hover{background:var(--gold);color:#fff}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(250,246,239,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:21px;font-weight:600;color:var(--wine)}
+  .brand .mark{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--wine-soft),var(--wine));display:flex;align-items:center;justify-content:center;color:#f4d9a8;font-size:17px;flex:none}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink-soft);transition:.15s}
+  .nav-links a:hover{color:var(--wine)}
+  .nav-cta{background:var(--wine);color:#fff;padding:9px 18px;border-radius:4px;font-weight:600}
+  .nav-cta:hover{background:var(--wine-dark);color:#fff}
+  .menu-btn{display:none;background:none;border:0;font-size:24px;color:var(--wine);cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;padding:110px 0 96px;background:
+     radial-gradient(1100px 520px at 78% -8%,#f7ecd9 0%,transparent 60%),
+     linear-gradient(180deg,var(--ivory) 0%,var(--ivory-2) 100%);overflow:hidden}
+  .hero .stave{position:absolute;inset:0;opacity:.45;pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;position:relative}
+  .hero h1{font-size:clamp(40px,6vw,72px);color:var(--ink)}
+  .hero h1 em{font-style:italic;color:var(--wine)}
+  .hero .sub-kr{font-family:var(--kr);font-size:16px;color:var(--ink-soft);margin-top:18px;max-width:520px}
+  .hero .lead{margin:22px 0 30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:30px;box-shadow:var(--shadow)}
+  .hero-card h4{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .hero-card .row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--ink-soft)}
+  .hero-card .row:last-child{border-bottom:0}
+  .hero-card .row b{font-family:var(--serif);font-size:22px;color:var(--wine);font-weight:600}
+
+  /* STAT STRIP */
+  .stats{background:var(--wine);color:#f6ead3}
+  .stats .wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;text-align:center;padding:46px 28px}
+  .stats .n{font-family:var(--serif);font-size:42px;font-weight:600;color:#fff;line-height:1}
+  .stats .l{font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#e7c98e;margin-top:8px}
+
+  /* GENERIC */
+  .section-head{max-width:720px;margin-bottom:54px}
+  .section-head h2{font-size:clamp(30px,4vw,46px);color:var(--ink)}
+  .section-head .kr{margin-top:12px;font-size:15px}
+  .alt{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+  /* PILLARS */
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .pillar{background:var(--ivory);border:1px solid var(--line);border-radius:14px;padding:38px;position:relative;overflow:hidden}
+  .pillar:before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--gold)}
+  .pillar h3{font-size:30px;color:var(--wine);margin-bottom:6px}
+  .pillar .tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .pillar p{color:var(--ink-soft);margin-top:14px;font-size:15px}
+  .pillar ul{list-style:none;margin-top:18px}
+  .pillar li{padding:8px 0 8px 22px;position:relative;font-size:14.5px;border-top:1px solid var(--line)}
+  .pillar li:before{content:'♪';position:absolute;left:0;color:var(--wine-soft)}
+  .cycle-note{text-align:center;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--gold);margin-top:34px}
+
+  /* PROGRAMME CARDS */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px;transition:.2s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--gold-soft)}
+  .card .ico{width:46px;height:46px;border-radius:10px;background:var(--ivory-2);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--wine);margin-bottom:16px}
+  .card h3{font-size:23px;margin-bottom:4px}
+  .card .kr{font-size:13px;margin-bottom:10px;display:block}
+  .card p{font-size:14px;color:var(--ink-soft)}
+  .card .meta{margin-top:14px;font-size:12px;letter-spacing:.5px;color:var(--gold);font-weight:600;text-transform:uppercase}
+
+  /* VALUES */
+  .values{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .value{text-align:center;padding:26px 14px;border-radius:12px;background:var(--ivory);border:1px solid var(--line)}
+  .value .vico{font-size:26px;margin-bottom:10px}
+  .value h4{font-family:var(--serif);font-size:21px;color:var(--wine);margin-bottom:6px}
+  .value p{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+
+  /* TIMELINE */
+  .timeline{position:relative;margin-top:10px;padding-left:8px}
+  .timeline:before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl{position:relative;padding:0 0 30px 38px}
+  .tl:before{content:'';position:absolute;left:1px;top:5px;width:15px;height:15px;border-radius:50%;background:var(--wine);border:3px solid var(--ivory)}
+  .tl .yr{font-family:var(--sans);font-size:12px;letter-spacing:1.5px;font-weight:700;color:var(--gold);text-transform:uppercase}
+  .tl h4{font-family:var(--serif);font-size:21px;color:var(--ink);margin:3px 0 4px}
+  .tl p{font-size:14px;color:var(--ink-soft)}
+
+  /* OPS / VEHICLE */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  .ops-card{background:linear-gradient(160deg,var(--wine),var(--wine-dark));color:#f6ead3;border-radius:16px;padding:38px;box-shadow:var(--shadow)}
+  .ops-card .badge{display:inline-block;background:rgba(246,234,211,.15);color:#f4d9a8;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 12px;border-radius:20px;font-weight:600;margin-bottom:18px}
+  .ops-card h3{font-size:28px;color:#fff;margin-bottom:8px}
+  .ops-card .car{font-size:46px;margin:8px 0 14px}
+  .ops-card p{font-size:14.5px;color:#ecd6b3}
+  .ops-card .secured{margin-top:18px;font-size:13px;background:rgba(255,255,255,.1);padding:12px 14px;border-radius:8px;border-left:3px solid var(--gold-soft)}
+
+  /* COSTS */
+  .budget{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:start}
+  .bars{display:flex;flex-direction:column;gap:14px}
+  .bar-row .top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px}
+  .bar-row .top b{font-family:var(--serif);font-size:17px;color:var(--wine)}
+  .bar-track{height:11px;background:var(--ivory-2);border-radius:6px;overflow:hidden}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-soft),var(--wine));border-radius:6px}
+  .budget-note{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .budget-note .total{font-family:var(--serif);font-size:40px;color:var(--wine);font-weight:600}
+  .budget-note ul{list-style:none;margin-top:16px}
+  .budget-note li{font-size:13.5px;color:var(--ink-soft);padding:7px 0 7px 22px;position:relative;border-top:1px solid var(--line)}
+  .budget-note li:before{content:'›';position:absolute;left:4px;color:var(--gold);font-weight:700}
+
+  /* CTA BAND */
+  .cta-band{background:
+     radial-gradient(800px 400px at 20% 120%,#f7ecd9,transparent 60%),var(--ivory-2);
+     text-align:center}
+  .cta-band h2{font-size:clamp(30px,4vw,48px);color:var(--ink)}
+  .cta-band .lead{margin:18px auto 30px}
+  .cta-band .hero-cta{justify-content:center}
+
+  /* INVOLVE */
+  .involve{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .inv{background:var(--ivory);border:1px solid var(--line);border-radius:14px;padding:30px}
+  .inv h3{font-size:22px;color:var(--wine);margin-bottom:8px}
+  .inv p{font-size:14px;color:var(--ink-soft)}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#d9cbc4;padding:60px 0 34px;font-size:14px}
+  footer .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:40px}
+  footer h5{font-family:var(--sans);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:16px}
+  footer a{color:#d9cbc4;display:block;padding:5px 0;transition:.15s}
+  footer a:hover{color:#fff}
+  footer .brand{color:#f4d9a8;margin-bottom:14px}
+  footer .brand .mark{background:radial-gradient(circle at 35% 30%,var(--wine-soft),var(--wine))}
+  .foot-bottom{border-top:1px solid #4a3a36;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:#a8948c}
+
+  @media(max-width:900px){
+    .hero-grid,.split,.budget{grid-template-columns:1fr}
+    .pillars{grid-template-columns:1fr}
+    .cards,.involve{grid-template-columns:1fr 1fr}
+    .values{grid-template-columns:1fr 1fr 1fr}
+    .stats .wrap{grid-template-columns:1fr 1fr 1fr;gap:26px}
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .nav-links.open{display:flex;position:absolute;top:70px;left:0;right:0;flex-direction:column;background:var(--ivory);padding:18px 28px;border-bottom:1px solid var(--line);gap:14px}
+  }
+  @media(max-width:560px){
+    .cards,.involve,.values{grid-template-columns:1fr}
+    .stats .wrap{grid-template-columns:1fr 1fr}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><span class="mark">♪</span> Classical Music <span style="color:var(--gold);font-style:italic">for Everyone</span></a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#programmes">Programmes</a>
+      <a href="#values">Values</a>
+      <a href="#story">Our Story</a>
+      <a href="#operations">How We Work</a>
+      <a href="#support">Support</a>
+      <a class="nav-cta" href="#support">Donate</a>
+    </nav>
+    <button class="menu-btn" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <svg class="stave" preserveAspectRatio="none" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#d8c39a" stroke-width="1" opacity="0.7">
+      <line x1="0" y1="120" x2="1200" y2="120"/><line x1="0" y1="150" x2="1200" y2="150"/>
+      <line x1="0" y1="180" x2="1200" y2="180"/><line x1="0" y1="210" x2="1200" y2="210"/>
+      <line x1="0" y1="240" x2="1200" y2="240"/>
+    </g>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">A community music initiative · Dublin, Ireland</div>
+      <h1>Classical music,<br><em>for everyone.</em></h1>
+      <p class="lead">We bring classical music out of the concert hall and into everyday community life — to care homes, parishes, classrooms and living rooms. Music should belong to everyone, regardless of age, background, mobility, or prior musical knowledge.</p>
+      <p class="sub-kr">콘서트홀 밖으로, 일상 공동체 속으로. 나이·배경·거동·음악 경험과 상관없이, 음악은 누구에게나 열려 있어야 합니다.</p>
+      <div class="hero-cta" style="margin-top:26px">
+        <a class="btn btn-primary" href="#support">Support our work</a>
+        <a class="btn btn-ghost" href="#programmes">Explore programmes</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h4>Since 2024, in numbers</h4>
+      <div class="row"><span>Monthly learning sessions held</span><b>15</b></div>
+      <div class="row"><span>Letters Ensemble concerts</span><b>4</b></div>
+      <div class="row"><span>Outreach performances</span><b>20</b></div>
+      <div class="row"><span>Older-adults ensemble (aged 78–92)</span><b>8</b></div>
+      <div class="row"><span>Countries reached</span><b>4</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stats">
+  <div class="wrap">
+    <div><div class="n">2024</div><div class="l">Founded in Dublin</div></div>
+    <div><div class="n">5</div><div class="l">Active programmes</div></div>
+    <div><div class="n">2×</div><div class="l">Years at the BBC Proms</div></div>
+    <div><div class="n">20+</div><div class="l">Community venues</div></div>
+    <div><div class="n">100%</div><div class="l">Volunteer-run</div></div>
+  </div>
+</div>
+
+<!-- ABOUT / MISSION -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why we exist</div>
+      <h2>Many people who would love classical music are quietly left out.</h2>
+      <p class="kr">우리가 존재하는 이유 — 관심이 없어서가 아니라, 장벽 때문에 음악에서 멀어진 사람들에게.</p>
+    </div>
+    <div class="split">
+      <div>
+        <p class="lead" style="font-size:18px">Not because they lack interest — but because of barriers: mobility limitations, health conditions, financial constraints, lack of information, or simply the feeling that <em style="color:var(--wine);font-family:var(--serif);font-size:21px">“classical music isn’t for people like me.”</em></p>
+        <p style="margin-top:18px;color:var(--ink-soft)">Classical Music for Everyone began in early 2024 as a personal initiative and has grown into a living, relationship-based model of community music. Rather than asking people to adapt to the traditional concert model, we adapt the musical experience to people’s real lives — and bring it to where they already are.</p>
+      </div>
+      <div>
+        <p style="margin-top:0;color:var(--ink-soft)">We are not a professional performance company. We are a participatory community where performance is a means of <strong>connection</strong>, not an end in itself. Music here is not a finished product delivered to an audience, but a shared experience — shaped through presence, participation, and time spent together.</p>
+        <p class="kr" style="margin-top:18px;font-size:14px">우리는 전문 연주단체가 아니라, 연주가 ‘연결의 수단’이 되는 참여형 공동체입니다. 음악은 완성된 상품이 아니라, 함께한 시간 속에서 빚어지는 경험입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2>Two pillars, one continuous cycle.</h2>
+      <p class="kr">두 개의 기둥, 하나의 순환 — 배움이 경험이 되고, 경험이 나눔이 되며, 나눔이 다시 참여를 깊게 합니다.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="tag">Pillar I</span>
+        <h3>Learning</h3>
+        <p>Opening the door to classical music — gently, with no prior knowledge required.</p>
+        <ul>
+          <li><strong>Getting to Know Classical Music</strong> — a free monthly lecture series, in English & Korean.</li>
+          <li><strong>Concert Guide &amp; Companion</strong> — we attend live concerts together: before, during, and after.</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="tag">Pillar II</span>
+        <h3>Sharing</h3>
+        <p>Turning experience into music made with — and for — the community.</p>
+        <ul>
+          <li><strong>Letters Ensemble</strong> — an open, participatory ensemble of amateur musicians.</li>
+          <li><strong>Outreach Concerts</strong> — live music brought to care homes, hospices &amp; parishes.</li>
+          <li><strong>Older Adults Ensemble</strong> — a recorder ensemble for residents aged 78–92.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="cycle-note">“Learning leads to experience; experience encourages sharing; sharing deepens participation.”</p>
+  </div>
+</section>
+
+<!-- PROGRAMMES -->
+<section id="programmes">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What we do</div>
+      <h2>Five programmes, one belief.</h2>
+      <p class="kr">다섯 개의 프로그램, 하나의 믿음 — 음악은 누구에게나.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="ico">🎓</div>
+        <h3>Getting to Know Classical Music</h3>
+        <span class="kr">클래식 입문 강의</span>
+        <p>A free, monthly lecture series — music history, listening strategies, composers and instruments — for absolute beginners. Bilingual slides welcome newcomers to Ireland.</p>
+        <div class="meta">Monthly · Free · EN/KR</div>
+      </div>
+      <div class="card">
+        <div class="ico">🎟️</div>
+        <h3>Concert Guide &amp; Companion</h3>
+        <span class="kr">콘서트 동행</span>
+        <p>We choose accessible concerts together and go as a group — preparing beforehand, experiencing live, reflecting after. Highlights include two years at the BBC Proms.</p>
+        <div class="meta">Group trips · NSO · BBC Proms</div>
+      </div>
+      <div class="card">
+        <div class="ico">🎻</div>
+        <h3>Letters Ensemble</h3>
+        <span class="kr">레터스 앙상블</span>
+        <p>Founded January 2024 by amateur musicians in Dublin. We rehearse weekly and play classical, Irish &amp; Korean traditional, and familiar arrangements for everyone.</p>
+        <div class="meta">Weekly · 4 concerts to date</div>
+      </div>
+      <div class="card">
+        <div class="ico">🏡</div>
+        <h3>Outreach Concerts</h3>
+        <span class="kr">아웃리치 콘서트</span>
+        <p>We bring live performance to nursing homes, hospices, hospitals and rural parishes — places where music rarely reaches. 20 performances across four countries so far.</p>
+        <div class="meta">20 performances · 4 countries</div>
+      </div>
+      <div class="card">
+        <div class="ico">🎶</div>
+        <h3>Older Adults Ensemble</h3>
+        <span class="kr">고령자 앙상블</span>
+        <p>A weekly recorder ensemble for eight residents aged 78–92, most with no prior music education — building toward their own small concert. Now preparing a second group.</p>
+        <div class="meta">Weekly · Pilot since Oct 2025</div>
+      </div>
+      <div class="card" style="background:linear-gradient(160deg,var(--ivory-2),var(--paper));border-style:dashed">
+        <div class="ico">✨</div>
+        <h3>Growing in 2026</h3>
+        <span class="kr">2026 확장</span>
+        <p>Expanding the recorder-ensemble model to a second group, adding seasonal special lectures and a summer festival trip, and reaching new counties — Wicklow, Meath &amp; Louth.</p>
+        <div class="meta">In preparation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="alt" id="values">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What guides us</div>
+      <h2>Five values we practise, not just state.</h2>
+      <p class="kr">말이 아니라 실천으로 — 우리를 이끄는 다섯 가지 가치.</p>
+    </div>
+    <div class="values">
+      <div class="value"><div class="vico">🤝</div><h4>Dignity</h4><p>Everyone deserves respect, regardless of age, health or circumstance.</p></div>
+      <div class="value"><div class="vico">🚪</div><h4>Accessibility</h4><p>No barrier — physical or psychological — should keep music away.</p></div>
+      <div class="value"><div class="vico">🌱</div><h4>Accompaniment</h4><p>We stay alongside people over time, not just for one-off events.</p></div>
+      <div class="value"><div class="vico">🫂</div><h4>Community</h4><p>Music rebuilds relationships and dissolves “us and them”.</p></div>
+      <div class="value"><div class="vico">🕊️</div><h4>Hope</h4><p>We value small but real moments of calm, joy and connection.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY / TIMELINE -->
+<section id="story">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Our story so far</div>
+      <h2>From a personal idea to a community of music.</h2>
+      <p class="kr">한 사람의 아이디어에서 음악 공동체로 — 지금까지의 여정.</p>
+    </div>
+    <div class="split" style="align-items:start">
+      <div class="timeline">
+        <div class="tl"><div class="yr">Jan 2024</div><h4>It begins</h4><p>Classical Music for Everyone launches; <strong>Letters Ensemble</strong> is founded by amateur musicians in Dublin. First monthly lecture held in Sandyford.</p></div>
+        <div class="tl"><div class="yr">2024</div><h4>Music goes to the people</h4><p>Ensemble concerts at Dalgan Park and a Co. Wicklow nursing home; the lecture series moves to TU Dublin and grows to 12+ per session.</p></div>
+        <div class="tl"><div class="yr">2024–2025</div><h4>Two years at the BBC Proms</h4><p>Group concert trips become a signature shared experience — alongside the National Symphony Orchestra and Irish National Opera.</p></div>
+        <div class="tl"><div class="yr">Oct 2025</div><h4>An ensemble for elders</h4><p>The Older Adults Ensemble pilot begins — eight residents aged 78–92 learning recorder together, weekly, at home.</p></div>
+        <div class="tl"><div class="yr">Dec 2025</div><h4>To the National Concert Hall</h4><p>The 15th learning session is held at Ireland’s National Concert Hall — a full circle moment.</p></div>
+        <div class="tl"><div class="yr">2026</div><h4>A vehicle of our own</h4><p>With community funding and personal investment, we secure a 7-seater car — making regular outreach finally sustainable.</p></div>
+      </div>
+      <div>
+        <div class="hero-card" style="box-shadow:none">
+          <h4>One participant’s journey</h4>
+          <p style="font-family:var(--serif);font-size:21px;color:var(--ink);line-height:1.4;font-style:italic">“I had played viola at school, but stopped for years. The lectures brought me back — I took lessons again, and now I play in the Letters Ensemble.”</p>
+          <p class="kr" style="margin-top:14px;font-size:13px">강의로 다시 음악을 만났고, 레슨을 거쳐 지금은 앙상블 단원이 되었습니다 — 우리가 그리는 변화의 모습입니다.</p>
+        </div>
+        <div class="hero-card" style="box-shadow:none;margin-top:20px;background:var(--ivory)">
+          <h4>Where we play</h4>
+          <p style="font-size:14px;color:var(--ink-soft)">TU Dublin · National Concert Hall · St John of God Hospital · HSE EVE Goirtin Hub · Morning Star Hostel · parishes &amp; nursing homes across Dublin, Wicklow, Meath &amp; beyond — and abroad in France, the UK &amp; Korea.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATIONS / VEHICLE -->
+<section class="alt" id="operations">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How we work</div>
+      <h2>Bringing music to people takes wheels.</h2>
+      <p class="kr">사람에게 음악을 가져가려면 ‘이동’이 필요합니다 — 우리 운영의 핵심.</p>
+    </div>
+    <div class="split">
+      <div>
+        <p class="lead" style="font-size:18px">For a “going-to-the-people” model, transport is everything — and historically our single biggest cost, around half of every outreach concert.</p>
+        <p style="margin-top:16px;color:var(--ink-soft)">Carrying instruments, music stands and volunteers to nursing homes and rural parishes meant renting cars again and again. In 2026, thanks to community supporters, that changed.</p>
+        <p style="margin-top:16px;color:var(--ink-soft)">We move performers, instruments and equipment to every venue ourselves, set up on-site, and stay afterwards to talk with residents. Every concert follows the same care: venue confirmation → programme → logistics → on-site rehearsal → performance → conversation.</p>
+      </div>
+      <div class="ops-card">
+        <span class="badge">Secured in 2026</span>
+        <h3>Our community vehicle</h3>
+        <div class="car">🚐</div>
+        <p>A 2012 7-seater Citroën C4 Grand Picasso — room for the ensemble, instruments and equipment to reach communities across Ireland.</p>
+        <div class="secured">Funded by <strong>~€4,000</strong> in community donations + the founder’s personal investment. Ownership replaces repeated car rental, saving an estimated <strong>€4,400 a year</strong>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COSTS / FUNDING -->
+<section id="costs">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What it costs · 2026</div>
+      <h2>Transparent about every euro.</h2>
+      <p class="kr">모든 비용을 투명하게 — 2026년 운영 계획과 예산.</p>
+    </div>
+    <div class="budget">
+      <div class="bars">
+        <div class="bar-row"><div class="top"><span>Outreach Concerts</span><b>€7,920</b></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+        <div class="bar-row"><div class="top"><span>Older Adults Ensemble</span><b>€3,300</b></div><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div></div>
+        <div class="bar-row"><div class="top"><span>Letters Ensemble</span><b>€2,600</b></div><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></div>
+        <div class="bar-row"><div class="top"><span>Getting to Know Classical Music</span><b>€2,400</b></div><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div></div>
+        <div class="bar-row"><div class="top"><span>Concert Guide &amp; Companion</span><b>€1,800</b></div><div class="bar-track"><div class="bar-fill" style="width:23%"></div></div></div>
+        <div class="bar-row"><div class="top"><span>Vehicle running &amp; contingency</span><b>€2,000</b></div><div class="bar-track"><div class="bar-fill" style="width:25%"></div></div></div>
+      </div>
+      <div class="budget-note">
+        <div class="eyebrow" style="margin-bottom:6px">2026 programme budget</div>
+        <div class="total">≈ €20,000</div>
+        <p style="font-size:14px;color:var(--ink-soft);margin-top:8px">The vehicle (≈€8,000) is now <strong>secured</strong>, so funding focuses on running the five programmes and ongoing transport.</p>
+        <ul>
+          <li>100% volunteer-run — no salaries.</li>
+          <li>Largest ongoing cost: fuel, insurance &amp; maintenance.</li>
+          <li>Funded through donations, fundraising concerts &amp; grants.</li>
+          <li>Full proposal &amp; cost breakdown available to partners on request.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section class="alt" id="involve">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Get involved</div>
+      <h2>There’s a place for you here.</h2>
+      <p class="kr">당신을 위한 자리가 있습니다 — 함께하는 여러 가지 방법.</p>
+    </div>
+    <div class="involve">
+      <div class="inv"><h3>Come &amp; listen</h3><p>Join a free monthly lecture or a group concert trip. No experience, no cost — just curiosity. Newcomers to Ireland especially welcome.</p></div>
+      <div class="inv"><h3>Play with us</h3><p>Are you an amateur musician? The Letters Ensemble is open. Volunteers also help with outreach, logistics and facilitation.</p></div>
+      <div class="inv"><h3>Host or partner</h3><p>Run a care home, parish or community space? Invite an outreach concert, or partner with us on a programme.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:34px">
+      <a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Getting%20involved%20with%20CMFE">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT / DONATE -->
+<section class="cta-band" id="support">
+  <div class="wrap">
+    <div class="eyebrow">Support our work</div>
+    <h2>Help us keep music open to everyone.</h2>
+    <p class="lead">We are entirely volunteer-run and rely on the generosity of people who believe music belongs to everyone. Your support pays for instruments, sheet music, venue costs and the fuel that carries music to people who would otherwise go without.</p>
+    <p class="kr" style="max-width:620px;margin:6px auto 0">우리는 전적으로 자원봉사로 운영됩니다. 당신의 후원이 악기·악보·공간·이동 비용이 되어, 음악이 닿지 못한 곳까지 음악을 전합니다.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20CMFE">Make a donation</a>
+      <a class="btn btn-ghost" href="mailto:sby05034@gmail.com?subject=Partnership%20%26%20funding%20enquiry">Partner &amp; funding enquiries</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="brand" style="font-size:22px"><span class="mark">♪</span> Classical Music for Everyone</div>
+        <p style="max-width:340px;color:#bcaaa2">A community music initiative based in Dublin, Ireland — making classical music a shared resource for all, regardless of age, background, mobility or prior knowledge.</p>
+        <p class="kr" style="margin-top:12px;font-size:12.5px;color:#a8948c">더블린 기반의 커뮤니티 음악 이니셔티브 · 음악은 누구에게나.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="#about">About</a>
+        <a href="#programmes">Programmes</a>
+        <a href="#values">Our values</a>
+        <a href="#story">Our story</a>
+        <a href="#costs">Costs &amp; funding</a>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a>
+        <a href="tel:+353830780635">+353 083 078 0635</a>
+        <a href="#support">Donate &amp; support</a>
+        <a href="mailto:sby05034@gmail.com?subject=Partnership%20enquiry">Partner with us</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Classical Music for Everyone · Founded by Andrew Seohyeon Kim · Dublin, Ireland</span>
+      <span>Volunteer-run · A social-enterprise in the making</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // close mobile menu on link click
+  document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
+  // subtle reveal on scroll
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none';io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.card,.value,.tl,.pillar,.ops-card,.budget-note,.inv').forEach(el=>{el.style.opacity=0;el.style.transform='translateY(18px)';el.style.transition='.6s ease';io.observe(el)});
+</script>
+</body>
+</html>
