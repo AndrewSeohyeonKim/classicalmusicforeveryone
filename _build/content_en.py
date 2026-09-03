@@ -17,10 +17,10 @@ L = "en"
 STATS = """<div class="stats">
   <div class="wrap stats-grid">
     <div class="stat"><b>40+</b><span>Sessions &amp; performances</span></div>
-    <div class="stat"><b>4</b><span>Countries</span></div>
+    <div class="stat"><b>5</b><span>Programmes running</span></div>
     <div class="stat"><b>20+</b><span>Venues &amp; institutions</span></div>
+    <div class="stat"><b>4</b><span>Countries</span></div>
     <div class="stat"><b>143</b><span>Lecture attendances</span></div>
-    <div class="stat"><b>7 / 7</b><span>Pilot participants completed</span></div>
   </div>
 </div>"""
 
@@ -52,12 +52,12 @@ WHATS_ON = """<div class="grid grid-2 stagger">
 </div>"""
 
 CTA = """<section class="band-inverse">
-  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
-    <h2 style="font-size:clamp(28px,3.6vw,42px)">There is a place for you here.</h2>
-    <p class="lead" style="margin-top:18px;color:var(--fg-inverse-muted)">
+  <div class="wrap narrow center reveal">
+    <h2 class="h-lg">There is a place for you here.</h2>
+    <p class="lead mt-2">
       Learn an instrument for the first time, come and listen, play alongside us,
       or open your venue. Start with one line.</p>
-    <div class="btn-row" style="justify-content:center">
+    <div class="btn-row center-row">
       <a class="btn btn-accent" href="get-involved.html">Get involved <span class="arrow">→</span></a>
       <a class="btn btn-on-dark" href="support.html">Support our work</a>
     </div>
@@ -67,6 +67,11 @@ CTA = """<section class="band-inverse">
 
 # ---------------------------------------------------------------------------
 # Home
+#
+# Order is deliberate and follows the sector convention (Music and Health
+# Ireland, Live Music Now, Heart to Heart): say what the organisation runs
+# before asking anything of the reader. The five programmes carry equal
+# weight — no card is larger, first-coloured or labelled as the main one.
 # ---------------------------------------------------------------------------
 
 INDEX = f"""<section class="hero">
@@ -77,8 +82,8 @@ INDEX = f"""<section class="hero">
       <p class="lead lift lift-3">We teach people to play — not only to listen — and we bring
          live classical music to the places it rarely reaches.</p>
       <div class="btn-row lift lift-4">
-        <a class="btn btn-primary" href="get-involved.html">Join a class <span class="arrow">→</span></a>
-        <a class="btn btn-quiet" href="programmes.html">What we do</a>
+        <a class="btn btn-primary" href="programmes.html">What we do <span class="arrow">→</span></a>
+        <a class="btn btn-quiet" href="get-involved.html">Get involved</a>
       </div>
     </div>
     <figure class="lift lift-3">
@@ -95,23 +100,77 @@ INDEX = f"""<section class="hero">
 
 <section>
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">What&rsquo;s on</p>
-      <h2>Happening now.</h2>
+    <div class="section-head wide reveal">
+      <p class="eyebrow">What we do</p>
+      <h2>Five programmes, two pillars, one circuit.</h2>
+      <p>We teach people to play, and we play for people who cannot easily come to a concert
+         hall. Neither half works alone: the rooms we play in are where the next class comes
+         from, and the class is where the next players come from.</p>
     </div>
-{WHATS_ON}
+    <div class="legend reveal">
+      <b>Learning</b><span>a term, a talk, a seat beside you</span>
+      <b class="b2">Sharing</b><span>we bring the music to the room</span>
+    </div>
+    <div class="grid grid-5 stagger">
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/conducting.jpg" width="1400" height="933" alt="A weekly class in a community room in Dublin"></div>
+        <div class="prog-body">
+          <span class="kicker">Learning</span>
+          <h3>Recorder Ensemble course</h3>
+          <p>A term for complete beginners, ending in a concert.</p>
+          <div class="meta">weekly · a term</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/lecture-recital.jpg" width="1400" height="933" alt="A lecture-recital in progress"></div>
+        <div class="prog-body">
+          <span class="kicker">Learning</span>
+          <h3>Getting to Know Classical Music</h3>
+          <p>Free lecture-recitals for people with no prior knowledge.</p>
+          <div class="meta">17 sessions · 143 attendances</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/quartet-hall.jpg" width="1400" height="933" alt="An ensemble performing in a bright hall"></div>
+        <div class="prog-body">
+          <span class="kicker">Learning</span>
+          <h3>Concert Guide &amp; Companion</h3>
+          <p>Small groups accompanied to concerts they would not attend alone.</p>
+          <div class="meta">10 outings · groups of about five</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/care-christmas.jpg" width="1400" height="933" alt="A quartet performing in a care setting at Christmas"></div>
+        <div class="prog-body">
+          <span class="kicker">Sharing</span>
+          <h3>Outreach Concerts</h3>
+          <p>Live performance brought into care homes, parishes, hospitals and hostels.</p>
+          <div class="meta">20 performances · 15+ venues</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/letters-ensemble.jpg" width="1400" height="933" alt="The Letters Ensemble with their instruments"></div>
+        <div class="prog-body">
+          <span class="kicker">Sharing</span>
+          <h3>Letters Ensemble</h3>
+          <p>Amateur musicians living in Dublin, rehearsing every Saturday.</p>
+          <div class="meta">4 concerts · since Jan 2024</div>
+        </div>
+      </a>
+    </div>
+    <div class="reveal mt-4">{dg.loop(L)}</div>
+    <div class="btn-row reveal"><a class="btn btn-quiet" href="programmes.html">All five in detail <span class="arrow">→</span></a></div>
   </div>
 </section>
 
 <section class="band-raised">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">How it works</p>
-      <h2>Playing and listening feed each other.</h2>
-      <p>We go to a room and play. Someone asks whether they could do that. That question
-         becomes a class — and the class produces people who can play in the next room.</p>
+      <p class="eyebrow">What&rsquo;s on</p>
+      <h2>Open right now.</h2>
+      <p>One class taking enrolments and one concert with the door open. Both are free.</p>
     </div>
-    <div class="reveal">{dg.loop(L)}</div>
+{WHATS_ON}
   </div>
 </section>
 
@@ -119,78 +178,52 @@ INDEX = f"""<section class="hero">
   <img src="images/church-concert.jpg" alt="" width="1400" height="1050">
   <div class="wrap narrow reveal">
     <p class="eyebrow">Why we exist</p>
-    <h2 style="font-size:clamp(28px,3.8vw,44px)">It is playing, not only listening,
+    <h2 class="h-lg">It is playing, not only listening,
        that restores dignity.</h2>
-    <p class="lead" style="margin-top:20px;color:var(--fg-inverse-body)">
+    <p class="lead mt-3">
       Classical music is culturally rich and still out of reach for many people — because of
       age, mobility, income, geography, or simple unfamiliarity. A care home, a hospital, a
       hostel, a rural parish is not a place without an audience. It is where the audience that
       has waited longest already is.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">What we run</p>
-      <h2>Five programmes, one belief.</h2>
-    </div>
-    <div class="grid grid-3 stagger">
-      <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="images/community-room.jpg" width="1400" height="1050"
-             alt="Playing the clarinet in a community room"></div>
-        <div class="card-body">
-          <span class="kicker">Flagship</span>
-          <h3>Recorder Ensemble</h3>
-          <p>A term for complete beginners: first notes in week one, a concert in the last.</p>
-          <div class="meta">Weekly · community centres &amp; parishes</div>
-        </div>
-      </a>
-      <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="images/care-christmas.jpg" width="1400" height="1050"
-             alt="A quartet performing in a care setting at Christmas"></div>
-        <div class="card-body">
-          <span class="kicker">Outreach</span>
-          <h3>Music that comes to you</h3>
-          <p>Live performance in care homes, parishes, hospitals, hostels and community spaces.</p>
-          <div class="meta">20 performances · 4 countries · 15+ venues</div>
-        </div>
-      </a>
-      <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="images/lecture-recital.jpg" width="1400" height="1050"
-             alt="A lecture-recital in progress"></div>
-        <div class="card-body">
-          <span class="kicker">Learning</span>
-          <h3>Getting to Know Classical Music</h3>
-          <p>Free lecture-recitals, roughly monthly, for people with no prior knowledge.</p>
-          <div class="meta">17 sessions · 143 attendances</div>
-        </div>
-      </a>
-    </div>
+    <div class="btn-row"><a class="btn btn-on-dark" href="about.html">About us <span class="arrow">→</span></a></div>
   </div>
 </section>
 
 <section class="band-sunken">
-  <div class="wrap split split-center reveal">
-    <div class="quote">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">Grounds for trust</p>
+      <h2>Someone other than us paid for it.</h2>
+      <p>We are volunteer-led and formalising as a not-for-profit company limited by guarantee.
+         Until that is finished, the record is what we offer in place of a charity number.</p>
+    </div>
+    <div class="evidence stagger">
+      <div><dl>
+        <dt>Publicly funded</dt>
+        <dd>South Dublin County Council&rsquo;s Arts Office selected the project for
+            <strong>South Dublin Live 2026</strong> — our first publicly funded commission.</dd>
+      </dl></div>
+      <div><dl>
+        <dt>Letters of support</dt>
+        <dd>Held from <strong>Rua Red</strong>, <strong>The Civic</strong> and
+            <strong>Tallaght University Hospital</strong>.</dd>
+      </dl></div>
+      <div><dl>
+        <dt>Where we have played</dt>
+        <dd>Over <strong>20 venues and institutions</strong> across
+            <strong>four countries</strong> — Ireland, France, the United Kingdom and Korea.</dd>
+      </dl></div>
+    </div>
+    <div class="quote reveal mt-4">
       <p>&ldquo;Through music, he offers encouragement, dignity, and spiritual accompaniment to
          those who may otherwise feel isolated.&rdquo;</p>
       <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
     </div>
-    <div>
-      <p class="eyebrow">Backed by the record</p>
-      <h3 style="font-size:26px">Someone other than us paid for it.</h3>
-      <p style="margin-top:14px">In 2026 South Dublin County Council&rsquo;s Arts Office selected
-         the project for <strong>South Dublin Live 2026</strong> — our first publicly funded
-         commission. Letters of support are held from Rua Red, The Civic and Tallaght University
-         Hospital.</p>
-      <div class="btn-row"><a class="btn btn-quiet" href="support.html">Funding to date <span class="arrow">→</span></a></div>
-    </div>
+    <div class="btn-row reveal"><a class="btn btn-quiet" href="support.html">Funding to date <span class="arrow">→</span></a></div>
   </div>
 </section>
 
 {CTA}"""
-
 
 # ---------------------------------------------------------------------------
 # About
@@ -213,7 +246,7 @@ ABOUT = f"""<section class="page-hero">
          of age, background, mobility, income or prior musical knowledge — by teaching people to
          play, playing alongside them, and bringing music to the places it does not normally
          reach.</p>
-      <p class="eyebrow" style="margin-top:38px">Vision</p>
+      <p class="eyebrow mt-4">Vision</p>
       <p class="lead">An Ireland in which every community — urban, rural, in care, and living
          with disability — has a welcoming pathway into making music together, delivered by
          educators in secure, properly paid employment.</p>
@@ -272,23 +305,23 @@ ABOUT = f"""<section class="page-hero">
   <div class="wrap split split-center">
     <div class="reveal">
       <p class="eyebrow">The founder</p>
-      <h2 style="font-size:clamp(28px,3.4vw,40px)">Andrew Seohyeon Kim</h2>
-      <p class="lead" style="margin-top:18px;color:var(--fg-inverse-body)">
+      <h2 class="h-lg">Andrew Seohyeon Kim</h2>
+      <p class="lead mt-2">
         Clarinettist, organist and community music practitioner. BMus (Hons) in Performance,
         TU Dublin Conservatoire, where his final-year research was the ten-week recorder ensemble
         he designed and led for seven retired Presentation Sisters.</p>
-      <p style="margin-top:14px;color:var(--fg-inverse-muted)">
+      <p class="mt-2">
         Music Director at Our Lady of Dolours Church, Dolphin&rsquo;s Barn since 2022; organist at
         the Church of the Three Patrons, Rathgar since 2023. He founded Classical Music for
         Everyone and the Letters Ensemble in 2024.</p>
     </div>
     <div>
-      <ul class="plainlist reveal" style="color:var(--fg-inverse-muted)">
-        <li><strong style="color:var(--fg-inverse)">Clarinet</strong> — Dr Paul Roe, TU Dublin Conservatoire</li>
-        <li><strong style="color:var(--fg-inverse)">Organ</strong> — Simon Harden</li>
-        <li><strong style="color:var(--fg-inverse)">Conducting</strong> — IAYO · London Conducting Workshop</li>
-        <li><strong style="color:var(--fg-inverse)">Social enterprise</strong> — TU Dublin Venture Lab</li>
-        <li><strong style="color:var(--fg-inverse)">Scholarship</strong> — Myongdohoe, Lay Apostolate Committee,
+      <ul class="plainlist reveal">
+        <li><strong>Clarinet</strong> — Dr Paul Roe, TU Dublin Conservatoire</li>
+        <li><strong>Organ</strong> — Simon Harden</li>
+        <li><strong>Conducting</strong> — IAYO · London Conducting Workshop</li>
+        <li><strong>Social enterprise</strong> — TU Dublin Venture Lab</li>
+        <li><strong>Scholarship</strong> — Myongdohoe, Lay Apostolate Committee,
             Catholic Bishops&rsquo; Conference of Korea</li>
       </ul>
     </div>
@@ -306,7 +339,7 @@ ABOUT = f"""<section class="page-hero">
     <div class="split reveal">
       <div>
         <h3 class="h-sub">Ireland</h3>
-        <ul class="plainlist" style="margin-top:14px">
+        <ul class="plainlist mt-2">
           <li>National Concert Hall &amp; TU Dublin, Grangegorman</li>
           <li>Tallaght University Hospital · Rua Red, Tallaght</li>
           <li>Our Lady of Dolours, Dolphin&rsquo;s Barn · Three Patrons, Rathgar</li>
@@ -321,15 +354,15 @@ ABOUT = f"""<section class="page-hero">
       </div>
       <div>
         <h3 class="h-sub">Abroad</h3>
-        <ul class="plainlist" style="margin-top:14px">
+        <ul class="plainlist mt-2">
           <li>Sanctuary of Our Lady of Lourdes, France</li>
           <li>Missions Étrangères de Paris · Palais Brongniart, Paris</li>
           <li>London Korean Catholic Church, United Kingdom</li>
           <li>Gwandukjeong Martyrs Memorial Centre, Daegu, Korea</li>
         </ul>
-        <div class="callout" style="margin-top:26px">
+        <div class="callout mt-3">
           <h3 class="h-sub">What we do not claim</h3>
-          <p class="small" style="margin-top:10px">Our evidence is participation, retention and
+          <p class="small mt-1">Our evidence is participation, retention and
              testimony — not measured outcome. Wellbeing has not been measured with a validated
              instrument, and outreach audiences were never counted. From the autumn 2026 cohort we
              are introducing a simple pre/post measure and a consent framework.</p>
@@ -350,8 +383,9 @@ PROGRAMMES = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Programmes</p>
     <h1>What we actually run.</h1>
-    <p>Five strands under two pillars, plus one faith-based sub-strand. The Recorder Ensemble
-       course is the flagship; everything else feeds it or grows out of it.</p>
+    <p>Five programmes under two pillars, plus one faith-based sub-strand. None of them is
+       the main one: each is described here at the same length, with the same facts, in the
+       same order.</p>
   </div>
 </section>
 
@@ -365,7 +399,7 @@ PROGRAMMES = f"""<section class="page-hero">
         </tr></thead>
         <tbody>
           <tr><td><strong>Recorder Ensemble course</strong></td><td>Learning</td>
-              <td>Flagship · running</td><td>Pilot complete; first community class from Sept 2026</td></tr>
+              <td>Running</td><td>Pilot complete; first community class from Sept 2026</td></tr>
           <tr><td><strong>Getting to Know Classical Music</strong></td><td>Learning</td>
               <td>Running · free</td><td>17 lecture-recitals · 143 attendances</td></tr>
           <tr><td><strong>Concert Guide &amp; Companion</strong></td><td>Learning</td>
@@ -379,47 +413,162 @@ PROGRAMMES = f"""<section class="page-hero">
         </tbody>
       </table>
     </div>
+    <div class="mt-4">{dg.loop(L)}</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/conducting.jpg" width="1400" height="1050" alt="Conducting a small ensemble in a community setting">
+      </div>
+      <figcaption>Every course ends the same way — a concert, however small.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">Learning</p>
+      <h2 class="h-md">Recorder Ensemble course</h2>
+      <p class="lead mt-2">A term for complete beginners, ending in a concert.</p>
+      <p class="mt-2">The recorder is gentle on the hands and breath, quick to a first satisfying sound, inexpensive, and made for playing together. That is why it works for people who have never played anything. Scores and handouts are printed by us, at no cost to participants.</p>
+      <dl class="facts">
+        <dt>Length</dt><dd>One term, weekly · 60–90 minutes</dd>
+        <dt>For</dt><dd>Complete beginners — no music reading assumed</dd>
+        <dt>Instrument</dt><dd>Descant recorder — we advise on buying one, supply at cost, or lend you one</dd>
+        <dt>Ends with</dt><dd>A short concert for family and friends</dd>
+        <dt>Running now</dt><dd>Mulhuddart Community Centre, Dublin 15 · Wednesdays 7:00–8:00pm from 9 September 2026 · free</dd>
+      </dl>
+    </div>
   </div>
 </section>
 
 <section class="band-raised">
+  <div class="wrap split split-wide split-center split-flip">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/lecture-recital.jpg" width="1400" height="1050" alt="A lecture-recital in progress">
+      </div>
+      <figcaption>A lecture-recital in progress.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">Learning</p>
+      <h2 class="h-md">Getting to Know Classical Music</h2>
+      <p class="lead mt-2">Free lecture-recitals for people with no prior knowledge.</p>
+      <p class="mt-2">Roughly monthly, with recorded and live performance, for anyone who has never known where to start. No entry requirement and nothing to prepare.</p>
+      <dl class="facts">
+        <dt>Three stages</dt><dd>Getting Closer · Experiencing Together · Discovering My Taste</dd>
+        <dt>Seasonal specials</dt><dd>European summer festivals, the BBC Proms, Wexford Opera Festival, Christmas</dd>
+        <dt>Group size</dt><dd>Typically 6–14</dd>
+        <dt>Cost</dt><dd>Free</dd>
+        <dt>To date</dt><dd>17 sessions · 143 attendances</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/quartet-hall.jpg" width="1400" height="1050" alt="An ensemble performing in a bright hall">
+      </div>
+      <figcaption>An ensemble performing in a bright hall.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">Learning</p>
+      <h2 class="h-md">Concert Guide &amp; Companion</h2>
+      <p class="lead mt-2">Small groups accompanied to concerts they would not attend alone.</p>
+      <p class="mt-2">Preparation before, guidance during the interval, reflection after. The barrier is rarely the ticket price — it is not knowing what happens when you get there, or having nobody to go with.</p>
+      <dl class="facts">
+        <dt>Group size</dt><dd>About five</dd>
+        <dt>Been to</dt><dd>National Symphony Orchestra · Irish National Opera · RTÉ Concert Orchestra · the NCH International Series</dd>
+        <dt>Further afield</dt><dd>The BBC Proms, in two consecutive summers</dd>
+        <dt>Cost</dt><dd>Tickets can be as little as £8</dd>
+        <dt>To date</dt><dd>10 recorded outings</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap split split-wide split-center split-flip">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/care-christmas.jpg" width="1400" height="1050" alt="A quartet performing in a care setting at Christmas">
+      </div>
+      <figcaption>A quartet performing in a care setting at Christmas.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">Sharing</p>
+      <h2 class="h-md">Outreach Concerts</h2>
+      <p class="lead mt-2">Live performance brought into the rooms people are already in.</p>
+      <p class="mt-2">Care homes, parishes, hospitals, hostels and community spaces — from a homeless hostel in Dublin 7 to a martyrs&rsquo; shrine in Daegu. We bring the instruments, the stands and the programme; the room provides the room.</p>
+      <dl class="facts">
+        <dt>Where</dt><dd>Care homes, parishes, hospitals, hostels, community spaces</dd>
+        <dt>Growing into</dt><dd>Wicklow, Meath and Louth</dd>
+        <dt>Aim</dt><dd>Ten or more a year</dd>
+        <dt>Since</dt><dd>2023</dd>
+        <dt>To date</dt><dd>20 performances · 15+ venues · 4 countries</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/letters-ensemble.jpg" width="1400" height="1050" alt="The Letters Ensemble with their instruments">
+      </div>
+      <figcaption>The Letters Ensemble with their instruments.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">Sharing</p>
+      <h2 class="h-md">Letters Ensemble</h2>
+      <p class="lead mt-2">Amateur musicians living in Dublin, rehearsing every Saturday.</p>
+      <p class="mt-2">Repertoire is chosen so that any room can meet the music halfway — Irish traditional, Korean traditional, sacred repertoire and accessible arrangements. New amateur players are welcome.</p>
+      <dl class="facts">
+        <dt>Founded</dt><dd>January 2024, by amateur musicians living in Dublin</dd>
+        <dt>Rehearsals</dt><dd>Every Saturday</dd>
+        <dt>Repertoire</dt><dd>Irish traditional · Korean traditional · sacred · accessible arrangements</dd>
+        <dt>Open to</dt><dd>Amateur musicians</dd>
+        <dt>To date</dt><dd>4 formal concerts</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">Flagship</p>
-      <h2>A term, from nothing to a concert.</h2>
-      <p>The recorder is gentle on the hands and breath, quick to a first satisfying sound,
-         inexpensive, and made for playing together. That is why it works for absolute
-         beginners.</p>
+    <div class="section-head wide reveal">
+      <p class="eyebrow">How a course is built</p>
+      <h2>The first satisfying sound arrives in week one.</h2>
+      <p>Every teaching programme is built to the same shape, whatever the instrument: reach
+         something worth hearing early, move as a whole group, and finish in front of people.</p>
     </div>
     <div class="reveal">{dg.term(L)}</div>
 
-    <div class="split" style="margin-top:52px">
+    <div class="split split-wide split-center mt-4">
       <div class="reveal">
-        <h3>What it looks like</h3>
-        <div class="table-scroll" style="margin-top:16px">
-          <table><tbody>
-            <tr><td><strong>Length</strong></td><td>One term, weekly</td></tr>
-            <tr><td><strong>Session</strong></td><td>60–90 minutes</td></tr>
-            <tr><td><strong>Group</strong></td><td>Small and friendly</td></tr>
-            <tr><td><strong>Instrument</strong></td><td>Descant recorder — we advise on buying one,
-                supply at cost, or lend you one</td></tr>
-            <tr><td><strong>Materials</strong></td><td>Scores and handouts, printed by us. No cost
-                to participants.</td></tr>
-            <tr><td><strong>Ending</strong></td><td>A short concert for family and friends</td></tr>
-          </tbody></table>
-        </div>
+        <p class="eyebrow">Where the model came from</p>
+        <h3 class="h-md">The pilot.</h3>
+        <p class="lead mt-2">Seven retired Presentation Sisters. Ten weekly hours at
+           Warrenmount, Dublin 8. An Easter concert of nine pieces at Clondalkin Lodge.
+           Completed as Bachelor of Music research at TU Dublin Conservatoire.</p>
+        <p class="mt-2">Three months of preparation came first — a needs survey, permissions,
+           vetting, individual lessons, part allocation. Descant, alto, tenor and bass recorders
+           with melodica, xylophone and small percussion; enlarged scores. All seven completed
+           and performed in public.</p>
       </div>
       <div class="reveal">
-        <h3>What it gives people</h3>
-        <ul class="checklist" style="margin-top:16px">
+        <ul class="checklist">
           <li><strong>Connection</strong> — a warm, weekly reason to gather.</li>
           <li><strong>Dignity and achievement</strong> — the quiet pride of &ldquo;I can make music.&rdquo;</li>
           <li><strong>Gentle stimulation</strong> — memory, coordination, breath and focus.</li>
           <li><strong>Friendship</strong> — bonds that often outlast the term.</li>
         </ul>
-        <div class="callout" style="margin-top:24px">
+        <div class="callout mt-3">
           <span class="tag tag-live">Running now</span>
-          <p style="margin-top:12px"><strong>Mulhuddart Community Centre, Dublin 15.</strong>
+          <p class="mt-1"><strong>Mulhuddart Community Centre, Dublin 15.</strong>
              Wednesdays 7:00–8:00pm from 9 September 2026, twelve weeks, free — ending with a
              festive concert before Christmas.</p>
           <div class="btn-row"><a class="btn btn-accent" href="get-involved.html">Join the class <span class="arrow">→</span></a></div>
@@ -430,74 +579,13 @@ PROGRAMMES = f"""<section class="page-hero">
 </section>
 
 <section>
-  <div class="wrap split split-wide split-center">
-    <div class="reveal">
-      <p class="eyebrow">The pilot</p>
-      <h2 style="font-size:clamp(26px,3.2vw,38px)">Where the model came from.</h2>
-      <p class="lead" style="margin-top:18px">Seven retired Presentation Sisters. Ten weekly
-         hours at Warrenmount, Dublin 8. An Easter concert of nine pieces at Clondalkin Lodge.
-         Completed as Bachelor of Music research at TU Dublin Conservatoire.</p>
-      <p style="margin-top:16px">Three months of preparation came first — a needs survey,
-         permissions, vetting, individual lessons, part allocation. Descant, alto, tenor and bass
-         recorders with melodica, xylophone and small percussion; enlarged scores. All seven
-         completed and performed in public.</p>
-    </div>
-    <figure class="reveal">
-      <div class="photo photo-4x3">
-        <img src="images/conducting.jpg" width="1400" height="1050"
-             alt="Conducting a small ensemble in a community setting">
-      </div>
-      <figcaption>Every course ends the same way — a concert, however small.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="band-sunken">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">The other programmes</p>
-      <h2>Four more ways in.</h2>
-    </div>
-    <div class="grid grid-2 stagger">
-      <article class="card"><span class="kicker">Learning</span>
-        <h3>Getting to Know Classical Music</h3>
-        <p>Free lecture-recitals, roughly monthly, with recorded and live performance. Three
-           stages — <em>Getting Closer</em>, <em>Experiencing Together</em>,
-           <em>Discovering My Taste</em> — plus seasonal specials on European summer festivals,
-           the BBC Proms, Wexford Opera Festival and Christmas.</p>
-        <div class="meta">17 sessions · typical attendance 6–14 · free</div>
-      </article>
-      <article class="card"><span class="kicker">Learning</span>
-        <h3>Concert Guide &amp; Companion</h3>
-        <p>Small groups accompanied to concerts they would not attend alone — the National
-           Symphony Orchestra, Irish National Opera, the RTÉ Concert Orchestra, the NCH
-           International Series, and the BBC Proms in two consecutive summers. Preparation before,
-           guidance during, reflection after.</p>
-        <div class="meta">Groups of about five · tickets can be as little as £8</div>
-      </article>
-      <article class="card"><span class="kicker">Sharing</span>
-        <h3>Outreach Concerts</h3>
-        <p>Live performance brought into care homes, parishes, hospitals, hostels and community
-           spaces — from a homeless hostel in Dublin 7 to a martyrs&rsquo; shrine in Daegu.
-           Priority counties for growth: Wicklow, Meath and Louth.</p>
-        <div class="meta">Since 2023 · target ten or more per year</div>
-      </article>
-      <article class="card"><span class="kicker">Sharing</span>
-        <h3>Letters Ensemble</h3>
-        <p>Founded January 2024 by amateur musicians living in Dublin. Weekly Saturday rehearsals.
-           Irish traditional, Korean traditional, sacred repertoire and accessible arrangements —
-           chosen so that any room can meet the music halfway.</p>
-        <div class="meta">4 formal concerts · open to amateur musicians</div>
-      </article>
-    </div>
-    <div class="callout reveal" style="margin-top:26px">
-      <p class="h-sub">Sub-strand</p>
-      <h3 style="margin-top:8px">Bringing Music to Sacred Places</h3>
-      <p style="margin-top:10px">The faith-based strand — parishes, shrines, convents, liturgies
-         and retired religious communities, roughly sixteen of the twenty outreach performances.
-         Described to religious audiences as a lay apostolate through music: a ministry of
-         presence rather than a concert series.</p>
-    </div>
+  <div class="wrap narrow reveal">
+    <p class="eyebrow">Sub-strand</p>
+    <h2 class="h-md">Bringing Music to Sacred Places</h2>
+    <p class="mt-2">The faith-based strand — parishes, shrines, convents, liturgies and retired
+       religious communities, roughly sixteen of the twenty outreach performances. Described to
+       religious audiences as a lay apostolate through music: a ministry of presence rather than
+       a concert series.</p>
   </div>
 </section>
 
@@ -565,7 +653,7 @@ GET_INVOLVED = """<section class="page-hero">
     <div class="split reveal">
       <div>
         <h3>The venue provides</h3>
-        <ul class="checklist" style="margin-top:16px">
+        <ul class="checklist mt-2">
           <li>A warm room seating ten to twelve in a circle, weekly for the term</li>
           <li>Help spreading the word locally</li>
           <li>One named contact person</li>
@@ -574,7 +662,7 @@ GET_INVOLVED = """<section class="page-hero">
       </div>
       <div>
         <h3>We provide</h3>
-        <ul class="checklist" style="margin-top:16px">
+        <ul class="checklist mt-2">
           <li>The tutor and the full curriculum</li>
           <li>All scores and weekly materials, printed at our cost</li>
           <li>Guidance on low-cost instruments, and loans where needed</li>
@@ -583,7 +671,7 @@ GET_INVOLVED = """<section class="page-hero">
         </ul>
       </div>
     </div>
-    <div class="callout reveal" style="margin-top:30px">
+    <div class="callout reveal mt-4">
       <p><strong>On cost.</strong> Every programme keeps free and discounted places. Where a venue
          can pay a facilitation fee from its own budget, participation is free for everyone in the
          room — and that contribution keeps a door open elsewhere. Where it cannot, we will still
@@ -594,13 +682,13 @@ GET_INVOLVED = """<section class="page-hero">
 
 <section class="band-photo">
   <img src="images/quartet-hall.jpg" alt="" width="1400" height="788">
-  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
-    <p class="eyebrow" style="justify-content:center">Next step</p>
-    <h2 style="font-size:clamp(28px,3.6vw,42px)">Write one line.</h2>
-    <p class="lead" style="margin-top:18px;color:var(--fg-inverse-body)">Tell us which of the
+  <div class="wrap narrow center reveal">
+    <p class="eyebrow center-row">Next step</p>
+    <h2 class="h-lg">Write one line.</h2>
+    <p class="lead mt-2">Tell us which of the
        four sounds like you and roughly where you are. We will answer with the practical
        details.</p>
-    <div class="btn-row" style="justify-content:center">
+    <div class="btn-row center-row">
       <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=Getting%20involved%20with%20CMFE">Email us <span class="arrow">→</span></a>
       <a class="btn btn-on-dark" href="contact.html">All contact details</a>
     </div>
@@ -628,7 +716,7 @@ NEWS = f"""<section class="page-hero">
       <h2>Autumn 2026.</h2>
     </div>
 {WHATS_ON}
-    <div class="callout reveal" style="margin-top:26px">
+    <div class="callout reveal mt-3">
       <p><strong>December 2026 —</strong> a festive concert for family and friends closes the
          first Mulhuddart course. Details to follow.</p>
     </div>
@@ -647,7 +735,7 @@ NEWS = f"""<section class="page-hero">
              alt="An ensemble performing in a bright hall"></div>
         <div class="card-body">
           <span class="tag tag-live">First public funding</span>
-          <h3 style="margin-top:12px">South Dublin Live 2026</h3>
+          <h3 class="mt-1">South Dublin Live 2026</h3>
           <p>SDCC&rsquo;s Arts Office selected the project for its 2026 programme — the first work
              funded by anyone other than ourselves.</p>
           <div class="meta">August 2026 · SDCC Arts Office</div>
@@ -724,9 +812,9 @@ NEWS = f"""<section class="page-hero">
           </div>
           <figcaption>The Letters Ensemble, founded January 2024.</figcaption>
         </figure>
-        <div class="callout reveal" style="margin-top:26px">
+        <div class="callout reveal mt-3">
           <h3 class="h-sub">Press &amp; publication</h3>
-          <ul class="plainlist" style="margin-top:12px">
+          <ul class="plainlist mt-1">
             <li><strong>Kyunghyang Magazine</strong>, May 2026 — commissioned article for
                 &ldquo;Young people, how are you?&rdquo;</li>
             <li><strong>Catholic University student paper</strong>, March 2026 —
@@ -801,7 +889,7 @@ SUPPORT = f"""<section class="page-hero">
         </tbody>
       </table>
     </div>
-    <div class="split split-center reveal" style="margin-top:48px">
+    <div class="split split-center reveal mt-4">
       <div class="quote">
         <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
            within limited personal financial circumstances, he continues to give generously of his
@@ -810,7 +898,7 @@ SUPPORT = f"""<section class="page-hero">
       </div>
       <div>
         <h3 class="h-sub">Letters of support</h3>
-        <ul class="plainlist" style="margin-top:14px">
+        <ul class="plainlist mt-2">
           <li><strong>Rua Red</strong> — South Dublin&rsquo;s contemporary arts centre</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>
           <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
@@ -841,11 +929,11 @@ SUPPORT = f"""<section class="page-hero">
         <p>A warm room once a week for a term is the most valuable in-kind gift there is. It
            converts directly into free places.</p></div>
     </div>
-    <div class="btn-row reveal" style="justify-content:center;margin-top:36px">
+    <div class="btn-row reveal center-row mt-4">
       <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20CMFE">Offer support <span class="arrow">→</span></a>
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=Partnership%20and%20funding%20enquiry">Request the proposal</a>
     </div>
-    <div class="callout reveal" style="margin-top:34px">
+    <div class="callout reveal mt-4">
       <p class="small"><strong>Please note.</strong> CMFE is a volunteer-led social enterprise
          currently formalising as a not-for-profit company limited by guarantee. We are not yet a
          registered charity, so gifts are not eligible for charitable tax relief. We would rather
@@ -872,7 +960,7 @@ CONTACT = """<section class="page-hero">
   <div class="wrap split">
     <div class="reveal">
       <h2>Details</h2>
-      <div class="table-scroll" style="margin-top:24px">
+      <div class="table-scroll mt-3">
         <table><tbody>
           <tr><td><strong>Email</strong></td>
               <td><a class="link" href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></td></tr>
@@ -886,13 +974,13 @@ CONTACT = """<section class="page-hero">
           <tr><td><strong>Languages</strong></td><td>English · 한국어</td></tr>
         </tbody></table>
       </div>
-      <p class="small" style="margin-top:22px">We hold public liability insurance and complete
+      <p class="small mt-3">We hold public liability insurance and complete
          Garda vetting where the work requires it. Documentation is available to partner venues on
          request.</p>
     </div>
     <div class="reveal">
       <h2>Who writes about what</h2>
-      <ul class="checklist" style="margin-top:24px">
+      <ul class="checklist mt-3">
         <li><strong>Joining a class</strong> — which venue, and whether you have played anything
             before. &ldquo;Never&rdquo; is a completely normal answer.</li>
         <li><strong>Inviting a concert</strong> — the setting, roughly how many people, and a
@@ -912,10 +1000,10 @@ CONTACT = """<section class="page-hero">
 </section>
 
 <section class="band-sunken">
-  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
-    <p class="eyebrow" style="justify-content:center">Organisation</p>
+  <div class="wrap narrow center reveal">
+    <p class="eyebrow center-row">Organisation</p>
     <h2>Classical Music for Everyone</h2>
-    <p class="lead" style="margin-top:22px">A community music social enterprise founded in Dublin
+    <p class="lead mt-3">A community music social enterprise founded in Dublin
        in January 2024, currently formalising as a not-for-profit company limited by guarantee.
        Volunteer-led. Community music · social enterprise · arts and health.</p>
   </div>

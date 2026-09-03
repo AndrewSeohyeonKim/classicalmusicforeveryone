@@ -75,6 +75,19 @@
   --font-body:'Plus Jakarta Sans','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --font-kr:'Noto Sans KR','Plus Jakarta Sans',-apple-system,sans-serif;
 
+  /* --- type scale -------------------------------------------------------
+     One fluid scale, defined once. Components read these; no component and
+     no content file writes its own font-size in a style attribute. */
+  --t-display:clamp(43px,6.4vw,78px);   /* home h1 only */
+  --t-h1:clamp(34px,4.6vw,54px);        /* interior page h1 */
+  --t-h2:clamp(29px,3.6vw,44px);        /* section heading */
+  --t-h2-sm:clamp(25px,2.7vw,33px);     /* section heading in a column */
+  --t-h3:clamp(19px,1.4vw,22px);
+  --t-lead:clamp(18px,1.35vw,20.5px);
+  --t-body:17px;
+  --t-small:14.5px;
+  --t-label:11.5px;                     /* eyebrows, kickers, footer heads */
+
   /* space + shape */
   --wrap:1180px;
   --gutter:28px;
@@ -103,8 +116,11 @@
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--surface);color:var(--fg-body);
-  font-family:var(--font-body);font-size:17px;line-height:1.62;
+  font-family:var(--font-body);font-size:var(--t-body);line-height:1.62;
   -webkit-font-smoothing:antialiased;
+  font-optical-sizing:auto;
+  /* proportional lining figures in body copy, tabular nowhere by default */
+  font-variant-numeric:proportional-nums;
 }
 html[lang^="ko"] body{font-family:var(--font-kr);line-height:1.76;font-size:16.5px}
 
@@ -119,10 +135,20 @@ strong{color:var(--fg);font-weight:700}
 
 h1,h2,h3,h4{
   font-family:var(--font-display);color:var(--fg);font-weight:600;
-  line-height:1.1;margin:0;letter-spacing:-.018em;text-wrap:balance;
+  margin:0;text-wrap:balance;font-optical-sizing:auto;
 }
-h3{font-size:21px}
-h4{font-size:18px}
+/* Fraunces gains contrast as it grows, so the tracking has to come back in
+   at the large end and open up at the small end. One rule per step. */
+h1{font-size:var(--t-h1);line-height:1.05;letter-spacing:-.028em}
+h2{font-size:var(--t-h2);line-height:1.09;letter-spacing:-.022em}
+h3{font-size:var(--t-h3);line-height:1.24;letter-spacing:-.012em}
+h4{font-size:18px;line-height:1.3;letter-spacing:-.01em}
+
+/* display sizes as classes — so a content file never sets font-size inline */
+.h-display{font-size:var(--t-display);line-height:1.0;letter-spacing:-.034em}
+.h-xl{font-size:var(--t-h1);line-height:1.05;letter-spacing:-.028em}
+.h-lg{font-size:var(--t-h2);line-height:1.09;letter-spacing:-.022em}
+.h-md{font-size:var(--t-h2-sm);line-height:1.14;letter-spacing:-.018em}
 /* a heading that reads as a small label — used where a section needs a level
    in the outline but the design calls for an eyebrow, not a title */
 .h-sub{
@@ -135,9 +161,16 @@ html[lang^="ko"] .h-sub{font-family:var(--font-kr);letter-spacing:.08em}
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
 }
-html[lang^="ko"] :is(h1,h2,h3,h4){
-  font-family:var(--font-kr);font-weight:700;letter-spacing:-.03em;line-height:1.32;
+/* Korean has no italic and no optical size; it needs more leading and less
+   negative tracking than Fraunces to stay readable at display sizes. */
+html[lang^="ko"] :is(h1,h2,h3,h4,.h-display,.h-xl,.h-lg,.h-md){
+  font-family:var(--font-kr);font-weight:700;letter-spacing:-.032em;
 }
+html[lang^="ko"] :is(h1,.h-xl){line-height:1.26}
+html[lang^="ko"] .h-display{font-size:clamp(33px,4.9vw,58px);line-height:1.2}
+html[lang^="ko"] :is(h2,.h-lg){line-height:1.3}
+html[lang^="ko"] .h-md{line-height:1.34}
+html[lang^="ko"] :is(h3,h4){line-height:1.42;letter-spacing:-.028em}
 /* Korean must not break inside a word — wrap at spaces only */
 html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.tiny){
   word-break:keep-all;overflow-wrap:break-word;
@@ -159,7 +192,11 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
    or where the reader asks for reduced motion.
    ========================================================================== */
 @keyframes rise-in{from{opacity:0;translate:0 26px}to{opacity:1;translate:0 0}}
+@keyframes rise-in-soft{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
 @keyframes fade-in{from{opacity:0}to{opacity:1}}
+/* SVG paths carry pathLength="1", so one dash length fits every path */
+@keyframes draw-path{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes note-drift{from{translate:0 4px}to{translate:0 -4px}}
 @keyframes wipe-in{
   from{opacity:0;clip-path:inset(16% 0 0 0);scale:1.05}
   to  {opacity:1;clip-path:inset(0 0 0 0);scale:1}
@@ -185,16 +222,45 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
       animation-timeline:view();
       animation-range:entry 12% entry 86%;
     }
-    /* stagger: later children start their range a little further in */
-    .stagger>*:nth-child(2){animation-range:entry 18% entry 92%}
-    .stagger>*:nth-child(3){animation-range:entry 24% entry 98%}
-    .stagger>*:nth-child(4){animation-range:entry 30% cover 6%}
-    .stagger>*{animation:rise-in linear both;animation-timeline:view();animation-range:entry 12% entry 86%}
+    /* stagger: each later child starts its range a little further in, so a
+       row of five arrives as a sweep rather than all at once */
+    .stagger>*{animation:rise-in linear both;animation-timeline:view();animation-range:entry 12% entry 84%}
+    .stagger>*:nth-child(2){animation-range:entry 17% entry 89%}
+    .stagger>*:nth-child(3){animation-range:entry 22% entry 94%}
+    .stagger>*:nth-child(4){animation-range:entry 27% entry 99%}
+    .stagger>*:nth-child(5){animation-range:entry 32% cover 4%}
+    .stagger>*:nth-child(6){animation-range:entry 37% cover 9%}
+
+    /* the eyebrow rule draws out from its origin */
+    .eyebrow::before{
+      animation:draw-rule linear both;
+      animation-timeline:view();animation-range:entry 20% entry 70%;
+    }
+
+    /* diagrams: the arrows draw themselves, then the labels on them arrive.
+       The timeline is named on the figure because an SVG child is not itself
+       a view() subject. */
+    .diagram{timeline-scope:--dg;view-timeline-name:--dg;view-timeline-axis:block}
+    .diagram .dg-draw{
+      stroke-dasharray:1;
+      animation:draw-path linear both;
+      animation-timeline:--dg;animation-range:entry 24% cover 18%;
+    }
+    .diagram .dg-late{
+      animation:fade-in linear both;
+      animation-timeline:--dg;animation-range:cover 8% cover 26%;
+    }
+    .hero::after{
+      animation:note-drift 7s var(--ease) infinite alternate;
+    }
 
     .photo>img{
       animation:wipe-in linear both;
       animation-timeline:view();animation-range:entry 8% entry 78%;
     }
+    /* the hero photograph already arrives with .lift on its figure; a second
+       scroll-driven wipe on top of that leaves it blank above the fold */
+    .hero .photo>img{animation:none}
     .band-photo img{
       animation:drift linear both;
       animation-timeline:view();animation-range:cover;
@@ -208,9 +274,10 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
   /* hero runs on load, not on scroll */
   .lift{animation:rise-in var(--dur-slower) var(--ease-enter-expressive) both}
   .lift-1{animation-delay:60ms}
-  .lift-2{animation-delay:140ms}
-  .lift-3{animation-delay:220ms}
-  .lift-4{animation-delay:300ms}
+  .lift-2{animation-delay:150ms}
+  .lift-3{animation-delay:240ms}
+  .lift-4{animation-delay:330ms}
+  .lift-5{animation-delay:420ms}
 }
 
 ::view-transition-old(root){animation:vt-out var(--dur-5) var(--ease-exit) both}
@@ -309,6 +376,8 @@ html[lang^="ko"] .btn{font-family:var(--font-kr)}
 .btn-on-dark{--btn-border:rgb(255 255 255 / .38);--btn-fg:var(--white)}
 .btn-on-dark:hover{--btn-border:var(--white);--btn-bg:rgb(255 255 255 / .1);--btn-fg:var(--white)}
 .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn-row.center-row,.eyebrow.center-row{justify-content:center}
+.center .btn-row{justify-content:center}
 
 /* inline text link with an underline that draws in */
 .link{
@@ -321,8 +390,8 @@ html[lang^="ko"] .btn{font-family:var(--font-kr)}
 /* ==========================================================================
    7. SECTIONS
    ========================================================================== */
-section{padding-block:92px}
-section.tight{padding-block:62px}
+section{padding-block:clamp(64px,7.2vw,108px)}
+section.tight{padding-block:clamp(44px,4.6vw,66px)}
 .band-raised{background:var(--surface-raised)}
 .band-sunken{background:var(--surface-sunken)}
 .band-inverse{background:var(--surface-inverse);color:var(--fg-inverse-body)}
@@ -332,52 +401,97 @@ section.tight{padding-block:62px}
 .band-inverse a:not(.btn):hover{color:var(--fg-inverse)}
 
 .eyebrow{
-  display:flex;align-items:center;gap:10px;
-  font-family:var(--font-body);font-size:11.5px;font-weight:700;letter-spacing:.19em;
-  text-transform:uppercase;color:var(--accent-ink);margin:0 0 16px;
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent-ink);margin:0 0 18px;
 }
 html[lang^="ko"] .eyebrow{font-family:var(--font-kr);letter-spacing:.1em}
+/* the rule draws itself in as the eyebrow enters the viewport */
 .eyebrow::before{
-  content:"";width:26px;height:1.5px;background:currentColor;flex:0 0 auto;
+  content:"";width:30px;height:1.5px;background:currentColor;flex:0 0 auto;
   transform-origin:0 50%;
 }
 .band-inverse .eyebrow{color:var(--accent-inverse)}
 
-.section-head{max-width:720px;margin-bottom:48px}
-.section-head h2{font-size:clamp(29px,3.5vw,42px)}
-.section-head p{margin-top:16px;font-size:18px;color:var(--fg-muted)}
+/* px, not em: an em here would resolve against the inherited body size, not
+   against the heading, and the block would collapse to a narrow column */
+.section-head{max-width:720px;margin-bottom:clamp(34px,3.6vw,54px)}
+.section-head.wide{max-width:880px}
+/* the heading's own measure, in its own em — about two lines of display type */
+.section-head :is(h1,h2){max-width:13em}
+/* body colour, not muted: at 20.5px on the sunken band the muted grey lands
+   at 4.49:1, a hair under AA */
+.section-head p{margin-top:18px;font-size:var(--t-lead);color:var(--fg-body);max-width:34em}
 .band-inverse .section-head p{color:var(--fg-inverse-muted)}
-.lead{font-size:19px;line-height:1.58;color:var(--fg-body)}
-.small{font-size:14.5px;color:var(--fg-muted)}
+.lead{font-size:var(--t-lead);line-height:1.56;color:var(--fg-body)}
+.band-inverse .lead,.band-photo .lead{color:var(--fg-inverse-body)}
+.small{font-size:var(--t-small);color:var(--fg-muted)}
 .tiny{font-size:13px;color:var(--fg-muted)}
+/* utility spacing — replaces inline margin-top in the content files */
+.mt-1{margin-top:12px}.mt-2{margin-top:18px}.mt-3{margin-top:26px}.mt-4{margin-top:38px}
+.center{text-align:center}
+.center .eyebrow{justify-content:center}
+.center .section-head,.center.section-head{margin-inline:auto}
 
 /* ==========================================================================
    8. HERO
    ========================================================================== */
 .hero{
-  position:relative;overflow:hidden;
-  background:linear-gradient(168deg,var(--surface) 0%,var(--surface) 44%,var(--surface-sunken) 100%);
-  padding-block:80px 92px;border-bottom:1px solid var(--line);
+  position:relative;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(115% 80% at 88% 0%,color-mix(in srgb,var(--gold-bronze) 9%,transparent),transparent 62%),
+    linear-gradient(168deg,var(--surface) 0%,var(--surface) 46%,var(--surface-sunken) 100%);
+  padding-block:clamp(56px,6.4vw,96px) clamp(64px,7vw,104px);
+  border-bottom:1px solid var(--line);
 }
-.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:center}
-.hero h1{font-size:clamp(40px,5.6vw,66px);line-height:1.02;letter-spacing:-.032em}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:clamp(40px,5vw,72px);align-items:center}
+.hero h1{font-size:var(--t-display);line-height:1.0;letter-spacing:-.034em;margin-top:-.06em}
+html[lang^="ko"] .hero h1{font-size:clamp(33px,4.9vw,58px);line-height:1.2;letter-spacing:-.032em}
 .hero h1 .line{display:block}
-.hero h1 em{font-style:italic;color:var(--accent)}
-html[lang^="ko"] .hero h1{font-size:clamp(32px,4.6vw,52px);line-height:1.24;letter-spacing:-.035em}
-html[lang^="ko"] .hero h1 em{font-style:normal}
-.hero .lead{margin-top:24px;max-width:31em}
+.hero h1 em{font-style:italic;color:var(--accent-ink)}
+html[lang^="ko"] .hero h1 em{font-style:normal;color:var(--accent-ink)}
+.hero .lead{margin-top:26px;max-width:30em}
+.hero .btn-row{margin-top:32px}
+.hero figure{position:relative}
+/* a thin gold rule stepping out from behind the photograph */
+.hero figure::before{
+  content:"";position:absolute;z-index:-1;inset-block:22px;inset-inline-start:-14px;
+  width:2px;background:linear-gradient(var(--accent),transparent);opacity:.5;
+}
 
-/* five ruled staves drifting behind the hero — pure CSS, no image */
+/* --- the stave ---------------------------------------------------------
+   Five ruled lines, a gold brace at the left, and the fifth line carrying
+   more weight, as a printed stave does. Pure CSS: no image, no JS. */
 .hero::before{
-  content:"";position:absolute;inset-block-start:-40px;inset-inline-end:-10%;
-  width:70%;height:280px;pointer-events:none;opacity:.5;
-  background:repeating-linear-gradient(
-    to bottom,
-    transparent 0 21px,
-    var(--line-strong) 21px 22px
-  );
-  mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 55%,transparent);
-  rotate:-2deg;
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  inset-block-start:clamp(-30px,-2vw,-10px);inset-inline-end:-6%;
+  width:74%;height:236px;rotate:-1.6deg;
+  background:
+    /* the four light lines + one firmer bottom line */
+    linear-gradient(var(--line-strong),var(--line-strong)) 0 0/100% 1px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) 0 23px/100% 1px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) 0 46px/100% 1px no-repeat,
+    linear-gradient(var(--line-strong),var(--line-strong)) 0 69px/100% 1px no-repeat,
+    linear-gradient(var(--accent),var(--accent)) 0 92px/100% 1.5px no-repeat;
+  opacity:.55;
+  -webkit-mask-image:linear-gradient(100deg,transparent,#000 34%,#000 72%,transparent);
+  mask-image:linear-gradient(100deg,transparent,#000 34%,#000 72%,transparent);
+}
+/* three note-heads resting on the stave, drifting slowly */
+.hero::after{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  inset-block-start:clamp(28px,3vw,52px);inset-inline-end:14%;
+  width:250px;height:70px;rotate:-1.6deg;opacity:.5;
+  background:
+    radial-gradient(closest-side,var(--accent) 96%,transparent) 0 44px/13px 10px no-repeat,
+    radial-gradient(closest-side,var(--accent) 96%,transparent) 92px 21px/13px 10px no-repeat,
+    radial-gradient(closest-side,var(--accent-strong) 96%,transparent) 190px 56px/13px 10px no-repeat;
+}
+/* below the breakpoint the stave would run through the eyebrow, so it retires
+   to a quiet wash rather than crossing live text */
+@media (max-width:880px){
+  .hero::after{display:none}
+  .hero::before{width:100%;inset-inline-end:-20%;opacity:.28}
 }
 
 /* ==========================================================================
@@ -385,32 +499,55 @@ html[lang^="ko"] .hero h1 em{font-style:normal}
    ========================================================================== */
 .page-hero{
   background:var(--surface-inverse);color:var(--fg-inverse-body);
-  padding-block:78px 70px;position:relative;overflow:hidden;
+  padding-block:clamp(62px,6.6vw,96px) clamp(56px,5.8vw,82px);
+  position:relative;overflow:hidden;isolation:isolate;
 }
-.page-hero h1{color:var(--fg-inverse);font-size:clamp(33px,4.6vw,52px);max-width:15em}
-.page-hero p{margin-top:20px;max-width:40em;font-size:19px;color:var(--fg-inverse-muted)}
+.page-hero h1{color:var(--fg-inverse);max-width:17em}
+.page-hero p{margin-top:22px;max-width:38em;font-size:var(--t-lead);color:var(--fg-inverse-muted)}
 .page-hero .eyebrow{color:var(--accent-inverse)}
+/* the same stave, reversed, so interior pages read as one family with the home */
+.page-hero::before{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  inset-block-start:-14px;inset-inline-end:-4%;width:56%;height:120px;rotate:-1.6deg;
+  background:
+    linear-gradient(var(--line-inverse),var(--line-inverse)) 0 0/100% 1px no-repeat,
+    linear-gradient(var(--line-inverse),var(--line-inverse)) 0 23px/100% 1px no-repeat,
+    linear-gradient(var(--line-inverse),var(--line-inverse)) 0 46px/100% 1px no-repeat,
+    linear-gradient(var(--line-inverse),var(--line-inverse)) 0 69px/100% 1px no-repeat,
+    linear-gradient(var(--accent),var(--accent)) 0 92px/100% 1.5px no-repeat;
+  opacity:.8;
+  -webkit-mask-image:linear-gradient(100deg,transparent,#000 40%,#000 80%,transparent);
+  mask-image:linear-gradient(100deg,transparent,#000 40%,#000 80%,transparent);
+}
 .page-hero::after{
-  content:"";position:absolute;inset-block-end:-120px;inset-inline-end:-60px;
-  width:340px;height:340px;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 68%);
+  content:"";position:absolute;z-index:-1;inset-block-end:-140px;inset-inline-end:-70px;
+  width:380px;height:380px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 20%,transparent),transparent 68%);
 }
 
 /* ==========================================================================
    10. STAT STRIP
    ========================================================================== */
-.stats{background:var(--surface-inverse);color:var(--fg-inverse);padding-block:40px}
+.stats{
+  background:var(--surface-inverse);color:var(--fg-inverse);
+  padding-block:clamp(34px,3.4vw,48px);
+}
 .stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
 .stat{
-  text-align:center;padding-inline:8px;
+  text-align:center;padding-inline:10px;
   border-inline-start:1px solid var(--line-inverse);
 }
 .stat:first-child{border-inline-start:0}
 .stat b{
-  display:block;font-family:var(--font-display);font-size:clamp(28px,3vw,38px);
-  font-weight:600;color:var(--accent-inverse);line-height:1.05;letter-spacing:-.02em;
+  display:block;font-family:var(--font-display);font-size:clamp(30px,3.1vw,42px);
+  font-weight:700;color:var(--accent-inverse);line-height:1.02;letter-spacing:-.028em;
+  font-variant-numeric:lining-nums;font-optical-sizing:auto;
 }
-.stat span{display:block;font-size:12.5px;color:var(--fg-inverse-muted);margin-top:8px;line-height:1.35}
+.stat span{
+  display:block;font-family:var(--font-body);font-size:12.5px;color:var(--fg-inverse-muted);
+  margin-top:10px;line-height:1.38;
+}
+html[lang^="ko"] .stat span{font-family:var(--font-kr)}
 
 /* ==========================================================================
    11. CARDS & GRIDS
@@ -419,9 +556,16 @@ html[lang^="ko"] .hero h1 em{font-style:normal}
 .grid-2{grid-template-columns:repeat(2,1fr)}
 .grid-3{grid-template-columns:repeat(3,1fr)}
 .grid-4{grid-template-columns:repeat(4,1fr)}
+/* Five programmes, five identical columns. The parity is structural: there is
+   no size, order or colour that marks one of them as the main one. */
+.grid-5{grid-template-columns:repeat(5,1fr);gap:18px}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .split-wide{grid-template-columns:1.12fr .88fr}
 .split-center{align-items:center}
+/* alternating photo/text order down the programmes page; below the breakpoint
+   the photograph always comes first, so the rhythm does not become a lottery */
+.split-flip>figure{order:2}
+@media (max-width:880px){.split-flip>figure{order:0}}
 
 a.card{color:var(--fg-body)}
 a.card:hover{color:var(--fg-body)}
@@ -453,6 +597,88 @@ a.card:hover{color:var(--fg-body)}
 .card-media{padding:0;overflow:hidden}
 .card-media .photo{border-radius:0}
 .card-media .card-body{padding:26px;display:flex;flex-direction:column;flex:1}
+
+/* --- the compact programme card ---------------------------------------
+   Deliberately small and identical for all five programmes. The thumbnail,
+   the label and the rule are the same size in every one of them. */
+.prog{
+  display:flex;flex-direction:column;
+  background:var(--surface-raised);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-1);
+  color:var(--fg-body);
+  transition:translate var(--dur-5) var(--ease-enter),
+             box-shadow var(--dur-5) var(--ease-enter),
+             border-color var(--dur-4) var(--ease);
+}
+.prog:hover{translate:0 -4px;box-shadow:var(--shadow-2);border-color:var(--line-strong);color:var(--fg-body)}
+.prog .photo{border-radius:0}
+.prog-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.prog .kicker{
+  font-family:var(--font-body);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent-ink);
+}
+html[lang^="ko"] .prog .kicker{font-family:var(--font-kr);letter-spacing:.06em}
+.prog h3{margin-top:9px;font-size:17.5px;line-height:1.22}
+html[lang^="ko"] .prog h3{font-size:16.5px;line-height:1.4}
+.prog p{margin:10px 0 0;font-size:14px;line-height:1.5;color:var(--fg-muted)}
+.prog .meta{
+  margin-top:auto;padding-top:14px;font-size:12px;color:var(--fg-muted);
+  font-variant-numeric:lining-nums;
+}
+.prog .meta::before{
+  content:"";display:block;width:26px;height:1.5px;background:var(--accent);
+  margin-bottom:10px;opacity:.6;
+}
+
+/* --- the two-pillar legend, sitting above the five cards --------------- */
+.legend{
+  display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;
+  margin-bottom:26px;font-size:14px;color:var(--fg-muted);
+}
+.legend b{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--fg);
+}
+html[lang^="ko"] .legend b{font-family:var(--font-kr);letter-spacing:.06em}
+.legend b::before{
+  content:"";width:10px;height:10px;border-radius:50%;
+  background:var(--accent);flex:0 0 auto;
+}
+.legend b.b2::before{background:transparent;border:2px solid var(--accent)}
+
+/* --- evidence row: who has backed the work ---------------------------- */
+.evidence{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;
+}
+.evidence>div{background:var(--surface-raised);padding:24px 22px}
+.evidence dt{
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent-ink);margin-bottom:10px;
+}
+html[lang^="ko"] .evidence dt{font-family:var(--font-kr);letter-spacing:.06em}
+.evidence dd{margin:0;font-size:15px;line-height:1.52}
+.evidence dd+dd{margin-top:8px}
+@media (max-width:880px){.evidence{grid-template-columns:1fr}}
+
+/* a short fact list under a programme heading — the same six-ish rows in
+   every one of the five blocks, which is what makes them read as equals */
+.facts{
+  display:grid;grid-template-columns:auto 1fr;gap:11px 24px;
+  margin:24px 0 0;padding-top:20px;border-top:1px solid var(--line);
+  font-size:15px;
+}
+.facts dt{color:var(--fg-muted);white-space:nowrap}
+.facts dd{margin:0;color:var(--fg)}
+.band-inverse .facts{border-top-color:var(--line-inverse)}
+.band-inverse .facts dt{color:var(--fg-inverse-muted)}
+.band-inverse .facts dd{color:var(--fg-inverse)}
+@media (max-width:560px){
+  .facts{grid-template-columns:1fr;gap:2px}
+  .facts dd{margin-bottom:12px}
+}
 
 .pillar{
   background:var(--surface-raised);border:1px solid var(--line);
@@ -531,9 +757,15 @@ figcaption{margin-top:12px;font-size:13px;color:var(--fg-muted);line-height:1.5}
    ========================================================================== */
 .diagram{
   background:var(--surface-raised);border:1px solid var(--line);
-  border-radius:var(--radius);padding:30px 26px 22px;box-shadow:var(--shadow-1);
-  color:var(--fg);
+  border-radius:var(--radius-lg);padding:clamp(22px,2.6vw,38px) clamp(18px,2.4vw,34px) 24px;
+  box-shadow:var(--shadow-1);color:var(--fg);
 }
+.diagram-title{
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent-ink);margin:0 0 20px;
+}
+html[lang^="ko"] .diagram-title{font-family:var(--font-kr);letter-spacing:.07em}
+.band-inverse .diagram-title{color:var(--accent-inverse)}
 .band-inverse .diagram{
   background:color-mix(in srgb,var(--white) 5%,transparent);
   border-color:var(--line-inverse);color:var(--fg-inverse);
@@ -551,15 +783,37 @@ figcaption{margin-top:12px;font-size:13px;color:var(--fg-muted);line-height:1.5}
 }
 .diagram figcaption{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 .band-inverse .diagram figcaption{border-top-color:var(--line-inverse);color:var(--fg-inverse-muted)}
-.dg-fill-soft{fill:color-mix(in srgb,currentColor 5%,transparent)}
-.dg-fill-accent{fill:color-mix(in srgb,var(--accent) 13%,transparent)}
-.dg-stroke{stroke:currentColor;fill:none;stroke-width:1.25;opacity:.55}
-.dg-stroke-accent{stroke:var(--accent);fill:none;stroke-width:1.75}
-.dg-box{stroke:currentColor;stroke-width:1.25;opacity:.85}
-.dg-label{fill:currentColor;font-family:var(--font-body);font-size:13px;font-weight:600}
-.dg-sub{fill:currentColor;font-family:var(--font-body);font-size:11.5px;opacity:.62}
-.dg-edge{fill:var(--accent-ink);font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.04em}
-html[lang^="ko"] :is(.dg-label,.dg-sub,.dg-edge){font-family:var(--font-kr)}
+.dg-fill-soft{fill:color-mix(in srgb,currentColor 4%,transparent)}
+.dg-fill-accent{fill:color-mix(in srgb,var(--accent) 12%,transparent)}
+.dg-fill-panel{fill:var(--surface-sunken)}
+.band-sunken .dg-fill-panel,.band-raised .dg-fill-panel{fill:color-mix(in srgb,var(--accent) 6%,transparent)}
+.dg-stroke{stroke:currentColor;fill:none;stroke-width:1.25;opacity:.5}
+.dg-stroke-accent{stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round}
+.dg-box{stroke:currentColor;stroke-width:1.25;opacity:.75;fill:none}
+
+/* the stave: four quiet lines and one that carries the weight */
+.dg-stave{stroke:currentColor;fill:none;stroke-width:1;opacity:.3}
+.dg-stave-base{stroke:var(--accent);fill:none;stroke-width:1.5;opacity:.75}
+/* a note-head is the unit of every diagram here — always the same size */
+.dg-note{fill:var(--accent)}
+.dg-note-open{fill:var(--surface-raised);stroke:var(--accent);stroke-width:2}
+.band-sunken .dg-note-open{fill:var(--surface-raised)}
+.band-inverse .dg-note-open{fill:var(--surface-inverse)}
+.dg-tri{fill:var(--accent)}
+.dg-tri-q{fill:currentColor;opacity:.45}
+
+.dg-h{fill:currentColor;font-family:var(--font-display);font-size:19px;font-weight:600;
+  letter-spacing:-.015em;font-optical-sizing:auto}
+.dg-label{fill:currentColor;font-family:var(--font-body);font-size:14px;font-weight:600;
+  letter-spacing:-.005em}
+.dg-sub{fill:currentColor;font-family:var(--font-body);font-size:12.5px;opacity:.66}
+.dg-edge{fill:var(--accent-ink);font-family:var(--font-body);font-size:11.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase}
+.band-inverse .dg-edge{fill:var(--accent-inverse)}
+.dg-num{fill:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;
+  opacity:.85;font-variant-numeric:lining-nums}
+html[lang^="ko"] :is(.dg-h,.dg-label,.dg-sub,.dg-edge){font-family:var(--font-kr)}
+html[lang^="ko"] .dg-edge{letter-spacing:.03em;text-transform:none}
 
 /* ==========================================================================
    14. NOTICES, QUOTES, LISTS, TABLES
@@ -668,6 +922,7 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
 @media (max-width:1040px){
   .grid-4{grid-template-columns:repeat(2,1fr)}
   .grid-3{grid-template-columns:repeat(2,1fr)}
+  .grid-5{grid-template-columns:repeat(3,1fr)}
   .stats-grid{grid-template-columns:repeat(3,1fr);gap:26px}
   .stat:nth-child(4){border-inline-start:0}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
@@ -677,6 +932,7 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
   .hero{padding-block:56px 66px}
   .hero-grid,.split,.split-wide{grid-template-columns:1fr;gap:38px}
   .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .grid-5{grid-template-columns:repeat(2,1fr)}
   .band-photo{padding-block:88px}
   .menu-toggle{display:block;margin-inline-start:auto}
   .nav{
@@ -692,6 +948,7 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
 }
 @media (max-width:560px){
   :root{--gutter:20px}
+  .grid-5{grid-template-columns:1fr}
   body{font-size:16px}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .stat{border-inline-start:0}

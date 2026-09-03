@@ -16,7 +16,8 @@ PHONE_INTL = "+353 83 078 0635"
 PHONE_TEL = "+353830780635"
 
 FONTS = ("https://fonts.googleapis.com/css2?"
-         "family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600"
+         "family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700"
+         ";1,9..144,400;1,9..144,600"
          "&family=Plus+Jakarta+Sans:wght@400;500;600;700"
          "&family=Noto+Sans+KR:wght@400;500;700&display=swap")
 
@@ -94,12 +95,17 @@ JSONLD = """<script type="application/ld+json">
 </script>"""
 
 
-def _images(body, eager_first):
+def _images(body, eager_first, prefix=""):
     """Lazy-load every image; the hero, if there is one, loads eagerly.
 
-    Applied here rather than in the content files so the rule cannot drift
-    between pages.
+    Also resolves image paths. Both content files write `src="images/…"`, and
+    the prefix back to the site root is added here — a Korean page lives in
+    ko/, so it needs ../images/. Doing it here rather than in the content
+    files means the two languages stay byte-identical in this respect and a
+    new photograph cannot be added with the wrong path in one of them.
     """
+    if prefix:
+        body = body.replace('src="images/', f'src="{prefix}images/')
     out, first = [], True
     for chunk in re.split(r"(<img\b)", body):
         if chunk == "<img":
@@ -187,7 +193,7 @@ def footer(lang):
 def page(lang, slug, title, description, body):
     p = _prefix(lang)
     sub = "" if slug == "index.html" else slug
-    body = _images(body, eager_first='<section class="hero">' in body)
+    body = _images(body, eager_first='<section class="hero">' in body, prefix=p)
     jsonld = JSONLD.format(site=SITE_URL, desc=description.replace('"', "'"),
                            email=EMAIL, phone=PHONE_INTL,
                            lang="en-IE" if lang == "en" else "ko")

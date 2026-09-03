@@ -44,15 +44,26 @@ gradient do the work.
 | File | Used on | Shows |
 |---|---|---|
 | `hero-outreach.jpg` | Home hero | Letters Ensemble, St Patrick's Day concert for a religious community |
-| `church-concert.jpg` | Home band | Ensemble in a church |
-| `community-room.jpg` | Home + Programmes cards | Clarinet in a community room |
-| `care-christmas.jpg` | Home card | Quartet in a care setting at Christmas |
-| `lecture-recital.jpg` | Home card | A lecture-recital in progress |
+| `church-concert.jpg` | Home photo band | Ensemble in a church |
+| `conducting.jpg` | Home card 1 + Programmes: Recorder Ensemble | Conducting a small ensemble |
+| `lecture-recital.jpg` | Home card 2 + Programmes: Getting to Know Classical Music | A lecture-recital in progress |
+| `quartet-hall.jpg` | Home card 3 + Programmes: Concert Guide + News + Get involved band | Ensemble performing in a bright hall |
+| `care-christmas.jpg` | Home card 4 + Programmes: Outreach Concerts | Quartet in a care setting at Christmas |
+| `letters-ensemble.jpg` | Home card 5 + Programmes: Letters Ensemble + News | The Letters Ensemble with their instruments |
+| `community-room.jpg` | spare | Clarinet in a community room |
 | `clarinet.jpg` | About | The founder playing at a parish liturgy |
 | `organ.jpg` | About band | Organ console |
-| `conducting.jpg` | Programmes | Conducting a small ensemble |
-| `letters-ensemble.jpg` | News | The Letters Ensemble with their instruments |
-| `quartet-hall.jpg` | News + Get involved band | Ensemble performing in a bright hall |
+
+The five home cards and the five programme blocks use **one photograph each, in the
+same order**. That pairing is what makes the five programmes read as equals — do not
+give one of them two photographs or a larger crop.
+
+## Paths
+
+Write `src="images/…"` in **both** content files, English and Korean. Korean pages sit
+in `ko/` and need `../images/`, but that prefix is added at build time by `_images()`
+in `_build/layout.py`. Writing `../images/` by hand in `content_ko.py` is how a broken
+hero once shipped on the Korean home page.
 
 ## Two rules that are not negotiable
 

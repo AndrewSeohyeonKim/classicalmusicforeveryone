@@ -13,11 +13,11 @@ L = "ko"
 
 STATS = """<div class="stats">
   <div class="wrap stats-grid">
-    <div class="stat"><b>40+</b><span>세션·공연</span></div>
-    <div class="stat"><b>4</b><span>연주한 국가</span></div>
-    <div class="stat"><b>20+</b><span>기관·공간</span></div>
+    <div class="stat"><b>40+</b><span>진행한 세션과 연주</span></div>
+    <div class="stat"><b>5</b><span>운영 중인 프로그램</span></div>
+    <div class="stat"><b>20+</b><span>닿은 공간과 기관</span></div>
+    <div class="stat"><b>4</b><span>연주한 나라</span></div>
     <div class="stat"><b>143</b><span>강의 누적 참석</span></div>
-    <div class="stat"><b>7 / 7</b><span>파일럿 전원 수료</span></div>
   </div>
 </div>"""
 
@@ -48,12 +48,12 @@ WHATS_ON = """<div class="grid grid-2 stagger">
 </div>"""
 
 CTA = """<section class="band-inverse">
-  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
-    <h2 style="font-size:clamp(26px,3.4vw,40px)">당신을 위한 자리가 있습니다.</h2>
-    <p class="lead" style="margin-top:18px;color:var(--fg-inverse-muted)">
+  <div class="wrap narrow center reveal">
+    <h2 class="h-lg">당신을 위한 자리가 있습니다.</h2>
+    <p class="lead mt-2">
       처음 악기를 배우든, 들으러 오든, 함께 연주하든, 공간을 열어 주든 —
       한 줄이면 시작됩니다.</p>
-    <div class="btn-row" style="justify-content:center">
+    <div class="btn-row center-row">
       <a class="btn btn-accent" href="get-involved.html">참여하기 <span class="arrow">→</span></a>
       <a class="btn btn-on-dark" href="support.html">후원하기</a>
     </div>
@@ -61,6 +61,12 @@ CTA = """<section class="band-inverse">
 </section>"""
 
 
+# ---------------------------------------------------------------------------
+# 홈
+#
+# 순서에는 이유가 있습니다. 동종 단체를 따라, 방문자에게 무엇을 부탁하기 전에
+# 단체가 무엇을 운영하는지를 먼저 말합니다. 다섯 프로그램은 동등합니다 —
+# 더 큰 카드도, 먼저 칠한 색도, '대표'라는 표기도 두지 않습니다.
 # ---------------------------------------------------------------------------
 
 INDEX = f"""<section class="hero">
@@ -71,16 +77,16 @@ INDEX = f"""<section class="hero">
       <p class="lead lift lift-3">듣는 데서 그치지 않고 직접 연주하도록 가르칩니다.
          그리고 클래식 음악이 좀처럼 닿지 않는 곳으로 찾아갑니다.</p>
       <div class="btn-row lift lift-4">
-        <a class="btn btn-primary" href="get-involved.html">수업 참여하기 <span class="arrow">→</span></a>
-        <a class="btn btn-quiet" href="programmes.html">하는 일 보기</a>
+        <a class="btn btn-primary" href="programmes.html">하는 일 보기 <span class="arrow">→</span></a>
+        <a class="btn btn-quiet" href="get-involved.html">참여하기</a>
       </div>
     </div>
     <figure class="lift lift-3">
       <div class="photo photo-3x2">
-        <img src="../images/hero-outreach.jpg" width="1800" height="1350"
-             alt="커뮤니티 홀에서 성 파트리치오 축일 음악회를 여는 연주자들">
+        <img src="images/hero-outreach.jpg" width="1800" height="1350"
+             alt="커뮤니티 홀에서 열린 성 파트리치오 축일 음악회에서 연주하는 연주자들">
       </div>
-      <figcaption>한 수도 공동체를 위한 성 파트리치오 축일 음악회 — Letters Ensemble.</figcaption>
+      <figcaption>수도 공동체를 위한 성 파트리치오 축일 음악회 — Letters Ensemble.</figcaption>
     </figure>
   </div>
 </section>
@@ -89,96 +95,126 @@ INDEX = f"""<section class="hero">
 
 <section>
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">지금</p>
-      <h2>진행 중인 일.</h2>
+    <div class="section-head wide reveal">
+      <p class="eyebrow">우리가 하는 일</p>
+      <h2>다섯 프로그램, 두 축, 하나의 회로.</h2>
+      <p>직접 연주하도록 가르치고, 공연장에 오기 어려운 분들을 찾아가 연주합니다.
+         어느 한쪽만으로는 돌아가지 않습니다. 찾아간 방에서 다음 수업이 생기고,
+         그 수업에서 다음 연주자가 나옵니다.</p>
     </div>
-{WHATS_ON}
+    <div class="legend reveal">
+      <b>배움</b><span>한 학기, 한 번의 강의, 옆자리의 동행</span>
+      <b class="b2">나눔</b><span>그 방으로 음악을 가져갑니다</span>
+    </div>
+    <div class="grid grid-5 stagger">
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/conducting.jpg" width="1400" height="933" alt="더블린의 한 커뮤니티 공간에서 진행하는 주간 수업"></div>
+        <div class="prog-body">
+          <span class="kicker">배움</span>
+          <h3>리코더 앙상블 과정</h3>
+          <p>완전 초보를 위한 한 학기, 마지막은 음악회로 끝납니다.</p>
+          <div class="meta">주 1회 · 한 학기</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/lecture-recital.jpg" width="1400" height="933" alt="진행 중인 강의·연주"></div>
+        <div class="prog-body">
+          <span class="kicker">배움</span>
+          <h3>클래식 음악과 친해지기</h3>
+          <p>사전 지식이 없는 분들을 위한 무료 강의·연주.</p>
+          <div class="meta">17회 · 누적 143명</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/quartet-hall.jpg" width="1400" height="933" alt="밝은 홀에서 연주하는 앙상블"></div>
+        <div class="prog-body">
+          <span class="kicker">배움</span>
+          <h3>함께하는 음악여행</h3>
+          <p>혼자서는 가지 않을 공연에 소그룹으로 동행합니다.</p>
+          <div class="meta">10회 동행 · 5명 안팎</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/care-christmas.jpg" width="1400" height="933" alt="성탄에 요양시설에서 연주하는 사중주"></div>
+        <div class="prog-body">
+          <span class="kicker">나눔</span>
+          <h3>찾아가는 음악회</h3>
+          <p>요양시설·본당·병원·쉼터로 실연을 가져갑니다.</p>
+          <div class="meta">20회 · 15곳 이상</div>
+        </div>
+      </a>
+      <a class="prog" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/letters-ensemble.jpg" width="1400" height="933" alt="악기를 든 Letters Ensemble"></div>
+        <div class="prog-body">
+          <span class="kicker">나눔</span>
+          <h3>Letters Ensemble</h3>
+          <p>더블린에 사는 아마추어 연주자들이 매주 토요일 연습합니다.</p>
+          <div class="meta">정식 음악회 4회 · 2024년 1월부터</div>
+        </div>
+      </a>
+    </div>
+    <div class="reveal mt-4">{dg.loop(L)}</div>
+    <div class="btn-row reveal"><a class="btn btn-quiet" href="programmes.html">다섯 가지 자세히 보기 <span class="arrow">→</span></a></div>
   </div>
 </section>
 
 <section class="band-raised">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">작동 방식</p>
-      <h2>연주하기와 듣기가 서로를 먹여 살립니다.</h2>
-      <p>찾아가서 연주합니다. 누군가 자기도 해 볼 수 있겠느냐고 묻습니다. 그 질문이 수업이 되고,
-         그 수업이 다음 방에서 연주할 사람을 만듭니다.</p>
+      <p class="eyebrow">지금 열려 있는 것</p>
+      <h2>지금 참여할 수 있습니다.</h2>
+      <p>모집 중인 수업 하나와 문이 열려 있는 음악회 하나. 둘 다 무료입니다.</p>
     </div>
-    <div class="reveal">{dg.loop(L)}</div>
+{WHATS_ON}
   </div>
 </section>
 
 <section class="band-photo">
-  <img src="../images/church-concert.jpg" alt="" width="1400" height="1050">
+  <img src="images/church-concert.jpg" alt="" width="1400" height="1050">
   <div class="wrap narrow reveal">
-    <p class="eyebrow">우리가 존재하는 이유</p>
-    <h2 style="font-size:clamp(26px,3.6vw,42px)">존엄을 되찾아 주는 것은
-       듣기가 아니라 연주하기입니다.</h2>
-    <p class="lead" style="margin-top:20px;color:var(--fg-inverse-body)">
-      클래식 음악은 풍요롭지만 여전히 많은 사람에게 닿지 않습니다 — 나이, 거동, 소득, 지역,
-      그리고 그저 낯설다는 이유로. 요양시설도, 병원도, 쉼터도, 시골 본당도 관객이 없는 곳이
-      아닙니다. 가장 오래 기다려 온 관객이 이미 그곳에 있습니다.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">하는 일</p>
-      <h2>다섯 개의 프로그램, 하나의 믿음.</h2>
-    </div>
-    <div class="grid grid-3 stagger">
-      <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="../images/community-room.jpg" width="1400" height="1050"
-             alt="커뮤니티 공간에서 클라리넷을 연주하는 모습"></div>
-        <div class="card-body">
-          <span class="kicker">대표 프로그램</span>
-          <h3>리코더 앙상블</h3>
-          <p>완전 초보를 위한 한 학기. 첫 주에 첫 소리, 마지막 주에 음악회.</p>
-          <div class="meta">주 1회 · 커뮤니티 센터와 본당</div>
-        </div>
-      </a>
-      <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="../images/care-christmas.jpg" width="1400" height="1050"
-             alt="성탄 시기 돌봄시설에서 연주하는 사중주"></div>
-        <div class="card-body">
-          <span class="kicker">찾아가는 음악회</span>
-          <h3>음악이 찾아갑니다</h3>
-          <p>요양시설·본당·병원·쉼터·커뮤니티 공간으로 실연을 가져갑니다.</p>
-          <div class="meta">20회 · 4개국 · 15곳 이상</div>
-        </div>
-      </a>
-      <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="../images/lecture-recital.jpg" width="1400" height="1050"
-             alt="강의·연주가 진행되는 모습"></div>
-        <div class="card-body">
-          <span class="kicker">배움</span>
-          <h3>클래식 음악과 친해지기</h3>
-          <p>사전 지식이 필요 없는 무료 강의·연주, 대략 월 1회.</p>
-          <div class="meta">17회 · 누적 참석 143명</div>
-        </div>
-      </a>
-    </div>
+    <p class="eyebrow">왜 이 일을 하는가</p>
+    <h2 class="h-lg">존엄을 되돌려 주는 것은 듣는 일이 아니라
+       직접 연주하는 일입니다.</h2>
+    <p class="lead mt-3">
+      클래식 음악은 문화적으로 풍요롭지만 여전히 많은 이에게 닿지 않습니다 —
+      나이, 거동, 소득, 사는 곳, 혹은 그저 낯설다는 이유로. 요양시설과 병원, 쉼터,
+      시골 본당은 관객이 없는 곳이 아닙니다. 가장 오래 기다려 온 관객이
+      이미 있는 곳입니다.</p>
+    <div class="btn-row"><a class="btn btn-on-dark" href="about.html">단체 소개 <span class="arrow">→</span></a></div>
   </div>
 </section>
 
 <section class="band-sunken">
-  <div class="wrap split split-center reveal">
-    <div class="quote">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">신뢰의 근거</p>
+      <h2>우리가 아닌 누군가가 값을 치렀습니다.</h2>
+      <p>자원봉사로 운영하며 비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다.
+         그 절차가 끝나기 전까지, 자선단체 등록번호 대신 내놓을 수 있는 것은 기록입니다.</p>
+    </div>
+    <div class="evidence stagger">
+      <div><dl>
+        <dt>공적 지원</dt>
+        <dd>사우스더블린 카운티 의회 예술과가 <strong>South Dublin Live 2026</strong>에
+            이 프로젝트를 선정했습니다. 첫 공적 위촉입니다.</dd>
+      </dl></div>
+      <div><dl>
+        <dt>지지 서한</dt>
+        <dd><strong>Rua Red</strong>, <strong>The Civic</strong>,
+            <strong>Tallaght University Hospital</strong>의 지지 서한을 보유하고 있습니다.</dd>
+      </dl></div>
+      <div><dl>
+        <dt>연주해 온 곳</dt>
+        <dd><strong>네 나라</strong>—아일랜드·프랑스·영국·한국—의
+            <strong>20곳 이상의 공간과 기관</strong>에서 연주했습니다.</dd>
+      </dl></div>
+    </div>
+    <div class="quote reveal mt-4">
       <p>&ldquo;음악을 통해 그는 달리 고립감을 느낄 수 있는 이들에게 격려와 존엄,
-         그리고 영적 동행을 건넵니다.&rdquo;</p>
+         그리고 영적인 동행을 건넵니다.&rdquo;</p>
       <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
     </div>
-    <div>
-      <p class="eyebrow">기록으로 남은 것</p>
-      <h3 style="font-size:25px">우리 아닌 누군가가 비용을 댔습니다.</h3>
-      <p style="margin-top:14px">2026년 South Dublin County Council 예술과가 이 프로젝트를
-         <strong>South Dublin Live 2026</strong>에 선정했습니다. 처음으로 공적 자금이 들어온
-         일입니다. Rua Red, The Civic, Tallaght University Hospital의 지지 서한을 보유하고
-         있습니다.</p>
-      <div class="btn-row"><a class="btn btn-quiet" href="support.html">지금까지의 후원 <span class="arrow">→</span></a></div>
-    </div>
+    <div class="btn-row reveal"><a class="btn btn-quiet" href="support.html">지금까지의 재원 <span class="arrow">→</span></a></div>
   </div>
 </section>
 
@@ -203,14 +239,14 @@ ABOUT = f"""<section class="page-hero">
       <p class="lead">나이·배경·거동·소득·음악 지식과 무관하게, 살아있는 클래식 음악을 누구나
          누릴 수 있게 만듭니다 — 사람들에게 연주를 가르치고, 곁에서 함께 연주하고, 음악이 닿지
          않는 곳으로 찾아감으로써.</p>
-      <p class="eyebrow" style="margin-top:38px">비전</p>
+      <p class="eyebrow mt-4">비전</p>
       <p class="lead">도시와 농촌, 돌봄 시설과 장애가 있는 삶 어디에서든 함께 음악을 만드는
          환대하는 통로가 있는 아일랜드. 그리고 그 일을 안정된 정규 고용 상태의 교육자들이
          수행하는 것.</p>
     </div>
     <figure class="reveal">
       <div class="photo photo-4x5">
-        <img src="../images/clarinet.jpg" width="1400" height="1400"
+        <img src="images/clarinet.jpg" width="1400" height="1400"
              alt="본당 전례에서 클라리넷을 연주하는 김서현">
       </div>
       <figcaption>더블린의 한 본당 전례에서. 커뮤니티 활동과 교회 봉사는 같은 실천입니다.</figcaption>
@@ -254,26 +290,26 @@ ABOUT = f"""<section class="page-hero">
 </section>
 
 <section class="band-photo">
-  <img src="../images/organ.jpg" alt="" width="1400" height="1050">
+  <img src="images/organ.jpg" alt="" width="1400" height="1050">
   <div class="wrap split split-center">
     <div class="reveal">
       <p class="eyebrow">창립자</p>
-      <h2 style="font-size:clamp(26px,3.2vw,38px)">Andrew Seohyeon Kim · 김서현</h2>
-      <p class="lead" style="margin-top:18px;color:var(--fg-inverse-body)">
+      <h2 class="h-lg">Andrew Seohyeon Kim · 김서현</h2>
+      <p class="lead mt-2">
         클라리네티스트이자 오르가니스트, 커뮤니티 음악 실천가. TU Dublin Conservatoire 연주 전공
         음악학사(우등). 졸업 연구는 은퇴 프레젠테이션 수녀 일곱 분을 위해 직접 설계하고 이끈
         10주 리코더 앙상블이었습니다.</p>
-      <p style="margin-top:14px;color:var(--fg-inverse-muted)">
+      <p class="mt-2">
         2022년부터 Dolphin&rsquo;s Barn 성모 통고 성당 음악감독, 2023년부터 Rathgar 삼주보 성당
         오르가니스트. 2024년에 Classical Music for Everyone과 Letters Ensemble을 창립했습니다.</p>
     </div>
     <div>
-      <ul class="plainlist reveal" style="color:var(--fg-inverse-muted)">
-        <li><strong style="color:var(--fg-inverse)">클라리넷</strong> — Dr Paul Roe, TU Dublin Conservatoire</li>
-        <li><strong style="color:var(--fg-inverse)">오르간</strong> — Simon Harden</li>
-        <li><strong style="color:var(--fg-inverse)">지휘</strong> — IAYO · London Conducting Workshop</li>
-        <li><strong style="color:var(--fg-inverse)">사회적기업</strong> — TU Dublin Venture Lab</li>
-        <li><strong style="color:var(--fg-inverse)">장학</strong> — 한국 천주교 주교회의
+      <ul class="plainlist reveal">
+        <li><strong>클라리넷</strong> — Dr Paul Roe, TU Dublin Conservatoire</li>
+        <li><strong>오르간</strong> — Simon Harden</li>
+        <li><strong>지휘</strong> — IAYO · London Conducting Workshop</li>
+        <li><strong>사회적기업</strong> — TU Dublin Venture Lab</li>
+        <li><strong>장학</strong> — 한국 천주교 주교회의
             평신도사도직위원회 명도회</li>
       </ul>
     </div>
@@ -291,7 +327,7 @@ ABOUT = f"""<section class="page-hero">
     <div class="split reveal">
       <div>
         <h3 class="h-sub">아일랜드</h3>
-        <ul class="plainlist" style="margin-top:14px">
+        <ul class="plainlist mt-2">
           <li>National Concert Hall · TU Dublin, Grangegorman</li>
           <li>Tallaght University Hospital · Rua Red, Tallaght</li>
           <li>성모 통고 성당(Dolphin&rsquo;s Barn) · 삼주보 성당(Rathgar)</li>
@@ -306,15 +342,15 @@ ABOUT = f"""<section class="page-hero">
       </div>
       <div>
         <h3 class="h-sub">국외</h3>
-        <ul class="plainlist" style="margin-top:14px">
+        <ul class="plainlist mt-2">
           <li>루르드 성모 성지, 프랑스</li>
           <li>파리 외방 전교회 · Palais Brongniart, 파리</li>
           <li>런던 한인 천주교회, 영국</li>
           <li>관덕정 순교자 기념관, 대구, 한국</li>
         </ul>
-        <div class="callout" style="margin-top:26px">
+        <div class="callout mt-3">
           <h3 class="h-sub">주장하지 않는 것</h3>
-          <p class="small" style="margin-top:10px">지금까지의 근거는 참여·지속·증언이지 측정된
+          <p class="small mt-1">지금까지의 근거는 참여·지속·증언이지 측정된
              성과가 아닙니다. 검증된 도구로 웰빙을 측정한 적이 없고, 찾아가는 음악회의 관객 수도
              기록되지 않았습니다. 2026년 가을 기수부터 간단한 사전·사후 측정과 동의 절차를
              도입합니다.</p>
@@ -332,9 +368,9 @@ ABOUT = f"""<section class="page-hero">
 PROGRAMMES = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">프로그램</p>
-    <h1>실제로 무엇을 하는가.</h1>
-    <p>두 축 아래 다섯 갈래, 그리고 하나의 신앙 기반 하위 갈래. 리코더 앙상블 과정이 대표
-       프로그램이고, 나머지는 그리로 이어지거나 거기서 자라났습니다.</p>
+    <h1>실제로 하고 있는 일.</h1>
+    <p>두 축 아래 다섯 개의 프로그램, 그리고 하나의 신앙 기반 세부 갈래. 그중 주된 것은
+       없습니다. 다섯 모두를 같은 분량, 같은 항목, 같은 순서로 적었습니다.</p>
   </div>
 </section>
 
@@ -344,65 +380,181 @@ PROGRAMMES = f"""<section class="page-hero">
       <table>
         <thead><tr>
           <th scope="col">프로그램</th><th scope="col">축</th>
-          <th scope="col">상태</th><th scope="col">지금까지</th>
+          <th scope="col">상태</th><th scope="col">현재까지</th>
         </tr></thead>
         <tbody>
           <tr><td><strong>리코더 앙상블 과정</strong></td><td>배움</td>
-              <td>대표 · 진행 중</td><td>파일럿 완료, 2026년 9월 첫 커뮤니티 기수</td></tr>
+              <td>운영 중</td><td>파일럿 완료 · 2026년 9월 첫 커뮤니티 수업</td></tr>
           <tr><td><strong>클래식 음악과 친해지기</strong></td><td>배움</td>
-              <td>진행 중 · 무료</td><td>강의·연주 17회 · 누적 참석 143명</td></tr>
+              <td>운영 중 · 무료</td><td>강의·연주 17회 · 누적 참석 143명</td></tr>
           <tr><td><strong>함께하는 음악여행</strong></td><td>배움</td>
-              <td>진행 중</td><td>기록된 동행 10회 (BBC Proms 2년 연속 포함)</td></tr>
+              <td>운영 중</td><td>기록된 동행 10회 · 두 해 연속 BBC 프롬스 포함</td></tr>
           <tr><td><strong>찾아가는 음악회</strong></td><td>나눔</td>
-              <td>진행 중</td><td>20회 · 4개국 · 15곳 이상</td></tr>
-          <tr><td style="padding-inline-start:34px">↳ Bringing Music to Sacred Places</td><td>나눔</td>
-              <td>하위 갈래</td><td>20회 중 약 16회</td></tr>
+              <td>운영 중</td><td>20회 · 4개국 · 15곳 이상</td></tr>
+          <tr><td style="padding-inline-start:34px">↳ 성지에 음악을</td><td>나눔</td>
+              <td>세부 갈래</td><td>찾아가는 음악회 20회 중 약 16회</td></tr>
           <tr><td><strong>Letters Ensemble</strong></td><td>나눔</td>
-              <td>진행 중</td><td>정식 음악회 4회 · 2024년 1월부터 주 1회 합주</td></tr>
+              <td>운영 중</td><td>정식 음악회 4회 · 2024년 1월부터 매주 연습</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="mt-4">{dg.loop(L)}</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/conducting.jpg" width="1400" height="1050" alt="커뮤니티 공간에서 소규모 앙상블을 지휘하는 모습">
+      </div>
+      <figcaption>모든 과정은 같은 방식으로 끝납니다 — 아무리 작아도 음악회로.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">배움</p>
+      <h2 class="h-md">리코더 앙상블 과정</h2>
+      <p class="lead mt-2">완전 초보를 위한 한 학기, 마지막은 음악회로 끝납니다.</p>
+      <p class="mt-2">리코더는 손과 호흡에 부담이 적고, 만족스러운 첫 소리가 빨리 나오며, 값이 싸고, 함께 부는 악기입니다. 아무 악기도 다뤄 본 적 없는 분에게 맞는 이유입니다. 악보와 유인물은 저희가 인쇄해 드리며 참가자 부담은 없습니다.</p>
+      <dl class="facts">
+        <dt>기간</dt><dd>한 학기 · 주 1회 · 회당 60–90분</dd>
+        <dt>대상</dt><dd>완전 초보 — 악보를 읽을 줄 몰라도 됩니다</dd>
+        <dt>악기</dt><dd>소프라노 리코더 — 구입 안내, 원가 공급, 또는 대여</dd>
+        <dt>마무리</dt><dd>가족과 친구를 위한 짧은 음악회</dd>
+        <dt>현재 진행</dt><dd>Mulhuddart Community Centre, Dublin 15 · 2026년 9월 9일부터 수요일 19:00–20:00 · 무료</dd>
+      </dl>
     </div>
   </div>
 </section>
 
 <section class="band-raised">
+  <div class="wrap split split-wide split-center split-flip">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/lecture-recital.jpg" width="1400" height="1050" alt="진행 중인 강의·연주">
+      </div>
+      <figcaption>진행 중인 강의·연주.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">배움</p>
+      <h2 class="h-md">클래식 음악과 친해지기</h2>
+      <p class="lead mt-2">사전 지식이 없는 분들을 위한 무료 강의·연주.</p>
+      <p class="mt-2">대략 월 1회, 음원과 실연을 함께 씁니다. 어디서부터 시작해야 할지 몰랐던 분을 위한 자리입니다. 자격 조건도, 미리 준비할 것도 없습니다.</p>
+      <dl class="facts">
+        <dt>세 단계</dt><dd>가까이 가기 · 함께 겪기 · 내 취향 찾기</dd>
+        <dt>계절 특별편</dt><dd>유럽 여름 페스티벌, BBC 프롬스, 웩스퍼드 오페라 페스티벌, 성탄</dd>
+        <dt>규모</dt><dd>보통 6–14명</dd>
+        <dt>비용</dt><dd>무료</dd>
+        <dt>현재까지</dt><dd>17회 · 누적 참석 143명</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/quartet-hall.jpg" width="1400" height="1050" alt="밝은 홀에서 연주하는 앙상블">
+      </div>
+      <figcaption>밝은 홀에서 연주하는 앙상블.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">배움</p>
+      <h2 class="h-md">함께하는 음악여행</h2>
+      <p class="lead mt-2">혼자서는 가지 않을 공연에 소그룹으로 동행합니다.</p>
+      <p class="mt-2">가기 전에 준비하고, 인터미션에 설명하고, 끝나고 함께 이야기합니다. 걸림돌은 티켓값인 경우가 드뭅니다 — 가서 무슨 일이 벌어지는지 모르는 것, 그리고 같이 갈 사람이 없다는 것입니다.</p>
+      <dl class="facts">
+        <dt>규모</dt><dd>5명 안팎</dd>
+        <dt>다녀온 곳</dt><dd>국립교향악단 · 아일랜드 국립오페라 · RTÉ 콘서트 오케스트라 · NCH 인터내셔널 시리즈</dd>
+        <dt>멀리는</dt><dd>두 해 연속 BBC 프롬스</dd>
+        <dt>비용</dt><dd>티켓이 £8 정도인 경우도 있습니다</dd>
+        <dt>현재까지</dt><dd>기록된 동행 10회</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap split split-wide split-center split-flip">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/care-christmas.jpg" width="1400" height="1050" alt="성탄에 요양시설에서 연주하는 사중주">
+      </div>
+      <figcaption>성탄에 요양시설에서 연주하는 사중주.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">나눔</p>
+      <h2 class="h-md">찾아가는 음악회</h2>
+      <p class="lead mt-2">이미 사람들이 있는 방으로 실연을 가져갑니다.</p>
+      <p class="mt-2">요양시설·본당·병원·쉼터·커뮤니티 공간 — 더블린 7구의 노숙인 쉼터부터 대구의 순교 성지까지. 악기와 보면대, 프로그램은 저희가 가져갑니다. 그 공간은 공간만 내어 주시면 됩니다.</p>
+      <dl class="facts">
+        <dt>장소</dt><dd>요양시설 · 본당 · 병원 · 쉼터 · 커뮤니티 공간</dd>
+        <dt>넓혀 가는 지역</dt><dd>위클로 · 미스 · 라우스</dd>
+        <dt>목표</dt><dd>연 10회 이상</dd>
+        <dt>시작</dt><dd>2023년</dd>
+        <dt>현재까지</dt><dd>20회 · 15곳 이상 · 4개국</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/letters-ensemble.jpg" width="1400" height="1050" alt="악기를 든 Letters Ensemble">
+      </div>
+      <figcaption>악기를 든 Letters Ensemble.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">나눔</p>
+      <h2 class="h-md">Letters Ensemble</h2>
+      <p class="lead mt-2">더블린에 사는 아마추어 연주자들이 매주 토요일 연습합니다.</p>
+      <p class="mt-2">어떤 방이든 음악을 반쯤 마중 나올 수 있도록 곡을 고릅니다 — 아일랜드 전통음악, 한국 전통음악, 전례 음악, 그리고 편하게 들리는 편곡. 새로운 아마추어 연주자를 환영합니다.</p>
+      <dl class="facts">
+        <dt>창단</dt><dd>2024년 1월, 더블린에 사는 아마추어 연주자들이</dd>
+        <dt>연습</dt><dd>매주 토요일</dd>
+        <dt>레퍼토리</dt><dd>아일랜드 전통 · 한국 전통 · 전례 음악 · 편안한 편곡</dd>
+        <dt>함께할 수 있는 분</dt><dd>아마추어 연주자</dd>
+        <dt>현재까지</dt><dd>정식 음악회 4회</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">대표 프로그램</p>
-      <h2>한 학기, 아무것도 없는 데서 음악회까지.</h2>
-      <p>리코더는 손과 호흡에 부담이 적고, 만족스러운 첫 소리가 빨리 나오고, 값이 싸고, 무엇보다
-         함께 연주하기 위해 만들어진 악기입니다. 완전 초보에게 통하는 이유가 그것입니다.</p>
+    <div class="section-head wide reveal">
+      <p class="eyebrow">한 과정을 만드는 방식</p>
+      <h2>만족스러운 첫 소리는 1주차에 납니다.</h2>
+      <p>악기가 무엇이든 배움 프로그램은 같은 모양으로 만듭니다 — 들을 만한 소리에 일찍
+         닿고, 그룹 전체가 함께 움직이고, 사람들 앞에서 끝냅니다.</p>
     </div>
     <div class="reveal">{dg.term(L)}</div>
 
-    <div class="split" style="margin-top:52px">
+    <div class="split split-wide split-center mt-4">
       <div class="reveal">
-        <h3>어떻게 진행되나</h3>
-        <div class="table-scroll" style="margin-top:16px">
-          <table><tbody>
-            <tr><td><strong>기간</strong></td><td>한 학기, 주 1회</td></tr>
-            <tr><td><strong>수업 시간</strong></td><td>60–90분</td></tr>
-            <tr><td><strong>규모</strong></td><td>작고 편안한 그룹</td></tr>
-            <tr><td><strong>악기</strong></td><td>소프라노 리코더 — 구입 안내, 원가 공급,
-                대여 모두 가능</td></tr>
-            <tr><td><strong>교재</strong></td><td>악보와 유인물을 직접 인쇄합니다.
-                참가자 부담 없음</td></tr>
-            <tr><td><strong>마무리</strong></td><td>가족·친구를 초대한 짧은 음악회</td></tr>
-          </tbody></table>
-        </div>
+        <p class="eyebrow">이 모델이 나온 곳</p>
+        <h3 class="h-md">파일럿.</h3>
+        <p class="lead mt-2">은퇴한 프레젠테이션 수녀 일곱 분. 더블린 8구 Warrenmount에서
+           주 1회씩 열 시간. Clondalkin Lodge에서 아홉 곡의 부활 음악회. TU Dublin
+           음악원 학사 연구로 수행했습니다.</p>
+        <p class="mt-2">그에 앞서 석 달의 준비가 있었습니다 — 필요 조사, 허가, 신원 확인,
+           개별 레슨, 파트 배정. 소프라노·알토·테너·베이스 리코더에 멜로디카와 실로폰,
+           작은 타악기를 더하고 악보를 확대했습니다. 일곱 분 모두 수료하고 사람들 앞에서
+           연주했습니다.</p>
       </div>
       <div class="reveal">
-        <h3>무엇이 남는가</h3>
-        <ul class="checklist" style="margin-top:16px">
-          <li><strong>연결</strong> — 매주 모일 따뜻한 이유.</li>
+        <ul class="checklist">
+          <li><strong>관계</strong> — 매주 모일 따뜻한 이유.</li>
           <li><strong>존엄과 성취</strong> — &ldquo;나도 음악을 만들 수 있다&rdquo;는 조용한 자부심.</li>
-          <li><strong>부드러운 자극</strong> — 기억력, 협응, 호흡, 집중.</li>
-          <li><strong>우정</strong> — 학기가 끝난 뒤에도 남는 관계.</li>
+          <li><strong>부드러운 자극</strong> — 기억, 협응, 호흡, 집중.</li>
+          <li><strong>우정</strong> — 학기가 끝나도 남는 관계.</li>
         </ul>
-        <div class="callout" style="margin-top:24px">
+        <div class="callout mt-3">
           <span class="tag tag-live">현재 진행</span>
-          <p style="margin-top:12px"><strong>Mulhuddart Community Centre, Dublin 15.</strong>
-             2026년 9월 9일부터 수요일 저녁 7:00–8:00, 12주, 무료 — 성탄 전 음악회로 마칩니다.</p>
+          <p class="mt-1"><strong>Mulhuddart Community Centre, Dublin 15.</strong>
+             2026년 9월 9일부터 수요일 19:00–20:00, 12주, 무료 — 성탄 전 음악회로 마무리합니다.</p>
           <div class="btn-row"><a class="btn btn-accent" href="get-involved.html">수업 참여하기 <span class="arrow">→</span></a></div>
         </div>
       </div>
@@ -411,75 +563,21 @@ PROGRAMMES = f"""<section class="page-hero">
 </section>
 
 <section>
-  <div class="wrap split split-wide split-center">
-    <div class="reveal">
-      <p class="eyebrow">파일럿</p>
-      <h2 style="font-size:clamp(24px,3vw,36px)">이 모델은 어디서 왔는가.</h2>
-      <p class="lead" style="margin-top:18px">은퇴 프레젠테이션 수녀 일곱 분. Dublin 8
-         Warrenmount에서 주 1회 한 시간씩 10주. Clondalkin Lodge에서 아홉 곡의 부활 음악회.
-         TU Dublin Conservatoire 음악학사 연구로 수행되었습니다.</p>
-      <p style="margin-top:16px">그 전에 석 달의 준비가 있었습니다 — 필요 조사, 허가, 신원조회,
-         개별 레슨, 파트 배정. 소프라노·알토·테너·베이스 리코더에 멜로디카, 실로폰, 작은 타악기를
-         더하고 악보는 크게 확대해 썼습니다. 일곱 분 전원이 수료하고 공개 연주까지 했습니다.</p>
-    </div>
-    <figure class="reveal">
-      <div class="photo photo-4x3">
-        <img src="../images/conducting.jpg" width="1400" height="1050"
-             alt="커뮤니티 공간에서 작은 앙상블을 지휘하는 모습">
-      </div>
-      <figcaption>모든 과정은 같은 방식으로 끝납니다 — 작더라도 음악회로.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="band-sunken">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">나머지 프로그램</p>
-      <h2>들어오는 네 가지 길.</h2>
-    </div>
-    <div class="grid grid-2 stagger">
-      <article class="card"><span class="kicker">배움</span>
-        <h3>클래식 음악과 친해지기</h3>
-        <p>대략 월 1회 열리는 무료 강의·연주. 녹음과 실연을 함께 씁니다. 커리큘럼은
-           <em>가까워지기</em>, <em>함께 경험하기</em>, <em>내 취향 찾기</em> 세 단계이고,
-           유럽 여름 페스티벌·BBC Proms·웩스포드 오페라·성탄 특강이 계절마다 붙습니다.</p>
-        <div class="meta">17회 · 보통 6–14명 · 무료</div>
-      </article>
-      <article class="card"><span class="kicker">배움</span>
-        <h3>함께하는 음악여행</h3>
-        <p>혼자서는 가지 않을 공연에 소그룹으로 동행합니다 — 국립교향악단, 아일랜드 국립 오페라,
-           RTÉ 콘서트 오케스트라, 국립 콘서트홀 국제 시리즈, 2년 연속 BBC Proms. 사전 준비,
-           현장 안내, 사후 나눔의 3단계.</p>
-        <div class="meta">5명 내외 · 티켓이 £8인 공연도 있습니다</div>
-      </article>
-      <article class="card"><span class="kicker">나눔</span>
-        <h3>찾아가는 음악회</h3>
-        <p>요양시설·본당·병원·쉼터·커뮤니티 공간으로 실연을 가져갑니다 — 더블린 7구역의 노숙인
-           쉼터에서 대구의 순교 성지까지. 확장 우선 지역은 위클로·미스·라우스입니다.</p>
-        <div class="meta">2023년부터 · 연 10회 이상 목표</div>
-      </article>
-      <article class="card"><span class="kicker">나눔</span>
-        <h3>Letters Ensemble</h3>
-        <p>2024년 1월 더블린에 사는 아마추어 연주자들이 만들었습니다. 매주 토요일 연습.
-           아일랜드 전통음악, 한국 전통음악, 성음악, 접근하기 쉬운 편곡 — 어떤 방에서든 절반쯤
-           마주 나와 줄 수 있는 곡들로 고릅니다.</p>
-        <div class="meta">정식 음악회 4회 · 아마추어 연주자에게 열려 있습니다</div>
-      </article>
-    </div>
-    <div class="callout reveal" style="margin-top:26px">
-      <p class="h-sub">하위 갈래</p>
-      <h3 style="margin-top:8px">Bringing Music to Sacred Places</h3>
-      <p style="margin-top:10px">본당·성지·수도원·전례·은퇴 수도 공동체를 향한 신앙 기반 갈래로,
-         스무 번의 찾아가는 음악회 가운데 약 열여섯 번이 여기 해당합니다. 교회 안에서는 음악을
-         통한 평신도 사도직 — 연주 시리즈가 아니라 현존의 봉사로 설명합니다.</p>
-    </div>
+  <div class="wrap narrow reveal">
+    <p class="eyebrow">세부 갈래</p>
+    <h2 class="h-md">성지에 음악을</h2>
+    <p class="mt-2">신앙에 기반한 갈래입니다 — 본당, 성지, 수도원, 전례, 은퇴한 수도
+       공동체. 찾아가는 음악회 20회 가운데 약 열여섯 회가 여기에 해당합니다. 신앙 공동체
+       앞에서는 음악을 통한 평신도 사도직으로 설명합니다. 연주 시리즈가 아니라
+       현존의 봉사입니다.</p>
   </div>
 </section>
 
 {CTA}"""
 
 
+# ---------------------------------------------------------------------------
+# 참여하기
 # ---------------------------------------------------------------------------
 
 GET_INVOLVED = """<section class="page-hero">
@@ -539,7 +637,7 @@ GET_INVOLVED = """<section class="page-hero">
     <div class="split reveal">
       <div>
         <h3>공간이 준비하는 것</h3>
-        <ul class="checklist" style="margin-top:16px">
+        <ul class="checklist mt-2">
           <li>열 명에서 열두 명이 둥글게 앉을 따뜻한 방, 학기 동안 주 1회</li>
           <li>지역에 알리는 일에 조금의 도움</li>
           <li>담당자 한 분</li>
@@ -548,7 +646,7 @@ GET_INVOLVED = """<section class="page-hero">
       </div>
       <div>
         <h3>저희가 준비하는 것</h3>
-        <ul class="checklist" style="margin-top:16px">
+        <ul class="checklist mt-2">
           <li>강사와 전체 커리큘럼</li>
           <li>모든 악보와 주간 교재 (저희 비용으로 인쇄)</li>
           <li>저렴한 악기 안내, 필요하면 대여</li>
@@ -557,7 +655,7 @@ GET_INVOLVED = """<section class="page-hero">
         </ul>
       </div>
     </div>
-    <div class="callout reveal" style="margin-top:30px">
+    <div class="callout reveal mt-4">
       <p><strong>비용에 관하여.</strong> 모든 프로그램에 무료·할인 자리를 둡니다. 공간이 자체
          예산에서 진행비를 지불할 수 있으면 그 방에 있는 모든 분의 참여가 무료가 되고, 그 기여가
          다른 곳의 문을 열어 둡니다. 그럴 수 없더라도 우선 이야기부터 나눕니다.</p>
@@ -566,13 +664,13 @@ GET_INVOLVED = """<section class="page-hero">
 </section>
 
 <section class="band-photo">
-  <img src="../images/quartet-hall.jpg" alt="" width="1400" height="788">
-  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
-    <p class="eyebrow" style="justify-content:center">다음 단계</p>
-    <h2 style="font-size:clamp(26px,3.4vw,40px)">한 줄만 적어 주세요.</h2>
-    <p class="lead" style="margin-top:18px;color:var(--fg-inverse-body)">네 가지 중 어디에
+  <img src="images/quartet-hall.jpg" alt="" width="1400" height="788">
+  <div class="wrap narrow center reveal">
+    <p class="eyebrow center-row">다음 단계</p>
+    <h2 class="h-lg">한 줄만 적어 주세요.</h2>
+    <p class="lead mt-2">네 가지 중 어디에
        해당하는지, 그리고 대략 어디에 계신지. 구체적인 안내를 답장으로 보내 드립니다.</p>
-    <div class="btn-row" style="justify-content:center">
+    <div class="btn-row center-row">
       <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=CMFE%20참여%20문의">메일 보내기 <span class="arrow">→</span></a>
       <a class="btn btn-on-dark" href="contact.html">연락처 전체</a>
     </div>
@@ -598,7 +696,7 @@ NEWS = f"""<section class="page-hero">
       <h2>2026년 가을.</h2>
     </div>
 {WHATS_ON}
-    <div class="callout reveal" style="margin-top:26px">
+    <div class="callout reveal mt-3">
       <p><strong>2026년 12월 —</strong> 가족과 친구를 초대한 음악회로 Mulhuddart 첫 기수를
          마무리합니다. 자세한 내용은 추후 안내합니다.</p>
     </div>
@@ -613,11 +711,11 @@ NEWS = f"""<section class="page-hero">
     </div>
     <div class="grid grid-3 stagger">
       <article class="card card-media">
-        <div class="photo photo-3x2"><img src="../images/quartet-hall.jpg" width="1400" height="788"
+        <div class="photo photo-3x2"><img src="images/quartet-hall.jpg" width="1400" height="788"
              alt="밝은 홀에서 연주하는 앙상블"></div>
         <div class="card-body">
           <span class="tag tag-live">첫 공적 지원</span>
-          <h3 style="margin-top:12px">South Dublin Live 2026</h3>
+          <h3 class="mt-1">South Dublin Live 2026</h3>
           <p>SDCC 예술과가 이 프로젝트를 2026년 프로그램에 선정했습니다. 우리 아닌 누군가가
              처음으로 비용을 댄 일입니다.</p>
           <div class="meta">2026년 8월 · SDCC 예술과</div>
@@ -688,14 +786,14 @@ NEWS = f"""<section class="page-hero">
       <div>
         <figure class="reveal">
           <div class="photo photo-4x3">
-            <img src="../images/letters-ensemble.jpg" width="1400" height="1050"
+            <img src="images/letters-ensemble.jpg" width="1400" height="1050"
                  alt="악기를 든 Letters Ensemble 단원들">
           </div>
           <figcaption>2024년 1월에 만들어진 Letters Ensemble.</figcaption>
         </figure>
-        <div class="callout reveal" style="margin-top:26px">
+        <div class="callout reveal mt-3">
           <h3 class="h-sub">기사와 기고</h3>
-          <ul class="plainlist" style="margin-top:12px">
+          <ul class="plainlist mt-1">
             <li><strong>경향잡지</strong> 2026년 5월호 — 기획 &ldquo;청년, 어떻게 지내니&rdquo;
                 청탁 원고</li>
             <li><strong>가톨릭대학교 학보</strong> 2026년 3월 — &ldquo;Fáilte go hÉirinn!&rdquo;</li>
@@ -765,7 +863,7 @@ SUPPORT = f"""<section class="page-hero">
         </tbody>
       </table>
     </div>
-    <div class="split split-center reveal" style="margin-top:48px">
+    <div class="split split-center reveal mt-4">
       <div class="quote">
         <p>&ldquo;그는 넉넉한 형편에서 이 일을 하는 것이 아닙니다. 개인적으로 제한된 재정 여건
            안에서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
@@ -773,7 +871,7 @@ SUPPORT = f"""<section class="page-hero">
       </div>
       <div>
         <h3 class="h-sub">지지 서한</h3>
-        <ul class="plainlist" style="margin-top:14px">
+        <ul class="plainlist mt-2">
           <li><strong>Rua Red</strong> — South Dublin의 현대예술센터</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>
           <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
@@ -804,11 +902,11 @@ SUPPORT = f"""<section class="page-hero">
         <p>한 학기 동안 매주 한 번 쓸 따뜻한 방 하나가 가장 값진 현물 후원입니다.
            그대로 무료 자리가 됩니다.</p></div>
     </div>
-    <div class="btn-row reveal" style="justify-content:center;margin-top:36px">
+    <div class="btn-row reveal center-row mt-4">
       <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=CMFE%20후원%20문의">후원 문의 <span class="arrow">→</span></a>
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=CMFE%20파트너십·펀딩%20문의">제안서 요청</a>
     </div>
-    <div class="callout reveal" style="margin-top:34px">
+    <div class="callout reveal mt-4">
       <p class="small"><strong>안내.</strong> CMFE는 자원봉사로 운영되는 사회적기업이며, 현재
          비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다. 아직 등록 자선단체가 아니므로
          기부금 세제 혜택은 적용되지 않습니다. 짐작하시게 두기보다 분명히 밝혀 두는 편이
@@ -833,7 +931,7 @@ CONTACT = """<section class="page-hero">
   <div class="wrap split">
     <div class="reveal">
       <h2>연락처</h2>
-      <div class="table-scroll" style="margin-top:24px">
+      <div class="table-scroll mt-3">
         <table><tbody>
           <tr><td><strong>이메일</strong></td>
               <td><a class="link" href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></td></tr>
@@ -847,13 +945,13 @@ CONTACT = """<section class="page-hero">
           <tr><td><strong>언어</strong></td><td>한국어 · English</td></tr>
         </tbody></table>
       </div>
-      <p class="small" style="margin-top:22px">공공배상책임보험을 보유하고 있으며, 활동이
+      <p class="small mt-3">공공배상책임보험을 보유하고 있으며, 활동이
          요구하는 경우 Garda 신원조회를 완료합니다. 파트너 공간에는 요청 시 서류를 보내
          드립니다.</p>
     </div>
     <div class="reveal">
       <h2>어떤 문의를 어떻게</h2>
-      <ul class="checklist" style="margin-top:24px">
+      <ul class="checklist mt-3">
         <li><strong>수업 참여</strong> — 어느 장소인지, 악기를 다뤄 본 적이 있는지.
             &lsquo;전혀 없다&rsquo;도 아주 평범한 답입니다.</li>
         <li><strong>음악회 초대</strong> — 어떤 공간인지, 인원이 대략 얼마인지, 시기가
@@ -872,10 +970,10 @@ CONTACT = """<section class="page-hero">
 </section>
 
 <section class="band-sunken">
-  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
-    <p class="eyebrow" style="justify-content:center">단체 정보</p>
+  <div class="wrap narrow center reveal">
+    <p class="eyebrow center-row">단체 정보</p>
     <h2>Classical Music for Everyone</h2>
-    <p class="lead" style="margin-top:22px">2024년 1월 더블린에서 시작한 커뮤니티 음악
+    <p class="lead mt-3">2024년 1월 더블린에서 시작한 커뮤니티 음악
        사회적기업이며, 현재 비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다.
        자원봉사로 운영합니다. 커뮤니티 음악 · 사회적기업 · 예술과 건강.</p>
   </div>
