@@ -189,6 +189,59 @@ INDEX = f"""<section class="hero">
   </div>
 </section>
 
+<section class="band-mark">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">The name, and what it commits us to</p>
+      <h2>The gold falls on <em>Everyone</em>.</h2>
+      <p class="lead mt-3">That is not a flourish. In the mark, &ldquo;for&rdquo; is set small
+         and &ldquo;Everyone&rdquo; large and gold, because the difficult word in the name is
+         the last one.</p>
+      <p class="mt-3">Classical music is not short of audiences. What it lacks is a reliable way
+         in for people who are older, unwell, far from a city, short of money, or simply never
+         told that any of it was theirs. The name is the brief, and the mark says which word we
+         are judged on.</p>
+      <p class="footer-line mark-line">Bringing classical music where it&rsquo;s needed.</p>
+    </div>
+    <figure class="reveal mark-plate">
+      <img src="assets/logo-horizontal.svg" width="341" height="131"
+           alt="The Classical Music for Everyone mark: a treble clef beside the wordmark, with &lsquo;Everyone&rsquo; set large and in gold">
+      <figcaption>The horizontal mark, adopted 17 August 2026.
+        <a class="link" href="about.html#identity">The full design standard</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">What we are working towards</p>
+      <h2>Two aims, and we are honest about the second.</h2>
+      <p>The first is the one people expect from a music charity. The second is the reason we
+         are a social enterprise rather than a pure charity, and it is the harder of the two.</p>
+    </div>
+    <div class="grid grid-2 stagger">
+      <div class="card"><span class="kicker">Aim 01</span>
+        <h3>A genuine way in, for anyone</h3>
+        <p>Live classical music available regardless of age, background, mobility, income or
+           prior knowledge &mdash; by teaching people to play, playing alongside them, and
+           bringing music to the places it does not normally reach.</p>
+        <div class="meta">Five programmes &middot; free and discounted places always held</div>
+      </div>
+      <div class="card"><span class="kicker">Aim 02</span>
+        <h3>Proper work for music educators</h3>
+        <p>Music educators mostly work in precarious freelance conditions. Employing them in
+           secure, properly paid posts is the second social aim &mdash; not a benefit we hope
+           to afford later, but part of what the organisation is for.</p>
+        <div class="meta">Volunteer-led today &middot; formalising as a not-for-profit CLG</div>
+      </div>
+    </div>
+    <div class="btn-row reveal">
+      <a class="btn btn-quiet" href="about.html">Mission, values and the founder <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
 <section class="band-sunken">
   <div class="wrap">
     <div class="section-head wide reveal">
@@ -484,7 +537,7 @@ ABOUT = f"""<section class="page-hero">
   </div>
 </section>
 
-<section class="band-raised">
+<section class="band-raised" id="identity">
   <div class="wrap">
     <div class="section-head wide reveal">
       <p class="eyebrow">Identity</p>
@@ -506,6 +559,12 @@ ABOUT = f"""<section class="page-hero">
           <img src="assets/logo-reversed.svg" width="341" height="131"
                alt="The reversed logo, for dark backgrounds">
           <figcaption>On navy — reversed</figcaption>
+        </figure>
+        <figure class="logo-plate on-light">
+          <img src="assets/logo-signature.png" width="600" height="210"
+               alt="The signature lock-up, used at the foot of an email">
+          <figcaption>Email signature &mdash; the same lock-up at mail size. A white-background
+            version is kept alongside it for clients that strip transparency.</figcaption>
         </figure>
       </div>
       <div>

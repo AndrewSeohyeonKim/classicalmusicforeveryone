@@ -1146,3 +1146,48 @@ html[lang^="ko"] .footer-line{font-family:var(--font-kr);font-size:18px;line-hei
 }
 .prog:hover .prog-body::after{translate:4px 0}
 .prog:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+
+/* ==========================================================================
+   19. THE MARK ON THE HOME PAGE
+
+   The logo appears at full size once, on the home page, with the sentence
+   that explains why the gold sits where it does. It is the only place the
+   mark is presented as content rather than as navigation, so it gets a plate
+   of its own rather than being dropped into the flow.
+   ========================================================================== */
+.band-mark{
+  background:var(--surface-raised);
+  border-block:1px solid var(--line);
+  padding-block:clamp(64px,6vw,92px);
+}
+.band-mark h2 em{font-style:italic;color:var(--accent-ink)}
+html[lang^="ko"] .band-mark h2 em{font-style:normal;color:var(--accent-ink)}
+/* the master line, reused here at heading weight on a light ground */
+.mark-line{color:var(--fg);margin-top:26px;max-width:20em;text-wrap:balance}
+
+.mark-plate{
+  display:grid;place-items:center;padding:clamp(30px,4vw,52px);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-1);
+}
+.mark-plate img{width:min(320px,90%);height:auto}
+.mark-plate figcaption{
+  margin-top:26px;font-size:13px;color:var(--fg-muted);text-align:center;line-height:1.55;
+}
+/* the clear space the brand standard asks for is half the clef's width; the
+   plate's padding is what enforces it here, so it must not be trimmed away */
+@media (max-width:880px){.mark-plate{padding:34px}}
+
+/* three plates now, not two: the two background variants sit side by side and
+   the signature lock-up takes the full width beneath them, which suits its
+   much wider aspect and avoids a half-empty row */
+.logo-pair{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.logo-pair>figure:nth-child(3){grid-column:1/-1}
+.logo-pair>figure:nth-child(3) img{width:min(300px,72%)}
+
+/* A grid item defaults to min-width:auto, so it refuses to shrink below its
+   widest child. That is how the contact table — correctly wrapped in a
+   .table-scroll — stopped scrolling inside its own box on a phone and pushed
+   the whole document sideways instead. Applied to both grids so no future
+   wide child (a table, a long URL, a diagram) can do it again. */
+.split>*,.grid>*{min-width:0}

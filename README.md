@@ -12,7 +12,7 @@ needed to view or edit it — open any `.html` file in a browser.
 | `programmes/` | One detail page per programme — five more English pages |
 | `ko/` | The Korean site — the same twelve pages, same structure |
 | `styles.css` | The one stylesheet both languages share |
-| `assets/` | Official logo files, copied from `10_CMFE_로고·브랜드셋업/` |
+| `assets/` | The five official logo variants, copied from `10_CMFE_로고·브랜드셋업/` |
 | `images/` | Photographs used on the site |
 | `404.html`, `sitemap.xml`, `robots.txt` | Generated — do not edit by hand |
 | `images/README.md` | Which photograph is used where, and how to add one |
