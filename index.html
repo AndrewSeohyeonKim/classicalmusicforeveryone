@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Classical Music for Everyone — community music in Dublin, Ireland</title>
 <meta name="description" content="A Dublin community music social enterprise. We teach people to play, not just listen, and bring live classical music to care homes, parishes, hospitals and community centres.">
+<meta name="theme-color" content="#1D2430">
 <link rel="canonical" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/">
 <link rel="alternate" hreflang="en" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/">
 <link rel="alternate" hreflang="ko" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/">
+<link rel="alternate" hreflang="x-default" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Classical Music for Everyone">
 <meta property="og:title" content="Classical Music for Everyone — community music in Dublin, Ireland">
@@ -20,258 +22,231 @@
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="index.html">
+    <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
     </a>
-    <nav class="nav" id="nav" aria-label="Menu">
-      <a href="about.html">About</a>
-      <a href="programmes.html">Programmes</a>
-      <a href="get-involved.html">Get Involved</a>
-      <a href="news.html">News</a>
-      <a href="support.html">Support</a>
-      <a class="lang" href="ko/index.html" hreflang="ko">한국어</a>
-      <a class="btn btn-gold" href="contact.html">Contact</a>
-    </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
-            aria-label="Menu" onclick="var n=document.getElementById('nav');
-            var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+            aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
+    <nav class="nav" id="nav" data-open="false" aria-label="Menu">
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="programmes.html">Programmes</a>
+      <a class="nav-link" href="get-involved.html">Get Involved</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link" href="support.html">Support</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <span aria-current="true">EN</span>
+        <a href="ko/index.html" hreflang="ko" lang="ko">한국어</a>
+      </div>
+      <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
+    </nav>
   </div>
 </header>
 <main id="main">
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Community music · Dublin, Ireland</p>
-      <h1>Classical music,<br><em>for everyone.</em></h1>
-      <p class="lead">We teach people to play — not only to listen — and we bring live classical
-         music to the places it rarely reaches: care homes, parishes, hospitals, hostels and
-         community centres across Ireland.</p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="get-involved.html">Join a class</a>
-        <a class="btn btn-outline" href="programmes.html">See what we do</a>
+      <p class="eyebrow lift lift-1">Community music · Dublin, Ireland</p>
+      <h1><span class="line lift lift-1">Classical music,</span><span class="line lift lift-2"><em>for everyone.</em></span></h1>
+      <p class="lead lift lift-3">We teach people to play — not only to listen — and we bring
+         live classical music to the places it rarely reaches.</p>
+      <div class="btn-row lift lift-4">
+        <a class="btn btn-primary" href="get-involved.html">Join a class <span class="arrow">→</span></a>
+        <a class="btn btn-quiet" href="programmes.html">What we do</a>
       </div>
     </div>
-    <figure class="hero-figure" style="margin:0">
-      <img src="images/hero-outreach.jpg" alt="Members of the Letters Ensemble playing a
-           St Patrick&rsquo;s Day concert in a community hall" width="1800" height="1350">
-      <figcaption class="figure-caption">The Letters Ensemble playing a St Patrick&rsquo;s Day
-        concert for a religious community.</figcaption>
+    <figure class="lift lift-3">
+      <div class="photo photo-3x2">
+        <img src="images/hero-outreach.jpg" width="1800" height="1350"
+             alt="Musicians playing a St Patrick&rsquo;s Day concert in a community hall">
+      </div>
+      <figcaption>A St Patrick&rsquo;s Day concert for a religious community — the Letters Ensemble.</figcaption>
     </figure>
   </div>
 </section>
 
 <div class="stats">
   <div class="wrap stats-grid">
-    <div class="stat"><div class="n">40+</div><div class="l">Sessions &amp; performances</div></div>
-    <div class="stat"><div class="n">4</div><div class="l">Countries</div></div>
-    <div class="stat"><div class="n">20+</div><div class="l">Venues &amp; institutions</div></div>
-    <div class="stat"><div class="n">143</div><div class="l">Lecture attendances</div></div>
-    <div class="stat"><div class="n">7 / 7</div><div class="l">Pilot participants completed</div></div>
+    <div class="stat"><b>40+</b><span>Sessions &amp; performances</span></div>
+    <div class="stat"><b>4</b><span>Countries</span></div>
+    <div class="stat"><b>20+</b><span>Venues &amp; institutions</span></div>
+    <div class="stat"><b>143</b><span>Lecture attendances</span></div>
+    <div class="stat"><b>7 / 7</b><span>Pilot participants completed</span></div>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">What&rsquo;s on</p>
       <h2>Happening now.</h2>
     </div>
-<div class="grid grid-2">
+<div class="grid grid-2 stagger">
   <div class="notice">
-    <span class="kicker">Now enrolling</span>
+    <span class="tag tag-live">Now enrolling</span>
     <h3>Recorder Ensemble — Mulhuddart</h3>
-    <p class="small mt-s">A twelve-week course for complete beginners. No experience and no
-       music reading required — you will play your first notes in week one.</p>
+    <p class="small">Twelve weeks for complete beginners. No experience, no music reading.</p>
     <dl>
       <dt>Where</dt><dd>Mulhuddart Community Centre, Dublin 15</dd>
       <dt>When</dt><dd>Wednesdays, 7:00–8:00pm</dd>
-      <dt>Starts</dt><dd>9 September 2026 · 12 weeks</dd>
+      <dt>Starts</dt><dd>9 September 2026</dd>
       <dt>Cost</dt><dd>Free</dd>
     </dl>
-    <div class="btn-row"><a class="btn btn-primary" href="get-involved.html">How to join</a></div>
+    <div class="btn-row"><a class="btn btn-primary" href="get-involved.html">How to join <span class="arrow">→</span></a></div>
   </div>
   <div class="notice">
-    <span class="kicker">Coming up</span>
+    <span class="tag">Coming up</span>
     <h3>An Autumn Concert</h3>
-    <p class="small mt-s">Soprano, haegeum, clarinet and piano — Chopin, Pierné, Spohr, Schubert
-       and Korean traditional songs. Everyone welcome.</p>
+    <p class="small">Soprano, haegeum, clarinet and piano — Chopin, Pierné, Spohr, Schubert
+       and Korean traditional songs.</p>
     <dl>
-      <dt>Where</dt><dd>Methodist Centenary Church, Leeson Park, Ranelagh, Dublin 6</dd>
+      <dt>Where</dt><dd>Methodist Centenary Church, Ranelagh, Dublin 6</dd>
       <dt>When</dt><dd>Saturday 19 September 2026, 5:00pm</dd>
       <dt>Admission</dt><dd>Free · donations welcome</dd>
     </dl>
-    <div class="btn-row"><a class="btn btn-outline" href="news.html">More dates</a></div>
+    <div class="btn-row"><a class="btn btn-quiet" href="news.html">All dates <span class="arrow">→</span></a></div>
   </div>
 </div>
   </div>
 </section>
 
-<section class="band-paper">
+<section class="band-raised">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Why we exist</p>
-      <h2>It is playing, not only listening, that restores dignity.</h2>
-      <p>Classical music is culturally rich and still out of reach for many people — because of
-         age, mobility, income, geography or simple unfamiliarity.</p>
+    <div class="section-head reveal">
+      <p class="eyebrow">How it works</p>
+      <h2>Playing and listening feed each other.</h2>
+      <p>We go to a room and play. Someone asks whether they could do that. That question
+         becomes a class — and the class produces people who can play in the next room.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <span class="kicker">One</span>
-        <h3>Go to people</h3>
-        <p>Rather than expecting people to come to music, we bring music to them. A care home,
-           a hospital, a hostel or a rural parish is not a place without an audience — it is
-           where the audience that has waited longest already is.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Two</span>
-        <h3>Don&rsquo;t stop at listening</h3>
-        <p>A visit that is only a performance ends when the music does. The moment an instrument
-           is placed in someone&rsquo;s hands they stop being an audience and become a player —
-           and a term becomes a relationship.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Three</span>
-        <h3>A social enterprise</h3>
-        <p>Contributions from those who can, and fees paid by institutions, cross-subsidise
-           places for those who cannot. Every programme keeps free and discounted places, so
-           cost is never the reason someone is left out.</p>
-      </div>
-    </div>
+    <div class="reveal"><figure class="diagram">
+  <svg viewBox="0 0 720 306" role="img" aria-label="A cycle: Sharing produces a question, which becomes Learning; Learning produces players, who go back out with Sharing.">
+  <defs>
+    <marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+    </marker>
+    <marker id="loop-arrow-q" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" opacity=".55"/>
+    </marker>
+  </defs>
+    <rect class="dg-fill-soft dg-box" x="16" y="104" rx="10" width="252" height="108"/>
+    <rect class="dg-fill-accent dg-box" x="452" y="104" rx="10" width="252" height="108"/>
+
+    <text class="dg-label" x="40" y="138" style="font-size:16px">Learning</text>
+    <text class="dg-sub"   x="40" y="164">Recorder ensemble course</text>
+    <text class="dg-sub"   x="40" y="186">Lecture-recitals · concert companions</text>
+
+    <text class="dg-label" x="476" y="138" style="font-size:16px">Sharing</text>
+    <text class="dg-sub"   x="476" y="164">Outreach concerts</text>
+    <text class="dg-sub"   x="476" y="186">Letters Ensemble · sacred places</text>
+
+    <path class="dg-stroke-accent" d="M270 128 C 330 46, 392 46, 450 128"
+          marker-end="url(#loop-arrow)"/>
+    <text class="dg-edge" x="360" y="40" text-anchor="middle">a player, ready for the room</text>
+
+    <path class="dg-stroke-accent" d="M450 188 C 392 270, 330 270, 270 188"
+          marker-end="url(#loop-arrow)"/>
+    <text class="dg-edge" x="360" y="290" text-anchor="middle">“could I do that?”</text>
+
+    <text class="dg-sub" x="40" y="240">we put the instrument in the hand</text>
+    <text class="dg-sub" x="476" y="240">we carry the music to the room</text>
+  </svg>
+  <figcaption>The two pillars are one circuit. Take either box away and the other stops being fed: without playing for people we never meet the person who asks, and without a class there is nowhere to send them.</figcaption>
+</figure></div>
+  </div>
+</section>
+
+<section class="band-photo">
+  <img src="images/church-concert.jpg" alt="" width="1400" height="1050">
+  <div class="wrap narrow reveal">
+    <p class="eyebrow">Why we exist</p>
+    <h2 style="font-size:clamp(28px,3.8vw,44px)">It is playing, not only listening,
+       that restores dignity.</h2>
+    <p class="lead" style="margin-top:20px;color:var(--fg-inverse-body)">
+      Classical music is culturally rich and still out of reach for many people — because of
+      age, mobility, income, geography, or simple unfamiliarity. A care home, a hospital, a
+      hostel, a rural parish is not a place without an audience. It is where the audience that
+      has waited longest already is.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">How it works</p>
-      <h2>Two pillars, one loop.</h2>
-      <p>Learning leads to lived musical experience; experience encourages sharing; and sharing
-         draws people back into deeper participation. The two are not separate departments —
-         they feed each other.</p>
-    </div>
-    <div class="grid grid-2">
-      <div class="pillar">
-        <span class="tag">Pillar I</span>
-        <h3>Learning — opening the door</h3>
-        <ul>
-          <li><strong>Recorder Ensemble course</strong> — adults and older beginners learn, over a
-              term, to play together. Our flagship programme.</li>
-          <li><strong>Getting to Know Classical Music</strong> — free lecture-recitals, roughly
-              monthly, with no prior knowledge required.</li>
-          <li><strong>Concert Guide &amp; Companion</strong> — accompanying small groups to live
-              concerts they would not attend alone.</li>
-        </ul>
-      </div>
-      <div class="pillar">
-        <span class="tag">Pillar II</span>
-        <h3>Sharing — carrying the music out</h3>
-        <ul>
-          <li><strong>Outreach Concerts</strong> — music that comes to you: care, parish, hospital,
-              hostel and community settings.</li>
-          <li><strong>Letters Ensemble</strong> — amateur musicians in Dublin given a reason to
-              keep playing.</li>
-          <li><strong>Bringing Music to Sacred Places</strong> — the faith-based strand: parishes,
-              shrines and retired religious communities.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="callout mt-m">
-      <p>A question — <em>&ldquo;could I do that?&rdquo;</em> — comes out of the rooms we play in,
-         and that question becomes a recorder ensemble. In 2024 we played for the Missionary
-         Sisters of St Columban; a sister asked whether she might play again. By 2026 seven
-         retired sisters were an ensemble of their own.</p>
-    </div>
-  </div>
-</section>
-
-<section class="band-cream">
-  <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">What we run</p>
       <h2>Five programmes, one belief.</h2>
     </div>
-    <div class="grid grid-3">
-      <article class="card card-media">
-        <img src="images/community-room.jpg" alt="Playing the clarinet in a community room"
-             width="1400" height="1050">
+    <div class="grid grid-3 stagger">
+      <a class="card card-media" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/community-room.jpg" width="1400" height="1050"
+             alt="Playing the clarinet in a community room"></div>
         <div class="card-body">
           <span class="kicker">Flagship</span>
           <h3>Recorder Ensemble</h3>
-          <p>A term-long course for complete beginners — first notes in week one, reading music
-             from zero, then a part of your own in the ensemble, ending in a concert for family
-             and friends.</p>
+          <p>A term for complete beginners: first notes in week one, a concert in the last.</p>
           <div class="meta">Weekly · community centres &amp; parishes</div>
         </div>
-      </article>
-      <article class="card card-media">
-        <img src="images/care-christmas.jpg" alt="A quartet performing in a care setting at Christmas"
-             width="1400" height="1050">
+      </a>
+      <a class="card card-media" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/care-christmas.jpg" width="1400" height="1050"
+             alt="A quartet performing in a care setting at Christmas"></div>
         <div class="card-body">
           <span class="kicker">Outreach</span>
           <h3>Music that comes to you</h3>
-          <p>Live performance brought into care homes, parishes, hospitals, hostels and community
-             spaces — twenty performances so far, across four countries and more than fifteen
-             venues.</p>
-          <div class="meta">Since 2023 · Dublin, Wicklow, Meath &amp; beyond</div>
+          <p>Live performance in care homes, parishes, hospitals, hostels and community spaces.</p>
+          <div class="meta">20 performances · 4 countries · 15+ venues</div>
         </div>
-      </article>
-      <article class="card card-media">
-        <img src="images/lecture-recital.jpg" alt="A lecture-recital in progress"
-             width="1400" height="1050">
+      </a>
+      <a class="card card-media" href="programmes.html">
+        <div class="photo photo-3x2"><img src="images/lecture-recital.jpg" width="1400" height="1050"
+             alt="A lecture-recital in progress"></div>
         <div class="card-body">
           <span class="kicker">Learning</span>
           <h3>Getting to Know Classical Music</h3>
-          <p>Free lecture-recitals, roughly monthly, open to all — music history, listening,
-             composers and instruments, with seasonal specials and live performance.</p>
+          <p>Free lecture-recitals, roughly monthly, for people with no prior knowledge.</p>
           <div class="meta">17 sessions · 143 attendances</div>
         </div>
-      </article>
-    </div>
-    <div class="btn-row"><a class="btn btn-outline" href="programmes.html">All five programmes</a></div>
-  </div>
-</section>
-
-<section class="band-paper">
-  <div class="wrap split split-wide">
-    <div>
-      <p class="eyebrow">Endorsement</p>
-      <div class="quote">
-        <p>&ldquo;Through music, he offers encouragement, dignity, and spiritual accompaniment to
-           those who may otherwise feel isolated. He seeks to build community rather than act
-           independently.&rdquo;</p>
-        <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
-      </div>
-    </div>
-    <div>
-      <h3>Backed by the record, not the rhetoric</h3>
-      <p class="mt-s">In 2026 South Dublin County Council&rsquo;s Arts Office selected the project
-         for <strong>South Dublin Live 2026</strong> — our first publicly funded commission.
-         Everything before that had been self-funded and voluntary.</p>
-      <p>Letters of support are held from Rua Red, The Civic and Tallaght University Hospital,
-         whose National Centre for Arts &amp; Health hosted a concert in its Atrium.</p>
-      <div class="btn-row"><a class="btn btn-outline" href="support.html">Funding &amp; support to date</a></div>
+      </a>
     </div>
   </div>
 </section>
 
-<section class="band-ink">
-  <div class="wrap center">
-    <div class="section-head">
-      <p class="eyebrow">Take part</p>
-      <h2>There is a place for you here.</h2>
-      <p>Whether you want to learn an instrument for the first time, come and listen,
-         play alongside us, or open your venue to a concert — start with an email.</p>
+<section class="band-sunken">
+  <div class="wrap split split-center reveal">
+    <div class="quote">
+      <p>&ldquo;Through music, he offers encouragement, dignity, and spiritual accompaniment to
+         those who may otherwise feel isolated.&rdquo;</p>
+      <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
     </div>
+    <div>
+      <p class="eyebrow">Backed by the record</p>
+      <h3 style="font-size:26px">Someone other than us paid for it.</h3>
+      <p style="margin-top:14px">In 2026 South Dublin County Council&rsquo;s Arts Office selected
+         the project for <strong>South Dublin Live 2026</strong> — our first publicly funded
+         commission. Letters of support are held from Rua Red, The Civic and Tallaght University
+         Hospital.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="support.html">Funding to date <span class="arrow">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-inverse">
+  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
+    <h2 style="font-size:clamp(28px,3.6vw,42px)">There is a place for you here.</h2>
+    <p class="lead" style="margin-top:18px;color:var(--fg-inverse-muted)">
+      Learn an instrument for the first time, come and listen, play alongside us,
+      or open your venue. Start with one line.</p>
     <div class="btn-row" style="justify-content:center">
-      <a class="btn btn-gold" href="get-involved.html">Get involved</a>
-      <a class="btn btn-ghost-light" href="support.html">Support our work</a>
+      <a class="btn btn-accent" href="get-involved.html">Get involved <span class="arrow">→</span></a>
+      <a class="btn btn-on-dark" href="support.html">Support our work</a>
     </div>
   </div>
 </section>
@@ -281,14 +256,14 @@
     <div class="footer-grid">
       <div>
         <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
-        <p class="footer-tagline">A community music social enterprise based in Dublin, founded in 2024. We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
+        <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
         <h4>Explore</h4>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="news.html">News & record</a>
+        <a href="news.html">News &amp; record</a>
         <a href="support.html">Support our work</a>
       </div>
       <div>
@@ -300,8 +275,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Founded by Andrew Seohyeon Kim · Dublin, Ireland</span>
-      <span>Volunteer-led · Formalising as a not-for-profit company limited by guarantee</span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span>Volunteer-led · formalising as a not-for-profit company limited by guarantee</span>
     </div>
   </div>
 </footer>

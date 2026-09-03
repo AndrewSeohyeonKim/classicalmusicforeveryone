@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Support — Classical Music for Everyone</title>
 <meta name="description" content="What support pays for, who has backed the work so far, and four ways to help — including giving a room or opening a door.">
+<meta name="theme-color" content="#1D2430">
 <link rel="canonical" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html">
 <link rel="alternate" hreflang="en" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html">
 <link rel="alternate" hreflang="ko" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/support.html">
+<link rel="alternate" hreflang="x-default" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Classical Music for Everyone">
 <meta property="og:title" content="Support — Classical Music for Everyone">
@@ -20,28 +22,31 @@
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="index.html">
+    <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
     </a>
-    <nav class="nav" id="nav" aria-label="Menu">
-      <a href="about.html">About</a>
-      <a href="programmes.html">Programmes</a>
-      <a href="get-involved.html">Get Involved</a>
-      <a href="news.html">News</a>
-      <a href="support.html" aria-current="page">Support</a>
-      <a class="lang" href="ko/support.html" hreflang="ko">한국어</a>
-      <a class="btn btn-gold" href="contact.html">Contact</a>
-    </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
-            aria-label="Menu" onclick="var n=document.getElementById('nav');
-            var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+            aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
+    <nav class="nav" id="nav" data-open="false" aria-label="Menu">
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="programmes.html">Programmes</a>
+      <a class="nav-link" href="get-involved.html">Get Involved</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link" href="support.html" aria-current="page">Support</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <span aria-current="true">EN</span>
+        <a href="ko/support.html" hreflang="ko" lang="ko">한국어</a>
+      </div>
+      <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
+    </nav>
   </div>
 </header>
 <main id="main">
@@ -49,91 +54,98 @@
   <div class="wrap">
     <p class="eyebrow">Support</p>
     <h1>Help keep the door open.</h1>
-    <p>We are volunteer-led. Support pays for recorders and scores, room hire, and the travel that
-       carries music to rooms it would not otherwise reach — and it keeps free places free.</p>
+    <p>We are volunteer-led. Support pays for recorders and scores, room hire, and the travel
+       that carries music to rooms it would not otherwise reach.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">What support does</p>
-      <h2>Three things money actually buys.</h2>
+    <div class="section-head reveal">
+      <p class="eyebrow">How the money works</p>
+      <h2>A paid booking is what keeps a free seat free.</h2>
+      <p>We are a social enterprise rather than a pure charity. That is not a technicality —
+         it is what lets the free places survive a dip in goodwill.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <span class="kicker">Instruments &amp; materials</span>
-        <h3>A recorder in every hand</h3>
-        <p>A descant recorder is inexpensive, and that is the point — but it is not free. We advise
-           on buying one, supply at cost, or lend one, and we print every score and handout so
-           that participants pay nothing for materials.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Rooms</span>
-        <h3>A warm room, every week</h3>
-        <p>Dublin community hall hire runs from roughly €15 to €40 an hour. Where a venue can offer
-           the room free or reduced, the saving goes straight into free places; where it cannot,
-           support covers the difference.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Travel</span>
-        <h3>Getting there at all</h3>
-        <p>A &lsquo;go to people&rsquo; model lives or dies on transport. Moving performers,
-           instruments and stands to care homes and rural parishes is our single largest cost per
-           outreach concert.</p>
-      </div>
-    </div>
+    <div class="reveal"><figure class="diagram">
+  <svg viewBox="0 0 1056 336" role="img" aria-label="Institutions and contributing participants pay into CMFE; CMFE pays out free places, and any surplus is reinvested in more sessions.">
+  <defs>
+    <marker id="sub-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+    </marker>
+    <marker id="sub-arrow-q" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" opacity=".55"/>
+    </marker>
+  </defs>
+    <text class="dg-edge" x="16" y="30">Money in</text>
+    <rect class="dg-fill-soft dg-box" x="16" y="44" rx="9" width="330" height="62"/>
+    <text class="dg-label" x="34" y="70">Institutions</text>
+    <text class="dg-sub"   x="34" y="90">care homes, parishes, councils, schools — a fee from their own budget</text>
+    <path class="dg-stroke-accent" d="M348 75 C 392 75, 400 152, 434 152" marker-end="url(#sub-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="16" y="120" rx="9" width="330" height="62"/>
+    <text class="dg-label" x="34" y="146">Participants who can</text>
+    <text class="dg-sub"   x="34" y="166">a small termly contribution</text>
+    <path class="dg-stroke-accent" d="M348 151 C 392 151, 400 152, 434 152" marker-end="url(#sub-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="16" y="196" rx="9" width="330" height="62"/>
+    <text class="dg-label" x="34" y="222">Grants and gifts</text>
+    <text class="dg-sub"   x="34" y="242">commissions, donations, in-kind rooms</text>
+    <path class="dg-stroke-accent" d="M348 227 C 392 227, 400 152, 434 152" marker-end="url(#sub-arrow)"/>
+    <text class="dg-edge" x="392" y="30" text-anchor="middle">pays a rate</text>
+    <rect class="dg-fill-accent dg-box" x="436" y="112" rx="12" width="212" height="80" stroke-width="1.8"/>
+    <text class="dg-label" x="542" y="146" text-anchor="middle" style="font-size:14px">Classical Music for Everyone</text>
+    <text class="dg-sub" x="542" y="168" text-anchor="middle">volunteer-led · no private profit</text>
+    <text class="dg-edge" x="1040" y="30" text-anchor="end">What it buys</text>
+    <rect class="dg-fill-soft dg-box" x="712" y="82" rx="9" width="328" height="76"/>
+    <text class="dg-label" x="730" y="110">Free places</text>
+    <text class="dg-sub"   x="730" y="132">older people, people with disabilities, anyone for whom cost decides</text>
+    <path class="dg-stroke-accent" d="M650 152 C 682 152, 686 120, 710 120" marker-end="url(#sub-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="712" y="190" rx="9" width="328" height="76"/>
+    <text class="dg-label" x="730" y="218">More rooms</text>
+    <text class="dg-sub"   x="730" y="240">surplus goes back into sessions, venues and lower fees</text>
+    <path class="dg-stroke-accent" d="M650 152 C 682 152, 686 228, 710 228" marker-end="url(#sub-arrow)"/>
+    <text class="dg-edge" x="680" y="106" text-anchor="middle">funds</text>
+    <path class="dg-stroke" d="M876 268 C 876 320, 542 322, 542 196" stroke-dasharray="4 5" marker-end="url(#sub-arrow-q)"/>
+    <text class="dg-sub" x="700" y="318" text-anchor="middle">surplus reinvested</text>
+  </svg>
+  <figcaption>Money enters from two directions and leaves as places nobody paid for. Remove the paid tier and the free tier does not shrink gracefully — it is the first thing that disappears.</figcaption>
+</figure></div>
   </div>
 </section>
 
-<section class="band-paper">
+<section class="band-raised">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Track record</p>
       <h2>Who has backed this so far.</h2>
       <p>Everything before 2026 was self-funded and voluntary. We publish the record because a
          funder&rsquo;s first question is who came before them.</p>
     </div>
-    <div class="table-scroll">
+    <div class="table-scroll reveal">
       <table>
-        <thead>
-          <tr><th scope="col">Source</th><th scope="col">Detail</th><th scope="col">Status</th></tr>
-        </thead>
+        <thead><tr><th scope="col">Source</th><th scope="col">Detail</th><th scope="col">Status</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>South Dublin County Council</strong><br><span class="small">Arts Office ·
-                South Dublin Live 2026</span></td>
-            <td>A commission for the series <em>Shared Voices of South Dublin</em> —
-                our first publicly funded work.</td>
-            <td>Received</td>
-          </tr>
-          <tr>
-            <td><strong>Myongdohoe Scholarship</strong><br><span class="small">Lay Apostolate
-                Committee, Catholic Bishops&rsquo; Conference of Korea</span></td>
-            <td>Termly support from March 2025 for the founder&rsquo;s musical apostolate.</td>
-            <td>Concluded</td>
-          </tr>
-          <tr>
-            <td><strong>Individual donors</strong></td>
-            <td>Gifts from supporters in Europe and Korea towards making regular outreach
-                possible.</td>
-            <td>Ongoing</td>
-          </tr>
-          <tr>
-            <td><strong>Partner venues, in kind</strong></td>
-            <td>Tallaght University Hospital — venue and operating time. Mulhuddart Community
-                Centre — the room. TU Dublin — rehearsal space.</td>
-            <td>Continuing</td>
-          </tr>
-          <tr>
-            <td><strong>TU Dublin Venture Lab</strong></td>
-            <td>Social enterprise start-up programme, from September 2024.</td>
-            <td>Completed</td>
-          </tr>
+          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">Arts Office ·
+              South Dublin Live 2026</span></td>
+              <td>A commission for <em>Shared Voices of South Dublin</em> — our first publicly
+                  funded work.</td><td>Received</td></tr>
+          <tr><td><strong>Myongdohoe Scholarship</strong><br><span class="tiny">Lay Apostolate
+              Committee, Catholic Bishops&rsquo; Conference of Korea</span></td>
+              <td>Termly support from March 2025 for the founder&rsquo;s musical apostolate.</td>
+              <td>Concluded</td></tr>
+          <tr><td><strong>Individual donors</strong></td>
+              <td>Gifts from supporters in Europe and Korea towards making regular outreach
+                  possible.</td><td>Ongoing</td></tr>
+          <tr><td><strong>Partner venues, in kind</strong></td>
+              <td>Tallaght University Hospital — venue and operating time. Mulhuddart Community
+                  Centre — the room. TU Dublin — rehearsal space.</td><td>Continuing</td></tr>
+          <tr><td><strong>TU Dublin Venture Lab</strong></td>
+              <td>Social enterprise start-up programme, from September 2024.</td><td>Completed</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="split mt-l">
+    <div class="split split-center reveal" style="margin-top:48px">
       <div class="quote">
         <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
            within limited personal financial circumstances, he continues to give generously of his
@@ -141,12 +153,11 @@
         <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
       </div>
       <div>
-        <h3>Letters of support</h3>
-        <ul class="plainlist mt-s">
+        <h4>Letters of support</h4>
+        <ul class="plainlist" style="margin-top:14px">
           <li><strong>Rua Red</strong> — South Dublin&rsquo;s contemporary arts centre</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>
-          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp;
-              Health</li>
+          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
           <li><strong>SDCC Arts Office</strong> — selection for South Dublin Live 2026</li>
         </ul>
       </div>
@@ -154,45 +165,35 @@
   </div>
 </section>
 
-<section class="band-cream">
+<section class="band-sunken">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">How to help</p>
       <h2>Four kinds of support, all of them useful.</h2>
     </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>Give</h3>
-        <p>A one-off or regular gift goes to instruments, materials, room hire and travel. Write to
-           us and we will send the current payment details and tell you exactly what your gift is
-           funding.</p>
-        <div class="btn-row"><a class="btn btn-gold"
-          href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20CMFE">Offer support</a></div>
-      </div>
-      <div class="card">
-        <h3>Fund a programme</h3>
+    <div class="grid grid-4 stagger">
+      <div class="card"><span class="kicker">01</span><h3>Give</h3>
+        <p>A one-off or regular gift goes to instruments, materials, room hire and travel. Write
+           and we will send the current payment details and say what it funds.</p></div>
+      <div class="card"><span class="kicker">02</span><h3>Fund a programme</h3>
         <p>For trusts, foundations, councils and corporate funders: a full proposal, budget and
-           cost breakdown is available on request, along with our activity record and letters of
-           support.</p>
-        <div class="btn-row"><a class="btn btn-outline"
-          href="mailto:sby05034@gmail.com?subject=Partnership%20and%20funding%20enquiry">Request the proposal</a></div>
-      </div>
-      <div class="card">
-        <h3>Open a door</h3>
-        <p>An introduction to a care home, parish, community centre, day service or hospital is
-           worth as much as a donation — often more, because it is where the work happens.</p>
-      </div>
-      <div class="card">
-        <h3>Give the room</h3>
-        <p>A warm room once a week for a term is the single most valuable in-kind gift there is.
-           It converts directly into free places.</p>
-      </div>
+           activity record on request.</p></div>
+      <div class="card"><span class="kicker">03</span><h3>Open a door</h3>
+        <p>An introduction to a care home, parish, community centre or hospital is worth as much
+           as a donation — often more.</p></div>
+      <div class="card"><span class="kicker">04</span><h3>Give the room</h3>
+        <p>A warm room once a week for a term is the most valuable in-kind gift there is. It
+           converts directly into free places.</p></div>
     </div>
-    <div class="callout mt-m">
-      <p class="small"><strong>Please note.</strong> Classical Music for Everyone is a
-         volunteer-led social enterprise currently formalising as a not-for-profit company limited
-         by guarantee. We are not yet a registered charity, so gifts are not eligible for charitable
-         tax relief. We would rather say so plainly than let anyone assume otherwise.</p>
+    <div class="btn-row reveal" style="justify-content:center;margin-top:36px">
+      <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20CMFE">Offer support <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=Partnership%20and%20funding%20enquiry">Request the proposal</a>
+    </div>
+    <div class="callout reveal" style="margin-top:34px">
+      <p class="small"><strong>Please note.</strong> CMFE is a volunteer-led social enterprise
+         currently formalising as a not-for-profit company limited by guarantee. We are not yet a
+         registered charity, so gifts are not eligible for charitable tax relief. We would rather
+         say so plainly than let anyone assume otherwise.</p>
     </div>
   </div>
 </section>
@@ -202,14 +203,14 @@
     <div class="footer-grid">
       <div>
         <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
-        <p class="footer-tagline">A community music social enterprise based in Dublin, founded in 2024. We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
+        <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
         <h4>Explore</h4>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="news.html">News & record</a>
+        <a href="news.html">News &amp; record</a>
         <a href="support.html">Support our work</a>
       </div>
       <div>
@@ -221,8 +222,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Founded by Andrew Seohyeon Kim · Dublin, Ireland</span>
-      <span>Volunteer-led · Formalising as a not-for-profit company limited by guarantee</span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span>Volunteer-led · formalising as a not-for-profit company limited by guarantee</span>
     </div>
   </div>
 </footer>

@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Programmes — Classical Music for Everyone</title>
 <meta name="description" content="Five programmes under two pillars: the Recorder Ensemble course, lecture-recitals, accompanied concert-going, outreach concerts and the Letters Ensemble.">
+<meta name="theme-color" content="#1D2430">
 <link rel="canonical" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html">
 <link rel="alternate" hreflang="en" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html">
 <link rel="alternate" hreflang="ko" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html">
+<link rel="alternate" hreflang="x-default" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Classical Music for Everyone">
 <meta property="og:title" content="Programmes — Classical Music for Everyone">
@@ -20,28 +22,31 @@
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="index.html">
+    <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
     </a>
-    <nav class="nav" id="nav" aria-label="Menu">
-      <a href="about.html">About</a>
-      <a href="programmes.html" aria-current="page">Programmes</a>
-      <a href="get-involved.html">Get Involved</a>
-      <a href="news.html">News</a>
-      <a href="support.html">Support</a>
-      <a class="lang" href="ko/programmes.html" hreflang="ko">한국어</a>
-      <a class="btn btn-gold" href="contact.html">Contact</a>
-    </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
-            aria-label="Menu" onclick="var n=document.getElementById('nav');
-            var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+            aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
+    <nav class="nav" id="nav" data-open="false" aria-label="Menu">
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="programmes.html" aria-current="page">Programmes</a>
+      <a class="nav-link" href="get-involved.html">Get Involved</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link" href="support.html">Support</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <span aria-current="true">EN</span>
+        <a href="ko/programmes.html" hreflang="ko" lang="ko">한국어</a>
+      </div>
+      <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
+    </nav>
   </div>
 </header>
 <main id="main">
@@ -49,29 +54,29 @@
   <div class="wrap">
     <p class="eyebrow">Programmes</p>
     <h1>What we actually run.</h1>
-    <p>Five programme strands under two pillars, plus one faith-based sub-strand. The Recorder
-       Ensemble course is the flagship; everything else either feeds it or grows out of it.</p>
+    <p>Five strands under two pillars, plus one faith-based sub-strand. The Recorder Ensemble
+       course is the flagship; everything else feeds it or grows out of it.</p>
   </div>
 </section>
 
 <section class="tight">
-  <div class="wrap">
+  <div class="wrap reveal">
     <div class="table-scroll">
       <table>
-        <thead>
-          <tr><th scope="col">Programme</th><th scope="col">Pillar</th>
-              <th scope="col">Status</th><th scope="col">Delivered to date</th></tr>
-        </thead>
+        <thead><tr>
+          <th scope="col">Programme</th><th scope="col">Pillar</th>
+          <th scope="col">Status</th><th scope="col">Delivered to date</th>
+        </tr></thead>
         <tbody>
           <tr><td><strong>Recorder Ensemble course</strong></td><td>Learning</td>
               <td>Flagship · running</td><td>Pilot complete; first community class from Sept 2026</td></tr>
           <tr><td><strong>Getting to Know Classical Music</strong></td><td>Learning</td>
               <td>Running · free</td><td>17 lecture-recitals · 143 attendances</td></tr>
           <tr><td><strong>Concert Guide &amp; Companion</strong></td><td>Learning</td>
-              <td>Running</td><td>10 recorded outings, including two summers at the BBC Proms</td></tr>
+              <td>Running</td><td>10 recorded outings, incl. two summers at the BBC Proms</td></tr>
           <tr><td><strong>Outreach Concerts</strong></td><td>Sharing</td>
               <td>Running</td><td>20 performances · 4 countries · 15+ venues</td></tr>
-          <tr><td style="padding-left:34px">↳ Bringing Music to Sacred Places</td><td>Sharing</td>
+          <tr><td style="padding-inline-start:34px">↳ Bringing Music to Sacred Places</td><td>Sharing</td>
               <td>Sub-strand</td><td>Around 16 of the 20 outreach performances</td></tr>
           <tr><td><strong>Letters Ensemble</strong></td><td>Sharing</td>
               <td>Running</td><td>4 formal concerts · weekly rehearsals since Jan 2024</td></tr>
@@ -81,68 +86,83 @@
   </div>
 </section>
 
-<section class="band-paper">
+<section class="band-raised">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Flagship programme</p>
-      <h2>Recorder Ensemble — a term, from nothing to a concert.</h2>
-      <p>A course for complete beginners. No experience and no music reading required. It is
-         gentle on the hands and breath, quick to a first satisfying sound, inexpensive, and made
-         for playing together — the friendliest possible doorway into making music.</p>
+    <div class="section-head reveal">
+      <p class="eyebrow">Flagship</p>
+      <h2>A term, from nothing to a concert.</h2>
+      <p>The recorder is gentle on the hands and breath, quick to a first satisfying sound,
+         inexpensive, and made for playing together. That is why it works for absolute
+         beginners.</p>
     </div>
-    <div class="grid grid-4">
-      <div class="card">
-        <span class="kicker">Step 01</span><h3>Play your first notes</h3>
-        <p>Hold it, breathe, play. Real sound in week one.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Step 02</span><h3>Read music from zero</h3>
-        <p>Small steps every week. Easier than you think.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Step 03</span><h3>Play in harmony</h3>
-        <p>Your own part in the ensemble. The moment it clicks.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Step 04</span><h3>Perform a concert</h3>
-        <p>A short concert for family and friends in the final week.</p>
-      </div>
-    </div>
+    <div class="reveal"><figure class="diagram">
+  <svg viewBox="0 0 1056 292" role="img" aria-label="Four rising steps across a term: first notes, reading music, playing in harmony, a concert.">
+  <defs>
+    <marker id="term-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+    </marker>
+    <marker id="term-arrow-q" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" opacity=".55"/>
+    </marker>
+  </defs>
+    <line class="dg-stroke" x1="16" y1="258" x2="1040" y2="258"/>
+    <rect class="dg-fill-soft dg-box" x="16" y="184" rx="9" width="236" height="66"/>
+    <text class="dg-edge" x="34" y="210">Week 1</text>
+    <text class="dg-label" x="34" y="232">Play your first notes</text>
+    <line class="dg-stroke-accent" x1="256" y1="228" x2="278" y2="228" marker-end="url(#term-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="284" y="144" rx="9" width="236" height="106"/>
+    <text class="dg-edge" x="302" y="170">Weeks 2–5</text>
+    <text class="dg-label" x="302" y="192">Read music from zero</text>
+    <text class="dg-sub" x="302" y="214">Small steps, every week.</text>
+    <line class="dg-stroke-accent" x1="524" y1="228" x2="546" y2="228" marker-end="url(#term-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="552" y="104" rx="9" width="236" height="146"/>
+    <text class="dg-edge" x="570" y="130">Weeks 6–11</text>
+    <text class="dg-label" x="570" y="152">Play your own part</text>
+    <text class="dg-sub" x="570" y="174">The moment it clicks.</text>
+    <line class="dg-stroke-accent" x1="792" y1="228" x2="814" y2="228" marker-end="url(#term-arrow)"/>
+    <rect class="dg-fill-accent dg-box" x="820" y="64" rx="9" width="236" height="186"/>
+    <text class="dg-edge" x="838" y="90">Final week</text>
+    <text class="dg-label" x="838" y="112">Perform a concert</text>
+    <text class="dg-sub" x="838" y="134">For family and friends.</text>
+    <text class="dg-sub" x="16" y="280">No experience assumed</text>
+    <text class="dg-sub" x="1040" y="280" text-anchor="end">A concert, in public</text>
+    <text class="dg-edge" x="62" y="44" opacity=".0">.</text>
+  </svg>
+  <figcaption>A term is designed so that the first satisfying sound arrives in week one, not in week six. Nothing here assumes prior music reading, and every step is reached by the whole group together.</figcaption>
+</figure></div>
 
-    <div class="split mt-l">
-      <div>
+    <div class="split" style="margin-top:52px">
+      <div class="reveal">
         <h3>What it looks like</h3>
-        <div class="table-scroll mt-s">
-          <table>
-            <tbody>
-              <tr><td><strong>Length</strong></td><td>One term, weekly</td></tr>
-              <tr><td><strong>Session</strong></td><td>60–90 minutes</td></tr>
-              <tr><td><strong>Group</strong></td><td>Small and friendly</td></tr>
-              <tr><td><strong>Entry level</strong></td><td>Complete beginners</td></tr>
-              <tr><td><strong>Instrument</strong></td><td>Descant recorder — low cost; we advise on
-                  buying one, supply at cost, or lend you one</td></tr>
-              <tr><td><strong>Materials</strong></td><td>Scores and weekly handouts, produced and
-                  printed by us. No cost to participants.</td></tr>
-              <tr><td><strong>Ending</strong></td><td>A short concert for family and friends</td></tr>
-            </tbody>
-          </table>
+        <div class="table-scroll" style="margin-top:16px">
+          <table><tbody>
+            <tr><td><strong>Length</strong></td><td>One term, weekly</td></tr>
+            <tr><td><strong>Session</strong></td><td>60–90 minutes</td></tr>
+            <tr><td><strong>Group</strong></td><td>Small and friendly</td></tr>
+            <tr><td><strong>Instrument</strong></td><td>Descant recorder — we advise on buying one,
+                supply at cost, or lend you one</td></tr>
+            <tr><td><strong>Materials</strong></td><td>Scores and handouts, printed by us. No cost
+                to participants.</td></tr>
+            <tr><td><strong>Ending</strong></td><td>A short concert for family and friends</td></tr>
+          </tbody></table>
         </div>
       </div>
-      <div>
+      <div class="reveal">
         <h3>What it gives people</h3>
-        <ul class="checklist mt-s">
-          <li><strong>Connection</strong> — a warm, weekly reason to gather and belong.</li>
-          <li><strong>Dignity and achievement</strong> — the quiet pride of &ldquo;I can make
-              music.&rdquo;</li>
-          <li><strong>Gentle stimulation</strong> — for memory, coordination, breath and focus.</li>
-          <li><strong>Friendship</strong> — bonds that often outlast the term itself.</li>
+        <ul class="checklist" style="margin-top:16px">
+          <li><strong>Connection</strong> — a warm, weekly reason to gather.</li>
+          <li><strong>Dignity and achievement</strong> — the quiet pride of &ldquo;I can make music.&rdquo;</li>
+          <li><strong>Gentle stimulation</strong> — memory, coordination, breath and focus.</li>
+          <li><strong>Friendship</strong> — bonds that often outlast the term.</li>
         </ul>
-        <div class="callout mt-m">
-          <span class="kicker">Running now</span>
-          <p class="mt-s"><strong>Mulhuddart Community Centre, Dublin 15.</strong> Wednesdays
-             7:00–8:00pm from 9 September 2026, twelve weeks, free of charge, ending with a
-             festive concert for family and friends before Christmas.</p>
-          <div class="btn-row"><a class="btn btn-gold" href="get-involved.html">Join the class</a></div>
+        <div class="callout" style="margin-top:24px">
+          <span class="tag tag-live">Running now</span>
+          <p style="margin-top:12px"><strong>Mulhuddart Community Centre, Dublin 15.</strong>
+             Wednesdays 7:00–8:00pm from 9 September 2026, twelve weeks, free — ending with a
+             festive concert before Christmas.</p>
+          <div class="btn-row"><a class="btn btn-accent" href="get-involved.html">Join the class <span class="arrow">→</span></a></div>
         </div>
       </div>
     </div>
@@ -150,103 +170,86 @@
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-head">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
       <p class="eyebrow">The pilot</p>
-      <h2>Where the model came from.</h2>
+      <h2 style="font-size:clamp(26px,3.2vw,38px)">Where the model came from.</h2>
+      <p class="lead" style="margin-top:18px">Seven retired Presentation Sisters. Ten weekly
+         hours at Warrenmount, Dublin 8. An Easter concert of nine pieces at Clondalkin Lodge.
+         Completed as Bachelor of Music research at TU Dublin Conservatoire.</p>
+      <p style="margin-top:16px">Three months of preparation came first — a needs survey,
+         permissions, vetting, individual lessons, part allocation. Descant, alto, tenor and bass
+         recorders with melodica, xylophone and small percussion; enlarged scores. All seven
+         completed and performed in public.</p>
     </div>
-    <div class="split split-wide">
-      <div>
-        <p class="lead">The model grew from a practice-based pilot study — a ten-week recorder
-           ensemble designed and led by the founder for seven retired Presentation Sisters at
-           Warrenmount, Dublin 8, meeting weekly for one hour and concluding with an Easter
-           concert of nine pieces at Clondalkin Lodge, completed as Bachelor of Music research at
-           TU Dublin Conservatoire.</p>
-        <p class="mt-m">Three months of preparation came first — a needs survey, permissions,
-           vetting, individual lessons and part allocation. The ensemble used descant, alto, tenor
-           and bass recorders alongside melodica, xylophone and small percussion, with enlarged
-           scores. All seven participants completed the course and performed in public. The group
-           continued in weekly sessions afterwards and concluded in August 2026.</p>
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/conducting.jpg" width="1400" height="1050"
+             alt="Conducting a small ensemble in a community setting">
       </div>
-      <div class="figure">
-        <img src="images/conducting.jpg" alt="Conducting a small ensemble in a community setting"
-             width="1400" height="1050">
-        <p class="figure-caption">Every course ends the same way — a concert, however small.</p>
-      </div>
-    </div>
+      <figcaption>Every course ends the same way — a concert, however small.</figcaption>
+    </figure>
   </div>
 </section>
 
-<section class="band-cream">
+<section class="band-sunken">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">The other programmes</p>
       <h2>Four more ways in.</h2>
     </div>
-    <div class="grid grid-2">
-      <article class="card">
-        <span class="kicker">Learning</span>
+    <div class="grid grid-2 stagger">
+      <article class="card"><span class="kicker">Learning</span>
         <h3>Getting to Know Classical Music</h3>
-        <p>Free lecture-recitals, roughly monthly, open to all with no prior knowledge required —
-           a presentation with recorded and live performance. The curriculum runs in three stages:
-           <em>Getting Closer</em>, <em>Experiencing Together</em>, <em>Discovering My Taste</em>,
-           with seasonal specials on European summer festivals, the BBC Proms, the Wexford Opera
-           Festival and Christmas.</p>
-        <div class="meta">17 sessions since 2024 · typical attendance 6–14 · free</div>
+        <p>Free lecture-recitals, roughly monthly, with recorded and live performance. Three
+           stages — <em>Getting Closer</em>, <em>Experiencing Together</em>,
+           <em>Discovering My Taste</em> — plus seasonal specials on European summer festivals,
+           the BBC Proms, Wexford Opera Festival and Christmas.</p>
+        <div class="meta">17 sessions · typical attendance 6–14 · free</div>
       </article>
-      <article class="card">
-        <span class="kicker">Learning</span>
+      <article class="card"><span class="kicker">Learning</span>
         <h3>Concert Guide &amp; Companion</h3>
-        <p>Small groups accompanied to live concerts they would not attend alone — National
-           Symphony Orchestra Friday concerts, Irish National Opera, the RTÉ Concert Orchestra,
-           the TU Dublin Philharmonic and the National Concert Hall International Series, plus
-           companion trips to the BBC Proms in two consecutive summers. Three stages: preparation
-           before, guidance during, reflection after.</p>
+        <p>Small groups accompanied to concerts they would not attend alone — the National
+           Symphony Orchestra, Irish National Opera, the RTÉ Concert Orchestra, the NCH
+           International Series, and the BBC Proms in two consecutive summers. Preparation before,
+           guidance during, reflection after.</p>
         <div class="meta">Groups of about five · tickets can be as little as £8</div>
       </article>
-      <article class="card">
-        <span class="kicker">Sharing</span>
+      <article class="card"><span class="kicker">Sharing</span>
         <h3>Outreach Concerts</h3>
-        <p>&lsquo;Music that comes to you&rsquo; — live performance brought into care homes,
-           parishes, hospitals, hostels and community spaces. Twenty performances so far across
-           four countries and more than fifteen venues, from a homeless hostel in Dublin 7 to a
-           martyrs&rsquo; shrine in Daegu. Priority counties for growth: Wicklow, Meath and
-           Louth.</p>
+        <p>Live performance brought into care homes, parishes, hospitals, hostels and community
+           spaces — from a homeless hostel in Dublin 7 to a martyrs&rsquo; shrine in Daegu.
+           Priority counties for growth: Wicklow, Meath and Louth.</p>
         <div class="meta">Since 2023 · target ten or more per year</div>
       </article>
-      <article class="card">
-        <span class="kicker">Sharing</span>
+      <article class="card"><span class="kicker">Sharing</span>
         <h3>Letters Ensemble</h3>
-        <p>Founded in January 2024 by amateur musicians living in Dublin, and directed by
-           CMFE&rsquo;s founder. Weekly Saturday rehearsals of about two hours in educational and
-           community spaces. The repertoire is Irish traditional, Korean traditional, sacred
-           repertoire, accessible contemporary arrangements and selected popular pieces — chosen
-           so that any room can meet it halfway.</p>
+        <p>Founded January 2024 by amateur musicians living in Dublin. Weekly Saturday rehearsals.
+           Irish traditional, Korean traditional, sacred repertoire and accessible arrangements —
+           chosen so that any room can meet the music halfway.</p>
         <div class="meta">4 formal concerts · open to amateur musicians</div>
       </article>
     </div>
-    <div class="callout mt-m">
-      <span class="kicker">Sub-strand</span>
-      <h3 class="mt-s">Bringing Music to Sacred Places</h3>
-      <p class="mt-s">The faith-based strand of the outreach work — parishes, shrines, convents,
-         liturgies and retired religious communities, accounting for roughly sixteen of the twenty
-         outreach performances. It is described to religious audiences as a lay apostolate through
-         music: a ministry of presence and accompaniment rather than a concert series.</p>
+    <div class="callout reveal" style="margin-top:26px">
+      <span class="kicker" style="color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase">Sub-strand</span>
+      <h3 style="margin-top:8px">Bringing Music to Sacred Places</h3>
+      <p style="margin-top:10px">The faith-based strand — parishes, shrines, convents, liturgies
+         and retired religious communities, roughly sixteen of the twenty outreach performances.
+         Described to religious audiences as a lay apostolate through music: a ministry of
+         presence rather than a concert series.</p>
     </div>
   </div>
 </section>
 
-<section class="band-ink">
-  <div class="wrap center">
-    <div class="section-head">
-      <p class="eyebrow">Take part</p>
-      <h2>There is a place for you here.</h2>
-      <p>Whether you want to learn an instrument for the first time, come and listen,
-         play alongside us, or open your venue to a concert — start with an email.</p>
-    </div>
+<section class="band-inverse">
+  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
+    <h2 style="font-size:clamp(28px,3.6vw,42px)">There is a place for you here.</h2>
+    <p class="lead" style="margin-top:18px;color:var(--fg-inverse-muted)">
+      Learn an instrument for the first time, come and listen, play alongside us,
+      or open your venue. Start with one line.</p>
     <div class="btn-row" style="justify-content:center">
-      <a class="btn btn-gold" href="get-involved.html">Get involved</a>
-      <a class="btn btn-ghost-light" href="support.html">Support our work</a>
+      <a class="btn btn-accent" href="get-involved.html">Get involved <span class="arrow">→</span></a>
+      <a class="btn btn-on-dark" href="support.html">Support our work</a>
     </div>
   </div>
 </section>
@@ -256,14 +259,14 @@
     <div class="footer-grid">
       <div>
         <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
-        <p class="footer-tagline">A community music social enterprise based in Dublin, founded in 2024. We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
+        <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
         <h4>Explore</h4>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="news.html">News & record</a>
+        <a href="news.html">News &amp; record</a>
         <a href="support.html">Support our work</a>
       </div>
       <div>
@@ -275,8 +278,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Founded by Andrew Seohyeon Kim · Dublin, Ireland</span>
-      <span>Volunteer-led · Formalising as a not-for-profit company limited by guarantee</span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span>Volunteer-led · formalising as a not-for-profit company limited by guarantee</span>
     </div>
   </div>
 </footer>

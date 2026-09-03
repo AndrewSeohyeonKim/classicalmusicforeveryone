@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact — Classical Music for Everyone</title>
 <meta name="description" content="Email, phone and where we travel to. Every enquiry reaches the founder directly.">
+<meta name="theme-color" content="#1D2430">
 <link rel="canonical" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/contact.html">
 <link rel="alternate" hreflang="en" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/contact.html">
 <link rel="alternate" hreflang="ko" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/contact.html">
+<link rel="alternate" hreflang="x-default" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/contact.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Classical Music for Everyone">
 <meta property="og:title" content="Contact — Classical Music for Everyone">
@@ -20,28 +22,31 @@
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="index.html">
+    <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
     </a>
-    <nav class="nav" id="nav" aria-label="Menu">
-      <a href="about.html">About</a>
-      <a href="programmes.html">Programmes</a>
-      <a href="get-involved.html">Get Involved</a>
-      <a href="news.html">News</a>
-      <a href="support.html">Support</a>
-      <a class="lang" href="ko/contact.html" hreflang="ko">한국어</a>
-      <a class="btn btn-gold" href="contact.html">Contact</a>
-    </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
-            aria-label="Menu" onclick="var n=document.getElementById('nav');
-            var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+            aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
+    <nav class="nav" id="nav" data-open="false" aria-label="Menu">
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="programmes.html">Programmes</a>
+      <a class="nav-link" href="get-involved.html">Get Involved</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link" href="support.html">Support</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <span aria-current="true">EN</span>
+        <a href="ko/contact.html" hreflang="ko" lang="ko">한국어</a>
+      </div>
+      <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
+    </nav>
   </div>
 </header>
 <main id="main">
@@ -49,63 +54,61 @@
   <div class="wrap">
     <p class="eyebrow">Contact</p>
     <h1>Write to us.</h1>
-    <p>Every enquiry reaches the founder directly. A single line is enough — say roughly what you
-       are asking about and where you are, and you will get a practical answer back.</p>
+    <p>Every enquiry reaches the founder directly. One line is enough — what you are asking
+       about, and roughly where you are.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap split">
-    <div>
+    <div class="reveal">
       <h2>Details</h2>
-      <div class="table-scroll mt-m">
-        <table>
-          <tbody>
-            <tr><td><strong>Email</strong></td>
-                <td><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></td></tr>
-            <tr><td><strong>Phone</strong></td>
-                <td><a href="tel:+353830780635">+353 83 078 0635</a></td></tr>
-            <tr><td><strong>Based in</strong></td><td>Dublin, Ireland</td></tr>
-            <tr><td><strong>We travel to</strong></td>
-                <td>Dublin, Co. Meath, Co. Wicklow, Co. Westmeath — and further by arrangement</td></tr>
-            <tr><td><strong>Founder</strong></td>
-                <td>Andrew Seohyeon Kim, BMus (Hons), TU Dublin Conservatoire</td></tr>
-            <tr><td><strong>Languages</strong></td><td>English · 한국어</td></tr>
-          </tbody>
-        </table>
+      <div class="table-scroll" style="margin-top:24px">
+        <table><tbody>
+          <tr><td><strong>Email</strong></td>
+              <td><a class="link" href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></td></tr>
+          <tr><td><strong>Phone</strong></td>
+              <td><a class="link" href="tel:+353830780635">+353 83 078 0635</a></td></tr>
+          <tr><td><strong>Based in</strong></td><td>Dublin, Ireland</td></tr>
+          <tr><td><strong>We travel to</strong></td>
+              <td>Dublin, Co. Meath, Co. Wicklow, Co. Westmeath — further by arrangement</td></tr>
+          <tr><td><strong>Founder</strong></td>
+              <td>Andrew Seohyeon Kim, BMus (Hons), TU Dublin Conservatoire</td></tr>
+          <tr><td><strong>Languages</strong></td><td>English · 한국어</td></tr>
+        </tbody></table>
       </div>
-      <p class="small mt-m">We hold public liability insurance and complete Garda vetting where
-         the work requires it. Documentation is available to partner venues on request.</p>
+      <p class="small" style="margin-top:22px">We hold public liability insurance and complete
+         Garda vetting where the work requires it. Documentation is available to partner venues on
+         request.</p>
     </div>
-    <div>
+    <div class="reveal">
       <h2>Who writes about what</h2>
-      <ul class="checklist mt-m">
-        <li><strong>Joining a class</strong> — say which venue, and whether you have played
-            anything before. &ldquo;Never&rdquo; is a completely normal answer.</li>
-        <li><strong>Inviting a concert</strong> — tell us the setting, roughly how many people, and
-            a rough time of year. We will take it from there.</li>
-        <li><strong>Hosting a course</strong> — a room, a day of the week, and a contact person is
-            all we need to begin.</li>
+      <ul class="checklist" style="margin-top:24px">
+        <li><strong>Joining a class</strong> — which venue, and whether you have played anything
+            before. &ldquo;Never&rdquo; is a completely normal answer.</li>
+        <li><strong>Inviting a concert</strong> — the setting, roughly how many people, and a
+            rough time of year.</li>
+        <li><strong>Hosting a course</strong> — a room, a day of the week, and a contact person.</li>
         <li><strong>Funding and partnership</strong> — ask for the proposal and budget; we will
-            send the current version with the activity record attached.</li>
-        <li><strong>Press and media</strong> — biographies, photographs and programme details are
-            available on request.</li>
+            send the current version with the activity record.</li>
+        <li><strong>Press and media</strong> — biographies, photographs and programme details on
+            request.</li>
       </ul>
       <div class="btn-row">
-        <a class="btn btn-gold" href="mailto:sby05034@gmail.com?subject=Enquiry%20—%20Classical%20Music%20for%20Everyone">Email us</a>
-        <a class="btn btn-outline" href="get-involved.html">Ways to take part</a>
+        <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=Enquiry%20—%20Classical%20Music%20for%20Everyone">Email us <span class="arrow">→</span></a>
+        <a class="btn btn-quiet" href="get-involved.html">Ways to take part</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band-cream">
-  <div class="wrap narrow center">
-    <p class="eyebrow">Organisation</p>
+<section class="band-sunken">
+  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
+    <p class="eyebrow" style="justify-content:center">Organisation</p>
     <h2>Classical Music for Everyone</h2>
-    <p class="lead mt-m">A community music social enterprise founded in Dublin in January 2024,
-       currently formalising as a not-for-profit company limited by guarantee. Volunteer-led.
-       Sector: community music, social enterprise, arts and health.</p>
+    <p class="lead" style="margin-top:22px">A community music social enterprise founded in Dublin
+       in January 2024, currently formalising as a not-for-profit company limited by guarantee.
+       Volunteer-led. Community music · social enterprise · arts and health.</p>
   </div>
 </section>
 </main>
@@ -114,14 +117,14 @@
     <div class="footer-grid">
       <div>
         <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
-        <p class="footer-tagline">A community music social enterprise based in Dublin, founded in 2024. We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
+        <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
         <h4>Explore</h4>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="news.html">News & record</a>
+        <a href="news.html">News &amp; record</a>
         <a href="support.html">Support our work</a>
       </div>
       <div>
@@ -133,8 +136,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Founded by Andrew Seohyeon Kim · Dublin, Ireland</span>
-      <span>Volunteer-led · Formalising as a not-for-profit company limited by guarantee</span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span>Volunteer-led · formalising as a not-for-profit company limited by guarantee</span>
     </div>
   </div>
 </footer>

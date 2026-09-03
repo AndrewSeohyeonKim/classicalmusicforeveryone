@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>후원 — Classical Music for Everyone</title>
 <meta name="description" content="후원이 실제로 쓰이는 곳, 지금까지 이 일을 받쳐 온 이들, 그리고 도울 수 있는 네 가지 방법.">
+<meta name="theme-color" content="#1D2430">
 <link rel="canonical" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/support.html">
 <link rel="alternate" hreflang="en" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html">
 <link rel="alternate" hreflang="ko" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/support.html">
+<link rel="alternate" hreflang="x-default" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Classical Music for Everyone">
 <meta property="og:title" content="후원 — Classical Music for Everyone">
@@ -20,28 +22,31 @@
 <link rel="apple-touch-icon" href="../assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="index.html">
+    <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
       <img src="../assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
     </a>
-    <nav class="nav" id="nav" aria-label="메뉴">
-      <a href="about.html">소개</a>
-      <a href="programmes.html">프로그램</a>
-      <a href="get-involved.html">참여하기</a>
-      <a href="news.html">소식</a>
-      <a href="support.html" aria-current="page">후원</a>
-      <a class="lang" href="../support.html" hreflang="en">English</a>
-      <a class="btn btn-gold" href="contact.html">문의</a>
-    </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
-            aria-label="메뉴" onclick="var n=document.getElementById('nav');
-            var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+            aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
+    <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
+      <a class="nav-link" href="about.html">소개</a>
+      <a class="nav-link" href="programmes.html">프로그램</a>
+      <a class="nav-link" href="get-involved.html">참여하기</a>
+      <a class="nav-link" href="news.html">소식</a>
+      <a class="nav-link" href="support.html" aria-current="page">후원</a>
+      <div class="lang-switch" role="group" aria-label="언어">
+        <span aria-current="true">한국어</span>
+        <a href="../support.html" hreflang="en" lang="en">EN</a>
+      </div>
+      <a class="btn btn-accent btn-nav" href="contact.html">문의</a>
+    </nav>
   </div>
 </header>
 <main id="main">
@@ -49,102 +54,108 @@
   <div class="wrap">
     <p class="eyebrow">후원</p>
     <h1>문이 계속 열려 있도록.</h1>
-    <p>우리는 자원봉사로 운영합니다. 후원은 리코더와 악보, 공간 대여, 그리고 음악이 닿지
-       않았을 방까지 데려다주는 이동에 쓰이고 — 무료 자리를 무료로 지켜 냅니다.</p>
+    <p>자원봉사로 운영합니다. 후원은 리코더와 악보, 공간 대여, 그리고 음악이 닿지 않았을 방까지
+       데려다주는 이동에 쓰입니다.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">후원이 하는 일</p>
-      <h2>실제로 무엇에 쓰이는가 — 세 가지.</h2>
+    <div class="section-head reveal">
+      <p class="eyebrow">돈이 도는 방식</p>
+      <h2>값을 치른 한 건이 무료 자리를 무료로 지킵니다.</h2>
+      <p>우리는 순수 자선단체가 아니라 사회적기업입니다. 형식의 문제가 아닙니다 — 선의가
+         잠시 식어도 무료 자리가 살아남게 하는 구조입니다.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card">
-        <span class="kicker">악기와 교재</span>
-        <h3>모든 손에 리코더 하나</h3>
-        <p>소프라노 리코더는 쌉니다. 그게 핵심이지만, 그렇다고 공짜는 아닙니다. 구입을
-           안내하거나 원가로 공급하거나 빌려 드리고, 악보와 유인물은 전부 저희가 인쇄해
-           참가자 부담을 없앱니다.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">공간</span>
-        <h3>매주, 따뜻한 방 하나</h3>
-        <p>더블린의 커뮤니티 홀 대여료는 시간당 대략 €15에서 €40입니다. 공간을 무료나
-           할인으로 내어 주면 그만큼이 그대로 무료 자리로 갑니다. 그럴 수 없는 곳에서는
-           후원이 그 차이를 메웁니다.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">이동</span>
-        <h3>거기까지 가는 일</h3>
-        <p>&lsquo;찾아가는&rsquo; 모델은 이동에서 살고 죽습니다. 연주자와 악기, 보면대를
-           요양시설과 시골 본당까지 옮기는 일이 찾아가는 음악회 한 번의 가장 큰 비용입니다.</p>
-      </div>
-    </div>
+    <div class="reveal"><figure class="diagram">
+  <svg viewBox="0 0 1056 336" role="img" aria-label="기관과 낼 수 있는 참가자가 CMFE에 지불하고, CMFE는 무료 자리를 내놓으며 잉여는 다시 세션에 투입된다.">
+  <defs>
+    <marker id="sub-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+    </marker>
+    <marker id="sub-arrow-q" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" opacity=".55"/>
+    </marker>
+  </defs>
+    <text class="dg-edge" x="16" y="30">들어오는 돈</text>
+    <rect class="dg-fill-soft dg-box" x="16" y="44" rx="9" width="330" height="62"/>
+    <text class="dg-label" x="34" y="70">기관</text>
+    <text class="dg-sub"   x="34" y="90">요양시설·본당·지자체·학교 — 자체 예산에서 지불</text>
+    <path class="dg-stroke-accent" d="M348 75 C 392 75, 400 152, 434 152" marker-end="url(#sub-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="16" y="120" rx="9" width="330" height="62"/>
+    <text class="dg-label" x="34" y="146">낼 수 있는 참가자</text>
+    <text class="dg-sub"   x="34" y="166">학기당 소액 기여</text>
+    <path class="dg-stroke-accent" d="M348 151 C 392 151, 400 152, 434 152" marker-end="url(#sub-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="16" y="196" rx="9" width="330" height="62"/>
+    <text class="dg-label" x="34" y="222">보조금과 후원</text>
+    <text class="dg-sub"   x="34" y="242">위촉, 기부, 현물로 내어 주는 공간</text>
+    <path class="dg-stroke-accent" d="M348 227 C 392 227, 400 152, 434 152" marker-end="url(#sub-arrow)"/>
+    <text class="dg-edge" x="392" y="30" text-anchor="middle">비용을 지불</text>
+    <rect class="dg-fill-accent dg-box" x="436" y="112" rx="12" width="212" height="80" stroke-width="1.8"/>
+    <text class="dg-label" x="542" y="146" text-anchor="middle" style="font-size:14px">Classical Music for Everyone</text>
+    <text class="dg-sub" x="542" y="168" text-anchor="middle">자원봉사 운영 · 사적 이익 배분 없음</text>
+    <text class="dg-edge" x="1040" y="30" text-anchor="end">그 돈이 사는 것</text>
+    <rect class="dg-fill-soft dg-box" x="712" y="82" rx="9" width="328" height="76"/>
+    <text class="dg-label" x="730" y="110">무료 자리</text>
+    <text class="dg-sub"   x="730" y="132">어르신, 장애가 있는 분, 비용이 참여를 가르는 모든 사람</text>
+    <path class="dg-stroke-accent" d="M650 152 C 682 152, 686 120, 710 120" marker-end="url(#sub-arrow)"/>
+    <rect class="dg-fill-soft dg-box" x="712" y="190" rx="9" width="328" height="76"/>
+    <text class="dg-label" x="730" y="218">더 많은 방</text>
+    <text class="dg-sub"   x="730" y="240">잉여는 세션·공간·더 낮은 수강료로 되돌아감</text>
+    <path class="dg-stroke-accent" d="M650 152 C 682 152, 686 228, 710 228" marker-end="url(#sub-arrow)"/>
+    <text class="dg-edge" x="680" y="106" text-anchor="middle">자리를 만듦</text>
+    <path class="dg-stroke" d="M876 268 C 876 320, 542 322, 542 196" stroke-dasharray="4 5" marker-end="url(#sub-arrow-q)"/>
+    <text class="dg-sub" x="700" y="318" text-anchor="middle">잉여 재투자</text>
+  </svg>
+  <figcaption>돈은 두 방향에서 들어와, 아무도 값을 치르지 않은 자리로 나갑니다. 유료 층을 걷어내면 무료 층이 조금씩 줄어드는 게 아니라 가장 먼저 사라집니다.</figcaption>
+</figure></div>
   </div>
 </section>
 
-<section class="band-paper">
+<section class="band-raised">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">지금까지</p>
       <h2>누가 이 일을 받쳐 왔는가.</h2>
-      <p>2026년 이전은 전부 자비와 자원봉사였습니다. 후원자의 첫 질문은 늘 &lsquo;앞서
-         누가 했는가&rsquo;이기에, 기록을 공개합니다.</p>
+      <p>2026년 이전은 전부 자비와 자원봉사였습니다. 후원자의 첫 질문은 늘 &lsquo;앞서 누가
+         했는가&rsquo;이기에 기록을 공개합니다.</p>
     </div>
-    <div class="table-scroll">
+    <div class="table-scroll reveal">
       <table>
-        <thead>
-          <tr><th scope="col">출처</th><th scope="col">내용</th><th scope="col">상태</th></tr>
-        </thead>
+        <thead><tr><th scope="col">출처</th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>South Dublin County Council</strong><br><span class="small">예술과 ·
-                South Dublin Live 2026</span></td>
-            <td><em>Shared Voices of South Dublin</em> 시리즈 위촉 — 처음으로 공적 자금이
-                들어온 작업입니다.</td>
-            <td>수령 완료</td>
-          </tr>
-          <tr>
-            <td><strong>명도회 장학금</strong><br><span class="small">한국 천주교 주교회의
-                평신도사도직위원회</span></td>
-            <td>2025년 3월부터 학기별 지원, 창립자의 음악 사도직을 위한 것.</td>
-            <td>종료</td>
-          </tr>
-          <tr>
-            <td><strong>개인 후원자</strong></td>
-            <td>유럽과 한국의 후원자들이 정기적인 찾아가는 음악회가 가능하도록 보내 준
-                도움.</td>
-            <td>진행 중</td>
-          </tr>
-          <tr>
-            <td><strong>파트너 공간, 현물</strong></td>
-            <td>Tallaght University Hospital — 공간과 운영 시간. Mulhuddart Community Centre —
-                수업 공간. TU Dublin — 연습 공간.</td>
-            <td>계속</td>
-          </tr>
-          <tr>
-            <td><strong>TU Dublin Venture Lab</strong></td>
-            <td>사회적기업 창업 프로그램, 2024년 9월부터.</td>
-            <td>수료</td>
-          </tr>
+          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">예술과 ·
+              South Dublin Live 2026</span></td>
+              <td><em>Shared Voices of South Dublin</em> 시리즈 위촉 — 처음으로 공적 자금이
+                  들어온 작업.</td><td>수령 완료</td></tr>
+          <tr><td><strong>명도회 장학금</strong><br><span class="tiny">한국 천주교 주교회의
+              평신도사도직위원회</span></td>
+              <td>2025년 3월부터 학기별 지원, 창립자의 음악 사도직을 위한 것.</td><td>종료</td></tr>
+          <tr><td><strong>개인 후원자</strong></td>
+              <td>유럽과 한국의 후원자들이 정기적인 찾아가는 음악회가 가능하도록 보내 준
+                  도움.</td><td>진행 중</td></tr>
+          <tr><td><strong>파트너 공간, 현물</strong></td>
+              <td>Tallaght University Hospital — 공간과 운영 시간. Mulhuddart Community Centre —
+                  수업 공간. TU Dublin — 연습 공간.</td><td>계속</td></tr>
+          <tr><td><strong>TU Dublin Venture Lab</strong></td>
+              <td>사회적기업 창업 프로그램, 2024년 9월부터.</td><td>수료</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="split mt-l">
+    <div class="split split-center reveal" style="margin-top:48px">
       <div class="quote">
-        <p>&ldquo;그는 넉넉한 형편에서 이 일을 하는 것이 아닙니다. 개인적으로 제한된 재정
-           여건 안에서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
+        <p>&ldquo;그는 넉넉한 형편에서 이 일을 하는 것이 아닙니다. 개인적으로 제한된 재정 여건
+           안에서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
         <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
       </div>
       <div>
-        <h3>지지 서한</h3>
-        <ul class="plainlist mt-s">
+        <h4>지지 서한</h4>
+        <ul class="plainlist" style="margin-top:14px">
           <li><strong>Rua Red</strong> — South Dublin의 현대예술센터</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>
-          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp;
-              Health</li>
+          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
           <li><strong>SDCC 예술과</strong> — South Dublin Live 2026 선정</li>
         </ul>
       </div>
@@ -152,43 +163,35 @@
   </div>
 </section>
 
-<section class="band-cream">
+<section class="band-sunken">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">돕는 방법</p>
       <h2>네 가지 후원, 모두 쓸모가 있습니다.</h2>
     </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>후원금</h3>
-        <p>일시든 정기든, 악기·교재·공간 대여·이동에 쓰입니다. 메일 주시면 현재 입금 정보와
-           함께, 그 후원이 정확히 무엇을 감당하게 되는지 알려 드립니다.</p>
-        <div class="btn-row"><a class="btn btn-gold"
-          href="mailto:sby05034@gmail.com?subject=CMFE%20후원%20문의">후원 문의</a></div>
-      </div>
-      <div class="card">
-        <h3>프로그램 지원</h3>
-        <p>재단·기금·지자체·기업 후원자를 위해 전체 제안서와 예산, 비용 내역을 요청 시
-           보내 드립니다. 활동 기록과 지지 서한도 함께 첨부합니다.</p>
-        <div class="btn-row"><a class="btn btn-outline"
-          href="mailto:sby05034@gmail.com?subject=CMFE%20파트너십·펀딩%20문의">제안서 요청</a></div>
-      </div>
-      <div class="card">
-        <h3>문을 열어 주기</h3>
-        <p>요양시설·본당·커뮤니티 센터·주간보호센터·병원으로의 소개는 후원금만큼, 때로는
-           그보다 더 큰 도움입니다. 일이 실제로 일어나는 자리이기 때문입니다.</p>
-      </div>
-      <div class="card">
-        <h3>공간 내어 주기</h3>
+    <div class="grid grid-4 stagger">
+      <div class="card"><span class="kicker">01</span><h3>후원금</h3>
+        <p>일시든 정기든 악기·교재·공간·이동에 쓰입니다. 메일 주시면 입금 정보와 함께
+           무엇을 감당하게 되는지 알려 드립니다.</p></div>
+      <div class="card"><span class="kicker">02</span><h3>프로그램 지원</h3>
+        <p>재단·기금·지자체·기업 후원자를 위해 전체 제안서와 예산, 활동 기록을 요청 시
+           보내 드립니다.</p></div>
+      <div class="card"><span class="kicker">03</span><h3>문을 열어 주기</h3>
+        <p>요양시설·본당·커뮤니티 센터·병원으로의 소개는 후원금만큼, 때로는 그보다 더
+           큰 도움입니다.</p></div>
+      <div class="card"><span class="kicker">04</span><h3>공간 내어 주기</h3>
         <p>한 학기 동안 매주 한 번 쓸 따뜻한 방 하나가 가장 값진 현물 후원입니다.
-           그대로 무료 자리로 바뀝니다.</p>
-      </div>
+           그대로 무료 자리가 됩니다.</p></div>
     </div>
-    <div class="callout mt-m">
-      <p class="small"><strong>안내.</strong> Classical Music for Everyone은 자원봉사로 운영되는
-         사회적기업이며, 현재 비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다. 아직
-         등록 자선단체가 아니므로 기부금에 대한 세제 혜택은 적용되지 않습니다. 짐작하시게
-         두기보다 분명히 밝혀 두는 편이 낫다고 생각합니다.</p>
+    <div class="btn-row reveal" style="justify-content:center;margin-top:36px">
+      <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=CMFE%20후원%20문의">후원 문의 <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=CMFE%20파트너십·펀딩%20문의">제안서 요청</a>
+    </div>
+    <div class="callout reveal" style="margin-top:34px">
+      <p class="small"><strong>안내.</strong> CMFE는 자원봉사로 운영되는 사회적기업이며, 현재
+         비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다. 아직 등록 자선단체가 아니므로
+         기부금 세제 혜택은 적용되지 않습니다. 짐작하시게 두기보다 분명히 밝혀 두는 편이
+         낫다고 생각합니다.</p>
     </div>
   </div>
 </section>
@@ -198,7 +201,7 @@
     <div class="footer-grid">
       <div>
         <img src="../assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
-        <p class="footer-tagline">2024년 더블린에서 시작한 커뮤니티 음악 사회적기업입니다. 듣는 데서 그치지 않고 직접 연주하도록 가르치고, 클래식 음악이 잘 닿지 않는 곳으로 찾아갑니다.</p>
+        <p class="footer-tagline">듣는 데서 그치지 않고 직접 연주하도록 가르치고, 클래식 음악이 잘 닿지 않는 곳으로 찾아갑니다.</p>
       </div>
       <div>
         <h4>둘러보기</h4>
@@ -213,11 +216,11 @@
         <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a>
         <a href="tel:+353830780635">+353 83 078 0635</a>
         <a href="contact.html">문의</a>
-        <a href="../index.html">English</a>
+        <a href="../index.html">EN</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · 창립자 Andrew Seohyeon Kim (김서현) · 아일랜드 더블린</span>
+      <span>© 2026 Classical Music for Everyone · 아일랜드 더블린</span>
       <span>자원봉사로 운영 · 비영리 보증유한책임회사(CLG) 설립 준비 중</span>
     </div>
   </div>

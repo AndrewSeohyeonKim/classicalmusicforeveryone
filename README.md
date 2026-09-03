@@ -14,7 +14,7 @@ needed to view or edit it — open any `.html` file in a browser.
 | `assets/` | Official logo files, copied from `10_CMFE_로고·브랜드셋업/` |
 | `images/` | Photographs used on the site |
 | `sitemap.xml`, `robots.txt` | Generated — do not edit by hand |
-| `_build/` | The page generator. Not published (GitHub Pages skips `_`-prefixed folders) |
+| `_build/` | The page generator and the diagrams. Not published (GitHub Pages skips `_`-prefixed folders) |
 | `02_CMFE_사이트_셋팅지침.md` | The original brief for the site |
 
 ## Editing
@@ -37,7 +37,30 @@ touches `styles.css`, `assets/` or `images/`.
 - `_build/layout.py` — the shell: `<head>`, header, navigation, footer, site URL
 - `_build/content_en.py` — English page content
 - `_build/content_ko.py` — Korean page content
+- `_build/diagrams.py` — the four inline-SVG diagrams, with labels in both languages
 - `_build/build.py` — page titles, meta descriptions, and the sitemap
+
+## How it is built
+
+**Stylesheet, three layers** — after LINE's `abc-def` (`packages/styles`): primitives (the
+canonical brand hexes, defined once), semantic roles (`--surface`, `--fg`, `--accent`,
+`--line`) that components actually read, then component tokens and selectors. To restyle,
+change a semantic token, not a component.
+
+**Motion, no JavaScript** — the duration and easing scales come from the SEED design system
+(`packages/rootage/duration.yaml`, `timing-function.yaml`). Reveals run on CSS
+`animation-timeline: view()`, the reading-progress bar on `scroll()`, and page-to-page
+transitions on the native cross-document View Transitions API. All of it is wrapped in
+`@supports` and `prefers-reduced-motion`, so an older browser simply shows a static page.
+There is one line of JavaScript on the site: the mobile menu toggle.
+
+**Diagrams instead of paragraphs** — four hand-authored inline SVGs carry the explanations
+that would otherwise be long prose: the Learning/Sharing loop, the theory of change, the
+term-long participant journey, and the cross-subsidy. They inherit `currentColor`, so the
+same figure works on the cream, white and navy bands.
+
+**Photographs, one treatment** — every image sits in `.photo` with a fixed aspect ratio and
+a shared warm-cast overlay, so shots from many different rooms read as one set.
 
 ## Previewing locally
 

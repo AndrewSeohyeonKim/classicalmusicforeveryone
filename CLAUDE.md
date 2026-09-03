@@ -58,6 +58,40 @@ Slate         #5F6B7D   보조 텍스트
 법적 지위는 "비영리 CLG 설립 준비 중, 아직 등록 자선단체 아님"까지만 쓴다.
 **기부금 세제 혜택이 있는 것처럼 쓰지 않는다.**
 
+## 3.5 아키텍처 — 손대기 전에 읽을 것
+
+이 사이트는 참조 저장소 두 곳의 구조를 그대로 가져왔다. 새 스타일을 즉흥으로 만들지 않는다.
+
+**CSS 3층 구조 (LINE `abc-def` / `packages/styles`)**
+`styles.css`는 ① primitives(정본 브랜드 hex, 여기서만 정의) ② semantic(`--surface`, `--fg`,
+`--accent`, `--line` — 컴포넌트가 읽는 유일한 층) ③ component 순서다.
+**컴포넌트에 hex를 직접 쓰지 않는다.** 색을 바꾸려면 semantic 토큰을 바꾼다.
+
+**모션 (SEED `packages/rootage`)**
+`duration.yaml`·`timing-function.yaml`의 스케일을 `--dur-1..6`, `--ease*`로 옮겨 놨다.
+새 duration/easing 값을 지어내지 말고 이 토큰을 쓴다.
+
+- 스크롤 등장 = `animation-timeline: view()`, 진행바 = `scroll()`, 페이지 전환 =
+  cross-document View Transitions. **전부 CSS다. 애니메이션용 JS·라이브러리를 추가하지 않는다.**
+- `@view-transition`은 최상위에서만 유효하다. `@media` 안에 넣으면 조용히 무시된다.
+  reduced-motion 대응은 `::view-transition-*` 의사요소로 한다.
+- 모든 모션은 `@supports` + `prefers-reduced-motion: no-preference` 안에 둔다.
+  미지원 브라우저에서는 그냥 정적으로 보여야 한다.
+- 사이트 전체 JS는 모바일 메뉴 토글 한 줄뿐이다. 이 상태를 유지한다.
+
+**설명은 문단이 아니라 도식으로**
+한 섹션 본문은 50–80단어(한국어 두세 문장)가 상한이다. 그보다 길어지면 `_build/diagrams.py`의
+인라인 SVG로 옮긴다. 도식은 `currentColor`를 상속해 크림·흰색·네이비 밴드 어디서나 작동한다.
+도식은 **이름이 아니라 메커니즘**을 그린다 — 화살표에 라벨을 붙이고, 한 도식은 한 가지만 말한다.
+
+**사진은 한 가지 처리로 통일**
+모든 이미지는 `.photo` 안에 고정 비율(`.photo-3x2` 등)로 넣는다. 공통 오버레이가 여러 방에서
+찍은 사진을 한 세트로 묶어 준다. 이 래퍼 밖에 `<img>`를 두지 않는다.
+
+**언어 전환은 세그먼트 컨트롤**
+`.lang-switch`는 nav 링크와 의도적으로 다르게 생겼다. 현재 언어는 `<span aria-current="true">`,
+다른 언어는 `<a>`다. 이것을 일반 nav 링크로 되돌리지 않는다.
+
 ## 4. 파일 구조
 
 - 영문 7페이지는 루트, 한국어 7페이지는 `ko/`. 두 언어는 항상 같이 고친다.
@@ -66,6 +100,7 @@ Slate         #5F6B7D   보조 텍스트
 - `_build/`는 `_` 로 시작하므로 GitHub Pages가 발행하지 않는다.
   **`.nojekyll` 파일을 만들지 말 것** — 만들면 `_build/`가 공개된다.
 - `styles.css`·`assets/`·`images/`는 빌드가 건드리지 않는다. 직접 관리한다.
+- 도식은 `_build/diagrams.py`에서 두 언어 라벨을 함께 관리한다. HTML에 SVG를 직접 붙여넣지 않는다.
 - 로고는 `10_CMFE_로고·브랜드셋업/`에서만 가져온다. `03_CMFE_브랜드/`는 아카이브다.
 
 ## 5. 사진
@@ -92,3 +127,5 @@ Slate         #5F6B7D   보조 텍스트
   이제 사실이 아니다. 사이트 공개 후 정본과 이메일 서명·포스터를 갱신해야 한다.
 - 홈 히어로 사진 캡션(성 파트리치오 축일 음악회)의 정확한 행사·장소를 Andrew가 확인해야 한다.
 - 자체 도메인을 붙이면 `_build/layout.py`의 `SITE_URL`을 바꾸고 다시 빌드한다.
+- 참고한 동종 사이트: musicandhealthireland.ie, livemusicnow.org.uk — 섹션당 50–75단어,
+  히어로 직후 숫자, 섹션마다 버튼 하나라는 패턴을 여기서 가져왔다.

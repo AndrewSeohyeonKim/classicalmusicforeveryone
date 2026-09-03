@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About — Classical Music for Everyone</title>
 <meta name="description" content="Our mission, vision and five values; the founder Andrew Seohyeon Kim; and the venues and institutions we have played in since 2024.">
+<meta name="theme-color" content="#1D2430">
 <link rel="canonical" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html">
 <link rel="alternate" hreflang="en" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html">
 <link rel="alternate" hreflang="ko" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html">
+<link rel="alternate" hreflang="x-default" href="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Classical Music for Everyone">
 <meta property="og:title" content="About — Classical Music for Everyone">
@@ -20,28 +22,31 @@
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="index.html">
+    <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
     </a>
-    <nav class="nav" id="nav" aria-label="Menu">
-      <a href="about.html" aria-current="page">About</a>
-      <a href="programmes.html">Programmes</a>
-      <a href="get-involved.html">Get Involved</a>
-      <a href="news.html">News</a>
-      <a href="support.html">Support</a>
-      <a class="lang" href="ko/about.html" hreflang="ko">한국어</a>
-      <a class="btn btn-gold" href="contact.html">Contact</a>
-    </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
-            aria-label="Menu" onclick="var n=document.getElementById('nav');
-            var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+            aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
+    <nav class="nav" id="nav" data-open="false" aria-label="Menu">
+      <a class="nav-link" href="about.html" aria-current="page">About</a>
+      <a class="nav-link" href="programmes.html">Programmes</a>
+      <a class="nav-link" href="get-involved.html">Get Involved</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link" href="support.html">Support</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <span aria-current="true">EN</span>
+        <a href="ko/about.html" hreflang="ko" lang="ko">한국어</a>
+      </div>
+      <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
+    </nav>
   </div>
 </header>
 <main id="main">
@@ -49,176 +54,202 @@
   <div class="wrap">
     <p class="eyebrow">About us</p>
     <h1>Music should be a shared, everyday experience.</h1>
-    <p>Classical Music for Everyone is a community music social enterprise founded in Dublin in
-       January 2024. We were created in response to a simple observation: despite its cultural
-       richness, classical music remains out of reach for many people.</p>
+    <p>A community music social enterprise founded in Dublin in January 2024. Not a performance
+       company — a participatory community, where playing is the point.</p>
   </div>
 </section>
 
 <section>
-  <div class="wrap split">
-    <div>
-      <h2>Mission</h2>
-      <p class="lead mt-s">To make live classical music genuinely available to everyone —
-         regardless of age, background, mobility, income or prior musical knowledge — by teaching
-         people to play, playing alongside them, and bringing music to the places it does not
-         normally reach.</p>
-      <h2 class="mt-l">Vision</h2>
-      <p class="lead mt-s">An Ireland in which every community — urban, rural, in care, and living
-         with disability — has a realistic, welcoming pathway into making music together,
-         delivered by educators in secure, properly paid employment.</p>
+  <div class="wrap split split-wide">
+    <div class="reveal">
+      <p class="eyebrow">Mission</p>
+      <p class="lead">To make live classical music genuinely available to everyone — regardless
+         of age, background, mobility, income or prior musical knowledge — by teaching people to
+         play, playing alongside them, and bringing music to the places it does not normally
+         reach.</p>
+      <p class="eyebrow" style="margin-top:38px">Vision</p>
+      <p class="lead">An Ireland in which every community — urban, rural, in care, and living
+         with disability — has a welcoming pathway into making music together, delivered by
+         educators in secure, properly paid employment.</p>
     </div>
-    <div class="figure">
-      <img src="images/clarinet.jpg" alt="Andrew Seohyeon Kim playing the clarinet during a
-           liturgy" width="1400" height="1400">
-      <p class="figure-caption">Playing at a parish liturgy in Dublin.</p>
-    </div>
+    <figure class="reveal">
+      <div class="photo photo-4x5">
+        <img src="images/clarinet.jpg" width="1400" height="1400"
+             alt="Andrew Seohyeon Kim playing the clarinet during a parish liturgy">
+      </div>
+      <figcaption>A parish liturgy in Dublin. The community work and the church work are the
+        same practice.</figcaption>
+    </figure>
   </div>
 </section>
 
-<section class="band-paper">
+<section class="band-raised">
   <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">What guides us</p>
-      <h2>Five values, described by what they cost us.</h2>
+    <div class="section-head reveal">
+      <p class="eyebrow">Theory of change</p>
+      <h2>What a room, an hour and a recorder are supposed to add up to.</h2>
     </div>
-    <div class="grid grid-2">
-      <div>
-        <div class="value" style="border-top:0">
-          <h4>Dignity</h4>
-          <p>Everyone is received with respect and treated as someone who can still create —
-             regardless of age, health or circumstance.</p>
-        </div>
-        <div class="value">
-          <h4>Accessibility</h4>
-          <p>We lower the barriers of price, distance and unfamiliarity. Physical, environmental
-             and psychological barriers should not prevent engagement with music.</p>
-        </div>
-        <div class="value">
-          <h4>Accompaniment</h4>
-          <p>We stay alongside people over a whole term, not for a one-off visit. Meaningful
-             engagement grows through continuity.</p>
-        </div>
-      </div>
-      <div>
-        <div class="value" style="border-top:0">
-          <h4>Community</h4>
-          <p>Music that connects people across age, background and language.</p>
-        </div>
-        <div class="value">
-          <h4>Hope</h4>
-          <p>We do not promise dramatic transformation. We value small, real moments of connection
-             — the quiet lift of learning something new, together.</p>
-        </div>
-        <div class="value">
-          <h4>And — work for educators</h4>
-          <p>Music educators mostly work in precarious freelance conditions. Our second social aim
-             is to employ them properly.</p>
-        </div>
-      </div>
-    </div>
+    <div class="reveal"><figure class="diagram">
+  <svg viewBox="0 0 1042 282" role="img" aria-label="Inputs feed activities, activities produce countable outputs, outputs point to change.">
+  <defs>
+    <marker id="toc-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/>
+    </marker>
+    <marker id="toc-arrow-q" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" opacity=".55"/>
+    </marker>
+  </defs>
+    <rect class="dg-fill-soft dg-box" x="14" y="40" rx="10" width="208" height="180"/>
+    <text class="dg-label" x="32" y="70" style="font-size:15px">Inputs</text>
+    <text class="dg-sub" x="32" y="102">· Tutor and musicians</text>
+    <text class="dg-sub" x="32" y="128">· Recorders and scores</text>
+    <text class="dg-sub" x="32" y="154">· A room, weekly</text>
+    <text class="dg-sub" x="32" y="180">· Grants and fees</text>
+    <line class="dg-stroke-accent" x1="232" y1="140" x2="280" y2="140" marker-end="url(#toc-arrow)"/>
+    <text class="dg-edge" x="256.0" y="128" text-anchor="middle">buys</text>
+    <rect class="dg-fill-soft dg-box" x="290" y="40" rx="10" width="208" height="180"/>
+    <text class="dg-label" x="308" y="70" style="font-size:15px">Activities</text>
+    <text class="dg-sub" x="308" y="102">· A term-long class</text>
+    <text class="dg-sub" x="308" y="128">· Playing together</text>
+    <text class="dg-sub" x="308" y="154">· Concerts in the room</text>
+    <text class="dg-sub" x="308" y="180">· Going to concerts</text>
+    <line class="dg-stroke-accent" x1="508" y1="140" x2="556" y2="140" marker-end="url(#toc-arrow)"/>
+    <text class="dg-edge" x="532.0" y="128" text-anchor="middle">produces</text>
+    <rect class="dg-fill-soft dg-box" x="566" y="40" rx="10" width="208" height="180"/>
+    <text class="dg-label" x="584" y="70" style="font-size:15px">Outputs</text>
+    <text class="dg-sub" x="584" y="102">· Sessions delivered</text>
+    <text class="dg-sub" x="584" y="128">· People who completed</text>
+    <text class="dg-sub" x="584" y="154">· Venues reached</text>
+    <text class="dg-sub" x="584" y="180">· Concerts given</text>
+    <line class="dg-stroke-accent" x1="784" y1="140" x2="832" y2="140" marker-end="url(#toc-arrow)"/>
+    <text class="dg-edge" x="808.0" y="128" text-anchor="middle">points to</text>
+    <rect class="dg-fill-accent dg-box" x="842" y="40" rx="10" width="208" height="180"/>
+    <text class="dg-label" x="860" y="70" style="font-size:15px">Change</text>
+    <text class="dg-sub" x="860" y="102">· Less isolation</text>
+    <text class="dg-sub" x="860" y="128">· Dignity and achievement</text>
+    <text class="dg-sub" x="860" y="154">· Ties across age</text>
+    <text class="dg-sub" x="860" y="180">· Work for educators</text>
+    <path class="dg-stroke" d="M14 236 v10 H774 v-10"/>
+    <text class="dg-sub" x="394.0" y="266" text-anchor="middle">counted and recorded</text>
+    <path class="dg-stroke" d="M842 236 v10 H1050 v-10" stroke-dasharray="3 4"/>
+    <text class="dg-sub" x="946.0" y="266" text-anchor="middle">reported, not yet measured</text>
+  </svg>
+  <figcaption>Read left to right: what goes in, what we do with it, what can be counted, and what we believe changes. Only the first three columns are evidenced — the fourth rests on what participants told us.</figcaption>
+</figure></div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
+      <p class="eyebrow">Values</p>
+      <h2>Five, described by what they cost us.</h2>
+    </div>
+    <div class="grid grid-3 stagger">
+      <div class="card"><span class="kicker">01</span><h3>Dignity</h3>
+        <p>Everyone is treated as someone who can still create — regardless of age, health or
+           circumstance.</p></div>
+      <div class="card"><span class="kicker">02</span><h3>Accessibility</h3>
+        <p>We lower the barriers of price, distance and unfamiliarity — physical, environmental
+           and psychological alike.</p></div>
+      <div class="card"><span class="kicker">03</span><h3>Accompaniment</h3>
+        <p>We stay alongside people for a whole term, not for a one-off visit. Meaning grows
+           through continuity.</p></div>
+      <div class="card"><span class="kicker">04</span><h3>Community</h3>
+        <p>Music that connects people across age, background and language.</p></div>
+      <div class="card"><span class="kicker">05</span><h3>Hope</h3>
+        <p>We promise no dramatic transformation — only small, real moments of connection.</p></div>
+      <div class="card" style="--card-bg:var(--surface-sunken)"><span class="kicker">And</span>
+        <h3>Work for educators</h3>
+        <p>Music educators mostly work in precarious freelance conditions. Employing them
+           properly is our second social aim.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-photo">
+  <img src="images/organ.jpg" alt="" width="1400" height="1050">
+  <div class="wrap split split-center">
+    <div class="reveal">
       <p class="eyebrow">The founder</p>
-      <h2>Andrew Seohyeon Kim</h2>
+      <h2 style="font-size:clamp(28px,3.4vw,40px)">Andrew Seohyeon Kim</h2>
+      <p class="lead" style="margin-top:18px;color:var(--fg-inverse-body)">
+        Clarinettist, organist and community music practitioner. BMus (Hons) in Performance,
+        TU Dublin Conservatoire, where his final-year research was the ten-week recorder ensemble
+        he designed and led for seven retired Presentation Sisters.</p>
+      <p style="margin-top:14px;color:var(--fg-inverse-muted)">
+        Music Director at Our Lady of Dolours Church, Dolphin&rsquo;s Barn since 2022; organist at
+        the Church of the Three Patrons, Rathgar since 2023. He founded Classical Music for
+        Everyone and the Letters Ensemble in 2024.</p>
     </div>
-    <div class="split split-wide">
-      <div>
-        <p class="lead">Andrew Seohyeon Kim is a clarinettist, organist and community music
-           practitioner based in Dublin, and the founder and project lead of Classical Music for
-           Everyone.</p>
-        <p class="mt-m">He graduated from TU Dublin Conservatoire with a Bachelor of Music (Hons)
-           in Performance, studying clarinet with Dr Paul Roe alongside organ, cello and piano,
-           and completing conducting training with the Irish Association of Youth Orchestras and
-           the London Conducting Workshop. His final-year research was a practice-based study of a
-           ten-week recorder ensemble he designed and led for seven retired Presentation Sisters
-           in Dublin.</p>
-        <p>Since 2022 he has served as Music Director at Our Lady of Dolours Church,
-           Dolphin&rsquo;s Barn, and since 2023 as organist at the Church of the Three Patrons,
-           Rathgar. In 2024 he founded both Classical Music for Everyone and the Letters
-           Ensemble.</p>
-        <p>He has volunteered at World Youth Day Lisbon 2023, ClarinetFest 2024, the Dublin
-           International Piano Competition 2025 and the Jubilee of Youth in Rome, and holds a
-           Myongdohoe scholarship from the Lay Apostolate Committee of the Catholic
-           Bishops&rsquo; Conference of Korea.</p>
-      </div>
-      <div class="figure">
-        <img src="images/organ.jpg" alt="An organ console with music open on the stand"
-             width="1400" height="1050">
-        <p class="figure-caption">Weekly organ and music-direction duties in two Dublin parishes
-           sit alongside the community work.</p>
-      </div>
+    <div>
+      <ul class="plainlist reveal" style="color:var(--fg-inverse-muted)">
+        <li><strong style="color:var(--fg-inverse)">Clarinet</strong> — Dr Paul Roe, TU Dublin Conservatoire</li>
+        <li><strong style="color:var(--fg-inverse)">Organ</strong> — Simon Harden</li>
+        <li><strong style="color:var(--fg-inverse)">Conducting</strong> — IAYO · London Conducting Workshop</li>
+        <li><strong style="color:var(--fg-inverse)">Social enterprise</strong> — TU Dublin Venture Lab</li>
+        <li><strong style="color:var(--fg-inverse)">Scholarship</strong> — Myongdohoe, Lay Apostolate Committee,
+            Catholic Bishops&rsquo; Conference of Korea</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section class="band-cream">
+<section>
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Where we have played</p>
-      <h2>Venues and institutions to date.</h2>
+      <h2>Rooms music does not usually enter.</h2>
       <p>Residential and nursing care · religious communities · parishes · a university ·
-         a national concert hall · an HSE day service · a homeless hostel · community centres ·
-         a public cultural event.</p>
+         a national concert hall · an HSE day service · a homeless hostel · community centres.</p>
     </div>
-    <div class="split">
+    <div class="split reveal">
       <div>
         <h4>Ireland</h4>
-        <ul class="plainlist mt-s">
-          <li>National Concert Hall, Dublin — concert outings attended together</li>
-          <li>TU Dublin, Grangegorman</li>
-          <li>Tallaght University Hospital &amp; Rua Red, Tallaght</li>
-          <li>Our Lady of Dolours Church, Dolphin&rsquo;s Barn</li>
-          <li>Church of the Three Patrons, Rathgar</li>
-          <li>Carmelite Community Centre &amp; Blessed Sacrament Chapel, Dublin</li>
-          <li>Clondalkin Lodge &amp; Warrenmount, Dublin</li>
+        <ul class="plainlist" style="margin-top:14px">
+          <li>National Concert Hall &amp; TU Dublin, Grangegorman</li>
+          <li>Tallaght University Hospital · Rua Red, Tallaght</li>
+          <li>Our Lady of Dolours, Dolphin&rsquo;s Barn · Three Patrons, Rathgar</li>
+          <li>Carmelite Community Centre · Blessed Sacrament Chapel</li>
+          <li>Clondalkin Lodge · Warrenmount, Dublin 8</li>
           <li>Missionary Sisters of St Columban, Co. Wicklow</li>
           <li>Franciscan Missionaries of Mary, Dublin 5</li>
-          <li>Dalgan Park &amp; Kilmessan Church, Co. Meath</li>
-          <li>Dysart Parish, Co. Westmeath</li>
-          <li>HSE EVE Goirtin Hub &amp; Morning Star Hostel, Dublin 7</li>
-          <li>Methodist Centenary Church, Ranelagh</li>
-          <li>Mulhuddart Community Centre, Dublin 15</li>
+          <li>Dalgan Park &amp; Kilmessan Church, Co. Meath · Dysart, Co. Westmeath</li>
+          <li>HSE EVE Goirtin Hub · Morning Star Hostel, Dublin 7</li>
+          <li>Methodist Centenary Church, Ranelagh · Mulhuddart Community Centre, D15</li>
         </ul>
       </div>
       <div>
         <h4>Abroad</h4>
-        <ul class="plainlist mt-s">
+        <ul class="plainlist" style="margin-top:14px">
           <li>Sanctuary of Our Lady of Lourdes, France</li>
-          <li>Missions Étrangères de Paris, France</li>
-          <li>Palais Brongniart, Paris, France</li>
+          <li>Missions Étrangères de Paris · Palais Brongniart, Paris</li>
           <li>London Korean Catholic Church, United Kingdom</li>
           <li>Gwandukjeong Martyrs Memorial Centre, Daegu, Korea</li>
         </ul>
-        <div class="callout mt-m">
+        <div class="callout" style="margin-top:26px">
           <h4>What we do not claim</h4>
-          <p class="small mt-s">Our evidence to date is participation, retention and testimony
-             rather than measured outcome. We have not measured wellbeing with a validated
-             instrument, and audience numbers at outreach performances were not recorded. Seven of
-             seven pilot participants completed and performed publicly, and lecture attendance
-             more than doubled over two years. From the autumn 2026 cohort we are introducing a
-             simple pre/post measure and a consent framework.</p>
+          <p class="small" style="margin-top:10px">Our evidence is participation, retention and
+             testimony — not measured outcome. Wellbeing has not been measured with a validated
+             instrument, and outreach audiences were never counted. From the autumn 2026 cohort we
+             are introducing a simple pre/post measure and a consent framework.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band-ink">
-  <div class="wrap center">
-    <div class="section-head">
-      <p class="eyebrow">Take part</p>
-      <h2>There is a place for you here.</h2>
-      <p>Whether you want to learn an instrument for the first time, come and listen,
-         play alongside us, or open your venue to a concert — start with an email.</p>
-    </div>
+<section class="band-inverse">
+  <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
+    <h2 style="font-size:clamp(28px,3.6vw,42px)">There is a place for you here.</h2>
+    <p class="lead" style="margin-top:18px;color:var(--fg-inverse-muted)">
+      Learn an instrument for the first time, come and listen, play alongside us,
+      or open your venue. Start with one line.</p>
     <div class="btn-row" style="justify-content:center">
-      <a class="btn btn-gold" href="get-involved.html">Get involved</a>
-      <a class="btn btn-ghost-light" href="support.html">Support our work</a>
+      <a class="btn btn-accent" href="get-involved.html">Get involved <span class="arrow">→</span></a>
+      <a class="btn btn-on-dark" href="support.html">Support our work</a>
     </div>
   </div>
 </section>
@@ -228,14 +259,14 @@
     <div class="footer-grid">
       <div>
         <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
-        <p class="footer-tagline">A community music social enterprise based in Dublin, founded in 2024. We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
+        <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
         <h4>Explore</h4>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="news.html">News & record</a>
+        <a href="news.html">News &amp; record</a>
         <a href="support.html">Support our work</a>
       </div>
       <div>
@@ -247,8 +278,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Founded by Andrew Seohyeon Kim · Dublin, Ireland</span>
-      <span>Volunteer-led · Formalising as a not-for-profit company limited by guarantee</span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span>Volunteer-led · formalising as a not-for-profit company limited by guarantee</span>
     </div>
   </div>
 </footer>

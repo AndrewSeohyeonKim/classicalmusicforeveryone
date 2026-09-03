@@ -15,7 +15,7 @@ PHONE_INTL = "+353 83 078 0635"
 PHONE_TEL = "+353830780635"
 
 FONTS = ("https://fonts.googleapis.com/css2?"
-         "family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400"
+         "family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600"
          "&family=Plus+Jakarta+Sans:wght@400;500;600;700"
          "&family=Noto+Sans+KR:wght@400;500;700&display=swap")
 
@@ -33,33 +33,31 @@ STR = {
         "skip": "Skip to main content",
         "contact": "Contact",
         "menu": "Menu",
+        "lang_label": "Language",
         "logo_alt": "Classical Music for Everyone",
-        "other_lang": "한국어",
-        "tagline": "Making live classical music a shared, everyday experience.",
-        "footer_about": ("A community music social enterprise based in Dublin, founded in 2024. "
-                         "We teach people to play — not only to listen — and bring live classical "
-                         "music to the places it rarely reaches."),
+        "this_lang": "EN", "other_lang": "한국어",
+        "footer_about": ("We teach people to play — not only to listen — and bring live "
+                         "classical music to the places it rarely reaches."),
         "f_explore": "Explore",
         "f_connect": "Connect",
-        "f_legal": ("© 2026 Classical Music for Everyone · Founded by Andrew Seohyeon Kim · Dublin, Ireland"),
-        "f_status": "Volunteer-led · Formalising as a not-for-profit company limited by guarantee",
+        "f_legal": "© 2026 Classical Music for Everyone · Dublin, Ireland",
+        "f_status": "Volunteer-led · formalising as a not-for-profit company limited by guarantee",
         "f_links": [("about.html", "About us"), ("programmes.html", "Programmes"),
-                    ("get-involved.html", "Get involved"), ("news.html", "News & record"),
+                    ("get-involved.html", "Get involved"), ("news.html", "News &amp; record"),
                     ("support.html", "Support our work")],
     },
     "ko": {
         "skip": "본문으로 건너뛰기",
         "contact": "문의",
         "menu": "메뉴",
+        "lang_label": "언어",
         "logo_alt": "Classical Music for Everyone",
-        "other_lang": "English",
-        "tagline": "살아있는 클래식 음악을 일상에서 함께 나누는 경험으로.",
-        "footer_about": ("2024년 더블린에서 시작한 커뮤니티 음악 사회적기업입니다. "
-                         "듣는 데서 그치지 않고 직접 연주하도록 가르치고, "
+        "this_lang": "한국어", "other_lang": "EN",
+        "footer_about": ("듣는 데서 그치지 않고 직접 연주하도록 가르치고, "
                          "클래식 음악이 잘 닿지 않는 곳으로 찾아갑니다."),
         "f_explore": "둘러보기",
         "f_connect": "연락",
-        "f_legal": "© 2026 Classical Music for Everyone · 창립자 Andrew Seohyeon Kim (김서현) · 아일랜드 더블린",
+        "f_legal": "© 2026 Classical Music for Everyone · 아일랜드 더블린",
         "f_status": "자원봉사로 운영 · 비영리 보증유한책임회사(CLG) 설립 준비 중",
         "f_links": [("about.html", "단체 소개"), ("programmes.html", "프로그램"),
                     ("get-involved.html", "참여하기"), ("news.html", "소식과 기록"),
@@ -67,38 +65,45 @@ STR = {
     },
 }
 
+MENU_JS = ("var n=document.getElementById('nav');"
+           "var o=n.getAttribute('data-open')!==&quot;true&quot;;"
+           "n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)")
+
 
 def _prefix(lang):
     """Relative path back to the site root from a page in this language."""
     return "" if lang == "en" else "../"
 
 
-def _lang_switch_href(lang, slug):
+def _switch(lang, slug):
     return ("ko/" + slug) if lang == "en" else ("../" + slug)
 
 
 def header(lang, slug):
     p, s = _prefix(lang), STR[lang]
-    items = []
+    rows = []
     for href, label in NAV[lang]:
         current = ' aria-current="page"' if href == slug else ""
-        items.append(f'      <a href="{href}"{current}>{label}</a>')
-    items.append(f'      <a class="lang" href="{_lang_switch_href(lang, slug)}" '
-                 f'hreflang="{"ko" if lang == "en" else "en"}">{s["other_lang"]}</a>')
-    items.append(f'      <a class="btn btn-gold" href="contact.html">{s["contact"]}</a>')
-    nav = "\n".join(items)
-    return f"""<a class="skip" href="#main">{s['skip']}</a>
+        rows.append(f'      <a class="nav-link" href="{href}"{current}>{label}</a>')
+    links = "\n".join(rows)
+    other = "ko" if lang == "en" else "en"
+    return f"""<div class="progress" aria-hidden="true"></div>
+<a class="skip" href="#main">{s['skip']}</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="index.html">
+    <a class="brand" href="index.html" aria-label="{s['logo_alt']}">
       <img src="{p}assets/logo-horizontal.svg" alt="{s['logo_alt']}" width="120" height="46">
     </a>
-    <nav class="nav" id="nav" aria-label="{s['menu']}">
-{nav}
-    </nav>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
-            aria-label="{s['menu']}" onclick="var n=document.getElementById('nav');
-            var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+            aria-label="{s['menu']}" onclick="{MENU_JS}">☰</button>
+    <nav class="nav" id="nav" data-open="false" aria-label="{s['menu']}">
+{links}
+      <div class="lang-switch" role="group" aria-label="{s['lang_label']}">
+        <span aria-current="true">{s['this_lang']}</span>
+        <a href="{_switch(lang, slug)}" hreflang="{other}" lang="{other}">{s['other_lang']}</a>
+      </div>
+      <a class="btn btn-accent btn-nav" href="contact.html">{s['contact']}</a>
+    </nav>
   </div>
 </header>"""
 
@@ -122,7 +127,7 @@ def footer(lang):
         <a href="mailto:{EMAIL}">{EMAIL}</a>
         <a href="tel:{PHONE_TEL}">{PHONE_INTL}</a>
         <a href="contact.html">{s['contact']}</a>
-        <a href="{_lang_switch_href(lang, 'index.html')}">{s['other_lang']}</a>
+        <a href="{_switch(lang, 'index.html')}">{s['other_lang']}</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -135,9 +140,8 @@ def footer(lang):
 
 def page(lang, slug, title, description, body):
     p = _prefix(lang)
-    canonical = f"{SITE_URL}/" + ("" if lang == "en" else "ko/") + ("" if slug == "index.html" else slug)
-    alt_en = f"{SITE_URL}/" + ("" if slug == "index.html" else slug)
-    alt_ko = f"{SITE_URL}/ko/" + ("" if slug == "index.html" else slug)
+    sub = "" if slug == "index.html" else slug
+    canonical = f"{SITE_URL}/" + ("" if lang == "en" else "ko/") + sub
     return f"""<!DOCTYPE html>
 <html lang="{'en-IE' if lang == 'en' else 'ko'}">
 <head>
@@ -145,9 +149,11 @@ def page(lang, slug, title, description, body):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{description}">
+<meta name="theme-color" content="#1D2430">
 <link rel="canonical" href="{canonical}">
-<link rel="alternate" hreflang="en" href="{alt_en}">
-<link rel="alternate" hreflang="ko" href="{alt_ko}">
+<link rel="alternate" hreflang="en" href="{SITE_URL}/{sub}">
+<link rel="alternate" hreflang="ko" href="{SITE_URL}/ko/{sub}">
+<link rel="alternate" hreflang="x-default" href="{SITE_URL}/{sub}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Classical Music for Everyone">
 <meta property="og:title" content="{title}">
