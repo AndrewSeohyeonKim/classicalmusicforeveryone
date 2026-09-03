@@ -764,10 +764,15 @@ figcaption{margin-top:12px;font-size:13px;color:var(--fg-muted);line-height:1.5}
 }
 .band-photo::before{
   content:"";position:absolute;inset:0;z-index:-1;
+  /* The lightest stop has to carry the text, not just the photograph. At the
+     old 66% the lead paragraph measured 3.6:1 and the gold eyebrow 2.9:1 over
+     a bright frame — both under AA. These stops keep the same left-to-right
+     direction while holding every band on the site above 5:1, measured against
+     the brightest pixel of the composited background. */
   background:linear-gradient(100deg,
-    color-mix(in srgb,var(--ink-navy) 92%,transparent) 0%,
-    color-mix(in srgb,var(--ink-navy) 80%,transparent) 52%,
-    color-mix(in srgb,var(--ink-navy) 66%,transparent) 100%);
+    color-mix(in srgb,var(--ink-navy) 93%,transparent) 0%,
+    color-mix(in srgb,var(--ink-navy) 87%,transparent) 52%,
+    color-mix(in srgb,var(--ink-navy) 82%,transparent) 100%);
 }
 .band-photo :is(h2,h3){color:var(--fg-inverse)}
 .band-photo .eyebrow{color:var(--accent-inverse)}
