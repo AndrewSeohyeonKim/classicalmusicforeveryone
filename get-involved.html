@@ -24,6 +24,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
+  "name": "Classical Music for Everyone",
+  "alternateName": "CMFE",
+  "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+  "logo": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png",
+  "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
+  "description": "Learn to play, come and listen, play with us, or host a course. Beginners welcome — no experience assumed and nothing to prepare.",
+  "foundingDate": "2024-01",
+  "founder": {"@type": "Person", "name": "Andrew Seohyeon Kim"},
+  "email": "sby05034@gmail.com",
+  "telephone": "+353 83 078 0635",
+  "address": {"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"},
+  "areaServed": "Ireland",
+  "knowsLanguage": ["en", "ko"],
+  "inLanguage": "en-IE"
+}
+</script>
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -31,7 +52,8 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
-      <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
+      <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone"
+           width="120" height="46" fetchpriority="high" decoding="async">
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
@@ -61,6 +83,7 @@
 
 <section>
   <div class="wrap">
+    <h2 class="sr-only">Ways to take part</h2>
     <div class="grid grid-2 stagger">
       <article class="card">
         <span class="kicker">For absolute beginners</span>
@@ -134,7 +157,7 @@
 </section>
 
 <section class="band-photo">
-  <img src="images/quartet-hall.jpg" alt="" width="1400" height="788">
+  <img loading="lazy" decoding="async" src="images/quartet-hall.jpg" alt="" width="1400" height="788">
   <div class="wrap narrow reveal" style="text-align:center;margin-inline:auto">
     <p class="eyebrow" style="justify-content:center">Next step</p>
     <h2 style="font-size:clamp(28px,3.6vw,42px)">Write one line.</h2>
@@ -152,11 +175,12 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
+        <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone"
+             width="109" height="42" loading="lazy" decoding="async">
         <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h3>Explore</h3>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
@@ -164,7 +188,7 @@
         <a href="support.html">Support our work</a>
       </div>
       <div>
-        <h4>Connect</h4>
+        <h3>Connect</h3>
         <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a>
         <a href="tel:+353830780635">+353 83 078 0635</a>
         <a href="contact.html">Contact</a>

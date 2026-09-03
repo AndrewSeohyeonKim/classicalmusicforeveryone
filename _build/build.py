@@ -10,14 +10,17 @@ styles.css, assets/ and images/ are hand-maintained.
 """
 
 import os
+import re
 import sys
 from datetime import date
+from urllib.parse import urlparse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import content_en as en          # noqa: E402
 import content_ko as ko          # noqa: E402
-from layout import ROOT, SITE_URL, write   # noqa: E402
+import notfound                  # noqa: E402
+from layout import ROOT, SITE_URL, page, write   # noqa: E402
 
 PAGES = [
     # slug,               en title,                     en description,
@@ -82,6 +85,31 @@ PAGES = [
 ]
 
 
+def build_404():
+    """GitHub Pages serves this for any unknown path, at any depth.
+
+    A 404 for /ko/foo/bar is rendered by this file but the browser's base URL is
+    still /ko/foo/, so every relative path in it would resolve wrongly. All links
+    and assets are therefore rewritten absolute, using the path from SITE_URL —
+    which is why previewing 404.html locally needs the same path (see README).
+    """
+    base = urlparse(SITE_URL).path.rstrip("/") + "/"      # "/classicalmusicforeveryone/"
+    html = page("en", "404.html", notfound.TITLE, notfound.DESC, notfound.BODY)
+    html = (html.replace('href="assets/', f'href="{base}assets/')
+                .replace('src="assets/', f'src="{base}assets/')
+                .replace('href="styles.css"', f'href="{base}styles.css"'))
+    # there is no Korean 404 — send the language switch to the Korean home
+    html = html.replace('href="ko/404.html"', f'href="{base}ko/"')
+    for slug in ("index.html", "about.html", "programmes.html", "get-involved.html",
+                 "news.html", "support.html", "contact.html", "ko/index.html"):
+        html = html.replace(f'href="{slug}"', f'href="{base}{slug}"')
+    # a 404 is not a page to index, and it has no language twin
+    html = re.sub(r'<link rel="(canonical|alternate)"[^>]*>\n', "", html)
+    html = html.replace("<title>", '<meta name="robots" content="noindex">\n<title>')
+    with open(os.path.join(ROOT, "404.html"), "w", encoding="utf-8") as fh:
+        fh.write(html)
+
+
 def build_sitemap():
     today = date.today().isoformat()
     urls = []
@@ -117,8 +145,9 @@ def main():
     for slug, en_title, en_desc, ko_title, ko_desc, en_body, ko_body in PAGES:
         written.append(write("en", slug, en_title, en_desc, en_body))
         written.append(write("ko", slug, ko_title, ko_desc, ko_body))
+    build_404()
     build_sitemap()
-    written += ["sitemap.xml", "robots.txt"]
+    written += ["404.html", "sitemap.xml", "robots.txt"]
     for path in written:
         print("wrote", path)
     print(f"\n{len(written)} files.")

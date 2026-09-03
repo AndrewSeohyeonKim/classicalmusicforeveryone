@@ -24,6 +24,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
+  "name": "Classical Music for Everyone",
+  "alternateName": "CMFE",
+  "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+  "logo": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png",
+  "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
+  "description": "Our mission, vision and five values; the founder Andrew Seohyeon Kim; and the venues and institutions we have played in since 2024.",
+  "foundingDate": "2024-01",
+  "founder": {"@type": "Person", "name": "Andrew Seohyeon Kim"},
+  "email": "sby05034@gmail.com",
+  "telephone": "+353 83 078 0635",
+  "address": {"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"},
+  "areaServed": "Ireland",
+  "knowsLanguage": ["en", "ko"],
+  "inLanguage": "en-IE"
+}
+</script>
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -31,7 +52,8 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
-      <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
+      <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone"
+           width="120" height="46" fetchpriority="high" decoding="async">
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
@@ -74,7 +96,7 @@
     </div>
     <figure class="reveal">
       <div class="photo photo-4x5">
-        <img src="images/clarinet.jpg" width="1400" height="1400"
+        <img loading="lazy" decoding="async" src="images/clarinet.jpg" width="1400" height="1400"
              alt="Andrew Seohyeon Kim playing the clarinet during a parish liturgy">
       </div>
       <figcaption>A parish liturgy in Dublin. The community work and the church work are the
@@ -90,6 +112,7 @@
       <h2>What a room, an hour and a recorder are supposed to add up to.</h2>
     </div>
     <div class="reveal"><figure class="diagram">
+  <div class="diagram-canvas">
   <svg viewBox="0 0 1042 282" role="img" aria-label="Inputs feed activities, activities produce countable outputs, outputs point to change.">
   <defs>
     <marker id="toc-arrow" viewBox="0 0 10 10" refX="9" refY="5"
@@ -136,6 +159,7 @@
     <path class="dg-stroke" d="M842 236 v10 H1050 v-10" stroke-dasharray="3 4"/>
     <text class="dg-sub" x="946.0" y="266" text-anchor="middle">reported, not yet measured</text>
   </svg>
+  </div>
   <figcaption>Read left to right: what goes in, what we do with it, what can be counted, and what we believe changes. Only the first three columns are evidenced — the fourth rests on what participants told us.</figcaption>
 </figure></div>
   </div>
@@ -170,7 +194,7 @@
 </section>
 
 <section class="band-photo">
-  <img src="images/organ.jpg" alt="" width="1400" height="1050">
+  <img loading="lazy" decoding="async" src="images/organ.jpg" alt="" width="1400" height="1050">
   <div class="wrap split split-center">
     <div class="reveal">
       <p class="eyebrow">The founder</p>
@@ -207,7 +231,7 @@
     </div>
     <div class="split reveal">
       <div>
-        <h4>Ireland</h4>
+        <h3 class="h-sub">Ireland</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li>National Concert Hall &amp; TU Dublin, Grangegorman</li>
           <li>Tallaght University Hospital · Rua Red, Tallaght</li>
@@ -222,7 +246,7 @@
         </ul>
       </div>
       <div>
-        <h4>Abroad</h4>
+        <h3 class="h-sub">Abroad</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li>Sanctuary of Our Lady of Lourdes, France</li>
           <li>Missions Étrangères de Paris · Palais Brongniart, Paris</li>
@@ -230,7 +254,7 @@
           <li>Gwandukjeong Martyrs Memorial Centre, Daegu, Korea</li>
         </ul>
         <div class="callout" style="margin-top:26px">
-          <h4>What we do not claim</h4>
+          <h3 class="h-sub">What we do not claim</h3>
           <p class="small" style="margin-top:10px">Our evidence is participation, retention and
              testimony — not measured outcome. Wellbeing has not been measured with a validated
              instrument, and outreach audiences were never counted. From the autumn 2026 cohort we
@@ -258,11 +282,12 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
+        <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone"
+             width="109" height="42" loading="lazy" decoding="async">
         <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h3>Explore</h3>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
@@ -270,7 +295,7 @@
         <a href="support.html">Support our work</a>
       </div>
       <div>
-        <h4>Connect</h4>
+        <h3>Connect</h3>
         <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a>
         <a href="tel:+353830780635">+353 83 078 0635</a>
         <a href="contact.html">Contact</a>

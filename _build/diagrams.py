@@ -62,6 +62,7 @@ LOOP = {
 def loop(lang):
     t = LOOP[lang]
     return f"""<figure class="diagram">
+  <div class="diagram-canvas">
   <svg viewBox="0 0 720 306" role="img" aria-label="{t['aria']}">
 {ARROW_DEFS.format(mid='loop-arrow')}
     <rect class="dg-fill-soft dg-box" x="16" y="104" rx="10" width="252" height="108"/>
@@ -86,6 +87,7 @@ def loop(lang):
     <text class="dg-sub" x="40" y="240">{t['note_a']}</text>
     <text class="dg-sub" x="476" y="240">{t['note_b']}</text>
   </svg>
+  </div>
   <figcaption>{t['caption']}</figcaption>
 </figure>"""
 
@@ -154,9 +156,11 @@ def theory_of_change(lang):
                  f'{t["claimed"]}</text>')
     body = "\n".join(parts)
     return f"""<figure class="diagram">
+  <div class="diagram-canvas">
   <svg viewBox="0 0 1042 282" role="img" aria-label="{t['aria']}">
 {body}
   </svg>
+  </div>
   <figcaption>{t['caption']}</figcaption>
 </figure>"""
 
@@ -217,9 +221,11 @@ def term(lang):
     parts.append(f'    <text class="dg-edge" x="{top_max}" y="44" opacity=".0">.</text>')
     body = "\n".join(parts)
     return f"""<figure class="diagram">
+  <div class="diagram-canvas">
   <svg viewBox="0 0 1056 292" role="img" aria-label="{t['aria']}">
 {body}
   </svg>
+  </div>
   <figcaption>{t['caption']}</figcaption>
 </figure>"""
 
@@ -307,8 +313,10 @@ def subsidy(lang):
 
     body = "\n".join(parts)
     return f"""<figure class="diagram">
+  <div class="diagram-canvas">
   <svg viewBox="0 0 1056 336" role="img" aria-label="{t['aria']}">
 {body}
   </svg>
+  </div>
   <figcaption>{t['caption']}</figcaption>
 </figure>"""

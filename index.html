@@ -24,6 +24,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
+  "name": "Classical Music for Everyone",
+  "alternateName": "CMFE",
+  "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+  "logo": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png",
+  "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
+  "description": "A Dublin community music social enterprise. We teach people to play, not just listen, and bring live classical music to care homes, parishes, hospitals and community centres.",
+  "foundingDate": "2024-01",
+  "founder": {"@type": "Person", "name": "Andrew Seohyeon Kim"},
+  "email": "sby05034@gmail.com",
+  "telephone": "+353 83 078 0635",
+  "address": {"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"},
+  "areaServed": "Ireland",
+  "knowsLanguage": ["en", "ko"],
+  "inLanguage": "en-IE"
+}
+</script>
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -31,7 +52,8 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
-      <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
+      <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone"
+           width="120" height="46" fetchpriority="high" decoding="async">
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
@@ -64,7 +86,7 @@
     </div>
     <figure class="lift lift-3">
       <div class="photo photo-3x2">
-        <img src="images/hero-outreach.jpg" width="1800" height="1350"
+        <img fetchpriority="high" decoding="async" src="images/hero-outreach.jpg" width="1800" height="1350"
              alt="Musicians playing a St Patrick&rsquo;s Day concert in a community hall">
       </div>
       <figcaption>A St Patrick&rsquo;s Day concert for a religious community — the Letters Ensemble.</figcaption>
@@ -126,6 +148,7 @@
          becomes a class — and the class produces people who can play in the next room.</p>
     </div>
     <div class="reveal"><figure class="diagram">
+  <div class="diagram-canvas">
   <svg viewBox="0 0 720 306" role="img" aria-label="A cycle: Sharing produces a question, which becomes Learning; Learning produces players, who go back out with Sharing.">
   <defs>
     <marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5"
@@ -159,13 +182,14 @@
     <text class="dg-sub" x="40" y="240">we put the instrument in the hand</text>
     <text class="dg-sub" x="476" y="240">we carry the music to the room</text>
   </svg>
+  </div>
   <figcaption>The two pillars are one circuit. Take either box away and the other stops being fed: without playing for people we never meet the person who asks, and without a class there is nowhere to send them.</figcaption>
 </figure></div>
   </div>
 </section>
 
 <section class="band-photo">
-  <img src="images/church-concert.jpg" alt="" width="1400" height="1050">
+  <img loading="lazy" decoding="async" src="images/church-concert.jpg" alt="" width="1400" height="1050">
   <div class="wrap narrow reveal">
     <p class="eyebrow">Why we exist</p>
     <h2 style="font-size:clamp(28px,3.8vw,44px)">It is playing, not only listening,
@@ -186,7 +210,7 @@
     </div>
     <div class="grid grid-3 stagger">
       <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="images/community-room.jpg" width="1400" height="1050"
+        <div class="photo photo-3x2"><img loading="lazy" decoding="async" src="images/community-room.jpg" width="1400" height="1050"
              alt="Playing the clarinet in a community room"></div>
         <div class="card-body">
           <span class="kicker">Flagship</span>
@@ -196,7 +220,7 @@
         </div>
       </a>
       <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="images/care-christmas.jpg" width="1400" height="1050"
+        <div class="photo photo-3x2"><img loading="lazy" decoding="async" src="images/care-christmas.jpg" width="1400" height="1050"
              alt="A quartet performing in a care setting at Christmas"></div>
         <div class="card-body">
           <span class="kicker">Outreach</span>
@@ -206,7 +230,7 @@
         </div>
       </a>
       <a class="card card-media" href="programmes.html">
-        <div class="photo photo-3x2"><img src="images/lecture-recital.jpg" width="1400" height="1050"
+        <div class="photo photo-3x2"><img loading="lazy" decoding="async" src="images/lecture-recital.jpg" width="1400" height="1050"
              alt="A lecture-recital in progress"></div>
         <div class="card-body">
           <span class="kicker">Learning</span>
@@ -255,11 +279,12 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
+        <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone"
+             width="109" height="42" loading="lazy" decoding="async">
         <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h3>Explore</h3>
         <a href="about.html">About us</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
@@ -267,7 +292,7 @@
         <a href="support.html">Support our work</a>
       </div>
       <div>
-        <h4>Connect</h4>
+        <h3>Connect</h3>
         <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a>
         <a href="tel:+353830780635">+353 83 078 0635</a>
         <a href="contact.html">Contact</a>

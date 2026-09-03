@@ -6,6 +6,7 @@ Directories beginning with an underscore are not published by GitHub Pages.
 """
 
 import os
+import re
 
 SITE_URL = "https://andrewseohyeonkim.github.io/classicalmusicforeveryone"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -70,6 +71,49 @@ MENU_JS = ("var n=document.getElementById('nav');"
            "n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)")
 
 
+JSONLD = """<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "{site}/#organisation",
+  "name": "Classical Music for Everyone",
+  "alternateName": "CMFE",
+  "url": "{site}/",
+  "logo": "{site}/assets/logo-horizontal.png",
+  "image": "{site}/images/hero-outreach.jpg",
+  "description": "{desc}",
+  "foundingDate": "2024-01",
+  "founder": {{"@type": "Person", "name": "Andrew Seohyeon Kim"}},
+  "email": "{email}",
+  "telephone": "{phone}",
+  "address": {{"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"}},
+  "areaServed": "Ireland",
+  "knowsLanguage": ["en", "ko"],
+  "inLanguage": "{lang}"
+}}
+</script>"""
+
+
+def _images(body, eager_first):
+    """Lazy-load every image; the hero, if there is one, loads eagerly.
+
+    Applied here rather than in the content files so the rule cannot drift
+    between pages.
+    """
+    out, first = [], True
+    for chunk in re.split(r"(<img\b)", body):
+        if chunk == "<img":
+            if first and eager_first:
+                out.append('<img fetchpriority="high" decoding="async"')
+                first = False
+            else:
+                out.append('<img loading="lazy" decoding="async"')
+                first = False
+        else:
+            out.append(chunk)
+    return "".join(out)
+
+
 def _prefix(lang):
     """Relative path back to the site root from a page in this language."""
     return "" if lang == "en" else "../"
@@ -92,7 +136,8 @@ def header(lang, slug):
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html" aria-label="{s['logo_alt']}">
-      <img src="{p}assets/logo-horizontal.svg" alt="{s['logo_alt']}" width="120" height="46">
+      <img src="{p}assets/logo-horizontal.svg" alt="{s['logo_alt']}"
+           width="120" height="46" fetchpriority="high" decoding="async">
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="{s['menu']}" onclick="{MENU_JS}">☰</button>
@@ -115,15 +160,16 @@ def footer(lang):
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="{p}assets/logo-reversed.svg" alt="{s['logo_alt']}" width="109" height="42">
+        <img src="{p}assets/logo-reversed.svg" alt="{s['logo_alt']}"
+             width="109" height="42" loading="lazy" decoding="async">
         <p class="footer-tagline">{s['footer_about']}</p>
       </div>
       <div>
-        <h4>{s['f_explore']}</h4>
+        <h3>{s['f_explore']}</h3>
 {links}
       </div>
       <div>
-        <h4>{s['f_connect']}</h4>
+        <h3>{s['f_connect']}</h3>
         <a href="mailto:{EMAIL}">{EMAIL}</a>
         <a href="tel:{PHONE_TEL}">{PHONE_INTL}</a>
         <a href="contact.html">{s['contact']}</a>
@@ -141,6 +187,10 @@ def footer(lang):
 def page(lang, slug, title, description, body):
     p = _prefix(lang)
     sub = "" if slug == "index.html" else slug
+    body = _images(body, eager_first='<section class="hero">' in body)
+    jsonld = JSONLD.format(site=SITE_URL, desc=description.replace('"', "'"),
+                           email=EMAIL, phone=PHONE_INTL,
+                           lang="en-IE" if lang == "en" else "ko")
     canonical = f"{SITE_URL}/" + ("" if lang == "en" else "ko/") + sub
     return f"""<!DOCTYPE html>
 <html lang="{'en-IE' if lang == 'en' else 'ko'}">
@@ -168,6 +218,7 @@ def page(lang, slug, title, description, body):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="{p}styles.css">
+{jsonld}
 </head>
 <body>
 {header(lang, slug)}

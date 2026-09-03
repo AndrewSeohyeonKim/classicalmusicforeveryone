@@ -24,6 +24,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
+  "name": "Classical Music for Everyone",
+  "alternateName": "CMFE",
+  "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+  "logo": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png",
+  "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
+  "description": "이메일, 전화, 활동 지역. 모든 문의는 창립자에게 바로 전달됩니다.",
+  "foundingDate": "2024-01",
+  "founder": {"@type": "Person", "name": "Andrew Seohyeon Kim"},
+  "email": "sby05034@gmail.com",
+  "telephone": "+353 83 078 0635",
+  "address": {"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"},
+  "areaServed": "Ireland",
+  "knowsLanguage": ["en", "ko"],
+  "inLanguage": "ko"
+}
+</script>
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -31,7 +52,8 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html" aria-label="Classical Music for Everyone">
-      <img src="../assets/logo-horizontal.svg" alt="Classical Music for Everyone" width="120" height="46">
+      <img src="../assets/logo-horizontal.svg" alt="Classical Music for Everyone"
+           width="120" height="46" fetchpriority="high" decoding="async">
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
@@ -115,11 +137,12 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="../assets/logo-reversed.svg" alt="Classical Music for Everyone" width="109" height="42">
+        <img src="../assets/logo-reversed.svg" alt="Classical Music for Everyone"
+             width="109" height="42" loading="lazy" decoding="async">
         <p class="footer-tagline">듣는 데서 그치지 않고 직접 연주하도록 가르치고, 클래식 음악이 잘 닿지 않는 곳으로 찾아갑니다.</p>
       </div>
       <div>
-        <h4>둘러보기</h4>
+        <h3>둘러보기</h3>
         <a href="about.html">단체 소개</a>
         <a href="programmes.html">프로그램</a>
         <a href="get-involved.html">참여하기</a>
@@ -127,7 +150,7 @@
         <a href="support.html">후원하기</a>
       </div>
       <div>
-        <h4>연락</h4>
+        <h3>연락</h3>
         <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a>
         <a href="tel:+353830780635">+353 83 078 0635</a>
         <a href="contact.html">문의</a>

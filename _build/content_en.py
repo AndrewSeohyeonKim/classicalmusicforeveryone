@@ -305,7 +305,7 @@ ABOUT = f"""<section class="page-hero">
     </div>
     <div class="split reveal">
       <div>
-        <h4>Ireland</h4>
+        <h3 class="h-sub">Ireland</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li>National Concert Hall &amp; TU Dublin, Grangegorman</li>
           <li>Tallaght University Hospital · Rua Red, Tallaght</li>
@@ -320,7 +320,7 @@ ABOUT = f"""<section class="page-hero">
         </ul>
       </div>
       <div>
-        <h4>Abroad</h4>
+        <h3 class="h-sub">Abroad</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li>Sanctuary of Our Lady of Lourdes, France</li>
           <li>Missions Étrangères de Paris · Palais Brongniart, Paris</li>
@@ -328,7 +328,7 @@ ABOUT = f"""<section class="page-hero">
           <li>Gwandukjeong Martyrs Memorial Centre, Daegu, Korea</li>
         </ul>
         <div class="callout" style="margin-top:26px">
-          <h4>What we do not claim</h4>
+          <h3 class="h-sub">What we do not claim</h3>
           <p class="small" style="margin-top:10px">Our evidence is participation, retention and
              testimony — not measured outcome. Wellbeing has not been measured with a validated
              instrument, and outreach audiences were never counted. From the autumn 2026 cohort we
@@ -491,7 +491,7 @@ PROGRAMMES = f"""<section class="page-hero">
       </article>
     </div>
     <div class="callout reveal" style="margin-top:26px">
-      <span class="kicker" style="color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase">Sub-strand</span>
+      <p class="h-sub">Sub-strand</p>
       <h3 style="margin-top:8px">Bringing Music to Sacred Places</h3>
       <p style="margin-top:10px">The faith-based strand — parishes, shrines, convents, liturgies
          and retired religious communities, roughly sixteen of the twenty outreach performances.
@@ -519,6 +519,7 @@ GET_INVOLVED = """<section class="page-hero">
 
 <section>
   <div class="wrap">
+    <h2 class="sr-only">Ways to take part</h2>
     <div class="grid grid-2 stagger">
       <article class="card">
         <span class="kicker">For absolute beginners</span>
@@ -680,38 +681,38 @@ NEWS = f"""<section class="page-hero">
     <div class="split split-wide">
       <div class="timeline reveal">
         <div class="tl-item"><div class="tl-date">February 2023</div>
-          <h4>Before the beginning</h4>
+          <h3>Before the beginning</h3>
           <p>A clarinet solo at the English-language Mass in Lourdes — the outreach strand, two
              years before it had a name.</p></div>
         <div class="tl-item"><div class="tl-date">January 2024</div>
-          <h4>It starts</h4>
+          <h3>It starts</h3>
           <p>CMFE is founded in Dublin, and the Letters Ensemble with it. The first lecture-recital
              is held in Dublin 18, for six people.</p></div>
         <div class="tl-item"><div class="tl-date">2024</div>
-          <h4>Music goes out</h4>
+          <h3>Music goes out</h3>
           <p>Concerts at Dalgan Park and for the Missionary Sisters of St Columban; performances in
              London, Paris and Daegu. The lecture series moves to TU Dublin.</p></div>
         <div class="tl-item"><div class="tl-date">2024–2025</div>
-          <h4>Going together</h4>
+          <h3>Going together</h3>
           <p>Accompanied concert-going becomes a strand of its own — the NSO, Irish National Opera,
              and the BBC Proms in two consecutive summers.</p></div>
         <div class="tl-item"><div class="tl-date">October 2025</div>
-          <h4>An audience becomes players</h4>
+          <h3>An audience becomes players</h3>
           <p>Preparation begins for a recorder ensemble with seven retired Presentation Sisters —
              survey, permissions, vetting, individual lessons.</p></div>
         <div class="tl-item"><div class="tl-date">December 2025</div>
-          <h4>To the National Concert Hall</h4>
+          <h3>To the National Concert Hall</h3>
           <p>The fifteenth learning session is a concert at Ireland&rsquo;s National Concert Hall,
              attended together.</p></div>
         <div class="tl-item"><div class="tl-date">Jan–Apr 2026</div>
-          <h4>The pilot, and its concert</h4>
+          <h3>The pilot, and its concert</h3>
           <p>Ten weekly rehearsals at Warrenmount, then an Easter concert of nine pieces at
              Clondalkin Lodge. All seven completed.</p></div>
         <div class="tl-item"><div class="tl-date">August 2026</div>
-          <h4>First public commission</h4>
+          <h3>First public commission</h3>
           <p>Two concerts for South Dublin Live 2026 — Tallaght University Hospital and Rua Red.</p></div>
         <div class="tl-item"><div class="tl-date">September 2026</div>
-          <h4>The model opens to the public</h4>
+          <h3>The model opens to the public</h3>
           <p>The first community recorder ensemble course begins at Mulhuddart Community Centre,
              Dublin 15 — twelve weeks, free.</p></div>
       </div>
@@ -724,7 +725,7 @@ NEWS = f"""<section class="page-hero">
           <figcaption>The Letters Ensemble, founded January 2024.</figcaption>
         </figure>
         <div class="callout reveal" style="margin-top:26px">
-          <h4>Press &amp; publication</h4>
+          <h3 class="h-sub">Press &amp; publication</h3>
           <ul class="plainlist" style="margin-top:12px">
             <li><strong>Kyunghyang Magazine</strong>, May 2026 — commissioned article for
                 &ldquo;Young people, how are you?&rdquo;</li>
@@ -808,7 +809,7 @@ SUPPORT = f"""<section class="page-hero">
         <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
       </div>
       <div>
-        <h4>Letters of support</h4>
+        <h3 class="h-sub">Letters of support</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li><strong>Rua Red</strong> — South Dublin&rsquo;s contemporary arts centre</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>

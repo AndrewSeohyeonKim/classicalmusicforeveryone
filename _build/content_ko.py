@@ -290,7 +290,7 @@ ABOUT = f"""<section class="page-hero">
     </div>
     <div class="split reveal">
       <div>
-        <h4>아일랜드</h4>
+        <h3 class="h-sub">아일랜드</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li>National Concert Hall · TU Dublin, Grangegorman</li>
           <li>Tallaght University Hospital · Rua Red, Tallaght</li>
@@ -305,7 +305,7 @@ ABOUT = f"""<section class="page-hero">
         </ul>
       </div>
       <div>
-        <h4>국외</h4>
+        <h3 class="h-sub">국외</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li>루르드 성모 성지, 프랑스</li>
           <li>파리 외방 전교회 · Palais Brongniart, 파리</li>
@@ -313,7 +313,7 @@ ABOUT = f"""<section class="page-hero">
           <li>관덕정 순교자 기념관, 대구, 한국</li>
         </ul>
         <div class="callout" style="margin-top:26px">
-          <h4>주장하지 않는 것</h4>
+          <h3 class="h-sub">주장하지 않는 것</h3>
           <p class="small" style="margin-top:10px">지금까지의 근거는 참여·지속·증언이지 측정된
              성과가 아닙니다. 검증된 도구로 웰빙을 측정한 적이 없고, 찾아가는 음악회의 관객 수도
              기록되지 않았습니다. 2026년 가을 기수부터 간단한 사전·사후 측정과 동의 절차를
@@ -468,7 +468,7 @@ PROGRAMMES = f"""<section class="page-hero">
       </article>
     </div>
     <div class="callout reveal" style="margin-top:26px">
-      <span class="kicker" style="color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">하위 갈래</span>
+      <p class="h-sub">하위 갈래</p>
       <h3 style="margin-top:8px">Bringing Music to Sacred Places</h3>
       <p style="margin-top:10px">본당·성지·수도원·전례·은퇴 수도 공동체를 향한 신앙 기반 갈래로,
          스무 번의 찾아가는 음악회 가운데 약 열여섯 번이 여기 해당합니다. 교회 안에서는 음악을
@@ -493,6 +493,7 @@ GET_INVOLVED = """<section class="page-hero">
 
 <section>
   <div class="wrap">
+    <h2 class="sr-only">참여하는 방법</h2>
     <div class="grid grid-2 stagger">
       <article class="card">
         <span class="kicker">완전 초보라면</span>
@@ -650,37 +651,37 @@ NEWS = f"""<section class="page-hero">
     <div class="split split-wide">
       <div class="timeline reveal">
         <div class="tl-item"><div class="tl-date">2023년 2월</div>
-          <h4>시작 이전</h4>
+          <h3>시작 이전</h3>
           <p>루르드의 영어 미사에서 클라리넷 독주. 이름이 붙기 2년 전의 찾아가는 음악회.</p></div>
         <div class="tl-item"><div class="tl-date">2024년 1월</div>
-          <h4>시작</h4>
+          <h3>시작</h3>
           <p>더블린에서 CMFE가, 그리고 Letters Ensemble이 함께 만들어집니다. 첫 강의·연주는
              Dublin 18에서 여섯 명과 함께.</p></div>
         <div class="tl-item"><div class="tl-date">2024년</div>
-          <h4>음악이 나갑니다</h4>
+          <h3>음악이 나갑니다</h3>
           <p>Dalgan Park와 성 골롬반 외방 선교 수녀회에서 음악회, 런던·파리·대구에서 연주.
              강의 시리즈는 TU Dublin으로 옮겨 갑니다.</p></div>
         <div class="tl-item"><div class="tl-date">2024–2025년</div>
-          <h4>함께 갑니다</h4>
+          <h3>함께 갑니다</h3>
           <p>동행 관람이 독립된 갈래가 됩니다 — 국립교향악단, 아일랜드 국립 오페라, 2년 연속
              BBC Proms.</p></div>
         <div class="tl-item"><div class="tl-date">2025년 10월</div>
-          <h4>관객이 연주자가 됩니다</h4>
+          <h3>관객이 연주자가 됩니다</h3>
           <p>은퇴 프레젠테이션 수녀 일곱 분과의 리코더 앙상블 준비 — 조사, 허가, 신원조회,
              개별 레슨.</p></div>
         <div class="tl-item"><div class="tl-date">2025년 12월</div>
-          <h4>국립 콘서트홀에서</h4>
+          <h3>국립 콘서트홀에서</h3>
           <p>열다섯 번째 배움의 자리는 아일랜드 국립 콘서트홀에서 함께 본 공연이었습니다.</p></div>
         <div class="tl-item"><div class="tl-date">2026년 1–4월</div>
-          <h4>파일럿, 그리고 그 음악회</h4>
+          <h3>파일럿, 그리고 그 음악회</h3>
           <p>Warrenmount에서 10주 합주, 이어 Clondalkin Lodge에서 아홉 곡의 부활 음악회.
              일곱 분 전원 수료.</p></div>
         <div class="tl-item"><div class="tl-date">2026년 8월</div>
-          <h4>첫 공적 위촉</h4>
+          <h3>첫 공적 위촉</h3>
           <p>South Dublin Live 2026을 위한 두 번의 연주 — Tallaght University Hospital과
              Rua Red.</p></div>
         <div class="tl-item"><div class="tl-date">2026년 9월</div>
-          <h4>모델이 일반에 열립니다</h4>
+          <h3>모델이 일반에 열립니다</h3>
           <p>첫 커뮤니티 리코더 앙상블 과정이 Dublin 15 Mulhuddart Community Centre에서
              시작됩니다 — 12주, 무료.</p></div>
       </div>
@@ -693,7 +694,7 @@ NEWS = f"""<section class="page-hero">
           <figcaption>2024년 1월에 만들어진 Letters Ensemble.</figcaption>
         </figure>
         <div class="callout reveal" style="margin-top:26px">
-          <h4>기사와 기고</h4>
+          <h3 class="h-sub">기사와 기고</h3>
           <ul class="plainlist" style="margin-top:12px">
             <li><strong>경향잡지</strong> 2026년 5월호 — 기획 &ldquo;청년, 어떻게 지내니&rdquo;
                 청탁 원고</li>
@@ -771,7 +772,7 @@ SUPPORT = f"""<section class="page-hero">
         <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
       </div>
       <div>
-        <h4>지지 서한</h4>
+        <h3 class="h-sub">지지 서한</h3>
         <ul class="plainlist" style="margin-top:14px">
           <li><strong>Rua Red</strong> — South Dublin의 현대예술센터</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>

@@ -13,7 +13,8 @@ needed to view or edit it — open any `.html` file in a browser.
 | `styles.css` | The one stylesheet both languages share |
 | `assets/` | Official logo files, copied from `10_CMFE_로고·브랜드셋업/` |
 | `images/` | Photographs used on the site |
-| `sitemap.xml`, `robots.txt` | Generated — do not edit by hand |
+| `404.html`, `sitemap.xml`, `robots.txt` | Generated — do not edit by hand |
+| `images/README.md` | Which photograph is used where, and how to add one |
 | `_build/` | The page generator and the diagrams. Not published (GitHub Pages skips `_`-prefixed folders) |
 | `02_CMFE_사이트_셋팅지침.md` | The original brief for the site |
 
@@ -38,7 +39,9 @@ touches `styles.css`, `assets/` or `images/`.
 - `_build/content_en.py` — English page content
 - `_build/content_ko.py` — Korean page content
 - `_build/diagrams.py` — the four inline-SVG diagrams, with labels in both languages
-- `_build/build.py` — page titles, meta descriptions, and the sitemap
+- `_build/notfound.py` — the 404 page
+- `_build/build.py` — page titles, meta descriptions, the 404 and the sitemap
+- `_build/add-photo.sh` — resize and compress a photograph for `images/`
 
 ## How it is built
 
@@ -60,16 +63,39 @@ term-long participant journey, and the cross-subsidy. They inherit `currentColor
 same figure works on the cream, white and navy bands.
 
 **Photographs, one treatment** — every image sits in `.photo` with a fixed aspect ratio and
-a shared warm-cast overlay, so shots from many different rooms read as one set.
+a shared warm-cast overlay, so shots from many different rooms read as one set. That is what
+makes photographs swappable: to use a better one, run `_build/add-photo.sh` and change the
+filename and `alt` text. Nothing in the layout moves. See `images/README.md`.
+
+**Accessibility, measured not assumed** — every body/background pair on the site clears
+WCAG AA (4.5:1, or 3:1 for large text), checked in the browser rather than by eye. The one
+thing to know before changing a colour: gold as *text* uses `--accent-ink` (#7F5C1C), while
+`--accent` (#B8893A) is for fills, rules, arrows and the logo. Swapping them drops body text
+to 2.9:1. Headings never skip a level, images all carry `alt`, and each diagram is an
+`<svg role="img">` with an `aria-label` restating its caption.
+
+**Performance** — images are `loading="lazy" decoding="async"` except the hero, which is
+`fetchpriority="high"`; the attributes are added at build time, not written by hand. No
+JavaScript framework, no animation library: the whole site is ~200 KB of HTML plus one
+stylesheet. Swapping in
+a better photograph is a one-line change: see `images/README.md` and `_build/add-photo.sh`.
+
+**Accessibility** — every text/background pair on the site meets WCAG AA (4.5:1, or 3:1 for
+large text); the check that proves it is in the repository history. Headings run in order,
+images carry alt text, the mobile menu reports `aria-expanded`, and the whole site works
+with `prefers-reduced-motion: reduce`.
 
 ## Previewing locally
 
+Serve the **parent** directory, so the site sits at the same path it will have on
+GitHub Pages (`/classicalmusicforeveryone/`). `404.html` uses absolute paths and only
+renders correctly this way.
+
 ```bash
-python3 -m http.server 4173
+python3 -m http.server 4173 --directory ..
 ```
 
-Then open <http://localhost:4173>. Opening the files directly with `file://` also
-works, but a local server matches how GitHub Pages will serve them.
+Then open <http://localhost:4173/classicalmusicforeveryone/>.
 
 ## House rules for this repository
 
