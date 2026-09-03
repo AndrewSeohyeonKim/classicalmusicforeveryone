@@ -112,7 +112,7 @@ INDEX = f"""<section class="hero">
       <b class="b2">Sharing</b><span>we bring the music to the room</span>
     </div>
     <div class="grid grid-5 stagger">
-      <a class="prog" href="programmes.html">
+      <a class="prog" href="programmes/recorder-ensemble.html">
         <div class="photo photo-3x2"><img src="images/conducting.jpg" width="1400" height="933" alt="A weekly class in a community room in Dublin"></div>
         <div class="prog-body">
           <span class="kicker">Learning</span>
@@ -121,7 +121,7 @@ INDEX = f"""<section class="hero">
           <div class="meta">weekly · a term</div>
         </div>
       </a>
-      <a class="prog" href="programmes.html">
+      <a class="prog" href="programmes/getting-to-know.html">
         <div class="photo photo-3x2"><img src="images/lecture-recital.jpg" width="1400" height="933" alt="A lecture-recital in progress"></div>
         <div class="prog-body">
           <span class="kicker">Learning</span>
@@ -130,7 +130,7 @@ INDEX = f"""<section class="hero">
           <div class="meta">17 sessions · 143 attendances</div>
         </div>
       </a>
-      <a class="prog" href="programmes.html">
+      <a class="prog" href="programmes/concert-companion.html">
         <div class="photo photo-3x2"><img src="images/quartet-hall.jpg" width="1400" height="933" alt="An ensemble performing in a bright hall"></div>
         <div class="prog-body">
           <span class="kicker">Learning</span>
@@ -139,7 +139,7 @@ INDEX = f"""<section class="hero">
           <div class="meta">10 outings · groups of about five</div>
         </div>
       </a>
-      <a class="prog" href="programmes.html">
+      <a class="prog" href="programmes/outreach-concerts.html">
         <div class="photo photo-3x2"><img src="images/care-christmas.jpg" width="1400" height="933" alt="A quartet performing in a care setting at Christmas"></div>
         <div class="prog-body">
           <span class="kicker">Sharing</span>
@@ -148,7 +148,7 @@ INDEX = f"""<section class="hero">
           <div class="meta">20 performances · 15+ venues</div>
         </div>
       </a>
-      <a class="prog" href="programmes.html">
+      <a class="prog" href="programmes/letters-ensemble.html">
         <div class="photo photo-3x2"><img src="images/letters-ensemble.jpg" width="1400" height="933" alt="The Letters Ensemble with their instruments"></div>
         <div class="prog-body">
           <span class="kicker">Sharing</span>
@@ -302,28 +302,123 @@ ABOUT = f"""<section class="page-hero">
 
 <section class="band-photo">
   <img src="images/organ.jpg" alt="" width="1400" height="1050">
-  <div class="wrap split split-center">
+  <div class="wrap narrow reveal">
+    <p class="eyebrow">The founder</p>
+    <h2 class="h-lg">Andrew Seohyeon Kim</h2>
+    <p class="lead mt-3">
+      Clarinettist, organist and community music practitioner, based in Dublin. He founded
+      <span class="brandname">Classical Music for Everyone</span> and the Letters Ensemble in
+      January 2024, and leads every programme on this site.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide">
     <div class="reveal">
-      <p class="eyebrow">The founder</p>
-      <h2 class="h-lg">Andrew Seohyeon Kim</h2>
-      <p class="lead mt-2">
-        Clarinettist, organist and community music practitioner. BMus (Hons) in Performance,
-        TU Dublin Conservatoire, where his final-year research was the ten-week recorder ensemble
-        he designed and led for seven retired Presentation Sisters.</p>
-      <p class="mt-2">
-        Music Director at Our Lady of Dolours Church, Dolphin&rsquo;s Barn since 2022; organist at
-        the Church of the Three Patrons, Rathgar since 2023. He founded Classical Music for
-        Everyone and the Letters Ensemble in 2024.</p>
+      <h3 class="h-sub">The practice</h3>
+      <p class="lead mt-2">He is in the room for all of it. The tutor at the recorder class,
+         the speaker at the lecture-recitals, the person who books the outing, the clarinettist
+         at the care home, and the conductor of the ensemble that plays there are the same
+         person.</p>
+      <p class="mt-3">That is a limit as much as a description — it is why the organisation
+         says five programmes rather than fifty sessions a week, and why employing music
+         educators properly is the second social aim rather than a nice idea. The work does not
+         scale on one person, and it is not meant to.</p>
+      <p class="mt-3">He graduated from TU Dublin Conservatoire with a Bachelor of Music (Hons)
+         in Performance in May 2026, studying clarinet with Dr Paul Roe alongside organ, cello
+         and piano. His final-year research was a practice-based study of the ten-week recorder
+         ensemble he designed and led for seven retired Presentation Sisters in Dublin — the
+         work the whole teaching programme is built on.</p>
     </div>
-    <div>
-      <ul class="plainlist reveal">
-        <li><strong>Clarinet</strong> — Dr Paul Roe, TU Dublin Conservatoire</li>
-        <li><strong>Organ</strong> — Simon Harden</li>
-        <li><strong>Conducting</strong> — IAYO · London Conducting Workshop</li>
-        <li><strong>Social enterprise</strong> — TU Dublin Venture Lab</li>
-        <li><strong>Scholarship</strong> — Myongdohoe, Lay Apostolate Committee,
-            Catholic Bishops&rsquo; Conference of Korea</li>
-      </ul>
+    <div class="reveal">
+      <div class="callout">
+        <h3 class="h-sub">Church and community, one practice</h3>
+        <p class="small mt-2">Music Director at Our Lady of Dolours Church, Dolphin&rsquo;s Barn
+           since September 2022, and principal Sunday organist at the Church of the Three
+           Patrons, Rathgar since September 2023 — Holy Week liturgies, school and remembrance
+           Masses, funerals and parish concerts.</p>
+        <p class="small mt-2">For parish and religious audiences the work is described as a lay
+           apostolate through music: a ministry of presence rather than a concert series. It is
+           the same practice as the community work, described to the people who asked for it.</p>
+      </div>
+      <div class="quote mt-4">
+        <p>&ldquo;Through music, he offers encouragement, dignity, and spiritual accompaniment to
+           those who may otherwise feel isolated.&rdquo;</p>
+        <cite>Donal Roche, Auxiliary Bishop of Dublin &middot; 16 February 2026</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Training and roles</p>
+      <h2 class="h-md">Where the practice comes from.</h2>
+    </div>
+    <div class="split reveal">
+      <div>
+        <h3 class="h-sub">Education and training</h3>
+        <ul class="plainlist mt-2">
+          <li><strong>BMus (Hons) in Performance</strong> — TU Dublin Conservatoire,
+              2022–2026</li>
+          <li><strong>Clarinet</strong> — Dr Paul Roe</li>
+          <li><strong>Organ</strong> — Simon Harden &middot; <strong>Cello</strong> — Arun Rao
+              &middot; <strong>Piano</strong> — Sam Armstrong</li>
+          <li><strong>Conducting</strong> — Irish Association of Youth Orchestras &middot;
+              London Conducting Workshop &middot; TU Dublin Special Studies</li>
+          <li><strong>Social enterprise</strong> — TU Dublin Venture Lab, from September 2024</li>
+          <li><strong>Scholarship</strong> — Myongdohoe, Lay Apostolate Committee, Catholic
+              Bishops&rsquo; Conference of Korea, from March 2025</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="h-sub">Current roles</h3>
+        <ul class="plainlist mt-2">
+          <li><strong>Founder &amp; Project Lead</strong> — <span class="brandname">Classical
+              Music for Everyone</span>, from January 2024</li>
+          <li><strong>Founder, Music Director &amp; Conductor</strong> — Letters Ensemble,
+              from January 2024</li>
+          <li><strong>Music Director</strong> — Our Lady of Dolours Church, Dolphin&rsquo;s Barn,
+              from September 2022</li>
+          <li><strong>Organist</strong> — Church of the Three Patrons, Rathgar,
+              from September 2023</li>
+          <li><strong>Student Ambassador</strong> — TU Dublin, from August 2024</li>
+        </ul>
+        <h3 class="h-sub mt-4">Before this</h3>
+        <ul class="plainlist mt-2">
+          <li><strong>Baram</strong>, 2023–24 — a Korean traditional and classical duo;
+              embassy events and cultural exhibitions</li>
+          <li><strong>Chorus of Angels</strong>, 2023 — a children&rsquo;s choir for Korean and
+              mixed-heritage children in Dublin</li>
+          <li><strong>At Home Ensemble Project</strong>, 2020–21 — a virtual wind ensemble
+              during Covid-19</li>
+        </ul>
+      </div>
+    </div>
+    <div class="split reveal mt-4">
+      <div>
+        <h3 class="h-sub">Volunteering</h3>
+        <ul class="plainlist mt-2">
+          <li>World Youth Day, Lisbon, 2023 — logistics, music, liturgy, language assistance</li>
+          <li>ICA ClarinetFest, Dublin, 2024 — support and interpreting</li>
+          <li>13th Dublin International Piano Competition, 2025 — Team Harmony</li>
+          <li>Jubilee of Youth, Rome, 2025 &middot; Korea Festival, Farmleigh House, 2025</li>
+        </ul>
+        <p class="small mt-2">Portugal and Italy appear here as volunteering. The four countries
+           in our record are the four we have <em>performed</em> in.</p>
+      </div>
+      <div>
+        <h3 class="h-sub">Collaborating artists</h3>
+        <ul class="plainlist mt-2">
+          <li><strong>Dr Soo-Jung Ann</strong>, piano — Doctor of Music, RIAM 2022; first prize,
+              58th Maria Canals International Competition</li>
+          <li><strong>Hyelee Jung</strong>, soprano — Silla University; Conservatorio di Santa
+              Cecilia, Rome</li>
+          <li><strong>Jaewon Kim</strong>, haegeum — guest artist for <em>Shared Voices of
+              Care</em> and <em>An Autumn Concert</em>, 2026</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -372,6 +467,148 @@ ABOUT = f"""<section class="page-hero">
   </div>
 </section>
 
+<section>
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">What we run</p>
+      <h2>Five programmes, each with its own page.</h2>
+      <p>Two pillars — teaching people to play, and playing for people who cannot easily get to
+         a concert hall. Each programme is described at the same length, with the same facts, in
+         the same order, and none of them is the main one.</p>
+    </div>
+    <div class="reveal">{dg.loop(L)}</div>
+    <div class="btn-row reveal">
+      <a class="btn btn-primary" href="programmes.html">All five in detail <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-quiet" href="get-involved.html">Ways to take part</a>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">Identity</p>
+      <h2>The design standard, in the open.</h2>
+      <p>Everything a small organisation puts its name on has to look like it came from the same
+         place, whether it was made in a design tool or typed into a parish newsletter. This is
+         the standard we hold ourselves to, published so that partners printing something on our
+         behalf can hold us to it too.</p>
+    </div>
+
+    <div class="split split-center reveal">
+      <div class="logo-pair">
+        <figure class="logo-plate on-light">
+          <img src="assets/logo-horizontal.svg" width="341" height="131"
+               alt="The horizontal logo: a treble clef beside the wordmark">
+          <figcaption>On light — the default</figcaption>
+        </figure>
+        <figure class="logo-plate on-dark">
+          <img src="assets/logo-reversed.svg" width="341" height="131"
+               alt="The reversed logo, for dark backgrounds">
+          <figcaption>On navy — reversed</figcaption>
+        </figure>
+      </div>
+      <div>
+        <h3 class="h-sub">The mark</h3>
+        <p class="mt-2">A treble clef with the wordmark, adopted on 17 August 2026. The
+           proportion inside the wordmark carries the meaning and never changes:
+           <strong>&ldquo;for&rdquo; small, &ldquo;Everyone&rdquo; large and gold.</strong> The
+           name is a proper noun with one shape — <span class="brandname">Classical Music for
+           Everyone</span> — and is never set in all capitals, never abbreviated to CMFE in
+           public copy, and never reset in another typeface.</p>
+        <div class="rules mt-3">
+          <div class="do">
+            <h3 class="h-sub">Always</h3>
+            <ul>
+              <li>Clef and wordmark together</li>
+              <li>Clear space of half the clef&rsquo;s width, on all four sides</li>
+              <li>Light ground → horizontal; dark ground → reversed</li>
+              <li>On a photograph, place it where the area behind it is quiet</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3 class="h-sub">Never</h3>
+            <ul>
+              <li>Stretch, squash, skew or recolour it</li>
+              <li>Add a shadow, outline or glow</li>
+              <li>Make &ldquo;for&rdquo; and &ldquo;Everyone&rdquo; the same size</li>
+              <li>Use the clef alone above favicon size</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head reveal mt-4">
+      <h3 class="h-sub">Colour</h3>
+      <p>Eight values, defined once. Every colour on this site resolves to one of them or to a
+         tint derived from one — a component never invents a colour of its own.</p>
+    </div>
+    <div class="swatches reveal">
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--ink-navy)"></i><b>Ink Navy</b><code>#1D2430</code>
+        <span>Logo base, body text, dark bands</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-bronze)"></i><b>Gold Bronze</b><code>#B8893A</code>
+        <span>Logo gold, rules, arrows, diagram strokes</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-light)"></i><b>Light Gold</b><code>#D9B36A</code>
+        <span>The gold of the reversed logo, and on dark grounds</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--warm-cream)"></i><b>Warm Cream</b><code>#FAF5EE</code>
+        <span>The background of nearly every page</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--soft-navy)"></i><b>Soft Navy</b><code>#33405C</code>
+        <span>Panels and blocks in print material</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--antique-gold)"></i><b>Antique Gold</b><code>#B4914F</code>
+        <span>Accents in print material</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--dusty-rose)"></i><b>Dusty Rose</b><code>#8C4A56</code>
+        <span>Highlight — used sparingly, never for body text</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--slate)"></i><b>Slate</b><code>#5F6B7D</code>
+        <span>Secondary text</span></div>
+    </div>
+    <div class="callout reveal mt-3">
+      <p class="small"><strong>One rule that costs us the prettier option.</strong> Gold Bronze
+         is a 2.9:1 contrast against cream, which fails at body size. So gold as <em>text</em> is
+         always the darkened <code>#7F5C1C</code>, and the gold buttons carry ink navy lettering
+         rather than white. Every text and background pair on this site meets WCAG AA. The logo
+         is the one thing exempt, because a logo is an image and is never recoloured.</p>
+    </div>
+
+    <div class="section-head reveal mt-4">
+      <h3 class="h-sub">Type</h3>
+      <p>Three faces and no fourth. Fraunces is an optical-size serif, so its tracking is set
+         separately at every step of the scale; Korean gets more leading and less negative
+         tracking, because Noto Sans KR needs both.</p>
+    </div>
+    <div class="specimen reveal">
+      <div>
+        <dfn>Fraunces — headings</dfn>
+        <div class="sp-display">Bringing classical music where it&rsquo;s needed.</div>
+        <p>SemiBold. Titles, headlines and display sizes.</p>
+      </div>
+      <div>
+        <dfn>Plus Jakarta Sans — body and labels</dfn>
+        <div class="sp-body">We teach people to play, not only to listen.</div>
+        <p>Regular, SemiBold, Bold. Body text, tables, captions, every label.</p>
+      </div>
+      <div>
+        <dfn>Noto Sans KR — Korean</dfn>
+        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로.</div>
+        <p>Regular, Medium, Bold. Headings and body alike on the Korean pages.</p>
+      </div>
+      <div>
+        <dfn>Cormorant Garamond — logo only</dfn>
+        <div class="sp-body">Used for the wordmark and nowhere else.</div>
+        <p>The lettering in the logo is outlined, so the face is never loaded on this site.</p>
+      </div>
+    </div>
+
+    <div class="section-head reveal mt-4">
+      <h3 class="h-sub">Diagrams</h3>
+      <p>Where an explanation runs past about eighty words, it stops being a paragraph and
+         becomes a figure. Every figure on this site is drawn from the same four marks, so nine
+         diagrams read as one set rather than nine flowcharts.</p>
+    </div>
+    <div class="reveal">{dg.vocabulary(L)}</div>
+  </div>
+</section>
+
 {CTA}"""
 
 
@@ -398,17 +635,17 @@ PROGRAMMES = f"""<section class="page-hero">
           <th scope="col">Status</th><th scope="col">Delivered to date</th>
         </tr></thead>
         <tbody>
-          <tr><td><strong>Recorder Ensemble course</strong></td><td>Learning</td>
+          <tr><td><strong><a class="link" href="programmes/recorder-ensemble.html">Recorder Ensemble course</a></strong></td><td>Learning</td>
               <td>Running</td><td>Pilot complete; first community class from Sept 2026</td></tr>
-          <tr><td><strong>Getting to Know Classical Music</strong></td><td>Learning</td>
+          <tr><td><strong><a class="link" href="programmes/getting-to-know.html">Getting to Know Classical Music</a></strong></td><td>Learning</td>
               <td>Running · free</td><td>17 lecture-recitals · 143 attendances</td></tr>
-          <tr><td><strong>Concert Guide &amp; Companion</strong></td><td>Learning</td>
+          <tr><td><strong><a class="link" href="programmes/concert-companion.html">Concert Guide &amp; Companion</a></strong></td><td>Learning</td>
               <td>Running</td><td>10 recorded outings, incl. two summers at the BBC Proms</td></tr>
-          <tr><td><strong>Outreach Concerts</strong></td><td>Sharing</td>
+          <tr><td><strong><a class="link" href="programmes/outreach-concerts.html">Outreach Concerts</a></strong></td><td>Sharing</td>
               <td>Running</td><td>20 performances · 4 countries · 15+ venues</td></tr>
           <tr><td style="padding-inline-start:34px">↳ Bringing Music to Sacred Places</td><td>Sharing</td>
               <td>Sub-strand</td><td>Around 16 of the 20 outreach performances</td></tr>
-          <tr><td><strong>Letters Ensemble</strong></td><td>Sharing</td>
+          <tr><td><strong><a class="link" href="programmes/letters-ensemble.html">Letters Ensemble</a></strong></td><td>Sharing</td>
               <td>Running</td><td>4 formal concerts · weekly rehearsals since Jan 2024</td></tr>
         </tbody>
       </table>
@@ -437,6 +674,7 @@ PROGRAMMES = f"""<section class="page-hero">
         <dt>Ends with</dt><dd>A short concert for family and friends</dd>
         <dt>Running now</dt><dd>Mulhuddart Community Centre, Dublin 15 · Wednesdays 7:00–8:00pm from 9 September 2026 · free</dd>
       </dl>
+      <div class="btn-row"><a class="btn btn-quiet" href="programmes/recorder-ensemble.html">Full detail <span class="arrow">&rarr;</span></a></div>
     </div>
   </div>
 </section>
@@ -461,6 +699,7 @@ PROGRAMMES = f"""<section class="page-hero">
         <dt>Cost</dt><dd>Free</dd>
         <dt>To date</dt><dd>17 sessions · 143 attendances</dd>
       </dl>
+      <div class="btn-row"><a class="btn btn-quiet" href="programmes/getting-to-know.html">Full detail <span class="arrow">&rarr;</span></a></div>
     </div>
   </div>
 </section>
@@ -485,6 +724,7 @@ PROGRAMMES = f"""<section class="page-hero">
         <dt>Cost</dt><dd>Tickets can be as little as £8</dd>
         <dt>To date</dt><dd>10 recorded outings</dd>
       </dl>
+      <div class="btn-row"><a class="btn btn-quiet" href="programmes/concert-companion.html">Full detail <span class="arrow">&rarr;</span></a></div>
     </div>
   </div>
 </section>
@@ -509,6 +749,7 @@ PROGRAMMES = f"""<section class="page-hero">
         <dt>Since</dt><dd>2023</dd>
         <dt>To date</dt><dd>20 performances · 15+ venues · 4 countries</dd>
       </dl>
+      <div class="btn-row"><a class="btn btn-quiet" href="programmes/outreach-concerts.html">Full detail <span class="arrow">&rarr;</span></a></div>
     </div>
   </div>
 </section>
@@ -533,6 +774,7 @@ PROGRAMMES = f"""<section class="page-hero">
         <dt>Open to</dt><dd>Amateur musicians</dd>
         <dt>To date</dt><dd>4 formal concerts</dd>
       </dl>
+      <div class="btn-row"><a class="btn btn-quiet" href="programmes/letters-ensemble.html">Full detail <span class="arrow">&rarr;</span></a></div>
     </div>
   </div>
 </section>
@@ -596,7 +838,7 @@ PROGRAMMES = f"""<section class="page-hero">
 # Get involved
 # ---------------------------------------------------------------------------
 
-GET_INVOLVED = """<section class="page-hero">
+GET_INVOLVED = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Get involved</p>
     <h1>Four ways in. Pick the one that sounds like you.</h1>
@@ -640,6 +882,42 @@ GET_INVOLVED = """<section class="page-hero">
            liability insurance and complete Garda vetting where the work requires it.</p>
         <div class="meta">Dublin, Wicklow, Meath, Louth and beyond</div>
       </article>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">How the four fit together</p>
+      <h2>They are four sentences, not four application forms.</h2>
+      <p>Nobody has to pick the right one. Most of the people playing with us now started by
+         coming to listen, and two of the rooms we play in were offered by someone who had come
+         to a concert.</p>
+    </div>
+    <div class="reveal">{dg.pathways(L)}</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">What happens after you write</p>
+      <h2 class="h-md">No form, no waiting list, no interview.</h2>
+      <p class="mt-3">Every enquiry goes to the founder directly and is answered by a person who
+         will be in the room with you. There is nothing to fill in and nothing to attach.</p>
+    </div>
+    <div class="reveal">
+      <ol class="steps">
+        <li><strong>You write one line.</strong> What you are asking about, and roughly where
+            you are. That is genuinely enough.</li>
+        <li><strong>We reply with the practical details</strong> — the venue, the day, the time,
+            what it costs, and what to bring. Usually within a few days.</li>
+        <li><strong>You come once and see.</strong> Nobody is committing to a term by turning up
+            to one session.</li>
+        <li><strong>If it is not the right fit,</strong> we will say so and point you at
+            something that is, including things we do not run.</li>
+      </ol>
     </div>
   </div>
 </section>

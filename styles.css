@@ -198,7 +198,7 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
 @keyframes draw-path{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 @keyframes note-drift{from{translate:0 4px}to{translate:0 -4px}}
 @keyframes wipe-in{
-  from{opacity:0;clip-path:inset(16% 0 0 0);scale:1.05}
+  from{opacity:.25;clip-path:inset(9% 0 0 0);scale:1.03}
   to  {opacity:1;clip-path:inset(0 0 0 0);scale:1}
 }
 @keyframes draw-rule{from{scale:0 1}to{scale:1 1}}
@@ -217,24 +217,30 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
     .progress{animation:progress-grow linear both;animation-timeline:scroll(root block)}
   }
   @supports (animation-timeline:view()){
+    /* Ranges end early on purpose. A range that finishes at `entry 86%` leaves
+       everything in the lower third of the viewport sitting at partial opacity
+       when a page first paints, which reads as a permanently blurred bottom
+       half rather than as an animation. Finishing inside `entry 45–60%` means
+       an element is fully opaque as soon as it is properly on screen, and the
+       fold is never the thing holding it back. */
     .reveal{
-      animation:rise-in linear both;
+      animation:rise-in-soft linear both;
       animation-timeline:view();
-      animation-range:entry 12% entry 86%;
+      animation-range:entry 5% entry 48%;
     }
     /* stagger: each later child starts its range a little further in, so a
        row of five arrives as a sweep rather than all at once */
-    .stagger>*{animation:rise-in linear both;animation-timeline:view();animation-range:entry 12% entry 84%}
-    .stagger>*:nth-child(2){animation-range:entry 17% entry 89%}
-    .stagger>*:nth-child(3){animation-range:entry 22% entry 94%}
-    .stagger>*:nth-child(4){animation-range:entry 27% entry 99%}
-    .stagger>*:nth-child(5){animation-range:entry 32% cover 4%}
-    .stagger>*:nth-child(6){animation-range:entry 37% cover 9%}
+    .stagger>*{animation:rise-in-soft linear both;animation-timeline:view();animation-range:entry 5% entry 44%}
+    .stagger>*:nth-child(2){animation-range:entry 8% entry 47%}
+    .stagger>*:nth-child(3){animation-range:entry 11% entry 50%}
+    .stagger>*:nth-child(4){animation-range:entry 14% entry 53%}
+    .stagger>*:nth-child(5){animation-range:entry 17% entry 56%}
+    .stagger>*:nth-child(6){animation-range:entry 20% entry 59%}
 
     /* the eyebrow rule draws out from its origin */
     .eyebrow::before{
       animation:draw-rule linear both;
-      animation-timeline:view();animation-range:entry 20% entry 70%;
+      animation-timeline:view();animation-range:entry 10% entry 46%;
     }
 
     /* diagrams: the arrows draw themselves, then the labels on them arrive.
@@ -244,19 +250,22 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
     .diagram .dg-draw{
       stroke-dasharray:1;
       animation:draw-path linear both;
-      animation-timeline:--dg;animation-range:entry 24% cover 18%;
+      animation-timeline:--dg;animation-range:entry 20% entry 90%;
     }
     .diagram .dg-late{
       animation:fade-in linear both;
-      animation-timeline:--dg;animation-range:cover 8% cover 26%;
+      animation-timeline:--dg;animation-range:entry 60% cover 6%;
     }
     .hero::after{
       animation:note-drift 7s var(--ease) infinite alternate;
     }
 
+    /* the photographic wipe is the one thing that used to make a half-scrolled
+       page look genuinely out of focus; it now completes well before the
+       photograph reaches the middle of the screen */
     .photo>img{
       animation:wipe-in linear both;
-      animation-timeline:view();animation-range:entry 8% entry 78%;
+      animation-timeline:view();animation-range:entry 2% entry 40%;
     }
     /* the hero photograph already arrives with .lift on its figure; a second
        scroll-driven wipe on top of that leaves it blank above the fold */
@@ -268,7 +277,7 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
     .rule-draw{
       transform-origin:0 50%;
       animation:draw-rule linear both;
-      animation-timeline:view();animation-range:entry 20% entry 80%;
+      animation-timeline:view();animation-range:entry 10% entry 50%;
     }
   }
   /* hero runs on load, not on scroll */
@@ -282,6 +291,14 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
 
 ::view-transition-old(root){animation:vt-out var(--dur-5) var(--ease-exit) both}
 ::view-transition-new(root){animation:vt-in var(--dur-slow) var(--ease-enter-expressive) both}
+/* The header and the mark are the same objects on the next page, so they are
+   named and therefore carried across the navigation rather than cross-faded
+   out and back in. Without this the logo blinks on every click, which is the
+   single thing that makes a multi-page site feel like a set of documents. */
+::view-transition-group(site-header),
+::view-transition-group(brand-mark){animation-duration:var(--dur-slow)}
+::view-transition-old(site-header),::view-transition-new(site-header),
+::view-transition-old(brand-mark),::view-transition-new(brand-mark){animation:none}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition-duration:1ms !important}
@@ -303,7 +320,10 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
 }
 .header-inner{display:flex;align-items:center;gap:20px;min-height:74px}
 .brand{margin-inline-end:auto;display:flex;align-items:center}
-.brand img{height:46px;width:auto;transition:opacity var(--dur-3) var(--ease)}
+.brand img{
+  height:46px;width:auto;transition:opacity var(--dur-3) var(--ease);
+  view-transition-name:brand-mark;
+}
 .brand:hover img{opacity:.72}
 
 .nav{display:flex;align-items:center;gap:4px}
@@ -972,3 +992,152 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
   .site-footer{background:#fff;color:#333;border-top:1px solid #ccc}
   .site-footer :is(a,h3){color:#333}
 }
+
+/* ==========================================================================
+   17. PROGRAMME DETAIL PAGES
+
+   Five pages built from one renderer (_build/programmes_sub.py). Nothing in
+   here may make one programme's page look more important than another's —
+   the parity that the .grid-5 cards enforce on the home page has to survive
+   one level down as well.
+   ========================================================================== */
+
+/* the detail hero carries buttons, so it needs a little more room under the
+   lead than the plain interior hero does */
+.page-hero-lead p{max-width:34em}
+.page-hero-lead .btn-row{margin-top:30px}
+
+/* the breadcrumb sits inside the eyebrow, so it inherits the tracking and the
+   uppercasing; only the underline marks it as a link */
+.crumb{
+  color:var(--accent-inverse);border-bottom:1px solid color-mix(in srgb,var(--accent-inverse) 45%,transparent);
+  transition:border-color var(--dur-3) var(--ease),color var(--dur-3) var(--ease);
+}
+.crumb:hover{color:var(--fg-inverse);border-bottom-color:var(--fg-inverse)}
+.page-hero .eyebrow span[aria-hidden]{opacity:.45;margin-inline:4px}
+
+/* a numbered sequence — the same list as .checklist, but the order matters */
+.steps{list-style:none;margin:0;padding:0;counter-reset:step}
+.steps li{
+  position:relative;padding-inline-start:44px;margin-bottom:16px;font-size:16px;
+  counter-increment:step;
+}
+.steps li:last-child{margin-bottom:0}
+.steps li::before{
+  content:counter(step,decimal-leading-zero);
+  position:absolute;inset-inline-start:0;top:.08em;
+  font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.06em;
+  color:var(--accent-ink);font-variant-numeric:lining-nums;
+}
+.steps li::after{
+  content:"";position:absolute;inset-inline-start:2px;top:2.05em;bottom:-.55em;
+  width:1px;background:var(--line-strong);
+}
+.steps li:last-child::after{display:none}
+html[lang^="ko"] .steps li::before{font-family:var(--font-kr)}
+
+/* the other-four strip is four of the same card the home page uses; it has to
+   stay the same card, so only the grid changes */
+@media (max-width:1080px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+
+/* ==========================================================================
+   18. IDENTITY — the design system, shown rather than described
+
+   Used on the About page. These are specimens, not decoration: the swatch
+   prints the hex it is actually painting, and the type rows are set in the
+   faces they name.
+   ========================================================================== */
+.swatches{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;
+}
+@media (max-width:880px){.swatches{grid-template-columns:repeat(2,1fr)}}
+.swatch{background:var(--surface-raised);padding:0 0 18px}
+.swatch i{
+  display:block;height:78px;border-bottom:1px solid var(--line);
+  background:var(--sw);
+}
+.swatch b,.swatch span,.swatch code{display:block;padding-inline:18px}
+.swatch b{
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg);margin-top:16px;
+}
+html[lang^="ko"] .swatch b{font-family:var(--font-kr);letter-spacing:.05em}
+.swatch code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+  color:var(--accent-ink);margin-top:7px;letter-spacing:.04em;
+}
+.swatch span{font-size:13px;color:var(--fg-muted);margin-top:6px;line-height:1.45}
+
+/* type specimen — each row is set in the face it is naming */
+.specimen{
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface-raised);overflow:hidden;
+}
+.specimen>div{padding:24px 26px;border-bottom:1px solid var(--line)}
+.specimen>div:last-child{border-bottom:0}
+.specimen dfn{
+  display:block;font-family:var(--font-body);font-style:normal;
+  font-size:var(--t-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-ink);margin-bottom:12px;
+}
+html[lang^="ko"] .specimen dfn{font-family:var(--font-kr);letter-spacing:.05em}
+.specimen p{font-size:13px;color:var(--fg-muted);margin:10px 0 0}
+.sp-display{font-family:var(--font-display);font-size:clamp(28px,3.2vw,40px);
+  font-weight:600;color:var(--fg);line-height:1.1;letter-spacing:-.022em}
+.sp-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;color:var(--fg);line-height:1.5}
+.sp-kr{font-family:var(--font-kr);font-size:19px;color:var(--fg);line-height:1.62}
+
+/* the logo, shown on both grounds it is allowed to sit on, and nowhere else */
+.logo-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:640px){.logo-pair{grid-template-columns:1fr}}
+.logo-plate{
+  display:grid;place-items:center;min-height:180px;padding:34px;
+  border:1px solid var(--line);border-radius:var(--radius);
+}
+.logo-plate img{width:min(240px,80%);height:auto}
+.logo-plate.on-light{background:var(--surface-raised)}
+.logo-plate.on-dark{background:var(--surface-inverse);border-color:var(--surface-inverse)}
+.logo-plate figcaption{
+  grid-column:1;margin-top:20px;font-size:12.5px;color:var(--fg-muted);text-align:center;
+}
+.logo-plate.on-dark figcaption{color:var(--fg-inverse-muted)}
+
+/* the do / do-not pair — deliberately plain, because it is a rule list */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:760px){.rules{grid-template-columns:1fr}}
+.rules ul{list-style:none;margin:12px 0 0;padding:0;font-size:15px}
+.rules li{position:relative;padding-inline-start:26px;padding-block:7px;color:var(--fg-body)}
+.rules li::before{
+  position:absolute;inset-inline-start:0;top:7px;font-weight:700;font-size:14px;
+}
+.rules .do li::before{content:"✓";color:var(--accent-ink)}
+.rules .dont li::before{content:"✕";color:var(--dusty-rose)}
+
+/* the organisation's name, wherever it is set as running text. It is a proper
+   noun with a fixed shape — capital C, M, E and a lower-case "for" — so it is
+   never allowed to inherit a text-transform from the block it lands in. */
+.brandname{text-transform:none !important;font-variant:normal;white-space:nowrap}
+@media (max-width:520px){.brandname{white-space:normal}}
+
+/* the master line — the whole organisation in one sentence (06 §5). It sits
+   above the descriptive tagline in the footer of every page. */
+.footer-line{
+  font-family:var(--font-display);font-size:20px;line-height:1.32;font-weight:600;
+  color:var(--fg-inverse);letter-spacing:-.016em;margin:20px 0 10px;max-width:14em;
+}
+html[lang^="ko"] .footer-line{font-family:var(--font-kr);font-size:18px;line-height:1.5;letter-spacing:-.03em}
+
+/* The five programme cards are links now, so they need to say so. The arrow
+   is positioned rather than made a flex item, because .meta::before is already
+   the gold rule and turning .meta into a flex container would break it. */
+.prog-body{position:relative}
+.prog .meta{padding-inline-end:26px}
+.prog-body::after{
+  content:"\2192";position:absolute;inset-inline-end:0;inset-block-end:-2px;
+  font-size:15px;line-height:1;color:var(--accent-ink);
+  transition:translate var(--dur-4) var(--ease-enter);
+}
+.prog:hover .prog-body::after{translate:4px 0}
+.prog:focus-visible{outline:2px solid var(--ring);outline-offset:3px}

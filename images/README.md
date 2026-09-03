@@ -45,14 +45,20 @@ gradient do the work.
 |---|---|---|
 | `hero-outreach.jpg` | Home hero | Letters Ensemble, St Patrick's Day concert for a religious community |
 | `church-concert.jpg` | Home photo band | Ensemble in a church |
-| `conducting.jpg` | Home card 1 + Programmes: Recorder Ensemble | Conducting a small ensemble |
-| `lecture-recital.jpg` | Home card 2 + Programmes: Getting to Know Classical Music | A lecture-recital in progress |
-| `quartet-hall.jpg` | Home card 3 + Programmes: Concert Guide + News + Get involved band | Ensemble performing in a bright hall |
-| `care-christmas.jpg` | Home card 4 + Programmes: Outreach Concerts | Quartet in a care setting at Christmas |
-| `letters-ensemble.jpg` | Home card 5 + Programmes: Letters Ensemble + News | The Letters Ensemble with their instruments |
+| `conducting.jpg` | Home card 1 + Programmes + `programmes/recorder-ensemble` | Conducting a small ensemble |
+| `lecture-recital.jpg` | Home card 2 + Programmes + `programmes/getting-to-know` | A lecture-recital in progress |
+| `quartet-hall.jpg` | Home card 3 + Programmes + `programmes/concert-companion` + News + Get involved band | Ensemble performing in a bright hall |
+| `care-christmas.jpg` | Home card 4 + Programmes + `programmes/outreach-concerts` | Quartet in a care setting at Christmas |
+| `letters-ensemble.jpg` | Home card 5 + Programmes + `programmes/letters-ensemble` | The Letters Ensemble with their instruments |
 | `community-room.jpg` | spare | Clarinet in a community room |
 | `clarinet.jpg` | About | The founder playing at a parish liturgy |
 | `organ.jpg` | About band | Organ console |
+
+Each programme detail page uses its own photograph three times — the figure, the
+closing photographic band, and the card for it in the "other four" strip at the foot of
+the other pages. That is deliberate: a programme is identified by one image everywhere it
+appears, so a reader recognises it before reading the name. Replacing that one file
+updates all three places at once, in both languages.
 
 The five home cards and the five programme blocks use **one photograph each, in the
 same order**. That pairing is what makes the five programmes read as equals — do not

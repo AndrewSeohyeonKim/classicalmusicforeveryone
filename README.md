@@ -9,7 +9,8 @@ needed to view or edit it — open any `.html` file in a browser.
 | Path | What it is |
 |---|---|
 | `index.html` and the six pages beside it | The English site |
-| `ko/` | The Korean site — the same seven pages |
+| `programmes/` | One detail page per programme — five more English pages |
+| `ko/` | The Korean site — the same twelve pages, same structure |
 | `styles.css` | The one stylesheet both languages share |
 | `assets/` | Official logo files, copied from `10_CMFE_로고·브랜드셋업/` |
 | `images/` | Photographs used on the site |
@@ -22,7 +23,7 @@ needed to view or edit it — open any `.html` file in a browser.
 
 **A small text change** — edit the `.html` file directly and commit. Remember that
 each page carries its own copy of the header and footer, so a change to the
-navigation has to be made in all fourteen files (or made once in `_build/` and
+navigation has to be made in all twenty-four files (or made once in `_build/` and
 rebuilt, which is easier).
 
 **A change to structure, navigation, or anything repeated** — edit the files in
@@ -32,13 +33,15 @@ rebuilt, which is easier).
 python3 _build/build.py
 ```
 
-That rewrites all fourteen pages plus `sitemap.xml` and `robots.txt`. It never
+That rewrites all twenty-four pages plus `sitemap.xml` and `robots.txt`. It never
 touches `styles.css`, `assets/` or `images/`.
 
 - `_build/layout.py` — the shell: `<head>`, header, navigation, footer, site URL
 - `_build/content_en.py` — English page content
 - `_build/content_ko.py` — Korean page content
-- `_build/diagrams.py` — the four inline-SVG diagrams, with labels in both languages
+- `_build/diagrams.py` — the ten inline-SVG diagrams, with labels in both languages
+- `_build/programmes_sub.py` — the shared skeleton for the five programme detail pages
+- `_build/prog_en.py`, `_build/prog_ko.py` — the prose for those five, one file per language
 - `_build/notfound.py` — the 404 page
 - `_build/build.py` — page titles, meta descriptions, the 404 and the sitemap
 - `_build/add-photo.sh` — resize and compress a photograph for `images/`

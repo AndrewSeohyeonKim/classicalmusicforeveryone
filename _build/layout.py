@@ -38,6 +38,7 @@ STR = {
         "lang_label": "Language",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "EN", "other_lang": "한국어",
+        "tagline": "Bringing classical music where it&rsquo;s needed.",
         "footer_about": ("We teach people to play — not only to listen — and bring live "
                          "classical music to the places it rarely reaches."),
         "f_explore": "Explore",
@@ -55,6 +56,7 @@ STR = {
         "lang_label": "언어",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "한국어", "other_lang": "EN",
+        "tagline": "클래식 음악을, 그것이 필요한 곳으로.",
         "footer_about": ("듣는 데서 그치지 않고 직접 연주하도록 가르치고, "
                          "클래식 음악이 잘 닿지 않는 곳으로 찾아갑니다."),
         "f_explore": "둘러보기",
@@ -95,17 +97,8 @@ JSONLD = """<script type="application/ld+json">
 </script>"""
 
 
-def _images(body, eager_first, prefix=""):
-    """Lazy-load every image; the hero, if there is one, loads eagerly.
-
-    Also resolves image paths. Both content files write `src="images/…"`, and
-    the prefix back to the site root is added here — a Korean page lives in
-    ko/, so it needs ../images/. Doing it here rather than in the content
-    files means the two languages stay byte-identical in this respect and a
-    new photograph cannot be added with the wrong path in one of them.
-    """
-    if prefix:
-        body = body.replace('src="images/', f'src="{prefix}images/')
+def _images(body, eager_first):
+    """Lazy-load every image; the hero, if there is one, loads eagerly."""
     out, first = [], True
     for chunk in re.split(r"(<img\b)", body):
         if chunk == "<img":
@@ -120,29 +113,69 @@ def _images(body, eager_first, prefix=""):
     return "".join(out)
 
 
-def _prefix(lang):
-    """Relative path back to the site root from a page in this language."""
-    return "" if lang == "en" else "../"
+# ---------------------------------------------------------------------------
+# Paths
+#
+# A page may live one level down — programmes/recorder-ensemble.html — and the
+# Korean twin of that is two levels down, in ko/programmes/. Two different
+# prefixes fall out of that, and confusing them is exactly how the Korean nav
+# once pointed at the English pages:
+#
+#   _here  … back to the top of THIS language's tree. Page-to-page links use
+#            it, because ko/about.html is the Korean about page.
+#   _root  … back to the site root. Shared files — assets/, images/,
+#            styles.css — use it, because there is only one copy of them.
+#
+# Content files write every path root-relative (`href="programmes.html"`,
+# `src="images/x.jpg"`); the right prefix is bolted on here, in one place, so
+# a new sub-page cannot end up with a broken path in one language only.
+# ---------------------------------------------------------------------------
+
+SHARED = ("images/", "assets/", "styles.css")
+
+
+def _here(slug):
+    """Prefix from this page back to the top of its own language tree."""
+    return "../" * slug.count("/")
+
+
+def _root(lang, slug):
+    """Prefix from this page back to the site root."""
+    return "../" * (slug.count("/") + (0 if lang == "en" else 1))
 
 
 def _switch(lang, slug):
-    return ("ko/" + slug) if lang == "en" else ("../" + slug)
+    r = _root(lang, slug)
+    return (r + "ko/" + slug) if lang == "en" else (r + slug)
+
+
+# a path that is already resolved, and must be left exactly as written
+_LINK = re.compile(r'\b(href|src)="(?!https?:|mailto:|tel:|data:|#|/|\.\.?/)([^"]*)"')
+
+
+def _relink(markup, here, root):
+    """Give every root-relative href/src in a body the prefix it needs."""
+    def sub(m):
+        attr, path = m.group(1), m.group(2)
+        pre = root if path.startswith(SHARED) else here
+        return f'{attr}="{pre}{path}"'
+    return _LINK.sub(sub, markup)
 
 
 def header(lang, slug):
-    p, s = _prefix(lang), STR[lang]
+    p, r, s = _here(slug), _root(lang, slug), STR[lang]
     rows = []
     for href, label in NAV[lang]:
         current = ' aria-current="page"' if href == slug else ""
-        rows.append(f'      <a class="nav-link" href="{href}"{current}>{label}</a>')
+        rows.append(f'      <a class="nav-link" href="{p}{href}"{current}>{label}</a>')
     links = "\n".join(rows)
     other = "ko" if lang == "en" else "en"
     return f"""<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">{s['skip']}</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="index.html" aria-label="{s['logo_alt']}">
-      <img src="{p}assets/logo-horizontal.svg" alt="{s['logo_alt']}"
+    <a class="brand" href="{p}index.html" aria-label="{s['logo_alt']}">
+      <img src="{r}assets/logo-horizontal.svg" alt="{s['logo_alt']}"
            width="120" height="46" fetchpriority="high" decoding="async">
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
@@ -153,21 +186,25 @@ def header(lang, slug):
         <span aria-current="true">{s['this_lang']}</span>
         <a href="{_switch(lang, slug)}" hreflang="{other}" lang="{other}">{s['other_lang']}</a>
       </div>
-      <a class="btn btn-accent btn-nav" href="contact.html">{s['contact']}</a>
+      <a class="btn btn-accent btn-nav" href="{p}contact.html">{s['contact']}</a>
     </nav>
   </div>
 </header>"""
 
 
-def footer(lang):
-    p, s = _prefix(lang), STR[lang]
-    links = "\n".join(f'        <a href="{h}">{t}</a>' for h, t in s["f_links"])
+def footer(lang, slug="index.html"):
+    p, r, s = _here(slug), _root(lang, slug), STR[lang]
+    # the footer language link always goes to the other language's home page,
+    # not to this page's twin — that is what the header switcher is for
+    home_other = r + ("ko/index.html" if lang == "en" else "index.html")
+    links = "\n".join(f'        <a href="{p}{h}">{t}</a>' for h, t in s["f_links"])
     return f"""<footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="{p}assets/logo-reversed.svg" alt="{s['logo_alt']}"
+        <img src="{r}assets/logo-reversed.svg" alt="{s['logo_alt']}"
              width="109" height="42" loading="lazy" decoding="async">
+        <p class="footer-line">{s['tagline']}</p>
         <p class="footer-tagline">{s['footer_about']}</p>
       </div>
       <div>
@@ -178,8 +215,8 @@ def footer(lang):
         <h3>{s['f_connect']}</h3>
         <a href="mailto:{EMAIL}">{EMAIL}</a>
         <a href="tel:{PHONE_TEL}">{PHONE_INTL}</a>
-        <a href="contact.html">{s['contact']}</a>
-        <a href="{_switch(lang, 'index.html')}">{s['other_lang']}</a>
+        <a href="{p}contact.html">{s['contact']}</a>
+        <a href="{home_other}">{s['other_lang']}</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -191,9 +228,10 @@ def footer(lang):
 
 
 def page(lang, slug, title, description, body):
-    p = _prefix(lang)
+    p, r = _here(slug), _root(lang, slug)
     sub = "" if slug == "index.html" else slug
-    body = _images(body, eager_first='<section class="hero">' in body, prefix=p)
+    body = _images(body, eager_first='<section class="hero">' in body)
+    body = _relink(body, p, r)
     jsonld = JSONLD.format(site=SITE_URL, desc=description.replace('"', "'"),
                            email=EMAIL, phone=PHONE_INTL,
                            lang="en-IE" if lang == "en" else "ko")
@@ -218,12 +256,12 @@ def page(lang, slug, title, description, body):
 <meta property="og:image" content="{SITE_URL}/images/hero-outreach.jpg">
 <meta property="og:locale" content="{'en_IE' if lang == 'en' else 'ko_KR'}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="{p}assets/logo-icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{p}assets/logo-icon.png">
+<link rel="icon" href="{r}assets/logo-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{r}assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
-<link rel="stylesheet" href="{p}styles.css">
+<link rel="stylesheet" href="{r}styles.css">
 {jsonld}
 </head>
 <body>
@@ -231,7 +269,7 @@ def page(lang, slug, title, description, body):
 <main id="main">
 {body}
 </main>
-{footer(lang)}
+{footer(lang, slug)}
 </body>
 </html>
 """

@@ -410,3 +410,423 @@ def subsidy(lang):
     p.append(f'    <text class="dg-sub" x="722" y="356" text-anchor="middle">{t["loop"]}</text>')
 
     return figure("0 0 1080 376", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 5. The lecture series — what changes in the listener, not what is covered
+# ---------------------------------------------------------------------------
+
+ARC = {
+    "en": dict(
+        title="What the three stages actually move",
+        caption=("The three stages are not three difficulty levels. They move ownership: "
+                 "the music starts as somebody else&rsquo;s, becomes something shared in the "
+                 "room, and ends up yours. Each session also stands on its own, so nobody "
+                 "arrives having missed the beginning."),
+        aria=("Three rising note-heads on a stave: Getting Closer, Experiencing Together and "
+              "Discovering My Taste, with arrows labelled 'listen without being tested' and "
+              "'say what you heard'. A dashed arc returns from the third stage to the entry "
+              "point, marked 'every session stands alone — start at any one'."),
+        entry="no prior knowledge",
+        steps=[(["Getting Closer"], ["the music is", "somebody else&rsquo;s"]),
+               (["Experiencing Together"], ["the music is", "the room&rsquo;s"]),
+               (["Discovering My Taste"], ["the music is", "yours"])],
+        edges=["listen without being tested", "say what you heard"],
+        loopback="every session stands alone — start at any one",
+    ),
+    "ko": dict(
+        title="세 단계가 실제로 옮기는 것",
+        caption=("세 단계는 난이도 세 칸이 아닙니다. 옮기는 것은 소유입니다 — 음악은 처음에 "
+                 "남의 것이었다가, 그 방이 함께 가진 것이 되고, 끝에는 내 것이 됩니다. "
+                 "동시에 각 회차는 그 자체로 완결돼 있어, 늦게 온 사람이 앞부분을 놓친 채로 "
+                 "앉아 있게 되지 않습니다."),
+        aria=("오선 위로 올라가는 음표 셋 — 친해지기, 함께 경험하기, 내 취향 찾기. 화살표에는 "
+              "‘평가받지 않고 듣기’와 ‘들은 것을 말해 보기’가 붙어 있고, 세 번째에서 입구로 "
+              "돌아오는 점선은 ‘각 회차는 그 자체로 완결 — 아무 회차나 첫 회차’를 뜻한다."),
+        entry="사전 지식 없이",
+        steps=[(["친해지기"], ["음악은 아직", "남의 것입니다"]),
+               (["함께 경험하기"], ["음악은 이 방이", "함께 가진 것입니다"]),
+               (["내 취향 찾기"], ["음악은 이제", "내 것입니다"])],
+        edges=["평가받지 않고 듣기", "들은 것을 말해 보기"],
+        loopback="각 회차는 그 자체로 완결 — 아무 회차나 첫 회차입니다",
+    ),
+}
+
+ARC_X = [300, 580, 860]
+ARC_Y = [216, 183, 150]
+
+
+def lecture_arc(lang):
+    t = ARC[lang]
+    p = []
+    p += stave(40, 1000, 150)
+
+    # the entry: an open note-head, because nothing is required to be there yet
+    p.append(note(120, 238, open_=True))
+    p.append(f'    <text class="dg-sub" x="120" y="278" text-anchor="middle">{t["entry"]}</text>')
+    p.append(draw("M140 232 C 200 232, 220 216, 278 216", width=1.75))
+    p.append(tri(286, 216))
+
+    for i, ((head, sub), x, y) in enumerate(zip(t["steps"], ARC_X, ARC_Y)):
+        p.append(note(x, y))
+        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 11}" x2="{x}" y2="300"/>')
+        p += lines(x, 326, head, cls="dg-h", anchor="middle")
+        p += lines(x, 352, sub, cls="dg-sub", step=20, anchor="middle")
+        if i < 2:
+            a, b = x + 22, ARC_X[i + 1] - 30
+            mid = (a + b) / 2
+            p.append(draw(f"M{a} {y - 4} C {mid} {y - 26}, {mid} {ARC_Y[i + 1] - 4}, "
+                          f"{b} {ARC_Y[i + 1] + 2}", width=1.75))
+            p.append(tri(b + 8, ARC_Y[i + 1] + 2))
+            p.append(f'    <text class="dg-edge dg-late" x="{mid}" y="{y - 34}" '
+                     f'text-anchor="middle">{t["edges"][i]}</text>')
+
+    # you can start anywhere — the series does not have a locked front door
+    p.append('    <path class="dg-stroke" d="M860 404 C 860 456, 120 460, 120 262" '
+             'stroke-dasharray="4 5" fill="none"/>')
+    p.append(tri(120, 266, -90))
+    p.append(f'    <text class="dg-sub" x="490" y="462" text-anchor="middle">{t["loopback"]}</text>')
+
+    return figure("0 0 1080 480", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 6. An accompanied outing — the concert is only the middle third
+# ---------------------------------------------------------------------------
+
+OUTING = {
+    "en": dict(
+        title="Why an outing is three parts, not one",
+        caption=("The ticket is rarely what stops someone. Not knowing what happens when you "
+                 "get there, and having nobody to go with, is. So the concert is bracketed: "
+                 "the two parts either side are the ones that make the middle possible."),
+        aria=("Three note-heads under one bracket labelled 'one outing'. The middle one is the "
+              "concert itself; the two on either side are preparation beforehand and reflection "
+              "afterwards, and are marked as the parts that make the middle possible."),
+        span="one outing",
+        parts=[(["Before"], ["what the piece is,", "what the room will do"]),
+               (["During"], ["we sit together;", "questions at the interval"]),
+               (["After"], ["say what you heard —", "there is no wrong answer"])],
+        mid_note="the concert itself",
+        side_note="the parts that make the middle possible",
+        edges=["prepare", "sit together"],
+    ),
+    "ko": dict(
+        title="한 번의 동행이 왜 세 부분인가",
+        caption=("사람을 멈춰 세우는 것은 대개 티켓 값이 아닙니다. 가서 무슨 일이 벌어지는지 "
+                 "모른다는 것, 그리고 같이 갈 사람이 없다는 것입니다. 그래서 음악회는 괄호 "
+                 "안에 놓입니다 — 양옆의 두 부분이 가운데를 가능하게 합니다."),
+        aria=("‘한 번의 동행’이라는 괄호 아래 음표 셋. 가운데가 음악회 자체이고, 양옆은 사전 "
+              "준비와 사후 나눔으로, 가운데를 가능하게 하는 부분으로 표시돼 있다."),
+        span="한 번의 동행",
+        parts=[(["가기 전"], ["어떤 곡인지,", "그 자리에서 무슨 일이 있는지"]),
+               (["가서"], ["옆자리에 함께 앉고,", "쉬는 시간에 궁금한 것을"]),
+               (["다녀와서"], ["들은 것을 말해 봅니다 —", "틀린 답은 없습니다"])],
+        mid_note="음악회 그 자체",
+        side_note="가운데를 가능하게 하는 부분",
+        edges=["준비하고", "함께 앉고"],
+    ),
+}
+
+OUT_X = [230, 540, 850]
+
+
+def outing(lang):
+    t = OUTING[lang]
+    p = []
+    p += stave(40, 1000, 128)
+
+    p.append(bracket(180, 900, 96, depth=12))
+    p.append(f'    <text class="dg-h" x="540" y="76" text-anchor="middle">{t["span"]}</text>')
+
+    for i, ((head, sub), x) in enumerate(zip(t["parts"], OUT_X)):
+        y = 172 if i == 1 else 194
+        p.append(note(x, y, open_=(i != 1)))
+        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 11}" x2="{x}" y2="246"/>')
+        p += lines(x, 272, head, cls="dg-h", anchor="middle")
+        p += lines(x, 300, sub, cls="dg-sub", step=20, anchor="middle")
+        if i < 2:
+            a, b = x + 22, OUT_X[i + 1] - 30
+            p.append(draw(f"M{a} {y - 2} H{b}", width=1.75))
+            p.append(tri(b + 8, y - 2))
+            p.append(f'    <text class="dg-edge dg-late" x="{(a + b) / 2}" y="{y - 14}" '
+                     f'text-anchor="middle">{t["edges"][i]}</text>')
+
+    p.append(f'    <text class="dg-sub" x="540" y="358" text-anchor="middle">{t["mid_note"]}</text>')
+    p.append(bracket(180, 330, 380, depth=9, below=True))
+    p.append(bracket(750, 900, 380, depth=9, below=True))
+    p.append(f'    <text class="dg-sub" x="540" y="404" text-anchor="middle">{t["side_note"]}</text>')
+
+    return figure("0 0 1080 420", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 7. An outreach visit — what has to be true for a concert to happen in a room
+# ---------------------------------------------------------------------------
+
+VISIT = {
+    "en": dict(
+        title="What a room has to provide",
+        caption=("Everything above the stave arrives in a car. Everything below it is already "
+                 "in the building. That is the whole arrangement, and it is why a day room "
+                 "with no piano, no stage and no budget can still host a concert."),
+        aria=("Two brackets meet at a single note-head marked 'the concert'. The upper bracket, "
+              "'we carry in', lists players, instruments, stands, the programme and insurance. "
+              "The lower bracket, 'already in the building', lists the room, the people and one "
+              "named contact."),
+        in_title="we carry in",
+        in_rows=["players and instruments", "stands, scores, programme",
+                 "a programme built for the room", "insurance and paperwork"],
+        room_title="already in the building",
+        room_rows=["a room, any room", "the people who live or work there",
+                   "one named contact"],
+        hub="the concert",
+        hub_note="30–60 minutes · no stage, no piano, no fee to the audience",
+    ),
+    "ko": dict(
+        title="그 방이 준비해야 하는 것",
+        caption=("오선 위의 것은 전부 차에 실려 옵니다. 오선 아래의 것은 이미 그 건물 안에 "
+                 "있습니다. 준비물은 그게 전부이고, 그래서 피아노도 무대도 예산도 없는 "
+                 "휴게실이 음악회를 열 수 있습니다."),
+        aria=("두 개의 괄호가 ‘음악회’라는 하나의 음표에서 만난다. 위쪽 괄호 ‘우리가 싣고 가는 것’은 "
+              "연주자·악기·보면대·프로그램·보험을, 아래쪽 괄호 ‘이미 그 건물에 있는 것’은 방과 "
+              "사람과 담당자 한 사람을 담고 있다."),
+        in_title="우리가 싣고 가는 것",
+        in_rows=["연주자와 악기", "보면대 · 악보 · 프로그램",
+                 "그 방에 맞춰 짠 곡목", "보험과 서류"],
+        room_title="이미 그 건물에 있는 것",
+        room_rows=["방 하나, 어떤 방이든", "거기 살거나 일하는 사람들",
+                   "담당자 한 사람"],
+        hub="음악회",
+        hub_note="30–60분 · 무대 없이, 피아노 없이, 관객 부담 없이",
+    ),
+}
+
+
+def visit(lang):
+    t = VISIT[lang]
+    p = []
+    p += stave(40, 1000, 178, gap=20, n=5)
+    hx, hy = 700, 218
+
+    p.append(f'    <text class="dg-edge" x="0" y="34">{t["in_title"]}</text>')
+    p.append(bracket(0, 470, 52, depth=10))
+    for i, row in enumerate(t["in_rows"]):
+        p.append(note(22, 88 + i * 34, open_=True))
+        p.append(f'    <text class="dg-label" x="52" y="{94 + i * 34}">{row}</text>')
+    p.append(draw("M470 132 C 570 132, 590 218, 656 218", width=5))
+    p.append(tri(664, 218))
+
+    p.append(f'    <text class="dg-edge" x="0" y="316">{t["room_title"]}</text>')
+    p.append(bracket(0, 470, 300, depth=10, below=True))
+    for i, row in enumerate(t["room_rows"]):
+        p.append(note(22, 358 + i * 34, open_=True))
+        p.append(f'    <text class="dg-label" x="52" y="{364 + i * 34}">{row}</text>')
+    p.append(draw("M470 372 C 570 372, 590 240, 656 240", width=3.5))
+    p.append(tri(664, 240))
+
+    p.append(note(hx, hy))
+    p.append(f'    <text class="dg-h" x="{hx + 26}" y="{hy + 6}">{t["hub"]}</text>')
+    p.append(f'    <text class="dg-sub" x="{hx + 26}" y="{hy + 32}">{t["hub_note"]}</text>')
+
+    return figure("0 0 1080 470", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 8. Letters Ensemble — what four concerts are actually resting on
+# ---------------------------------------------------------------------------
+
+REHEARSE = {
+    "en": dict(
+        title="What four concerts are resting on",
+        caption=("Four concerts are the part of this that got written down. Underneath them is "
+                 "weekly rehearsal since January 2024 — well over a hundred afternoons, none of "
+                 "which we recorded. We are counting them from now on, because the rehearsal is "
+                 "the programme and the concert is the receipt."),
+        aria=("A long row of small equal note-heads under a bracket reading 'every Saturday since "
+              "January 2024 — over one hundred, none of them recorded', with an arrow leading to "
+              "four larger-spaced note-heads marked 'four formal concerts, documented'."),
+        many="every Saturday since January 2024",
+        many_sub="well over a hundred · none of them recorded",
+        edge="what gets written down",
+        few="four formal concerts",
+        few_sub="programmes, photographs, dates",
+        foot="amateur musicians living in Dublin · about two hours · open to new players",
+    ),
+    "ko": dict(
+        title="네 번의 음악회가 딛고 선 것",
+        caption=("네 번의 음악회는 기록으로 남은 부분입니다. 그 아래에는 2024년 1월부터의 주간 "
+                 "연습이 있습니다 — 백 번이 훨씬 넘는 토요일이고, 그중 어느 것도 기록해 두지 "
+                 "않았습니다. 이제부터는 셉니다. 연습이 프로그램이고 음악회는 영수증입니다."),
+        aria=("‘2024년 1월부터 매주 토요일 — 백 회가 넘고, 기록된 것은 없음’이라는 괄호 아래 "
+              "같은 크기의 작은 음표가 길게 늘어서 있고, 화살표가 ‘정식 음악회 네 번, 기록됨’으로 "
+              "표시된 음표 네 개로 이어진다."),
+        many="2024년 1월부터 매주 토요일",
+        many_sub="백 회가 훨씬 넘습니다 · 기록해 둔 것은 없습니다",
+        edge="기록으로 남는 것",
+        few="정식 음악회 4회",
+        few_sub="프로그램 · 사진 · 날짜",
+        foot="더블린에 사는 아마추어 연주자들 · 약 2시간 · 새 연주자를 환영합니다",
+    ),
+}
+
+
+def rehearsals(lang):
+    t = REHEARSE[lang]
+    p = []
+    p += stave(0, 640, 120, gap=18, n=5)
+
+    for i in range(17):
+        p.append(note(26 + i * 34, 156 if i % 2 else 174))
+    p.append(f'    <text class="dg-sub" x="608" y="170">···</text>')
+    p.append(bracket(0, 640, 96, depth=11))
+    p.append(f'    <text class="dg-h" x="0" y="74">{t["many"]}</text>')
+    p.append(f'    <text class="dg-sub" x="0" y="232">{t["many_sub"]}</text>')
+
+    p.append(draw("M660 165 H 780", width=2.5))
+    p.append(tri(790, 165))
+    p.append(f'    <text class="dg-edge dg-late" x="722" y="146" '
+             f'text-anchor="middle">{t["edge"]}</text>')
+
+    p += stave(816, 264, 120, gap=18, n=5)
+    for i in range(4):
+        p.append(note(858 + i * 62, 156))
+    p.append(bracket(816, 1080, 96, depth=11))
+    p.append(f'    <text class="dg-h" x="816" y="74">{t["few"]}</text>')
+    p.append(f'    <text class="dg-sub" x="816" y="232">{t["few_sub"]}</text>')
+
+    p.append(f'    <text class="dg-sub" x="540" y="286" text-anchor="middle">{t["foot"]}</text>')
+
+    return figure("0 0 1080 300", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 9. Four ways in — one door, and permission to change your mind
+# ---------------------------------------------------------------------------
+
+WAYS = {
+    "en": dict(
+        title="Four ways in, one door",
+        caption=("The four routes are not four application processes. They are four sentences "
+                 "you might write in the same email, and people move between them all the time "
+                 "— most of the players started as listeners, and two of the rooms we play in "
+                 "were offered by someone who came to a concert."),
+        aria=("Four note-heads on the left — learn to play, come and listen, play with us, host "
+              "or partner — with arrows converging on a single note marked 'one email, one line'. "
+              "Dashed arcs run between the four, labelled 'people move between these'."),
+        rows=[(["Learn to play"], ["you have never played anything"]),
+              (["Come and listen"], ["you would rather start by listening"]),
+              (["Play with us"], ["you already play something"]),
+              (["Host or partner"], ["you have a room, or you know one"])],
+        hub=["one email,", "one line"],
+        hub_note="we answer with the practical details",
+        move="people move between these",
+        edge="whichever sounds like you",
+    ),
+    "ko": dict(
+        title="네 가지 길, 하나의 문",
+        caption=("네 갈래는 네 개의 신청 절차가 아닙니다. 같은 이메일에 쓸 수 있는 네 개의 문장이고, "
+                 "사람들은 그 사이를 늘 오갑니다 — 지금 연주하는 사람 대부분이 처음에는 듣는 "
+                 "사람이었고, 우리가 연주하는 방 중 둘은 음악회에 왔던 분이 내어 준 것입니다."),
+        aria=("왼쪽에 음표 네 개 — 배우기, 들으러 오기, 함께 연주하기, 공간 열기 — 가 하나의 "
+              "‘이메일 한 통, 한 줄’ 음표로 모인다. 넷 사이에는 ‘사람들은 이 사이를 오갑니다’라는 "
+              "점선이 놓여 있다."),
+        rows=[(["배우러 옵니다"], ["악기를 잡아 본 적이 없어도"]),
+              (["들으러 옵니다"], ["듣는 것부터 시작하고 싶다면"]),
+              (["함께 연주합니다"], ["이미 다루는 악기가 있다면"]),
+              (["공간을 엽니다"], ["방이 있거나, 아는 방이 있다면"])],
+        hub=["이메일 한 통,", "한 줄"],
+        hub_note="실무적인 내용으로 답을 드립니다",
+        move="사람들은 이 사이를 오갑니다",
+        edge="당신에게 맞는 쪽으로",
+    ),
+}
+
+WAYS_Y = [70, 158, 246, 334]
+
+
+def pathways(lang):
+    t = WAYS[lang]
+    p = []
+    hx, hy = 780, 202
+
+    for (head, sub), y in zip(t["rows"], WAYS_Y):
+        p.append(note(22, y))
+        p += lines(52, y + 6, head, cls="dg-h")
+        p += lines(52, y + 32, sub, cls="dg-sub", step=18)
+        p.append(draw(f"M520 {y - 4} C 620 {y - 4}, 640 {hy}, {hx - 46} {hy}", width=2))
+    p.append(tri(hx - 34, hy))
+    p.append(f'    <text class="dg-edge dg-late" x="600" y="26" '
+             f'text-anchor="middle">{t["edge"]}</text>')
+
+    # the four are porous — a listener becomes a player, a guest offers a room
+    p.append('    <path class="dg-stroke" d="M22 92 C -34 122, -34 148, 22 136 '
+             'M22 180 C -34 210, -34 236, 22 224 M22 268 C -34 298, -34 324, 22 312" '
+             'stroke-dasharray="3 4" fill="none"/>')
+    p.append(f'    <text class="dg-sub" x="22" y="392" >{t["move"]}</text>')
+
+    p.append(note(hx, hy))
+    p += lines(hx + 28, hy - 4, t["hub"], cls="dg-h", step=26)
+    p.append(f'    <text class="dg-sub" x="{hx + 28}" y="{hy + 46}">{t["hub_note"]}</text>')
+
+    return figure("-60 0 1140 408", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 10. The drawing vocabulary itself — the key to every other figure here
+# ---------------------------------------------------------------------------
+
+VOCAB = {
+    "en": dict(
+        title="How to read every diagram on this site",
+        caption=("Four marks, borrowed from notation, used the same way in every figure. The "
+                 "note-head is the load-bearing one: it is always the same size, so nothing on "
+                 "a stave can be quietly ranked above anything else. That is a design decision "
+                 "about the organisation, not about the drawing."),
+        aria=("A key to four drawing marks: the stave, the note-head, the bracket and the "
+              "crescendo wedge, each with the meaning it carries in the diagrams on this site."),
+        items=[(["The stave"], ["four quiet lines and one", "that carries the weight"]),
+               (["The note-head"], ["one unit — always the same", "size, whatever it stands for"]),
+               (["The bracket"], ["what groups with what;", "dashed means still a claim"]),
+               (["The crescendo"], ["the only mark here", "that means &lsquo;this grows&rsquo;"])],
+    ),
+    "ko": dict(
+        title="이 사이트의 도식을 읽는 법",
+        caption=("악보에서 빌려 온 네 개의 표시를 모든 도식에서 같은 뜻으로 씁니다. 무게를 지는 "
+                 "것은 음표 머리입니다 — 무엇을 나타내든 크기가 같아서, 오선 위의 어떤 것도 "
+                 "다른 것보다 슬그머니 높아질 수 없습니다. 이건 그림에 관한 결정이 아니라 "
+                 "단체에 관한 결정입니다."),
+        aria=("네 가지 표시의 범례 — 오선, 음표 머리, 괄호, 크레셴도 쐐기. 각각이 이 사이트의 "
+              "도식에서 갖는 뜻이 함께 적혀 있다."),
+        items=[(["오선"], ["조용한 네 줄과", "무게를 지는 다섯째 줄"]),
+               (["음표 머리"], ["단위 — 무엇을 나타내든", "크기가 같습니다"]),
+               (["괄호"], ["무엇이 무엇과 묶이는지;", "점선은 아직 주장입니다"]),
+               (["크레셴도"], ["이 세트에서 ‘자란다’를", "뜻하는 유일한 표시"])],
+    ),
+}
+
+
+def vocabulary(lang):
+    t = VOCAB[lang]
+    p = []
+    x0, step = 8, 268
+
+    for i, (head, sub) in enumerate(t["items"]):
+        x = x0 + i * step
+        if i == 0:
+            p += stave(x, 180, 34, gap=13, n=5)
+        elif i == 1:
+            for j in range(3):
+                p.append(note(x + 34 + j * 52, 62))
+        elif i == 2:
+            p.append(bracket(x + 10, x + 110, 74, depth=13))
+            p.append(bracket(x + 124, x + 190, 74, depth=13, dashed=True))
+        else:
+            p.append(f'    <path class="dg-note" opacity=".3" '
+                     f'd="M{x + 8} 62 L{x + 196} 44 L{x + 196} 84 L{x + 8} 66 Z"/>')
+        p.append(f'    <line class="dg-stroke-accent" x1="{x}" y1="118" x2="{x + 200}" y2="118" '
+                 f'stroke-width="2"/>')
+        p += lines(x, 146, head, cls="dg-h")
+        p += lines(x, 174, sub, cls="dg-sub", step=19)
+
+    return figure("0 0 1080 210", t["aria"], "\n".join(p), t["caption"], t["title"])

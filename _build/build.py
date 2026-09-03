@@ -20,6 +20,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import content_en as en          # noqa: E402
 import content_ko as ko          # noqa: E402
 import notfound                  # noqa: E402
+import prog_en                   # noqa: E402
+import prog_ko                   # noqa: E402
+import programmes_sub as sub     # noqa: E402
 from layout import ROOT, SITE_URL, page, write   # noqa: E402
 
 PAGES = [
@@ -84,6 +87,53 @@ PAGES = [
      en.CONTACT, ko.CONTACT),
 ]
 
+# One detail page per programme, under programmes/. The five share a renderer
+# (programmes_sub.py) so no one of them can drift into looking like the main
+# one; only the prose differs, and it is written natively in each language.
+SUB_META = {
+    "recorder-ensemble": (
+        "Recorder Ensemble course — Classical Music for Everyone",
+        "A term of weekly recorder sessions for complete beginners in Dublin, ending in a "
+        "concert. Free at Mulhuddart Community Centre from September 2026.",
+        "리코더 앙상블 과정 — Classical Music for Everyone",
+        "완전 초보를 위한 더블린의 리코더 주간 수업. 마지막은 음악회. "
+        "2026년 9월부터 Mulhuddart Community Centre에서 무료로 진행합니다."),
+    "getting-to-know": (
+        "Getting to Know Classical Music — Classical Music for Everyone",
+        "Free lecture-recitals in Dublin for people with no prior knowledge — three stages, "
+        "seasonal specials, 17 sessions and 143 attendances so far.",
+        "클래식 음악과 친해지기 — Classical Music for Everyone",
+        "사전 지식이 없는 분들을 위한 더블린의 무료 강의·연주. 세 단계와 계절 특집, "
+        "지금까지 17회에 연 143명이 참석했습니다."),
+    "concert-companion": (
+        "Concert Guide & Companion — Classical Music for Everyone",
+        "Small groups accompanied to live concerts in Dublin and beyond — prepared "
+        "beforehand, sat with during, and talked about afterwards.",
+        "함께하는 음악여행 — Classical Music for Everyone",
+        "혼자서는 가지 않았을 공연에 소그룹으로 함께 갑니다. 미리 준비하고, 옆자리에 앉고, "
+        "다녀와서 이야기를 나눕니다."),
+    "outreach-concerts": (
+        "Outreach Concerts — Classical Music for Everyone",
+        "Live classical music brought into care homes, parishes, hospitals and hostels — "
+        "20 performances across four countries since 2023.",
+        "찾아가는 음악회 — Classical Music for Everyone",
+        "요양시설·본당·병원·쉼터로 실연이 찾아갑니다. 2023년 이후 4개국에서 20회를 "
+        "연주했습니다."),
+    "letters-ensemble": (
+        "Letters Ensemble — Classical Music for Everyone",
+        "An amateur ensemble in Dublin rehearsing every Saturday since January 2024, "
+        "playing in community settings. New amateur players welcome.",
+        "Letters Ensemble — Classical Music for Everyone",
+        "2024년 1월부터 매주 토요일 연습해 온 더블린의 아마추어 앙상블. 커뮤니티 공간에서 "
+        "연주합니다. 새 연주자를 환영합니다."),
+}
+
+for _slug in sub.ORDER:
+    _en_t, _en_d, _ko_t, _ko_d = SUB_META[_slug]
+    PAGES.append((f"programmes/{_slug}.html", _en_t, _en_d, _ko_t, _ko_d,
+                  sub.render("en", _slug, prog_en.DATA),
+                  sub.render("ko", _slug, prog_ko.DATA)))
+
 
 def build_404():
     """GitHub Pages serves this for any unknown path, at any depth.
@@ -95,14 +145,13 @@ def build_404():
     """
     base = urlparse(SITE_URL).path.rstrip("/") + "/"      # "/classicalmusicforeveryone/"
     html = page("en", "404.html", notfound.TITLE, notfound.DESC, notfound.BODY)
-    html = (html.replace('href="assets/', f'href="{base}assets/')
-                .replace('src="assets/', f'src="{base}assets/')
-                .replace('href="styles.css"', f'href="{base}styles.css"'))
+    # every path in the shell and body is relative and correct for a page at
+    # the root; rewrite all of them absolute so the file also works when the
+    # browser thinks it is at /ko/whatever/ — which is the whole point of a 404
+    html = re.sub(r'\b(href|src)="(?!https?:|mailto:|tel:|data:|#|/)',
+                  lambda m: f'{m.group(1)}="{base}', html)
     # there is no Korean 404 — send the language switch to the Korean home
-    html = html.replace('href="ko/404.html"', f'href="{base}ko/"')
-    for slug in ("index.html", "about.html", "programmes.html", "get-involved.html",
-                 "news.html", "support.html", "contact.html", "ko/index.html"):
-        html = html.replace(f'href="{slug}"', f'href="{base}{slug}"')
+    html = html.replace(f'href="{base}ko/404.html"', f'href="{base}ko/"')
     # a 404 is not a page to index, and it has no language twin
     html = re.sub(r'<link rel="(canonical|alternate)"[^>]*>\n', "", html)
     html = html.replace("<title>", '<meta name="robots" content="noindex">\n<title>')
