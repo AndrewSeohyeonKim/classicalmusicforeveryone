@@ -16,8 +16,13 @@
 <meta property="og:description" content="A Dublin community music social enterprise. We teach people to play, not just listen, and bring live classical music to care homes, parishes, hospitals and community centres.">
 <meta property="og:url" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/">
 <meta property="og:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="933">
+<meta property="og:image:alt" content="Classical Music for Everyone — community music in Dublin, Ireland">
 <meta property="og:locale" content="en_IE">
+<meta property="og:locale:alternate" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
 <link rel="icon" href="assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,22 +32,94 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
-  "name": "Classical Music for Everyone",
-  "alternateName": "CMFE",
-  "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
-  "logo": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png",
-  "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
-  "description": "A Dublin community music social enterprise. We teach people to play, not just listen, and bring live classical music to care homes, parishes, hospitals and community centres.",
-  "foundingDate": "2024-01",
-  "founder": {"@type": "Person", "name": "Andrew Seohyeon Kim"},
-  "email": "sby05034@gmail.com",
-  "telephone": "+353 83 078 0635",
-  "address": {"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"},
-  "areaServed": "Ireland",
-  "knowsLanguage": ["en", "ko"],
-  "inLanguage": "en-IE"
+  "@graph": [
+    {
+      "@type": ["Organization", "NGO"],
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
+      "name": "Classical Music for Everyone",
+      "alternateName": "CMFE",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+      "logo": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png"},
+      "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
+      "description": "A Dublin community music social enterprise. We teach people to play, not just listen, and bring live classical music to care homes, parishes, hospitals and community centres.",
+      "foundingDate": "2024-01",
+      "founder": {"@type": "Person", "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+                  "name": "Andrew Seohyeon Kim"},
+      "email": "sby05034@gmail.com",
+      "telephone": "+353 83 078 0635",
+      "address": {"@type": "PostalAddress", "addressLocality": "Dublin",
+                  "addressCountry": "IE"},
+      "areaServed": {"@type": "Country", "name": "Ireland"},
+      "knowsLanguage": ["en", "ko"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+      "name": "Classical Music for Everyone",
+      "inLanguage": "en-IE",
+      "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#page",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+      "name": "Classical Music for Everyone — community music in Dublin, Ireland",
+      "description": "A Dublin community music social enterprise. We teach people to play, not just listen, and bring live classical music to care homes, parishes, hospitals and community centres.",
+      "inLanguage": "en-IE",
+      "isPartOf": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website"},
+      "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg"}
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html#mulhuddart-2026",
+      "name": "Recorder Ensemble course — Mulhuddart",
+      "description": "A term of weekly recorder sessions for complete beginners. No experience and no music reading assumed.",
+      "startDate": "2026-09-09T19:00:00+01:00",
+      "endDate": "2026-09-09T20:00:00+01:00",
+      "eventSchedule": {
+        "@type": "Schedule", "byDay": "https://schema.org/Wednesday",
+        "startTime": "19:00", "endTime": "20:00", "repeatFrequency": "P1W",
+        "scheduleTimezone": "Europe/Dublin"
+      },
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place", "name": "Mulhuddart Community Centre",
+        "address": {"@type": "PostalAddress", "addressLocality": "Dublin 15",
+                    "addressCountry": "IE"}
+      },
+      "organizer": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
+                 "availability": "https://schema.org/InStock",
+                 "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/get-involved.html"},
+      "inLanguage": "en-IE"
+    },
+    {
+      "@type": "MusicEvent",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html#autumn-concert-2026",
+      "name": "An Autumn Concert",
+      "description": "Soprano, haegeum, clarinet and piano — Chopin, Pierne, Spohr, Schubert and Korean traditional songs.",
+      "startDate": "2026-09-19T17:00:00+01:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place", "name": "Methodist Centenary Church, Ranelagh",
+        "address": {"@type": "PostalAddress", "addressLocality": "Dublin 6",
+                    "addressCountry": "IE"}
+      },
+      "organizer": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "performer": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
+                 "availability": "https://schema.org/InStock",
+                 "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html"},
+      "inLanguage": "en-IE"
+    }
+  ]
 }
 </script>
 </head>

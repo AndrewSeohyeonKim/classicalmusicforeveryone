@@ -109,27 +109,71 @@ MENU_JS = ("var n=document.getElementById('nav');"
            "n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)")
 
 
-JSONLD = """<script type="application/ld+json">
-{{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "{site}/#organisation",
-  "name": "Classical Music for Everyone",
-  "alternateName": "CMFE",
-  "url": "{site}/",
-  "logo": "{site}/assets/logo-horizontal.png",
-  "image": "{site}/images/hero-outreach.jpg",
-  "description": "{desc}",
-  "foundingDate": "2024-01",
-  "founder": {{"@type": "Person", "name": "Andrew Seohyeon Kim"}},
-  "email": "{email}",
-  "telephone": "{phone}",
-  "address": {{"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"}},
-  "areaServed": "Ireland",
-  "knowsLanguage": ["en", "ko"],
-  "inLanguage": "{lang}"
-}}
-</script>"""
+# Structured data is emitted as one @graph per page rather than a lone
+# Organization block repeated on all 25 pages. The organisation is declared
+# once with an @id; every other node — the page itself, a breadcrumb, an
+# event — points at that @id instead of restating it. That is what lets a
+# search engine treat the whole site as one entity, and it is why the
+# programme pages can carry a breadcrumb without a second Organization.
+ORG_NODE = """    {{
+      "@type": ["Organization", "NGO"],
+      "@id": "{site}/#organisation",
+      "name": "Classical Music for Everyone",
+      "alternateName": "CMFE",
+      "url": "{site}/",
+      "logo": {{"@type": "ImageObject", "url": "{site}/assets/logo-horizontal.png"}},
+      "image": "{site}/images/hero-outreach.jpg",
+      "description": "{desc}",
+      "foundingDate": "2024-01",
+      "founder": {{"@type": "Person", "@id": "{site}/about.html#founder",
+                  "name": "Andrew Seohyeon Kim"}},
+      "email": "{email}",
+      "telephone": "{phone}",
+      "address": {{"@type": "PostalAddress", "addressLocality": "Dublin",
+                  "addressCountry": "IE"}},
+      "areaServed": {{"@type": "Country", "name": "Ireland"}},
+      "knowsLanguage": ["en", "ko"]
+    }}"""
+
+PAGE_NODE = """    {{
+      "@type": "WebPage",
+      "@id": "{canonical}#page",
+      "url": "{canonical}",
+      "name": "{title}",
+      "description": "{desc}",
+      "inLanguage": "{lang}",
+      "isPartOf": {{"@id": "{site}/#website"}},
+      "about": {{"@id": "{site}/#organisation"}},
+      "publisher": {{"@id": "{site}/#organisation"}},
+      "primaryImageOfPage": {{"@type": "ImageObject", "url": "{image}"}}
+    }}"""
+
+SITE_NODE = """    {{
+      "@type": "WebSite",
+      "@id": "{site}/#website",
+      "url": "{site}/",
+      "name": "Classical Music for Everyone",
+      "inLanguage": "{lang}",
+      "publisher": {{"@id": "{site}/#organisation"}}
+    }}"""
+
+
+def _graph(nodes):
+    return ('<script type="application/ld+json">\n'
+            '{\n  "@context": "https://schema.org",\n  "@graph": [\n'
+            + ",\n".join(nodes) + "\n  ]\n}\n</script>")
+
+
+def breadcrumb(site, lang, slug, trail):
+    """trail is [(path or None, label), ...]; the last item is this page."""
+    items = []
+    for i, (path, label) in enumerate(trail, start=1):
+        loc = site + "/" + ("" if lang == "en" else "ko/") + (path or "")
+        items.append('        {"@type": "ListItem", "position": %d, "name": "%s",'
+                     ' "item": "%s"}' % (i, label, loc))
+        
+    return ('    {\n      "@type": "BreadcrumbList",\n      "itemListElement": [\n'
+            + ",\n".join(items) + "\n      ]\n    }")
 
 
 def _images(body, eager_first):
@@ -281,15 +325,26 @@ def footer(lang, slug="index.html"):
 </footer>"""
 
 
-def page(lang, slug, title, description, body):
+def page(lang, slug, title, description, body, og_image=None, extra_nodes=()):
+    """extra_nodes: already-rendered JSON-LD nodes to add to this page's graph
+    (a breadcrumb, an event) — see build.py."""
     p, r = _here(slug), _root(lang, slug)
     sub = "" if slug == "index.html" else slug
     body = _images(body, eager_first='<section class="hero">' in body)
     body = _relink(body, p, r)
-    jsonld = JSONLD.format(site=SITE_URL, desc=description.replace('"', "'"),
-                           email=EMAIL, phone=PHONE_INTL,
-                           lang="en-IE" if lang == "en" else "ko")
     canonical = f"{SITE_URL}/" + ("" if lang == "en" else "ko/") + sub
+    desc = description.replace('"', "'")
+    ld_lang = "en-IE" if lang == "en" else "ko"
+    # a page shares its own photograph, not the site-wide hero, so a link to
+    # a programme page previews that programme
+    image = f"{SITE_URL}/images/{og_image}" if og_image else f"{SITE_URL}/images/hero-outreach.jpg"
+    jsonld = _graph([
+        ORG_NODE.format(site=SITE_URL, desc=desc, email=EMAIL, phone=PHONE_INTL),
+        SITE_NODE.format(site=SITE_URL, lang=ld_lang),
+        PAGE_NODE.format(site=SITE_URL, canonical=canonical, title=title.replace('"', "'"),
+                         desc=desc, lang=ld_lang, image=image),
+        *extra_nodes,
+    ])
     return f"""<!DOCTYPE html>
 <html lang="{'en-IE' if lang == 'en' else 'ko'}">
 <head>
@@ -307,9 +362,14 @@ def page(lang, slug, title, description, body):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{SITE_URL}/images/hero-outreach.jpg">
+<meta property="og:image" content="{image}">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="933">
+<meta property="og:image:alt" content="{title}">
 <meta property="og:locale" content="{'en_IE' if lang == 'en' else 'ko_KR'}">
+<meta property="og:locale:alternate" content="{'ko_KR' if lang == 'en' else 'en_IE'}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{image}">
 <link rel="icon" href="{r}assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{r}assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -329,9 +389,9 @@ def page(lang, slug, title, description, body):
 """
 
 
-def write(lang, slug, title, description, body):
+def write(lang, slug, title, description, body, og_image=None, extra_nodes=()):
     out = os.path.join(ROOT, "" if lang == "en" else "ko", slug)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as fh:
-        fh.write(page(lang, slug, title, description, body))
+        fh.write(page(lang, slug, title, description, body, og_image, extra_nodes))
     return os.path.relpath(out, ROOT)

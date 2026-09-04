@@ -15,9 +15,14 @@
 <meta property="og:title" content="Letters Ensemble — Classical Music for Everyone">
 <meta property="og:description" content="2024년 1월부터 매주 토요일 연습해 온 더블린의 아마추어 앙상블. 커뮤니티 공간에서 연주합니다. 새 연주자를 환영합니다.">
 <meta property="og:url" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html">
-<meta property="og:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
+<meta property="og:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/letters-ensemble.jpg">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="933">
+<meta property="og:image:alt" content="Letters Ensemble — Classical Music for Everyone">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/letters-ensemble.jpg">
 <link rel="icon" href="../../assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../../assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,22 +32,55 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
-  "name": "Classical Music for Everyone",
-  "alternateName": "CMFE",
-  "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
-  "logo": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png",
-  "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
-  "description": "2024년 1월부터 매주 토요일 연습해 온 더블린의 아마추어 앙상블. 커뮤니티 공간에서 연주합니다. 새 연주자를 환영합니다.",
-  "foundingDate": "2024-01",
-  "founder": {"@type": "Person", "name": "Andrew Seohyeon Kim"},
-  "email": "sby05034@gmail.com",
-  "telephone": "+353 83 078 0635",
-  "address": {"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"},
-  "areaServed": "Ireland",
-  "knowsLanguage": ["en", "ko"],
-  "inLanguage": "ko"
+  "@graph": [
+    {
+      "@type": ["Organization", "NGO"],
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
+      "name": "Classical Music for Everyone",
+      "alternateName": "CMFE",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+      "logo": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png"},
+      "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
+      "description": "2024년 1월부터 매주 토요일 연습해 온 더블린의 아마추어 앙상블. 커뮤니티 공간에서 연주합니다. 새 연주자를 환영합니다.",
+      "foundingDate": "2024-01",
+      "founder": {"@type": "Person", "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+                  "name": "Andrew Seohyeon Kim"},
+      "email": "sby05034@gmail.com",
+      "telephone": "+353 83 078 0635",
+      "address": {"@type": "PostalAddress", "addressLocality": "Dublin",
+                  "addressCountry": "IE"},
+      "areaServed": {"@type": "Country", "name": "Ireland"},
+      "knowsLanguage": ["en", "ko"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+      "name": "Classical Music for Everyone",
+      "inLanguage": "ko",
+      "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html#page",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html",
+      "name": "Letters Ensemble — Classical Music for Everyone",
+      "description": "2024년 1월부터 매주 토요일 연습해 온 더블린의 아마추어 앙상블. 커뮤니티 공간에서 연주합니다. 새 연주자를 환영합니다.",
+      "inLanguage": "ko",
+      "isPartOf": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website"},
+      "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/letters-ensemble.jpg"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/"},
+        {"@type": "ListItem", "position": 2, "name": "프로그램", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html"},
+        {"@type": "ListItem", "position": 3, "name": "Letters Ensemble", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html"}
+      ]
+    }
+  ]
 }
 </script>
 </head>

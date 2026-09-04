@@ -15,9 +15,14 @@
 <meta property="og:title" content="소식과 기록 — Classical Music for Everyone">
 <meta property="og:description" content="다가오는 연주와 수업, 2026년에 있었던 일, 그리고 2023년부터의 기록.">
 <meta property="og:url" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html">
-<meta property="og:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
+<meta property="og:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/quartet-hall.jpg">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="933">
+<meta property="og:image:alt" content="소식과 기록 — Classical Music for Everyone">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/quartet-hall.jpg">
 <link rel="icon" href="../assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,22 +32,94 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
-  "name": "Classical Music for Everyone",
-  "alternateName": "CMFE",
-  "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
-  "logo": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png",
-  "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
-  "description": "다가오는 연주와 수업, 2026년에 있었던 일, 그리고 2023년부터의 기록.",
-  "foundingDate": "2024-01",
-  "founder": {"@type": "Person", "name": "Andrew Seohyeon Kim"},
-  "email": "sby05034@gmail.com",
-  "telephone": "+353 83 078 0635",
-  "address": {"@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE"},
-  "areaServed": "Ireland",
-  "knowsLanguage": ["en", "ko"],
-  "inLanguage": "ko"
+  "@graph": [
+    {
+      "@type": ["Organization", "NGO"],
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation",
+      "name": "Classical Music for Everyone",
+      "alternateName": "CMFE",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+      "logo": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png"},
+      "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
+      "description": "다가오는 연주와 수업, 2026년에 있었던 일, 그리고 2023년부터의 기록.",
+      "foundingDate": "2024-01",
+      "founder": {"@type": "Person", "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+                  "name": "Andrew Seohyeon Kim"},
+      "email": "sby05034@gmail.com",
+      "telephone": "+353 83 078 0635",
+      "address": {"@type": "PostalAddress", "addressLocality": "Dublin",
+                  "addressCountry": "IE"},
+      "areaServed": {"@type": "Country", "name": "Ireland"},
+      "knowsLanguage": ["en", "ko"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
+      "name": "Classical Music for Everyone",
+      "inLanguage": "ko",
+      "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html#page",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html",
+      "name": "소식과 기록 — Classical Music for Everyone",
+      "description": "다가오는 연주와 수업, 2026년에 있었던 일, 그리고 2023년부터의 기록.",
+      "inLanguage": "ko",
+      "isPartOf": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website"},
+      "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/quartet-hall.jpg"}
+    },
+    {
+      "@type": "EducationEvent",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html#mulhuddart-2026",
+      "name": "Recorder Ensemble course — Mulhuddart",
+      "description": "A term of weekly recorder sessions for complete beginners. No experience and no music reading assumed.",
+      "startDate": "2026-09-09T19:00:00+01:00",
+      "endDate": "2026-09-09T20:00:00+01:00",
+      "eventSchedule": {
+        "@type": "Schedule", "byDay": "https://schema.org/Wednesday",
+        "startTime": "19:00", "endTime": "20:00", "repeatFrequency": "P1W",
+        "scheduleTimezone": "Europe/Dublin"
+      },
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place", "name": "Mulhuddart Community Centre",
+        "address": {"@type": "PostalAddress", "addressLocality": "Dublin 15",
+                    "addressCountry": "IE"}
+      },
+      "organizer": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
+                 "availability": "https://schema.org/InStock",
+                 "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/get-involved.html"},
+      "inLanguage": "ko"
+    },
+    {
+      "@type": "MusicEvent",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html#autumn-concert-2026",
+      "name": "An Autumn Concert",
+      "description": "Soprano, haegeum, clarinet and piano — Chopin, Pierne, Spohr, Schubert and Korean traditional songs.",
+      "startDate": "2026-09-19T17:00:00+01:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place", "name": "Methodist Centenary Church, Ranelagh",
+        "address": {"@type": "PostalAddress", "addressLocality": "Dublin 6",
+                    "addressCountry": "IE"}
+      },
+      "organizer": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "performer": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
+                 "availability": "https://schema.org/InStock",
+                 "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html"},
+      "inLanguage": "ko"
+    }
+  ]
 }
 </script>
 </head>

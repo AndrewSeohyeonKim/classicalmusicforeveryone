@@ -122,13 +122,25 @@
   --t-body:1.0625rem;                         /* 17px */
   --t-small:0.9rem;                           /* 14.4px */
   --t-label:0.72rem;                          /* 11.5px  eyebrows, kickers */
+  --t-label-sm:0.66rem;                       /* 10.5px  dense labels only */
+  /* One tracking for every uppercase label. Korean needs far less, because
+     Noto Sans KR already carries its own side bearings. */
+  --label-track:.16em;
+  --label-track-kr:.06em;
 
   /* space + shape */
   --wrap:1180px;
   --gutter:28px;
+  /* Component padding was ad hoc — 8, 18, 22, 24, 26, 28, 30, 34 — which is
+     the kind of near-miss that reads as unresolved rather than as designed.
+     Three steps, all multiples of 4, after SEED's dimension scale. */
+  --pad-sm:20px;
+  --pad:26px;
+  --pad-lg:34px;
+  /* radii from the same scale: SEED r1_5 / r3 / r5 */
   --radius-sm:6px;
   --radius:12px;
-  --radius-lg:18px;
+  --radius-lg:20px;
 
   /* Fluent 2's model: each step is a KEY shadow (sharp, offset downward,
      drawing the edge) plus an AMBIENT one (soft, no offset, implying the
@@ -203,13 +215,29 @@ h4{font-size:1.125rem;line-height:1.32;letter-spacing:-.004em}
 .h-xl{font-size:var(--t-h1);line-height:1.06;letter-spacing:-.012em}
 .h-lg{font-size:var(--t-h2);line-height:1.12;letter-spacing:-.010em}
 .h-md{font-size:var(--t-h2-sm);line-height:1.16;letter-spacing:-.008em}
+/* --- THE SMALL LABEL ---------------------------------------------------
+   Thirteen near-identical uppercase rules had grown up across this file,
+   between them using five font sizes and eight different letter-spacings.
+   Nothing was wrong in any one of them, and that is exactly why the page
+   read as unresolved: no two labels agreed. One recipe here; the component
+   rules below now set only colour, margin and layout.
+   Sizes: --t-label everywhere, --t-label-sm only where space is tight. */
+.eyebrow,.h-sub,.kicker,.diagram-title,.tl-date,.evidence dt,
+.pillar-span b,.swatch b,.specimen dfn,.site-footer h3,.tag,
+.lang-switch a,.lang-switch span,thead th{
+  font-family:var(--font-body);
+  font-size:var(--t-label);
+  font-weight:700;
+  letter-spacing:var(--label-track);
+  text-transform:uppercase;
+  line-height:1.2;
+}
+html[lang^="ko"] :is(.eyebrow,.h-sub,.kicker,.diagram-title,.tl-date,.evidence dt,.pillar-span b,.swatch b,.specimen dfn,.site-footer h3,.tag,.lang-switch a,.lang-switch span,thead th){
+  font-family:var(--font-kr);letter-spacing:var(--label-track-kr);
+}
 /* a heading that reads as a small label — used where a section needs a level
    in the outline but the design calls for an eyebrow, not a title */
-.h-sub{
-  font-family:var(--font-body);font-size:0.7188rem;font-weight:700;letter-spacing:.17em;
-  text-transform:uppercase;color:var(--accent-ink);
-}
-html[lang^="ko"] .h-sub{font-family:var(--font-kr);letter-spacing:.08em}
+.h-sub{color:var(--accent-ink)}
 .band-inverse .h-sub,.band-photo .h-sub{color:var(--accent-inverse)}
 .sr-only{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -444,12 +472,7 @@ html[lang^="ko"] .subnav b{font-family:var(--font-kr)}
 .lang-switch a,.lang-switch span{
   display:inline-flex;align-items:center;
   padding-inline:5px;
-  font-family:var(--font-body);font-size:0.7188rem;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;line-height:1;
   transition:color var(--dur-3) var(--ease);
-}
-html[lang^="ko"] .lang-switch a,html[lang^="ko"] .lang-switch span{
-  font-family:var(--font-kr);letter-spacing:.02em;
 }
 .lang-switch [aria-current="true"]{color:var(--fg);text-decoration:underline;
   text-underline-offset:4px;text-decoration-thickness:1.5px;
@@ -463,6 +486,22 @@ html[lang^="ko"] .lang-switch a,html[lang^="ko"] .lang-switch span{
   color:var(--fg);font-size:1.0625rem;cursor:pointer;
   transition:border-color var(--dur-3) var(--ease)}
 .menu-toggle:hover{border-color:var(--accent)}
+
+/* --- ELEVATION, AND WHAT IT IS ALLOWED TO MEAN -------------------------
+   Fluent 2's model: a shadow is the perceived distance from the surface
+   behind, so it encodes importance. Every panel on this site used to carry
+   the same shadow, which meant it encoded nothing. Three tiers now:
+
+     flat, held by a 1px rule   figures, plates, tables, swatches — content
+                                you read, not things you act on
+     --shadow-1 at rest         cards: something is on offer here, and most
+                                of them are links
+     --shadow-2 on hover        the card answering the pointer
+     --shadow-3                 the one overlay, the Programmes panel
+
+   Adding a shadow to something in the first tier is how the page went flat-
+   looking in the first place: when everything floats, nothing does.
+   ========================================================================== */
 
 /* ==========================================================================
    6. BUTTONS
@@ -529,10 +568,8 @@ section.tight{padding-block:clamp(44px,4.6vw,66px)}
    front of each heading; the label carries itself on colour and tracking. */
 .eyebrow{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--accent-ink);margin:0 0 16px;
+  color:var(--accent-ink);margin:0 0 16px;
 }
-html[lang^="ko"] .eyebrow{font-family:var(--font-kr);letter-spacing:.1em}
 .band-inverse .eyebrow{color:var(--accent-inverse)}
 
 /* px, not em: an em here would resolve against the inherited body size, not
@@ -697,7 +734,7 @@ a.card:hover{color:var(--fg-body)}
   --card-border:var(--line);
   display:flex;flex-direction:column;
   background:var(--card-bg);border:1px solid var(--card-border);
-  border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-1);
+  border-radius:var(--radius);padding:var(--pad);box-shadow:var(--shadow-1);
   transition:translate var(--dur-5) var(--ease-enter),
              box-shadow var(--dur-5) var(--ease-enter),
              border-color var(--dur-4) var(--ease);
@@ -705,10 +742,7 @@ a.card:hover{color:var(--fg-body)}
 .card:hover{translate:0 -4px;box-shadow:var(--shadow-2);border-color:var(--line-strong)}
 .card h3{font-size:1.3125rem}
 .card p{margin-top:10px;font-size:0.9688rem}
-.card .kicker{
-  font-size:0.6875rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--accent-ink);margin-bottom:9px;
-}
+.card .kicker{display:block;color:var(--accent-ink);margin-bottom:10px}
 .card .meta{
   margin-top:auto;padding-top:16px;
   font-size:0.8125rem;color:var(--fg-muted);
@@ -719,7 +753,7 @@ a.card:hover{color:var(--fg-body)}
 }
 .card-media{padding:0;overflow:hidden}
 .card-media .photo{border-radius:0}
-.card-media .card-body{padding:26px;display:flex;flex-direction:column;flex:1}
+.card-media .card-body{padding:var(--pad);display:flex;flex-direction:column;flex:1}
 
 /* --- the compact programme card ---------------------------------------
    Deliberately small and identical for all five programmes. The thumbnail,
@@ -735,12 +769,8 @@ a.card:hover{color:var(--fg-body)}
 }
 .prog:hover{translate:0 -4px;box-shadow:var(--shadow-2);border-color:var(--line-strong);color:var(--fg-body)}
 .prog .photo{border-radius:0}
-.prog-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
-.prog .kicker{
-  font-family:var(--font-body);font-size:0.6562rem;font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--accent-ink);
-}
-html[lang^="ko"] .prog .kicker{font-family:var(--font-kr);letter-spacing:.06em}
+.prog-body{padding:var(--pad-sm);display:flex;flex-direction:column;flex:1}
+.prog .kicker{display:block;font-size:var(--t-label-sm);color:var(--accent-ink)}
 .prog h3{margin-top:9px;font-size:1.0938rem;line-height:1.22}
 html[lang^="ko"] .prog h3{font-size:1.0312rem;line-height:1.4}
 .prog p{margin:10px 0 0;font-size:0.875rem;line-height:1.5;color:var(--fg-muted)}
@@ -766,13 +796,8 @@ html[lang^="ko"] .prog h3{font-size:1.0312rem;line-height:1.4}
 }
 .pillar-span{grid-column:span 3;padding-top:14px;border-top:2px solid var(--accent)}
 .pillar-span.pillar-b{grid-column:span 2;border-top-color:var(--line-strong)}
-.pillar-span b{
-  display:block;
-  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--accent-ink);
-}
+.pillar-span b{display:block;color:var(--accent-ink)}
 .pillar-span.pillar-b b{color:var(--fg)}
-html[lang^="ko"] .pillar-span b{font-family:var(--font-kr);letter-spacing:.06em}
 .pillar-span span{
   display:block;margin-top:6px;max-width:36em;
   font-size:0.9062rem;line-height:1.5;color:var(--fg-muted);
@@ -788,15 +813,10 @@ html[lang^="ko"] .pillar-span b{font-family:var(--font-kr);letter-spacing:.06em}
   background:var(--surface-raised);border:1px solid var(--line);
   border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-1);
 }
-.exchange-side{padding:30px 30px 32px;position:relative}
+.exchange-side{padding:var(--pad-lg);position:relative}
 .exchange-side + .exchange-side{border-inline-start:1px solid var(--line)}
 .exchange-ours{background:color-mix(in srgb,var(--accent) 5%,var(--surface-raised))}
-.exchange-side .kicker{
-  display:block;
-  font-family:var(--font-body);font-size:0.6875rem;font-weight:700;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--accent-ink);
-}
-html[lang^="ko"] .exchange-side .kicker{font-family:var(--font-kr);letter-spacing:.06em}
+.exchange-side .kicker{display:block;color:var(--accent-ink)}
 .exchange-count{
   margin-top:6px;font-family:var(--font-display);font-size:var(--t-h3);
   line-height:1.15;color:var(--fg);
@@ -816,12 +836,8 @@ html[lang^="ko"] .exchange-side .kicker{font-family:var(--font-kr);letter-spacin
   background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
   overflow:hidden;
 }
-.evidence>div{background:var(--surface-raised);padding:24px 22px}
-.evidence dt{
-  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--accent-ink);margin-bottom:10px;
-}
-html[lang^="ko"] .evidence dt{font-family:var(--font-kr);letter-spacing:.06em}
+.evidence>div{background:var(--surface-raised);padding:var(--pad)}
+.evidence dt{color:var(--accent-ink);margin-bottom:10px}
 .evidence dd{margin:0;font-size:0.9375rem;line-height:1.52}
 .evidence dd+dd{margin-top:8px}
 @media (max-width:55em){.evidence{grid-template-columns:1fr}}
@@ -860,8 +876,7 @@ html[lang^="ko"] .evidence dt{font-family:var(--font-kr);letter-spacing:.06em}
 }
 
 .tag{
-  display:inline-block;font-size:0.6875rem;font-weight:700;letter-spacing:.13em;
-  text-transform:uppercase;padding:5px 11px;border-radius:999px;
+  display:inline-block;font-size:var(--t-label-sm);padding:6px 12px;border-radius:999px;
   background:var(--surface-sunken);color:var(--accent-ink);border:1px solid var(--line);
 }
 .tag-live{background:#EAF3ED;color:#2F6B4F;border-color:#CDE2D5}
@@ -926,13 +941,9 @@ figcaption{margin-top:12px;font-size:0.8125rem;color:var(--fg-muted);line-height
 .diagram{
   background:var(--surface-raised);border:1px solid var(--line);
   border-radius:var(--radius-lg);padding:clamp(22px,2.6vw,38px) clamp(18px,2.4vw,34px) 24px;
-  box-shadow:var(--shadow-1);color:var(--fg);
+  color:var(--fg);
 }
-.diagram-title{
-  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--accent-ink);margin:0 0 20px;
-}
-html[lang^="ko"] .diagram-title{font-family:var(--font-kr);letter-spacing:.07em}
+.diagram-title{color:var(--accent-ink);margin:0 0 20px}
 .band-inverse .diagram-title{color:var(--accent-inverse)}
 .band-inverse .diagram{
   background:color-mix(in srgb,var(--white) 5%,transparent);
@@ -989,7 +1000,7 @@ html[lang^="ko"] .dg-edge{letter-spacing:.03em;text-transform:none}
 .notice{
   background:var(--surface-raised);border:1px solid var(--line);
   border-inline-start:4px solid var(--accent);
-  border-radius:0 var(--radius) var(--radius) 0;padding:28px 30px;box-shadow:var(--shadow-1);
+  border-radius:0 var(--radius) var(--radius) 0;padding:var(--pad);box-shadow:var(--shadow-1);
   transition:box-shadow var(--dur-5) var(--ease-enter),translate var(--dur-5) var(--ease-enter);
 }
 .notice:hover{box-shadow:var(--shadow-2);translate:0 -3px}
@@ -1012,7 +1023,7 @@ html[lang^="ko"] .quote p{font-family:var(--font-kr);font-style:normal;font-size
 
 .callout{
   background:var(--surface-sunken);border:1px solid var(--line);
-  border-radius:var(--radius);padding:26px 28px;
+  border-radius:var(--radius);padding:var(--pad);
 }
 .band-sunken .callout,.band-raised .callout{background:var(--surface)}
 
@@ -1036,10 +1047,8 @@ table{border-collapse:collapse;width:100%;min-width:540px;font-size:0.9375rem}
 th,td{padding:14px 18px;text-align:start;border-bottom:1px solid var(--line);vertical-align:top}
 thead th{
   background:var(--surface-inverse);color:var(--fg-inverse);
-  font-family:var(--font-body);font-weight:700;font-size:0.8125rem;
-  letter-spacing:.05em;text-transform:uppercase;border-bottom:0;
+  border-bottom:0;
 }
-html[lang^="ko"] thead th{font-family:var(--font-kr);letter-spacing:.02em}
 tbody tr{transition:background var(--dur-3) var(--ease)}
 tbody tr:hover{background:var(--surface)}
 tbody tr:last-child td{border-bottom:0}
@@ -1059,7 +1068,7 @@ td strong{color:var(--fg)}
   background:var(--surface);border:2px solid var(--accent);
 }
 .band-raised .tl-item::before{background:var(--surface-raised)}
-.tl-date{font-size:0.75rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink)}
+.tl-date{display:block;color:var(--accent-ink)}
 .tl-item h3{font-size:1.125rem;margin-top:6px}
 .tl-item p{margin-top:7px;font-size:0.9375rem;color:var(--fg-muted)}
 
@@ -1068,10 +1077,8 @@ td strong{color:var(--fg)}
    ========================================================================== */
 .site-footer{background:var(--surface-inverse);color:var(--fg-inverse-muted);padding-block:66px 34px;font-size:0.9375rem}
 .site-footer h3{
-  color:var(--fg-inverse);font-family:var(--font-body);font-size:0.7188rem;font-weight:700;
-  letter-spacing:.17em;text-transform:uppercase;margin:0 0 16px;
+  color:var(--fg-inverse);margin:0 0 16px;
 }
-html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em}
 .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:46px}
 .site-footer img{height:42px;width:auto;margin-bottom:20px}
 .site-footer a:not(.btn){display:block;color:var(--fg-inverse-muted);padding-block:5px;width:fit-content;
@@ -1237,17 +1244,13 @@ html[lang^="ko"] .steps li::before{font-family:var(--font-kr)}
   border-radius:var(--radius);overflow:hidden;
 }
 @media (max-width:55em){.swatches{grid-template-columns:repeat(2,1fr)}}
-.swatch{background:var(--surface-raised);padding:0 0 18px}
+.swatch{background:var(--surface-raised);padding:0 0 var(--pad-sm)}
 .swatch i{
   display:block;height:78px;border-bottom:1px solid var(--line);
   background:var(--sw);
 }
-.swatch b,.swatch span,.swatch code{display:block;padding-inline:18px}
-.swatch b{
-  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--fg);margin-top:16px;
-}
-html[lang^="ko"] .swatch b{font-family:var(--font-kr);letter-spacing:.05em}
+.swatch b,.swatch span,.swatch code{display:block;padding-inline:var(--pad-sm)}
+.swatch b{color:var(--fg);margin-top:16px}
 .swatch code{
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.7812rem;
   color:var(--accent-ink);margin-top:7px;letter-spacing:.04em;
@@ -1259,14 +1262,9 @@ html[lang^="ko"] .swatch b{font-family:var(--font-kr);letter-spacing:.05em}
   border:1px solid var(--line);border-radius:var(--radius);
   background:var(--surface-raised);overflow:hidden;
 }
-.specimen>div{padding:24px 26px;border-bottom:1px solid var(--line)}
+.specimen>div{padding:var(--pad);border-bottom:1px solid var(--line)}
 .specimen>div:last-child{border-bottom:0}
-.specimen dfn{
-  display:block;font-family:var(--font-body);font-style:normal;
-  font-size:var(--t-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent-ink);margin-bottom:12px;
-}
-html[lang^="ko"] .specimen dfn{font-family:var(--font-kr);letter-spacing:.05em}
+.specimen dfn{display:block;font-style:normal;color:var(--accent-ink);margin-bottom:12px}
 .specimen p{font-size:0.8125rem;color:var(--fg-muted);margin:10px 0 0}
 .sp-display{font-family:var(--font-display);font-size:clamp(1.75rem,3.2vw,2.5rem);
   font-weight:600;color:var(--fg);line-height:1.1;letter-spacing:-.022em}
@@ -1343,7 +1341,6 @@ html[lang^="ko"] .band-mark h2 em{font-style:normal;color:var(--accent-ink)}
 .mark-plate{
   display:grid;place-items:center;padding:clamp(30px,4vw,52px);
   background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
-  box-shadow:var(--shadow-1);
 }
 .mark-plate img{width:min(320px,90%);height:auto}
 .mark-plate figcaption{

@@ -23,7 +23,7 @@ import notfound                  # noqa: E402
 import prog_en                   # noqa: E402
 import prog_ko                   # noqa: E402
 import programmes_sub as sub     # noqa: E402
-from layout import ROOT, SITE_URL, page, write   # noqa: E402
+from layout import (ROOT, SITE_URL, breadcrumb, page, write)   # noqa: E402
 
 PAGES = [
     # slug,               en title,                     en description,
@@ -135,6 +135,99 @@ for _slug in sub.ORDER:
                   sub.render("ko", _slug, prog_ko.DATA)))
 
 
+# --- structured data beyond the shared graph -------------------------------
+#
+# Two things are worth declaring per page. Events, because a free class and a
+# free concert are exactly what a search engine can surface for someone in
+# Dublin who did not know we exist; and breadcrumbs, because the five
+# programme pages sit a level down and should say so. Facts here must match
+# the page — WHATS_ON in the content files is the same two events.
+EVENTS = {
+    "en": ["""    {
+      "@type": "EducationEvent",
+      "@id": "%(site)s/programmes/recorder-ensemble.html#mulhuddart-2026",
+      "name": "Recorder Ensemble course — Mulhuddart",
+      "description": "A term of weekly recorder sessions for complete beginners. No experience and no music reading assumed.",
+      "startDate": "2026-09-09T19:00:00+01:00",
+      "endDate": "2026-09-09T20:00:00+01:00",
+      "eventSchedule": {
+        "@type": "Schedule", "byDay": "https://schema.org/Wednesday",
+        "startTime": "19:00", "endTime": "20:00", "repeatFrequency": "P1W",
+        "scheduleTimezone": "Europe/Dublin"
+      },
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place", "name": "Mulhuddart Community Centre",
+        "address": {"@type": "PostalAddress", "addressLocality": "Dublin 15",
+                    "addressCountry": "IE"}
+      },
+      "organizer": {"@id": "%(site)s/#organisation"},
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
+                 "availability": "https://schema.org/InStock",
+                 "url": "%(site)s/get-involved.html"},
+      "inLanguage": "en-IE"
+    }""",
+           """    {
+      "@type": "MusicEvent",
+      "@id": "%(site)s/news.html#autumn-concert-2026",
+      "name": "An Autumn Concert",
+      "description": "Soprano, haegeum, clarinet and piano — Chopin, Pierne, Spohr, Schubert and Korean traditional songs.",
+      "startDate": "2026-09-19T17:00:00+01:00",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place", "name": "Methodist Centenary Church, Ranelagh",
+        "address": {"@type": "PostalAddress", "addressLocality": "Dublin 6",
+                    "addressCountry": "IE"}
+      },
+      "organizer": {"@id": "%(site)s/#organisation"},
+      "performer": {"@id": "%(site)s/#organisation"},
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR",
+                 "availability": "https://schema.org/InStock",
+                 "url": "%(site)s/news.html"},
+      "inLanguage": "en-IE"
+    }"""],
+}
+EVENTS["ko"] = [e.replace('"inLanguage": "en-IE"', '"inLanguage": "ko"') for e in EVENTS["en"]]
+EVENT_PAGES = ("index.html", "news.html")
+
+# which photograph each page hands to a social card
+OG = {
+    "index.html": "hero-outreach.jpg",
+    "about.html": "clarinet.jpg",
+    "programmes.html": "conducting.jpg",
+    "get-involved.html": "community-room.jpg",
+    "news.html": "quartet-hall.jpg",
+    "support.html": "church-concert.jpg",
+    "contact.html": "letters-ensemble.jpg",
+    "programmes/recorder-ensemble.html": "conducting.jpg",
+    "programmes/getting-to-know.html": "lecture-recital.jpg",
+    "programmes/concert-companion.html": "quartet-hall.jpg",
+    "programmes/outreach-concerts.html": "care-christmas.jpg",
+    "programmes/letters-ensemble.html": "letters-ensemble.jpg",
+}
+
+CRUMB_ROOT = {"en": "Home", "ko": "홈"}
+CRUMB_PROG = {"en": "Programmes", "ko": "프로그램"}
+
+
+def extra_nodes(lang, slug, title):
+    """The per-page JSON-LD nodes that hang off the shared graph."""
+    nodes = []
+    if slug in EVENT_PAGES:
+        nodes += [e % {"site": SITE_URL} for e in EVENTS[lang]]
+    if slug.startswith("programmes/"):
+        nodes.append(breadcrumb(SITE_URL, lang, slug, [
+            ("", CRUMB_ROOT[lang]),
+            ("programmes.html", CRUMB_PROG[lang]),
+            (slug, title.split(" — ")[0]),
+        ]))
+    return nodes
+
+
 def build_404():
     """GitHub Pages serves this for any unknown path, at any depth.
 
@@ -192,8 +285,11 @@ def build_sitemap():
 def main():
     written = []
     for slug, en_title, en_desc, ko_title, ko_desc, en_body, ko_body in PAGES:
-        written.append(write("en", slug, en_title, en_desc, en_body))
-        written.append(write("ko", slug, ko_title, ko_desc, ko_body))
+        og = OG.get(slug)
+        written.append(write("en", slug, en_title, en_desc, en_body,
+                             og, extra_nodes("en", slug, en_title)))
+        written.append(write("ko", slug, ko_title, ko_desc, ko_body,
+                             og, extra_nodes("ko", slug, ko_title)))
     build_404()
     build_sitemap()
     written += ["404.html", "sitemap.xml", "robots.txt"]
