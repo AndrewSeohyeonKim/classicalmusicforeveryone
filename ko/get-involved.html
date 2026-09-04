@@ -59,7 +59,16 @@
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
       <a class="nav-link" href="about.html">소개</a>
-      <a class="nav-link" href="programmes.html">프로그램</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="programmes.html">프로그램<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="subnav">
+          <a href="programmes/recorder-ensemble.html"><b>리코더 앙상블 과정</b><span>완전 초보를 위한 한 학기</span></a>
+          <a href="programmes/getting-to-know.html"><b>클래식 음악과 친해지기</b><span>무료 강의·연주</span></a>
+          <a href="programmes/concert-companion.html"><b>함께하는 음악여행</b><span>공연에 함께 갑니다</span></a>
+          <a href="programmes/outreach-concerts.html"><b>찾아가는 음악회</b><span>요양시설 · 본당 · 병원</span></a>
+          <a href="programmes/letters-ensemble.html"><b>Letters Ensemble</b><span>아마추어 연주자, 주 1회</span></a>
+        </div>
+      </div>
       <a class="nav-link" href="get-involved.html" aria-current="page">참여하기</a>
       <a class="nav-link" href="news.html">소식</a>
       <a class="nav-link" href="support.html">후원</a>
@@ -85,36 +94,53 @@
   <div class="wrap">
     <h2 class="sr-only">참여하는 방법</h2>
     <div class="grid grid-2 stagger">
-      <article class="card">
-        <span class="kicker">완전 초보라면</span>
-        <h3>연주를 배웁니다</h3>
-        <p>리코더 앙상블 과정에 참여하세요. 첫 주에 첫 소리, 악보는 처음부터, 앙상블에서 내 파트,
-           그리고 학기 끝에 짧은 음악회.</p>
-        <div class="meta">Mulhuddart Community Centre, D15 · 수요일 19:00–20:00 ·
-           2026년 9월 9일 개강 · 무료</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/conducting.jpg" width="1400" height="933"
+             alt="더블린의 한 커뮤니티 공간에서 진행하는 주간 수업"></div>
+        <div class="card-body">
+          <span class="kicker">완전 초보라면</span>
+          <h3>연주를 배웁니다</h3>
+          <p>리코더 앙상블 과정에 오세요. 첫 주에 첫 소리를 내고, 악보는 처음부터 배우고,
+             앙상블에서 내 파트를 맡고, 학기 끝에는 음악회를 엽니다.</p>
+          <div class="meta">Mulhuddart Community Centre, D15 · 수요일 19:00–20:00 ·
+             2026년 9월 9일 개강 · 무료</div>
+        </div>
       </article>
-      <article class="card">
-        <span class="kicker">먼저 듣고 싶다면</span>
-        <h3>들으러 옵니다</h3>
-        <p>무료 강의·연주에 오시거나, 함께 공연을 보러 가는 소그룹에 합류하세요. 미리 준비하고,
-           나란히 앉아 듣고, 끝나고 이야기를 나눕니다. 혼자서는 가지 않게 되는 분,
-           아일랜드에 막 오신 분을 특히 환영합니다.</p>
-        <div class="meta">대략 월 1회 · 5명 내외</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/lecture-recital.jpg" width="1400" height="933"
+             alt="진행 중인 강의·연주"></div>
+        <div class="card-body">
+          <span class="kicker">먼저 듣고 싶다면</span>
+          <h3>들으러 옵니다</h3>
+          <p>무료 강의·연주에 오시거나, 공연을 보러 가는 소그룹에 끼세요. 미리 준비하고,
+             나란히 앉아 듣고, 끝나고 이야기를 나눕니다. 혼자서는 잘 안 가게 되는 분,
+             아일랜드에 막 오신 분을 특히 환영합니다.</p>
+          <div class="meta">대략 월 1회 · 5명 내외</div>
+        </div>
       </article>
-      <article class="card">
-        <span class="kicker">이미 연주한다면</span>
-        <h3>함께 연주합니다</h3>
-        <p>Letters Ensemble은 더블린에 사는 아마추어 연주자에게 열려 있습니다 — 매주 토요일
-           연습과 커뮤니티 공간에서의 연주. 찾아가는 음악회 운영을 돕는 자원봉사자도
-           환영합니다.</p>
-        <div class="meta">현악·관악 모두 환영</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/letters-ensemble.jpg" width="1400" height="933"
+             alt="악기를 든 Letters Ensemble"></div>
+        <div class="card-body">
+          <span class="kicker">이미 연주한다면</span>
+          <h3>함께 연주합니다</h3>
+          <p>Letters Ensemble은 더블린에 사는 아마추어 연주자에게 열려 있습니다. 토요일마다
+             모여 연습하고, 커뮤니티 공간에서 연주합니다. 찾아가는 음악회 준비를 돕는
+             자원봉사자도 환영합니다.</p>
+          <div class="meta">현악·관악 모두 환영</div>
+        </div>
       </article>
-      <article class="card">
-        <span class="kicker">공간을 운영한다면</span>
-        <h3>초대하거나 함께합니다</h3>
-        <p>찾아가는 음악회를 초대하시거나, 그 공동체를 위한 과정을 여실 수 있습니다.
-           공공배상책임보험을 보유하고 있고, 신원조회가 필요한 일은 시작 전에 Garda 신원조회를 마칩니다.</p>
-        <div class="meta">더블린·위클로·미스·라우스, 그 밖 지역도 협의</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/community-room.jpg" width="1400" height="933"
+             alt="꾸밈없는 커뮤니티 공간에서 연주하는 모습"></div>
+        <div class="card-body">
+          <span class="kicker">공간을 운영한다면</span>
+          <h3>초대하거나 함께합니다</h3>
+          <p>찾아가는 음악회를 부르시거나, 그 공동체를 위한 과정을 여실 수 있습니다.
+             공공배상책임보험을 들어 두었고, 신원조회가 필요한 일은 시작 전에 Garda
+             신원조회를 마칩니다.</p>
+          <div class="meta">더블린·위클로·미스·라우스, 그 밖 지역도 협의</div>
+        </div>
       </article>
     </div>
   </div>
@@ -131,31 +157,33 @@
     <div class="reveal"><figure class="diagram">
   <p class="diagram-title">네 가지 길, 하나의 문</p>
   <div class="diagram-canvas">
-  <svg viewBox="-60 0 1140 408" role="img" aria-label="왼쪽에 음표 네 개 — 배우기, 들으러 오기, 함께 연주하기, 공간 열기 — 가 하나의 ‘이메일 한 통, 한 줄’ 음표로 모인다. 넷 사이에는 ‘사람들은 이 사이를 오갑니다’라는 점선이 놓여 있다.">
-    <ellipse class="dg-note" cx="22" cy="70" rx="11.0" ry="8.0" transform="rotate(-20 22 70)"/>
-    <text class="dg-h" x="52" y="76" text-anchor="start">배우러 옵니다</text>
-    <text class="dg-sub" x="52" y="102" text-anchor="start">악기를 잡아 본 적이 없어도</text>
-    <path class="dg-stroke-accent dg-draw" d="M520 66 C 620 66, 640 202, 734 202" pathLength="1" stroke-width="2" fill="none"/>
-    <ellipse class="dg-note" cx="22" cy="158" rx="11.0" ry="8.0" transform="rotate(-20 22 158)"/>
-    <text class="dg-h" x="52" y="164" text-anchor="start">들으러 옵니다</text>
-    <text class="dg-sub" x="52" y="190" text-anchor="start">듣는 것부터 시작하고 싶다면</text>
-    <path class="dg-stroke-accent dg-draw" d="M520 154 C 620 154, 640 202, 734 202" pathLength="1" stroke-width="2" fill="none"/>
-    <ellipse class="dg-note" cx="22" cy="246" rx="11.0" ry="8.0" transform="rotate(-20 22 246)"/>
-    <text class="dg-h" x="52" y="252" text-anchor="start">함께 연주합니다</text>
-    <text class="dg-sub" x="52" y="278" text-anchor="start">이미 다루는 악기가 있다면</text>
-    <path class="dg-stroke-accent dg-draw" d="M520 242 C 620 242, 640 202, 734 202" pathLength="1" stroke-width="2" fill="none"/>
-    <ellipse class="dg-note" cx="22" cy="334" rx="11.0" ry="8.0" transform="rotate(-20 22 334)"/>
-    <text class="dg-h" x="52" y="340" text-anchor="start">공간을 엽니다</text>
-    <text class="dg-sub" x="52" y="366" text-anchor="start">방이 있거나, 아는 방이 있다면</text>
-    <path class="dg-stroke-accent dg-draw" d="M520 330 C 620 330, 640 202, 734 202" pathLength="1" stroke-width="2" fill="none"/>
-    <path class="dg-tri dg-late" d="M746 202 l-10 -6 v12 z" transform="rotate(0 746 202)"/>
-    <text class="dg-edge dg-late" x="600" y="26" text-anchor="middle">당신에게 맞는 쪽으로</text>
-    <path class="dg-stroke" d="M22 92 C -34 122, -34 148, 22 136 M22 180 C -34 210, -34 236, 22 224 M22 268 C -34 298, -34 324, 22 312" stroke-dasharray="3 4" fill="none"/>
-    <text class="dg-sub" x="22" y="392" >사람들은 이 사이를 오갑니다</text>
-    <ellipse class="dg-note" cx="780" cy="202" rx="11.0" ry="8.0" transform="rotate(-20 780 202)"/>
-    <text class="dg-h" x="808" y="198" text-anchor="start">이메일 한 통,</text>
-    <text class="dg-h" x="808" y="224" text-anchor="start">한 줄</text>
-    <text class="dg-sub" x="808" y="248">실무적인 내용으로 답을 드립니다</text>
+  <svg viewBox="0 0 1080 460" role="img" aria-label="점선 하나에 꿰인 음표 네 개 — 배우러 오기, 들으러 오기, 함께 연주하기, 공간 열기. 그 점선에는 ‘사람들은 이 사이를 오갑니다’라고 적혀 있다. 네 갈래는 모두 오른쪽의 금색 선에서 만나고, 거기서 화살표 하나가 ‘이메일 한 통, 한 줄’ 음표로 간다.">
+    <line class="dg-stroke" x1="60" y1="52" x2="60" y2="414" stroke-dasharray="3 5"/>
+    <ellipse class="dg-note" cx="60" cy="82" rx="11.0" ry="8.0" transform="rotate(-20 60 82)"/>
+    <text class="dg-h" x="90" y="88" text-anchor="start">배우러 옵니다</text>
+    <text class="dg-sub" x="90" y="113" text-anchor="start">악기를 잡아 본 적이 없어도</text>
+    <line class="dg-stroke" x1="60" y1="134" x2="520" y2="134"/>
+    <ellipse class="dg-note" cx="60" cy="170" rx="11.0" ry="8.0" transform="rotate(-20 60 170)"/>
+    <text class="dg-h" x="90" y="176" text-anchor="start">들으러 옵니다</text>
+    <text class="dg-sub" x="90" y="201" text-anchor="start">듣는 것부터 시작하고 싶다면</text>
+    <line class="dg-stroke" x1="60" y1="222" x2="520" y2="222"/>
+    <ellipse class="dg-note" cx="60" cy="258" rx="11.0" ry="8.0" transform="rotate(-20 60 258)"/>
+    <text class="dg-h" x="90" y="264" text-anchor="start">함께 연주합니다</text>
+    <text class="dg-sub" x="90" y="289" text-anchor="start">이미 다루는 악기가 있다면</text>
+    <line class="dg-stroke" x1="60" y1="310" x2="520" y2="310"/>
+    <ellipse class="dg-note" cx="60" cy="346" rx="11.0" ry="8.0" transform="rotate(-20 60 346)"/>
+    <text class="dg-h" x="90" y="352" text-anchor="start">공간을 엽니다</text>
+    <text class="dg-sub" x="90" y="377" text-anchor="start">방이 있거나, 아는 방이 있다면</text>
+    <line class="dg-stroke" x1="60" y1="398" x2="520" y2="398"/>
+    <line class="dg-stroke-accent" x1="520" y1="134" x2="520" y2="398" stroke-width="2.5"/>
+    <path class="dg-stroke-accent dg-draw" d="M520 266 H726" pathLength="1" stroke-width="2.5" fill="none"/>
+    <path class="dg-tri dg-late" d="M736 266 l-10 -6 v12 z" transform="rotate(0 736 266)"/>
+    <text class="dg-edge dg-late" x="628" y="248" text-anchor="middle">당신에게 맞는 쪽으로</text>
+    <ellipse class="dg-note" cx="760" cy="266" rx="11.0" ry="8.0" transform="rotate(-20 760 266)"/>
+    <text class="dg-h" x="788" y="262" text-anchor="start">이메일 한 통,</text>
+    <text class="dg-h" x="788" y="288" text-anchor="start">한 줄</text>
+    <text class="dg-sub" x="788" y="312">실무적인 내용으로 답을 드립니다</text>
+    <text class="dg-sub" x="46" y="442">사람들은 이 사이를 오갑니다</text>
   </svg>
   </div>
   <figcaption>네 갈래는 네 개의 신청 절차가 아닙니다. 같은 이메일에 쓸 수 있는 네 개의 문장이고, 사람들은 그 사이를 늘 오갑니다 — 지금 연주하는 사람 대부분이 처음에는 듣는 사람이었고, 우리가 연주하는 방 중 둘은 음악회에 왔던 분이 내어 준 것입니다.</figcaption>
@@ -192,9 +220,10 @@
       <p class="eyebrow">공간을 여는 분들께</p>
       <h2>방 하나와 담당자 한 분. 나머지는 저희가 합니다.</h2>
     </div>
-    <div class="split reveal">
-      <div>
-        <h3>공간이 준비하는 것</h3>
+    <div class="exchange reveal">
+      <div class="exchange-side">
+        <span class="kicker">공간이 준비하는 것</span>
+        <p class="exchange-count">네 가지</p>
         <ul class="checklist mt-2">
           <li>열 명에서 열두 명이 둥글게 앉을 따뜻한 방, 학기 동안 주 1회</li>
           <li>지역에 알리는 일에 조금의 도움</li>
@@ -202,8 +231,9 @@
           <li>그 밖에는 없습니다 — 장비도, 행정도, 피아노도</li>
         </ul>
       </div>
-      <div>
-        <h3>저희가 준비하는 것</h3>
+      <div class="exchange-side exchange-ours">
+        <span class="kicker">저희가 준비하는 것</span>
+        <p class="exchange-count">나머지 전부</p>
         <ul class="checklist mt-2">
           <li>강사와 전체 커리큘럼</li>
           <li>모든 악보와 주간 교재 (저희 비용으로 인쇄)</li>

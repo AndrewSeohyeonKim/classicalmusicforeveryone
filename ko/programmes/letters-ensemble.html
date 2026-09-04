@@ -59,7 +59,16 @@
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
       <a class="nav-link" href="../about.html">소개</a>
-      <a class="nav-link" href="../programmes.html">프로그램</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="../programmes.html" aria-current="page">프로그램<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="subnav">
+          <a href="../programmes/recorder-ensemble.html"><b>리코더 앙상블 과정</b><span>완전 초보를 위한 한 학기</span></a>
+          <a href="../programmes/getting-to-know.html"><b>클래식 음악과 친해지기</b><span>무료 강의·연주</span></a>
+          <a href="../programmes/concert-companion.html"><b>함께하는 음악여행</b><span>공연에 함께 갑니다</span></a>
+          <a href="../programmes/outreach-concerts.html"><b>찾아가는 음악회</b><span>요양시설 · 본당 · 병원</span></a>
+          <a href="../programmes/letters-ensemble.html" aria-current="page"><b>Letters Ensemble</b><span>아마추어 연주자, 주 1회</span></a>
+        </div>
+      </div>
       <a class="nav-link" href="../get-involved.html">참여하기</a>
       <a class="nav-link" href="../news.html">소식</a>
       <a class="nav-link" href="../support.html">후원</a>
@@ -118,47 +127,46 @@
   <p class="diagram-title">네 번의 음악회가 딛고 선 것</p>
   <div class="diagram-canvas">
   <svg viewBox="0 0 1080 300" role="img" aria-label="‘2024년 1월부터 매주 토요일 — 백 회가 넘고, 기록된 것은 없음’이라는 괄호 아래 같은 크기의 작은 음표가 길게 늘어서 있고, 화살표가 ‘정식 음악회 네 번, 기록됨’으로 표시된 음표 네 개로 이어진다.">
-    <line class="dg-stave" x1="0" y1="120" x2="640" y2="120"/>
-    <line class="dg-stave" x1="0" y1="138" x2="640" y2="138"/>
-    <line class="dg-stave" x1="0" y1="156" x2="640" y2="156"/>
-    <line class="dg-stave" x1="0" y1="174" x2="640" y2="174"/>
-    <line class="dg-stave-base" x1="0" y1="192" x2="640" y2="192"/>
-    <ellipse class="dg-note" cx="26" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 26 174)"/>
-    <ellipse class="dg-note" cx="60" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 60 156)"/>
-    <ellipse class="dg-note" cx="94" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 94 174)"/>
-    <ellipse class="dg-note" cx="128" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 128 156)"/>
-    <ellipse class="dg-note" cx="162" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 162 174)"/>
-    <ellipse class="dg-note" cx="196" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 196 156)"/>
-    <ellipse class="dg-note" cx="230" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 230 174)"/>
-    <ellipse class="dg-note" cx="264" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 264 156)"/>
-    <ellipse class="dg-note" cx="298" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 298 174)"/>
-    <ellipse class="dg-note" cx="332" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 332 156)"/>
-    <ellipse class="dg-note" cx="366" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 366 174)"/>
-    <ellipse class="dg-note" cx="400" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 400 156)"/>
-    <ellipse class="dg-note" cx="434" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 434 174)"/>
-    <ellipse class="dg-note" cx="468" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 468 156)"/>
-    <ellipse class="dg-note" cx="502" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 502 174)"/>
-    <ellipse class="dg-note" cx="536" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 536 156)"/>
-    <ellipse class="dg-note" cx="570" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 570 174)"/>
-    <text class="dg-sub" x="608" y="170">···</text>
-    <path class="dg-stroke" d="M0 85 V96 H640 V85" fill="none"/>
-    <text class="dg-h" x="0" y="74">2024년 1월부터 매주 토요일</text>
-    <text class="dg-sub" x="0" y="232">백 회가 훨씬 넘습니다 · 기록해 둔 것은 없습니다</text>
-    <path class="dg-stroke-accent dg-draw" d="M660 165 H 780" pathLength="1" stroke-width="2.5" fill="none"/>
-    <path class="dg-tri dg-late" d="M790 165 l-10 -6 v12 z" transform="rotate(0 790 165)"/>
-    <text class="dg-edge dg-late" x="722" y="146" text-anchor="middle">기록으로 남는 것</text>
-    <line class="dg-stave" x1="816" y1="120" x2="1080" y2="120"/>
-    <line class="dg-stave" x1="816" y1="138" x2="1080" y2="138"/>
-    <line class="dg-stave" x1="816" y1="156" x2="1080" y2="156"/>
-    <line class="dg-stave" x1="816" y1="174" x2="1080" y2="174"/>
-    <line class="dg-stave-base" x1="816" y1="192" x2="1080" y2="192"/>
-    <ellipse class="dg-note" cx="858" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 858 156)"/>
-    <ellipse class="dg-note" cx="920" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 920 156)"/>
-    <ellipse class="dg-note" cx="982" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 982 156)"/>
-    <ellipse class="dg-note" cx="1044" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 1044 156)"/>
-    <path class="dg-stroke" d="M816 85 V96 H1080 V85" fill="none"/>
-    <text class="dg-h" x="816" y="74">정식 음악회 4회</text>
-    <text class="dg-sub" x="816" y="232">프로그램 · 사진 · 날짜</text>
+    <line class="dg-stave" x1="24" y1="120" x2="612" y2="120"/>
+    <line class="dg-stave" x1="24" y1="138" x2="612" y2="138"/>
+    <line class="dg-stave" x1="24" y1="156" x2="612" y2="156"/>
+    <line class="dg-stave" x1="24" y1="174" x2="612" y2="174"/>
+    <line class="dg-stave-base" x1="24" y1="192" x2="612" y2="192"/>
+    <ellipse class="dg-note" cx="46" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 46 174)"/>
+    <ellipse class="dg-note" cx="79" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 79 156)"/>
+    <ellipse class="dg-note" cx="112" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 112 174)"/>
+    <ellipse class="dg-note" cx="145" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 145 156)"/>
+    <ellipse class="dg-note" cx="178" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 178 174)"/>
+    <ellipse class="dg-note" cx="211" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 211 156)"/>
+    <ellipse class="dg-note" cx="244" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 244 174)"/>
+    <ellipse class="dg-note" cx="277" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 277 156)"/>
+    <ellipse class="dg-note" cx="310" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 310 174)"/>
+    <ellipse class="dg-note" cx="343" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 343 156)"/>
+    <ellipse class="dg-note" cx="376" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 376 174)"/>
+    <ellipse class="dg-note" cx="409" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 409 156)"/>
+    <ellipse class="dg-note" cx="442" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 442 174)"/>
+    <ellipse class="dg-note" cx="475" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 475 156)"/>
+    <ellipse class="dg-note" cx="508" cy="174" rx="11.0" ry="8.0" transform="rotate(-20 508 174)"/>
+    <ellipse class="dg-note" cx="541" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 541 156)"/>
+    <text class="dg-sub" x="562" y="170">···</text>
+    <path class="dg-stroke" d="M24 85 V96 H612 V85" fill="none"/>
+    <text class="dg-h" x="24" y="74">2024년 1월부터 매주 토요일</text>
+    <text class="dg-sub" x="24" y="232">백 회가 훨씬 넘습니다 · 기록해 둔 것은 없습니다</text>
+    <path class="dg-stroke-accent dg-draw" d="M636 165 H 752" pathLength="1" stroke-width="2.5" fill="none"/>
+    <path class="dg-tri dg-late" d="M762 165 l-10 -6 v12 z" transform="rotate(0 762 165)"/>
+    <text class="dg-edge dg-late" x="696" y="146" text-anchor="middle">기록으로 남는 것</text>
+    <line class="dg-stave" x1="792" y1="120" x2="1056" y2="120"/>
+    <line class="dg-stave" x1="792" y1="138" x2="1056" y2="138"/>
+    <line class="dg-stave" x1="792" y1="156" x2="1056" y2="156"/>
+    <line class="dg-stave" x1="792" y1="174" x2="1056" y2="174"/>
+    <line class="dg-stave-base" x1="792" y1="192" x2="1056" y2="192"/>
+    <ellipse class="dg-note" cx="832" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 832 156)"/>
+    <ellipse class="dg-note" cx="894" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 894 156)"/>
+    <ellipse class="dg-note" cx="956" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 956 156)"/>
+    <ellipse class="dg-note" cx="1018" cy="156" rx="11.0" ry="8.0" transform="rotate(-20 1018 156)"/>
+    <path class="dg-stroke" d="M792 85 V96 H1056 V85" fill="none"/>
+    <text class="dg-h" x="792" y="74">정식 음악회 4회</text>
+    <text class="dg-sub" x="792" y="232">프로그램 · 사진 · 날짜</text>
     <text class="dg-sub" x="540" y="286" text-anchor="middle">더블린에 사는 아마추어 연주자들 · 약 2시간 · 새 연주자를 환영합니다</text>
   </svg>
   </div>

@@ -59,7 +59,16 @@
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
       <a class="nav-link" href="about.html">소개</a>
-      <a class="nav-link" href="programmes.html">프로그램</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="programmes.html">프로그램<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="subnav">
+          <a href="programmes/recorder-ensemble.html"><b>리코더 앙상블 과정</b><span>완전 초보를 위한 한 학기</span></a>
+          <a href="programmes/getting-to-know.html"><b>클래식 음악과 친해지기</b><span>무료 강의·연주</span></a>
+          <a href="programmes/concert-companion.html"><b>함께하는 음악여행</b><span>공연에 함께 갑니다</span></a>
+          <a href="programmes/outreach-concerts.html"><b>찾아가는 음악회</b><span>요양시설 · 본당 · 병원</span></a>
+          <a href="programmes/letters-ensemble.html"><b>Letters Ensemble</b><span>아마추어 연주자, 주 1회</span></a>
+        </div>
+      </div>
       <a class="nav-link" href="get-involved.html">참여하기</a>
       <a class="nav-link" href="news.html" aria-current="page">소식</a>
       <a class="nav-link" href="support.html">후원</a>
@@ -225,7 +234,7 @@
 
 <section class="band-inverse">
   <div class="wrap narrow center reveal">
-    <h2 class="h-lg">당신을 위한 자리가 있습니다.</h2>
+    <h2 class="h-lg">여기 당신 자리가 있습니다.</h2>
     <p class="lead mt-2">
       처음 악기를 배우든, 들으러 오든, 함께 연주하든, 공간을 열어 주든 —
       한 줄이면 시작됩니다.</p>

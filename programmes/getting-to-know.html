@@ -59,7 +59,16 @@
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="Menu">
       <a class="nav-link" href="../about.html">About</a>
-      <a class="nav-link" href="../programmes.html">Programmes</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="../programmes.html" aria-current="page">Programmes<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="subnav">
+          <a href="../programmes/recorder-ensemble.html"><b>Recorder Ensemble course</b><span>A term for complete beginners</span></a>
+          <a href="../programmes/getting-to-know.html" aria-current="page"><b>Getting to Know Classical Music</b><span>Free lecture-recitals</span></a>
+          <a href="../programmes/concert-companion.html"><b>Concert Guide &amp; Companion</b><span>Accompanied concert-going</span></a>
+          <a href="../programmes/outreach-concerts.html"><b>Outreach Concerts</b><span>Care homes, parishes, hospitals</span></a>
+          <a href="../programmes/letters-ensemble.html"><b>Letters Ensemble</b><span>Amateur players, weekly</span></a>
+        </div>
+      </div>
       <a class="nav-link" href="../get-involved.html">Get Involved</a>
       <a class="nav-link" href="../news.html">News</a>
       <a class="nav-link" href="../support.html">Support</a>

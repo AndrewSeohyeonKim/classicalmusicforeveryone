@@ -59,7 +59,16 @@
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
       <a class="nav-link" href="about.html">소개</a>
-      <a class="nav-link" href="programmes.html">프로그램</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="programmes.html">프로그램<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="subnav">
+          <a href="programmes/recorder-ensemble.html"><b>리코더 앙상블 과정</b><span>완전 초보를 위한 한 학기</span></a>
+          <a href="programmes/getting-to-know.html"><b>클래식 음악과 친해지기</b><span>무료 강의·연주</span></a>
+          <a href="programmes/concert-companion.html"><b>함께하는 음악여행</b><span>공연에 함께 갑니다</span></a>
+          <a href="programmes/outreach-concerts.html"><b>찾아가는 음악회</b><span>요양시설 · 본당 · 병원</span></a>
+          <a href="programmes/letters-ensemble.html"><b>Letters Ensemble</b><span>아마추어 연주자, 주 1회</span></a>
+        </div>
+      </div>
       <a class="nav-link" href="get-involved.html">참여하기</a>
       <a class="nav-link" href="news.html">소식</a>
       <a class="nav-link" href="support.html" aria-current="page">후원</a>
@@ -93,20 +102,20 @@
   <p class="diagram-title">유료 예약 하나가 무료 자리를 지키는 방식</p>
   <div class="diagram-canvas">
   <svg viewBox="0 0 1080 376" role="img" aria-label="기관과 낼 수 있는 참가자, 보조금이 CMFE에 지불하고, CMFE는 무료 자리와 더 많은 방을 내놓으며 잉여는 다시 안으로 돌아온다.">
-    <text class="dg-edge" x="0" y="26">들어오는 돈</text>
-    <line class="dg-stroke-accent" x1="0" y1="44" x2="0" y2="84" stroke-width="2.5"/>
-    <text class="dg-label" x="16" y="66" text-anchor="start">기관</text>
-    <text class="dg-sub" x="16" y="88" text-anchor="start">요양시설 · 본당 · 지자체 · 학교</text>
-    <text class="dg-sub" x="16" y="106" text-anchor="start">— 자체 예산에서</text>
+    <text class="dg-edge" x="24" y="26">들어오는 돈</text>
+    <line class="dg-stroke-accent" x1="24" y1="44" x2="24" y2="84" stroke-width="2.5"/>
+    <text class="dg-label" x="40" y="66" text-anchor="start">기관</text>
+    <text class="dg-sub" x="40" y="88" text-anchor="start">요양시설 · 본당 · 지자체 · 학교</text>
+    <text class="dg-sub" x="40" y="106" text-anchor="start">— 자체 예산에서</text>
     <path class="dg-stroke-accent dg-draw" d="M320 62 C 380 62, 386 190, 424 190" pathLength="1" stroke-width="5.5" fill="none"/>
-    <line class="dg-stroke-accent" x1="0" y1="156" x2="0" y2="196" stroke-width="2.5"/>
-    <text class="dg-label" x="16" y="178" text-anchor="start">낼 수 있는 참가자</text>
-    <text class="dg-sub" x="16" y="200" text-anchor="start">학기당 소액 기여</text>
+    <line class="dg-stroke-accent" x1="24" y1="156" x2="24" y2="196" stroke-width="2.5"/>
+    <text class="dg-label" x="40" y="178" text-anchor="start">낼 수 있는 참가자</text>
+    <text class="dg-sub" x="40" y="200" text-anchor="start">학기당 소액 기여</text>
     <path class="dg-stroke-accent dg-draw" d="M320 174 C 380 174, 386 190, 424 190" pathLength="1" stroke-width="3.0" fill="none"/>
-    <line class="dg-stroke-accent" x1="0" y1="268" x2="0" y2="308" stroke-width="2.5"/>
-    <text class="dg-label" x="16" y="290" text-anchor="start">보조금과 후원</text>
-    <text class="dg-sub" x="16" y="312" text-anchor="start">위촉, 기부,</text>
-    <text class="dg-sub" x="16" y="330" text-anchor="start">현물로 내어 주는 공간</text>
+    <line class="dg-stroke-accent" x1="24" y1="268" x2="24" y2="308" stroke-width="2.5"/>
+    <text class="dg-label" x="40" y="290" text-anchor="start">보조금과 후원</text>
+    <text class="dg-sub" x="40" y="312" text-anchor="start">위촉, 기부,</text>
+    <text class="dg-sub" x="40" y="330" text-anchor="start">현물로 내어 주는 공간</text>
     <path class="dg-stroke-accent dg-draw" d="M320 286 C 380 286, 386 190, 424 190" pathLength="1" stroke-width="2.25" fill="none"/>
     <path class="dg-tri dg-late" d="M430 190 l-10 -6 v12 z" transform="rotate(0 430 190)"/>
     <text class="dg-edge dg-late" x="372" y="44" text-anchor="middle">비용을 지불</text>
@@ -114,7 +123,7 @@
     <text class="dg-label" x="542" y="180" text-anchor="middle">Classical Music</text>
     <text class="dg-label" x="542" y="200" text-anchor="middle">for Everyone</text>
     <text class="dg-sub" x="542" y="218" text-anchor="middle">자원봉사 운영 · 사적 이익 배분 없음</text>
-    <text class="dg-edge" x="1080" y="26" text-anchor="end">그 돈이 사는 것</text>
+    <text class="dg-edge" x="1056" y="26" text-anchor="end">그 돈이 사는 것</text>
     <line class="dg-stroke-accent" x1="770" y1="88" x2="770" y2="128" stroke-width="2.5"/>
     <text class="dg-label" x="786" y="110" text-anchor="start">무료 자리</text>
     <text class="dg-sub" x="786" y="132" text-anchor="start">어르신, 장애가 있는 분,</text>

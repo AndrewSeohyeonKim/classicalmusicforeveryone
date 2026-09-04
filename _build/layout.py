@@ -30,6 +30,37 @@ NAV = {
            ("support.html", "후원")],
 }
 
+# The five programme pages hang off the Programmes item. Without this they were
+# reachable only from a card on another page — the menu said the section existed
+# but gave no way to choose within it. Order matches the five cards everywhere
+# else; no entry is marked out as the main one.
+SUBNAV = {
+    "programmes.html": {
+        "en": [("programmes/recorder-ensemble.html", "Recorder Ensemble course",
+                "A term for complete beginners"),
+               ("programmes/getting-to-know.html", "Getting to Know Classical Music",
+                "Free lecture-recitals"),
+               ("programmes/concert-companion.html", "Concert Guide &amp; Companion",
+                "Accompanied concert-going"),
+               ("programmes/outreach-concerts.html", "Outreach Concerts",
+                "Care homes, parishes, hospitals"),
+               ("programmes/letters-ensemble.html", "Letters Ensemble",
+                "Amateur players, weekly")],
+        "ko": [("programmes/recorder-ensemble.html", "리코더 앙상블 과정",
+                "완전 초보를 위한 한 학기"),
+               ("programmes/getting-to-know.html", "클래식 음악과 친해지기",
+                "무료 강의·연주"),
+               ("programmes/concert-companion.html", "함께하는 음악여행",
+                "공연에 함께 갑니다"),
+               ("programmes/outreach-concerts.html", "찾아가는 음악회",
+                "요양시설 · 본당 · 병원"),
+               ("programmes/letters-ensemble.html", "Letters Ensemble",
+                "아마추어 연주자, 주 1회")],
+    },
+}
+
+SUBNAV_LABEL = {"en": "Programmes", "ko": "프로그램"}
+
 STR = {
     "en": {
         "skip": "Skip to main content",
@@ -166,8 +197,28 @@ def header(lang, slug):
     p, r, s = _here(slug), _root(lang, slug), STR[lang]
     rows = []
     for href, label in NAV[lang]:
-        current = ' aria-current="page"' if href == slug else ""
-        rows.append(f'      <a class="nav-link" href="{p}{href}"{current}>{label}</a>')
+        sub = SUBNAV.get(href)
+        # a page under programmes/ should light up the Programmes item too
+        here = href == slug or (sub and slug.startswith(href[:-5] + "/"))
+        current = ' aria-current="page"' if here else ""
+        if not sub:
+            rows.append(f'      <a class="nav-link" href="{p}{href}"{current}>{label}</a>')
+            continue
+        # CSS-only disclosure: hover, and :focus-within for the keyboard. No
+        # script — the whole site still runs on the one menu-toggle line.
+        items = "\n".join(
+            f'          <a href="{p}{h}"'
+            + (' aria-current="page"' if h == slug else "")
+            + f'><b>{t}</b><span>{d}</span></a>'
+            for h, t, d in sub[lang])
+        rows.append(
+            f'      <div class="nav-item has-sub">\n'
+            f'        <a class="nav-link" href="{p}{href}"{current}>{label}'
+            f'<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true">'
+            f'<path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" '
+            f'stroke-linecap="round"/></svg></a>\n'
+            f'        <div class="subnav">\n{items}\n        </div>\n'
+            f'      </div>')
     links = "\n".join(rows)
     other = "ko" if lang == "en" else "en"
     return f"""<div class="progress" aria-hidden="true"></div>

@@ -14,15 +14,11 @@ L = "en"
 # Reusable blocks
 # ---------------------------------------------------------------------------
 
-STATS = """<div class="stats">
-  <div class="wrap stats-grid">
-    <div class="stat"><b>40+</b><span>Sessions &amp; performances</span></div>
-    <div class="stat"><b>5</b><span>Programmes running</span></div>
-    <div class="stat"><b>20+</b><span>Venues &amp; institutions</span></div>
-    <div class="stat"><b>4</b><span>Countries</span></div>
-    <div class="stat"><b>143</b><span>Lecture attendances</span></div>
-  </div>
-</div>"""
+# The home page no longer opens on a band of figures. Counts answer "how much
+# of it is there" before the reader has been told what it is, and they made the
+# work read as a tally rather than as a programme. The same numbers still sit
+# where they are evidence for a claim — on About, on the programme pages, and
+# in "Grounds for trust" further down this page.
 
 WHATS_ON = """<div class="grid grid-2 stagger">
   <div class="notice">
@@ -78,7 +74,7 @@ INDEX = f"""<section class="hero">
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow lift lift-1">Community music · Dublin, Ireland</p>
-      <h1><span class="line lift lift-1">Classical music,</span><span class="line lift lift-2"><em>for everyone.</em></span></h1>
+      <h1><span class="line lift lift-1">Classical music,</span><span class="line lift lift-2"><em>for Everyone.</em></span></h1>
       <p class="lead lift lift-3">We teach people to play — not only to listen — and we bring
          live classical music to the places it rarely reaches.</p>
       <div class="btn-row lift lift-4">
@@ -96,7 +92,6 @@ INDEX = f"""<section class="hero">
   </div>
 </section>
 
-{STATS}
 
 <section>
   <div class="wrap">
@@ -107,9 +102,14 @@ INDEX = f"""<section class="hero">
          hall. Neither half works alone: the rooms we play in are where the next class comes
          from, and the class is where the next players come from.</p>
     </div>
-    <div class="legend reveal">
-      <b>Learning</b><span>a term, a talk, a seat beside you</span>
-      <b class="b2">Sharing</b><span>we bring the music to the room</span>
+    <div class="pillar-bar reveal" aria-hidden="true">
+      <div class="pillar-span">
+        <b>Learning</b><span>We teach people to play. Three ways in, all of them
+        starting from nothing.</span>
+      </div>
+      <div class="pillar-span pillar-b">
+        <b>Sharing</b><span>We play where the music does not otherwise go.</span>
+      </div>
     </div>
     <div class="grid grid-5 stagger">
       <a class="prog" href="programmes/recorder-ensemble.html">
@@ -910,36 +910,52 @@ GET_INVOLVED = f"""<section class="page-hero">
   <div class="wrap">
     <h2 class="sr-only">Ways to take part</h2>
     <div class="grid grid-2 stagger">
-      <article class="card">
-        <span class="kicker">For absolute beginners</span>
-        <h3>Learn to play</h3>
-        <p>Join the recorder ensemble course. First notes in week one, reading music from zero,
-           your own part in the ensemble, and a short concert at the end of term.</p>
-        <div class="meta">Mulhuddart Community Centre, D15 · Wednesdays 7:00–8:00pm ·
-           from 9 September 2026 · free</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img src="images/conducting.jpg" width="1400" height="933"
+             alt="A weekly class in a community room in Dublin"></div>
+        <div class="card-body">
+          <span class="kicker">For absolute beginners</span>
+          <h3>Learn to play</h3>
+          <p>Join the recorder ensemble course. First notes in week one, reading music from
+             zero, your own part in the ensemble, and a concert at the end of term.</p>
+          <div class="meta">Mulhuddart Community Centre, D15 · Wednesdays 7:00–8:00pm ·
+             from 9 September 2026 · free</div>
+        </div>
       </article>
-      <article class="card">
-        <span class="kicker">If you would rather listen first</span>
-        <h3>Come and listen</h3>
-        <p>A free lecture-recital, or a small group going to a live concert together — we prepare
-           beforehand, sit together, and talk about it after. Especially welcome if you would
-           never go alone, or are new to Ireland.</p>
-        <div class="meta">Roughly monthly · groups of about five</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img src="images/lecture-recital.jpg" width="1400" height="933"
+             alt="A lecture-recital in progress"></div>
+        <div class="card-body">
+          <span class="kicker">If you would rather listen first</span>
+          <h3>Come and listen</h3>
+          <p>A free lecture-recital, or a small group going to a concert together — prepared
+             beforehand, sat through together, talked about after. Especially welcome if you
+             would never go alone, or are new to Ireland.</p>
+          <div class="meta">Roughly monthly · groups of about five</div>
+        </div>
       </article>
-      <article class="card">
-        <span class="kicker">If you already play</span>
-        <h3>Play with us</h3>
-        <p>The Letters Ensemble is open to amateur musicians living in Dublin — weekly Saturday
-           rehearsals and concerts in community settings. Volunteers also help with outreach
-           logistics.</p>
-        <div class="meta">Strings, winds and more welcome</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img src="images/letters-ensemble.jpg" width="1400" height="933"
+             alt="The Letters Ensemble with their instruments"></div>
+        <div class="card-body">
+          <span class="kicker">If you already play</span>
+          <h3>Play with us</h3>
+          <p>The Letters Ensemble is open to amateur musicians living in Dublin — Saturday
+             rehearsals and concerts in community settings. Volunteers also help with outreach
+             logistics.</p>
+          <div class="meta">Strings, winds and more welcome</div>
+        </div>
       </article>
-      <article class="card">
-        <span class="kicker">If you run a venue</span>
-        <h3>Host or partner</h3>
-        <p>Invite an outreach concert, or host a course for your community. We carry public
-           liability insurance and complete Garda vetting where the work requires it.</p>
-        <div class="meta">Dublin, Wicklow, Meath, Louth and beyond</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img src="images/community-room.jpg" width="1400" height="933"
+             alt="A musician playing in a plain community room"></div>
+        <div class="card-body">
+          <span class="kicker">If you run a venue</span>
+          <h3>Host or partner</h3>
+          <p>Invite an outreach concert, or host a course for your community. We carry public
+             liability insurance and complete Garda vetting where the work requires it.</p>
+          <div class="meta">Dublin, Wicklow, Meath, Louth and beyond</div>
+        </div>
       </article>
     </div>
   </div>
@@ -987,9 +1003,10 @@ GET_INVOLVED = f"""<section class="page-hero">
       <p class="eyebrow">For venues</p>
       <h2>You provide a room and a name. We provide the rest.</h2>
     </div>
-    <div class="split reveal">
-      <div>
-        <h3>The venue provides</h3>
+    <div class="exchange reveal">
+      <div class="exchange-side">
+        <span class="kicker">You provide</span>
+        <p class="exchange-count">Four things</p>
         <ul class="checklist mt-2">
           <li>A warm room seating ten to twelve in a circle, weekly for the term</li>
           <li>Help spreading the word locally</li>
@@ -997,8 +1014,9 @@ GET_INVOLVED = f"""<section class="page-hero">
           <li>Nothing else — no equipment, no admin, no piano</li>
         </ul>
       </div>
-      <div>
-        <h3>We provide</h3>
+      <div class="exchange-side exchange-ours">
+        <span class="kicker">We provide</span>
+        <p class="exchange-count">Everything else</p>
         <ul class="checklist mt-2">
           <li>The tutor and the full curriculum</li>
           <li>All scores and weekly materials, printed at our cost</li>

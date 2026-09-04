@@ -59,7 +59,16 @@
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
       <a class="nav-link" href="../about.html">소개</a>
-      <a class="nav-link" href="../programmes.html">프로그램</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="../programmes.html" aria-current="page">프로그램<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <div class="subnav">
+          <a href="../programmes/recorder-ensemble.html"><b>리코더 앙상블 과정</b><span>완전 초보를 위한 한 학기</span></a>
+          <a href="../programmes/getting-to-know.html"><b>클래식 음악과 친해지기</b><span>무료 강의·연주</span></a>
+          <a href="../programmes/concert-companion.html" aria-current="page"><b>함께하는 음악여행</b><span>공연에 함께 갑니다</span></a>
+          <a href="../programmes/outreach-concerts.html"><b>찾아가는 음악회</b><span>요양시설 · 본당 · 병원</span></a>
+          <a href="../programmes/letters-ensemble.html"><b>Letters Ensemble</b><span>아마추어 연주자, 주 1회</span></a>
+        </div>
+      </div>
       <a class="nav-link" href="../get-involved.html">참여하기</a>
       <a class="nav-link" href="../news.html">소식</a>
       <a class="nav-link" href="../support.html">후원</a>
@@ -117,7 +126,7 @@
     <div class="reveal"><figure class="diagram">
   <p class="diagram-title">한 번의 동행이 왜 세 부분인가</p>
   <div class="diagram-canvas">
-  <svg viewBox="0 0 1080 420" role="img" aria-label="‘한 번의 동행’이라는 괄호 아래 음표 셋. 가운데가 음악회 자체이고, 양옆은 사전 준비와 사후 나눔으로, 가운데를 가능하게 하는 부분으로 표시돼 있다.">
+  <svg viewBox="0 0 1080 450" role="img" aria-label="‘한 번의 동행’이라는 괄호 아래 음표 셋. 가운데가 음악회 자체이고, 양옆은 사전 준비와 사후 나눔으로, 가운데를 가능하게 하는 부분으로 표시돼 있다.">
     <line class="dg-stave" x1="40" y1="128" x2="1040" y2="128"/>
     <line class="dg-stave" x1="40" y1="150" x2="1040" y2="150"/>
     <line class="dg-stave" x1="40" y1="172" x2="1040" y2="172"/>
@@ -146,10 +155,10 @@
     <text class="dg-h" x="850" y="272" text-anchor="middle">다녀와서</text>
     <text class="dg-sub" x="850" y="300" text-anchor="middle">들은 것을 말해 봅니다 —</text>
     <text class="dg-sub" x="850" y="320" text-anchor="middle">틀린 답은 없습니다</text>
-    <text class="dg-sub" x="540" y="358" text-anchor="middle">음악회 그 자체</text>
-    <path class="dg-stroke" d="M180 389 V380 H330 V389" fill="none"/>
-    <path class="dg-stroke" d="M750 389 V380 H900 V389" fill="none"/>
-    <text class="dg-sub" x="540" y="404" text-anchor="middle">가운데를 가능하게 하는 부분</text>
+    <text class="dg-sub" x="540" y="352" text-anchor="middle">음악회 그 자체</text>
+    <path class="dg-stroke" d="M180 401 V392 H330 V401" fill="none"/>
+    <path class="dg-stroke" d="M750 401 V392 H900 V401" fill="none"/>
+    <text class="dg-sub" x="540" y="424" text-anchor="middle">가운데를 가능하게 하는 부분</text>
   </svg>
   </div>
   <figcaption>사람을 멈춰 세우는 것은 대개 티켓 값이 아닙니다. 가서 무슨 일이 벌어지는지 모른다는 것, 그리고 같이 갈 사람이 없다는 것입니다. 그래서 음악회는 괄호 안에 놓입니다 — 양옆의 두 부분이 가운데를 가능하게 합니다.</figcaption>

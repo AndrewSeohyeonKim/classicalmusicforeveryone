@@ -100,7 +100,8 @@ MAP = {
               "under the Learning pillar, two under Sharing. An arc from Learning to Sharing is "
               "labelled 'a player, ready for the room'; an arc back from Sharing to Learning is "
               "labelled 'could I do that?'."),
-        pillar_a="Learning", pillar_b="Sharing",
+        pillar_a="Learning", pillar_a_sub="we teach people to play",
+        pillar_b="Sharing", pillar_b_sub="we bring the music to the room",
         top="a player, ready for the room",
         bottom="“could I do that?”",
         progs=[(["Recorder", "Ensemble course"], "a term, weekly"),
@@ -117,7 +118,8 @@ MAP = {
         aria=("다섯 프로그램을 같은 크기의 음표 다섯 개로 하나의 오선 위에 그린 도식. 셋은 배움 축, "
               "둘은 나눔 축 아래에 있다. 배움에서 나눔으로 가는 곡선은 ‘그 방에 설 준비가 된 연주자’, "
               "나눔에서 배움으로 돌아오는 곡선은 ‘나도 해 볼 수 있을까?’로 표시된다."),
-        pillar_a="배움", pillar_b="나눔",
+        pillar_a="배움", pillar_a_sub="직접 연주하도록 가르칩니다",
+        pillar_b="나눔", pillar_b_sub="그 방으로 음악을 가져갑니다",
         top="그 방에 설 준비가 된 연주자",
         bottom="“나도 해 볼 수 있을까?”",
         progs=[(["리코더", "앙상블 과정"], "한 학기 · 주 1회"),
@@ -128,41 +130,56 @@ MAP = {
     ),
 }
 
-# x of each note-head, and its pitch on the stave — varied so the figure reads
-# as music, not as a bar chart. The heads are all the same size on purpose.
-MAP_X = [150, 330, 510, 760, 940]
-MAP_Y = [242, 220, 187, 198, 165]
-STAVE_TOP = 165
+# Geometry. Two named zones rather than two brackets: the pillars are the
+# point of the figure, so they get panels and headings of their own instead of
+# a hairline that the circuit arrow then has to dodge. Every note sits on the
+# SAME stave line — five equal heads at one pitch is the plainest way to draw
+# "none of these is the main one", and it also stops the figure reading as a
+# scattered bar chart.
+MAP_ZONE_A = (24, 510)          # Learning:  x, width   (three programmes)
+MAP_ZONE_B = (684, 372)         # Sharing:   x, width   (two programmes)
+MAP_X = [104, 274, 444, 778, 962]
+MAP_NOTE_Y = 232
+MAP_PANEL = (110, 262)          # y, height
 
 
 def programme_map(lang):
     t = MAP[lang]
+    py, ph = MAP_PANEL
     p = []
-    p += stave(40, 1000, STAVE_TOP)
 
-    # the two pillars, bracketed above the notes they group
-    p.append(f'    <text class="dg-h" x="94" y="112">{t["pillar_a"]}</text>')
-    p.append(bracket(80, 580, 130))
-    p.append(f'    <text class="dg-h" x="704" y="112">{t["pillar_b"]}</text>')
-    p.append(bracket(690, 1000, 130))
+    # the two zones
+    for (zx, zw), head, sub in ((MAP_ZONE_A, t["pillar_a"], t["pillar_a_sub"]),
+                                (MAP_ZONE_B, t["pillar_b"], t["pillar_b_sub"])):
+        p.append(f'    <rect class="dg-fill-soft" x="{zx}" y="{py}" width="{zw}" '
+                 f'height="{ph}" rx="12"/>')
+        p.append(f'    <text class="dg-h" x="{zx + 24}" y="{py + 38}">{head}</text>')
+        p.append(f'    <text class="dg-sub" x="{zx + 24}" y="{py + 62}">{sub}</text>')
 
-    # the circuit: out along the top, back along the bottom
-    p.append(draw("M470 116 C 540 58, 640 58, 700 116"))
-    p.append(tri(700, 116, 44))
-    p.append(f'    <text class="dg-edge dg-late" x="585" y="40" text-anchor="middle">{t["top"]}</text>')
+    # one stave across both zones — the circuit is a single line of music
+    p += stave(24, 1032, 196, gap=18)
 
-    p.append(draw("M700 386 C 640 448, 540 448, 470 386"))
-    p.append(tri(470, 386, 136))
-    p.append(f'    <text class="dg-edge dg-late" x="585" y="474" text-anchor="middle">{t["bottom"]}</text>')
+    # the five programmes, all at the same pitch and the same size
+    for i, ((rows, meta), x) in enumerate(zip(t["progs"], MAP_X)):
+        p.append(note(x, MAP_NOTE_Y, open_=(i >= 3)))
+        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{MAP_NOTE_Y + 10}" '
+                 f'x2="{x}" y2="292"/>')
+        p += lines(x, 314, rows, anchor="middle")
+        p.append(f'    <text class="dg-sub" x="{x}" y="{314 + 19 * len(rows) + 8}" '
+                 f'text-anchor="middle">{meta}</text>')
 
-    # the five programmes
-    for i, ((rows, meta), x, y) in enumerate(zip(t["progs"], MAP_X, MAP_Y)):
-        p.append(note(x, y, open_=(i >= 3)))
-        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 11}" x2="{x}" y2="288"/>')
-        p += lines(x, 312, rows, anchor="middle")
-        p.append(f'    <text class="dg-sub" x="{x}" y="354" text-anchor="middle">{meta}</text>')
+    # the circuit — one slur out above the zones, one return below them
+    p.append(f'    <text class="dg-edge dg-late" x="568" y="30" '
+             f'text-anchor="middle">{t["top"]}</text>')
+    p.append(draw("M274 96 C 380 40, 760 40, 856 92"))
+    p.append(tri(864, 96, 40))
 
-    return figure("0 0 1080 490", t["aria"], "\n".join(p), t["caption"], t["title"])
+    p.append(draw("M962 400 C 860 452, 380 452, 282 404"))
+    p.append(tri(274, 400, 220))
+    p.append(f'    <text class="dg-edge dg-late" x="568" y="480" '
+             f'text-anchor="middle">{t["bottom"]}</text>')
+
+    return figure("0 0 1080 500", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # a name the content files already use
@@ -221,7 +238,7 @@ TOC = {
 
 def theory_of_change(lang):
     t = TOC[lang]
-    x0, w, gap = 8, 210, 72
+    x0, w, gap = 24, 206, 64
     p = []
     for i, (title, rows) in enumerate(t["cols"]):
         x = x0 + i * (w + gap)
@@ -377,12 +394,12 @@ def subsidy(lang):
     p = []
     hub_y = 190
 
-    p.append(f'    <text class="dg-edge" x="0" y="26">{t["in_title"]}</text>')
+    p.append(f'    <text class="dg-edge" x="24" y="26">{t["in_title"]}</text>')
     for (rows, notes, wt), y in zip(t["in_rows"], (66, 178, 290)):
-        p.append(f'    <line class="dg-stroke-accent" x1="0" y1="{y - 22}" x2="0" y2="{y + 18}" '
+        p.append(f'    <line class="dg-stroke-accent" x1="24" y1="{y - 22}" x2="24" y2="{y + 18}" '
                  f'stroke-width="2.5"/>')
-        p += lines(16, y, rows)
-        p += lines(16, y + 22, notes, cls="dg-sub", step=18)
+        p += lines(40, y, rows)
+        p += lines(40, y + 22, notes, cls="dg-sub", step=18)
         p.append(draw(f"M320 {y - 4} C 380 {y - 4}, 386 {hub_y}, 424 {hub_y}", width=wt))
     p.append(tri(430, hub_y))
     p.append(f'    <text class="dg-edge dg-late" x="372" y="44" '
@@ -393,7 +410,7 @@ def subsidy(lang):
     p += lines(542, 180, t["hub"], cls="dg-label", step=20, anchor="middle")
     p.append(f'    <text class="dg-sub" x="542" y="218" text-anchor="middle">{t["hub_note"]}</text>')
 
-    p.append(f'    <text class="dg-edge" x="1080" y="26" text-anchor="end">{t["out_title"]}</text>')
+    p.append(f'    <text class="dg-edge" x="1056" y="26" text-anchor="end">{t["out_title"]}</text>')
     for (rows, notes, wt), y in zip(t["out_rows"], (110, 262)):
         p.append(f'    <line class="dg-stroke-accent" x1="770" y1="{y - 22}" x2="770" y2="{y + 18}" '
                  f'stroke-width="2.5"/>')
@@ -552,12 +569,12 @@ def outing(lang):
             p.append(f'    <text class="dg-edge dg-late" x="{(a + b) / 2}" y="{y - 14}" '
                      f'text-anchor="middle">{t["edges"][i]}</text>')
 
-    p.append(f'    <text class="dg-sub" x="540" y="358" text-anchor="middle">{t["mid_note"]}</text>')
-    p.append(bracket(180, 330, 380, depth=9, below=True))
-    p.append(bracket(750, 900, 380, depth=9, below=True))
-    p.append(f'    <text class="dg-sub" x="540" y="404" text-anchor="middle">{t["side_note"]}</text>')
+    p.append(f'    <text class="dg-sub" x="540" y="352" text-anchor="middle">{t["mid_note"]}</text>')
+    p.append(bracket(180, 330, 392, depth=9, below=True))
+    p.append(bracket(750, 900, 392, depth=9, below=True))
+    p.append(f'    <text class="dg-sub" x="540" y="424" text-anchor="middle">{t["side_note"]}</text>')
 
-    return figure("0 0 1080 420", t["aria"], "\n".join(p), t["caption"], t["title"])
+    return figure("0 0 1080 450", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------
@@ -581,7 +598,7 @@ VISIT = {
         room_rows=["a room, any room", "the people who live or work there",
                    "one named contact"],
         hub="the concert",
-        hub_note="30–60 minutes · no stage, no piano, no fee to the audience",
+        hub_note=["30–60 minutes · no stage, no piano,", "nothing for the audience to pay"],
     ),
     "ko": dict(
         title="그 방이 준비해야 하는 것",
@@ -598,38 +615,52 @@ VISIT = {
         room_rows=["방 하나, 어떤 방이든", "거기 살거나 일하는 사람들",
                    "담당자 한 사람"],
         hub="음악회",
-        hub_note="30–60분 · 무대 없이, 피아노 없이, 관객 부담 없이",
+        hub_note=["30–60분 · 무대도 피아노도 없이,", "관객이 낼 돈도 없이"],
     ),
 }
 
 
+# Two lists, each on its own leader rules, meeting at one note. The earlier
+# version ran a stave straight through the words and set both headings hard on
+# the frame edge; nothing here touches the margin now.
+VISIT_LEFT = 24                 # left margin for both lists
+VISIT_COLLECT = 520             # x of the gold rule each list arrives at
+VISIT_HUB = (760, 250)
+
+
 def visit(lang):
     t = VISIT[lang]
+    hx, hy = VISIT_HUB
+    x, cx = VISIT_LEFT, VISIT_COLLECT
     p = []
-    p += stave(40, 1000, 178, gap=20, n=5)
-    hx, hy = 700, 218
 
-    p.append(f'    <text class="dg-edge" x="0" y="34">{t["in_title"]}</text>')
-    p.append(bracket(0, 470, 52, depth=10))
-    for i, row in enumerate(t["in_rows"]):
-        p.append(note(22, 88 + i * 34, open_=True))
-        p.append(f'    <text class="dg-label" x="52" y="{94 + i * 34}">{row}</text>')
-    p.append(draw("M470 132 C 570 132, 590 218, 656 218", width=5))
-    p.append(tri(664, 218))
+    def group(title, rows, y0, ytitle):
+        ys = [y0 + i * 44 for i in range(len(rows))]
+        out = [f'    <text class="dg-edge" x="{x}" y="{ytitle}">{title}</text>']
+        for row, y in zip(rows, ys):
+            out.append(note(x + 14, y - 5, open_=True))
+            out.append(f'    <text class="dg-label" x="{x + 44}" y="{y}">{row}</text>')
+            out.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 14}" '
+                       f'x2="{cx}" y2="{y + 14}"/>')
+        top, bot = ys[0] + 14, ys[-1] + 14
+        out.append(f'    <line class="dg-stroke-accent" x1="{cx}" y1="{top}" '
+                   f'x2="{cx}" y2="{bot}" stroke-width="2.5"/>')
+        return out, (top + bot) / 2
 
-    p.append(f'    <text class="dg-edge" x="0" y="316">{t["room_title"]}</text>')
-    p.append(bracket(0, 470, 300, depth=10, below=True))
-    for i, row in enumerate(t["room_rows"]):
-        p.append(note(22, 358 + i * 34, open_=True))
-        p.append(f'    <text class="dg-label" x="52" y="{364 + i * 34}">{row}</text>')
-    p.append(draw("M470 372 C 570 372, 590 240, 656 240", width=3.5))
-    p.append(tri(664, 240))
+    up, a = group(t["in_title"], t["in_rows"], 78, 44)
+    down, b = group(t["room_title"], t["room_rows"], 330, 296)
+    p += up + down
+
+    # both lists converge on the same note-head
+    p.append(draw(f"M{cx} {a} C {cx + 90} {a}, {cx + 110} {hy}, {hx - 34} {hy}", width=3))
+    p.append(draw(f"M{cx} {b} C {cx + 90} {b}, {cx + 110} {hy}, {hx - 34} {hy}", width=3))
+    p.append(tri(hx - 24, hy))
 
     p.append(note(hx, hy))
-    p.append(f'    <text class="dg-h" x="{hx + 26}" y="{hy + 6}">{t["hub"]}</text>')
-    p.append(f'    <text class="dg-sub" x="{hx + 26}" y="{hy + 32}">{t["hub_note"]}</text>')
+    p.append(f'    <text class="dg-h" x="{hx + 28}" y="{hy + 6}">{t["hub"]}</text>')
+    p += lines(hx + 28, hy + 32, t["hub_note"], cls="dg-sub", step=20)
 
-    return figure("0 0 1080 470", t["aria"], "\n".join(p), t["caption"], t["title"])
+    return figure("0 0 1080 500", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------
@@ -674,26 +705,26 @@ REHEARSE = {
 def rehearsals(lang):
     t = REHEARSE[lang]
     p = []
-    p += stave(0, 640, 120, gap=18, n=5)
+    p += stave(24, 588, 120, gap=18, n=5)
 
-    for i in range(17):
-        p.append(note(26 + i * 34, 156 if i % 2 else 174))
-    p.append(f'    <text class="dg-sub" x="608" y="170">···</text>')
-    p.append(bracket(0, 640, 96, depth=11))
-    p.append(f'    <text class="dg-h" x="0" y="74">{t["many"]}</text>')
-    p.append(f'    <text class="dg-sub" x="0" y="232">{t["many_sub"]}</text>')
+    for i in range(16):
+        p.append(note(46 + i * 33, 156 if i % 2 else 174))
+    p.append(f'    <text class="dg-sub" x="562" y="170">···</text>')
+    p.append(bracket(24, 612, 96, depth=11))
+    p.append(f'    <text class="dg-h" x="24" y="74">{t["many"]}</text>')
+    p.append(f'    <text class="dg-sub" x="24" y="232">{t["many_sub"]}</text>')
 
-    p.append(draw("M660 165 H 780", width=2.5))
-    p.append(tri(790, 165))
-    p.append(f'    <text class="dg-edge dg-late" x="722" y="146" '
+    p.append(draw("M636 165 H 752", width=2.5))
+    p.append(tri(762, 165))
+    p.append(f'    <text class="dg-edge dg-late" x="696" y="146" '
              f'text-anchor="middle">{t["edge"]}</text>')
 
-    p += stave(816, 264, 120, gap=18, n=5)
+    p += stave(792, 264, 120, gap=18, n=5)
     for i in range(4):
-        p.append(note(858 + i * 62, 156))
-    p.append(bracket(816, 1080, 96, depth=11))
-    p.append(f'    <text class="dg-h" x="816" y="74">{t["few"]}</text>')
-    p.append(f'    <text class="dg-sub" x="816" y="232">{t["few_sub"]}</text>')
+        p.append(note(832 + i * 62, 156))
+    p.append(bracket(792, 1056, 96, depth=11))
+    p.append(f'    <text class="dg-h" x="792" y="74">{t["few"]}</text>')
+    p.append(f'    <text class="dg-sub" x="792" y="232">{t["few_sub"]}</text>')
 
     p.append(f'    <text class="dg-sub" x="540" y="286" text-anchor="middle">{t["foot"]}</text>')
 
@@ -711,9 +742,10 @@ WAYS = {
                  "you might write in the same email, and people move between them all the time "
                  "— most of the players started as listeners, and two of the rooms we play in "
                  "were offered by someone who came to a concert."),
-        aria=("Four note-heads on the left — learn to play, come and listen, play with us, host "
-              "or partner — with arrows converging on a single note marked 'one email, one line'. "
-              "Dashed arcs run between the four, labelled 'people move between these'."),
+        aria=("Four note-heads threaded on one dashed vertical line — learn to play, come and "
+              "listen, play with us, host or partner — labelled 'people move between these'. All "
+              "four run right to a single gold rule, and one arrow leaves it for a note-head "
+              "marked 'one email, one line'."),
         rows=[(["Learn to play"], ["you have never played anything"]),
               (["Come and listen"], ["you would rather start by listening"]),
               (["Play with us"], ["you already play something"]),
@@ -728,9 +760,9 @@ WAYS = {
         caption=("네 갈래는 네 개의 신청 절차가 아닙니다. 같은 이메일에 쓸 수 있는 네 개의 문장이고, "
                  "사람들은 그 사이를 늘 오갑니다 — 지금 연주하는 사람 대부분이 처음에는 듣는 "
                  "사람이었고, 우리가 연주하는 방 중 둘은 음악회에 왔던 분이 내어 준 것입니다."),
-        aria=("왼쪽에 음표 네 개 — 배우기, 들으러 오기, 함께 연주하기, 공간 열기 — 가 하나의 "
-              "‘이메일 한 통, 한 줄’ 음표로 모인다. 넷 사이에는 ‘사람들은 이 사이를 오갑니다’라는 "
-              "점선이 놓여 있다."),
+        aria=("점선 하나에 꿰인 음표 네 개 — 배우러 오기, 들으러 오기, 함께 연주하기, 공간 열기. "
+              "그 점선에는 ‘사람들은 이 사이를 오갑니다’라고 적혀 있다. 네 갈래는 모두 오른쪽의 "
+              "금색 선에서 만나고, 거기서 화살표 하나가 ‘이메일 한 통, 한 줄’ 음표로 간다."),
         rows=[(["배우러 옵니다"], ["악기를 잡아 본 적이 없어도"]),
               (["들으러 옵니다"], ["듣는 것부터 시작하고 싶다면"]),
               (["함께 연주합니다"], ["이미 다루는 악기가 있다면"]),
@@ -742,34 +774,55 @@ WAYS = {
     ),
 }
 
-WAYS_Y = [70, 158, 246, 334]
+# Four rows on one spine, a collector, and a single destination. The earlier
+# version let the connectors start in mid-air and hung the four off dashed
+# hooks that curled outside the frame; both read as decoration. Here the spine
+# IS the "you can move between these" claim — the four note-heads sit on it —
+# and every connector starts on a label and ends on the hub.
+WAYS_Y = [88, 176, 264, 352]    # baseline of each row's heading
+WAYS_SPINE = 60                 # x of the dashed spine the four heads sit on
+WAYS_COLLECT = 520              # x of the gold rule every route arrives at
+WAYS_RULE = 46                  # heading baseline -> the row's own leader rule
 
 
 def pathways(lang):
     t = WAYS[lang]
+    top, bottom = WAYS_Y[0] + WAYS_RULE, WAYS_Y[-1] + WAYS_RULE
+    hy = (top + bottom) // 2
+    hx = 760
     p = []
-    hx, hy = 780, 202
+
+    # the spine: one dashed line through all four, because they are one family
+    p.append(f'    <line class="dg-stroke" x1="{WAYS_SPINE}" y1="{WAYS_Y[0] - 36}" '
+             f'x2="{WAYS_SPINE}" y2="{bottom + 16}" stroke-dasharray="3 5"/>')
 
     for (head, sub), y in zip(t["rows"], WAYS_Y):
-        p.append(note(22, y))
-        p += lines(52, y + 6, head, cls="dg-h")
-        p += lines(52, y + 32, sub, cls="dg-sub", step=18)
-        p.append(draw(f"M520 {y - 4} C 620 {y - 4}, 640 {hy}, {hx - 46} {hy}", width=2))
-    p.append(tri(hx - 34, hy))
-    p.append(f'    <text class="dg-edge dg-late" x="600" y="26" '
-             f'text-anchor="middle">{t["edge"]}</text>')
+        p.append(note(WAYS_SPINE, y - 6))
+        p += lines(WAYS_SPINE + 30, y, head, cls="dg-h")
+        p += lines(WAYS_SPINE + 30, y + 25, sub, cls="dg-sub", step=18)
+        # the row's own rule runs under it and carries on into the collector,
+        # so no connector begins in mid-air
+        p.append(f'    <line class="dg-stroke" x1="{WAYS_SPINE}" y1="{y + WAYS_RULE}" '
+                 f'x2="{WAYS_COLLECT}" y2="{y + WAYS_RULE}"/>')
 
-    # the four are porous — a listener becomes a player, a guest offers a room
-    p.append('    <path class="dg-stroke" d="M22 92 C -34 122, -34 148, 22 136 '
-             'M22 180 C -34 210, -34 236, 22 224 M22 268 C -34 298, -34 324, 22 312" '
-             'stroke-dasharray="3 4" fill="none"/>')
-    p.append(f'    <text class="dg-sub" x="22" y="392" >{t["move"]}</text>')
+    # the collector — four rules, one edge
+    p.append(f'    <line class="dg-stroke-accent" x1="{WAYS_COLLECT}" y1="{top}" '
+             f'x2="{WAYS_COLLECT}" y2="{bottom}" stroke-width="2.5"/>')
+    p.append(draw(f"M{WAYS_COLLECT} {hy} H{hx - 34}", width=2.5))
+    p.append(tri(hx - 24, hy))
+    p.append(f'    <text class="dg-edge dg-late" x="{(WAYS_COLLECT + hx) // 2 - 12}" '
+             f'y="{hy - 18}" text-anchor="middle">{t["edge"]}</text>')
 
+    # the one destination
     p.append(note(hx, hy))
     p += lines(hx + 28, hy - 4, t["hub"], cls="dg-h", step=26)
     p.append(f'    <text class="dg-sub" x="{hx + 28}" y="{hy + 46}">{t["hub_note"]}</text>')
 
-    return figure("-60 0 1140 408", t["aria"], "\n".join(p), t["caption"], t["title"])
+    # what the spine means, said once, at its foot
+    p.append(f'    <text class="dg-sub" x="{WAYS_SPINE - 14}" y="{bottom + 44}">'
+             f'{t["move"]}</text>')
+
+    return figure("0 0 1080 460", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------
