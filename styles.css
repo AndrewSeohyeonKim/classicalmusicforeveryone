@@ -8,6 +8,19 @@
 
    Motion scale (durations and easing curves) follows the SEED design system
    (packages/rootage: duration.yaml, timing-function.yaml).
+
+   Reference systems consulted 2026-09-04, and what each one changed here:
+     Adobe Spectrum   token naming is context → common unit → clarification,
+                      and a primitive is never named after its usage
+     SEED             the type scale is in rem, so the page honours the
+                      reader's own font size (rootage: font-size.yaml)
+     Fluent 2         shadows are a key (sharp, directional) plus an ambient
+                      (soft, undirected) pair on one ramp; every control
+                      defines rest / hover / pressed / focus; non-text parts
+                      of a control clear 3:1 against what is next to them
+     Gestalt, TDS     a touch target is never smaller than 44px
+     abc-def          the three-layer primitives → semantic → component split
+                      this file already had
    ========================================================================== */
 
 /* --- cross-document page transitions ------------------------------------
@@ -33,11 +46,13 @@
   --white:#FFFFFF;
 
   /* tints derived from the canonical values, not new brand colours.
-     --gold-text is Gold Bronze darkened until small text on cream clears
-     WCAG AA (5.6:1). The logo and every decorative gold stay #B8893A. */
+     --gold-deep is Gold Bronze darkened until small text on cream clears
+     WCAG AA (5.6:1). It is named for what it IS, not for what it is used
+     for — the usage names live one layer down, in the semantic block. The
+     logo and every decorative gold stay #B8893A. */
   --cream-deep:#F2E9DA;
   --cream-edge:#E7DDCB;
-  --gold-text:#7F5C1C;
+  --gold-deep:#7F5C1C;
   --ink-70:#4A5462;
   --ink-on-dark:#C6CDD8;
   --ink-on-dark-dim:#8C96A4;
@@ -61,14 +76,28 @@
   --fg-inverse-muted:var(--ink-on-dark-dim);
 
   --accent:var(--gold-bronze);           /* fills, rules, arrows, diagram strokes */
-  --accent-ink:var(--gold-text);         /* gold used as text on a light ground */
+  --accent-ink:var(--gold-deep);         /* gold used as text on a light ground */
   --accent-strong:var(--antique-gold);
   --accent-inverse:var(--gold-light);
 
   --line:var(--cream-edge);
   --line-strong:#D6C9B2;
   --line-inverse:rgb(255 255 255 / .14);
-  --ring:var(--gold-bronze);
+  /* The edge of a CONTROL is not decoration: Fluent 2 and WCAG 1.4.11 both
+     ask for 3:1 against the surfaces either side of it. --line-strong is
+     1.5:1 on cream, so buttons and the menu toggle use this instead — a tone
+     mixed down from --gold-deep, which measures 3.6:1 on cream, 3.9:1 on
+     white and 3.2:1 on the sunken band. Decorative container edges keep
+     --line. */
+  --line-interactive:color-mix(in srgb,var(--gold-deep) 78%,var(--warm-cream));
+
+  /* Focus is a two-tone ring, after Spectrum: a light halo in the offset gap
+     and a dark ring outside it, so the indicator survives cream, white, the
+     gold button and the navy bands without a per-component override. Dark
+     bands swap the two. */
+  --focus-ring:var(--ink-navy);
+  --focus-halo:var(--white);
+  --ring:var(--focus-ring);          /* kept: older rules still read it */
 
   /* type */
   --font-display:'EB Garamond','Iowan Old Style',Georgia,'Times New Roman',serif;
@@ -77,16 +106,22 @@
 
   /* --- type scale -------------------------------------------------------
      One fluid scale, defined once. Components read these; no component and
-     no content file writes its own font-size in a style attribute. */
-  --t-display:clamp(43px,6.4vw,78px);   /* home h1 only */
-  --t-h1:clamp(34px,4.6vw,54px);        /* interior page h1 */
-  --t-h2:clamp(29px,3.6vw,44px);        /* section heading */
-  --t-h2-sm:clamp(25px,2.7vw,33px);     /* section heading in a column */
-  --t-h3:clamp(19px,1.4vw,22px);
-  --t-lead:clamp(18px,1.35vw,20.5px);
-  --t-body:17px;
-  --t-small:14.5px;
-  --t-label:11.5px;                     /* eyebrows, kickers, footer heads */
+     no content file writes its own font-size in a style attribute.
+
+     In rem, not px (SEED, rootage/font-size.yaml). A px scale silently
+     ignores a reader who has set a larger default size in their browser,
+     and Fluent's zoom guidance — 200% text zoom with no clipping — cannot
+     be met by a page whose type does not move. 1rem = 16px by default, so
+     the rendered sizes are unchanged for everyone who has changed nothing. */
+  --t-display:clamp(2.7rem,6.4vw,4.9rem);     /* 43 → 78px  home h1 only */
+  --t-h1:clamp(2.15rem,4.6vw,3.4rem);         /* 34 → 54px  interior h1 */
+  --t-h2:clamp(1.8rem,3.6vw,2.75rem);         /* 29 → 44px  section heading */
+  --t-h2-sm:clamp(1.55rem,2.7vw,2.05rem);     /* 25 → 33px  heading in a column */
+  --t-h3:clamp(1.2rem,1.4vw,1.375rem);        /* 19 → 22px */
+  --t-lead:clamp(1.125rem,1.35vw,1.28rem);    /* 18 → 20.5px */
+  --t-body:1.0625rem;                         /* 17px */
+  --t-small:0.9rem;                           /* 14.4px */
+  --t-label:0.72rem;                          /* 11.5px  eyebrows, kickers */
 
   /* space + shape */
   --wrap:1180px;
@@ -95,8 +130,16 @@
   --radius:12px;
   --radius-lg:18px;
 
-  --shadow-1:0 1px 2px rgb(29 36 48 / .04), 0 10px 26px -18px rgb(29 36 48 / .28);
-  --shadow-2:0 2px 6px rgb(29 36 48 / .05), 0 26px 54px -26px rgb(29 36 48 / .36);
+  /* Fluent 2's model: each step is a KEY shadow (sharp, offset downward,
+     drawing the edge) plus an AMBIENT one (soft, no offset, implying the
+     distance). Blur doubles per step and the vertical offset is half the
+     blur, which is what keeps the light source consistent between them.
+     Opacities are tuned down from Fluent's 14%/20% because this ground is
+     warm cream rather than neutral grey, and tinted with ink navy rather
+     than pure black for the same reason. */
+  --shadow-1:0 2px 4px rgb(29 36 48 / .07), 0 0 8px rgb(29 36 48 / .04);
+  --shadow-2:0 4px 8px rgb(29 36 48 / .09), 0 0 10px rgb(29 36 48 / .05);
+  --shadow-3:0 8px 16px rgb(29 36 48 / .11), 0 0 14px rgb(29 36 48 / .06);
 
   /* motion — SEED duration.yaml / timing-function.yaml */
   --dur-1:50ms;  --dur-2:100ms; --dur-3:150ms;
@@ -122,7 +165,7 @@ body{
   /* proportional lining figures in body copy, tabular nowhere by default */
   font-variant-numeric:proportional-nums;
 }
-html[lang^="ko"] body{font-family:var(--font-kr);line-height:1.76;font-size:16.5px}
+html[lang^="ko"] body{font-family:var(--font-kr);line-height:1.76;font-size:1.0312rem}
 
 img,svg{display:block;max-width:100%}
 img{height:auto}
@@ -131,7 +174,17 @@ a:hover{color:var(--fg)}
 p{margin:0 0 1em}
 p:last-child{margin-bottom:0}
 strong{color:var(--fg);font-weight:700}
-:focus-visible{outline:2px solid var(--ring);outline-offset:3px;border-radius:4px}
+/* Two rings, not one: the box-shadow fills the outline's offset gap with the
+   halo colour, so there is always a light edge against a dark ring (or the
+   reverse) whatever the element is sitting on. */
+:focus-visible{
+  outline:2px solid var(--focus-ring);outline-offset:2px;
+  box-shadow:0 0 0 2px var(--focus-halo);border-radius:4px;
+}
+/* dark grounds invert the pair */
+.band-inverse,.band-photo,.site-footer,.band-mark .mark-plate.on-dark{
+  --focus-ring:var(--white);--focus-halo:var(--ink-navy);
+}
 
 h1,h2,h3,h4{
   font-family:var(--font-display);color:var(--fg);font-weight:600;
@@ -143,7 +196,7 @@ h1,h2,h3,h4{
 h1{font-size:var(--t-h1);line-height:1.06;letter-spacing:-.012em}
 h2{font-size:var(--t-h2);line-height:1.12;letter-spacing:-.010em}
 h3{font-size:var(--t-h3);line-height:1.26;letter-spacing:-.006em}
-h4{font-size:18px;line-height:1.32;letter-spacing:-.004em}
+h4{font-size:1.125rem;line-height:1.32;letter-spacing:-.004em}
 
 /* display sizes as classes — so a content file never sets font-size inline */
 .h-display{font-size:var(--t-display);line-height:1.02;letter-spacing:-.016em}
@@ -153,7 +206,7 @@ h4{font-size:18px;line-height:1.32;letter-spacing:-.004em}
 /* a heading that reads as a small label — used where a section needs a level
    in the outline but the design calls for an eyebrow, not a title */
 .h-sub{
-  font-family:var(--font-body);font-size:11.5px;font-weight:700;letter-spacing:.17em;
+  font-family:var(--font-body);font-size:0.7188rem;font-weight:700;letter-spacing:.17em;
   text-transform:uppercase;color:var(--accent-ink);
 }
 html[lang^="ko"] .h-sub{font-family:var(--font-kr);letter-spacing:.08em}
@@ -168,7 +221,7 @@ html[lang^="ko"] :is(h1,h2,h3,h4,.h-display,.h-xl,.h-lg,.h-md){
   font-family:var(--font-kr);font-weight:700;letter-spacing:-.032em;
 }
 html[lang^="ko"] :is(h1,.h-xl){line-height:1.26}
-html[lang^="ko"] .h-display{font-size:clamp(33px,4.9vw,58px);line-height:1.2}
+html[lang^="ko"] .h-display{font-size:clamp(2.06rem,4.9vw,3.63rem);line-height:1.2}
 html[lang^="ko"] :is(h2,.h-lg){line-height:1.3}
 html[lang^="ko"] .h-md{line-height:1.34}
 html[lang^="ko"] :is(h3,h4){line-height:1.42;letter-spacing:-.028em}
@@ -313,7 +366,10 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
   border-bottom:1px solid var(--line);
   view-transition-name:site-header;
 }
-.header-inner{display:flex;align-items:center;gap:20px;min-height:74px}
+/* wraps rather than overflows: at a large default text size the nav can
+   need more than one row, and a header that overflows pushes the brand
+   off the page instead of reflowing (Fluent: reflow, do not clip) */
+.header-inner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;min-height:74px}
 .brand{margin-inline-end:auto;display:flex;align-items:center}
 .brand img{
   height:46px;width:auto;transition:opacity var(--dur-3) var(--ease);
@@ -323,7 +379,7 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
 
 .nav{display:flex;align-items:center;gap:4px}
 .nav-link{
-  position:relative;font-size:14.5px;font-weight:600;color:var(--fg);
+  position:relative;font-size:0.9062rem;font-weight:600;color:var(--fg);
   padding:9px 12px;border-radius:var(--radius-sm);
   transition:color var(--dur-3) var(--ease),background var(--dur-3) var(--ease);
 }
@@ -353,7 +409,7 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
   position:absolute;top:calc(100% + 10px);inset-inline-start:-8px;z-index:10;
   min-width:308px;padding:8px;
   background:var(--surface-raised);border:1px solid var(--line);
-  border-radius:var(--radius);box-shadow:var(--shadow-2);
+  border-radius:var(--radius);box-shadow:var(--shadow-3);
   opacity:0;visibility:hidden;translate:0 -6px;
   transition:opacity var(--dur-3) var(--ease),translate var(--dur-4) var(--ease-enter),
              visibility 0s linear var(--dur-4);
@@ -370,10 +426,10 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
 }
 .subnav a:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
 .subnav b{
-  display:block;font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--fg);
+  display:block;font-family:var(--font-body);font-size:0.875rem;font-weight:600;color:var(--fg);
 }
 html[lang^="ko"] .subnav b{font-family:var(--font-kr)}
-.subnav span{display:block;margin-top:2px;font-size:12.5px;color:var(--fg-muted)}
+.subnav span{display:block;margin-top:2px;font-size:0.7812rem;color:var(--fg-muted)}
 .subnav a[aria-current="page"] b{color:var(--accent-ink)}
 
 /* Language switcher. It used to be a filled pill sitting mid-nav, which gave
@@ -388,7 +444,7 @@ html[lang^="ko"] .subnav b{font-family:var(--font-kr)}
 .lang-switch a,.lang-switch span{
   display:inline-flex;align-items:center;
   padding-inline:5px;
-  font-family:var(--font-body);font-size:11.5px;font-weight:700;letter-spacing:.08em;
+  font-family:var(--font-body);font-size:0.7188rem;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;line-height:1;
   transition:color var(--dur-3) var(--ease);
 }
@@ -403,8 +459,8 @@ html[lang^="ko"] .lang-switch a,html[lang^="ko"] .lang-switch span{
 
 .menu-toggle{
   display:none;width:44px;height:40px;flex:0 0 auto;
-  background:none;border:1px solid var(--line-strong);border-radius:var(--radius-sm);
-  color:var(--fg);font-size:17px;cursor:pointer;
+  background:none;border:1px solid var(--line-interactive);border-radius:var(--radius-sm);
+  color:var(--fg);font-size:1.0625rem;cursor:pointer;
   transition:border-color var(--dur-3) var(--ease)}
 .menu-toggle:hover{border-color:var(--accent)}
 
@@ -413,9 +469,11 @@ html[lang^="ko"] .lang-switch a,html[lang^="ko"] .lang-switch span{
    ========================================================================== */
 .btn{
   --btn-bg:transparent; --btn-fg:var(--fg); --btn-border:transparent;
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--font-body);font-size:15px;font-weight:700;line-height:1;
-  padding:14px 22px;border-radius:var(--radius-sm);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-body);font-size:0.94rem;font-weight:700;line-height:1;
+  /* 44px is the floor Gestalt, TDS and the platform HIGs all set for a
+     target that a thumb has to find */
+  min-height:46px;padding:14px 22px;border-radius:var(--radius-sm);
   border:1.5px solid var(--btn-border);background:var(--btn-bg);color:var(--btn-fg);
   cursor:pointer;
   transition:background var(--dur-3) var(--ease),color var(--dur-3) var(--ease),
@@ -423,17 +481,25 @@ html[lang^="ko"] .lang-switch a,html[lang^="ko"] .lang-switch span{
 }
 html[lang^="ko"] .btn{font-family:var(--font-kr)}
 .btn:hover{translate:0 -2px}
+/* Fluent 2 asks every control to define rest, hover, PRESSED and focus.
+   Pressed puts the button back down and darkens it — without it the button
+   keeps floating under a finger that is still on it. */
+.btn:active{translate:0 1px;transition-duration:var(--dur-1)}
 .btn .arrow{transition:translate var(--dur-4) var(--ease-enter)}
 .btn:hover .arrow{translate:4px 0}
 
 .btn-primary{--btn-bg:var(--fg);--btn-fg:var(--fg-inverse)}
 .btn-primary:hover{--btn-bg:var(--soft-navy);--btn-fg:var(--fg-inverse)}
+.btn-primary:active{--btn-bg:#151B25}
 .btn-accent{--btn-bg:var(--accent);--btn-fg:var(--ink-navy)}
 .btn-accent:hover{--btn-bg:var(--gold-light);--btn-fg:var(--ink-navy)}
-.btn-quiet{--btn-border:var(--line-strong)}
+.btn-accent:active{--btn-bg:var(--antique-gold)}
+.btn-quiet{--btn-border:var(--line-interactive)}
 .btn-quiet:hover{--btn-border:var(--accent);--btn-fg:var(--accent-ink)}
-.btn-on-dark{--btn-border:rgb(255 255 255 / .38);--btn-fg:var(--white)}
+.btn-quiet:active{--btn-bg:var(--cream-deep);--btn-border:var(--accent)}
+.btn-on-dark{--btn-border:rgb(255 255 255 / .48);--btn-fg:var(--white)}
 .btn-on-dark:hover{--btn-border:var(--white);--btn-bg:rgb(255 255 255 / .1);--btn-fg:var(--white)}
+.btn-on-dark:active{--btn-bg:rgb(255 255 255 / .2)}
 .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .btn-row.center-row,.eyebrow.center-row{justify-content:center}
 .center .btn-row{justify-content:center}
@@ -482,9 +548,10 @@ html[lang^="ko"] .eyebrow{font-family:var(--font-kr);letter-spacing:.1em}
 .lead{font-size:var(--t-lead);line-height:1.56;color:var(--fg-body)}
 .band-inverse .lead,.band-photo .lead{color:var(--fg-inverse-body)}
 .small{font-size:var(--t-small);color:var(--fg-muted)}
-.tiny{font-size:13px;color:var(--fg-muted)}
+.tiny{font-size:0.8125rem;color:var(--fg-muted)}
 /* utility spacing — replaces inline margin-top in the content files */
-.mt-1{margin-top:12px}.mt-2{margin-top:18px}.mt-3{margin-top:26px}.mt-4{margin-top:38px}
+/* every step a multiple of 4, after SEED's dimension scale */
+.mt-1{margin-top:12px}.mt-2{margin-top:20px}.mt-3{margin-top:28px}.mt-4{margin-top:40px}
 .center{text-align:center}
 .center .eyebrow{justify-content:center}
 .center .section-head,.center.section-head{margin-inline:auto}
@@ -502,7 +569,7 @@ html[lang^="ko"] .eyebrow{font-family:var(--font-kr);letter-spacing:.1em}
 }
 .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:clamp(40px,5vw,72px);align-items:center}
 .hero h1{font-size:var(--t-display);line-height:1.0;letter-spacing:-.034em;margin-top:-.06em}
-html[lang^="ko"] .hero h1{font-size:clamp(33px,4.9vw,58px);line-height:1.2;letter-spacing:-.032em}
+html[lang^="ko"] .hero h1{font-size:clamp(2.06rem,4.9vw,3.63rem);line-height:1.2;letter-spacing:-.032em}
 .hero h1 .line{display:block}
 .hero h1 em{font-style:italic;color:var(--accent-ink)}
 html[lang^="ko"] .hero h1 em{font-style:normal;color:var(--accent-ink)}
@@ -545,7 +612,7 @@ html[lang^="ko"] .hero h1 em{font-style:normal;color:var(--accent-ink)}
 }
 /* below the breakpoint the stave would run through the eyebrow, so it retires
    to a quiet wash rather than crossing live text */
-@media (max-width:880px){
+@media (max-width:55em){
   .hero::after{display:none}
   .hero::before{width:100%;inset-inline-end:-20%;opacity:.28}
 }
@@ -595,12 +662,12 @@ html[lang^="ko"] .hero h1 em{font-style:normal;color:var(--accent-ink)}
 }
 .stat:first-child{border-inline-start:0}
 .stat b{
-  display:block;font-family:var(--font-display);font-size:clamp(30px,3.1vw,42px);
+  display:block;font-family:var(--font-display);font-size:clamp(1.88rem,3.1vw,2.63rem);
   font-weight:700;color:var(--accent-inverse);line-height:1.02;letter-spacing:-.028em;
   font-variant-numeric:lining-nums;font-optical-sizing:auto;
 }
 .stat span{
-  display:block;font-family:var(--font-body);font-size:12.5px;color:var(--fg-inverse-muted);
+  display:block;font-family:var(--font-body);font-size:0.7812rem;color:var(--fg-inverse-muted);
   margin-top:10px;line-height:1.38;
 }
 html[lang^="ko"] .stat span{font-family:var(--font-kr)}
@@ -621,7 +688,7 @@ html[lang^="ko"] .stat span{font-family:var(--font-kr)}
 /* alternating photo/text order down the programmes page; below the breakpoint
    the photograph always comes first, so the rhythm does not become a lottery */
 .split-flip>figure{order:2}
-@media (max-width:880px){.split-flip>figure{order:0}}
+@media (max-width:55em){.split-flip>figure{order:0}}
 
 a.card{color:var(--fg-body)}
 a.card:hover{color:var(--fg-body)}
@@ -636,15 +703,15 @@ a.card:hover{color:var(--fg-body)}
              border-color var(--dur-4) var(--ease);
 }
 .card:hover{translate:0 -4px;box-shadow:var(--shadow-2);border-color:var(--line-strong)}
-.card h3{font-size:21px}
-.card p{margin-top:10px;font-size:15.5px}
+.card h3{font-size:1.3125rem}
+.card p{margin-top:10px;font-size:0.9688rem}
 .card .kicker{
-  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  font-size:0.6875rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
   color:var(--accent-ink);margin-bottom:9px;
 }
 .card .meta{
   margin-top:auto;padding-top:16px;
-  font-size:13px;color:var(--fg-muted);
+  font-size:0.8125rem;color:var(--fg-muted);
 }
 .card .meta::before{
   content:"";display:block;width:32px;height:1.5px;background:var(--accent);
@@ -670,15 +737,15 @@ a.card:hover{color:var(--fg-body)}
 .prog .photo{border-radius:0}
 .prog-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
 .prog .kicker{
-  font-family:var(--font-body);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  font-family:var(--font-body);font-size:0.6562rem;font-weight:700;letter-spacing:.16em;
   text-transform:uppercase;color:var(--accent-ink);
 }
 html[lang^="ko"] .prog .kicker{font-family:var(--font-kr);letter-spacing:.06em}
-.prog h3{margin-top:9px;font-size:17.5px;line-height:1.22}
-html[lang^="ko"] .prog h3{font-size:16.5px;line-height:1.4}
-.prog p{margin:10px 0 0;font-size:14px;line-height:1.5;color:var(--fg-muted)}
+.prog h3{margin-top:9px;font-size:1.0938rem;line-height:1.22}
+html[lang^="ko"] .prog h3{font-size:1.0312rem;line-height:1.4}
+.prog p{margin:10px 0 0;font-size:0.875rem;line-height:1.5;color:var(--fg-muted)}
 .prog .meta{
-  margin-top:auto;padding-top:14px;font-size:12px;color:var(--fg-muted);
+  margin-top:auto;padding-top:14px;font-size:0.75rem;color:var(--fg-muted);
   font-variant-numeric:lining-nums;
 }
 .prog .meta::before{
@@ -708,7 +775,7 @@ html[lang^="ko"] .prog h3{font-size:16.5px;line-height:1.4}
 html[lang^="ko"] .pillar-span b{font-family:var(--font-kr);letter-spacing:.06em}
 .pillar-span span{
   display:block;margin-top:6px;max-width:36em;
-  font-size:14.5px;line-height:1.5;color:var(--fg-muted);
+  font-size:0.9062rem;line-height:1.5;color:var(--fg-muted);
 }
 
 /* --- the give / get exchange, on Get involved --------------------------
@@ -726,7 +793,7 @@ html[lang^="ko"] .pillar-span b{font-family:var(--font-kr);letter-spacing:.06em}
 .exchange-ours{background:color-mix(in srgb,var(--accent) 5%,var(--surface-raised))}
 .exchange-side .kicker{
   display:block;
-  font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.15em;
+  font-family:var(--font-body);font-size:0.6875rem;font-weight:700;letter-spacing:.15em;
   text-transform:uppercase;color:var(--accent-ink);
 }
 html[lang^="ko"] .exchange-side .kicker{font-family:var(--font-kr);letter-spacing:.06em}
@@ -736,12 +803,12 @@ html[lang^="ko"] .exchange-side .kicker{font-family:var(--font-kr);letter-spacin
 }
 html[lang^="ko"] .exchange-side .kicker{
   display:block;
-  font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:.15em;
+  font-family:var(--font-body);font-size:0.6875rem;font-weight:700;letter-spacing:.15em;
   text-transform:uppercase;color:var(--accent-ink);
 }
 html[lang^="ko"] .exchange-side .kicker{font-family:var(--font-kr);letter-spacing:.06em}
 .exchange-count{font-family:var(--font-kr);font-weight:700}
-.exchange .checklist li{font-size:15px}
+.exchange .checklist li{font-size:0.9375rem}
 
 /* --- evidence row: who has backed the work ---------------------------- */
 .evidence{
@@ -755,23 +822,23 @@ html[lang^="ko"] .exchange-side .kicker{font-family:var(--font-kr);letter-spacin
   text-transform:uppercase;color:var(--accent-ink);margin-bottom:10px;
 }
 html[lang^="ko"] .evidence dt{font-family:var(--font-kr);letter-spacing:.06em}
-.evidence dd{margin:0;font-size:15px;line-height:1.52}
+.evidence dd{margin:0;font-size:0.9375rem;line-height:1.52}
 .evidence dd+dd{margin-top:8px}
-@media (max-width:880px){.evidence{grid-template-columns:1fr}}
+@media (max-width:55em){.evidence{grid-template-columns:1fr}}
 
 /* a short fact list under a programme heading — the same six-ish rows in
    every one of the five blocks, which is what makes them read as equals */
 .facts{
   display:grid;grid-template-columns:auto 1fr;gap:11px 24px;
   margin:24px 0 0;padding-top:20px;border-top:1px solid var(--line);
-  font-size:15px;
+  font-size:0.9375rem;
 }
 .facts dt{color:var(--fg-muted);white-space:nowrap}
 .facts dd{margin:0;color:var(--fg)}
 .band-inverse .facts{border-top-color:var(--line-inverse)}
 .band-inverse .facts dt{color:var(--fg-inverse-muted)}
 .band-inverse .facts dd{color:var(--fg-inverse)}
-@media (max-width:560px){
+@media (max-width:35em){
   .facts{grid-template-columns:1fr;gap:2px}
   .facts dd{margin-bottom:12px}
 }
@@ -781,10 +848,10 @@ html[lang^="ko"] .evidence dt{font-family:var(--font-kr);letter-spacing:.06em}
   border-top:3px solid var(--accent);border-radius:var(--radius);
   padding:32px;box-shadow:var(--shadow-1);
 }
-.pillar h3{font-size:24px;margin-top:10px}
+.pillar h3{font-size:1.5rem;margin-top:10px}
 .pillar ul{margin:20px 0 0;padding-inline-start:0;list-style:none}
 .pillar li{
-  position:relative;padding-inline-start:26px;margin-bottom:14px;font-size:15.5px;
+  position:relative;padding-inline-start:26px;margin-bottom:14px;font-size:0.9688rem;
 }
 .pillar li:last-child{margin-bottom:0}
 .pillar li::before{
@@ -793,7 +860,7 @@ html[lang^="ko"] .evidence dt{font-family:var(--font-kr);letter-spacing:.06em}
 }
 
 .tag{
-  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.13em;
+  display:inline-block;font-size:0.6875rem;font-weight:700;letter-spacing:.13em;
   text-transform:uppercase;padding:5px 11px;border-radius:999px;
   background:var(--surface-sunken);color:var(--accent-ink);border:1px solid var(--line);
 }
@@ -826,7 +893,7 @@ html[lang^="ko"] .evidence dt{font-family:var(--font-kr);letter-spacing:.06em}
 a:hover>.photo>img,.card:hover .photo>img{scale:1.04}
 
 figure{margin:0}
-figcaption{margin-top:12px;font-size:13px;color:var(--fg-muted);line-height:1.5}
+figcaption{margin-top:12px;font-size:0.8125rem;color:var(--fg-muted);line-height:1.5}
 
 /* full-bleed photographic band */
 .band-photo{
@@ -874,7 +941,7 @@ html[lang^="ko"] .diagram-title{font-family:var(--font-kr);letter-spacing:.07em}
 .band-sunken .diagram{background:var(--surface-raised)}
 .diagram-canvas{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-inline:-4px;padding-inline:4px}
 .diagram svg{width:100%;height:auto;overflow:visible}
-@media (max-width:820px){
+@media (max-width:51.25em){
   /* below this width the labels would fall under 8px — let the figure scroll instead */
   .diagram-canvas svg{min-width:680px}
   .diagram-canvas{
@@ -926,8 +993,8 @@ html[lang^="ko"] .dg-edge{letter-spacing:.03em;text-transform:none}
   transition:box-shadow var(--dur-5) var(--ease-enter),translate var(--dur-5) var(--ease-enter);
 }
 .notice:hover{box-shadow:var(--shadow-2);translate:0 -3px}
-.notice h3{font-size:22px;margin-top:9px}
-.notice dl{display:grid;grid-template-columns:auto 1fr;gap:9px 22px;margin:20px 0 0;font-size:15px}
+.notice h3{font-size:1.375rem;margin-top:9px}
+.notice dl{display:grid;grid-template-columns:auto 1fr;gap:9px 22px;margin:20px 0 0;font-size:0.9375rem}
 .notice dt{color:var(--fg-muted);white-space:nowrap}
 .notice dd{margin:0;color:var(--fg);font-weight:600}
 
@@ -935,12 +1002,12 @@ html[lang^="ko"] .dg-edge{letter-spacing:.03em;text-transform:none}
   border-inline-start:3px solid var(--accent);padding-inline-start:26px;
 }
 .quote p{
-  font-family:var(--font-display);font-size:22px;line-height:1.42;color:var(--fg);
+  font-family:var(--font-display);font-size:1.375rem;line-height:1.42;color:var(--fg);
   font-style:italic;letter-spacing:-.012em;
 }
-html[lang^="ko"] .quote p{font-family:var(--font-kr);font-style:normal;font-size:19px;line-height:1.6}
+html[lang^="ko"] .quote p{font-family:var(--font-kr);font-style:normal;font-size:1.1875rem;line-height:1.6}
 .band-inverse .quote p,.band-photo .quote p{color:var(--fg-inverse)}
-.quote cite{display:block;margin-top:16px;font-style:normal;font-size:13.5px;color:var(--fg-body)}
+.quote cite{display:block;margin-top:16px;font-style:normal;font-size:0.8438rem;color:var(--fg-body)}
 .band-inverse .quote cite,.band-photo .quote cite{color:var(--fg-inverse-muted)}
 
 .callout{
@@ -950,13 +1017,13 @@ html[lang^="ko"] .quote p{font-family:var(--font-kr);font-style:normal;font-size
 .band-sunken .callout,.band-raised .callout{background:var(--surface)}
 
 .checklist{list-style:none;margin:0;padding:0}
-.checklist li{position:relative;padding-inline-start:30px;margin-bottom:14px;font-size:16px}
+.checklist li{position:relative;padding-inline-start:30px;margin-bottom:14px;font-size:1rem}
 .checklist li::before{
   content:"";position:absolute;inset-inline-start:0;top:.55em;
   width:10px;height:10px;border-radius:50%;
   background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 15%,transparent);
 }
-.plainlist{list-style:none;margin:0;padding:0;font-size:15px;color:var(--fg-body)}
+.plainlist{list-style:none;margin:0;padding:0;font-size:0.9375rem;color:var(--fg-body)}
 .plainlist li{padding-block:10px;border-bottom:1px solid var(--line)}
 .plainlist li:last-child{border-bottom:0}
 .band-inverse .plainlist li{border-bottom-color:var(--line-inverse)}
@@ -965,11 +1032,11 @@ html[lang^="ko"] .quote p{font-family:var(--font-kr);font-style:normal;font-size
   overflow-x:auto;-webkit-overflow-scrolling:touch;
   border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-raised);
 }
-table{border-collapse:collapse;width:100%;min-width:540px;font-size:15px}
+table{border-collapse:collapse;width:100%;min-width:540px;font-size:0.9375rem}
 th,td{padding:14px 18px;text-align:start;border-bottom:1px solid var(--line);vertical-align:top}
 thead th{
   background:var(--surface-inverse);color:var(--fg-inverse);
-  font-family:var(--font-body);font-weight:700;font-size:13px;
+  font-family:var(--font-body);font-weight:700;font-size:0.8125rem;
   letter-spacing:.05em;text-transform:uppercase;border-bottom:0;
 }
 html[lang^="ko"] thead th{font-family:var(--font-kr);letter-spacing:.02em}
@@ -992,16 +1059,16 @@ td strong{color:var(--fg)}
   background:var(--surface);border:2px solid var(--accent);
 }
 .band-raised .tl-item::before{background:var(--surface-raised)}
-.tl-date{font-size:12px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink)}
-.tl-item h3{font-size:18px;margin-top:6px}
-.tl-item p{margin-top:7px;font-size:15px;color:var(--fg-muted)}
+.tl-date{font-size:0.75rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-ink)}
+.tl-item h3{font-size:1.125rem;margin-top:6px}
+.tl-item p{margin-top:7px;font-size:0.9375rem;color:var(--fg-muted)}
 
 /* ==========================================================================
    15. FOOTER
    ========================================================================== */
-.site-footer{background:var(--surface-inverse);color:var(--fg-inverse-muted);padding-block:66px 34px;font-size:15px}
+.site-footer{background:var(--surface-inverse);color:var(--fg-inverse-muted);padding-block:66px 34px;font-size:0.9375rem}
 .site-footer h3{
-  color:var(--fg-inverse);font-family:var(--font-body);font-size:11.5px;font-weight:700;
+  color:var(--fg-inverse);font-family:var(--font-body);font-size:0.7188rem;font-weight:700;
   letter-spacing:.17em;text-transform:uppercase;margin:0 0 16px;
 }
 html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em}
@@ -1014,13 +1081,17 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
 .footer-bottom{
   margin-top:46px;padding-top:22px;border-top:1px solid var(--line-inverse);
   display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
-  font-size:13px;color:var(--ink-on-dark-faint);
+  font-size:0.8125rem;color:var(--ink-on-dark-faint);
 }
 
 /* ==========================================================================
    16. RESPONSIVE
    ========================================================================== */
-@media (max-width:1040px){
+/* Breakpoints are in em, not px, so that enlarging the default text size
+   moves them too — a reader at 200% text zoom gets the drawer navigation
+   rather than a header that overflows its own row (Fluent: 200% text zoom
+   without clipping). 1em = 16px at the root. */
+@media (max-width:65em){
   .grid-4{grid-template-columns:repeat(2,1fr)}
   .grid-3{grid-template-columns:repeat(2,1fr)}
   .grid-5{grid-template-columns:repeat(3,1fr)}
@@ -1031,7 +1102,7 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
   .stat:nth-child(4){border-inline-start:0}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
 }
-@media (max-width:880px){
+@media (max-width:55em){
   section{padding-block:66px}
   .hero{padding-block:56px 66px}
   .hero-grid,.split,.split-wide{grid-template-columns:1fr;gap:38px}
@@ -1047,7 +1118,10 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
     border-bottom:1px solid var(--line);padding:12px var(--gutter) 22px;box-shadow:var(--shadow-2);
   }
   .nav[data-open="true"]{display:flex;animation:fade-in var(--dur-4) var(--ease-enter) both}
-  .nav-link{padding:14px 0;border-bottom:1px solid var(--line);border-radius:0}
+  /* below this width the drawer is driven by a thumb, so nothing
+     interactive is allowed under 44px (Gestalt, TDS) */
+  .nav-link{min-height:48px;display:flex;align-items:center;
+    padding:12px 0;border-bottom:1px solid var(--line);border-radius:0}
   .nav-link::after{left:0;right:auto;width:26px}
   /* in the drawer the sub-menu is just an indented list — no hover to find */
   .nav-item{display:block}
@@ -1058,17 +1132,20 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
     background:transparent;box-shadow:none;
     border-bottom:1px solid var(--line);
   }
-  .subnav a{padding:9px 0}
+  .subnav a{min-height:44px;display:flex;align-items:center;padding:9px 0}
   .subnav span{display:none}
   .has-sub::after{content:none}
   .lang-switch{margin:18px 0 0;padding-inline-start:0;border-inline-start:0;align-self:flex-start}
-  .lang-switch a,.lang-switch span{padding-inline:0;margin-inline-end:16px}
+  .lang-switch a,.lang-switch span{min-height:44px;padding-inline:0;margin-inline-end:20px}
   .btn-nav{margin-top:12px;justify-content:center}
 }
-@media (max-width:560px){
+/* Fluent's zoom guidance is "no horizontal scrolling down to 320px, and no
+   clipping at 200% text zoom". The rem type scale does the second; this
+   block and the one below do the first. */
+@media (max-width:35em){
   :root{--gutter:20px}
   .grid-5{grid-template-columns:1fr}
-  body{font-size:16px}
+  body{font-size:1rem}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .stat{border-inline-start:0}
   .card{padding:24px}
@@ -1077,6 +1154,14 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
   .notice dd{margin-bottom:12px}
   .diagram{padding:22px 16px 18px}
   .footer-grid{grid-template-columns:1fr;gap:30px}
+}
+@media (max-width:23.75em){
+  :root{--gutter:16px}
+  /* a long unbroken word in a heading is the one thing that can still push
+     a 320px viewport sideways */
+  :is(h1,h2,h3,h4,.h-display,.h-xl,.h-lg,.h-md){overflow-wrap:break-word}
+  .btn{width:100%;padding-inline:16px}
+  .btn-row{gap:10px}
 }
 
 /* ==========================================================================
@@ -1118,14 +1203,14 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
 /* a numbered sequence — the same list as .checklist, but the order matters */
 .steps{list-style:none;margin:0;padding:0;counter-reset:step}
 .steps li{
-  position:relative;padding-inline-start:44px;margin-bottom:16px;font-size:16px;
+  position:relative;padding-inline-start:44px;margin-bottom:16px;font-size:1rem;
   counter-increment:step;
 }
 .steps li:last-child{margin-bottom:0}
 .steps li::before{
   content:counter(step,decimal-leading-zero);
   position:absolute;inset-inline-start:0;top:.08em;
-  font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.06em;
+  font-family:var(--font-body);font-size:0.75rem;font-weight:700;letter-spacing:.06em;
   color:var(--accent-ink);font-variant-numeric:lining-nums;
 }
 .steps li::after{
@@ -1137,7 +1222,7 @@ html[lang^="ko"] .steps li::before{font-family:var(--font-kr)}
 
 /* the other-four strip is four of the same card the home page uses; it has to
    stay the same card, so only the grid changes */
-@media (max-width:1080px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:67.5em){.grid-4{grid-template-columns:repeat(2,1fr)}}
 
 /* ==========================================================================
    18. IDENTITY — the design system, shown rather than described
@@ -1151,7 +1236,7 @@ html[lang^="ko"] .steps li::before{font-family:var(--font-kr)}
   background:var(--line);border:1px solid var(--line);
   border-radius:var(--radius);overflow:hidden;
 }
-@media (max-width:880px){.swatches{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:55em){.swatches{grid-template-columns:repeat(2,1fr)}}
 .swatch{background:var(--surface-raised);padding:0 0 18px}
 .swatch i{
   display:block;height:78px;border-bottom:1px solid var(--line);
@@ -1164,10 +1249,10 @@ html[lang^="ko"] .steps li::before{font-family:var(--font-kr)}
 }
 html[lang^="ko"] .swatch b{font-family:var(--font-kr);letter-spacing:.05em}
 .swatch code{
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:0.7812rem;
   color:var(--accent-ink);margin-top:7px;letter-spacing:.04em;
 }
-.swatch span{font-size:13px;color:var(--fg-muted);margin-top:6px;line-height:1.45}
+.swatch span{font-size:0.8125rem;color:var(--fg-muted);margin-top:6px;line-height:1.45}
 
 /* type specimen — each row is set in the face it is naming */
 .specimen{
@@ -1182,15 +1267,15 @@ html[lang^="ko"] .swatch b{font-family:var(--font-kr);letter-spacing:.05em}
   color:var(--accent-ink);margin-bottom:12px;
 }
 html[lang^="ko"] .specimen dfn{font-family:var(--font-kr);letter-spacing:.05em}
-.specimen p{font-size:13px;color:var(--fg-muted);margin:10px 0 0}
-.sp-display{font-family:var(--font-display);font-size:clamp(28px,3.2vw,40px);
+.specimen p{font-size:0.8125rem;color:var(--fg-muted);margin:10px 0 0}
+.sp-display{font-family:var(--font-display);font-size:clamp(1.75rem,3.2vw,2.5rem);
   font-weight:600;color:var(--fg);line-height:1.1;letter-spacing:-.022em}
-.sp-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;color:var(--fg);line-height:1.5}
-.sp-kr{font-family:var(--font-kr);font-size:19px;color:var(--fg);line-height:1.62}
+.sp-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1875rem;color:var(--fg);line-height:1.5}
+.sp-kr{font-family:var(--font-kr);font-size:1.1875rem;color:var(--fg);line-height:1.62}
 
 /* the logo, shown on both grounds it is allowed to sit on, and nowhere else */
 .logo-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media (max-width:640px){.logo-pair{grid-template-columns:1fr}}
+@media (max-width:40em){.logo-pair{grid-template-columns:1fr}}
 .logo-plate{
   display:grid;place-items:center;min-height:180px;padding:34px;
   border:1px solid var(--line);border-radius:var(--radius);
@@ -1199,17 +1284,17 @@ html[lang^="ko"] .specimen dfn{font-family:var(--font-kr);letter-spacing:.05em}
 .logo-plate.on-light{background:var(--surface-raised)}
 .logo-plate.on-dark{background:var(--surface-inverse);border-color:var(--surface-inverse)}
 .logo-plate figcaption{
-  grid-column:1;margin-top:20px;font-size:12.5px;color:var(--fg-muted);text-align:center;
+  grid-column:1;margin-top:20px;font-size:0.7812rem;color:var(--fg-muted);text-align:center;
 }
 .logo-plate.on-dark figcaption{color:var(--fg-inverse-muted)}
 
 /* the do / do-not pair — deliberately plain, because it is a rule list */
 .rules{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-@media (max-width:760px){.rules{grid-template-columns:1fr}}
-.rules ul{list-style:none;margin:12px 0 0;padding:0;font-size:15px}
+@media (max-width:47.5em){.rules{grid-template-columns:1fr}}
+.rules ul{list-style:none;margin:12px 0 0;padding:0;font-size:0.9375rem}
 .rules li{position:relative;padding-inline-start:26px;padding-block:7px;color:var(--fg-body)}
 .rules li::before{
-  position:absolute;inset-inline-start:0;top:7px;font-weight:700;font-size:14px;
+  position:absolute;inset-inline-start:0;top:7px;font-weight:700;font-size:0.875rem;
 }
 .rules .do li::before{content:"✓";color:var(--accent-ink)}
 .rules .dont li::before{content:"✕";color:var(--dusty-rose)}
@@ -1218,15 +1303,15 @@ html[lang^="ko"] .specimen dfn{font-family:var(--font-kr);letter-spacing:.05em}
    noun with a fixed shape — capital C, M, E and a lower-case "for" — so it is
    never allowed to inherit a text-transform from the block it lands in. */
 .brandname{text-transform:none !important;font-variant:normal;white-space:nowrap}
-@media (max-width:520px){.brandname{white-space:normal}}
+@media (max-width:32.5em){.brandname{white-space:normal}}
 
 /* the master line — the whole organisation in one sentence (06 §5). It sits
    above the descriptive tagline in the footer of every page. */
 .footer-line{
-  font-family:var(--font-display);font-size:21px;line-height:1.34;font-weight:600;
+  font-family:var(--font-display);font-size:1.3125rem;line-height:1.34;font-weight:600;
   color:var(--fg-inverse);letter-spacing:-.004em;margin:20px 0 10px;max-width:16em;
 }
-html[lang^="ko"] .footer-line{font-family:var(--font-kr);font-size:18px;line-height:1.5;letter-spacing:-.03em}
+html[lang^="ko"] .footer-line{font-family:var(--font-kr);font-size:1.125rem;line-height:1.5;letter-spacing:-.03em}
 
 /* The five programme cards are links. They used to say so with an arrow
    pinned to the bottom-right corner, which floated free of the meta line and
@@ -1235,7 +1320,7 @@ html[lang^="ko"] .footer-line{font-family:var(--font-kr);font-size:18px;line-hei
    lifts, which is affordance enough. */
 .prog:hover h3{color:var(--accent-ink)}
 .prog h3{transition:color var(--dur-3) var(--ease)}
-.prog:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+
 
 /* ==========================================================================
    19. THE MARK ON THE HOME PAGE
@@ -1262,7 +1347,7 @@ html[lang^="ko"] .band-mark h2 em{font-style:normal;color:var(--accent-ink)}
 }
 .mark-plate img{width:min(320px,90%);height:auto}
 .mark-plate figcaption{
-  margin-top:26px;font-size:13px;color:var(--fg-muted);text-align:center;line-height:1.55;
+  margin-top:26px;font-size:0.8125rem;color:var(--fg-muted);text-align:center;line-height:1.55;
   /* the adoption date and the link to the standard are two separate things;
      stacking them on their own lines stops the link from wrapping mid-phrase */
   display:flex;flex-direction:column;align-items:center;gap:6px;
@@ -1270,7 +1355,7 @@ html[lang^="ko"] .band-mark h2 em{font-style:normal;color:var(--accent-ink)}
 .mark-plate figcaption .link{white-space:nowrap}
 /* the clear space the brand standard asks for is half the clef's width; the
    plate's padding is what enforces it here, so it must not be trimmed away */
-@media (max-width:880px){.mark-plate{padding:34px}}
+@media (max-width:55em){.mark-plate{padding:34px}}
 
 /* three plates now, not two: the two background variants sit side by side and
    the signature lock-up takes the full width beneath them, which suits its
