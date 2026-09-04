@@ -112,15 +112,15 @@ MAP = {
     ),
     "ko": dict(
         title="우리가 하는 일 전체",
-        caption=("다섯 개의 프로그램, 두 갈래, 한 바퀴. 그중에 대표는 없습니다. 어느 하나를 "
-                 "떼어 내면 반대쪽이 굶습니다 — 찾아가 연주하지 않으면 묻는 사람을 만나지 "
-                 "못하고, 수업이 없으면 그 사람을 보낼 곳이 없습니다."),
+        caption=("다섯 개의 프로그램이 두 갈래로 나뉘어 한 바퀴를 돕니다. 대표는 없습니다. "
+                 "하나를 떼어 내면 반대쪽이 굶습니다. 찾아가 연주하지 않으면 묻는 사람을 "
+                 "만날 일이 없고, 수업이 없으면 그 사람을 보낼 데가 없습니다."),
         aria=("같은 너비의 패널 둘. 왼쪽 ‘배움’에는 세 프로그램, 오른쪽 ‘나눔’에는 두 "
               "프로그램이 들어 있고, 모든 항목에 같은 크기의 음표가 붙어 있다. 배움에서 나눔으로 "
               "가는 곡선은 ‘그 방에 설 준비가 된 연주자’, 대칭으로 돌아오는 곡선은 ‘나도 해 볼 수 "
               "있을까?’로 표시된다."),
-        pillar_a="배움", pillar_a_sub="직접 연주하도록 가르칩니다",
-        pillar_b="나눔", pillar_b_sub="그 방으로 음악을 가져갑니다",
+        pillar_a="배움", pillar_a_sub="악기를 직접 잡도록 가르칩니다",
+        pillar_b="나눔", pillar_b_sub="그 방으로 음악을 들고 갑니다",
         top="그 방에 설 준비가 된 연주자",
         bottom="“나도 해 볼 수 있을까?”",
         progs=[("리코더 앙상블 과정", "한 학기 · 주 1회"),
@@ -144,7 +144,7 @@ MAP_PANEL_Y, MAP_PANEL_H = 128, 264
 MAP_ZONES = ((24, 486), (570, 486))          # x, width — deliberately equal
 MAP_ROW_STEP = 52
 MAP_MID = MAP_PANEL_Y + MAP_PANEL_H / 2      # 260 — both arcs mirror about this
-MAP_ARC = 164                                # how far above / below the middle
+MAP_ARC = MAP_PANEL_H / 2                    # the arcs leave the panel edge itself
 
 
 def _map_rows(zx, zw, rows, open_):
@@ -183,14 +183,14 @@ def programme_map(lang):
     b = MAP_ZONES[1][0] + MAP_ZONES[1][1] / 2
     yt, yb = MAP_MID - MAP_ARC, MAP_MID + MAP_ARC
 
-    p.append(f'    <text class="dg-edge dg-late" x="540" y="32" '
+    p.append(f'    <text class="dg-edge dg-late" x="540" y="44" '
              f'text-anchor="middle">{t["top"]}</text>')
-    p.append(draw(f"M{a} {yt} C {a + 130} {yt - 46}, {b - 130} {yt - 46}, {b - 10} {yt - 4}"))
-    p.append(tri(b, yt, 24))
+    p.append(draw(f"M{a} {yt} C {a} {yt - 74}, {b} {yt - 74}, {b} {yt - 12}"))
+    p.append(tri(b, yt, 90))
 
-    p.append(draw(f"M{b} {yb} C {b - 130} {yb + 46}, {a + 130} {yb + 46}, {a + 10} {yb + 4}"))
-    p.append(tri(a, yb, 204))
-    p.append(f'    <text class="dg-edge dg-late" x="540" y="492" '
+    p.append(draw(f"M{b} {yb} C {b} {yb + 74}, {a} {yb + 74}, {a} {yb + 12}"))
+    p.append(tri(a, yb, 270))
+    p.append(f'    <text class="dg-edge dg-late" x="540" y="480" '
              f'text-anchor="middle">{t["bottom"]}</text>')
 
     return figure("0 0 1080 500", t["aria"], "\n".join(p), t["caption"], t["title"])
@@ -229,9 +229,9 @@ TOC = {
     ),
     "ko": dict(
         title="들어가는 것에서 달라지는 것까지",
-        caption=("왼쪽에서 오른쪽으로 읽습니다. 실선 괄호는 우리가 세어서 보여 드릴 수 있는 것이고, "
-                 "점선 괄호는 참가자와 공간이 해 준 말이지 아직 측정한 것이 아닙니다. "
-                 "그 이음매를 흐리기보다 표시해 두는 편을 택했습니다."),
+        caption=("왼쪽에서 오른쪽으로 읽습니다. 실선 괄호는 저희가 세어서 보여 드릴 수 있는 "
+                 "것이고, 점선 괄호는 참가자와 공간이 해 준 말입니다. 아직 재 보지 않았습니다. "
+                 "그 경계는 흐리지 않고 그어 둡니다."),
         aria=("왼쪽에서 오른쪽으로 네 단계 — 투입이 활동을 사고, 활동이 산출을 만들고, 산출이 변화를 "
               "가리킨다. 실선 괄호는 앞의 세 단계를 ‘세어서 기록함’으로, 점선 괄호는 네 번째를 "
               "‘증언에 근거, 아직 측정 안 됨’으로 표시한다."),
@@ -240,10 +240,10 @@ TOC = {
               ("활동", ["한 학기 수업", "함께 연주하기",
                         "그 방에서의 음악회", "공연에 함께 가기"]),
               ("산출", ["진행한 세션", "수료한 사람",
-                        "닿은 공간", "연 음악회"]),
-              ("변화", ["덜해진 고립", "존엄과 성취",
+                        "닿은 공간", "치른 음악회"]),
+              ("변화", ["줄어든 고립", "존엄과 성취",
                         "세대를 잇는 관계", "교육가의 일자리"])],
-        edges=["쓰여서", "만들고", "가리킨다"],
+        edges=["산다", "만든다", "가리킨다"],
         evidenced="세어서 기록함",
         claimed="증언에 근거 · 아직 측정 안 됨",
     ),
@@ -252,7 +252,10 @@ TOC = {
 
 def theory_of_change(lang):
     t = TOC[lang]
-    x0, w, gap = 24, 206, 64
+    # The gap has to hold the edge label, not just the arrow. At 64px it did
+    # not: "points to" is about 75px wide at 11.5px with .09em tracking, so it
+    # ran straight through the gold rule of the column it was pointing at.
+    x0, w, gap = 24, 189, 92
     p = []
     for i, (title, rows) in enumerate(t["cols"]):
         x = x0 + i * (w + gap)
@@ -264,10 +267,10 @@ def theory_of_change(lang):
         p.append(f'    <text class="dg-h" x="{x + 16}" y="70">{title}</text>')
         p += lines(x + 16, 104, [f"{r}" for r in rows], cls="dg-sub", step=26)
         if i < 3:
-            a, b = x + w + 6, x + w + gap - 18
+            a, b = x + w + 12, x + w + gap - 24
             p.append(draw(f"M{a} 120 H{b}", width=1.75))
             p.append(tri(b + 10, 120))
-            p.append(f'    <text class="dg-edge dg-late" x="{(a + b) / 2 + 4}" y="104" '
+            p.append(f'    <text class="dg-edge dg-late" x="{(a + b) / 2 + 5}" y="102" '
                      f'text-anchor="middle">{t["edges"][i]}</text>')
 
     solid_end = x0 + 2 * (w + gap) + w
@@ -306,9 +309,9 @@ TERM = {
     ),
     "ko": dict(
         title="한 과정은 이렇게 만듭니다",
-        caption=("한 과정은 만족스러운 첫 소리가 6주차가 아니라 1주차에 나오도록 설계돼 있습니다. "
-                 "악보를 읽을 줄 안다고 전제하지 않고, 모든 단계를 그룹 전체가 함께 넘으며, "
-                 "끝나는 방식은 하나뿐입니다 — 사람들 앞에서."),
+        caption=("만족스러운 첫 소리가 6주차가 아니라 1주차에 나오도록 짜여 있습니다. "
+                 "악보를 읽을 줄 안다고 전제하지 않고, 모든 단계를 그룹 전체가 함께 넘습니다. "
+                 "끝나는 방식은 하나뿐입니다. 사람들 앞에서."),
         aria=("한 학기에 걸쳐 올라가는 음표 네 개 — 1주차 첫 소리, 2–5주차 악보 읽기, 6–11주차 "
               "자기 파트 연주, 마지막 주 음악회. 아래의 점점 넓어지는 쐐기는 경험 없음에서 "
               "사람들 앞에서 연주하기까지의 성장을 나타낸다."),
@@ -380,11 +383,11 @@ SUBSIDY = {
     ),
     "ko": dict(
         title="유료 예약 하나가 무료 자리를 지키는 방식",
-        caption=("돈은 세 방향에서 들어와, 아무도 값을 치르지 않은 자리로 나갑니다. 선의 굵기는 "
-                 "장식이 아니라 각자의 몫입니다. 유료 층을 걷어내면 무료 층이 조금씩 줄어드는 게 "
-                 "아니라 가장 먼저 사라집니다."),
-        aria=("기관과 낼 수 있는 참가자, 보조금이 CMFE에 지불하고, CMFE는 무료 자리와 더 많은 방을 "
-              "내놓으며 잉여는 다시 안으로 돌아온다."),
+        caption=("돈은 세 방향에서 들어와, 아무도 값을 치르지 않은 자리로 나갑니다. 선의 "
+                 "굵기는 각자의 몫을 나타냅니다. 유료 층을 걷어내면 무료 층이 가장 먼저 "
+                 "사라집니다."),
+        aria=("기관과 낼 수 있는 참가자, 보조금이 Classical Music for Everyone에 지불하고, 그 돈이 "
+              "무료 자리와 더 많은 방으로 나가며, 잉여는 다시 안으로 돌아온다."),
         in_title="들어오는 돈", out_title="그 돈이 사는 것",
         in_rows=[(["기관"],
                   ["요양시설 · 본당 · 지자체 · 학교", "— 자체 예산에서"], 5.5),
@@ -404,43 +407,70 @@ SUBSIDY = {
 
 
 def subsidy(lang):
+    """Money in, money out — every connector leaving a real panel edge.
+
+    The earlier version started each curve at x=320, in the white space to the
+    right of a ragged column of text, which is the one thing the figures here
+    are not allowed to do: a line that begins in mid-air reads as unfinished.
+    Each side is a panel of fixed width now, the same device `pathways` uses,
+    so every line leaves an edge at the same x.
+    """
     t = SUBSIDY[lang]
     p = []
-    hub_y = 190
+    lx, lw = 24, 270                  # money in
+    rx, rw = 780, 276                 # what it buys
+    hx, hw = 430, 220                 # the hub
+    hub_y = 196
+    in_y = (86, 198, 310)
+    out_y = (130, 282)
+    ch = 80                           # panel height
 
-    p.append(f'    <text class="dg-edge" x="24" y="26">{t["in_title"]}</text>')
-    for (rows, notes, wt), y in zip(t["in_rows"], (66, 178, 290)):
-        p.append(f'    <line class="dg-stroke-accent" x1="24" y1="{y - 22}" x2="24" y2="{y + 18}" '
-                 f'stroke-width="2.5"/>')
-        p += lines(40, y, rows)
-        p += lines(40, y + 22, notes, cls="dg-sub", step=18)
-        p.append(draw(f"M320 {y - 4} C 380 {y - 4}, 386 {hub_y}, 424 {hub_y}", width=wt))
-    p.append(tri(430, hub_y))
-    p.append(f'    <text class="dg-edge dg-late" x="372" y="44" '
+    def panel(x, w, cy, rows, notes):
+        out = [f'    <rect class="dg-fill-soft" x="{x}" y="{cy - ch / 2}" width="{w}" '
+               f'height="{ch}" rx="12"/>',
+               f'    <line class="dg-stroke-accent" x1="{x + 20}" y1="{cy - 20}" '
+               f'x2="{x + 20}" y2="{cy + 20}" stroke-width="2.5"/>']
+        out += lines(x + 36, cy - 4, rows)
+        out += lines(x + 36, cy + 18, notes, cls="dg-sub", step=18)
+        return out
+
+    p.append(f'    <text class="dg-edge" x="{lx}" y="34">{t["in_title"]}</text>')
+    for (rows, notes, wt), y in zip(t["in_rows"], in_y):
+        p += panel(lx, lw, y, rows, notes)
+        # control points on a single vertical, so the S never bulges backwards
+        p.append(draw(f"M{lx + lw} {y} C {(lx + lw + hx) / 2} {y}, "
+                      f"{(lx + lw + hx) / 2} {hub_y}, {hx - 30} {hub_y}", width=wt))
+    p.append(tri(hx - 18, hub_y))
+    # on the same baseline as the two section titles: every other place in this
+    # gap is crossed by one of the three curves
+    p.append(f'    <text class="dg-edge dg-late" x="{(lx + lw + hx) / 2}" y="34" '
              f'text-anchor="middle">{t["edge_in"]}</text>')
 
-    p.append('    <rect class="dg-fill-accent dg-box" x="436" y="150" rx="12" '
-             'width="212" height="84" stroke-width="1.8"/>')
-    p += lines(542, 180, t["hub"], cls="dg-label", step=20, anchor="middle")
-    p.append(f'    <text class="dg-sub" x="542" y="218" text-anchor="middle">{t["hub_note"]}</text>')
+    p.append(f'    <rect class="dg-fill-accent dg-box" x="{hx}" y="{hub_y - 42}" rx="12" '
+             f'width="{hw}" height="84" stroke-width="1.8"/>')
+    p += lines(hx + hw / 2, hub_y - 14, t["hub"], cls="dg-label", step=20, anchor="middle")
+    p.append(f'    <text class="dg-sub" x="{hx + hw / 2}" y="{hub_y + 24}" '
+             f'text-anchor="middle">{t["hub_note"]}</text>')
 
-    p.append(f'    <text class="dg-edge" x="1056" y="26" text-anchor="end">{t["out_title"]}</text>')
-    for (rows, notes, wt), y in zip(t["out_rows"], (110, 262)):
-        p.append(f'    <line class="dg-stroke-accent" x1="770" y1="{y - 22}" x2="770" y2="{y + 18}" '
-                 f'stroke-width="2.5"/>')
-        p += lines(786, y, rows)
-        p += lines(786, y + 22, notes, cls="dg-sub", step=18)
-        p.append(draw(f"M652 {hub_y} C 700 {hub_y}, 706 {y - 4}, 754 {y - 4}", width=wt))
-        p.append(tri(762, y - 4))
-    p.append(f'    <text class="dg-edge dg-late" x="706" y="44" '
+    p.append(f'    <text class="dg-edge" x="{rx}" y="34">{t["out_title"]}</text>')
+    for (rows, notes, wt), y in zip(t["out_rows"], out_y):
+        p += panel(rx, rw, y, rows, notes)
+        p.append(draw(f"M{hx + hw} {hub_y} C {(hx + hw + rx) / 2} {hub_y}, "
+                      f"{(hx + hw + rx) / 2} {y}, {rx - 30} {y}", width=wt))
+        p.append(tri(rx - 18, y))
+    p.append(f'    <text class="dg-edge dg-late" x="{(hx + hw + rx) / 2}" y="34" '
              f'text-anchor="middle">{t["edge_out"]}</text>')
 
-    p.append('    <path class="dg-stroke" d="M900 300 C 900 356, 542 360, 542 238" '
+    # the surplus goes back in — dashed, because it is the part that only
+    # happens in a good year
+    p.append(f'    <path class="dg-stroke" d="M{rx + 40} {out_y[1] + ch / 2} '
+             f'C {rx + 40} 398, {hx + hw / 2} 402, {hx + hw / 2} {hub_y + 56}" '
              'stroke-dasharray="4 5" fill="none"/>')
-    p.append(tri(542, 242, -90))
-    p.append(f'    <text class="dg-sub" x="722" y="356" text-anchor="middle">{t["loop"]}</text>')
+    p.append(tri(hx + hw / 2, hub_y + 48, -90))
+    p.append(f'    <text class="dg-sub" x="{(hx + hw / 2 + rx + 40) / 2}" y="416" '
+             f'text-anchor="middle">{t["loop"]}</text>')
 
-    return figure("0 0 1080 376", t["aria"], "\n".join(p), t["caption"], t["title"])
+    return figure("0 0 1080 440", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------
@@ -467,10 +497,10 @@ ARC = {
     ),
     "ko": dict(
         title="세 단계가 실제로 옮기는 것",
-        caption=("세 단계는 난이도 세 칸이 아닙니다. 옮기는 것은 소유입니다 — 음악은 처음에 "
-                 "남의 것이었다가, 그 방이 함께 가진 것이 되고, 끝에는 내 것이 됩니다. "
-                 "동시에 각 회차는 그 자체로 완결돼 있어, 늦게 온 사람이 앞부분을 놓친 채로 "
-                 "앉아 있게 되지 않습니다."),
+        caption=("세 단계가 옮기는 것은 난이도가 아니라 소유입니다. 음악은 처음에 남의 "
+                 "것이었다가, 그 방이 함께 가진 것이 되고, 끝에는 내 것이 됩니다. 각 회차는 "
+                 "그 자체로 완결돼 있어서, 늦게 온 사람이 앞부분을 놓친 채 앉아 있을 일이 "
+                 "없습니다."),
         aria=("오선 위로 올라가는 음표 셋 — 친해지기, 함께 경험하기, 내 취향 찾기. 화살표에는 "
               "‘평가받지 않고 듣기’와 ‘들은 것을 말해 보기’가 붙어 있고, 세 번째에서 입구로 "
               "돌아오는 점선은 ‘각 회차는 그 자체로 완결 — 아무 회차나 첫 회차’를 뜻한다."),
@@ -494,7 +524,7 @@ def lecture_arc(lang):
 
     # the entry: an open note-head, because nothing is required to be there yet
     p.append(note(120, 238, open_=True))
-    p.append(f'    <text class="dg-sub" x="120" y="278" text-anchor="middle">{t["entry"]}</text>')
+    p.append(f'    <text class="dg-sub" x="104" y="280">{t["entry"]}</text>')
     p.append(draw("M140 232 C 200 232, 220 216, 278 216", width=1.75))
     p.append(tri(286, 216))
 
@@ -509,16 +539,18 @@ def lecture_arc(lang):
             p.append(draw(f"M{a} {y - 4} C {mid} {y - 26}, {mid} {ARC_Y[i + 1] - 4}, "
                           f"{b} {ARC_Y[i + 1] + 2}", width=1.75))
             p.append(tri(b + 8, ARC_Y[i + 1] + 2))
-            p.append(f'    <text class="dg-edge dg-late" x="{mid}" y="{y - 34}" '
+            # above the stave, not between its lines: at 11.5px a label set
+            # inside a 22px gap is struck through by the rule above it
+            p.append(f'    <text class="dg-edge dg-late" x="{mid}" y="130" '
                      f'text-anchor="middle">{t["edges"][i]}</text>')
 
     # you can start anywhere — the series does not have a locked front door
-    p.append('    <path class="dg-stroke" d="M860 404 C 860 456, 120 460, 120 262" '
+    p.append('    <path class="dg-stroke" d="M860 404 C 860 456, 56 460, 56 238 H 90" '
              'stroke-dasharray="4 5" fill="none"/>')
-    p.append(tri(120, 266, -90))
-    p.append(f'    <text class="dg-sub" x="490" y="462" text-anchor="middle">{t["loopback"]}</text>')
+    p.append(tri(100, 238))
+    p.append(f'    <text class="dg-sub" x="500" y="462" text-anchor="middle">{t["loopback"]}</text>')
 
-    return figure("0 0 1080 480", t["aria"], "\n".join(p), t["caption"], t["title"])
+    return figure("0 100 1080 384", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------
@@ -544,9 +576,9 @@ OUTING = {
     ),
     "ko": dict(
         title="한 번의 동행이 왜 세 부분인가",
-        caption=("사람을 멈춰 세우는 것은 대개 티켓 값이 아닙니다. 가서 무슨 일이 벌어지는지 "
-                 "모른다는 것, 그리고 같이 갈 사람이 없다는 것입니다. 그래서 음악회는 괄호 "
-                 "안에 놓입니다 — 양옆의 두 부분이 가운데를 가능하게 합니다."),
+        caption=("발목을 잡는 것은 대개 티켓 값이 아닙니다. 가서 뭘 어떻게 해야 하는지 "
+                 "모른다는 것, 같이 갈 사람이 없다는 것입니다. 그래서 음악회를 괄호 안에 "
+                 "넣었습니다. 양옆의 두 부분이 가운데를 가능하게 합니다."),
         aria=("‘한 번의 동행’이라는 괄호 아래 음표 셋. 가운데가 음악회 자체이고, 양옆은 사전 "
               "준비와 사후 나눔으로, 가운데를 가능하게 하는 부분으로 표시돼 있다."),
         span="한 번의 동행",
@@ -565,30 +597,38 @@ OUT_X = [230, 540, 850]
 def outing(lang):
     t = OUTING[lang]
     p = []
-    p += stave(40, 1000, 128)
+    # the stave sits low enough that the edge labels can live above it. Set
+    # between the rules they were struck through by the line above them.
+    p += stave(40, 1000, 150)
 
     p.append(bracket(180, 900, 96, depth=12))
     p.append(f'    <text class="dg-h" x="540" y="76" text-anchor="middle">{t["span"]}</text>')
 
+    ys = [216, 194, 216]
     for i, ((head, sub), x) in enumerate(zip(t["parts"], OUT_X)):
-        y = 172 if i == 1 else 194
+        y = ys[i]
         p.append(note(x, y, open_=(i != 1)))
-        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 11}" x2="{x}" y2="246"/>')
-        p += lines(x, 272, head, cls="dg-h", anchor="middle")
-        p += lines(x, 300, sub, cls="dg-sub", step=20, anchor="middle")
+        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 11}" x2="{x}" y2="268"/>')
+        p += lines(x, 294, head, cls="dg-h", anchor="middle")
+        p += lines(x, 322, sub, cls="dg-sub", step=20, anchor="middle")
         if i < 2:
-            a, b = x + 22, OUT_X[i + 1] - 30
-            p.append(draw(f"M{a} {y - 2} H{b}", width=1.75))
-            p.append(tri(b + 8, y - 2))
-            p.append(f'    <text class="dg-edge dg-late" x="{(a + b) / 2}" y="{y - 14}" '
+            # the connector runs note to note, so the arrowhead lands on the
+            # thing it points at rather than 22px under it
+            a, b = x + 22, OUT_X[i + 1] - 32
+            y2 = ys[i + 1]
+            p.append(draw(f"M{a} {y - 2} L{b} {y2 - 2}", width=1.75))
+            p.append(tri(b + 10, y2 - 2))
+            p.append(f'    <text class="dg-edge dg-late" x="{(a + b) / 2}" y="138" '
                      f'text-anchor="middle">{t["edges"][i]}</text>')
 
-    p.append(f'    <text class="dg-sub" x="540" y="352" text-anchor="middle">{t["mid_note"]}</text>')
-    p.append(bracket(180, 330, 392, depth=9, below=True))
-    p.append(bracket(750, 900, 392, depth=9, below=True))
-    p.append(f'    <text class="dg-sub" x="540" y="424" text-anchor="middle">{t["side_note"]}</text>')
+    # the middle gets its label and the two sides get their bracket on the same
+    # line, so the three read as one row rather than two stranded ticks
+    p.append(f'    <text class="dg-sub" x="540" y="374" text-anchor="middle">{t["mid_note"]}</text>')
+    p.append(bracket(180, 330, 366, depth=9, below=True))
+    p.append(bracket(750, 900, 366, depth=9, below=True))
+    p.append(f'    <text class="dg-sub" x="540" y="404" text-anchor="middle">{t["side_note"]}</text>')
 
-    return figure("0 0 1080 450", t["aria"], "\n".join(p), t["caption"], t["title"])
+    return figure("0 0 1080 428", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------
@@ -616,9 +656,9 @@ VISIT = {
     ),
     "ko": dict(
         title="그 방이 준비해야 하는 것",
-        caption=("오선 위의 것은 전부 차에 실려 옵니다. 오선 아래의 것은 이미 그 건물 안에 "
-                 "있습니다. 준비물은 그게 전부이고, 그래서 피아노도 무대도 예산도 없는 "
-                 "휴게실이 음악회를 열 수 있습니다."),
+        caption=("위쪽은 전부 차에 실려 옵니다. 아래쪽은 이미 그 건물 안에 있습니다. "
+                 "준비물은 그게 전부입니다. 그래서 피아노도 무대도 예산도 없는 휴게실이 "
+                 "음악회를 열 수 있습니다."),
         aria=("두 개의 괄호가 ‘음악회’라는 하나의 음표에서 만난다. 위쪽 괄호 ‘우리가 싣고 가는 것’은 "
               "연주자·악기·보면대·프로그램·보험을, 아래쪽 괄호 ‘이미 그 건물에 있는 것’은 방과 "
               "사람과 담당자 한 사람을 담고 있다."),
@@ -634,47 +674,51 @@ VISIT = {
 }
 
 
-# Two lists, each on its own leader rules, meeting at one note. The earlier
-# version ran a stave straight through the words and set both headings hard on
-# the frame edge; nothing here touches the margin now.
-VISIT_LEFT = 24                 # left margin for both lists
+# Two lists meeting at one note-head. The version before this ran a leader
+# rule from every row out to a shared vertical, which drew four horizontals
+# and a right-hand vertical — a comb that read as a table with its left side
+# missing. Each row is a panel now, the same device as `pathways` and
+# `subsidy`, so a connector leaves a real edge instead of the end of a word.
+VISIT_LEFT, VISIT_W = 24, 420   # x and width of every row panel
 VISIT_COLLECT = 520             # x of the gold rule each list arrives at
-VISIT_HUB = (760, 250)
+VISIT_HUB = (720, 232)
+VISIT_ROW = 46                  # row pitch
 
 
 def visit(lang):
     t = VISIT[lang]
     hx, hy = VISIT_HUB
-    x, cx = VISIT_LEFT, VISIT_COLLECT
+    x, w, cx = VISIT_LEFT, VISIT_W, VISIT_COLLECT
     p = []
 
     def group(title, rows, y0, ytitle):
-        ys = [y0 + i * 44 for i in range(len(rows))]
+        ys = [y0 + i * VISIT_ROW for i in range(len(rows))]
         out = [f'    <text class="dg-edge" x="{x}" y="{ytitle}">{title}</text>']
         for row, y in zip(rows, ys):
-            out.append(note(x + 14, y - 5, open_=True))
-            out.append(f'    <text class="dg-label" x="{x + 44}" y="{y}">{row}</text>')
-            out.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 14}" '
-                       f'x2="{cx}" y2="{y + 14}"/>')
-        top, bot = ys[0] + 14, ys[-1] + 14
-        out.append(f'    <line class="dg-stroke-accent" x1="{cx}" y1="{top}" '
-                   f'x2="{cx}" y2="{bot}" stroke-width="2.5"/>')
-        return out, (top + bot) / 2
+            out.append(f'    <rect class="dg-fill-soft" x="{x}" y="{y - 18}" width="{w}" '
+                       f'height="36" rx="10"/>')
+            out.append(note(x + 26, y - 4, open_=True))
+            out.append(f'    <text class="dg-label" x="{x + 52}" y="{y + 1}">{row}</text>')
+            out.append(f'    <line class="dg-stroke" x1="{x + w}" y1="{y}" '
+                       f'x2="{cx}" y2="{y}"/>')
+        out.append(f'    <line class="dg-stroke-accent" x1="{cx}" y1="{ys[0]}" '
+                   f'x2="{cx}" y2="{ys[-1]}" stroke-width="2.5"/>')
+        return out, (ys[0] + ys[-1]) / 2
 
-    up, a = group(t["in_title"], t["in_rows"], 78, 44)
-    down, b = group(t["room_title"], t["room_rows"], 330, 296)
+    up, a = group(t["in_title"], t["in_rows"], 76, 44)
+    down, b = group(t["room_title"], t["room_rows"], 296, 264)
     p += up + down
 
     # both lists converge on the same note-head
-    p.append(draw(f"M{cx} {a} C {cx + 90} {a}, {cx + 110} {hy}, {hx - 34} {hy}", width=3))
-    p.append(draw(f"M{cx} {b} C {cx + 90} {b}, {cx + 110} {hy}, {hx - 34} {hy}", width=3))
-    p.append(tri(hx - 24, hy))
+    p.append(draw(f"M{cx} {a} C {cx + 80} {a}, {cx + 100} {hy}, {hx - 34} {hy}", width=3))
+    p.append(draw(f"M{cx} {b} C {cx + 80} {b}, {cx + 100} {hy}, {hx - 34} {hy}", width=3))
+    p.append(tri(hx - 22, hy))
 
     p.append(note(hx, hy))
     p.append(f'    <text class="dg-h" x="{hx + 28}" y="{hy + 6}">{t["hub"]}</text>')
     p += lines(hx + 28, hy + 32, t["hub_note"], cls="dg-sub", step=20)
 
-    return figure("0 0 1080 500", t["aria"], "\n".join(p), t["caption"], t["title"])
+    return figure("0 0 1080 432", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------
@@ -700,8 +744,8 @@ REHEARSE = {
     ),
     "ko": dict(
         title="네 번의 음악회가 딛고 선 것",
-        caption=("네 번의 음악회는 기록으로 남은 부분입니다. 그 아래에는 2024년 1월부터의 주간 "
-                 "연습이 있습니다 — 백 번이 훨씬 넘는 토요일이고, 그중 어느 것도 기록해 두지 "
+        caption=("네 번의 음악회는 기록으로 남은 부분입니다. 그 아래에 2024년 1월부터의 주간 "
+                 "연습이 있습니다. 백 번이 훨씬 넘는 토요일이고, 그중 어느 것도 기록해 두지 "
                  "않았습니다. 이제부터는 셉니다. 연습이 프로그램이고 음악회는 영수증입니다."),
         aria=("‘2024년 1월부터 매주 토요일 — 백 회가 넘고, 기록된 것은 없음’이라는 괄호 아래 "
               "같은 크기의 작은 음표가 길게 늘어서 있고, 화살표가 ‘정식 음악회 네 번, 기록됨’으로 "
@@ -722,8 +766,8 @@ def rehearsals(lang):
     p += stave(24, 588, 120, gap=18, n=5)
 
     for i in range(16):
-        p.append(note(46 + i * 33, 156 if i % 2 else 174))
-    p.append(f'    <text class="dg-sub" x="562" y="170">···</text>')
+        p.append(note(46 + i * 33, 156))
+    p.append(f'    <text class="dg-sub" x="568" y="161">···</text>')
     p.append(bracket(24, 612, 96, depth=11))
     p.append(f'    <text class="dg-h" x="24" y="74">{t["many"]}</text>')
     p.append(f'    <text class="dg-sub" x="24" y="232">{t["many_sub"]}</text>')
@@ -771,9 +815,10 @@ WAYS = {
     ),
     "ko": dict(
         title="네 가지 길, 하나의 문",
-        caption=("네 갈래는 네 개의 신청 절차가 아닙니다. 같은 이메일에 쓸 수 있는 네 개의 문장이고, "
-                 "사람들은 그 사이를 늘 오갑니다 — 지금 연주하는 사람 대부분이 처음에는 듣는 "
-                 "사람이었고, 우리가 연주하는 방 중 둘은 음악회에 왔던 분이 내어 준 것입니다."),
+        caption=("네 갈래는 네 개의 신청 절차가 아닙니다. 같은 이메일에 쓸 수 있는 네 개의 "
+                 "문장이고, 사람들은 그 사이를 늘 오갑니다. 지금 연주하는 사람 대부분이 "
+                 "처음에는 듣는 사람이었고, 저희가 연주하는 방 중 둘은 음악회에 왔던 분이 "
+                 "내어 준 것입니다."),
         aria=("같은 크기의 판 넷 — 배우러 오기, 들으러 오기, 함께 연주하기, 공간 열기 — 이 "
               "점선으로 이어져 있고 그 점선에는 ‘사람들은 이 사이를 오갑니다’라고 적혀 있다. "
               "네 갈래는 모두 오른쪽 금색 선에서 만나고, 거기서 화살표 하나가 ‘이메일 한 통, "
@@ -802,9 +847,9 @@ WAYS = {
 # that — every connector now leaves a real edge, at the same x, at the vertical
 # centre of the thing it belongs to. The dashes in the gaps between the chips
 # are the whole claim of the figure: these are not four separate doors.
-WAYS_X, WAYS_W, WAYS_H = 24, 452, 76
+WAYS_X, WAYS_W, WAYS_H = 24, 400, 76
 WAYS_Y = [44, 144, 244, 344]      # top of each chip
-WAYS_COLLECT = 560                # x of the gold rule every route arrives at
+WAYS_COLLECT = 496                # x of the gold rule every route arrives at
 WAYS_HUB = (760, 296)             # x, width of the destination chip
 
 
@@ -835,10 +880,8 @@ def pathways(lang):
              f'x2="{cx}" y2="{mids[-1]}" stroke-width="2.5"/>')
     p.append(draw(f"M{cx} {hy} H{hx - 34}", width=2.5))
     p.append(tri(hx - 22, hy))
-    # above the arrow and clear of both the collector rule and the destination
-    # panel — centred, it clipped one or the other at every width
-    p.append(f'    <text class="dg-edge dg-late" x="{cx + 20}" y="{hy - 78}">'
-             f'{t["edge"]}</text>')
+    p.append(f'    <text class="dg-edge dg-late" x="{(cx + hx - 34) / 2}" y="{hy - 16}" '
+             f'text-anchor="middle">{t["edge"]}</text>')
 
     # the destination
     p.append(f'    <rect class="dg-fill-accent dg-box" x="{hx}" y="{hy - 62}" width="{hw}" '
@@ -869,10 +912,10 @@ VOCAB = {
     ),
     "ko": dict(
         title="이 사이트의 도식을 읽는 법",
-        caption=("악보에서 빌려 온 네 개의 표시를 모든 도식에서 같은 뜻으로 씁니다. 무게를 지는 "
-                 "것은 음표 머리입니다 — 무엇을 나타내든 크기가 같아서, 오선 위의 어떤 것도 "
-                 "다른 것보다 슬그머니 높아질 수 없습니다. 이건 그림에 관한 결정이 아니라 "
-                 "단체에 관한 결정입니다."),
+        caption=("악보에서 빌려 온 네 개의 표시를 모든 도식에서 같은 뜻으로 씁니다. 무게를 "
+                 "지는 것은 음표 머리입니다. 무엇을 나타내든 크기가 같아서, 오선 위의 어떤 "
+                 "것도 다른 것보다 슬그머니 높아질 수 없습니다. 그림 때문에 정한 규칙이 "
+                 "아니라 단체 때문에 정한 규칙입니다."),
         aria=("네 가지 표시의 범례 — 오선, 음표 머리, 괄호, 크레셴도 쐐기. 각각이 이 사이트의 "
               "도식에서 갖는 뜻이 함께 적혀 있다."),
         items=[(["오선"], ["조용한 네 줄과", "무게를 지는 다섯째 줄"]),

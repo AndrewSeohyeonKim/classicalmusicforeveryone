@@ -667,8 +667,8 @@ ABOUT = f"""<section class="page-hero">
     <div class="section-head reveal mt-4">
       <h3 class="h-sub">Diagrams</h3>
       <p>Where an explanation runs past about eighty words, it stops being a paragraph and
-         becomes a figure. Every figure on this site is drawn from the same four marks, so nine
-         diagrams read as one set rather than nine flowcharts.</p>
+         becomes a figure. Every figure on this site is drawn from the same four marks, so ten
+         diagrams read as one set rather than ten flowcharts.</p>
     </div>
     <div class="reveal">{dg.vocabulary(L)}</div>
   </div>
@@ -1135,7 +1135,8 @@ NEWS = f"""<section class="page-hero">
              years before it had a name.</p></div>
         <div class="tl-item"><div class="tl-date">January 2024</div>
           <h3>It starts</h3>
-          <p>CMFE is founded in Dublin, and the Letters Ensemble with it. The first lecture-recital
+          <p><span class="brandname">Classical Music for Everyone</span> is founded in Dublin,
+             and the Letters Ensemble with it. The first lecture-recital
              is held in Dublin 18, for six people.</p></div>
         <div class="tl-item"><div class="tl-date">2024</div>
           <h3>Music goes out</h3>
@@ -1298,7 +1299,8 @@ SUPPORT = f"""<section class="page-hero">
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=Partnership%20and%20funding%20enquiry">Request the proposal</a>
     </div>
     <div class="callout reveal mt-4">
-      <p class="small"><strong>Please note.</strong> CMFE is a volunteer-led social enterprise
+      <p class="small"><strong>Please note.</strong> <span class="brandname">Classical Music for Everyone</span>
+         is a volunteer-led social enterprise
          currently formalising as a not-for-profit company limited by guarantee. We are not yet a
          registered charity, so gifts are not eligible for charitable tax relief. We would rather
          say so plainly than let anyone assume otherwise.</p>

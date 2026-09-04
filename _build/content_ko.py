@@ -20,7 +20,7 @@ WHATS_ON = """<div class="grid grid-2 stagger">
   <div class="notice">
     <span class="tag tag-live">모집 중</span>
     <h3>리코더 앙상블 — Mulhuddart</h3>
-    <p class="small">완전 초보를 위한 12주. 경험도, 악보 읽는 능력도 필요하지 않습니다.</p>
+    <p class="small">12주 과정입니다. 악기를 한 번도 잡아 본 적 없어도, 악보를 못 읽어도 됩니다.</p>
     <dl>
       <dt>장소</dt><dd>Mulhuddart Community Centre, Dublin 15</dd>
       <dt>요일</dt><dd>수요일 저녁 7:00–8:00</dd>
@@ -46,8 +46,8 @@ CTA = """<section class="band-inverse">
   <div class="wrap narrow center reveal">
     <h2 class="h-lg">여기 당신 자리가 있습니다.</h2>
     <p class="lead mt-2">
-      처음 악기를 배우든, 들으러 오든, 함께 연주하든, 공간을 열어 주든 —
-      한 줄이면 시작됩니다.</p>
+      악기를 처음 배우든, 들으러 오든, 같이 연주하든, 방을 하나 내어 주시든.
+      메일 한 줄이면 시작됩니다.</p>
     <div class="btn-row center-row">
       <a class="btn btn-accent" href="get-involved.html">참여하기 <span class="arrow">→</span></a>
       <a class="btn btn-on-dark" href="support.html">후원하기</a>
@@ -69,8 +69,8 @@ INDEX = f"""<section class="hero">
     <div>
       <p class="eyebrow lift lift-1">커뮤니티 음악 · 아일랜드 더블린</p>
       <h1><span class="line lift lift-1">클래식 음악을,</span><span class="line lift lift-2"><em>모두에게.</em></span></h1>
-      <p class="lead lift lift-3">듣는 데서 그치지 않고 직접 연주하도록 가르칩니다.
-         그리고 클래식 음악이 좀처럼 닿지 않는 곳으로 찾아갑니다.</p>
+      <p class="lead lift lift-3">악기를 직접 잡고 소리를 내도록 가르칩니다.
+         그리고 클래식 음악이 좀처럼 가지 않는 곳으로 저희가 갑니다.</p>
       <div class="btn-row lift lift-4">
         <a class="btn btn-primary" href="programmes.html">하는 일 보기 <span class="arrow">→</span></a>
         <a class="btn btn-quiet" href="get-involved.html">참여하기</a>
@@ -91,18 +91,18 @@ INDEX = f"""<section class="hero">
   <div class="wrap">
     <div class="section-head wide reveal">
       <p class="eyebrow">우리가 하는 일</p>
-      <h2>다섯 개의 프로그램, 두 갈래, 그리고 한 바퀴.</h2>
-      <p>직접 연주하도록 가르치고, 공연장까지 오기 어려운 분들을 찾아가 연주합니다.
-         한쪽만으로는 굴러가지 않습니다. 찾아간 방에서 다음 수업이 생기고, 그 수업에서
-         다음 연주자가 나옵니다.</p>
+      <h2>가르치는 일 셋, 찾아가는 일 둘.</h2>
+      <p>악기를 가르치는 프로그램이 셋, 공연장까지 오기 어려운 분들을 찾아가 연주하는
+         프로그램이 둘입니다. 이 둘은 붙어 있습니다. 찾아간 방에서 다음 수업이 생기고,
+         그 수업에서 다음 연주자가 나옵니다.</p>
     </div>
     <div class="pillar-bar reveal" aria-hidden="true">
       <div class="pillar-span">
-        <b>배움</b><span>직접 연주하도록 가르칩니다. 셋 다 아무것도 모르는 데서
-        출발합니다.</span>
+        <b>배움</b><span>악기를 직접 잡도록 가르칩니다. 셋 다 아무것도 모르는
+        자리에서 시작합니다.</span>
       </div>
       <div class="pillar-span pillar-b">
-        <b>나눔</b><span>음악이 좀처럼 가지 않는 곳으로 찾아가 연주합니다.</span>
+        <b>나눔</b><span>음악이 좀처럼 가지 않는 곳으로 저희가 갑니다.</span>
       </div>
     </div>
     <div class="grid grid-5 stagger">
@@ -111,7 +111,7 @@ INDEX = f"""<section class="hero">
         <div class="prog-body">
           <span class="kicker">배움</span>
           <h3>리코더 앙상블 과정</h3>
-          <p>완전 초보를 위한 한 학기, 마지막은 음악회로 끝납니다.</p>
+          <p>악기를 처음 잡는 분들과 한 학기. 끝은 음악회입니다.</p>
           <div class="meta">주 1회 · 한 학기</div>
         </div>
       </a>
@@ -120,7 +120,7 @@ INDEX = f"""<section class="hero">
         <div class="prog-body">
           <span class="kicker">배움</span>
           <h3>클래식 음악과 친해지기</h3>
-          <p>사전 지식이 없는 분들을 위한 무료 강의·연주.</p>
+          <p>아무것도 몰라도 되는 무료 강의·연주.</p>
           <div class="meta">17회 · 누적 143명</div>
         </div>
       </a>
@@ -138,7 +138,7 @@ INDEX = f"""<section class="hero">
         <div class="prog-body">
           <span class="kicker">나눔</span>
           <h3>찾아가는 음악회</h3>
-          <p>요양시설·본당·병원·쉼터로 실연을 가져갑니다.</p>
+          <p>요양시설과 본당, 병원과 쉼터로 연주를 들고 갑니다.</p>
           <div class="meta">20회 · 15곳 이상</div>
         </div>
       </a>
@@ -172,13 +172,13 @@ INDEX = f"""<section class="hero">
   <img src="images/church-concert.jpg" alt="" width="1400" height="1050">
   <div class="wrap narrow reveal">
     <p class="eyebrow">왜 이 일을 하는가</p>
-    <h2 class="h-lg">존엄은 듣는 자리가 아니라
-       연주하는 자리에서 돌아옵니다.</h2>
+    <h2 class="h-lg">그 방에도 관객은
+       이미 앉아 있습니다.</h2>
     <p class="lead mt-3">
-      클래식 음악은 풍요롭지만, 여전히 많은 사람에게는 닿지 않습니다. 나이 때문에,
-      몸이 불편해서, 형편이 빠듯해서, 사는 곳이 멀어서, 아니면 그저 낯설어서.
-      요양시설도 병원도 쉼터도 시골 본당도 관객이 없는 곳이 아닙니다.
-      가장 오래 기다려 온 관객이 이미 앉아 있는 곳입니다.</p>
+      클래식 음악은 풍요롭습니다. 그런데 여전히 많은 사람에게 닿지 않습니다.
+      나이가 많아서, 몸이 아파서, 형편이 빠듯해서, 사는 곳이 멀어서, 그저 낯설어서.
+      요양시설과 병원, 쉼터와 시골 본당에는 가장 오래 기다린 관객이 앉아 있습니다.
+      아무도 찾아가지 않았을 뿐입니다.</p>
     <div class="btn-row"><a class="btn btn-on-dark" href="about.html">단체 소개 <span class="arrow">→</span></a></div>
   </div>
 </section>
@@ -186,15 +186,14 @@ INDEX = f"""<section class="hero">
 <section class="band-mark">
   <div class="wrap split split-wide split-center">
     <div class="reveal">
-      <p class="eyebrow">이름, 그리고 그 이름이 지우는 책임</p>
+      <p class="eyebrow">이름이 곧 숙제입니다</p>
       <h2>금색은 <em>Everyone</em> 위에 놓입니다.</h2>
-      <p class="lead mt-3">멋으로 그렇게 둔 것이 아닙니다. 로고에서 &lsquo;for&rsquo;는 작게,
-         &lsquo;Everyone&rsquo;은 크고 금색으로 놓입니다. 이 이름에서 어려운 낱말은 마지막
-         낱말이기 때문입니다.</p>
-      <p class="mt-3">클래식 음악에 관객이 모자란 것이 아닙니다. 모자란 것은 길입니다.
-         나이가 많거나, 몸이 아프거나, 도시에서 멀거나, 형편이 빠듯하거나, 이 음악이 자기
-         것이라는 말을 한 번도 들어 본 적 없는 사람이 들어설 길. 이름이 곧 해야 할 일이고,
-         로고는 우리가 어느 낱말로 평가받을지를 미리 적어 둔 것입니다.</p>
+      <p class="lead mt-3">로고에서 &lsquo;for&rsquo;는 작게, &lsquo;Everyone&rsquo;은 크고
+         금색으로 놓습니다. 이 이름에서 지키기 어려운 낱말이 마지막 낱말이라서 그렇습니다.</p>
+      <p class="mt-3">이 음악에 부족한 건 관객이 아니라 길입니다. 나이가 많거나, 몸이
+         아프거나, 도시에서 멀거나, 형편이 빠듯하거나, 이 음악이 자기 것이라는 말을 한 번도
+         못 들어 본 사람이 걸어 들어올 길. 저희가 무엇으로 평가받아야 하는지는 로고에 이미
+         적혀 있습니다.</p>
       <p class="footer-line mark-line">클래식 음악을, 그것이 필요한 곳으로!</p>
     </div>
     <figure class="reveal mark-plate">
@@ -210,23 +209,23 @@ INDEX = f"""<section class="hero">
   <div class="wrap">
     <div class="section-head wide reveal">
       <p class="eyebrow">무엇을 향해 가는가</p>
-      <h2>두 가지 목표, 그리고 두 번째에 대한 솔직한 말.</h2>
-      <p>첫 번째는 음악 단체라면 으레 기대하실 만한 것입니다. 두 번째는 저희가 자선단체가
-         아니라 사회적기업인 이유이고, 둘 중 훨씬 어려운 쪽입니다.</p>
+      <h2>목표는 둘입니다. 두 번째가 훨씬 어렵습니다.</h2>
+      <p>첫 번째는 음악 단체라면 으레 기대하실 만한 것입니다. 두 번째 때문에 저희는
+         자선단체 대신 사회적기업을 택했습니다.</p>
     </div>
     <div class="grid grid-2 stagger">
       <div class="card"><span class="kicker">목표 01</span>
         <h3>누구든 들어설 수 있는 길</h3>
         <p>나이가 몇이든, 어디서 왔든, 몸이 어떻든, 형편이 어떻든, 음악을 알든 모르든
-           실연을 만날 수 있게 합니다. 연주를 가르치고, 곁에 앉아 함께 연주하고, 음악이
-           평소에 가지 않는 곳으로 찾아가는 방식으로.</p>
+           실황 연주를 만날 수 있게 합니다. 악기를 가르치고, 옆에 앉아 함께 연주하고,
+           음악이 평소에 가지 않는 곳까지 찾아갑니다.</p>
         <div class="meta">다섯 개 프로그램 &middot; 무료·감면 자리는 언제나 확보</div>
       </div>
       <div class="card"><span class="kicker">목표 02</span>
         <h3>음악교육자의 제대로 된 일자리</h3>
         <p>음악교육자는 대부분 불안정한 프리랜서로 일합니다. 이들을 제대로 된 급여의
            정규직으로 채용하는 것이 저희의 두 번째 사회적 목표입니다. 형편이 나아지면
-           그때 하겠다는 약속이 아니라, 이 단체가 있는 이유의 절반입니다.</p>
+           그때 하겠다는 약속이 아닙니다. 이 단체가 있는 이유의 절반입니다.</p>
         <div class="meta">현재는 자원봉사 운영 &middot; 비영리 CLG 설립 준비 중</div>
       </div>
     </div>
@@ -249,11 +248,11 @@ INDEX = f"""<section class="hero">
       <div><dl>
         <dt>후원으로 마련한 차량</dt>
         <dd>개인 후원이 모여 <strong>차량 한 대</strong>가 생겼습니다. 연주자와 악기와
-            보면대가 함께 움직이고, 버스 시간표가 닿지 않는 방까지 갑니다.</dd>
+            보면대를 한 번에 싣고, 버스로는 갈 수 없던 곳까지 갑니다.</dd>
       </dl></div>
       <div><dl>
         <dt>그래서 닿은 곳</dt>
-        <dd><strong>네 나라</strong>의 <strong>20곳 이상</strong> — 아일랜드·프랑스·영국·한국의
+        <dd>아일랜드·프랑스·영국·한국 <strong>네 나라</strong>의 <strong>20곳 이상</strong>.
             요양시설, 본당, 병원, 쉼터, 주간보호센터, 커뮤니티 센터.</dd>
       </dl></div>
       <div><dl>
@@ -264,12 +263,12 @@ INDEX = f"""<section class="hero">
       </dl></div>
     </div>
     <div class="quote reveal mt-4">
-      <p>&ldquo;음악으로, 그는 그렇지 않았다면 홀로 남았을 이들에게 격려와 존엄과
+      <p>&ldquo;음악으로, 그는 홀로 남았을 이들에게 격려와 존엄과
          영적인 동행을 건넵니다.&rdquo;</p>
       <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
     </div>
-    <p class="lead center mt-4 reveal">이후의 후원도 같은 계산입니다.
-       갈 수 없던 방 하나가 갈 수 있는 방이 됩니다.</p>
+    <p class="lead center mt-4 reveal">다음 후원도 마찬가지입니다.
+       못 가던 방 하나가 갈 수 있는 방이 됩니다.</p>
     <div class="btn-row center-row reveal"><a class="btn btn-quiet" href="support.html">후원이 쓰이는 곳 <span class="arrow">→</span></a></div>
   </div>
 </section>
@@ -282,9 +281,9 @@ INDEX = f"""<section class="hero">
 ABOUT = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">단체 소개</p>
-    <h1>음악은 특별한 날의 일이 아니라 일상의 일이어야 합니다.</h1>
-    <p>2024년 1월 더블린에서 시작한 커뮤니티 음악 사회적기업입니다. 전문 연주단체가 아니라,
-       직접 연주하는 것이 핵심인 참여형 공동체입니다.</p>
+    <h1>음악이 특별한 날에만 있는 일이 되지 않도록.</h1>
+    <p>2024년 1월 더블린에서 시작한 커뮤니티 음악 사회적기업입니다. 무대에 올리는
+       단체라기보다, 사람들이 직접 연주하는 자리를 만드는 쪽에 가깝습니다.</p>
   </div>
 </section>
 
@@ -293,11 +292,11 @@ ABOUT = f"""<section class="page-hero">
     <div class="reveal">
       <p class="eyebrow">미션</p>
       <p class="lead">나이가 몇이든, 어디서 왔든, 몸이 어떻든, 형편이 어떻든, 음악을 알든
-         모르든 실연을 만날 수 있게 합니다. 연주를 가르치고, 곁에 앉아 함께 연주하고, 음악이
-         평소에 가지 않는 곳으로 찾아가는 방식으로.</p>
+         모르든 실황 연주를 만날 수 있게 합니다. 악기를 가르치고, 옆에 앉아 함께 연주하고,
+         음악이 평소에 가지 않는 곳까지 찾아갑니다.</p>
       <p class="eyebrow mt-4">비전</p>
       <p class="lead">도시에서도 농촌에서도, 돌봄 시설에서도, 장애가 있는 삶에서도 함께
-         음악을 만들 수 있는 아일랜드. 그 문은 누구에게나 열려 있고, 그 일을 하는 교육자들은
+         음악을 만들 수 있는 아일랜드. 누구나 들어올 수 있고, 그 안에서 일하는 교육자들은
          안정된 자리에서 일합니다.</p>
     </div>
     <figure class="reveal">
@@ -314,7 +313,7 @@ ABOUT = f"""<section class="page-hero">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">변화이론</p>
-      <h2>방 하나, 한 시간, 리코더 하나가 무엇이 되어야 하는가.</h2>
+      <h2>방 하나, 한 시간, 리코더 하나로 무엇이 달라지는가.</h2>
     </div>
     <div class="reveal">{dg.theory_of_change(L)}</div>
   </div>
@@ -324,19 +323,19 @@ ABOUT = f"""<section class="page-hero">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">가치</p>
-      <h2>다섯 가지 — 실제로 무엇을 감수하는가.</h2>
+      <h2>다섯 가지. 지키려면 무언가를 포기해야 하는 것들.</h2>
     </div>
     <div class="grid grid-3 stagger">
       <div class="card"><span class="kicker">01</span><h3>존엄</h3>
         <p>나이·건강·처지와 무관하게, 여전히 무언가를 창조할 수 있는 사람으로 대합니다.</p></div>
       <div class="card"><span class="kicker">02</span><h3>접근성</h3>
-        <p>가격·거리·낯섦의 장벽을 낮춥니다. 신체적·환경적·심리적 장벽 모두.</p></div>
+        <p>돈, 거리, 낯섦. 몸이 겪는 장벽과 마음이 겪는 장벽을 다 같이 낮춥니다.</p></div>
       <div class="card"><span class="kicker">03</span><h3>동행</h3>
-        <p>한 번 방문하고 끝내지 않고 한 학기 내내 곁에 머뭅니다. 의미는 지속에서 자랍니다.</p></div>
+        <p>한 번 다녀오고 마는 대신 한 학기를 함께 머무릅니다. 오래 있어야 뭐라도 남습니다.</p></div>
       <div class="card"><span class="kicker">04</span><h3>공동체</h3>
-        <p>나이와 배경과 언어를 가로질러 사람을 잇는 음악.</p></div>
+        <p>나이도 출신도 언어도 다른 사람들을 한 방에 앉히는 음악.</p></div>
       <div class="card"><span class="kicker">05</span><h3>희망</h3>
-        <p>극적인 변화를 약속하지 않습니다. 작고 진짜인 연결의 순간을 소중히 여깁니다.</p></div>
+        <p>인생이 바뀐다고 약속하지 않습니다. 작지만 진짜인 순간들을 셉니다.</p></div>
       <div class="card" style="--card-bg:var(--surface-sunken)"><span class="kicker">그리고</span>
         <h3>교육자의 일자리</h3>
         <p>음악교육자 대부분이 불안정한 프리랜서 조건에서 일합니다. 제대로 고용하는 것이
@@ -364,10 +363,10 @@ ABOUT = f"""<section class="page-hero">
       <p class="lead mt-2">전부 같은 방 안에 있습니다. 리코더 수업의 강사, 강의·연주의 진행자,
          동행을 예약하는 사람, 요양시설에서 클라리넷을 부는 연주자, 그 자리에서 앙상블을
          지휘하는 사람이 같은 한 사람입니다.</p>
-      <p class="mt-3">이건 설명인 동시에 한계입니다. 주당 50회 세션이 아니라 다섯 개
-         프로그램이라고 말하는 이유가 여기 있고, 음악교육자를 제대로 고용하는 것이 좋은
-         아이디어가 아니라 두 번째 사회적 목표인 이유도 여기 있습니다. 이 일은 한 사람 위에서
-         커지지 않고, 커져서도 안 됩니다.</p>
+      <p class="mt-3">이건 설명인 동시에 한계입니다. 주당 50회가 아니라 다섯 개
+         프로그램인 이유가 여기 있습니다. 음악교육자를 제대로 고용하는 일을 두 번째 사회적
+         목표로 못 박아 둔 이유도 마찬가지입니다. 이 일은 한 사람 위에서 커지지 않고,
+         커져서도 안 됩니다.</p>
       <p class="mt-3">2026년 5월 TU Dublin Conservatoire에서 연주 전공 음악학사(우등)를
          졸업했습니다. Dr Paul Roe에게 클라리넷을 배우며 오르간·첼로·피아노를 함께 공부했고,
          졸업 연구는 은퇴 프레젠테이션 수녀 일곱 분을 위해 직접 설계하고 이끈 10주 리코더
@@ -377,14 +376,14 @@ ABOUT = f"""<section class="page-hero">
       <div class="callout">
         <h3 class="h-sub">교회와 커뮤니티는 하나의 실천</h3>
         <p class="small mt-2">2022년 9월부터 Dolphin&rsquo;s Barn 성모 통고 성당 음악감독,
-           2023년 9월부터 Rathgar 삼주보 성당의 주일 오르가니스트로 봉사하고 있습니다 —
-           성주간 전례, 학교 미사와 위령 미사, 장례, 본당 음악회.</p>
+           2023년 9월부터 Rathgar 삼주보 성당의 주일 오르가니스트로 봉사하고 있습니다.
+           성주간 전례, 학교 미사와 위령 미사, 장례, 본당 음악회까지.</p>
         <p class="small mt-2">본당과 수도 공동체에는 이 일을 &lsquo;음악을 통한 평신도
-           사도직&rsquo;으로 설명합니다. 연주 시리즈가 아니라 함께 있어 주는 봉사라는 뜻입니다.
-           커뮤니티 활동과 같은 실천을, 그렇게 물어본 분들의 언어로 설명한 것입니다.</p>
+           사도직&rsquo;으로 설명합니다. 그 자리에 함께 있어 주는 봉사라는 뜻입니다.
+           커뮤니티 활동과 같은 일을, 물어보신 분들의 언어로 옮긴 것뿐입니다.</p>
       </div>
       <div class="quote mt-4">
-        <p>&ldquo;음악으로, 그는 그렇지 않았다면 홀로 남았을 이들에게 격려와 존엄과
+        <p>&ldquo;음악으로, 그는 홀로 남았을 이들에게 격려와 존엄과
            영적인 동행을 건넵니다.&rdquo;</p>
         <cite>더블린 보좌주교 Donal Roche &middot; 2026년 2월 16일</cite>
       </div>
@@ -442,8 +441,8 @@ ABOUT = f"""<section class="page-hero">
           <li>제13회 더블린 국제 피아노 콩쿠르, 2025 — Team Harmony</li>
           <li>청년 희년, 로마, 2025 &middot; Korea Festival, Farmleigh House, 2025</li>
         </ul>
-        <p class="small mt-2">포르투갈과 이탈리아는 자원봉사지입니다. 저희 기록의 &lsquo;4개국&rsquo;은
-           <em>연주한</em> 네 나라입니다.</p>
+        <p class="small mt-2">포르투갈과 이탈리아는 자원봉사를 간 곳입니다. 저희가 적는
+           &lsquo;4개국&rsquo;은 <em>연주한</em> 나라만 셉니다.</p>
       </div>
       <div>
         <h3 class="h-sub">함께 연주하는 예술가</h3>
@@ -493,10 +492,10 @@ ABOUT = f"""<section class="page-hero">
         </ul>
         <div class="callout mt-3">
           <h3 class="h-sub">주장하지 않는 것</h3>
-          <p class="small mt-1">지금까지의 근거는 참여와 지속과 증언이지, 측정한 성과가
-             아닙니다. 검증된 도구로 웰빙을 재 본 적이 없고, 찾아가는 음악회의 관객 수도 세어
-             두지 않았습니다. 2026년 가을 기수부터 간단한 사전·사후 조사와 동의 절차를
-             시작합니다.</p>
+          <p class="small mt-1">지금 내놓을 수 있는 근거는 사람들이 왔고, 계속 왔고,
+             이런 말을 해 주었다는 것까지입니다. 검증된 도구로 웰빙을 재 본 적이 없고,
+             찾아가는 음악회의 관객 수도 세어 두지 않았습니다. 2026년 가을 기수부터
+             간단한 사전·사후 조사와 동의 절차를 시작합니다.</p>
         </div>
       </div>
     </div>
@@ -508,9 +507,9 @@ ABOUT = f"""<section class="page-hero">
     <div class="section-head wide reveal">
       <p class="eyebrow">우리가 하는 일</p>
       <h2>다섯 개의 프로그램, 각각의 페이지.</h2>
-      <p>두 개의 축 — 사람들에게 연주를 가르치는 일과, 콘서트홀까지 오기 어려운 분들을 위해
-         찾아가 연주하는 일. 다섯을 같은 분량으로, 같은 항목으로, 같은 순서로 적었습니다.
-         그 가운데 주된 것은 없습니다.</p>
+      <p>축은 둘입니다. 악기를 가르치는 일, 그리고 콘서트홀까지 오기 어려운 분들을
+         찾아가 연주하는 일. 다섯을 같은 분량, 같은 항목, 같은 순서로 적었습니다.
+         대표 프로그램은 따로 없습니다.</p>
     </div>
     <div class="reveal">{dg.loop(L)}</div>
     <div class="btn-row reveal">
@@ -525,9 +524,9 @@ ABOUT = f"""<section class="page-hero">
     <div class="section-head wide reveal">
       <p class="eyebrow">아이덴티티</p>
       <h2>디자인 표준을 공개합니다.</h2>
-      <p>작은 단체가 이름을 올리는 모든 것은, 디자인 도구로 만들었든 본당 주보에 타이핑했든
-         같은 곳에서 나온 것처럼 보여야 합니다. 저희가 지키는 기준이고, 저희를 대신해
-         무언가를 인쇄하는 파트너도 이 기준으로 저희를 붙잡을 수 있도록 공개합니다.</p>
+      <p>작은 단체일수록 내놓는 것이 다 같은 데서 나온 것처럼 보여야 합니다. 디자인
+         도구로 만들었든 본당 주보에 타이핑했든 마찬가지입니다. 저희 대신 무언가를
+         인쇄하는 곳에서도 그대로 쓰시라고 공개해 둡니다.</p>
     </div>
 
     <div class="split split-center reveal">
@@ -552,10 +551,10 @@ ABOUT = f"""<section class="page-hero">
       <div>
         <h3 class="h-sub">마크</h3>
         <p class="mt-2">높은음자리표와 워드마크를 함께 쓰며, 2026년 8월 17일에 확정했습니다.
-           워드마크 안의 비례가 의미를 지므로 절대 바뀌지 않습니다 —
+           워드마크 안의 크기 차이가 뜻을 담고 있어서, 그 비례는 바꾸지 않습니다.
            <strong>&lsquo;for&rsquo;는 작게, &lsquo;Everyone&rsquo;은 크고 금색으로.</strong>
-           이름은 하나의 모양을 가진 고유명사입니다 — <span class="brandname">Classical Music
-           for Everyone</span> — 전부 대문자로 쓰지 않고, 대외 문안에서 CMFE로 줄이지 않으며,
+           이름은 모양이 하나뿐인 고유명사입니다. <span class="brandname">Classical Music
+           for Everyone</span>. 전부 대문자로 쓰지 않고, 대외 문안에서 CMFE로 줄이지 않으며,
            다른 서체로 다시 조판하지 않습니다.</p>
         <div class="rules mt-3">
           <div class="do">
@@ -604,8 +603,8 @@ ABOUT = f"""<section class="page-hero">
         <span>보조 텍스트</span></div>
     </div>
     <div class="callout reveal mt-3">
-      <p class="small"><strong>더 예쁜 선택지를 포기하게 만드는 규칙 하나.</strong>
-         Gold Bronze는 크림 바탕에서 대비가 2.9:1이라 본문 크기에서 떨어집니다. 그래서
+      <p class="small"><strong>예쁜 쪽을 포기하게 만드는 규칙 하나.</strong>
+         Gold Bronze는 크림 바탕에서 대비가 2.9:1이라 본문 크기로 쓰면 읽기 어렵습니다. 그래서
          <em>글자</em>로 쓰는 금색은 언제나 어둡게 조정한 <code>#7F5C1C</code>이고, 금색 버튼의
          글자는 흰색이 아니라 잉크 네이비입니다. 이 사이트의 모든 글자·배경 조합은 WCAG AA를
          통과합니다. 예외는 로고 하나뿐인데, 로고는 이미지이고 색을 바꾸지 않기 때문입니다.</p>
@@ -615,8 +614,7 @@ ABOUT = f"""<section class="page-hero">
       <h3 class="h-sub">서체</h3>
       <p>세 벌이고, 네 번째는 들이지 않습니다. EB Garamond는 로고 워드마크의 Cormorant
          Garamond과 같은 계보의 올드스타일 세리프라, 제목이 로고와 다투지 않고 맞물립니다.
-         한국어는 행간을 더 주고 음수 자간을 덜 조입니다. Noto Sans KR에는 둘 다 필요하기
-         때문입니다.</p>
+         한국어는 행간을 더 주고 자간은 덜 조입니다. Noto Sans KR이 그래야 읽힙니다.</p>
     </div>
     <div class="specimen reveal">
       <div>
@@ -643,9 +641,8 @@ ABOUT = f"""<section class="page-hero">
 
     <div class="section-head reveal mt-4">
       <h3 class="h-sub">도식</h3>
-      <p>설명이 여든 단어를 넘어가면 문단으로 두지 않고 그림으로 옮깁니다. 이 사이트의
-         도식은 모두 같은 네 가지 표시로만 그립니다. 그래서 아홉 개가 제각각인 순서도가
-         아니라 한 세트로 읽힙니다.</p>
+      <p>설명이 여든 낱말을 넘어가면 문단 대신 그림으로 옮깁니다. 도식은 모두 같은 네
+         가지 표시로만 그려서, 열 개가 한 세트로 읽힙니다.</p>
     </div>
     <div class="reveal">{dg.vocabulary(L)}</div>
   </div>
@@ -660,8 +657,8 @@ PROGRAMMES = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">프로그램</p>
     <h1>실제로 하고 있는 일.</h1>
-    <p>두 축 아래 다섯 개의 프로그램, 그리고 하나의 신앙 기반 세부 갈래. 그중 주된 것은
-       없습니다. 다섯 모두를 같은 분량, 같은 항목, 같은 순서로 적었습니다.</p>
+    <p>두 갈래에 걸친 다섯 개의 프로그램, 그리고 신앙 공동체를 향한 세부 갈래 하나.
+       대표 프로그램은 따로 없습니다. 다섯을 같은 분량, 같은 항목, 같은 순서로 적었습니다.</p>
   </div>
 </section>
 
@@ -704,8 +701,8 @@ PROGRAMMES = f"""<section class="page-hero">
     <div class="reveal">
       <p class="eyebrow">배움</p>
       <h2 class="h-md">리코더 앙상블 과정</h2>
-      <p class="lead mt-2">완전 초보를 위한 한 학기, 마지막은 음악회로 끝납니다.</p>
-      <p class="mt-2">리코더는 손과 호흡에 부담이 적고, 만족스러운 첫 소리가 빨리 나오며, 값이 싸고, 함께 부는 악기입니다. 아무 악기도 다뤄 본 적 없는 분에게 맞는 이유입니다. 악보와 유인물은 저희가 인쇄해 드리며 참가자 부담은 없습니다.</p>
+      <p class="lead mt-2">악기를 처음 잡는 분들과 한 학기. 끝은 음악회입니다.</p>
+      <p class="mt-2">리코더는 손과 호흡에 부담이 적고, 첫 소리가 금방 나오고, 값이 싸고, 여럿이 함께 붑니다. 악기를 한 번도 잡아 본 적 없는 분에게 맞는 조건이 다 모여 있습니다. 악보와 유인물은 저희가 인쇄해 드리고, 참가자 부담은 없습니다.</p>
       <dl class="facts">
         <dt>기간</dt><dd>한 학기 · 주 1회 · 회당 60–90분</dd>
         <dt>대상</dt><dd>완전 초보 — 악보를 읽을 줄 몰라도 됩니다</dd>
@@ -729,10 +726,10 @@ PROGRAMMES = f"""<section class="page-hero">
     <div class="reveal">
       <p class="eyebrow">배움</p>
       <h2 class="h-md">클래식 음악과 친해지기</h2>
-      <p class="lead mt-2">사전 지식이 없는 분들을 위한 무료 강의·연주.</p>
-      <p class="mt-2">대략 월 1회, 음원과 실연을 함께 씁니다. 어디서부터 시작해야 할지 몰랐던 분을 위한 자리입니다. 자격 조건도, 미리 준비할 것도 없습니다.</p>
+      <p class="lead mt-2">아무것도 몰라도 되는 무료 강의·연주.</p>
+      <p class="mt-2">대략 월 1회, 녹음과 실황 연주를 함께 씁니다. 어디서부터 시작해야 할지 몰랐던 분을 위한 자리입니다. 자격 조건도, 미리 준비할 것도 없습니다.</p>
       <dl class="facts">
-        <dt>세 단계</dt><dd>가까이 가기 · 함께 겪기 · 내 취향 찾기</dd>
+        <dt>세 단계</dt><dd>친해지기 · 함께 경험하기 · 내 취향 찾기</dd>
         <dt>계절 특별편</dt><dd>유럽 여름 페스티벌, BBC 프롬스, 웩스퍼드 오페라 페스티벌, 성탄</dd>
         <dt>규모</dt><dd>보통 6–14명</dd>
         <dt>비용</dt><dd>무료</dd>
@@ -755,7 +752,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <p class="eyebrow">배움</p>
       <h2 class="h-md">함께하는 음악여행</h2>
       <p class="lead mt-2">혼자서는 가지 않을 공연에 소그룹으로 동행합니다.</p>
-      <p class="mt-2">가기 전에 준비하고, 인터미션에 설명하고, 끝나고 함께 이야기합니다. 걸림돌은 티켓값인 경우가 드뭅니다 — 가서 무슨 일이 벌어지는지 모르는 것, 그리고 같이 갈 사람이 없다는 것입니다.</p>
+      <p class="mt-2">가기 전에 준비하고, 쉬는 시간에 궁금한 것을 풀고, 다녀와서 이야기를 나눕니다. 발목을 잡는 건 대개 티켓값이 아닙니다. 가서 뭘 어떻게 해야 하는지 모른다는 것, 같이 갈 사람이 없다는 것입니다.</p>
       <dl class="facts">
         <dt>규모</dt><dd>5명 안팎</dd>
         <dt>다녀온 곳</dt><dd>국립교향악단 · 아일랜드 국립오페라 · RTÉ 콘서트 오케스트라 · NCH 인터내셔널 시리즈</dd>
@@ -779,8 +776,8 @@ PROGRAMMES = f"""<section class="page-hero">
     <div class="reveal">
       <p class="eyebrow">나눔</p>
       <h2 class="h-md">찾아가는 음악회</h2>
-      <p class="lead mt-2">이미 사람들이 있는 방으로 실연을 가져갑니다.</p>
-      <p class="mt-2">요양시설·본당·병원·쉼터·커뮤니티 공간 — 더블린 7구의 노숙인 쉼터부터 대구의 순교 성지까지. 악기와 보면대, 프로그램은 저희가 가져갑니다. 그 공간은 공간만 내어 주시면 됩니다.</p>
+      <p class="lead mt-2">사람들이 이미 있는 방으로 연주를 들고 갑니다.</p>
+      <p class="mt-2">요양시설, 본당, 병원, 쉼터, 커뮤니티 공간. 더블린 7구의 노숙인 쉼터부터 대구의 순교 성지까지 갔습니다. 악기와 보면대와 곡목은 저희가 챙깁니다. 그쪽은 방만 내어 주시면 됩니다.</p>
       <dl class="facts">
         <dt>장소</dt><dd>요양시설 · 본당 · 병원 · 쉼터 · 커뮤니티 공간</dd>
         <dt>넓혀 가는 지역</dt><dd>위클로 · 미스 · 라우스</dd>
@@ -805,7 +802,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <p class="eyebrow">나눔</p>
       <h2 class="h-md">Letters Ensemble</h2>
       <p class="lead mt-2">더블린에 사는 아마추어 연주자들이 매주 토요일 연습합니다.</p>
-      <p class="mt-2">어떤 방이든 음악을 반쯤 마중 나올 수 있도록 곡을 고릅니다 — 아일랜드 전통음악, 한국 전통음악, 전례 음악, 그리고 편하게 들리는 편곡. 새로운 아마추어 연주자를 환영합니다.</p>
+      <p class="mt-2">그 방에 앉은 분들이 반쯤은 아는 곡이 되도록 고릅니다. 아일랜드 전통음악, 한국 전통음악, 전례 음악, 그리고 편하게 들리는 편곡. 새로운 아마추어 연주자를 환영합니다.</p>
       <dl class="facts">
         <dt>창단</dt><dd>2024년 1월, 더블린에 사는 아마추어 연주자들이</dd>
         <dt>연습</dt><dd>매주 토요일</dd>
@@ -823,8 +820,8 @@ PROGRAMMES = f"""<section class="page-hero">
     <div class="section-head wide reveal">
       <p class="eyebrow">한 과정을 만드는 방식</p>
       <h2>만족스러운 첫 소리는 1주차에 납니다.</h2>
-      <p>악기가 무엇이든 배움 프로그램은 같은 모양으로 만듭니다 — 들을 만한 소리에 일찍
-         닿고, 그룹 전체가 함께 움직이고, 사람들 앞에서 끝냅니다.</p>
+      <p>악기가 무엇이든 배움 프로그램은 같은 모양입니다. 들을 만한 소리가 일찍 나오고,
+         그룹 전체가 같이 움직이고, 사람들 앞에서 끝납니다.</p>
     </div>
     <div class="reveal">{dg.term(L)}</div>
 
@@ -833,18 +830,18 @@ PROGRAMMES = f"""<section class="page-hero">
         <p class="eyebrow">이 모델이 나온 곳</p>
         <h3 class="h-md">파일럿.</h3>
         <p class="lead mt-2">은퇴한 프레젠테이션 수녀 일곱 분. 더블린 8구 Warrenmount에서
-           주 1회씩 열 시간. Clondalkin Lodge에서 아홉 곡의 부활 음악회. TU Dublin
-           음악원 학사 연구로 수행했습니다.</p>
-        <p class="mt-2">그에 앞서 석 달의 준비가 있었습니다 — 필요 조사, 허가, 신원 확인,
+           주 1회 한 시간씩 열 주. 그리고 Clondalkin Lodge에서 아홉 곡짜리 부활 음악회.
+           TU Dublin 음악원 학사 연구로 진행했습니다.</p>
+        <p class="mt-2">그 앞에 석 달의 준비가 있었습니다. 필요 조사, 허가, 신원 확인,
            개별 레슨, 파트 배정. 소프라노·알토·테너·베이스 리코더에 멜로디카와 실로폰,
-           작은 타악기를 더하고 악보를 확대했습니다. 일곱 분 모두 수료하고 사람들 앞에서
-           연주했습니다.</p>
+           작은 타악기를 더하고 악보는 크게 확대했습니다. 일곱 분 모두 수료했고, 사람들
+           앞에서 연주했습니다.</p>
       </div>
       <div class="reveal">
         <ul class="checklist">
           <li><strong>관계</strong> — 매주 모일 따뜻한 이유.</li>
           <li><strong>존엄과 성취</strong> — &ldquo;나도 음악을 만들 수 있다&rdquo;는 조용한 자부심.</li>
-          <li><strong>부드러운 자극</strong> — 기억, 협응, 호흡, 집중.</li>
+          <li><strong>가벼운 자극</strong> — 기억, 손발 맞추기, 호흡, 집중.</li>
           <li><strong>우정</strong> — 학기가 끝나도 남는 관계.</li>
         </ul>
         <div class="callout mt-3">
@@ -862,10 +859,10 @@ PROGRAMMES = f"""<section class="page-hero">
   <div class="wrap narrow reveal">
     <p class="eyebrow">세부 갈래</p>
     <h2 class="h-md">성지에 음악을</h2>
-    <p class="mt-2">신앙에 기반한 갈래입니다 — 본당, 성지, 수도원, 전례, 은퇴한 수도
-       공동체. 찾아가는 음악회 20회 가운데 약 열여섯 회가 여기에 해당합니다. 신앙 공동체
-       앞에서는 음악을 통한 평신도 사도직으로 설명합니다. 연주 시리즈가 아니라
-       현존의 봉사입니다.</p>
+    <p class="mt-2">신앙 공동체를 향한 갈래입니다. 본당, 성지, 수도원, 전례, 은퇴한 수도
+       공동체. 찾아가는 음악회 20회 가운데 약 열여섯 회가 여기에 해당합니다. 이 자리에서는
+       음악을 통한 평신도 사도직이라고 설명합니다. 그 자리에 함께 있어 주는 봉사라는
+       뜻입니다.</p>
   </div>
 </section>
 
@@ -946,7 +943,7 @@ GET_INVOLVED = f"""<section class="page-hero">
     <div class="section-head wide reveal">
       <p class="eyebrow">네 갈래는 어떻게 이어지는가</p>
       <h2>신청서 네 종류가 아니라, 문장 네 개입니다.</h2>
-      <p>어느 쪽이 맞는지 고르실 필요 없습니다. 지금 함께 연주하는 분들 대부분이 처음에는
+      <p>어느 쪽인지 고르지 않으셔도 됩니다. 지금 함께 연주하는 분들 대부분이 처음에는
          들으러 오셨고, 저희가 연주하는 방 중 둘은 음악회에 오셨던 분이 내어 주신 것입니다.</p>
     </div>
     <div class="reveal">{dg.pathways(L)}</div>
@@ -1006,9 +1003,9 @@ GET_INVOLVED = f"""<section class="page-hero">
       </div>
     </div>
     <div class="callout reveal mt-4">
-      <p><strong>비용에 관하여.</strong> 모든 프로그램에 무료·할인 자리를 둡니다. 공간이 자체
-         예산에서 진행비를 지불할 수 있으면 그 방에 있는 모든 분의 참여가 무료가 되고, 그 기여가
-         다른 곳의 문을 열어 둡니다. 그럴 수 없더라도 우선 이야기부터 나눕니다.</p>
+      <p><strong>비용 이야기.</strong> 모든 프로그램에 무료·할인 자리를 둡니다. 공간이 자체
+         예산으로 진행비를 내주시면 그 방에 계신 분들은 전원 무료가 되고, 그 돈이 다른 방의
+         무료 자리까지 지킵니다. 그럴 형편이 아니어도 우선 이야기부터 나눕니다.</p>
     </div>
   </div>
 </section>
@@ -1034,8 +1031,8 @@ NEWS = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">소식과 기록</p>
     <h1>다가오는 일, 그리고 지나온 일.</h1>
-    <p>하이라이트가 아니라 대장(帳)으로 남깁니다. 모든 세션과 연주를 그날 기록해 두기 때문에,
-       인용하는 숫자는 어느 것이든 한 줄로 되짚을 수 있습니다.</p>
+    <p>잘된 것만 골라 싣지 않고 있었던 일을 그대로 적습니다. 세션과 연주는 그날 기록해
+       두기 때문에, 여기 적힌 숫자는 어느 것이든 한 줄까지 되짚을 수 있습니다.</p>
   </div>
 </section>
 
@@ -1066,8 +1063,8 @@ NEWS = f"""<section class="page-hero">
         <div class="card-body">
           <span class="tag tag-live">첫 공적 지원</span>
           <h3 class="mt-1">South Dublin Live 2026</h3>
-          <p>SDCC 예술과가 이 프로젝트를 2026년 프로그램에 선정했습니다. 우리 아닌 누군가가
-             처음으로 비용을 댄 일입니다.</p>
+          <p>SDCC 예술과가 이 프로젝트를 2026년 프로그램에 선정했습니다. 저희 주머니
+             밖에서 처음으로 돈이 나온 일입니다.</p>
           <div class="meta">2026년 8월 · SDCC 예술과</div>
         </div>
       </article>
@@ -1103,7 +1100,8 @@ NEWS = f"""<section class="page-hero">
           <p>루르드의 영어 미사에서 클라리넷 독주. 이름이 붙기 2년 전의 찾아가는 음악회.</p></div>
         <div class="tl-item"><div class="tl-date">2024년 1월</div>
           <h3>시작</h3>
-          <p>더블린에서 CMFE가, 그리고 Letters Ensemble이 함께 만들어집니다. 첫 강의·연주는
+          <p>더블린에서 <span class="brandname">Classical Music for Everyone</span>이,
+             그리고 Letters Ensemble이 함께 만들어집니다. 첫 강의·연주는
              Dublin 18에서 여섯 명과 함께.</p></div>
         <div class="tl-item"><div class="tl-date">2024년</div>
           <h3>음악이 나갑니다</h3>
@@ -1111,11 +1109,11 @@ NEWS = f"""<section class="page-hero">
              강의 시리즈는 TU Dublin으로 옮겨 갑니다.</p></div>
         <div class="tl-item"><div class="tl-date">2024–2025년</div>
           <h3>함께 갑니다</h3>
-          <p>동행 관람이 독립된 갈래가 됩니다 — 국립교향악단, 아일랜드 국립 오페라, 2년 연속
-             BBC Proms.</p></div>
+          <p>동행 관람이 독립된 갈래가 됩니다. 국립교향악단, 아일랜드 국립 오페라,
+             2년 연속 BBC Proms.</p></div>
         <div class="tl-item"><div class="tl-date">2025년 10월</div>
           <h3>관객이 연주자가 됩니다</h3>
-          <p>은퇴 프레젠테이션 수녀 일곱 분과의 리코더 앙상블 준비 — 조사, 허가, 신원조회,
+          <p>은퇴 프레젠테이션 수녀 일곱 분과의 리코더 앙상블 준비. 조사, 허가, 신원조회,
              개별 레슨.</p></div>
         <div class="tl-item"><div class="tl-date">2025년 12월</div>
           <h3>국립 콘서트홀에서</h3>
@@ -1126,10 +1124,10 @@ NEWS = f"""<section class="page-hero">
              일곱 분 전원 수료.</p></div>
         <div class="tl-item"><div class="tl-date">2026년 8월</div>
           <h3>첫 공적 위촉</h3>
-          <p>South Dublin Live 2026을 위한 두 번의 연주 — Tallaght University Hospital과
+          <p>South Dublin Live 2026을 위한 두 번의 연주. Tallaght University Hospital과
              Rua Red.</p></div>
         <div class="tl-item"><div class="tl-date">2026년 9월</div>
-          <h3>모델이 일반에 열립니다</h3>
+          <h3>이 모델이 처음으로 일반에 열립니다</h3>
           <p>첫 커뮤니티 리코더 앙상블 과정이 Dublin 15 Mulhuddart Community Centre에서
              시작됩니다 — 12주, 무료.</p></div>
       </div>
@@ -1166,8 +1164,8 @@ SUPPORT = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">후원</p>
     <h1>문이 계속 열려 있도록.</h1>
-    <p>자원봉사로 운영합니다. 후원은 리코더와 악보, 공간 대여, 그리고 음악이 닿지 않았을 방까지
-       데려다주는 이동에 쓰입니다.</p>
+    <p>자원봉사로 운영합니다. 후원금은 리코더와 악보, 공간 대여, 그리고 그 방까지 가는
+       이동에 쓰입니다.</p>
   </div>
 </section>
 
@@ -1175,9 +1173,9 @@ SUPPORT = f"""<section class="page-hero">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">돈이 도는 방식</p>
-      <h2>값을 치른 한 건이 무료 자리를 무료로 지킵니다.</h2>
-      <p>우리는 순수 자선단체가 아니라 사회적기업입니다. 형식의 문제가 아닙니다 — 선의가
-         잠시 식어도 무료 자리가 살아남게 하는 구조입니다.</p>
+      <h2>돈을 받은 일 하나가 무료 자리 하나를 지킵니다.</h2>
+      <p>저희는 사회적기업입니다. 기부가 줄어드는 해에도 무료 자리가 남아 있으려면 이
+         구조여야 합니다.</p>
     </div>
     <div class="reveal">{dg.subsidy(L)}</div>
   </div>
@@ -1188,8 +1186,8 @@ SUPPORT = f"""<section class="page-hero">
     <div class="section-head reveal">
       <p class="eyebrow">지금까지</p>
       <h2>누가 이 일을 받쳐 왔는가.</h2>
-      <p>2026년 이전은 전부 자비와 자원봉사였습니다. 후원자의 첫 질문은 늘 &lsquo;앞서 누가
-         했는가&rsquo;이기에 기록을 공개합니다.</p>
+      <p>2026년 이전은 전부 자비와 자원봉사였습니다. 후원을 검토하시는 분들이 가장 먼저
+         묻는 것이 &lsquo;지금까지 누가 냈는가&rsquo;여서 그대로 적어 둡니다.</p>
     </div>
     <div class="table-scroll reveal">
       <table>
@@ -1215,8 +1213,8 @@ SUPPORT = f"""<section class="page-hero">
     </div>
     <div class="split split-center reveal mt-4">
       <div class="quote">
-        <p>&ldquo;그는 넉넉한 형편에서 이 일을 하는 것이 아닙니다. 개인적으로 제한된 재정 여건
-           안에서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
+        <p>&ldquo;넉넉한 형편에서 하는 일이 아닙니다. 본인의 재정 형편이 빠듯한
+           가운데서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
         <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
       </div>
       <div>
@@ -1242,14 +1240,14 @@ SUPPORT = f"""<section class="page-hero">
     </div>
     <div class="grid grid-4 stagger">
       <div class="card"><span class="kicker">01</span><h3>후원금</h3>
-        <p>일시든 정기든 악기·교재·공간·이동에 쓰입니다. 메일 주시면 입금 정보와 함께
-           무엇을 감당하게 되는지 알려 드립니다.</p></div>
+        <p>일시든 정기든 악기와 교재, 공간과 이동에 쓰입니다. 메일 주시면 입금 정보와,
+           그 금액이 무엇을 감당하는지 함께 알려 드립니다.</p></div>
       <div class="card"><span class="kicker">02</span><h3>프로그램 지원</h3>
         <p>재단·기금·지자체·기업 후원자를 위해 전체 제안서와 예산, 활동 기록을 요청 시
            보내 드립니다.</p></div>
       <div class="card"><span class="kicker">03</span><h3>문을 열어 주기</h3>
-        <p>요양시설·본당·커뮤니티 센터·병원으로의 소개는 후원금만큼, 때로는 그보다 더
-           큰 도움입니다.</p></div>
+        <p>요양시설이나 본당, 커뮤니티 센터나 병원에 저희를 소개해 주시는 일은
+           후원금만큼, 때로는 그보다 더 큰 도움이 됩니다.</p></div>
       <div class="card"><span class="kicker">04</span><h3>공간 내어 주기</h3>
         <p>한 학기 동안 매주 한 번 쓸 따뜻한 방 하나가 가장 값진 현물 후원입니다.
            그대로 무료 자리가 됩니다.</p></div>
@@ -1259,10 +1257,10 @@ SUPPORT = f"""<section class="page-hero">
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=CMFE%20파트너십·펀딩%20문의">제안서 요청</a>
     </div>
     <div class="callout reveal mt-4">
-      <p class="small"><strong>안내.</strong> CMFE는 자원봉사로 운영되는 사회적기업이며, 현재
+      <p class="small"><strong>안내.</strong> <span class="brandname">Classical Music for Everyone</span>은
+         자원봉사로 운영되는 사회적기업이며, 현재
          비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다. 아직 등록 자선단체가 아니므로
-         기부금 세제 혜택은 적용되지 않습니다. 짐작하시게 두기보다 분명히 밝혀 두는 편이
-         낫다고 생각합니다.</p>
+         기부금 세제 혜택은 적용되지 않습니다. 헷갈리실 수 있어 미리 밝혀 둡니다.</p>
     </div>
   </div>
 </section>"""
@@ -1274,7 +1272,7 @@ CONTACT = """<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">문의</p>
     <h1>메일 주세요.</h1>
-    <p>모든 문의는 창립자에게 바로 갑니다. 한 줄이면 충분합니다 — 무엇에 관한 것인지,
+    <p>모든 문의는 창립자에게 바로 갑니다. 한 줄이면 충분합니다. 무엇에 관한 것인지,
        어디에 계신지.</p>
   </div>
 </section>
@@ -1297,8 +1295,8 @@ CONTACT = """<section class="page-hero">
           <tr><td><strong>언어</strong></td><td>한국어 · English</td></tr>
         </tbody></table>
       </div>
-      <p class="small mt-3">공공배상책임보험을 보유하고 있으며, 활동이
-         요구하는 경우 Garda 신원조회를 완료합니다. 파트너 공간에는 요청 시 서류를 보내
+      <p class="small mt-3">공공배상책임보험을 들어 두었고, 신원조회가 필요한 활동은
+         시작 전에 Garda 신원조회를 마칩니다. 파트너 공간에는 요청하시면 서류를 보내
          드립니다.</p>
     </div>
     <div class="reveal">
