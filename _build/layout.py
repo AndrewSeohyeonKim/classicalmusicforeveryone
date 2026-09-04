@@ -15,9 +15,13 @@ EMAIL = "sby05034@gmail.com"
 PHONE_INTL = "+353 83 078 0635"
 PHONE_TEL = "+353830780635"
 
+# Headings are EB Garamond, not Fraunces (changed 2026-09-04 on Andrew's call).
+# Fraunces' wedge serifs and its wonky italic read as busy at display size; a
+# Garamond is calm at any size and is the same lineage as the wordmark's
+# Cormorant Garamond, so the headings now rhyme with the logo instead of
+# arguing with it.
 FONTS = ("https://fonts.googleapis.com/css2?"
-         "family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700"
-         ";1,9..144,400;1,9..144,600"
+         "family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600"
          "&family=Plus+Jakarta+Sans:wght@400;500;600;700"
          "&family=Noto+Sans+KR:wght@400;500;700&display=swap")
 
@@ -69,7 +73,7 @@ STR = {
         "lang_label": "Language",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "EN", "other_lang": "한국어",
-        "tagline": "Bringing classical music where it&rsquo;s needed.",
+        "tagline": "Bringing classical music where it&rsquo;s needed!",
         "footer_about": ("We teach people to play — not only to listen — and bring live "
                          "classical music to the places it rarely reaches."),
         "f_explore": "Explore",
@@ -87,7 +91,7 @@ STR = {
         "lang_label": "언어",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "한국어", "other_lang": "EN",
-        "tagline": "클래식 음악을, 그것이 필요한 곳으로.",
+        "tagline": "클래식 음악을, 그것이 필요한 곳으로!",
         "footer_about": ("듣는 데서 그치지 않고 직접 연주하도록 가르치고, "
                          "클래식 음악이 잘 닿지 않는 곳으로 찾아갑니다."),
         "f_explore": "둘러보기",
@@ -211,12 +215,11 @@ def header(lang, slug):
             + (' aria-current="page"' if h == slug else "")
             + f'><b>{t}</b><span>{d}</span></a>'
             for h, t, d in sub[lang])
+        # no chevron: it sat below the word and broke the nav baseline. The
+        # panel opens on hover and on keyboard focus, which is the affordance.
         rows.append(
             f'      <div class="nav-item has-sub">\n'
-            f'        <a class="nav-link" href="{p}{href}"{current}>{label}'
-            f'<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true">'
-            f'<path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" '
-            f'stroke-linecap="round"/></svg></a>\n'
+            f'        <a class="nav-link" href="{p}{href}"{current}>{label}</a>\n'
             f'        <div class="subnav">\n{items}\n        </div>\n'
             f'      </div>')
     links = "\n".join(rows)
@@ -233,11 +236,11 @@ def header(lang, slug):
             aria-label="{s['menu']}" onclick="{MENU_JS}">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="{s['menu']}">
 {links}
+      <a class="btn btn-accent btn-nav" href="{p}contact.html">{s['contact']}</a>
       <div class="lang-switch" role="group" aria-label="{s['lang_label']}">
         <span aria-current="true">{s['this_lang']}</span>
         <a href="{_switch(lang, slug)}" hreflang="{other}" lang="{other}">{s['other_lang']}</a>
       </div>
-      <a class="btn btn-accent btn-nav" href="{p}contact.html">{s['contact']}</a>
     </nav>
   </div>
 </header>"""

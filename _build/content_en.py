@@ -201,7 +201,7 @@ INDEX = f"""<section class="hero">
          in for people who are older, unwell, far from a city, short of money, or simply never
          told that any of it was theirs. The name is the brief, and the mark says which word we
          are judged on.</p>
-      <p class="footer-line mark-line">Bringing classical music where it&rsquo;s needed.</p>
+      <p class="footer-line mark-line">Bringing classical music where it&rsquo;s needed!</p>
     </div>
     <figure class="reveal mark-plate">
       <img src="assets/logo-horizontal.svg" width="341" height="131"
@@ -245,26 +245,29 @@ INDEX = f"""<section class="hero">
 <section class="band-sunken">
   <div class="wrap">
     <div class="section-head wide reveal">
-      <p class="eyebrow">Grounds for trust</p>
-      <h2>Someone other than us paid for it.</h2>
+      <p class="eyebrow">What support has already done</p>
+      <h2>Support bought a vehicle. The vehicle bought distance.</h2>
       <p>We are volunteer-led and formalising as a not-for-profit company limited by guarantee.
-         Until that is finished, the record is what we offer in place of a charity number.</p>
+         Until that is finished there is no charity number to show you, so here is what has
+         actually happened instead.</p>
     </div>
     <div class="evidence stagger">
       <div><dl>
-        <dt>Publicly funded</dt>
-        <dd>South Dublin County Council&rsquo;s Arts Office selected the project for
-            <strong>South Dublin Live 2026</strong> — our first publicly funded commission.</dd>
+        <dt>A vehicle, given by donors</dt>
+        <dd>Donations from individuals put <strong>a vehicle on the road</strong>. Players,
+            instruments and stands now travel together, to rooms no bus timetable reaches.</dd>
       </dl></div>
       <div><dl>
-        <dt>Letters of support</dt>
-        <dd>Held from <strong>Rua Red</strong>, <strong>The Civic</strong> and
-            <strong>Tallaght University Hospital</strong>.</dd>
-      </dl></div>
-      <div><dl>
-        <dt>Where we have played</dt>
+        <dt>Where that has taken us</dt>
         <dd>Over <strong>20 venues and institutions</strong> across
-            <strong>four countries</strong> — Ireland, France, the United Kingdom and Korea.</dd>
+            <strong>four countries</strong> — care homes, parishes, hospitals, hostels, day
+            services and community centres in Ireland, France, the UK and Korea.</dd>
+      </dl></div>
+      <div><dl>
+        <dt>A publicly funded commission</dt>
+        <dd>South Dublin County Council&rsquo;s Arts Office selected the project for
+            <strong>South Dublin Live 2026</strong>. Rua Red, The Civic and Tallaght University
+            Hospital wrote letters of support for that application.</dd>
       </dl></div>
     </div>
     <div class="quote reveal mt-4">
@@ -272,7 +275,9 @@ INDEX = f"""<section class="hero">
          those who may otherwise feel isolated.&rdquo;</p>
       <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
     </div>
-    <div class="btn-row reveal"><a class="btn btn-quiet" href="support.html">Funding to date <span class="arrow">→</span></a></div>
+    <p class="lead center mt-4 reveal">Every further contribution does the same arithmetic:
+       it turns a room we cannot get to into a room we can.</p>
+    <div class="btn-row center-row reveal"><a class="btn btn-quiet" href="support.html">What support pays for <span class="arrow">→</span></a></div>
   </div>
 </section>
 
@@ -631,14 +636,15 @@ ABOUT = f"""<section class="page-hero">
 
     <div class="section-head reveal mt-4">
       <h3 class="h-sub">Type</h3>
-      <p>Three faces and no fourth. Fraunces is an optical-size serif, so its tracking is set
-         separately at every step of the scale; Korean gets more leading and less negative
-         tracking, because Noto Sans KR needs both.</p>
+      <p>Three faces and no fourth. EB Garamond is an old-style serif in the same lineage as
+         the Cormorant Garamond of the wordmark, so the headings rhyme with the logo rather
+         than argue with it; Korean gets more leading and less negative tracking, because
+         Noto Sans KR needs both.</p>
     </div>
     <div class="specimen reveal">
       <div>
-        <dfn>Fraunces — headings</dfn>
-        <div class="sp-display">Bringing classical music where it&rsquo;s needed.</div>
+        <dfn>EB Garamond — headings</dfn>
+        <div class="sp-display">Bringing classical music where it&rsquo;s needed!</div>
         <p>SemiBold. Titles, headlines and display sizes.</p>
       </div>
       <div>
@@ -648,7 +654,7 @@ ABOUT = f"""<section class="page-hero">
       </div>
       <div>
         <dfn>Noto Sans KR — Korean</dfn>
-        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로.</div>
+        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로!</div>
         <p>Regular, Medium, Bold. Headings and body alike on the Korean pages.</p>
       </div>
       <div>
@@ -1252,13 +1258,16 @@ SUPPORT = f"""<section class="page-hero">
         <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
       </div>
       <div>
-        <h3 class="h-sub">Letters of support</h3>
+        <h3 class="h-sub">Letters written for the South Dublin Live application</h3>
         <ul class="plainlist mt-2">
           <li><strong>Rua Red</strong> — South Dublin&rsquo;s contemporary arts centre</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>
           <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
           <li><strong>SDCC Arts Office</strong> — selection for South Dublin Live 2026</li>
         </ul>
+        <p class="tiny mt-2">These letters were written in support of that one application. They
+           are not a general endorsement of everything we run, and we do not present them as
+           one.</p>
       </div>
     </div>
   </div>

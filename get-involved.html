@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
 {
@@ -60,7 +60,7 @@
     <nav class="nav" id="nav" data-open="false" aria-label="Menu">
       <a class="nav-link" href="about.html">About</a>
       <div class="nav-item has-sub">
-        <a class="nav-link" href="programmes.html">Programmes<svg class="nav-chev" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        <a class="nav-link" href="programmes.html">Programmes</a>
         <div class="subnav">
           <a href="programmes/recorder-ensemble.html"><b>Recorder Ensemble course</b><span>A term for complete beginners</span></a>
           <a href="programmes/getting-to-know.html"><b>Getting to Know Classical Music</b><span>Free lecture-recitals</span></a>
@@ -72,11 +72,11 @@
       <a class="nav-link" href="get-involved.html" aria-current="page">Get Involved</a>
       <a class="nav-link" href="news.html">News</a>
       <a class="nav-link" href="support.html">Support</a>
+      <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
       <div class="lang-switch" role="group" aria-label="Language">
         <span aria-current="true">EN</span>
         <a href="ko/get-involved.html" hreflang="ko" lang="ko">한국어</a>
       </div>
-      <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -157,33 +157,39 @@
     <div class="reveal"><figure class="diagram">
   <p class="diagram-title">Four ways in, one door</p>
   <div class="diagram-canvas">
-  <svg viewBox="0 0 1080 460" role="img" aria-label="Four note-heads threaded on one dashed vertical line — learn to play, come and listen, play with us, host or partner — labelled 'people move between these'. All four run right to a single gold rule, and one arrow leaves it for a note-head marked 'one email, one line'.">
-    <line class="dg-stroke" x1="60" y1="52" x2="60" y2="414" stroke-dasharray="3 5"/>
-    <ellipse class="dg-note" cx="60" cy="82" rx="11.0" ry="8.0" transform="rotate(-20 60 82)"/>
-    <text class="dg-h" x="90" y="88" text-anchor="start">Learn to play</text>
-    <text class="dg-sub" x="90" y="113" text-anchor="start">you have never played anything</text>
-    <line class="dg-stroke" x1="60" y1="134" x2="520" y2="134"/>
-    <ellipse class="dg-note" cx="60" cy="170" rx="11.0" ry="8.0" transform="rotate(-20 60 170)"/>
-    <text class="dg-h" x="90" y="176" text-anchor="start">Come and listen</text>
-    <text class="dg-sub" x="90" y="201" text-anchor="start">you would rather start by listening</text>
-    <line class="dg-stroke" x1="60" y1="222" x2="520" y2="222"/>
-    <ellipse class="dg-note" cx="60" cy="258" rx="11.0" ry="8.0" transform="rotate(-20 60 258)"/>
-    <text class="dg-h" x="90" y="264" text-anchor="start">Play with us</text>
-    <text class="dg-sub" x="90" y="289" text-anchor="start">you already play something</text>
-    <line class="dg-stroke" x1="60" y1="310" x2="520" y2="310"/>
-    <ellipse class="dg-note" cx="60" cy="346" rx="11.0" ry="8.0" transform="rotate(-20 60 346)"/>
-    <text class="dg-h" x="90" y="352" text-anchor="start">Host or partner</text>
-    <text class="dg-sub" x="90" y="377" text-anchor="start">you have a room, or you know one</text>
-    <line class="dg-stroke" x1="60" y1="398" x2="520" y2="398"/>
-    <line class="dg-stroke-accent" x1="520" y1="134" x2="520" y2="398" stroke-width="2.5"/>
-    <path class="dg-stroke-accent dg-draw" d="M520 266 H726" pathLength="1" stroke-width="2.5" fill="none"/>
-    <path class="dg-tri dg-late" d="M736 266 l-10 -6 v12 z" transform="rotate(0 736 266)"/>
-    <text class="dg-edge dg-late" x="628" y="248" text-anchor="middle">whichever sounds like you</text>
-    <ellipse class="dg-note" cx="760" cy="266" rx="11.0" ry="8.0" transform="rotate(-20 760 266)"/>
-    <text class="dg-h" x="788" y="262" text-anchor="start">one email,</text>
-    <text class="dg-h" x="788" y="288" text-anchor="start">one line</text>
-    <text class="dg-sub" x="788" y="312">we answer with the practical details</text>
-    <text class="dg-sub" x="46" y="442">people move between these</text>
+  <svg viewBox="0 0 1080 470" role="img" aria-label="Four panels of equal size — learn to play, come and listen, play with us, host or partner — linked by dashed lines labelled 'people move between these'. All four run right to a single gold rule, and one arrow leaves it for a panel marked 'one email, one line'.">
+    <rect class="dg-fill-soft" x="24" y="44" width="452" height="76" rx="12"/>
+    <ellipse class="dg-note" cx="58" cy="78.0" rx="11.0" ry="8.0" transform="rotate(-20 58 78.0)"/>
+    <text class="dg-h" x="88" y="82.0" text-anchor="start">Learn to play</text>
+    <text class="dg-sub" x="88" y="107.0" text-anchor="start">you have never played anything</text>
+    <line class="dg-stroke" x1="476" y1="82.0" x2="560" y2="82.0"/>
+    <rect class="dg-fill-soft" x="24" y="144" width="452" height="76" rx="12"/>
+    <ellipse class="dg-note" cx="58" cy="178.0" rx="11.0" ry="8.0" transform="rotate(-20 58 178.0)"/>
+    <text class="dg-h" x="88" y="182.0" text-anchor="start">Come and listen</text>
+    <text class="dg-sub" x="88" y="207.0" text-anchor="start">you would rather start by listening</text>
+    <line class="dg-stroke" x1="476" y1="182.0" x2="560" y2="182.0"/>
+    <rect class="dg-fill-soft" x="24" y="244" width="452" height="76" rx="12"/>
+    <ellipse class="dg-note" cx="58" cy="278.0" rx="11.0" ry="8.0" transform="rotate(-20 58 278.0)"/>
+    <text class="dg-h" x="88" y="282.0" text-anchor="start">Play with us</text>
+    <text class="dg-sub" x="88" y="307.0" text-anchor="start">you already play something</text>
+    <line class="dg-stroke" x1="476" y1="282.0" x2="560" y2="282.0"/>
+    <rect class="dg-fill-soft" x="24" y="344" width="452" height="76" rx="12"/>
+    <ellipse class="dg-note" cx="58" cy="378.0" rx="11.0" ry="8.0" transform="rotate(-20 58 378.0)"/>
+    <text class="dg-h" x="88" y="382.0" text-anchor="start">Host or partner</text>
+    <text class="dg-sub" x="88" y="407.0" text-anchor="start">you have a room, or you know one</text>
+    <line class="dg-stroke" x1="476" y1="382.0" x2="560" y2="382.0"/>
+    <line class="dg-stroke" x1="58" y1="120" x2="58" y2="144" stroke-dasharray="3 4"/>
+    <line class="dg-stroke" x1="58" y1="220" x2="58" y2="244" stroke-dasharray="3 4"/>
+    <line class="dg-stroke" x1="58" y1="320" x2="58" y2="344" stroke-dasharray="3 4"/>
+    <text class="dg-sub" x="24" y="454">people move between these</text>
+    <line class="dg-stroke-accent" x1="560" y1="82.0" x2="560" y2="382.0" stroke-width="2.5"/>
+    <path class="dg-stroke-accent dg-draw" d="M560 232.0 H726" pathLength="1" stroke-width="2.5" fill="none"/>
+    <path class="dg-tri dg-late" d="M738 232.0 l-10 -6 v12 z" transform="rotate(0 738 232.0)"/>
+    <text class="dg-edge dg-late" x="580" y="154.0">whichever sounds like you</text>
+    <rect class="dg-fill-accent dg-box" x="760" y="170.0" width="296" height="124" rx="12" stroke-width="1.6"/>
+    <text class="dg-h" x="792" y="214.0" text-anchor="start">one email,</text>
+    <text class="dg-h" x="792" y="241.0" text-anchor="start">one line</text>
+    <text class="dg-sub" x="792" y="270.0">we answer with the practical details</text>
   </svg>
   </div>
   <figcaption>The four routes are not four application processes. They are four sentences you might write in the same email, and people move between them all the time — most of the players started as listeners, and two of the rooms we play in were offered by someone who came to a concert.</figcaption>
@@ -273,7 +279,7 @@
       <div>
         <img src="assets/logo-reversed.svg" alt="Classical Music for Everyone"
              width="109" height="42" loading="lazy" decoding="async">
-        <p class="footer-line">Bringing classical music where it&rsquo;s needed.</p>
+        <p class="footer-line">Bringing classical music where it&rsquo;s needed!</p>
         <p class="footer-tagline">We teach people to play — not only to listen — and bring live classical music to the places it rarely reaches.</p>
       </div>
       <div>

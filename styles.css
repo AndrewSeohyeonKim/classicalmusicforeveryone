@@ -71,7 +71,7 @@
   --ring:var(--gold-bronze);
 
   /* type */
-  --font-display:'Fraunces',Georgia,'Times New Roman',serif;
+  --font-display:'EB Garamond','Iowan Old Style',Georgia,'Times New Roman',serif;
   --font-body:'Plus Jakarta Sans','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --font-kr:'Noto Sans KR','Plus Jakarta Sans',-apple-system,sans-serif;
 
@@ -135,20 +135,21 @@ strong{color:var(--fg);font-weight:700}
 
 h1,h2,h3,h4{
   font-family:var(--font-display);color:var(--fg);font-weight:600;
-  margin:0;text-wrap:balance;font-optical-sizing:auto;
+  margin:0;text-wrap:balance;
 }
-/* Fraunces gains contrast as it grows, so the tracking has to come back in
-   at the large end and open up at the small end. One rule per step. */
-h1{font-size:var(--t-h1);line-height:1.05;letter-spacing:-.028em}
-h2{font-size:var(--t-h2);line-height:1.09;letter-spacing:-.022em}
-h3{font-size:var(--t-h3);line-height:1.24;letter-spacing:-.012em}
-h4{font-size:18px;line-height:1.3;letter-spacing:-.01em}
+/* EB Garamond is an old-style face: it is lighter and wider than Fraunces was,
+   so headings carry less negative tracking and a heavier weight than before.
+   One rule per step. */
+h1{font-size:var(--t-h1);line-height:1.06;letter-spacing:-.012em}
+h2{font-size:var(--t-h2);line-height:1.12;letter-spacing:-.010em}
+h3{font-size:var(--t-h3);line-height:1.26;letter-spacing:-.006em}
+h4{font-size:18px;line-height:1.32;letter-spacing:-.004em}
 
 /* display sizes as classes — so a content file never sets font-size inline */
-.h-display{font-size:var(--t-display);line-height:1.0;letter-spacing:-.034em}
-.h-xl{font-size:var(--t-h1);line-height:1.05;letter-spacing:-.028em}
-.h-lg{font-size:var(--t-h2);line-height:1.09;letter-spacing:-.022em}
-.h-md{font-size:var(--t-h2-sm);line-height:1.14;letter-spacing:-.018em}
+.h-display{font-size:var(--t-display);line-height:1.02;letter-spacing:-.016em}
+.h-xl{font-size:var(--t-h1);line-height:1.06;letter-spacing:-.012em}
+.h-lg{font-size:var(--t-h2);line-height:1.12;letter-spacing:-.010em}
+.h-md{font-size:var(--t-h2-sm);line-height:1.16;letter-spacing:-.008em}
 /* a heading that reads as a small label — used where a section needs a level
    in the outline but the design calls for an eyebrow, not a title */
 .h-sub{
@@ -161,8 +162,8 @@ html[lang^="ko"] .h-sub{font-family:var(--font-kr);letter-spacing:.08em}
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
 }
-/* Korean has no italic and no optical size; it needs more leading and less
-   negative tracking than Fraunces to stay readable at display sizes. */
+/* Korean has no italic; it needs more leading and less negative tracking than
+   the Latin display face to stay readable at display sizes. */
 html[lang^="ko"] :is(h1,h2,h3,h4,.h-display,.h-xl,.h-lg,.h-md){
   font-family:var(--font-kr);font-weight:700;letter-spacing:-.032em;
 }
@@ -375,25 +376,30 @@ html[lang^="ko"] .subnav b{font-family:var(--font-kr)}
 .subnav span{display:block;margin-top:2px;font-size:12.5px;color:var(--fg-muted)}
 .subnav a[aria-current="page"] b{color:var(--accent-ink)}
 
-/* language switcher — segmented control, deliberately unlike the nav links */
+/* Language switcher. It used to be a filled pill sitting mid-nav, which gave
+   it the weight of a primary action — it competed with Contact and read as
+   part of the main menu. It now sits past the Contact button, at the edge, as
+   two small quiet words with a hairline between them: still a pair of states
+   (current is a <span>, the other an <a>), just no longer shouting. */
 .lang-switch{
-  display:inline-flex;align-items:center;gap:2px;margin-inline-start:10px;
-  padding:3px;border-radius:999px;
-  background:var(--surface-sunken);border:1px solid var(--line);
+  display:inline-flex;align-items:center;margin-inline-start:14px;
+  padding-inline-start:14px;border-inline-start:1px solid var(--line);
 }
 .lang-switch a,.lang-switch span{
-  display:inline-flex;align-items:center;justify-content:center;
-  min-width:42px;height:28px;padding-inline:11px;border-radius:999px;
-  font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.06em;
+  display:inline-flex;align-items:center;
+  padding-inline:5px;
+  font-family:var(--font-body);font-size:11.5px;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;line-height:1;
-  transition:background var(--dur-3) var(--ease),color var(--dur-3) var(--ease);
+  transition:color var(--dur-3) var(--ease);
 }
-html[lang^="ko"] .lang-switch a,html[lang^="ko"] .lang-switch span{font-family:var(--font-kr)}
-.lang-switch [aria-current="true"]{
-  background:var(--surface-inverse);color:var(--fg-inverse);box-shadow:var(--shadow-1);
+html[lang^="ko"] .lang-switch a,html[lang^="ko"] .lang-switch span{
+  font-family:var(--font-kr);letter-spacing:.02em;
 }
-.lang-switch a:not([aria-current]){color:var(--fg-body)}
-.lang-switch a:not([aria-current]):hover{color:var(--fg);background:color-mix(in srgb,var(--white) 70%,transparent)}
+.lang-switch [aria-current="true"]{color:var(--fg);text-decoration:underline;
+  text-underline-offset:4px;text-decoration-thickness:1.5px;
+  text-decoration-color:var(--accent)}
+.lang-switch a:not([aria-current]){color:var(--fg-muted)}
+.lang-switch a:not([aria-current]):hover{color:var(--accent-ink)}
 
 .menu-toggle{
   display:none;width:44px;height:40px;flex:0 0 auto;
@@ -1055,7 +1061,8 @@ html[lang^="ko"] .site-footer h3{font-family:var(--font-kr);letter-spacing:.08em
   .subnav a{padding:9px 0}
   .subnav span{display:none}
   .has-sub::after{content:none}
-  .lang-switch{margin:16px 0 0;align-self:flex-start}
+  .lang-switch{margin:18px 0 0;padding-inline-start:0;border-inline-start:0;align-self:flex-start}
+  .lang-switch a,.lang-switch span{padding-inline:0;margin-inline-end:16px}
   .btn-nav{margin-top:12px;justify-content:center}
 }
 @media (max-width:560px){
@@ -1216,22 +1223,18 @@ html[lang^="ko"] .specimen dfn{font-family:var(--font-kr);letter-spacing:.05em}
 /* the master line — the whole organisation in one sentence (06 §5). It sits
    above the descriptive tagline in the footer of every page. */
 .footer-line{
-  font-family:var(--font-display);font-size:20px;line-height:1.32;font-weight:600;
-  color:var(--fg-inverse);letter-spacing:-.016em;margin:20px 0 10px;max-width:14em;
+  font-family:var(--font-display);font-size:21px;line-height:1.34;font-weight:600;
+  color:var(--fg-inverse);letter-spacing:-.004em;margin:20px 0 10px;max-width:16em;
 }
 html[lang^="ko"] .footer-line{font-family:var(--font-kr);font-size:18px;line-height:1.5;letter-spacing:-.03em}
 
-/* The five programme cards are links now, so they need to say so. The arrow
-   is positioned rather than made a flex item, because .meta::before is already
-   the gold rule and turning .meta into a flex container would break it. */
-.prog-body{position:relative}
-.prog .meta{padding-inline-end:26px}
-.prog-body::after{
-  content:"\2192";position:absolute;inset-inline-end:0;inset-block-end:-2px;
-  font-size:15px;line-height:1;color:var(--accent-ink);
-  transition:translate var(--dur-4) var(--ease-enter);
-}
-.prog:hover .prog-body::after{translate:4px 0}
+/* The five programme cards are links. They used to say so with an arrow
+   pinned to the bottom-right corner, which floated free of the meta line and
+   read as a stray glyph. The card now signals itself the way the rest of the
+   site does — the title takes the accent colour on hover — and the whole card
+   lifts, which is affordance enough. */
+.prog:hover h3{color:var(--accent-ink)}
+.prog h3{transition:color var(--dur-3) var(--ease)}
 .prog:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
 
 /* ==========================================================================
@@ -1260,7 +1263,11 @@ html[lang^="ko"] .band-mark h2 em{font-style:normal;color:var(--accent-ink)}
 .mark-plate img{width:min(320px,90%);height:auto}
 .mark-plate figcaption{
   margin-top:26px;font-size:13px;color:var(--fg-muted);text-align:center;line-height:1.55;
+  /* the adoption date and the link to the standard are two separate things;
+     stacking them on their own lines stops the link from wrapping mid-phrase */
+  display:flex;flex-direction:column;align-items:center;gap:6px;
 }
+.mark-plate figcaption .link{white-space:nowrap}
 /* the clear space the brand standard asks for is half the clef's width; the
    plate's padding is what enforces it here, so it must not be trimmed away */
 @media (max-width:880px){.mark-plate{padding:34px}}

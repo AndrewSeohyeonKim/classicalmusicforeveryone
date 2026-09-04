@@ -92,91 +92,105 @@ def figure(view, aria, body, caption, title=None):
 MAP = {
     "en": dict(
         title="The whole of what we run",
-        caption=("Five programmes, one stave. None of them is the main one: the two pillars "
-                 "are a single circuit, and taking any note off the stave leaves the other "
-                 "side unfed. Without playing for people we never meet the person who asks, "
-                 "and without a class there is nowhere to send them."),
-        aria=("Five programmes shown as five note-heads of equal size on one stave. Three sit "
-              "under the Learning pillar, two under Sharing. An arc from Learning to Sharing is "
-              "labelled 'a player, ready for the room'; an arc back from Sharing to Learning is "
-              "labelled 'could I do that?'."),
+        caption=("Five programmes, two halves, one circuit. None of them is the main one, and "
+                 "removing any single item leaves the other side unfed. Without playing for "
+                 "people we never meet the person who asks, and without a class there is "
+                 "nowhere to send them."),
+        aria=("Two panels of equal width. The left, Learning, lists three programmes; the "
+              "right, Sharing, lists two. Every item carries a note-head of the same size. An "
+              "arc from Learning to Sharing is labelled 'a player, ready for the room'; a "
+              "mirrored arc back is labelled 'could I do that?'."),
         pillar_a="Learning", pillar_a_sub="we teach people to play",
         pillar_b="Sharing", pillar_b_sub="we bring the music to the room",
         top="a player, ready for the room",
         bottom="“could I do that?”",
-        progs=[(["Recorder", "Ensemble course"], "a term, weekly"),
-               (["Getting to Know", "Classical Music"], "roughly monthly"),
-               (["Concert Guide", "&amp; Companion"], "small groups"),
-               (["Outreach", "Concerts"], "care homes · parishes"),
-               (["Letters", "Ensemble"], "weekly rehearsals")],
+        progs=[("Recorder Ensemble course", "a term, weekly"),
+               ("Getting to Know Classical Music", "roughly monthly"),
+               ("Concert Guide &amp; Companion", "small groups"),
+               ("Outreach Concerts", "care homes · parishes"),
+               ("Letters Ensemble", "weekly rehearsals")],
     ),
     "ko": dict(
         title="우리가 하는 일 전체",
-        caption=("다섯 개의 프로그램, 하나의 오선. 그 가운데 주된 것은 없습니다. 두 축은 하나의 "
-                 "회로이고, 오선에서 음표 하나를 떼면 반대쪽이 먹이를 잃습니다 — 찾아가 연주하지 "
-                 "않으면 묻는 사람을 만나지 못하고, 수업이 없으면 그 사람을 보낼 곳이 없습니다."),
-        aria=("다섯 프로그램을 같은 크기의 음표 다섯 개로 하나의 오선 위에 그린 도식. 셋은 배움 축, "
-              "둘은 나눔 축 아래에 있다. 배움에서 나눔으로 가는 곡선은 ‘그 방에 설 준비가 된 연주자’, "
-              "나눔에서 배움으로 돌아오는 곡선은 ‘나도 해 볼 수 있을까?’로 표시된다."),
+        caption=("다섯 개의 프로그램, 두 갈래, 한 바퀴. 그중에 대표는 없습니다. 어느 하나를 "
+                 "떼어 내면 반대쪽이 굶습니다 — 찾아가 연주하지 않으면 묻는 사람을 만나지 "
+                 "못하고, 수업이 없으면 그 사람을 보낼 곳이 없습니다."),
+        aria=("같은 너비의 패널 둘. 왼쪽 ‘배움’에는 세 프로그램, 오른쪽 ‘나눔’에는 두 "
+              "프로그램이 들어 있고, 모든 항목에 같은 크기의 음표가 붙어 있다. 배움에서 나눔으로 "
+              "가는 곡선은 ‘그 방에 설 준비가 된 연주자’, 대칭으로 돌아오는 곡선은 ‘나도 해 볼 수 "
+              "있을까?’로 표시된다."),
         pillar_a="배움", pillar_a_sub="직접 연주하도록 가르칩니다",
         pillar_b="나눔", pillar_b_sub="그 방으로 음악을 가져갑니다",
         top="그 방에 설 준비가 된 연주자",
         bottom="“나도 해 볼 수 있을까?”",
-        progs=[(["리코더", "앙상블 과정"], "한 학기 · 주 1회"),
-               (["클래식 음악과", "친해지기"], "대략 월 1회"),
-               (["함께하는", "음악여행"], "소그룹 동행"),
-               (["찾아가는", "음악회"], "요양시설 · 본당"),
-               (["Letters", "Ensemble"], "주 1회 정기연습")],
+        progs=[("리코더 앙상블 과정", "한 학기 · 주 1회"),
+               ("클래식 음악과 친해지기", "대략 월 1회"),
+               ("함께하는 음악여행", "소그룹 동행"),
+               ("찾아가는 음악회", "요양시설 · 본당"),
+               ("Letters Ensemble", "주 1회 정기연습")],
     ),
 }
 
-# Geometry. Two named zones rather than two brackets: the pillars are the
-# point of the figure, so they get panels and headings of their own instead of
-# a hairline that the circuit arrow then has to dodge. Every note sits on the
-# SAME stave line — five equal heads at one pitch is the plainest way to draw
-# "none of these is the main one", and it also stops the figure reading as a
-# scattered bar chart.
-MAP_ZONE_A = (24, 510)          # Learning:  x, width   (three programmes)
-MAP_ZONE_B = (684, 372)         # Sharing:   x, width   (two programmes)
-MAP_X = [104, 274, 444, 778, 962]
-MAP_NOTE_Y = 232
-MAP_PANEL = (110, 262)          # y, height
+# Geometry.
+#
+# The stave is gone from this one. It was doing two jobs badly: five heads at
+# five pitches read as a misalignment before it read as music, and the ruled
+# lines ran straight through the panel headings. What the figure has to say is
+# simpler than that — two named halves, five equal items, and a circuit — so it
+# says it with two panels of the same width and two arcs that are exact 180°
+# rotations of each other about the centre of the figure. Mirrored geometry is
+# why they now enter together instead of one arriving crooked after the other.
+MAP_PANEL_Y, MAP_PANEL_H = 128, 264
+MAP_ZONES = ((24, 486), (570, 486))          # x, width — deliberately equal
+MAP_ROW_STEP = 52
+MAP_MID = MAP_PANEL_Y + MAP_PANEL_H / 2      # 260 — both arcs mirror about this
+MAP_ARC = 164                                # how far above / below the middle
+
+
+def _map_rows(zx, zw, rows, open_):
+    """One programme per row: an equal note-head, a name, and a right-set meta."""
+    out, n = [], len(rows)
+    top = 308 - (n - 1) * MAP_ROW_STEP / 2
+    for i, (name, meta) in enumerate(rows):
+        y = top + i * MAP_ROW_STEP
+        out.append(note(zx + 40, y - 5, open_=open_))
+        out.append(f'    <text class="dg-label" x="{zx + 70}" y="{y}">{name}</text>')
+        out.append(f'    <text class="dg-sub" x="{zx + zw - 28}" y="{y}" '
+                   f'text-anchor="end">{meta}</text>')
+    return out
 
 
 def programme_map(lang):
     t = MAP[lang]
-    py, ph = MAP_PANEL
+    py, ph = MAP_PANEL_Y, MAP_PANEL_H
     p = []
 
-    # the two zones
-    for (zx, zw), head, sub in ((MAP_ZONE_A, t["pillar_a"], t["pillar_a_sub"]),
-                                (MAP_ZONE_B, t["pillar_b"], t["pillar_b_sub"])):
+    for (zx, zw), head, sub in zip(MAP_ZONES,
+                                   (t["pillar_a"], t["pillar_b"]),
+                                   (t["pillar_a_sub"], t["pillar_b_sub"])):
         p.append(f'    <rect class="dg-fill-soft" x="{zx}" y="{py}" width="{zw}" '
-                 f'height="{ph}" rx="12"/>')
-        p.append(f'    <text class="dg-h" x="{zx + 24}" y="{py + 38}">{head}</text>')
-        p.append(f'    <text class="dg-sub" x="{zx + 24}" y="{py + 62}">{sub}</text>')
+                 f'height="{ph}" rx="14"/>')
+        p.append(f'    <text class="dg-h" x="{zx + 28}" y="{py + 44}">{head}</text>')
+        p.append(f'    <text class="dg-sub" x="{zx + 28}" y="{py + 70}">{sub}</text>')
+        p.append(f'    <line class="dg-stroke" x1="{zx + 28}" y1="{py + 90}" '
+                 f'x2="{zx + zw - 28}" y2="{py + 90}"/>')
 
-    # one stave across both zones — the circuit is a single line of music
-    p += stave(24, 1032, 196, gap=18)
+    p += _map_rows(*MAP_ZONES[0], t["progs"][:3], False)
+    p += _map_rows(*MAP_ZONES[1], t["progs"][3:], True)
 
-    # the five programmes, all at the same pitch and the same size
-    for i, ((rows, meta), x) in enumerate(zip(t["progs"], MAP_X)):
-        p.append(note(x, MAP_NOTE_Y, open_=(i >= 3)))
-        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{MAP_NOTE_Y + 10}" '
-                 f'x2="{x}" y2="292"/>')
-        p += lines(x, 314, rows, anchor="middle")
-        p.append(f'    <text class="dg-sub" x="{x}" y="{314 + 19 * len(rows) + 8}" '
-                 f'text-anchor="middle">{meta}</text>')
+    # the circuit — one arc out, one back, each the other turned through 180°
+    a = MAP_ZONES[0][0] + MAP_ZONES[0][1] / 2
+    b = MAP_ZONES[1][0] + MAP_ZONES[1][1] / 2
+    yt, yb = MAP_MID - MAP_ARC, MAP_MID + MAP_ARC
 
-    # the circuit — one slur out above the zones, one return below them
-    p.append(f'    <text class="dg-edge dg-late" x="568" y="30" '
+    p.append(f'    <text class="dg-edge dg-late" x="540" y="32" '
              f'text-anchor="middle">{t["top"]}</text>')
-    p.append(draw("M274 96 C 380 40, 760 40, 856 92"))
-    p.append(tri(864, 96, 40))
+    p.append(draw(f"M{a} {yt} C {a + 130} {yt - 46}, {b - 130} {yt - 46}, {b - 10} {yt - 4}"))
+    p.append(tri(b, yt, 24))
 
-    p.append(draw("M962 400 C 860 452, 380 452, 282 404"))
-    p.append(tri(274, 400, 220))
-    p.append(f'    <text class="dg-edge dg-late" x="568" y="480" '
+    p.append(draw(f"M{b} {yb} C {b - 130} {yb + 46}, {a + 130} {yb + 46}, {a + 10} {yb + 4}"))
+    p.append(tri(a, yb, 204))
+    p.append(f'    <text class="dg-edge dg-late" x="540" y="492" '
              f'text-anchor="middle">{t["bottom"]}</text>')
 
     return figure("0 0 1080 500", t["aria"], "\n".join(p), t["caption"], t["title"])
@@ -742,10 +756,10 @@ WAYS = {
                  "you might write in the same email, and people move between them all the time "
                  "— most of the players started as listeners, and two of the rooms we play in "
                  "were offered by someone who came to a concert."),
-        aria=("Four note-heads threaded on one dashed vertical line — learn to play, come and "
-              "listen, play with us, host or partner — labelled 'people move between these'. All "
-              "four run right to a single gold rule, and one arrow leaves it for a note-head "
-              "marked 'one email, one line'."),
+        aria=("Four panels of equal size — learn to play, come and listen, play with us, host "
+              "or partner — linked by dashed lines labelled 'people move between these'. All "
+              "four run right to a single gold rule, and one arrow leaves it for a panel marked "
+              "'one email, one line'."),
         rows=[(["Learn to play"], ["you have never played anything"]),
               (["Come and listen"], ["you would rather start by listening"]),
               (["Play with us"], ["you already play something"]),
@@ -760,9 +774,10 @@ WAYS = {
         caption=("네 갈래는 네 개의 신청 절차가 아닙니다. 같은 이메일에 쓸 수 있는 네 개의 문장이고, "
                  "사람들은 그 사이를 늘 오갑니다 — 지금 연주하는 사람 대부분이 처음에는 듣는 "
                  "사람이었고, 우리가 연주하는 방 중 둘은 음악회에 왔던 분이 내어 준 것입니다."),
-        aria=("점선 하나에 꿰인 음표 네 개 — 배우러 오기, 들으러 오기, 함께 연주하기, 공간 열기. "
-              "그 점선에는 ‘사람들은 이 사이를 오갑니다’라고 적혀 있다. 네 갈래는 모두 오른쪽의 "
-              "금색 선에서 만나고, 거기서 화살표 하나가 ‘이메일 한 통, 한 줄’ 음표로 간다."),
+        aria=("같은 크기의 판 넷 — 배우러 오기, 들으러 오기, 함께 연주하기, 공간 열기 — 이 "
+              "점선으로 이어져 있고 그 점선에는 ‘사람들은 이 사이를 오갑니다’라고 적혀 있다. "
+              "네 갈래는 모두 오른쪽 금색 선에서 만나고, 거기서 화살표 하나가 ‘이메일 한 통, "
+              "한 줄’ 판으로 간다."),
         rows=[(["배우러 옵니다"], ["악기를 잡아 본 적이 없어도"]),
               (["들으러 옵니다"], ["듣는 것부터 시작하고 싶다면"]),
               (["함께 연주합니다"], ["이미 다루는 악기가 있다면"]),
@@ -779,50 +794,59 @@ WAYS = {
 # hooks that curled outside the frame; both read as decoration. Here the spine
 # IS the "you can move between these" claim — the four note-heads sit on it —
 # and every connector starts on a label and ends on the hub.
-WAYS_Y = [88, 176, 264, 352]    # baseline of each row's heading
-WAYS_SPINE = 60                 # x of the dashed spine the four heads sit on
-WAYS_COLLECT = 520              # x of the gold rule every route arrives at
-WAYS_RULE = 46                  # heading baseline -> the row's own leader rule
+# Four chips, one collector, one destination.
+#
+# Earlier versions let the connectors begin in mid-air beside a ragged column
+# of text, which is what made the figure look unfinished: the eye could not
+# tell where a route started. Giving each route a chip of fixed width fixes
+# that — every connector now leaves a real edge, at the same x, at the vertical
+# centre of the thing it belongs to. The dashes in the gaps between the chips
+# are the whole claim of the figure: these are not four separate doors.
+WAYS_X, WAYS_W, WAYS_H = 24, 452, 76
+WAYS_Y = [44, 144, 244, 344]      # top of each chip
+WAYS_COLLECT = 560                # x of the gold rule every route arrives at
+WAYS_HUB = (760, 296)             # x, width of the destination chip
 
 
 def pathways(lang):
     t = WAYS[lang]
-    top, bottom = WAYS_Y[0] + WAYS_RULE, WAYS_Y[-1] + WAYS_RULE
-    hy = (top + bottom) // 2
-    hx = 760
+    x, w, h = WAYS_X, WAYS_W, WAYS_H
+    cx, (hx, hw) = WAYS_COLLECT, WAYS_HUB
+    mids = [y + h / 2 for y in WAYS_Y]
+    hy = (mids[0] + mids[-1]) / 2
     p = []
 
-    # the spine: one dashed line through all four, because they are one family
-    p.append(f'    <line class="dg-stroke" x1="{WAYS_SPINE}" y1="{WAYS_Y[0] - 36}" '
-             f'x2="{WAYS_SPINE}" y2="{bottom + 16}" stroke-dasharray="3 5"/>')
+    for (head, sub), y, my in zip(t["rows"], WAYS_Y, mids):
+        p.append(f'    <rect class="dg-fill-soft" x="{x}" y="{y}" width="{w}" '
+                 f'height="{h}" rx="12"/>')
+        p.append(note(x + 34, my - 4))
+        p += lines(x + 64, my, head, cls="dg-h")
+        p += lines(x + 64, my + 25, sub, cls="dg-sub", step=18)
+        p.append(f'    <line class="dg-stroke" x1="{x + w}" y1="{my}" x2="{cx}" y2="{my}"/>')
 
-    for (head, sub), y in zip(t["rows"], WAYS_Y):
-        p.append(note(WAYS_SPINE, y - 6))
-        p += lines(WAYS_SPINE + 30, y, head, cls="dg-h")
-        p += lines(WAYS_SPINE + 30, y + 25, sub, cls="dg-sub", step=18)
-        # the row's own rule runs under it and carries on into the collector,
-        # so no connector begins in mid-air
-        p.append(f'    <line class="dg-stroke" x1="{WAYS_SPINE}" y1="{y + WAYS_RULE}" '
-                 f'x2="{WAYS_COLLECT}" y2="{y + WAYS_RULE}"/>')
+    # the dashes live in the gaps: you can move from any chip to any other
+    for a, b in zip(WAYS_Y[:-1], WAYS_Y[1:]):
+        p.append(f'    <line class="dg-stroke" x1="{x + 34}" y1="{a + h}" '
+                 f'x2="{x + 34}" y2="{b}" stroke-dasharray="3 4"/>')
+    p.append(f'    <text class="dg-sub" x="{x}" y="{WAYS_Y[-1] + h + 34}">{t["move"]}</text>')
 
-    # the collector — four rules, one edge
-    p.append(f'    <line class="dg-stroke-accent" x1="{WAYS_COLLECT}" y1="{top}" '
-             f'x2="{WAYS_COLLECT}" y2="{bottom}" stroke-width="2.5"/>')
-    p.append(draw(f"M{WAYS_COLLECT} {hy} H{hx - 34}", width=2.5))
-    p.append(tri(hx - 24, hy))
-    p.append(f'    <text class="dg-edge dg-late" x="{(WAYS_COLLECT + hx) // 2 - 12}" '
-             f'y="{hy - 18}" text-anchor="middle">{t["edge"]}</text>')
+    # four routes, one edge, one arrow
+    p.append(f'    <line class="dg-stroke-accent" x1="{cx}" y1="{mids[0]}" '
+             f'x2="{cx}" y2="{mids[-1]}" stroke-width="2.5"/>')
+    p.append(draw(f"M{cx} {hy} H{hx - 34}", width=2.5))
+    p.append(tri(hx - 22, hy))
+    # above the arrow and clear of both the collector rule and the destination
+    # panel — centred, it clipped one or the other at every width
+    p.append(f'    <text class="dg-edge dg-late" x="{cx + 20}" y="{hy - 78}">'
+             f'{t["edge"]}</text>')
 
-    # the one destination
-    p.append(note(hx, hy))
-    p += lines(hx + 28, hy - 4, t["hub"], cls="dg-h", step=26)
-    p.append(f'    <text class="dg-sub" x="{hx + 28}" y="{hy + 46}">{t["hub_note"]}</text>')
+    # the destination
+    p.append(f'    <rect class="dg-fill-accent dg-box" x="{hx}" y="{hy - 62}" width="{hw}" '
+             f'height="124" rx="12" stroke-width="1.6"/>')
+    p += lines(hx + 32, hy - 18, t["hub"], cls="dg-h", step=27)
+    p.append(f'    <text class="dg-sub" x="{hx + 32}" y="{hy + 38}">{t["hub_note"]}</text>')
 
-    # what the spine means, said once, at its foot
-    p.append(f'    <text class="dg-sub" x="{WAYS_SPINE - 14}" y="{bottom + 44}">'
-             f'{t["move"]}</text>')
-
-    return figure("0 0 1080 460", t["aria"], "\n".join(p), t["caption"], t["title"])
+    return figure("0 0 1080 470", t["aria"], "\n".join(p), t["caption"], t["title"])
 
 
 # ---------------------------------------------------------------------------

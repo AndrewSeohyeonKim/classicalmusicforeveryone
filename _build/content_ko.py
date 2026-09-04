@@ -195,7 +195,7 @@ INDEX = f"""<section class="hero">
          나이가 많거나, 몸이 아프거나, 도시에서 멀거나, 형편이 빠듯하거나, 이 음악이 자기
          것이라는 말을 한 번도 들어 본 적 없는 사람이 들어설 길. 이름이 곧 해야 할 일이고,
          로고는 우리가 어느 낱말로 평가받을지를 미리 적어 둔 것입니다.</p>
-      <p class="footer-line mark-line">클래식 음악을, 그것이 필요한 곳으로.</p>
+      <p class="footer-line mark-line">클래식 음악을, 그것이 필요한 곳으로!</p>
     </div>
     <figure class="reveal mark-plate">
       <img src="assets/logo-horizontal.svg" width="341" height="131"
@@ -239,27 +239,28 @@ INDEX = f"""<section class="hero">
 <section class="band-sunken">
   <div class="wrap">
     <div class="section-head wide reveal">
-      <p class="eyebrow">신뢰의 근거</p>
-      <h2>우리가 아닌 누군가가 값을 치렀습니다.</h2>
+      <p class="eyebrow">후원이 이미 바꾼 것</p>
+      <h2>차가 생겼고, 그만큼 멀리 갑니다.</h2>
       <p>지금은 자원봉사로 운영하고 있고, 비영리 보증유한책임회사(CLG) 설립을 준비하는
-         중입니다. 그 절차가 끝나기 전까지 자선단체 등록번호 대신 내놓을 수 있는 것은
-         지금까지의 기록뿐입니다.</p>
+         중입니다. 그 절차가 끝나기 전까지 보여 드릴 자선단체 등록번호가 없으니,
+         대신 실제로 있었던 일을 적습니다.</p>
     </div>
     <div class="evidence stagger">
       <div><dl>
-        <dt>공적 지원</dt>
-        <dd>사우스더블린 카운티 의회 예술과가 <strong>South Dublin Live 2026</strong>에
-            이 프로젝트를 선정했습니다. 첫 공적 위촉입니다.</dd>
+        <dt>후원으로 마련한 차량</dt>
+        <dd>개인 후원이 모여 <strong>차량 한 대</strong>가 생겼습니다. 연주자와 악기와
+            보면대가 함께 움직이고, 버스 시간표가 닿지 않는 방까지 갑니다.</dd>
       </dl></div>
       <div><dl>
-        <dt>지지 서한</dt>
-        <dd><strong>Rua Red</strong>, <strong>The Civic</strong>,
-            <strong>Tallaght University Hospital</strong>의 지지 서한을 보유하고 있습니다.</dd>
+        <dt>그래서 닿은 곳</dt>
+        <dd><strong>네 나라</strong>의 <strong>20곳 이상</strong> — 아일랜드·프랑스·영국·한국의
+            요양시설, 본당, 병원, 쉼터, 주간보호센터, 커뮤니티 센터.</dd>
       </dl></div>
       <div><dl>
-        <dt>연주해 온 곳</dt>
-        <dd><strong>네 나라</strong>—아일랜드·프랑스·영국·한국—의
-            <strong>20곳 이상의 공간과 기관</strong>에서 연주했습니다.</dd>
+        <dt>공적 위촉 한 건</dt>
+        <dd>사우스더블린 카운티 의회 예술과가 <strong>South Dublin Live 2026</strong>에 이
+            프로젝트를 선정했습니다. Rua Red, The Civic, Tallaght University Hospital은
+            그 신청을 위해 지지 서한을 써 주었습니다.</dd>
       </dl></div>
     </div>
     <div class="quote reveal mt-4">
@@ -267,7 +268,9 @@ INDEX = f"""<section class="hero">
          영적인 동행을 건넵니다.&rdquo;</p>
       <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
     </div>
-    <div class="btn-row reveal"><a class="btn btn-quiet" href="support.html">지금까지의 재원 <span class="arrow">→</span></a></div>
+    <p class="lead center mt-4 reveal">이후의 후원도 같은 계산입니다.
+       갈 수 없던 방 하나가 갈 수 있는 방이 됩니다.</p>
+    <div class="btn-row center-row reveal"><a class="btn btn-quiet" href="support.html">후원이 쓰이는 곳 <span class="arrow">→</span></a></div>
   </div>
 </section>
 
@@ -610,14 +613,15 @@ ABOUT = f"""<section class="page-hero">
 
     <div class="section-head reveal mt-4">
       <h3 class="h-sub">서체</h3>
-      <p>세 벌이고, 네 번째는 들이지 않습니다. Fraunces는 옵티컬 사이즈 세리프라 스케일의 각
-         단계마다 자간을 따로 잡았고, 한국어는 행간을 더 주고 음수 자간을 덜 조입니다.
-         Noto Sans KR에는 둘 다 필요하기 때문입니다.</p>
+      <p>세 벌이고, 네 번째는 들이지 않습니다. EB Garamond는 로고 워드마크의 Cormorant
+         Garamond과 같은 계보의 올드스타일 세리프라, 제목이 로고와 다투지 않고 맞물립니다.
+         한국어는 행간을 더 주고 음수 자간을 덜 조입니다. Noto Sans KR에는 둘 다 필요하기
+         때문입니다.</p>
     </div>
     <div class="specimen reveal">
       <div>
-        <dfn>Fraunces — 제목</dfn>
-        <div class="sp-display">Bringing classical music where it&rsquo;s needed.</div>
+        <dfn>EB Garamond — 제목</dfn>
+        <div class="sp-display">Bringing classical music where it&rsquo;s needed!</div>
         <p>SemiBold. 제목·헤드라인·디스플레이 크기.</p>
       </div>
       <div>
@@ -627,7 +631,7 @@ ABOUT = f"""<section class="page-hero">
       </div>
       <div>
         <dfn>Noto Sans KR — 한글</dfn>
-        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로.</div>
+        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로!</div>
         <p>Regular · Medium · Bold. 한국어 페이지의 제목과 본문 모두.</p>
       </div>
       <div>
@@ -1216,13 +1220,15 @@ SUPPORT = f"""<section class="page-hero">
         <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
       </div>
       <div>
-        <h3 class="h-sub">지지 서한</h3>
+        <h3 class="h-sub">South Dublin Live 신청을 위해 받은 서한</h3>
         <ul class="plainlist mt-2">
           <li><strong>Rua Red</strong> — South Dublin의 현대예술센터</li>
           <li><strong>The Civic Theatre</strong>, Tallaght</li>
           <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
           <li><strong>SDCC 예술과</strong> — South Dublin Live 2026 선정</li>
         </ul>
+        <p class="tiny mt-2">이 서한들은 그 한 건의 신청을 위해 써 주신 것입니다. 저희가 하는
+           모든 일에 대한 포괄적인 보증이 아니며, 그렇게 내세우지 않습니다.</p>
       </div>
     </div>
   </div>
