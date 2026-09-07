@@ -1367,3 +1367,184 @@ html[lang^="ko"] .band-mark h2 em{font-style:normal;color:var(--accent-ink)}
    the whole document sideways instead. Applied to both grids so no future
    wide child (a table, a long URL, a diagram) can do it again. */
 .split>*,.grid>*{min-width:0}
+
+
+/* ==========================================================================
+   20. THE RECORD, THE FIGURES, THE TICKER, THE FAQ  (2026-09-07)
+
+   Four new pages — Impact, Archive, Partner, Identity — and the home page's
+   story, trust line and partner invitation. Nothing here invents a size, a
+   colour or a spacing: every value is a token from sections 1–2, and every
+   label goes through the one small-label recipe in section 3.
+   ========================================================================== */
+
+/* --- dated figures ------------------------------------------------------
+   A number, what it counts, and the period it covers — never a number on
+   its own (12 §10: a figure without a date reads as marketing). The number
+   counts up as the tile scrolls into view, in CSS: --n is a registered
+   integer property, so it can be animated, and a counter prints it. The
+   real number is also in the markup, so the page reads correctly with no
+   animation support, with reduced motion, and to a screen reader. */
+@property --c { syntax: "<integer>"; inherits: false; initial-value: 0; }
+.figures{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;
+}
+.figures-4{grid-template-columns:repeat(4,1fr)}
+.figure{background:var(--surface-raised);padding:var(--pad) var(--pad-sm);display:flex;flex-direction:column}
+.band-sunken .figure{background:var(--surface-raised)}
+.figure b{
+  display:block;font-family:var(--font-display);font-weight:700;color:var(--fg);
+  font-size:clamp(2.1rem,3.4vw,2.9rem);line-height:1;letter-spacing:-.024em;
+  font-variant-numeric:lining-nums tabular-nums;
+}
+html[lang^="ko"] .figure b{font-family:var(--font-kr);letter-spacing:-.03em}
+.figure-label{display:block;margin-top:12px;font-size:0.9375rem;color:var(--fg);line-height:1.4}
+.figure-period{
+  display:block;margin-top:auto;padding-top:14px;font-size:0.8125rem;color:var(--fg-muted);
+  font-variant-numeric:lining-nums;
+}
+.figure-period::before{
+  content:"";display:block;width:26px;height:1.5px;background:var(--accent);
+  margin-bottom:10px;opacity:.6;
+}
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()) and (counter-reset:n var(--c)){
+    /* --n is the target, written in the markup; --c is the registered
+       property that animates from 0 to it and feeds the counter */
+    @keyframes count-up{from{--c:0}to{--c:var(--n)}}
+    /* the printed copy hides and a counter takes over; the suffix stays */
+    .count{position:relative;counter-reset:n var(--c)}
+    .count>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+    .count::before{content:counter(n)}
+    .count[style*="--n:40"]::before{content:counter(n) "+"}
+    .count{animation:count-up linear both;animation-timeline:view();animation-range:entry 10% entry 70%}
+  }
+}
+@media (max-width:65em){.figures,.figures-4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:35em){.figures,.figures-4{grid-template-columns:1fr}}
+
+/* the evidence grid, two-up on the Impact page */
+.evidence-2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:55em){.evidence-2{grid-template-columns:1fr}}
+
+/* --- the next steps, on the home page ----------------------------------- */
+.next{
+  border-top:1px solid var(--line);padding-top:28px;
+}
+.next-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0}
+.next-list li{
+  display:grid;grid-template-columns:7em 1fr;gap:16px;align-items:baseline;
+  padding-block:12px;border-bottom:1px solid var(--line);font-size:0.9688rem;
+}
+.next-list li:last-child{border-bottom:0}
+.next-list b{
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;
+  letter-spacing:var(--label-track);text-transform:uppercase;color:var(--accent-ink);
+}
+html[lang^="ko"] .next-list b{font-family:var(--font-kr);letter-spacing:var(--label-track-kr)}
+.next-list li:first-child b{color:var(--fg-muted)}
+.next-list span{color:var(--fg-body)}
+@media (max-width:35em){.next-list li{grid-template-columns:1fr;gap:4px}}
+
+/* --- the trust line ------------------------------------------------------
+   Names, not logos: we hold no permission to reproduce anyone's mark. The
+   row scrolls slowly so the whole list is seen without a wall of text; it
+   pauses under the pointer, and under reduced motion it is a wrapped list.
+   The second copy is aria-hidden, so a screen reader hears each name once. */
+.ticker{overflow:hidden;padding-block:8px}
+.ticker .eyebrow{margin-bottom:18px}
+.ticker-track{
+  display:flex;gap:0;width:max-content;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.ticker-track ul{
+  display:flex;list-style:none;margin:0;padding:0;flex:0 0 auto;
+}
+.ticker-track li{
+  padding:8px 26px;white-space:nowrap;font-family:var(--font-display);
+  font-size:1.125rem;color:var(--fg);letter-spacing:-.006em;
+  border-inline-end:1px solid var(--line-strong);
+}
+html[lang^="ko"] .ticker-track li{font-family:var(--font-kr);font-size:1rem}
+@keyframes marquee{to{translate:-50% 0}}
+@media (prefers-reduced-motion:no-preference){
+  .ticker-track{animation:marquee 90s linear infinite}
+  .ticker:hover .ticker-track,.ticker:focus-within .ticker-track{animation-play-state:paused}
+}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{width:auto;mask-image:none;-webkit-mask-image:none;flex-wrap:wrap;justify-content:center}
+  .ticker-track ul{flex-wrap:wrap;justify-content:center}
+  .ticker-track ul[aria-hidden]{display:none}
+}
+
+/* a plain list of names — the same names, static, on the Partner page */
+.names{
+  list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;
+}
+.names li{
+  padding:10px 16px;border:1px solid var(--line);border-radius:999px;
+  background:var(--surface-raised);font-size:0.9062rem;color:var(--fg);
+}
+
+/* --- the ledger tables on the Archive page --------------------------------- */
+.ledger td:first-child{white-space:nowrap}
+.ledger .tl-date{color:var(--fg-muted)}
+.ledger td .tiny{color:var(--fg-muted)}
+.ledger td.small{color:var(--fg-body)}
+.ledger .tag{margin-top:6px;padding:4px 10px}
+
+/* the chronicle's note-heads answer the pointer, because each carries a title */
+.dg-ev{cursor:help}
+.dg-ev:hover ellipse{stroke:var(--fg);stroke-width:2}
+
+/* --- FAQ: the native disclosure, so no script -------------------------------- */
+.faq-list{border-top:1px solid var(--line)}
+.faq{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:20px 44px 20px 0;position:relative;
+  font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;color:var(--fg);
+  line-height:1.3;
+  transition:color var(--dur-3) var(--ease);
+}
+html[lang^="ko"] .faq summary{font-family:var(--font-kr);font-weight:700;letter-spacing:-.028em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--accent-ink)}
+/* the mark is a plus that turns into a minus — two rules, one rotates */
+.faq summary::before,.faq summary::after{
+  content:"";position:absolute;inset-inline-end:8px;top:calc(50% - 1px);
+  width:16px;height:2px;background:var(--accent);border-radius:2px;
+  transition:rotate var(--dur-4) var(--ease-enter),opacity var(--dur-3) var(--ease);
+}
+.faq summary::after{rotate:90deg}
+.faq[open] summary::after{rotate:0deg;opacity:0}
+.faq p{padding:0 0 22px;max-width:40em;color:var(--fg-body)}
+@media (prefers-reduced-motion:no-preference){
+  .faq[open] p{animation:rise-in-soft var(--dur-slow) var(--ease-enter) both}
+}
+
+/* --- the nav drawer, now that it holds five panels ----------------------------
+   On a phone every sub-item is visible in the drawer, so it can be taller
+   than the screen. It scrolls inside its own box rather than being clipped. */
+@media (max-width:55em){
+  .nav{max-height:calc(100dvh - 74px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+}
+/* four footer columns; the brand column stays the widest */
+.footer-grid{grid-template-columns:1.5fr 1fr 1fr 1fr}
+@media (max-width:65em){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:35em){.footer-grid{grid-template-columns:1fr}}
+
+/* --- the hero stave draws itself in on load ----------------------------------
+   The ruled lines already sit behind the home hero; on arrival they now
+   extend from the left over the length of the heading's own entrance, and
+   the three note-heads settle after them. Load-time, not scroll-driven, so it
+   runs once. Reduced motion shows the finished state, as everywhere else. */
+@keyframes stave-in{from{scale:0 1;opacity:0}to{scale:1 1;opacity:.55}}
+@keyframes heads-in{from{opacity:0;translate:0 10px}to{opacity:.5;translate:0 0}}
+@media (prefers-reduced-motion:no-preference){
+  .hero::before{transform-origin:0 50%;animation:stave-in var(--dur-slower) var(--ease-enter-expressive) both}
+  .hero::after{animation:heads-in var(--dur-slow) var(--ease-enter) 420ms both,
+                         note-drift 7s var(--ease) 1.2s infinite alternate}
+}

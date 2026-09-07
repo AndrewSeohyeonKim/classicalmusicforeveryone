@@ -23,8 +23,10 @@
 <meta property="og:locale:alternate" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/church-concert.jpg">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="../assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/logo-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -61,6 +63,19 @@
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
     },
     {
+      "@type": "Person",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"},
+      "worksFor": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "sby05034@gmail.com",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
+    },
+    {
       "@type": "WebPage",
       "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/support.html#page",
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/support.html",
@@ -71,6 +86,13 @@
       "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/church-concert.jpg"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/"},
+        {"@type": "ListItem", "position": 2, "name": "후원", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/support.html"}
+      ]
     }
   ]
 }
@@ -88,7 +110,14 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
-      <a class="nav-link" href="about.html">소개</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="about.html">소개</a>
+        <div class="subnav">
+          <a href="about.html"><b>단체 소개</b><span>미션, 가치, 창립자</span></a>
+          <a href="about.html#founder"><b>창립자</b><span>김서현</span></a>
+          <a href="identity.html"><b>상징과 표준</b><span>금색이 Everyone 위에 놓이는 이유</span></a>
+        </div>
+      </div>
       <div class="nav-item has-sub">
         <a class="nav-link" href="programmes.html">프로그램</a>
         <div class="subnav">
@@ -100,8 +129,28 @@
         </div>
       </div>
       <a class="nav-link" href="get-involved.html">참여하기</a>
-      <a class="nav-link" href="news.html">소식</a>
-      <a class="nav-link" href="support.html" aria-current="page">후원</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="news.html">일정과 소식</a>
+        <div class="subnav">
+          <a href="news.html"><b>다가오는 일정</b><span>모집 중인 수업, 열려 있는 음악회</span></a>
+          <a href="archive.html"><b>기록, 2023년부터</b><span>모든 회차와 연주</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="impact.html">성과</a>
+        <div class="subnav">
+          <a href="impact.html"><b>무엇이 달라졌나</b><span>기록이 뒷받침하는 것만</span></a>
+          <a href="impact.html#next"><b>가려는 곳</b><span>다음 걸음, 순서대로</span></a>
+          <a href="impact.html#transparency"><b>투명성</b><span>지위, 돈, 증명되지 않은 것</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="support.html" aria-current="page">후원</a>
+        <div class="subnav">
+          <a href="support.html" aria-current="page"><b>후원하기</b><span>기부, 문 열기, 방 내어 주기</span></a>
+          <a href="partner.html"><b>기관 파트너십</b><span>기관과 재단을 위한 안내</span></a>
+        </div>
+      </div>
       <a class="btn btn-accent btn-nav" href="contact.html">문의</a>
       <div class="lang-switch" role="group" aria-label="언어">
         <span aria-current="true">한국어</span>
@@ -116,11 +165,39 @@
     <p class="eyebrow">후원</p>
     <h1>문이 계속 열려 있도록.</h1>
     <p>자원봉사로 운영합니다. 후원금은 리코더와 악보, 공간 대여, 그리고 그 방까지 가는
-       이동에 쓰입니다.</p>
+       이동에 쓰입니다. 후원이 이미 한 일, 후원이 되는 것, 후원하는 방법을 차례로 적었습니다.</p>
   </div>
 </section>
 
 <section>
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">후원이 이미 바꾼 것</p>
+      <h2>차가 생겼고, 그만큼 멀리 갑니다.</h2>
+      <p>유럽과 한국의 개인 후원이 모여 차량 한 대가 생겼습니다. 연주자와 악기와 보면대가
+         한 번에 실려, 버스 시간표에 없는 요양시설과 본당과 쉼터까지 갑니다. 위클로, 미스,
+         웨스트미스, 그리고 상의하면 더 멀리.</p>
+    </div>
+    <div class="grid grid-4 stagger">
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>누군가의 손에 들린 리코더</h3>
+        <p>소프라노 리코더 한 대는 8유로에서 15유로입니다. 사는 법을 알려 드리거나, 원가로
+           드리거나, 한 학기 빌려 드립니다.</p></div>
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>아무도 값을 치르지 않는 악보</h3>
+        <p>그날 온 사람 누구든 불 수 있게 편곡한 파트를, 눈이 필요로 하면 크게 확대해서,
+           저희 비용으로 인쇄합니다.</p></div>
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>한 학기 동안 쓸 방</h3>
+        <p>공간이 방을 내어 줄 수 없을 때 후원금으로 빌립니다. 매주 한 번 쓸 따뜻한 방이
+           있어야 과정이 열립니다.</p></div>
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>다음 방까지 가는 길</h3>
+        <p>후원자들이 사 준 차의 기름값입니다. 그래서 위클로 주의 휴게실 하나가 예산 항목
+           대신 오전 한나절이 됩니다.</p></div>
+    </div>
+    <p class="tiny mt-3 reveal">리코더 값 말고는 단가를 적지 않았습니다. 나머지는 방과 학기에
+       따라 달라지기 때문입니다. 물어보시면 생각하시는 프로그램의 지금 수치를 보여 드립니다.</p>
+  </div>
+</section>
+
+<section class="band-raised">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">돈이 도는 방식</p>
@@ -182,57 +259,6 @@
   </div>
 </section>
 
-<section class="band-raised">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">지금까지</p>
-      <h2>누가 이 일을 받쳐 왔는가.</h2>
-      <p>2026년 이전은 전부 자비와 자원봉사였습니다. 후원을 검토하시는 분들이 가장 먼저
-         묻는 것이 &lsquo;지금까지 누가 냈는가&rsquo;여서 그대로 적어 둡니다.</p>
-    </div>
-    <div class="table-scroll reveal">
-      <table>
-        <thead><tr><th scope="col">출처</th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>
-        <tbody>
-          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">예술과 ·
-              South Dublin Live 2026</span></td>
-              <td><em>Shared Voices of South Dublin</em> 시리즈 위촉 — 처음으로 공적 자금이
-                  들어온 작업.</td><td>수령 완료</td></tr>
-          <tr><td><strong>명도회 장학금</strong><br><span class="tiny">한국 천주교 주교회의
-              평신도사도직위원회</span></td>
-              <td>2025년 3월부터 학기별 지원, 창립자의 음악 사도직을 위한 것.</td><td>종료</td></tr>
-          <tr><td><strong>개인 후원자</strong></td>
-              <td>유럽과 한국의 후원자들이 정기적인 찾아가는 음악회가 가능하도록 보내 준
-                  도움.</td><td>진행 중</td></tr>
-          <tr><td><strong>파트너 공간, 현물</strong></td>
-              <td>Tallaght University Hospital — 공간과 운영 시간. Mulhuddart Community Centre —
-                  수업 공간. TU Dublin — 연습 공간.</td><td>계속</td></tr>
-          <tr><td><strong>TU Dublin Venture Lab</strong></td>
-              <td>사회적기업 창업 프로그램, 2024년 9월부터.</td><td>수료</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="split split-center reveal mt-4">
-      <div class="quote">
-        <p>&ldquo;넉넉한 형편에서 하는 일이 아닙니다. 본인의 재정 형편이 빠듯한
-           가운데서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
-        <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
-      </div>
-      <div>
-        <h3 class="h-sub">South Dublin Live 신청을 위해 받은 서한</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>Rua Red</strong> — South Dublin의 현대예술센터</li>
-          <li><strong>The Civic Theatre</strong>, Tallaght</li>
-          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
-          <li><strong>SDCC 예술과</strong> — South Dublin Live 2026 선정</li>
-        </ul>
-        <p class="tiny mt-2">이 서한들은 그 한 건의 신청을 위해 써 주신 것입니다. 저희가 하는
-           모든 일에 대한 포괄적인 보증이 아니며, 그렇게 내세우지 않습니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="band-sunken">
   <div class="wrap">
     <div class="section-head reveal">
@@ -245,7 +271,8 @@
            그 금액이 무엇을 감당하는지 함께 알려 드립니다.</p></div>
       <div class="card"><span class="kicker">02</span><h3>프로그램 지원</h3>
         <p>재단·기금·지자체·기업 후원자를 위해 전체 제안서와 예산, 활동 기록을 요청 시
-           보내 드립니다.</p></div>
+           보내 드립니다. <a class="link" href="partner.html">기관 파트너십</a> 페이지에
+           파트너십에 따라오는 것을 적어 두었습니다.</p></div>
       <div class="card"><span class="kicker">03</span><h3>문을 열어 주기</h3>
         <p>요양시설이나 본당, 커뮤니티 센터나 병원에 저희를 소개해 주시는 일은
            후원금만큼, 때로는 그보다 더 큰 도움이 됩니다.</p></div>
@@ -255,6 +282,7 @@
     </div>
     <div class="btn-row reveal center-row mt-4">
       <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=CMFE%20후원%20문의">후원 문의 <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="partner.html">기관을 위한 안내</a>
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=CMFE%20파트너십·펀딩%20문의">제안서 요청</a>
     </div>
     <div class="callout reveal mt-4">
@@ -262,6 +290,24 @@
          자원봉사로 운영되는 사회적기업이며, 현재
          비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다. 아직 등록 자선단체가 아니므로
          기부금 세제 혜택은 적용되지 않습니다. 헷갈리실 수 있어 미리 밝혀 둡니다.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">지금까지</p>
+      <h2 class="h-md">누가 이 일을 받쳐 왔는가.</h2>
+      <p class="mt-3">2026년 이전은 전부 자비와 자원봉사였습니다. 지금까지의 지원 전체, South
+         Dublin Live 신청을 위해 받은 서한, 그리고 아직 증명하지 못한 것을 한 페이지에 함께
+         적어 두었습니다.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html#transparency">투명성 <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <div class="quote reveal">
+      <p>&ldquo;넉넉한 형편에서 하는 일이 아닙니다. 본인의 재정 형편이 빠듯한
+         가운데서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
+      <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
     </div>
   </div>
 </section>
@@ -278,10 +324,18 @@
       <div>
         <h3>둘러보기</h3>
         <a href="about.html">단체 소개</a>
+        <a href="identity.html">상징과 표준</a>
         <a href="programmes.html">프로그램</a>
         <a href="get-involved.html">참여하기</a>
-        <a href="news.html">소식과 기록</a>
+        <a href="news.html">일정과 소식</a>
+      </div>
+      <div>
+        <h3>기록과 후원</h3>
+        <a href="impact.html">성과와 근거</a>
+        <a href="archive.html">기록, 2023년부터</a>
         <a href="support.html">후원하기</a>
+        <a href="partner.html">기관 파트너십</a>
+        <a href="impact.html#transparency">투명성</a>
       </div>
       <div>
         <h3>연락</h3>

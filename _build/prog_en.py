@@ -154,7 +154,7 @@ DATA = {
     facts=[("Group size", "About five"),
            ("Been to", "National Symphony Orchestra &middot; Irish National Opera &middot; "
                        "RT&Eacute; Concert Orchestra &middot; the NCH International Series"),
-           ("Further afield", "The BBC Proms, in two consecutive summers"),
+           ("Further afield", "The BBC Proms, in two summers"),
            ("Cost", "Your own ticket &mdash; sometimes as little as &pound;8"),
            ("To date", "10 recorded outings")],
     how_head="An outing is three parts. The concert is the middle one.",
@@ -179,7 +179,7 @@ DATA = {
              "NCH International Series, National Symphony Orchestra, RT&Eacute; Concert "
              "Orchestra, Irish National Opera, TU Dublin Philharmonic, RIAM"],
             ["<strong>Abroad</strong>",
-             "The BBC Proms, in two consecutive summers"],
+             "The BBC Proms, in two summers"],
             ["<strong>Group size</strong>", "Around five people per outing"],
             ["<strong>Evidence held</strong>",
              "Invitations and slide decks; attendance was not recorded at the time"]],

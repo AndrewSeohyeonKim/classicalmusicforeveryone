@@ -145,7 +145,7 @@ DATA = {
     facts=[("인원", "다섯 명 안팎"),
            ("다녀온 곳", "National Symphony Orchestra &middot; Irish National Opera &middot; "
                          "RT&Eacute; Concert Orchestra &middot; NCH International Series"),
-           ("더 멀리", "BBC 프롬스, 두 해 연속"),
+           ("더 멀리", "BBC 프롬스, 두 번의 여름"),
            ("비용", "본인 티켓 &mdash; &pound;8 정도인 경우도 있습니다"),
            ("지금까지", "기록된 동행 10회")],
     how_head="한 번의 동행은 세 부분입니다. 음악회는 그중 가운데입니다.",
@@ -154,7 +154,7 @@ DATA = {
     who=["몇 년째 가고 싶었는데 같이 갈 사람이 없었던 분.",
          "언제 박수를 쳐야 하는지, 뭘 입어야 하는지, 어디 앉는지가 걱정인 분.",
          "아일랜드에 온 지 얼마 안 되어 첫 문화 나들이를 함께하고 싶은 분.",
-         "강의·연주에 오시다가 이제 실연으로 넘어갈 준비가 된 분.",
+         "강의·연주에 오시다가 이제 실황 연주로 넘어갈 준비가 된 분.",
          "휠체어를 쓰거나 거동이 불편한 분 &mdash; 접근성을 먼저 확인합니다."],
     session=["어느 공연으로 갈지 정하고 티켓을 미리 정리합니다.",
              "짧게 준비합니다 &mdash; 어떤 곡인지, 그 자리에서 무슨 일이 있는지.",
@@ -168,7 +168,7 @@ DATA = {
             ["<strong>어디로</strong>",
              "NCH International Series, National Symphony Orchestra, RT&Eacute; Concert "
              "Orchestra, Irish National Opera, TU Dublin Philharmonic, RIAM"],
-            ["<strong>국외</strong>", "BBC 프롬스, 두 해 연속"],
+            ["<strong>국외</strong>", "BBC 프롬스, 두 번의 여름"],
             ["<strong>인원</strong>", "회당 다섯 명 안팎"],
             ["<strong>보유 자료</strong>",
              "초대 기록과 강의 슬라이드. 참석 인원은 당시 기록하지 않았습니다"]],

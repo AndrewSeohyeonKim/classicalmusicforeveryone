@@ -23,8 +23,10 @@
 <meta property="og:locale:alternate" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -59,6 +61,19 @@
       "name": "Classical Music for Everyone",
       "inLanguage": "en-IE",
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
+    },
+    {
+      "@type": "Person",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"},
+      "worksFor": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "sby05034@gmail.com",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
     },
     {
       "@type": "WebPage",
@@ -135,7 +150,14 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="Menu">
-      <a class="nav-link" href="about.html">About</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="about.html">About</a>
+        <div class="subnav">
+          <a href="about.html"><b>About us</b><span>Mission, values, the founder</span></a>
+          <a href="about.html#founder"><b>The founder</b><span>Andrew Seohyeon Kim</span></a>
+          <a href="identity.html"><b>The mark</b><span>Why the gold falls on Everyone</span></a>
+        </div>
+      </div>
       <div class="nav-item has-sub">
         <a class="nav-link" href="programmes.html">Programmes</a>
         <div class="subnav">
@@ -147,8 +169,28 @@
         </div>
       </div>
       <a class="nav-link" href="get-involved.html">Get Involved</a>
-      <a class="nav-link" href="news.html">News</a>
-      <a class="nav-link" href="support.html">Support</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="news.html">What&rsquo;s On</a>
+        <div class="subnav">
+          <a href="news.html"><b>Coming up</b><span>Classes enrolling, concerts with the door open</span></a>
+          <a href="archive.html"><b>The record, 2023 to date</b><span>Every session and performance</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="impact.html">Impact</a>
+        <div class="subnav">
+          <a href="impact.html"><b>What has changed</b><span>Only what the record supports</span></a>
+          <a href="impact.html#next"><b>Where this is going</b><span>The next steps, in order</span></a>
+          <a href="impact.html#transparency"><b>Transparency</b><span>Status, money, what is not proved</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="support.html">Support</a>
+        <div class="subnav">
+          <a href="support.html"><b>Support us</b><span>Give, open a door, give a room</span></a>
+          <a href="partner.html"><b>Partner with us</b><span>For organisations and funders</span></a>
+        </div>
+      </div>
       <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
       <div class="lang-switch" role="group" aria-label="Language">
         <span aria-current="true">EN</span>
@@ -338,6 +380,31 @@
   </div>
 </section>
 
+<section class="band-raised">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">One story</p>
+      <h2>A question from the back of the room.</h2>
+      <p class="lead mt-3">In November 2024 the Letters Ensemble played for the Missionary
+         Sisters of St Columban in Co. Wicklow. Afterwards one of the sisters asked whether she
+         might play again. She had played the violin, years ago.</p>
+      <p class="mt-3">That question became a recorder ensemble for seven retired Presentation
+         Sisters &mdash; ten weekly rehearsals, an Easter concert of nine pieces, all seven
+         completing. In September 2026 the same course opened to the public, free, in
+         Mulhuddart. One question, one term, one open door: that is the whole model.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html">What the record supports <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img loading="lazy" decoding="async" src="images/letters-ensemble.jpg" width="1400" height="1050"
+             alt="The Letters Ensemble with their instruments">
+      </div>
+      <figcaption>The Letters Ensemble. Its November 2024 concert in Co. Wicklow is where the
+        teaching programme began.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="band-mark">
   <div class="wrap split split-wide split-center">
     <div class="reveal">
@@ -356,7 +423,7 @@
       <img loading="lazy" decoding="async" src="assets/logo-horizontal.svg" width="341" height="131"
            alt="The Classical Music for Everyone mark: a treble clef beside the wordmark, with &lsquo;Everyone&rsquo; set large and in gold">
       <figcaption>The horizontal mark, adopted 17 August 2026.
-        <a class="link" href="about.html#identity">The full design standard</a></figcaption>
+        <a class="link" href="identity.html">The full design standard</a></figcaption>
     </figure>
   </div>
 </section>
@@ -385,8 +452,19 @@
         <div class="meta">Volunteer-led today &middot; formalising as a not-for-profit CLG</div>
       </div>
     </div>
-    <div class="btn-row reveal">
-      <a class="btn btn-quiet" href="about.html">Mission, values and the founder <span class="arrow">&rarr;</span></a>
+    <div class="next reveal mt-4">
+      <p class="eyebrow">Where this is going</p>
+      <ol class="next-list">
+        <li><b>Done</b><span>Founded 2024 &middot; pilot completed &middot; first public commission &middot; first community course</span></li>
+        <li><b>Next</b><span>Incorporated as a company limited by guarantee, with directors</span></li>
+        <li><b>Then</b><span>A second cohort, and rooms in Wicklow, Meath and Louth</span></li>
+        <li><b>Then</b><span>The first music educator properly employed</span></li>
+        <li><b>Then</b><span>Wellbeing measured, and reported on this site</span></li>
+      </ol>
+      <div class="btn-row">
+        <a class="btn btn-quiet" href="impact.html#next">The road, in order <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="about.html">Mission, values and the founder</a>
+      </div>
     </div>
   </div>
 </section>
@@ -424,9 +502,67 @@
          those who may otherwise feel isolated.&rdquo;</p>
       <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
     </div>
-    <p class="lead center mt-4 reveal">Every further contribution does the same arithmetic:
-       it turns a room we cannot get to into a room we can.</p>
-    <div class="btn-row center-row reveal"><a class="btn btn-quiet" href="support.html">What support pays for <span class="arrow">→</span></a></div>
+    <p class="lead center mt-4 reveal">Every further contribution turns a room we cannot get
+       to into a room we can.</p>
+    <div class="btn-row center-row reveal">
+      <a class="btn btn-quiet" href="impact.html">Dated figures, and what is not proved <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="support.html">What support pays for</a>
+    </div>
+  </div>
+  <div class="ticker mt-4" aria-label="Institutions we have worked with">
+    <p class="eyebrow center-row">Rooms we have played in</p>
+    <div class="ticker-track">
+      <ul>
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>Presentation Sisters</li>
+        <li>Missionary Sisters of St Columban</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>National Concert Hall</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>Missions &Eacute;trang&egrave;res de Paris</li>
+        <li>Sanctuary of Our Lady of Lourdes</li><li>London Korean Catholic Church</li>
+        <li>Gwandukjeong Martyrs Memorial Centre, Daegu</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>Presentation Sisters</li>
+        <li>Missionary Sisters of St Columban</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>National Concert Hall</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>Missions &Eacute;trang&egrave;res de Paris</li>
+        <li>Sanctuary of Our Lady of Lourdes</li><li>London Korean Catholic Church</li>
+        <li>Gwandukjeong Martyrs Memorial Centre, Daegu</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">For organisations</p>
+      <h2>Are you a nursing home, hospital or parish?</h2>
+      <p class="lead mt-3">Tell us your room and your date. Enquiring takes less than two
+         minutes, and everything except the room arrives with us &mdash; players, instruments,
+         stands, the programme, the insurance.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="partner.html">Partner with us <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=Partnership%20enquiry&body=Organisation%3A%20%0AWhere%3A%20%0AThe%20room%20and%20a%20possible%20date%3A%20%0AOne%20line%20on%20what%20you%20have%20in%20mind%3A%20">Email, two minutes</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <ul class="checklist">
+        <li><strong>Care homes and hospitals</strong> &mdash; thirty to sixty minutes in the day
+            room or the atrium, acoustic, nothing for the audience to pay.</li>
+        <li><strong>Parishes and religious communities</strong> &mdash; liturgical music, or a
+            concert after Mass. Roughly sixteen of our twenty outreach performances were in
+            sacred places.</li>
+        <li><strong>Community centres</strong> &mdash; a term-long beginners&rsquo; course in your
+            room; you provide the room and a contact, we provide the rest.</li>
+        <li><strong>Councils, trusts and companies</strong> &mdash; fund a season, fund a place,
+            or bring your people. Every partnership comes with a named contact and a dated
+            report.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -455,10 +591,18 @@
       <div>
         <h3>Explore</h3>
         <a href="about.html">About us</a>
+        <a href="identity.html">The mark</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="news.html">News &amp; record</a>
+        <a href="news.html">What&rsquo;s on</a>
+      </div>
+      <div>
+        <h3>Record &amp; support</h3>
+        <a href="impact.html">Our impact</a>
+        <a href="archive.html">The record, 2023 to date</a>
         <a href="support.html">Support our work</a>
+        <a href="partner.html">Partner with us</a>
+        <a href="impact.html#transparency">Transparency</a>
       </div>
       <div>
         <h3>Connect</h3>

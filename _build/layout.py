@@ -27,18 +27,28 @@ FONTS = ("https://fonts.googleapis.com/css2?"
 
 NAV = {
     "en": [("about.html", "About"), ("programmes.html", "Programmes"),
-           ("get-involved.html", "Get Involved"), ("news.html", "News"),
-           ("support.html", "Support")],
+           ("get-involved.html", "Get Involved"), ("news.html", "What&rsquo;s On"),
+           ("impact.html", "Impact"), ("support.html", "Support")],
     "ko": [("about.html", "소개"), ("programmes.html", "프로그램"),
-           ("get-involved.html", "참여하기"), ("news.html", "소식"),
-           ("support.html", "후원")],
+           ("get-involved.html", "참여하기"), ("news.html", "일정과 소식"),
+           ("impact.html", "성과"), ("support.html", "후원")],
 }
 
-# The five programme pages hang off the Programmes item. Without this they were
-# reachable only from a card on another page — the menu said the section existed
-# but gave no way to choose within it. Order matches the five cards everywhere
-# else; no entry is marked out as the main one.
+# Six items plus Contact, which is the ceiling the sector settles on
+# (12 — Brand & Web Master §8: organisations under five staff use five or
+# six). Four of the six open a small panel. The panel is CSS-only — hover
+# and :focus-within — and on a narrow screen it is an indented list inside
+# the drawer. Order inside the Programmes panel matches the five cards
+# everywhere else; no entry is marked out as the main one.
 SUBNAV = {
+    "about.html": {
+        "en": [("about.html", "About us", "Mission, values, the founder"),
+               ("about.html#founder", "The founder", "Andrew Seohyeon Kim"),
+               ("identity.html", "The mark", "Why the gold falls on Everyone")],
+        "ko": [("about.html", "단체 소개", "미션, 가치, 창립자"),
+               ("about.html#founder", "창립자", "김서현"),
+               ("identity.html", "상징과 표준", "금색이 Everyone 위에 놓이는 이유")],
+    },
     "programmes.html": {
         "en": [("programmes/recorder-ensemble.html", "Recorder Ensemble course",
                 "A term for complete beginners"),
@@ -61,6 +71,26 @@ SUBNAV = {
                ("programmes/letters-ensemble.html", "Letters Ensemble",
                 "아마추어 연주자, 주 1회")],
     },
+    "news.html": {
+        "en": [("news.html", "Coming up", "Classes enrolling, concerts with the door open"),
+               ("archive.html", "The record, 2023 to date", "Every session and performance")],
+        "ko": [("news.html", "다가오는 일정", "모집 중인 수업, 열려 있는 음악회"),
+               ("archive.html", "기록, 2023년부터", "모든 회차와 연주")],
+    },
+    "impact.html": {
+        "en": [("impact.html", "What has changed", "Only what the record supports"),
+               ("impact.html#next", "Where this is going", "The next steps, in order"),
+               ("impact.html#transparency", "Transparency", "Status, money, what is not proved")],
+        "ko": [("impact.html", "무엇이 달라졌나", "기록이 뒷받침하는 것만"),
+               ("impact.html#next", "가려는 곳", "다음 걸음, 순서대로"),
+               ("impact.html#transparency", "투명성", "지위, 돈, 증명되지 않은 것")],
+    },
+    "support.html": {
+        "en": [("support.html", "Support us", "Give, open a door, give a room"),
+               ("partner.html", "Partner with us", "For organisations and funders")],
+        "ko": [("support.html", "후원하기", "기부, 문 열기, 방 내어 주기"),
+               ("partner.html", "기관 파트너십", "기관과 재단을 위한 안내")],
+    },
 }
 
 SUBNAV_LABEL = {"en": "Programmes", "ko": "프로그램"}
@@ -77,12 +107,16 @@ STR = {
         "footer_about": ("We teach people to play — not only to listen — and bring live "
                          "classical music to the places it rarely reaches."),
         "f_explore": "Explore",
+        "f_record": "Record &amp; support",
         "f_connect": "Connect",
         "f_legal": "© 2026 Classical Music for Everyone · Dublin, Ireland",
         "f_status": "Volunteer-led · formalising as a not-for-profit company limited by guarantee",
-        "f_links": [("about.html", "About us"), ("programmes.html", "Programmes"),
-                    ("get-involved.html", "Get involved"), ("news.html", "News &amp; record"),
-                    ("support.html", "Support our work")],
+        "f_links": [("about.html", "About us"), ("identity.html", "The mark"),
+                    ("programmes.html", "Programmes"), ("get-involved.html", "Get involved"),
+                    ("news.html", "What&rsquo;s on")],
+        "f_links2": [("impact.html", "Our impact"), ("archive.html", "The record, 2023 to date"),
+                     ("support.html", "Support our work"), ("partner.html", "Partner with us"),
+                     ("impact.html#transparency", "Transparency")],
     },
     "ko": {
         "skip": "본문으로 건너뛰기",
@@ -95,12 +129,16 @@ STR = {
         "footer_about": ("듣는 데서 그치지 않고 직접 연주하도록 가르치고, "
                          "클래식 음악이 잘 닿지 않는 곳으로 찾아갑니다."),
         "f_explore": "둘러보기",
+        "f_record": "기록과 후원",
         "f_connect": "연락",
         "f_legal": "© 2026 Classical Music for Everyone · 아일랜드 더블린",
         "f_status": "자원봉사로 운영 · 비영리 보증유한책임회사(CLG) 설립 준비 중",
-        "f_links": [("about.html", "단체 소개"), ("programmes.html", "프로그램"),
-                    ("get-involved.html", "참여하기"), ("news.html", "소식과 기록"),
-                    ("support.html", "후원하기")],
+        "f_links": [("about.html", "단체 소개"), ("identity.html", "상징과 표준"),
+                    ("programmes.html", "프로그램"), ("get-involved.html", "참여하기"),
+                    ("news.html", "일정과 소식")],
+        "f_links2": [("impact.html", "성과와 근거"), ("archive.html", "기록, 2023년부터"),
+                     ("support.html", "후원하기"), ("partner.html", "기관 파트너십"),
+                     ("impact.html#transparency", "투명성")],
     },
 }
 
@@ -133,6 +171,22 @@ ORG_NODE = """    {{
                   "addressCountry": "IE"}},
       "areaServed": {{"@type": "Country", "name": "Ireland"}},
       "knowsLanguage": ["en", "ko"]
+    }}"""
+
+# The founder as a node of his own. Only what the founder profile publishes
+# as public (04 §1–2): name, role, qualification, the LinkedIn profile.
+PERSON_NODE = """    {{
+      "@type": "Person",
+      "@id": "{site}/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {{"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"}},
+      "worksFor": {{"@id": "{site}/#organisation"}},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "{email}",
+      "url": "{site}/about.html#founder"
     }}"""
 
 PAGE_NODE = """    {{
@@ -246,8 +300,12 @@ def header(lang, slug):
     rows = []
     for href, label in NAV[lang]:
         sub = SUBNAV.get(href)
-        # a page under programmes/ should light up the Programmes item too
-        here = href == slug or (sub and slug.startswith(href[:-5] + "/"))
+        # a page under programmes/, or one listed in this item's panel
+        # (identity under About, archive under What's on, partner under
+        # Support), lights the parent item too
+        here = href == slug or (sub and (
+            slug.startswith(href[:-5] + "/")
+            or any(h.split("#")[0] == slug for h, *_ in sub[lang])))
         current = ' aria-current="page"' if here else ""
         if not sub:
             rows.append(f'      <a class="nav-link" href="{p}{href}"{current}>{label}</a>')
@@ -296,6 +354,7 @@ def footer(lang, slug="index.html"):
     # not to this page's twin — that is what the header switcher is for
     home_other = r + ("ko/index.html" if lang == "en" else "index.html")
     links = "\n".join(f'        <a href="{p}{h}">{t}</a>' for h, t in s["f_links"])
+    links2 = "\n".join(f'        <a href="{p}{h}">{t}</a>' for h, t in s["f_links2"])
     return f"""<footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -308,6 +367,10 @@ def footer(lang, slug="index.html"):
       <div>
         <h3>{s['f_explore']}</h3>
 {links}
+      </div>
+      <div>
+        <h3>{s['f_record']}</h3>
+{links2}
       </div>
       <div>
         <h3>{s['f_connect']}</h3>
@@ -341,6 +404,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=()):
     jsonld = _graph([
         ORG_NODE.format(site=SITE_URL, desc=desc, email=EMAIL, phone=PHONE_INTL),
         SITE_NODE.format(site=SITE_URL, lang=ld_lang),
+        PERSON_NODE.format(site=SITE_URL, email=EMAIL),
         PAGE_NODE.format(site=SITE_URL, canonical=canonical, title=title.replace('"', "'"),
                          desc=desc, lang=ld_lang, image=image),
         *extra_nodes,
@@ -370,8 +434,10 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=()):
 <meta property="og:locale:alternate" content="{'ko_KR' if lang == 'en' else 'en_IE'}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{image}">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="{r}assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{r}assets/logo-icon.png">
+<link rel="manifest" href="{r}site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">

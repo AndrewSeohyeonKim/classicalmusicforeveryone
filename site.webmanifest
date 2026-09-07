@@ -1,0 +1,22 @@
+{
+  "name": "Classical Music for Everyone",
+  "short_name": "CMFE",
+  "description": "Community music in Dublin: we teach people to play, and bring live classical music to the places it rarely reaches.",
+  "start_url": "/classicalmusicforeveryone/",
+  "display": "browser",
+  "background_color": "#FAF5EE",
+  "theme_color": "#1D2430",
+  "lang": "en-IE",
+  "icons": [
+    {
+      "src": "assets/logo-icon.png",
+      "sizes": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

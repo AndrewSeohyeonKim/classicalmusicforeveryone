@@ -20,8 +20,10 @@
 <meta property="og:locale:alternate" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="/classicalmusicforeveryone/assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/classicalmusicforeveryone/assets/logo-icon.png">
+<link rel="manifest" href="/classicalmusicforeveryone/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -58,6 +60,19 @@
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
     },
     {
+      "@type": "Person",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"},
+      "worksFor": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "sby05034@gmail.com",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
+    },
+    {
       "@type": "WebPage",
       "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/404.html#page",
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/404.html",
@@ -85,7 +100,14 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="Menu">
-      <a class="nav-link" href="/classicalmusicforeveryone/about.html">About</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="/classicalmusicforeveryone/about.html">About</a>
+        <div class="subnav">
+          <a href="/classicalmusicforeveryone/about.html"><b>About us</b><span>Mission, values, the founder</span></a>
+          <a href="/classicalmusicforeveryone/about.html#founder"><b>The founder</b><span>Andrew Seohyeon Kim</span></a>
+          <a href="/classicalmusicforeveryone/identity.html"><b>The mark</b><span>Why the gold falls on Everyone</span></a>
+        </div>
+      </div>
       <div class="nav-item has-sub">
         <a class="nav-link" href="/classicalmusicforeveryone/programmes.html">Programmes</a>
         <div class="subnav">
@@ -97,8 +119,28 @@
         </div>
       </div>
       <a class="nav-link" href="/classicalmusicforeveryone/get-involved.html">Get Involved</a>
-      <a class="nav-link" href="/classicalmusicforeveryone/news.html">News</a>
-      <a class="nav-link" href="/classicalmusicforeveryone/support.html">Support</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="/classicalmusicforeveryone/news.html">What&rsquo;s On</a>
+        <div class="subnav">
+          <a href="/classicalmusicforeveryone/news.html"><b>Coming up</b><span>Classes enrolling, concerts with the door open</span></a>
+          <a href="/classicalmusicforeveryone/archive.html"><b>The record, 2023 to date</b><span>Every session and performance</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="/classicalmusicforeveryone/impact.html">Impact</a>
+        <div class="subnav">
+          <a href="/classicalmusicforeveryone/impact.html"><b>What has changed</b><span>Only what the record supports</span></a>
+          <a href="/classicalmusicforeveryone/impact.html#next"><b>Where this is going</b><span>The next steps, in order</span></a>
+          <a href="/classicalmusicforeveryone/impact.html#transparency"><b>Transparency</b><span>Status, money, what is not proved</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="/classicalmusicforeveryone/support.html">Support</a>
+        <div class="subnav">
+          <a href="/classicalmusicforeveryone/support.html"><b>Support us</b><span>Give, open a door, give a room</span></a>
+          <a href="/classicalmusicforeveryone/partner.html"><b>Partner with us</b><span>For organisations and funders</span></a>
+        </div>
+      </div>
       <a class="btn btn-accent btn-nav" href="/classicalmusicforeveryone/contact.html">Contact</a>
       <div class="lang-switch" role="group" aria-label="Language">
         <span aria-current="true">EN</span>
@@ -166,10 +208,18 @@
       <div>
         <h3>Explore</h3>
         <a href="/classicalmusicforeveryone/about.html">About us</a>
+        <a href="/classicalmusicforeveryone/identity.html">The mark</a>
         <a href="/classicalmusicforeveryone/programmes.html">Programmes</a>
         <a href="/classicalmusicforeveryone/get-involved.html">Get involved</a>
-        <a href="/classicalmusicforeveryone/news.html">News &amp; record</a>
+        <a href="/classicalmusicforeveryone/news.html">What&rsquo;s on</a>
+      </div>
+      <div>
+        <h3>Record &amp; support</h3>
+        <a href="/classicalmusicforeveryone/impact.html">Our impact</a>
+        <a href="/classicalmusicforeveryone/archive.html">The record, 2023 to date</a>
         <a href="/classicalmusicforeveryone/support.html">Support our work</a>
+        <a href="/classicalmusicforeveryone/partner.html">Partner with us</a>
+        <a href="/classicalmusicforeveryone/impact.html#transparency">Transparency</a>
       </div>
       <div>
         <h3>Connect</h3>

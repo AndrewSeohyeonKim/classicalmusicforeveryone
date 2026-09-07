@@ -23,8 +23,10 @@
 <meta property="og:locale:alternate" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="../assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/logo-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -59,6 +61,19 @@
       "name": "Classical Music for Everyone",
       "inLanguage": "ko",
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
+    },
+    {
+      "@type": "Person",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"},
+      "worksFor": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "sby05034@gmail.com",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
     },
     {
       "@type": "WebPage",
@@ -135,7 +150,14 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
-      <a class="nav-link" href="about.html">소개</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="about.html">소개</a>
+        <div class="subnav">
+          <a href="about.html"><b>단체 소개</b><span>미션, 가치, 창립자</span></a>
+          <a href="about.html#founder"><b>창립자</b><span>김서현</span></a>
+          <a href="identity.html"><b>상징과 표준</b><span>금색이 Everyone 위에 놓이는 이유</span></a>
+        </div>
+      </div>
       <div class="nav-item has-sub">
         <a class="nav-link" href="programmes.html">프로그램</a>
         <div class="subnav">
@@ -147,8 +169,28 @@
         </div>
       </div>
       <a class="nav-link" href="get-involved.html">참여하기</a>
-      <a class="nav-link" href="news.html">소식</a>
-      <a class="nav-link" href="support.html">후원</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="news.html">일정과 소식</a>
+        <div class="subnav">
+          <a href="news.html"><b>다가오는 일정</b><span>모집 중인 수업, 열려 있는 음악회</span></a>
+          <a href="archive.html"><b>기록, 2023년부터</b><span>모든 회차와 연주</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="impact.html">성과</a>
+        <div class="subnav">
+          <a href="impact.html"><b>무엇이 달라졌나</b><span>기록이 뒷받침하는 것만</span></a>
+          <a href="impact.html#next"><b>가려는 곳</b><span>다음 걸음, 순서대로</span></a>
+          <a href="impact.html#transparency"><b>투명성</b><span>지위, 돈, 증명되지 않은 것</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="support.html">후원</a>
+        <div class="subnav">
+          <a href="support.html"><b>후원하기</b><span>기부, 문 열기, 방 내어 주기</span></a>
+          <a href="partner.html"><b>기관 파트너십</b><span>기관과 재단을 위한 안내</span></a>
+        </div>
+      </div>
       <a class="btn btn-accent btn-nav" href="contact.html">문의</a>
       <div class="lang-switch" role="group" aria-label="언어">
         <span aria-current="true">한국어</span>
@@ -337,6 +379,31 @@
   </div>
 </section>
 
+<section class="band-raised">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">이야기 하나</p>
+      <h2>뒷줄에서 나온 질문.</h2>
+      <p class="lead mt-3">2024년 11월, Letters Ensemble이 위클로 주의 성 골롬반 선교
+         수녀회에서 연주했습니다. 연주가 끝나고 한 수녀님이 물었습니다. 다시 연주할 수
+         있을까요. 오래전에 바이올린을 켰다고 했습니다.</p>
+      <p class="mt-3">그 질문이 은퇴 프레젠테이션 수녀 일곱 분의 리코더 앙상블이 됐습니다.
+         10주의 연습, 아홉 곡의 부활 음악회, 일곱 분 전원 수료. 2026년 9월, 같은 과정이
+         멀허다트에서 누구에게나 무료로 열렸습니다. 질문 하나, 한 학기, 열린 문 하나.
+         이 모델의 전부입니다.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html">기록이 뒷받침하는 것 <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img loading="lazy" decoding="async" src="../images/letters-ensemble.jpg" width="1400" height="1050"
+             alt="악기를 든 Letters Ensemble 단원들">
+      </div>
+      <figcaption>Letters Ensemble. 2024년 11월 위클로 주 음악회가 가르치는 프로그램의
+        출발점이 됐습니다.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="band-mark">
   <div class="wrap split split-wide split-center">
     <div class="reveal">
@@ -354,7 +421,7 @@
       <img loading="lazy" decoding="async" src="../assets/logo-horizontal.svg" width="341" height="131"
            alt="Classical Music for Everyone 로고 — 높은음자리표와 워드마크. &lsquo;Everyone&rsquo;이 크고 금색으로 놓여 있다">
       <figcaption>가로형 로고, 2026년 8월 17일 확정.
-        <a class="link" href="about.html#identity">디자인 표준 전체 보기</a></figcaption>
+        <a class="link" href="identity.html">디자인 표준 전체 보기</a></figcaption>
     </figure>
   </div>
 </section>
@@ -383,8 +450,19 @@
         <div class="meta">현재는 자원봉사 운영 &middot; 비영리 CLG 설립 준비 중</div>
       </div>
     </div>
-    <div class="btn-row reveal">
-      <a class="btn btn-quiet" href="about.html">미션과 가치, 그리고 창립자 <span class="arrow">&rarr;</span></a>
+    <div class="next reveal mt-4">
+      <p class="eyebrow">가려는 곳</p>
+      <ol class="next-list">
+        <li><b>마침</b><span>2024년 창립 &middot; 파일럿 완료 &middot; 첫 공적 위촉 &middot; 첫 커뮤니티 과정</span></li>
+        <li><b>다음</b><span>이사진을 갖춘 비영리 보증유한책임회사로 법인 설립</span></li>
+        <li><b>그다음</b><span>두 번째 기수, 그리고 위클로·미스·라우스의 방들</span></li>
+        <li><b>그다음</b><span>첫 음악 교육가를 정식으로 고용</span></li>
+        <li><b>그다음</b><span>웰빙을 재어 이 사이트에 보고</span></li>
+      </ol>
+      <div class="btn-row">
+        <a class="btn btn-quiet" href="impact.html#next">가는 길, 순서대로 <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="about.html">미션과 가치, 그리고 창립자</a>
+      </div>
     </div>
   </div>
 </section>
@@ -423,7 +501,62 @@
     </div>
     <p class="lead center mt-4 reveal">다음 후원도 마찬가지입니다.
        못 가던 방 하나가 갈 수 있는 방이 됩니다.</p>
-    <div class="btn-row center-row reveal"><a class="btn btn-quiet" href="support.html">후원이 쓰이는 곳 <span class="arrow">→</span></a></div>
+    <div class="btn-row center-row reveal">
+      <a class="btn btn-quiet" href="impact.html">날짜가 있는 숫자, 그리고 증명되지 않은 것 <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="support.html">후원이 쓰이는 곳</a>
+    </div>
+  </div>
+  <div class="ticker mt-4" aria-label="함께한 기관">
+    <p class="eyebrow center-row">저희가 연주한 방들</p>
+    <div class="ticker-track">
+      <ul>
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>프레젠테이션 수녀회</li>
+        <li>성 골롬반 선교 수녀회</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>국립 콘서트홀</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>파리 외방전교회</li>
+        <li>루르드 성모 성지</li><li>런던 한인 천주교회</li>
+        <li>관덕정 순교기념관, 대구</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>프레젠테이션 수녀회</li>
+        <li>성 골롬반 선교 수녀회</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>국립 콘서트홀</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>파리 외방전교회</li>
+        <li>루르드 성모 성지</li><li>런던 한인 천주교회</li>
+        <li>관덕정 순교기념관, 대구</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">기관을 위한 안내</p>
+      <h2>요양시설이나 병원, 본당이신가요?</h2>
+      <p class="lead mt-3">방과 날짜만 알려 주세요. 문의는 2분이면 되고, 방을 뺀 나머지는
+         전부 저희가 가져갑니다. 연주자, 악기, 보면대, 프로그램, 보험까지.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="partner.html">기관 파트너십 <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%20%EB%AC%B8%EC%9D%98&body=%EA%B8%B0%EA%B4%80%3A%20%0A%EC%9C%84%EC%B9%98%3A%20%0A%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EB%82%A0%EC%A7%9C%3A%20%0A%EC%83%9D%EA%B0%81%ED%95%98%EC%8B%9C%EB%8A%94%20%EA%B2%83%20%ED%95%9C%20%EC%A4%84%3A%20">2분이면 되는 메일</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <ul class="checklist">
+        <li><strong>요양시설과 병원</strong> &mdash; 휴게실이나 아트리움에서 30분에서 60분,
+            어쿠스틱으로, 관객이 낼 돈 없이.</li>
+        <li><strong>본당과 수도 공동체</strong> &mdash; 전례 음악, 또는 미사 뒤의 음악회.
+            스무 번의 찾아가는 음악회 가운데 열여섯 번쯤이 성지와 본당이었습니다.</li>
+        <li><strong>커뮤니티 센터</strong> &mdash; 여러분의 방에서 여는 한 학기 초보 과정.
+            방과 담당자만 주시면 나머지는 저희가 합니다.</li>
+        <li><strong>지자체, 재단, 기업</strong> &mdash; 시즌을 후원하거나, 자리를 후원하거나,
+            사람을 데려오거나. 모든 파트너십에 담당자의 이름과 날짜 있는 보고가 따라옵니다.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -452,10 +585,18 @@
       <div>
         <h3>둘러보기</h3>
         <a href="about.html">단체 소개</a>
+        <a href="identity.html">상징과 표준</a>
         <a href="programmes.html">프로그램</a>
         <a href="get-involved.html">참여하기</a>
-        <a href="news.html">소식과 기록</a>
+        <a href="news.html">일정과 소식</a>
+      </div>
+      <div>
+        <h3>기록과 후원</h3>
+        <a href="impact.html">성과와 근거</a>
+        <a href="archive.html">기록, 2023년부터</a>
         <a href="support.html">후원하기</a>
+        <a href="partner.html">기관 파트너십</a>
+        <a href="impact.html#transparency">투명성</a>
       </div>
       <div>
         <h3>연락</h3>

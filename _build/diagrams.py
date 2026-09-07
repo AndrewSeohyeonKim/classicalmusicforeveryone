@@ -950,3 +950,345 @@ def vocabulary(lang):
         p += lines(x, 174, sub, cls="dg-sub", step=19)
 
     return figure("0 0 1080 210", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 11. The chronicle — four years on four staves, one note-head per activity
+# ---------------------------------------------------------------------------
+
+import ledger as _ledger
+
+CHRON = {
+    "en": dict(
+        title="Every session and performance, 2023 to date",
+        caption=("One stave a year, one note-head an activity, placed on the day it happened. "
+                 "Filled heads are Learning — a lecture, an outing, a class; open heads are "
+                 "Sharing — a concert in somebody else&rsquo;s room. A tie under the stave is a "
+                 "course that met weekly. Two heads stacked on one day are a chord: two things "
+                 "happened. Hover a head for the name. The table below is the same record in words."),
+        aria=("Four staves, one for each year from 2023 to 2026, with months across the top. "
+              "Note-heads are placed on the day of each activity: filled for learning, open for "
+              "sharing. Ties under the staves mark weekly courses. The density rises year by year."),
+        legend=[("learning — a lecture, an outing, a class", False),
+                ("sharing — a concert in someone&rsquo;s room", True)],
+        tie="a course, weekly",
+    ),
+    "ko": dict(
+        title="2023년부터 지금까지, 모든 회차와 연주",
+        caption=("한 해에 오선 하나, 활동 하나에 음표 하나를 그날 자리에 놓았습니다. 채운 "
+                 "음표는 배움 — 강의, 동행, 수업 — 이고, 빈 음표는 나눔 — 누군가의 방에서 "
+                 "연 음악회 — 입니다. 오선 아래 붙임줄은 매주 모인 과정입니다. 같은 날 두 "
+                 "음표가 겹쳐 있으면 화음입니다. 그날 두 가지가 있었다는 뜻입니다. 음표에 "
+                 "마우스를 올리면 이름이 보입니다. 아래 표는 같은 기록을 글로 적은 것입니다."),
+        aria=("2023년부터 2026년까지 해마다 오선 하나, 위쪽에 열두 달. 활동이 있던 날에 음표를 "
+              "놓았고, 배움은 채운 음표, 나눔은 빈 음표다. 오선 아래 붙임줄은 주간 과정을 뜻한다. "
+              "해가 갈수록 음표가 촘촘해진다."),
+        legend=[("배움 — 강의, 동행, 수업", False),
+                ("나눔 — 누군가의 방에서 연 음악회", True)],
+        tie="매주 모인 과정",
+    ),
+}
+
+CH_X0, CH_W = 92, 964          # the twelve months run across this width
+CH_MONTH = CH_W / 12
+CH_TOP, CH_STEP, CH_GAP = 72, 124, 12   # first stave, pitch between years, line gap
+CH_STACK = 20                            # a stacked head sits a space above the last
+
+
+def _ch_x(m, d):
+    """x for a date; a row with no day sits at the middle of its month."""
+    return CH_X0 + ((m - 1) + ((d - 1) / 31 if d else 0.5)) * CH_MONTH
+
+
+def chronicle(lang):
+    t = CHRON[lang]
+    p = []
+    years = sorted(_ledger.by_year())
+
+    # month rule along the top, once
+    for i, mon in enumerate(_ledger.MONTH[lang]):
+        x = CH_X0 + (i + 0.5) * CH_MONTH
+        p.append(f'    <text class="dg-sub" x="{x:.1f}" y="46" text-anchor="middle">{mon}</text>')
+
+    for yi, year in enumerate(years):
+        y0 = CH_TOP + yi * CH_STEP
+        mid = y0 + 2 * CH_GAP                       # the middle line carries the notes
+        p += stave(CH_X0, CH_W, y0, gap=CH_GAP)
+        p.append(f'    <text class="dg-h" x="24" y="{mid + 7}">{year}</text>')
+
+        # Heads that would touch stack upward instead, a space apart, so a
+        # busy fortnight reads as a chord rather than as a smear. Placed
+        # heads are remembered as (x, level).
+        placed = []
+        for r in _ledger.by_year()[year]:
+            _, m, d, kind, en_t, ko_t, en_v, ko_v, note_ = r
+            title = en_t if lang == "en" else ko_t
+            venue = en_v if lang == "en" else ko_v
+            x = _ch_x(m, d)
+            lift = 0
+            while any(lv == lift and abs(px - x) < 2 * NOTE_RX + 3 for px, lv in placed):
+                lift += 1
+            placed.append((x, lift))
+            cy = mid - lift * CH_STACK
+            open_ = kind not in _ledger.LEARN
+            label = f"{_ledger.when(r, lang)} &middot; {title} &middot; {venue}"
+            p.append(f'    <g class="dg-ev"><title>{label}</title>'
+                     + note(round(x, 1), cy, open_=open_).strip() + '</g>')
+            if "until" in note_ and kind == "course":
+                m2, d2 = note_["until"]
+                x2 = _ch_x(m2, d2)
+                yb = y0 + 4 * CH_GAP + 12
+                p.append(f'    <path class="dg-stroke-accent" d="M{x:.1f} {yb} '
+                         f'Q {(x + x2) / 2:.1f} {yb + 16} {x2:.1f} {yb}" '
+                         f'fill="none" stroke-width="1.75"/>')
+
+    # legend
+    ly = CH_TOP + len(years) * CH_STEP + 8
+    lx = CH_X0
+    for text, open_ in t["legend"]:
+        p.append(note(lx + 11, ly - 4, open_=open_))
+        p.append(f'    <text class="dg-sub" x="{lx + 32}" y="{ly}">{text}</text>')
+        lx += 400 if lang == "en" else 300
+    p.append(f'    <path class="dg-stroke-accent" d="M{lx} {ly - 8} Q {lx + 22} {ly + 8} {lx + 44} {ly - 8}" '
+             f'fill="none" stroke-width="1.75"/>')
+    p.append(f'    <text class="dg-sub" x="{lx + 56}" y="{ly}">{t["tie"]}</text>')
+
+    return figure(f"0 0 1080 {ly + 30}", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 12. Lecture attendance — fifteen sessions, the stave as the axis
+# ---------------------------------------------------------------------------
+
+ATT = {
+    "en": dict(
+        title="Who came to the lecture-recitals, session by session",
+        caption=("Six people came to the first session in January 2024; fourteen came to the "
+                 "eleventh. The stave is the axis: each line is four people. The fifteenth "
+                 "session, drawn open, was not a lecture but a concert at the National Concert "
+                 "Hall attended together, and six came. Sessions sixteen and seventeen were held "
+                 "in 2026 but their attendance was not recorded, so they are not drawn."),
+        aria=("A column chart drawn as note-heads on stems over a stave. Fifteen sessions from "
+              "January 2024 to December 2025; attendance rises from six to fourteen, dips to six "
+              "at the fifteenth, which was a concert outing."),
+        venues=[(1, 1, "Dublin 18"), (2, 6, "Dolphin&rsquo;s Barn"), (7, 14, "TU Dublin &middot; once at the Carmelite centre"),
+                (15, 15, "NCH")],
+        axis="people",
+        session="session",
+    ),
+    "ko": dict(
+        title="강의·연주에 온 사람, 회차별로",
+        caption=("2024년 1월 첫 회차에 여섯 명이 왔고, 열한 번째 회차에는 열네 명이 왔습니다. "
+                 "오선이 눈금입니다. 한 줄이 네 사람입니다. 빈 음표로 그린 열다섯 번째 회차는 "
+                 "강의 대신 국립 콘서트홀에 함께 간 날이고, 여섯 명이 왔습니다. 2026년의 "
+                 "열여섯·열일곱 번째 회차는 참석 인원이 기록되지 않아 그리지 않았습니다."),
+        aria=("오선 위에 기둥 달린 음표로 그린 막대 그래프. 2024년 1월부터 2025년 12월까지 "
+              "열다섯 회차, 참석이 6명에서 14명으로 늘고, 동행 관람이었던 열다섯 번째에서 6명으로 "
+              "내려간다."),
+        venues=[(1, 1, "더블린 18"), (2, 6, "돌핀스 반"), (7, 14, "TU 더블린 · 한 번은 가르멜 센터"),
+                (15, 15, "NCH")],
+        axis="명",
+        session="회차",
+    ),
+}
+
+ATT_X0, ATT_STEP = 132, 64
+ATT_BASE, ATT_UNIT = 262, 7        # y of zero, px per person (a stave line = 4 people)
+
+
+def attendance(lang):
+    t = ATT[lang]
+    rows = [r for r in _ledger.ROWS if r[3] == "lecture" and "att" in r[8]]
+    p = []
+    p += stave(ATT_X0 - 40, len(rows) * ATT_STEP + 40, ATT_BASE - 16 * ATT_UNIT, gap=4 * ATT_UNIT)
+    for k in (0, 4, 8, 12, 16):
+        y = ATT_BASE - k * ATT_UNIT
+        p.append(f'    <text class="dg-sub" x="{ATT_X0 - 52}" y="{y + 4}" text-anchor="end">{k}</text>')
+    p.append(f'    <text class="dg-sub" x="{ATT_X0 - 52}" y="{ATT_BASE - 16 * ATT_UNIT - 18}" '
+             f'text-anchor="end">{t["axis"]}</text>')
+
+    for i, r in enumerate(rows):
+        x = ATT_X0 + i * ATT_STEP
+        v = r[8]["att"]
+        y = ATT_BASE - v * ATT_UNIT
+        outing = "outing" in (r[8].get("flag", ("", ""))[0])
+        p.append(f'    <line class="dg-stroke-accent" x1="{x}" y1="{ATT_BASE}" x2="{x}" y2="{y + 6}" '
+                 f'stroke-width="2"/>')
+        p.append(note(x, y, open_=outing))
+        p.append(f'    <text class="dg-num" x="{x}" y="{y - 16}" text-anchor="middle">{v}</text>')
+        p.append(f'    <text class="dg-sub" x="{x}" y="{ATT_BASE + 24}" text-anchor="middle">{i + 1}</text>')
+    p.append(f'    <text class="dg-sub" x="{ATT_X0 - 52}" y="{ATT_BASE + 24}" '
+             f'text-anchor="end">{t["session"]}</text>')
+
+    # where each run of sessions was held
+    for a, b, name in t["venues"]:
+        x1 = ATT_X0 + (a - 1) * ATT_STEP - 20
+        x2 = ATT_X0 + (b - 1) * ATT_STEP + 20
+        p.append(bracket(x1, x2, ATT_BASE + 44, depth=8, below=True))
+        p.append(f'    <text class="dg-sub" x="{(x1 + x2) / 2}" y="{ATT_BASE + 72}" '
+                 f'text-anchor="middle">{name}</text>')
+
+    return figure("0 0 1080 350", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 13. The road ahead — what is on the record, and what is only planned
+# ---------------------------------------------------------------------------
+
+ROAD = {
+    "en": dict(
+        title="Where this is going",
+        caption=("The four filled heads are on the record. The four open ones are not: they are "
+                 "the next steps, in the order we intend to take them, and they stay under a "
+                 "dashed bracket until each one is done. Nothing here has a date it does not "
+                 "have yet."),
+        aria=("Eight note-heads rising left to right on a stave. The first four, filled and under "
+              "a solid bracket, are done: founded 2024, pilot completed 2026, first public "
+              "commission 2026, first community course 2026. The next four, open and under a dashed "
+              "bracket, are planned: a company with directors, a second cohort and new counties, "
+              "the first educator employed, wellbeing measured and reported."),
+        done=[("Jan 2024", ["Founded", "in Dublin"]),
+              ("Apr 2026", ["Pilot completed", "seven of seven"]),
+              ("Aug 2026", ["First public", "commission"]),
+              ("Sep 2026", ["First community", "course opens"])],
+        next=[("Next", ["Incorporated,", "with directors"]),
+              ("Then", ["A second cohort,", "new counties"]),
+              ("Then", ["The first educator", "properly employed"]),
+              ("Then", ["Wellbeing measured", "and reported here"])],
+        on_record="on the record", planned="planned, not yet done",
+        axis_a="one clarinet", axis_b="a community that plays",
+    ),
+    "ko": dict(
+        title="이 일이 가려는 곳",
+        caption=("채운 음표 넷은 기록에 있는 일입니다. 빈 음표 넷은 아직 없는 일입니다. 다음 "
+                 "걸음을 밟으려는 순서대로 놓았고, 하나씩 마칠 때까지 점선 괄호 아래 둡니다. "
+                 "아직 정해지지 않은 날짜는 여기 적지 않았습니다."),
+        aria=("오선 위로 왼쪽에서 오른쪽으로 올라가는 음표 여덟 개. 앞의 넷은 채워져 있고 실선 "
+              "괄호 아래 있다 — 2024년 창립, 2026년 파일럿 완료, 2026년 첫 공적 위촉, 2026년 첫 "
+              "커뮤니티 과정. 뒤의 넷은 비어 있고 점선 괄호 아래 있다 — 이사가 있는 법인, 두 번째 "
+              "기수와 새 카운티, 첫 교육가 고용, 측정하고 보고하는 웰빙."),
+        done=[("2024년 1월", ["더블린에서", "창립"]),
+              ("2026년 4월", ["파일럿 완료", "7명 중 7명"]),
+              ("2026년 8월", ["첫 공적", "위촉"]),
+              ("2026년 9월", ["첫 커뮤니티", "과정 개강"])],
+        next=[("다음", ["이사진을 갖춘", "비영리 법인"]),
+              ("그다음", ["두 번째 기수와", "위클로·미스·라우스"]),
+              ("그다음", ["첫 음악 교육가를", "정식으로 고용"]),
+              ("그다음", ["웰빙을 재어", "이 자리에 보고"])],
+        on_record="기록에 있는 일", planned="계획, 아직 안 한 일",
+        axis_a="클라리넷 하나", axis_b="연주하는 공동체",
+    ),
+}
+
+ROAD_X = [96, 226, 356, 486, 616, 746, 876, 1006]
+ROAD_Y = [232, 214, 196, 178, 160, 142, 124, 106]
+
+
+def roadmap(lang):
+    t = ROAD[lang]
+    p = []
+    p += stave(40, 1000, 106, gap=22, n=7)
+    steps = [(w, l, False) for w, l in t["done"]] + [(w, l, True) for w, l in t["next"]]
+
+    # the line of the road, threaded through the heads
+    d = f"M{ROAD_X[0]} {ROAD_Y[0]}"
+    for (x0, y0), (x1, y1) in zip(zip(ROAD_X, ROAD_Y), zip(ROAD_X[1:], ROAD_Y[1:])):
+        d += f" C {x0 + 60} {y0}, {x1 - 60} {y1}, {x1} {y1}"
+    p.append(draw(d, width=2.25))
+
+    for (when, what, open_), x, y in zip(steps, ROAD_X, ROAD_Y):
+        p.append(note(x, y, open_=open_))
+        p.append(f'    <line class="dg-stroke" x1="{x}" y1="{y + 11}" x2="{x}" y2="268"/>')
+        p.append(f'    <text class="dg-edge" x="{x}" y="292" text-anchor="middle">{when}</text>')
+        p += lines(x, 314, what, cls="dg-sub", step=18, anchor="middle")
+
+    p.append(bracket(ROAD_X[0] - 30, ROAD_X[3] + 30, 62, depth=10))
+    p.append(f'    <text class="dg-sub" x="{(ROAD_X[0] + ROAD_X[3]) / 2}" y="44" '
+             f'text-anchor="middle">{t["on_record"]}</text>')
+    p.append(bracket(ROAD_X[4] - 30, ROAD_X[7] + 30, 62, depth=10, dashed=True))
+    p.append(f'    <text class="dg-sub" x="{(ROAD_X[4] + ROAD_X[7]) / 2}" y="44" '
+             f'text-anchor="middle">{t["planned"]}</text>')
+
+    # the crescendo, as in the term figure: the one mark that means "grows"
+    p.append('    <path class="dg-note" opacity=".28" d="M40 366 L1040 352 L1040 384 L40 370 Z"/>')
+    p.append(f'    <text class="dg-sub" x="40" y="402">{t["axis_a"]}</text>')
+    p.append(f'    <text class="dg-sub" x="1040" y="402" text-anchor="end">{t["axis_b"]}</text>')
+
+    return figure("0 0 1080 414", t["aria"], "\n".join(p), t["caption"], t["title"])
+
+
+# ---------------------------------------------------------------------------
+# 14. Partnership — three ways in, and what every one of them comes with
+# ---------------------------------------------------------------------------
+
+PARTNER = {
+    "en": dict(
+        title="Three ways to partner, one set of promises",
+        caption=("Whichever route an organisation takes, the right-hand panel is the same: a "
+                 "named person to write to, a dated account of what the money did, and an open "
+                 "invitation to come and see it. The three on the left are not tiers. They are "
+                 "the three shapes support usually arrives in."),
+        aria=("Three panels of equal size — fund a season, fund a place, bring your people — run "
+              "to a single gold rule, and one arrow leaves it for a panel listing what every "
+              "partnership comes with: a named contact, a dated report and an open invitation."),
+        rows=[(["Fund a season"], ["a set number of concerts, in named settings"]),
+              (["Fund a place"], ["free places for people cost would otherwise exclude"]),
+              (["Bring your people"], ["staff volunteering, a workplace talk, seats at a concert"])],
+        hub="Every partnership comes with",
+        hub_rows=["a named contact", "a dated report of what it did", "an open invitation to attend"],
+        edge="whichever fits",
+    ),
+    "ko": dict(
+        title="파트너가 되는 세 가지 길, 약속은 하나",
+        caption=("어느 길로 오시든 오른쪽 판은 같습니다. 편지를 보낼 담당자의 이름, 그 돈이 "
+                 "무엇을 했는지 날짜를 적은 보고, 그리고 직접 와서 보시라는 초대. 왼쪽의 셋은 "
+                 "등급이 아닙니다. 후원이 대개 찾아오는 세 가지 모양입니다."),
+        aria=("같은 크기의 판 셋 — 시즌 후원, 자리 후원, 사람을 데려오기 — 이 금색 세로선 하나에서 "
+              "만나고, 거기서 화살표 하나가 모든 파트너십에 따라오는 것을 적은 판으로 간다: 담당자 "
+              "이름, 날짜 있는 보고, 언제든 오라는 초대."),
+        rows=[(["시즌을 후원합니다"], ["정해진 횟수의 음악회를, 이름을 밝힌 곳에서"]),
+              (["자리를 후원합니다"], ["비용 때문에 못 올 사람의 무료 자리를"]),
+              (["사람을 데려옵니다"], ["직원 자원봉사, 직장 강연, 음악회 좌석"])],
+        hub="모든 파트너십에 따라오는 것",
+        hub_rows=["담당자 한 사람의 이름", "그 돈이 한 일을 날짜와 함께 보고", "언제든 와서 보시라는 초대"],
+        edge="맞는 쪽으로",
+    ),
+}
+
+PT_X, PT_W, PT_H = 24, 400, 76
+PT_Y = [40, 140, 240]
+PT_COLLECT = 496
+PT_HUB = (620, 436)
+
+
+def partnership(lang):
+    t = PARTNER[lang]
+    x, w, h = PT_X, PT_W, PT_H
+    cx, (hx, hw) = PT_COLLECT, PT_HUB
+    mids = [y + h / 2 for y in PT_Y]
+    hy = (mids[0] + mids[-1]) / 2
+    p = []
+
+    for (head, sub), y, my in zip(t["rows"], PT_Y, mids):
+        p.append(f'    <rect class="dg-fill-soft" x="{x}" y="{y}" width="{w}" height="{h}" rx="12"/>')
+        p.append(note(x + 34, my - 4))
+        p += lines(x + 64, my, head, cls="dg-h")
+        p += lines(x + 64, my + 25, sub, cls="dg-sub", step=18)
+        p.append(f'    <line class="dg-stroke" x1="{x + w}" y1="{my}" x2="{cx}" y2="{my}"/>')
+
+    p.append(f'    <line class="dg-stroke-accent" x1="{cx}" y1="{mids[0]}" x2="{cx}" y2="{mids[-1]}" '
+             f'stroke-width="2.5"/>')
+    p.append(draw(f"M{cx} {hy} H{hx - 34}", width=2.5))
+    p.append(tri(hx - 22, hy))
+    p.append(f'    <text class="dg-edge dg-late" x="{(cx + hx - 34) / 2}" y="{hy - 16}" '
+             f'text-anchor="middle">{t["edge"]}</text>')
+
+    p.append(f'    <rect class="dg-fill-accent dg-box" x="{hx}" y="{hy - 78}" width="{hw}" '
+             f'height="156" rx="12" stroke-width="1.6"/>')
+    p.append(f'    <text class="dg-h" x="{hx + 32}" y="{hy - 40}">{t["hub"]}</text>')
+    for i, row in enumerate(t["hub_rows"]):
+        yy = hy - 8 + i * 28
+        p.append(note(hx + 42, yy - 4, open_=True))
+        p.append(f'    <text class="dg-label" x="{hx + 64}" y="{yy + 1}">{row}</text>')
+
+    return figure("0 0 1080 356", t["aria"], "\n".join(p), t["caption"], t["title"])

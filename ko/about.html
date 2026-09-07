@@ -23,8 +23,10 @@
 <meta property="og:locale:alternate" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/clarinet.jpg">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="../assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/logo-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -61,6 +63,19 @@
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
     },
     {
+      "@type": "Person",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"},
+      "worksFor": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "sby05034@gmail.com",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
+    },
+    {
       "@type": "WebPage",
       "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html#page",
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html",
@@ -71,6 +86,13 @@
       "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/clarinet.jpg"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/"},
+        {"@type": "ListItem", "position": 2, "name": "단체 소개", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html"}
+      ]
     }
   ]
 }
@@ -88,7 +110,14 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
-      <a class="nav-link" href="about.html" aria-current="page">소개</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="about.html" aria-current="page">소개</a>
+        <div class="subnav">
+          <a href="about.html" aria-current="page"><b>단체 소개</b><span>미션, 가치, 창립자</span></a>
+          <a href="about.html#founder"><b>창립자</b><span>김서현</span></a>
+          <a href="identity.html"><b>상징과 표준</b><span>금색이 Everyone 위에 놓이는 이유</span></a>
+        </div>
+      </div>
       <div class="nav-item has-sub">
         <a class="nav-link" href="programmes.html">프로그램</a>
         <div class="subnav">
@@ -100,8 +129,28 @@
         </div>
       </div>
       <a class="nav-link" href="get-involved.html">참여하기</a>
-      <a class="nav-link" href="news.html">소식</a>
-      <a class="nav-link" href="support.html">후원</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="news.html">일정과 소식</a>
+        <div class="subnav">
+          <a href="news.html"><b>다가오는 일정</b><span>모집 중인 수업, 열려 있는 음악회</span></a>
+          <a href="archive.html"><b>기록, 2023년부터</b><span>모든 회차와 연주</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="impact.html">성과</a>
+        <div class="subnav">
+          <a href="impact.html"><b>무엇이 달라졌나</b><span>기록이 뒷받침하는 것만</span></a>
+          <a href="impact.html#next"><b>가려는 곳</b><span>다음 걸음, 순서대로</span></a>
+          <a href="impact.html#transparency"><b>투명성</b><span>지위, 돈, 증명되지 않은 것</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="support.html">후원</a>
+        <div class="subnav">
+          <a href="support.html"><b>후원하기</b><span>기부, 문 열기, 방 내어 주기</span></a>
+          <a href="partner.html"><b>기관 파트너십</b><span>기관과 재단을 위한 안내</span></a>
+        </div>
+      </div>
       <a class="btn btn-accent btn-nav" href="contact.html">문의</a>
       <div class="lang-switch" role="group" aria-label="언어">
         <span aria-current="true">한국어</span>
@@ -225,7 +274,7 @@
   </div>
 </section>
 
-<section class="band-photo">
+<section class="band-photo" id="founder">
   <img loading="lazy" decoding="async" src="../images/organ.jpg" alt="" width="1400" height="1050">
   <div class="wrap narrow reveal">
     <p class="eyebrow">창립자</p>
@@ -376,7 +425,8 @@
           <p class="small mt-1">지금 내놓을 수 있는 근거는 사람들이 왔고, 계속 왔고,
              이런 말을 해 주었다는 것까지입니다. 검증된 도구로 웰빙을 재 본 적이 없고,
              찾아가는 음악회의 관객 수도 세어 두지 않았습니다. 2026년 가을 기수부터
-             간단한 사전·사후 조사와 동의 절차를 시작합니다.</p>
+             간단한 사전·사후 조사와 동의 절차를 시작합니다.
+             <a class="link" href="impact.html#transparency">전체 내용 보기</a>.</p>
         </div>
       </div>
     </div>
@@ -437,165 +487,20 @@
 </section>
 
 <section class="band-raised" id="identity">
-  <div class="wrap">
-    <div class="section-head wide reveal">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
       <p class="eyebrow">아이덴티티</p>
-      <h2>디자인 표준을 공개합니다.</h2>
-      <p>작은 단체일수록 내놓는 것이 다 같은 데서 나온 것처럼 보여야 합니다. 디자인
-         도구로 만들었든 본당 주보에 타이핑했든 마찬가지입니다. 저희 대신 무언가를
-         인쇄하는 곳에서도 그대로 쓰시라고 공개해 둡니다.</p>
+      <h2>금색은 <em>Everyone</em> 위에 놓입니다.</h2>
+      <p class="lead mt-3">로고와 색과 서체, 그리고 그것을 쓰는 규칙은 따로 한 페이지에
+         공개해 두었습니다. 저희 이름을 인쇄하는 누구든 그 기준으로 저희를 붙들어 두실 수
+         있도록.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="identity.html">상징과 표준 <span class="arrow">&rarr;</span></a></div>
     </div>
-
-    <div class="split split-center reveal">
-      <div class="logo-pair">
-        <figure class="logo-plate on-light">
-          <img loading="lazy" decoding="async" src="../assets/logo-horizontal.svg" width="341" height="131"
-               alt="가로형 로고 — 높은음자리표와 워드마크">
-          <figcaption>밝은 바탕 — 기본형</figcaption>
-        </figure>
-        <figure class="logo-plate on-dark">
-          <img loading="lazy" decoding="async" src="../assets/logo-reversed.svg" width="341" height="131"
-               alt="어두운 바탕용 반전 로고">
-          <figcaption>네이비 바탕 — 반전형</figcaption>
-        </figure>
-        <figure class="logo-plate on-light">
-          <img loading="lazy" decoding="async" src="../assets/logo-signature.png" width="600" height="210"
-               alt="이메일 서명용 로고 — 같은 조합을 메일 클라이언트 크기로">
-          <figcaption>이메일 서명 &mdash; 같은 조합을 메일 크기로. 투명도를 지우는 메일
-            클라이언트를 위해 흰 배경 판본을 함께 둡니다.</figcaption>
-        </figure>
-      </div>
-      <div>
-        <h3 class="h-sub">마크</h3>
-        <p class="mt-2">높은음자리표와 워드마크를 함께 쓰며, 2026년 8월 17일에 확정했습니다.
-           워드마크 안의 크기 차이가 뜻을 담고 있어서, 그 비례는 바꾸지 않습니다.
-           <strong>&lsquo;for&rsquo;는 작게, &lsquo;Everyone&rsquo;은 크고 금색으로.</strong>
-           이름은 모양이 하나뿐인 고유명사입니다. <span class="brandname">Classical Music
-           for Everyone</span>. 전부 대문자로 쓰지 않고, 대외 문안에서 CMFE로 줄이지 않으며,
-           다른 서체로 다시 조판하지 않습니다.</p>
-        <div class="rules mt-3">
-          <div class="do">
-            <h3 class="h-sub">언제나</h3>
-            <ul>
-              <li>자리표와 워드마크를 함께</li>
-              <li>네 면 모두에 자리표 너비의 절반만큼 여백</li>
-              <li>밝은 바탕 → 가로형, 어두운 바탕 → 반전형</li>
-              <li>사진 위에 놓을 때는 뒤가 조용한 자리에</li>
-            </ul>
-          </div>
-          <div class="dont">
-            <h3 class="h-sub">절대로</h3>
-            <ul>
-              <li>늘이거나 누르거나 기울이거나 색을 바꾸지 않습니다</li>
-              <li>그림자·외곽선·광채를 넣지 않습니다</li>
-              <li>&lsquo;for&rsquo;와 &lsquo;Everyone&rsquo;을 같은 크기로 두지 않습니다</li>
-              <li>파비콘 크기를 넘어서 자리표만 쓰지 않습니다</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">색</h3>
-      <p>여덟 개의 값을 한 번만 정의합니다. 이 사이트의 모든 색은 그중 하나이거나 거기서
-         파생된 톤입니다. 컴포넌트가 자기 색을 새로 만들어 쓰는 일은 없습니다.</p>
-    </div>
-    <div class="swatches reveal">
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--ink-navy)"></i><b>Ink Navy</b><code>#1D2430</code>
-        <span>로고 바탕색, 본문, 어두운 밴드</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-bronze)"></i><b>Gold Bronze</b><code>#B8893A</code>
-        <span>로고 금색, 괘선, 화살표, 도식 선</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-light)"></i><b>Light Gold</b><code>#D9B36A</code>
-        <span>반전 로고의 금색, 어두운 면 위 강조</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--warm-cream)"></i><b>Warm Cream</b><code>#FAF5EE</code>
-        <span>거의 모든 페이지의 배경</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--soft-navy)"></i><b>Soft Navy</b><code>#33405C</code>
-        <span>인쇄물의 패널과 블록</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--antique-gold)"></i><b>Antique Gold</b><code>#B4914F</code>
-        <span>인쇄물의 액센트</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--dusty-rose)"></i><b>Dusty Rose</b><code>#8C4A56</code>
-        <span>강조 — 아껴 쓰고, 본문에는 쓰지 않습니다</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--slate)"></i><b>Slate</b><code>#5F6B7D</code>
-        <span>보조 텍스트</span></div>
-    </div>
-    <div class="callout reveal mt-3">
-      <p class="small"><strong>예쁜 쪽을 포기하게 만드는 규칙 하나.</strong>
-         Gold Bronze는 크림 바탕에서 대비가 2.9:1이라 본문 크기로 쓰면 읽기 어렵습니다. 그래서
-         <em>글자</em>로 쓰는 금색은 언제나 어둡게 조정한 <code>#7F5C1C</code>이고, 금색 버튼의
-         글자는 흰색이 아니라 잉크 네이비입니다. 이 사이트의 모든 글자·배경 조합은 WCAG AA를
-         통과합니다. 예외는 로고 하나뿐인데, 로고는 이미지이고 색을 바꾸지 않기 때문입니다.</p>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">서체</h3>
-      <p>세 벌이고, 네 번째는 들이지 않습니다. EB Garamond는 로고 워드마크의 Cormorant
-         Garamond과 같은 계보의 올드스타일 세리프라, 제목이 로고와 다투지 않고 맞물립니다.
-         한국어는 행간을 더 주고 자간은 덜 조입니다. Noto Sans KR이 그래야 읽힙니다.</p>
-    </div>
-    <div class="specimen reveal">
-      <div>
-        <dfn>EB Garamond — 제목</dfn>
-        <div class="sp-display">Bringing classical music where it&rsquo;s needed!</div>
-        <p>SemiBold. 제목·헤드라인·디스플레이 크기.</p>
-      </div>
-      <div>
-        <dfn>Plus Jakarta Sans — 영문 본문과 라벨</dfn>
-        <div class="sp-body">We teach people to play, not only to listen.</div>
-        <p>Regular · SemiBold · Bold. 본문, 표, 캡션, 모든 라벨.</p>
-      </div>
-      <div>
-        <dfn>Noto Sans KR — 한글</dfn>
-        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로!</div>
-        <p>Regular · Medium · Bold. 한국어 페이지의 제목과 본문 모두.</p>
-      </div>
-      <div>
-        <dfn>Cormorant Garamond — 로고 전용</dfn>
-        <div class="sp-body">워드마크에만 쓰고, 다른 어디에도 쓰지 않습니다.</div>
-        <p>로고의 글자는 외곽선으로 변환돼 있어, 이 사이트는 이 서체를 불러오지 않습니다.</p>
-      </div>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">도식</h3>
-      <p>설명이 여든 낱말을 넘어가면 문단 대신 그림으로 옮깁니다. 도식은 모두 같은 네
-         가지 표시로만 그려서, 열 개가 한 세트로 읽힙니다.</p>
-    </div>
-    <div class="reveal"><figure class="diagram">
-  <p class="diagram-title">이 사이트의 도식을 읽는 법</p>
-  <div class="diagram-canvas">
-  <svg viewBox="0 0 1080 210" role="img" aria-label="네 가지 표시의 범례 — 오선, 음표 머리, 괄호, 크레셴도 쐐기. 각각이 이 사이트의 도식에서 갖는 뜻이 함께 적혀 있다.">
-    <line class="dg-stave" x1="8" y1="34" x2="188" y2="34"/>
-    <line class="dg-stave" x1="8" y1="47" x2="188" y2="47"/>
-    <line class="dg-stave" x1="8" y1="60" x2="188" y2="60"/>
-    <line class="dg-stave" x1="8" y1="73" x2="188" y2="73"/>
-    <line class="dg-stave-base" x1="8" y1="86" x2="188" y2="86"/>
-    <line class="dg-stroke-accent" x1="8" y1="118" x2="208" y2="118" stroke-width="2"/>
-    <text class="dg-h" x="8" y="146" text-anchor="start">오선</text>
-    <text class="dg-sub" x="8" y="174" text-anchor="start">조용한 네 줄과</text>
-    <text class="dg-sub" x="8" y="193" text-anchor="start">무게를 지는 다섯째 줄</text>
-    <ellipse class="dg-note" cx="310" cy="62" rx="11.0" ry="8.0" transform="rotate(-20 310 62)"/>
-    <ellipse class="dg-note" cx="362" cy="62" rx="11.0" ry="8.0" transform="rotate(-20 362 62)"/>
-    <ellipse class="dg-note" cx="414" cy="62" rx="11.0" ry="8.0" transform="rotate(-20 414 62)"/>
-    <line class="dg-stroke-accent" x1="276" y1="118" x2="476" y2="118" stroke-width="2"/>
-    <text class="dg-h" x="276" y="146" text-anchor="start">음표 머리</text>
-    <text class="dg-sub" x="276" y="174" text-anchor="start">단위 — 무엇을 나타내든</text>
-    <text class="dg-sub" x="276" y="193" text-anchor="start">크기가 같습니다</text>
-    <path class="dg-stroke" d="M554 61 V74 H654 V61" fill="none"/>
-    <path class="dg-stroke" d="M668 61 V74 H734 V61" stroke-dasharray="3 4" fill="none"/>
-    <line class="dg-stroke-accent" x1="544" y1="118" x2="744" y2="118" stroke-width="2"/>
-    <text class="dg-h" x="544" y="146" text-anchor="start">괄호</text>
-    <text class="dg-sub" x="544" y="174" text-anchor="start">무엇이 무엇과 묶이는지;</text>
-    <text class="dg-sub" x="544" y="193" text-anchor="start">점선은 아직 주장입니다</text>
-    <path class="dg-note" opacity=".3" d="M820 62 L1008 44 L1008 84 L820 66 Z"/>
-    <line class="dg-stroke-accent" x1="812" y1="118" x2="1012" y2="118" stroke-width="2"/>
-    <text class="dg-h" x="812" y="146" text-anchor="start">크레셴도</text>
-    <text class="dg-sub" x="812" y="174" text-anchor="start">이 세트에서 ‘자란다’를</text>
-    <text class="dg-sub" x="812" y="193" text-anchor="start">뜻하는 유일한 표시</text>
-  </svg>
-  </div>
-  <figcaption>악보에서 빌려 온 네 개의 표시를 모든 도식에서 같은 뜻으로 씁니다. 무게를 지는 것은 음표 머리입니다. 무엇을 나타내든 크기가 같아서, 오선 위의 어떤 것도 다른 것보다 슬그머니 높아질 수 없습니다. 그림 때문에 정한 규칙이 아니라 단체 때문에 정한 규칙입니다.</figcaption>
-</figure></div>
+    <figure class="reveal mark-plate">
+      <img loading="lazy" decoding="async" src="../assets/logo-horizontal.svg" width="341" height="131"
+           alt="Classical Music for Everyone 로고 — 높은음자리표와 워드마크. &lsquo;Everyone&rsquo;이 크고 금색으로 놓여 있다">
+      <figcaption>가로형 로고, 2026년 8월 17일 확정.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -624,10 +529,18 @@
       <div>
         <h3>둘러보기</h3>
         <a href="about.html">단체 소개</a>
+        <a href="identity.html">상징과 표준</a>
         <a href="programmes.html">프로그램</a>
         <a href="get-involved.html">참여하기</a>
-        <a href="news.html">소식과 기록</a>
+        <a href="news.html">일정과 소식</a>
+      </div>
+      <div>
+        <h3>기록과 후원</h3>
+        <a href="impact.html">성과와 근거</a>
+        <a href="archive.html">기록, 2023년부터</a>
         <a href="support.html">후원하기</a>
+        <a href="partner.html">기관 파트너십</a>
+        <a href="impact.html#transparency">투명성</a>
       </div>
       <div>
         <h3>연락</h3>

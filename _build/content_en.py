@@ -61,6 +61,10 @@ CTA = """<section class="band-inverse">
 </section>"""
 
 
+_MAIL_PARTNER_HOME = ("mailto:sby05034@gmail.com?subject=Partnership%20enquiry"
+                      "&body=Organisation%3A%20%0AWhere%3A%20%0AThe%20room%20and%20a%20possible%20date%3A%20%0A"
+                      "One%20line%20on%20what%20you%20have%20in%20mind%3A%20")
+
 # ---------------------------------------------------------------------------
 # Home
 #
@@ -189,6 +193,31 @@ INDEX = f"""<section class="hero">
   </div>
 </section>
 
+<section class="band-raised">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">One story</p>
+      <h2>A question from the back of the room.</h2>
+      <p class="lead mt-3">In November 2024 the Letters Ensemble played for the Missionary
+         Sisters of St Columban in Co. Wicklow. Afterwards one of the sisters asked whether she
+         might play again. She had played the violin, years ago.</p>
+      <p class="mt-3">That question became a recorder ensemble for seven retired Presentation
+         Sisters &mdash; ten weekly rehearsals, an Easter concert of nine pieces, all seven
+         completing. In September 2026 the same course opened to the public, free, in
+         Mulhuddart. One question, one term, one open door: that is the whole model.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html">What the record supports <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/letters-ensemble.jpg" width="1400" height="1050"
+             alt="The Letters Ensemble with their instruments">
+      </div>
+      <figcaption>The Letters Ensemble. Its November 2024 concert in Co. Wicklow is where the
+        teaching programme began.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="band-mark">
   <div class="wrap split split-wide split-center">
     <div class="reveal">
@@ -207,7 +236,7 @@ INDEX = f"""<section class="hero">
       <img src="assets/logo-horizontal.svg" width="341" height="131"
            alt="The Classical Music for Everyone mark: a treble clef beside the wordmark, with &lsquo;Everyone&rsquo; set large and in gold">
       <figcaption>The horizontal mark, adopted 17 August 2026.
-        <a class="link" href="about.html#identity">The full design standard</a></figcaption>
+        <a class="link" href="identity.html">The full design standard</a></figcaption>
     </figure>
   </div>
 </section>
@@ -236,8 +265,19 @@ INDEX = f"""<section class="hero">
         <div class="meta">Volunteer-led today &middot; formalising as a not-for-profit CLG</div>
       </div>
     </div>
-    <div class="btn-row reveal">
-      <a class="btn btn-quiet" href="about.html">Mission, values and the founder <span class="arrow">&rarr;</span></a>
+    <div class="next reveal mt-4">
+      <p class="eyebrow">Where this is going</p>
+      <ol class="next-list">
+        <li><b>Done</b><span>Founded 2024 &middot; pilot completed &middot; first public commission &middot; first community course</span></li>
+        <li><b>Next</b><span>Incorporated as a company limited by guarantee, with directors</span></li>
+        <li><b>Then</b><span>A second cohort, and rooms in Wicklow, Meath and Louth</span></li>
+        <li><b>Then</b><span>The first music educator properly employed</span></li>
+        <li><b>Then</b><span>Wellbeing measured, and reported on this site</span></li>
+      </ol>
+      <div class="btn-row">
+        <a class="btn btn-quiet" href="impact.html#next">The road, in order <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="about.html">Mission, values and the founder</a>
+      </div>
     </div>
   </div>
 </section>
@@ -275,9 +315,67 @@ INDEX = f"""<section class="hero">
          those who may otherwise feel isolated.&rdquo;</p>
       <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
     </div>
-    <p class="lead center mt-4 reveal">Every further contribution does the same arithmetic:
-       it turns a room we cannot get to into a room we can.</p>
-    <div class="btn-row center-row reveal"><a class="btn btn-quiet" href="support.html">What support pays for <span class="arrow">→</span></a></div>
+    <p class="lead center mt-4 reveal">Every further contribution turns a room we cannot get
+       to into a room we can.</p>
+    <div class="btn-row center-row reveal">
+      <a class="btn btn-quiet" href="impact.html">Dated figures, and what is not proved <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="support.html">What support pays for</a>
+    </div>
+  </div>
+  <div class="ticker mt-4" aria-label="Institutions we have worked with">
+    <p class="eyebrow center-row">Rooms we have played in</p>
+    <div class="ticker-track">
+      <ul>
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>Presentation Sisters</li>
+        <li>Missionary Sisters of St Columban</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>National Concert Hall</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>Missions &Eacute;trang&egrave;res de Paris</li>
+        <li>Sanctuary of Our Lady of Lourdes</li><li>London Korean Catholic Church</li>
+        <li>Gwandukjeong Martyrs Memorial Centre, Daegu</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>Presentation Sisters</li>
+        <li>Missionary Sisters of St Columban</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>National Concert Hall</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>Missions &Eacute;trang&egrave;res de Paris</li>
+        <li>Sanctuary of Our Lady of Lourdes</li><li>London Korean Catholic Church</li>
+        <li>Gwandukjeong Martyrs Memorial Centre, Daegu</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">For organisations</p>
+      <h2>Are you a nursing home, hospital or parish?</h2>
+      <p class="lead mt-3">Tell us your room and your date. Enquiring takes less than two
+         minutes, and everything except the room arrives with us &mdash; players, instruments,
+         stands, the programme, the insurance.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="partner.html">Partner with us <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="{_MAIL_PARTNER_HOME}">Email, two minutes</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <ul class="checklist">
+        <li><strong>Care homes and hospitals</strong> &mdash; thirty to sixty minutes in the day
+            room or the atrium, acoustic, nothing for the audience to pay.</li>
+        <li><strong>Parishes and religious communities</strong> &mdash; liturgical music, or a
+            concert after Mass. Roughly sixteen of our twenty outreach performances were in
+            sacred places.</li>
+        <li><strong>Community centres</strong> &mdash; a term-long beginners&rsquo; course in your
+            room; you provide the room and a contact, we provide the rest.</li>
+        <li><strong>Councils, trusts and companies</strong> &mdash; fund a season, fund a place,
+            or bring your people. Every partnership comes with a named contact and a dated
+            report.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -358,7 +456,7 @@ ABOUT = f"""<section class="page-hero">
   </div>
 </section>
 
-<section class="band-photo">
+<section class="band-photo" id="founder">
   <img src="images/organ.jpg" alt="" width="1400" height="1050">
   <div class="wrap narrow reveal">
     <p class="eyebrow">The founder</p>
@@ -518,7 +616,8 @@ ABOUT = f"""<section class="page-hero">
           <p class="small mt-1">Our evidence is participation, retention and
              testimony — not measured outcome. Wellbeing has not been measured with a validated
              instrument, and outreach audiences were never counted. From the autumn 2026 cohort we
-             are introducing a simple pre/post measure and a consent framework.</p>
+             are introducing a simple pre/post measure and a consent framework.
+             <a class="link" href="impact.html#transparency">The full statement</a>.</p>
         </div>
       </div>
     </div>
@@ -543,134 +642,20 @@ ABOUT = f"""<section class="page-hero">
 </section>
 
 <section class="band-raised" id="identity">
-  <div class="wrap">
-    <div class="section-head wide reveal">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
       <p class="eyebrow">Identity</p>
-      <h2>The design standard, in the open.</h2>
-      <p>Everything a small organisation puts its name on has to look like it came from the same
-         place, whether it was made in a design tool or typed into a parish newsletter. This is
-         the standard we hold ourselves to, published so that partners printing something on our
-         behalf can hold us to it too.</p>
+      <h2>The gold falls on <em>Everyone</em>.</h2>
+      <p class="lead mt-3">The mark, the colours, the type and the rules for using them are
+         published on a page of their own, so that anyone printing our name can hold us to the
+         standard.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="identity.html">The mark, and what it commits us to <span class="arrow">&rarr;</span></a></div>
     </div>
-
-    <div class="split split-center reveal">
-      <div class="logo-pair">
-        <figure class="logo-plate on-light">
-          <img src="assets/logo-horizontal.svg" width="341" height="131"
-               alt="The horizontal logo: a treble clef beside the wordmark">
-          <figcaption>On light — the default</figcaption>
-        </figure>
-        <figure class="logo-plate on-dark">
-          <img src="assets/logo-reversed.svg" width="341" height="131"
-               alt="The reversed logo, for dark backgrounds">
-          <figcaption>On navy — reversed</figcaption>
-        </figure>
-        <figure class="logo-plate on-light">
-          <img src="assets/logo-signature.png" width="600" height="210"
-               alt="The signature lock-up, used at the foot of an email">
-          <figcaption>Email signature &mdash; the same lock-up at mail size. A white-background
-            version is kept alongside it for clients that strip transparency.</figcaption>
-        </figure>
-      </div>
-      <div>
-        <h3 class="h-sub">The mark</h3>
-        <p class="mt-2">A treble clef with the wordmark, adopted on 17 August 2026. The
-           proportion inside the wordmark carries the meaning and never changes:
-           <strong>&ldquo;for&rdquo; small, &ldquo;Everyone&rdquo; large and gold.</strong> The
-           name is a proper noun with one shape — <span class="brandname">Classical Music for
-           Everyone</span> — and is never set in all capitals, never abbreviated to CMFE in
-           public copy, and never reset in another typeface.</p>
-        <div class="rules mt-3">
-          <div class="do">
-            <h3 class="h-sub">Always</h3>
-            <ul>
-              <li>Clef and wordmark together</li>
-              <li>Clear space of half the clef&rsquo;s width, on all four sides</li>
-              <li>Light ground → horizontal; dark ground → reversed</li>
-              <li>On a photograph, place it where the area behind it is quiet</li>
-            </ul>
-          </div>
-          <div class="dont">
-            <h3 class="h-sub">Never</h3>
-            <ul>
-              <li>Stretch, squash, skew or recolour it</li>
-              <li>Add a shadow, outline or glow</li>
-              <li>Make &ldquo;for&rdquo; and &ldquo;Everyone&rdquo; the same size</li>
-              <li>Use the clef alone above favicon size</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">Colour</h3>
-      <p>Eight values, defined once. Every colour on this site resolves to one of them or to a
-         tint derived from one — a component never invents a colour of its own.</p>
-    </div>
-    <div class="swatches reveal">
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--ink-navy)"></i><b>Ink Navy</b><code>#1D2430</code>
-        <span>Logo base, body text, dark bands</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-bronze)"></i><b>Gold Bronze</b><code>#B8893A</code>
-        <span>Logo gold, rules, arrows, diagram strokes</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-light)"></i><b>Light Gold</b><code>#D9B36A</code>
-        <span>The gold of the reversed logo, and on dark grounds</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--warm-cream)"></i><b>Warm Cream</b><code>#FAF5EE</code>
-        <span>The background of nearly every page</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--soft-navy)"></i><b>Soft Navy</b><code>#33405C</code>
-        <span>Panels and blocks in print material</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--antique-gold)"></i><b>Antique Gold</b><code>#B4914F</code>
-        <span>Accents in print material</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--dusty-rose)"></i><b>Dusty Rose</b><code>#8C4A56</code>
-        <span>Highlight — used sparingly, never for body text</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--slate)"></i><b>Slate</b><code>#5F6B7D</code>
-        <span>Secondary text</span></div>
-    </div>
-    <div class="callout reveal mt-3">
-      <p class="small"><strong>One rule that costs us the prettier option.</strong> Gold Bronze
-         is a 2.9:1 contrast against cream, which fails at body size. So gold as <em>text</em> is
-         always the darkened <code>#7F5C1C</code>, and the gold buttons carry ink navy lettering
-         rather than white. Every text and background pair on this site meets WCAG AA. The logo
-         is the one thing exempt, because a logo is an image and is never recoloured.</p>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">Type</h3>
-      <p>Three faces and no fourth. EB Garamond is an old-style serif in the same lineage as
-         the Cormorant Garamond of the wordmark, so the headings rhyme with the logo rather
-         than argue with it; Korean gets more leading and less negative tracking, because
-         Noto Sans KR needs both.</p>
-    </div>
-    <div class="specimen reveal">
-      <div>
-        <dfn>EB Garamond — headings</dfn>
-        <div class="sp-display">Bringing classical music where it&rsquo;s needed!</div>
-        <p>SemiBold. Titles, headlines and display sizes.</p>
-      </div>
-      <div>
-        <dfn>Plus Jakarta Sans — body and labels</dfn>
-        <div class="sp-body">We teach people to play, not only to listen.</div>
-        <p>Regular, SemiBold, Bold. Body text, tables, captions, every label.</p>
-      </div>
-      <div>
-        <dfn>Noto Sans KR — Korean</dfn>
-        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로!</div>
-        <p>Regular, Medium, Bold. Headings and body alike on the Korean pages.</p>
-      </div>
-      <div>
-        <dfn>Cormorant Garamond — logo only</dfn>
-        <div class="sp-body">Used for the wordmark and nowhere else.</div>
-        <p>The lettering in the logo is outlined, so the face is never loaded on this site.</p>
-      </div>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">Diagrams</h3>
-      <p>Where an explanation runs past about eighty words, it stops being a paragraph and
-         becomes a figure. Every figure on this site is drawn from the same four marks, so ten
-         diagrams read as one set rather than ten flowcharts.</p>
-    </div>
-    <div class="reveal">{dg.vocabulary(L)}</div>
+    <figure class="reveal mark-plate">
+      <img src="assets/logo-horizontal.svg" width="341" height="131"
+           alt="The Classical Music for Everyone mark: a treble clef beside the wordmark, with &lsquo;Everyone&rsquo; set large and in gold">
+      <figcaption>The horizontal mark, adopted 17 August 2026.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -785,7 +770,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <dl class="facts">
         <dt>Group size</dt><dd>About five</dd>
         <dt>Been to</dt><dd>National Symphony Orchestra · Irish National Opera · RTÉ Concert Orchestra · the NCH International Series</dd>
-        <dt>Further afield</dt><dd>The BBC Proms, in two consecutive summers</dd>
+        <dt>Further afield</dt><dd>The BBC Proms, in two summers</dd>
         <dt>Cost</dt><dd>Tickets can be as little as £8</dd>
         <dt>To date</dt><dd>10 recorded outings</dd>
       </dl>
@@ -1063,10 +1048,11 @@ GET_INVOLVED = f"""<section class="page-hero">
 
 NEWS = f"""<section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow">News &amp; record</p>
-    <h1>What is coming, and what has happened.</h1>
-    <p>We keep a ledger rather than a highlight reel. Every session and performance is logged on
-       the day, so any figure we quote traces back to a row.</p>
+    <p class="eyebrow">What&rsquo;s on</p>
+    <h1>What is coming, and what has happened this year.</h1>
+    <p>One class enrolling, one concert with the door open, and the year so far. The full
+       ledger since 2023 &mdash; every session and performance, on the day it happened &mdash;
+       is on <a class="crumb" href="archive.html">the record</a>.</p>
   </div>
 </section>
 
@@ -1122,58 +1108,16 @@ NEWS = f"""<section class="page-hero">
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">The story so far</p>
-      <h2>From one clarinet to a community.</h2>
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">The record</p>
+      <h2>Every session and performance since 2023, on one page.</h2>
+      <p class="lead mt-3">A chronicle drawn as four staves, one a year, and the tables under
+         it. The milestones, what was planned and not delivered, and what was never written
+         down are all there too.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="archive.html">Open the record <span class="arrow">&rarr;</span></a></div>
     </div>
-    <div class="split split-wide">
-      <div class="timeline reveal">
-        <div class="tl-item"><div class="tl-date">February 2023</div>
-          <h3>Before the beginning</h3>
-          <p>A clarinet solo at the English-language Mass in Lourdes — the outreach strand, two
-             years before it had a name.</p></div>
-        <div class="tl-item"><div class="tl-date">January 2024</div>
-          <h3>It starts</h3>
-          <p><span class="brandname">Classical Music for Everyone</span> is founded in Dublin,
-             and the Letters Ensemble with it. The first lecture-recital
-             is held in Dublin 18, for six people.</p></div>
-        <div class="tl-item"><div class="tl-date">2024</div>
-          <h3>Music goes out</h3>
-          <p>Concerts at Dalgan Park and for the Missionary Sisters of St Columban; performances in
-             London, Paris and Daegu. The lecture series moves to TU Dublin.</p></div>
-        <div class="tl-item"><div class="tl-date">2024–2025</div>
-          <h3>Going together</h3>
-          <p>Accompanied concert-going becomes a strand of its own — the NSO, Irish National Opera,
-             and the BBC Proms in two consecutive summers.</p></div>
-        <div class="tl-item"><div class="tl-date">October 2025</div>
-          <h3>An audience becomes players</h3>
-          <p>Preparation begins for a recorder ensemble with seven retired Presentation Sisters —
-             survey, permissions, vetting, individual lessons.</p></div>
-        <div class="tl-item"><div class="tl-date">December 2025</div>
-          <h3>To the National Concert Hall</h3>
-          <p>The fifteenth learning session is a concert at Ireland&rsquo;s National Concert Hall,
-             attended together.</p></div>
-        <div class="tl-item"><div class="tl-date">Jan–Apr 2026</div>
-          <h3>The pilot, and its concert</h3>
-          <p>Ten weekly rehearsals at Warrenmount, then an Easter concert of nine pieces at
-             Clondalkin Lodge. All seven completed.</p></div>
-        <div class="tl-item"><div class="tl-date">August 2026</div>
-          <h3>First public commission</h3>
-          <p>Two concerts for South Dublin Live 2026 — Tallaght University Hospital and Rua Red.</p></div>
-        <div class="tl-item"><div class="tl-date">September 2026</div>
-          <h3>The model opens to the public</h3>
-          <p>The first community recorder ensemble course begins at Mulhuddart Community Centre,
-             Dublin 15 — twelve weeks, free.</p></div>
-      </div>
-      <div>
-        <figure class="reveal">
-          <div class="photo photo-4x3">
-            <img src="images/letters-ensemble.jpg" width="1400" height="1050"
-                 alt="The Letters Ensemble with their instruments">
-          </div>
-          <figcaption>The Letters Ensemble, founded January 2024.</figcaption>
-        </figure>
+    <div>
         <div class="callout reveal mt-3">
           <h3 class="h-sub">Press &amp; publication</h3>
           <ul class="plainlist mt-1">
@@ -1187,7 +1131,6 @@ NEWS = f"""<section class="page-hero">
                 Tallaght concerts</li>
           </ul>
         </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1204,73 +1147,49 @@ SUPPORT = f"""<section class="page-hero">
     <p class="eyebrow">Support</p>
     <h1>Help keep the door open.</h1>
     <p>We are volunteer-led. Support pays for recorders and scores, room hire, and the travel
-       that carries music to rooms it would not otherwise reach.</p>
+       that carries music to rooms it would not otherwise reach. Here is what it has done, what
+       it becomes, and how to give it.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">How the money works</p>
-      <h2>A paid booking is what keeps a free seat free.</h2>
-      <p>We are a social enterprise rather than a pure charity. That is not a technicality —
-         it is what lets the free places survive a dip in goodwill.</p>
+    <div class="section-head wide reveal">
+      <p class="eyebrow">What support has already done</p>
+      <h2>Support bought a vehicle. The vehicle bought distance.</h2>
+      <p>Gifts from individuals in Europe and Korea put a vehicle on the road. Players,
+         instruments and stands now travel together to care homes, parishes and hostels that no
+         bus timetable reaches &mdash; Wicklow, Meath, Westmeath, and further by arrangement.</p>
     </div>
-    <div class="reveal">{dg.subsidy(L)}</div>
+    <div class="grid grid-4 stagger">
+      <div class="card"><span class="kicker">A gift becomes</span><h3>A recorder in someone&rsquo;s hands</h3>
+        <p>A descant recorder costs between &euro;8 and &euro;15. We advise on buying one, supply at
+           cost, or lend one for the term.</p></div>
+      <div class="card"><span class="kicker">A gift becomes</span><h3>Scores nobody has to pay for</h3>
+        <p>Every part, arranged so whoever turned up can play it, printed at our cost with
+           enlarged notation where eyes need it.</p></div>
+      <div class="card"><span class="kicker">A gift becomes</span><h3>A room for a term</h3>
+        <p>Where a venue cannot give the room, support hires it &mdash; and a warm room once a
+           week is where a course happens.</p></div>
+      <div class="card"><span class="kicker">A gift becomes</span><h3>The drive to the next room</h3>
+        <p>Fuel for the vehicle donors bought, so a day room in Co. Wicklow costs a morning, not
+           a budget line.</p></div>
+    </div>
+    <p class="tiny mt-3 reveal">No unit costs are quoted here beyond the price of a recorder,
+       because the others vary by room and by term. Ask, and we will show you the current
+       figures for the programme you have in mind.</p>
   </div>
 </section>
 
 <section class="band-raised">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">Track record</p>
-      <h2>Who has backed this so far.</h2>
-      <p>Everything before 2026 was self-funded and voluntary. We publish the record because a
-         funder&rsquo;s first question is who came before them.</p>
+      <p class="eyebrow">How the money works</p>
+      <h2>A paid booking is what keeps a free seat free.</h2>
+      <p>We are a social enterprise rather than a pure charity. That is not a technicality &mdash;
+         it is what lets the free places survive a dip in goodwill.</p>
     </div>
-    <div class="table-scroll reveal">
-      <table>
-        <thead><tr><th scope="col">Source</th><th scope="col">Detail</th><th scope="col">Status</th></tr></thead>
-        <tbody>
-          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">Arts Office ·
-              South Dublin Live 2026</span></td>
-              <td>A commission for <em>Shared Voices of South Dublin</em> — our first publicly
-                  funded work.</td><td>Received</td></tr>
-          <tr><td><strong>Myongdohoe Scholarship</strong><br><span class="tiny">Lay Apostolate
-              Committee, Catholic Bishops&rsquo; Conference of Korea</span></td>
-              <td>Termly support from March 2025 for the founder&rsquo;s musical apostolate.</td>
-              <td>Concluded</td></tr>
-          <tr><td><strong>Individual donors</strong></td>
-              <td>Gifts from supporters in Europe and Korea towards making regular outreach
-                  possible.</td><td>Ongoing</td></tr>
-          <tr><td><strong>Partner venues, in kind</strong></td>
-              <td>Tallaght University Hospital — venue and operating time. Mulhuddart Community
-                  Centre — the room. TU Dublin — rehearsal space.</td><td>Continuing</td></tr>
-          <tr><td><strong>TU Dublin Venture Lab</strong></td>
-              <td>Social enterprise start-up programme, from September 2024.</td><td>Completed</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="split split-center reveal mt-4">
-      <div class="quote">
-        <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
-           within limited personal financial circumstances, he continues to give generously of his
-           time, energy, and talent.&rdquo;</p>
-        <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
-      </div>
-      <div>
-        <h3 class="h-sub">Letters written for the South Dublin Live application</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>Rua Red</strong> — South Dublin&rsquo;s contemporary arts centre</li>
-          <li><strong>The Civic Theatre</strong>, Tallaght</li>
-          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
-          <li><strong>SDCC Arts Office</strong> — selection for South Dublin Live 2026</li>
-        </ul>
-        <p class="tiny mt-2">These letters were written in support of that one application. They
-           are not a general endorsement of everything we run, and we do not present them as
-           one.</p>
-      </div>
-    </div>
+    <div class="reveal">{dg.subsidy(L)}</div>
   </div>
 </section>
 
@@ -1286,16 +1205,18 @@ SUPPORT = f"""<section class="page-hero">
            and we will send the current payment details and say what it funds.</p></div>
       <div class="card"><span class="kicker">02</span><h3>Fund a programme</h3>
         <p>For trusts, foundations, councils and corporate funders: a full proposal, budget and
-           activity record on request.</p></div>
+           activity record on request. <a class="link" href="partner.html">Partner with us</a>
+           says what a partnership comes with.</p></div>
       <div class="card"><span class="kicker">03</span><h3>Open a door</h3>
         <p>An introduction to a care home, parish, community centre or hospital is worth as much
-           as a donation — often more.</p></div>
+           as a donation &mdash; often more.</p></div>
       <div class="card"><span class="kicker">04</span><h3>Give the room</h3>
         <p>A warm room once a week for a term is the most valuable in-kind gift there is. It
            converts directly into free places.</p></div>
     </div>
     <div class="btn-row reveal center-row mt-4">
-      <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20CMFE">Offer support <span class="arrow">→</span></a>
+      <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20Classical%20Music%20for%20Everyone">Offer support <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-quiet" href="partner.html">For organisations</a>
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=Partnership%20and%20funding%20enquiry">Request the proposal</a>
     </div>
     <div class="callout reveal mt-4">
@@ -1304,6 +1225,25 @@ SUPPORT = f"""<section class="page-hero">
          currently formalising as a not-for-profit company limited by guarantee. We are not yet a
          registered charity, so gifts are not eligible for charitable tax relief. We would rather
          say so plainly than let anyone assume otherwise.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">Track record</p>
+      <h2 class="h-md">Who has backed this so far.</h2>
+      <p class="mt-3">Everything before 2026 was self-funded and voluntary. The full record of
+         funding and support, the letters written for the South Dublin Live application, and
+         what has not yet been proved are published together on one page.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html#transparency">Transparency <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <div class="quote reveal">
+      <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
+         within limited personal financial circumstances, he continues to give generously of his
+         time, energy, and talent.&rdquo;</p>
+      <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
     </div>
   </div>
 </section>"""
@@ -1374,3 +1314,775 @@ CONTACT = """<section class="page-hero">
        Volunteer-led. Community music · social enterprise · arts and health.</p>
   </div>
 </section>"""
+
+
+# ---------------------------------------------------------------------------
+# Impact — what has changed, and only what the record supports
+#
+# The page 12 — Brand & Web Master §8 calls "Our impact": dated figures, one
+# story, the road ahead, and a transparency block that says what the
+# organisation is, what it has received, and what it has not proved.
+# Every figure is a row in 03 — Track Record or 09 — Impact & Support.
+# ---------------------------------------------------------------------------
+
+import archive as ar
+
+# a dated figure. --n is read by the CSS counter that counts it up on scroll;
+# the visible number is also in the markup, so it is there without CSS.
+def _fig(n, label, period, suffix=""):
+    return (f'<div class="figure"><b class="count" style="--n:{n}"><span>{n}{suffix}</span></b>'
+            f'<span class="figure-label">{label}</span>'
+            f'<span class="figure-period">{period}</span></div>')
+
+
+IMPACT = f"""<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Our impact</p>
+    <h1>What has changed, and only what the record supports.</h1>
+    <p>No claim here about measured wellbeing or reduced isolation, because neither has been
+       measured. Every figure below carries the period it covers and traces to a dated row in
+       <a class="crumb" href="archive.html">the record</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Dated figures</p>
+      <h2>A number without a date is marketing. These have dates.</h2>
+    </div>
+    <div class="figures stagger">
+      {_fig(40, "sessions and performances", "2024 – 2026", "+")}
+      {_fig(17, "lecture-recitals", "January 2024 – February 2026")}
+      {_fig(143, "attendances at those lectures", "sessions 1–15 · 2024 – 2025")}
+      {_fig(20, "outreach performances", "2023 – 2025 · four countries")}
+      {_fig(7, "of 7 completed the pilot ensemble", "January – April 2026")}
+      {_fig(25, "venues and institutions", "2023 – 2026")}
+      {_fig(213, "hours recorded, preparation included", "to 27 August 2026")}
+      {_fig(4, "Letters Ensemble concerts", "March 2024 – December 2025")}
+    </div>
+    <p class="tiny mt-3 reveal">Over 40 is 17 lecture-recitals, 20 outreach performances, one
+       pilot concert and two South Dublin Live concerts. The four ensemble concerts sit inside
+       the twenty and are not counted twice. Audiences at outreach performances were never
+       counted, so no audience figure is given.</p>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">What changed</p>
+      <h2>Seven things the record supports.</h2>
+      <p>Each one is a claim we can show you the paper for. Where the paper is a letter, a
+         programme or an attendance sheet, that is said.</p>
+    </div>
+    <div class="evidence evidence-2 stagger">
+      <div><dl><dt>More people came</dt>
+        <dd>Attendance at the free lecture-recitals rose from <strong>6</strong> at the first
+            session to <strong>14</strong>, with the same people returning &mdash; 15 sessions
+            and 143 attendances over two years, each one counted on the day.</dd></dl></div>
+      <div><dl><dt>An audience became players</dt>
+        <dd>At a 2024 concert for the Missionary Sisters of St Columban, a sister asked whether
+            she might play again. That question became the 2026 recorder ensemble for retired
+            religious: <strong>all seven completed</strong> the ten weeks and performed nine
+            pieces in public.</dd></dl></div>
+      <div><dl><dt>Learning fed sharing</dt>
+        <dd>A participant who came to a lecture-recital remembered playing the viola at school
+            and joined the Letters Ensemble. The two pillars are a circuit, and this is one turn
+            of it.</dd></dl></div>
+      <div><dl><dt>Hard-to-reach places were reached</dt>
+        <dd>Residential and nursing care, retired religious communities, a homeless hostel, an
+            HSE day service, a university hospital, rural parishes, a martyrs&rsquo; shrine
+            &mdash; and the National Concert Hall, attended together.</dd></dl></div>
+      <div><dl><dt>An external body validated it</dt>
+        <dd>South Dublin County Council&rsquo;s Arts Office selected the project for
+            <strong>South Dublin Live 2026</strong> and funded it. Everything before that had
+            been self-funded and voluntary.</dd></dl></div>
+      <div><dl><dt>The Church vouched for it</dt>
+        <dd>A letter of recommendation from Donal Roche, Auxiliary Bishop of Dublin, and a
+            scholarship from the Lay Apostolate Committee of the Catholic Bishops&rsquo;
+            Conference of Korea.</dd></dl></div>
+      <div><dl><dt>Institutions left the door open</dt>
+        <dd>Letters of support from Rua Red, The Civic and Tallaght University Hospital for the
+            South Dublin Live application; the hospital&rsquo;s National Centre for Arts &amp;
+            Health met us in the Atrium to plan the concert that then took place there.</dd></dl></div>
+      <div><dl><dt>Support bought a vehicle</dt>
+        <dd>Gifts from individuals in Europe and Korea put a vehicle on the road, so players,
+            instruments and stands travel together to rooms no bus timetable reaches.</dd></dl></div>
+    </div>
+    <div class="reveal mt-4">{dg.attendance(L)}</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/letters-ensemble.jpg" width="1400" height="1050"
+             alt="The Letters Ensemble with their instruments">
+      </div>
+      <figcaption>The Letters Ensemble, whose 2024 concert in Co. Wicklow is where the
+        teaching programme began.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">One story</p>
+      <h2 class="h-md">A question from the back of the room.</h2>
+      <p class="lead mt-2">In November 2024 the Letters Ensemble played for the Missionary
+         Sisters of St Columban in Co. Wicklow. Afterwards one of the sisters asked whether she
+         might play again. She had played the violin, years ago.</p>
+      <p class="mt-2">That question became a recorder ensemble for seven retired Presentation
+         Sisters: three months of preparation, ten weekly rehearsals at Warrenmount, and an
+         Easter concert of nine pieces at Clondalkin Lodge. All seven completed. In September
+         2026 the same course opened to the public at Mulhuddart Community Centre, free.</p>
+      <p class="mt-2">We do not name the sister, because we have not asked her. That is the
+         rule for every story on this site.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="programmes/recorder-ensemble.html">The course that came of it <span class="arrow">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Theory of change</p>
+      <h2>What a room, an hour and a recorder are supposed to add up to.</h2>
+    </div>
+    <div class="reveal">{dg.theory_of_change(L)}</div>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">Where this is going</p>
+      <h2>Four things done, four to do, in that order.</h2>
+      <p>The second social aim &mdash; music educators in secure, properly paid work &mdash; is
+         the reason the list ends where it does. A model that runs on one volunteer is a pilot,
+         not a programme.</p>
+    </div>
+    <div class="reveal">{dg.roadmap(L)}</div>
+    <div class="grid grid-2 stagger mt-4">
+      <div class="card"><span class="kicker">Measuring</span>
+        <h3>A simple pre and post measure, from autumn 2026</h3>
+        <p>Every cohort from the Mulhuddart course onward is asked the same short questions
+           about connection and confidence at the start and the end of term, with written
+           consent for anything quoted. The next report on this page will be able to speak to
+           wellbeing with the same confidence as it speaks to attendance.</p></div>
+      <div class="card"><span class="kicker">Recording</span>
+        <h3>The record, kept on the day</h3>
+        <p>Every session and performance is logged when it happens &mdash; date, venue, what
+           was done, an estimate of who was there, and what evidence exists. The practice is
+           also documented as research, and that continues. What has not been counted is said
+           so, in the same table.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised" id="transparency">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">Transparency</p>
+      <h2>What we are, what we have received, and what we have not proved.</h2>
+      <p>A funder forgives a stage. What a funder does not forgive is vagueness. So here is
+         the stage, plainly.</p>
+    </div>
+    <div class="split reveal">
+      <div>
+        <h3 class="h-sub">Status</h3>
+        <dl class="facts">
+          <dt>Operating as</dt><dd>A founder-led community music social enterprise, volunteer-led,
+              founded in Dublin in January 2024</dd>
+          <dt>Legal form</dt><dd>Formalising as a not-for-profit company limited by guarantee
+              (CLG). Not yet a registered charity; gifts are not eligible for tax relief</dd>
+          <dt>Directors</dt><dd>Not yet appointed. A board of at least three voluntary directors is
+              the next step in the list above</dd>
+          <dt>Insurance</dt><dd>Public liability insurance in place, from August 2026</dd>
+          <dt>Vetting</dt><dd>Garda vetting completed where the work requires it; documentation
+              available to partner venues on request</dd>
+          <dt>Founder</dt><dd>Andrew Seohyeon Kim, BMus (Hons), TU Dublin Conservatoire &mdash;
+              <a class="link" href="about.html#founder">profile</a></dd>
+        </dl>
+      </div>
+      <div>
+        <h3 class="h-sub">What has not been proved</h3>
+        <ul class="checklist mt-2">
+          <li><strong>Wellbeing has not been measured.</strong> No validated instrument, no pre
+              and post measure yet. Anything about easing isolation rests on what participants
+              said.</li>
+          <li><strong>Audiences have not been counted.</strong> No audience figure exists for any
+              of the twenty outreach performances.</li>
+          <li><strong>Nothing has been followed up.</strong> What remained after the ten weeks
+              ended is unknown.</li>
+          <li><strong>There is no comparison.</strong> No other instrument, cohort or tutor has
+              been tried against it.</li>
+          <li><strong>The practitioner is the researcher.</strong> A strength for design; a limit
+              on claims about outcomes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-head reveal mt-4">
+      <h3 class="h-sub">Funding and support to date</h3>
+      <p>Everything before 2026 was self-funded and voluntary. The record is published because a
+         funder&rsquo;s first question is who came before them, however small.</p>
+    </div>
+    <div class="table-scroll reveal">
+      <table>
+        <thead><tr><th scope="col">Source</th><th scope="col">Detail</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">Arts Office ·
+              South Dublin Live 2026</span></td>
+              <td>&euro;2,000 for <em>Shared Voices of South Dublin</em> &mdash; two concerts delivered,
+                  at Tallaght University Hospital and Rua Red. Our first publicly funded work.</td>
+              <td>Received</td></tr>
+          <tr><td><strong>Myongdohoe Scholarship</strong><br><span class="tiny">Lay Apostolate
+              Committee, Catholic Bishops&rsquo; Conference of Korea</span></td>
+              <td>Termly support from March 2025 for the founder&rsquo;s musical apostolate.</td>
+              <td>Concluded</td></tr>
+          <tr><td><strong>Individual donors</strong></td>
+              <td>Gifts from supporters in Europe and Korea that put a vehicle on the road.</td>
+              <td>Ongoing</td></tr>
+          <tr><td><strong>Partner venues, in kind</strong></td>
+              <td>Tallaght University Hospital &mdash; venue and operating time. Mulhuddart Community
+                  Centre &mdash; the room. TU Dublin &mdash; rehearsal space.</td><td>Continuing</td></tr>
+          <tr><td><strong>TU Dublin Venture Lab</strong></td>
+              <td>Social enterprise start-up programme, from September 2024.</td><td>Completed</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="split split-center reveal mt-4">
+      <div class="quote">
+        <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
+           within limited personal financial circumstances, he continues to give generously of his
+           time, energy, and talent.&rdquo;</p>
+        <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
+      </div>
+      <div>
+        <h3 class="h-sub">Letters written for the South Dublin Live application</h3>
+        <ul class="plainlist mt-2">
+          <li><strong>Rua Red</strong> &mdash; South Dublin&rsquo;s contemporary arts centre</li>
+          <li><strong>The Civic Theatre</strong>, Tallaght</li>
+          <li><strong>Tallaght University Hospital</strong> &mdash; National Centre for Arts &amp; Health</li>
+          <li><strong>SDCC Arts Office</strong> &mdash; selection for South Dublin Live 2026</li>
+        </ul>
+        <p class="tiny mt-2">These letters were written in support of that one application. They
+           are not a general endorsement of everything we run, and we do not present them as
+           one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{CTA}"""
+
+
+# ---------------------------------------------------------------------------
+# Archive — the record, 2023 to date
+# ---------------------------------------------------------------------------
+
+ARCHIVE = f"""<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">The record</p>
+    <h1>Every session and performance, 2023 to date.</h1>
+    <p>A ledger rather than a highlight reel. Each row is logged on the day, with the venue,
+       so any figure quoted anywhere on this site can be traced to a line here. Rows the record
+       marks as unconfirmed are left out rather than guessed at.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap reveal">
+    {dg.chronicle(L)}
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Milestones</p>
+      <h2>From one clarinet to a community.</h2>
+    </div>
+    <div class="split split-wide">
+      <div class="timeline reveal">
+        <div class="tl-item"><div class="tl-date">February 2023</div>
+          <h3>Before the beginning</h3>
+          <p>A clarinet solo at the English-language Mass in Lourdes &mdash; the outreach strand,
+             a year before it had a name.</p></div>
+        <div class="tl-item"><div class="tl-date">January 2024</div>
+          <h3>It starts</h3>
+          <p><span class="brandname">Classical Music for Everyone</span> is founded in Dublin,
+             and the Letters Ensemble with it. The first lecture-recital is held in Dublin 18,
+             for six people.</p></div>
+        <div class="tl-item"><div class="tl-date">2024</div>
+          <h3>Music goes out</h3>
+          <p>Concerts at Dalgan Park and for the Missionary Sisters of St Columban; performances in
+             London, Paris and Daegu. The lecture series moves to TU Dublin.</p></div>
+        <div class="tl-item"><div class="tl-date">2024–2025</div>
+          <h3>Going together</h3>
+          <p>Accompanied concert-going becomes a strand of its own &mdash; the NCH International
+             Series, the National Symphony Orchestra, and the BBC Proms in two summers.</p></div>
+        <div class="tl-item"><div class="tl-date">October 2025</div>
+          <h3>An audience becomes players</h3>
+          <p>Preparation begins for a recorder ensemble with seven retired Presentation Sisters
+             &mdash; survey, permissions, vetting, individual lessons.</p></div>
+        <div class="tl-item"><div class="tl-date">December 2025</div>
+          <h3>To the National Concert Hall</h3>
+          <p>The fifteenth learning session is a concert at Ireland&rsquo;s National Concert Hall,
+             attended together.</p></div>
+        <div class="tl-item"><div class="tl-date">Jan–Apr 2026</div>
+          <h3>The pilot, and its concert</h3>
+          <p>Ten weekly rehearsals at Warrenmount, then an Easter concert of nine pieces at
+             Clondalkin Lodge. All seven completed.</p></div>
+        <div class="tl-item"><div class="tl-date">August 2026</div>
+          <h3>First public commission</h3>
+          <p>Two concerts for South Dublin Live 2026 &mdash; Tallaght University Hospital and Rua Red.</p></div>
+        <div class="tl-item"><div class="tl-date">September 2026</div>
+          <h3>The model opens to the public</h3>
+          <p>The first community recorder ensemble course begins at Mulhuddart Community Centre,
+             Dublin 15 &mdash; twelve weeks, free.</p></div>
+      </div>
+      <div>
+        <figure class="reveal">
+          <div class="photo photo-4x3">
+            <img src="images/church-concert.jpg" width="1400" height="1050"
+                 alt="An ensemble performing in a church">
+          </div>
+          <figcaption>An ensemble in a church. Roughly sixteen of the twenty outreach performances
+            were in parishes, shrines, convents or liturgies.</figcaption>
+        </figure>
+        <div class="callout reveal mt-3">
+          <h3 class="h-sub">How to read the tables</h3>
+          <p class="small mt-1">Newest year first. <em>Present</em> is recorded for lecture-recitals
+             only; outreach audiences were never counted and are not estimated here. The
+             <span class="tag">Sacred Places</span> tag marks the faith-based sub-strand.
+             Weekly rehearsals of the Letters Ensemble &mdash; well over a hundred since January
+             2024 &mdash; were not logged and are not listed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{ar.tables(L)}
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">Planned, and not delivered</p>
+      <h2>2026: we halved the plan and delivered what remained in full.</h2>
+      <p>This belongs in the record too. In a year that held graduation, a dissertation and a
+         move, four planned events became two, and the two were done properly.</p>
+    </div>
+    <div class="grid grid-2 stagger">
+      <div class="card"><span class="kicker">Not held · March 2026</span>
+        <h3>A Lenten concert at Our Lady of Dolours</h3>
+        <p>A free parish concert with a voluntary offering, clarinet and piano, then clarinet with
+           the Letters Ensemble. The proposal, poster and scores exist; it did not go ahead.</p></div>
+      <div class="card"><span class="kicker">In discussion</span>
+        <h3>A fifth Letters Ensemble concert</h3>
+        <p>St John of God Hospital, Stillorgan, with a draft programme. Named in the 2026 plan
+           as the first partnership in discussion; no date yet.</p></div>
+      <div class="card"><span class="kicker">Not held · August 2026</span>
+        <h3>South Dublin Live — a cross-cultural concert at The Civic</h3>
+        <p>Clarinet, piano and haegeum in the main auditorium. Of the four concerts proposed to
+           the Arts Office, this and the family concert below did not proceed; the two that did
+           are in the 2026 table above.</p></div>
+      <div class="card"><span class="kicker">Not held · September 2026</span>
+        <h3>South Dublin Live — a family concert outdoors</h3>
+        <p>A 45-minute trio concert in a public square, with the county library as a wet-weather
+           backup. The format is the cheapest and most public of the four, and the one most
+           likely to return.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">Still undocumented</p>
+      <h2 class="h-md">What happened, and was not written down.</h2>
+      <ul class="checklist mt-3">
+        <li>Letters Ensemble rehearsals &mdash; weekly since January 2024, well over a hundred,
+            not one recorded. We are counting them from now on.</li>
+        <li>Actual attendance on Concert Guide outings &mdash; the invitations survive, the
+            participation does not.</li>
+        <li>Programmes and repertoire for most of the twenty outreach concerts.</li>
+        <li>Audience numbers for every performance.</li>
+        <li>Participant testimony &mdash; to be collected with consent from the autumn 2026
+            cohort on.</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">How the record is kept</p>
+      <h2 class="h-md">On the day, in one row.</h2>
+      <ol class="steps mt-3">
+        <li><strong>Date, formal venue name, institution type</strong> &mdash; what was done, and
+            for whom.</li>
+        <li><strong>An estimate of who was there</strong>, written down that evening, even when
+            nobody counted.</li>
+        <li><strong>Hours, preparation included</strong> &mdash; the part every earlier record
+            left out.</li>
+        <li><strong>Evidence held</strong>, in the order assessors trust it: a letter on headed
+            paper, press coverage, a programme or poster, photographs.</li>
+      </ol>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html">What the record adds up to <span class="arrow">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+{CTA}"""
+
+
+# ---------------------------------------------------------------------------
+# Partner with us — for organisations
+#
+# Order after Acumen's page, which 12 — Brand & Web Master §11 found the most
+# complete of 28 studied: what you get first, then the ways, then the
+# evidence, then the questions, then a short ask. Never the need first.
+# ---------------------------------------------------------------------------
+
+_MAIL_PARTNER = ("mailto:sby05034@gmail.com?subject=Partnership%20enquiry"
+                 "&body=Organisation%3A%20%0AWhere%3A%20%0AThe%20room%20and%20a%20possible%20date%3A%20%0A"
+                 "One%20line%20on%20what%20you%20have%20in%20mind%3A%20")
+
+_FAQ_EN = "\n".join(
+    f'      <details class="faq reveal"><summary>{q}</summary><p>{a}</p></details>'
+    for q, a in [
+        ("Can we fund one programme rather than the organisation?",
+         "Yes. Name the programme, or the kind of setting, and the support is ring-fenced for it "
+         "and reported against it."),
+        ("Is a gift tax-deductible?",
+         "Not yet. We are formalising as a not-for-profit company limited by guarantee and are not "
+         "a registered charity, so gifts are not eligible for charitable tax relief. We say so "
+         "plainly rather than let anyone assume otherwise."),
+        ("Where would our name appear?",
+         "On the printed programme of what you funded, on the Support page of this site, and in "
+         "the dated report you receive &mdash; with your agreement, and nowhere else."),
+        ("What does a venue need to provide for a concert?",
+         "A room, the people who live or work there, and one named contact. Players, instruments, "
+         "stands, the programme and insurance arrive with us. There is no stage, no piano and "
+         "nothing for the audience to pay."),
+    ])
+
+PARTNER = f"""<section class="page-hero page-hero-lead">
+  <div class="wrap">
+    <p class="eyebrow lift lift-1">Partner with us</p>
+    <h1 class="lift lift-2">Tell us your room and your date.</h1>
+    <p class="lift lift-3">For care homes, hospitals, parishes and community centres; for councils,
+       trusts, foundations and companies. Enquiring takes less than two minutes, and everything
+       except the room arrives with us.</p>
+    <div class="btn-row lift lift-4">
+      <a class="btn btn-accent" href="{_MAIL_PARTNER}">Enquire in two minutes <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-on-dark" href="#faq">The questions we are asked</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">What you get</p>
+      <h2>Live music in rooms where it changes the day, and something your people can see.</h2>
+      <p>Your support puts musicians into a ward, a day room or a parish hall, and gives your
+         team something they can visit and take part in. Every partnership comes with a named
+         contact, a dated report of what the money did, and an open invitation to attend.</p>
+    </div>
+    <div class="reveal">{dg.partnership(L)}</div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">If you run a room</p>
+      <h2>Everything above the stave arrives in a car.</h2>
+      <p>A day room with no piano, no stage and no budget can host a concert. Thirty to sixty
+         minutes, acoustic, introduced from the floor in plain language, with nothing for the
+         audience to pay. We carry public liability insurance and complete Garda vetting where
+         the work requires it; the paperwork is available before we arrive.</p>
+    </div>
+    <div class="reveal">{dg.visit(L)}</div>
+    <div class="grid grid-3 stagger mt-4">
+      <div class="card"><span class="kicker">Care homes and hospitals</span>
+        <h3>A concert in the day room, or a drop-in in the atrium</h3>
+        <p>Residents, patients, families and staff, in the room they are already in. The
+           Tallaght University Hospital concert in August 2026 was thirty minutes, acoustic and
+           drop-in; a care-home concert is usually the same shape.</p></div>
+      <div class="card"><span class="kicker">Parishes and religious communities</span>
+        <h3>Liturgical music, or a concert after Mass</h3>
+        <p>Roughly sixteen of our twenty outreach performances were in parishes, shrines,
+           convents and liturgies. The founder is Music Director at one Dublin parish and
+           organist at another; we know what a sacristy needs to hear first.</p></div>
+      <div class="card"><span class="kicker">Community centres</span>
+        <h3>A term-long course, in your room</h3>
+        <p>A warm room seating ten to twelve in a circle, once a week for a term, and one named
+           contact. We bring the tutor, the curriculum, the scores and the end-of-term concert.
+           <a class="link" href="get-involved.html">What you provide, and what we do</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Evidence</p>
+      <h2>Who has already worked with us.</h2>
+      <p>Named, because borrowed trust should be checkable. Each of these is a row in
+         <a class="link" href="archive.html">the record</a>.</p>
+    </div>
+    <ul class="names reveal">
+      <li>South Dublin County Council Arts Office</li>
+      <li>Tallaght University Hospital</li>
+      <li>Rua Red</li>
+      <li>The Civic Theatre</li>
+      <li>Clondalkin Lodge</li>
+      <li>Mulhuddart Community Centre</li>
+      <li>Presentation Sisters</li>
+      <li>Missionary Sisters of St Columban</li>
+      <li>Dalgan Park</li>
+      <li>TU Dublin</li>
+      <li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+      <li>Church of the Three Patrons, Rathgar</li>
+      <li>HSE EVE Goirtin Hub</li>
+      <li>Morning Star Hostel</li>
+      <li>Missions &Eacute;trang&egrave;res de Paris</li>
+    </ul>
+    <div class="figures figures-4 stagger mt-4">
+      {_fig(20, "outreach performances", "2023 – 2025 · four countries")}
+      {_fig(25, "venues and institutions", "2023 – 2026")}
+      {_fig(7, "of 7 completed the pilot", "January – April 2026")}
+      {_fig(2, "concerts for South Dublin Live", "August 2026 · first public commission")}
+    </div>
+    <div class="quote reveal mt-4">
+      <p>&ldquo;Through music, he offers encouragement, dignity, and spiritual accompaniment to
+         those who may otherwise feel isolated.&rdquo;</p>
+      <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">The questions we are asked</p>
+      <h2 class="h-md">Four, honestly answered.</h2>
+    </div>
+    <div class="faq-list">
+{_FAQ_EN}
+    </div>
+  </div>
+</section>
+
+<section class="band-photo">
+  <img src="images/quartet-hall.jpg" alt="" width="1400" height="788">
+  <div class="wrap narrow center reveal">
+    <p class="eyebrow center-row">Next step</p>
+    <h2 class="h-lg">One email, four lines.</h2>
+    <p class="lead mt-2">Your organisation, where you are, the room and a possible date, and a
+       line on what you have in mind. The email opens with those four lines already in it.
+       You will hear back from the person who will be in the room.</p>
+    <div class="btn-row center-row">
+      <a class="btn btn-accent" href="{_MAIL_PARTNER}">Become a partner <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-on-dark" href="contact.html">All contact details</a>
+    </div>
+  </div>
+</section>"""
+
+
+# ---------------------------------------------------------------------------
+# Identity — the mark, and what it commits us to
+# ---------------------------------------------------------------------------
+
+IDENTITY = f"""<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">The mark</p>
+    <h1>The gold falls on <em>Everyone</em>.</h1>
+    <p>That is not a flourish. In the mark, &ldquo;for&rdquo; is set small and
+       &ldquo;Everyone&rdquo; large and gold, because the difficult word in the name is the
+       last one. This page is the design standard, published so that anyone printing our name
+       can hold us to it.</p>
+  </div>
+</section>
+
+<section class="band-mark">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">The name, and what it commits us to</p>
+      <h2 class="h-md">The name is the brief.</h2>
+      <p class="lead mt-3">Classical music is not short of audiences. What it lacks is a reliable
+         way in for people who are older, unwell, far from a city, short of money, or simply
+         never told that any of it was theirs. The mark says which word we are judged on.</p>
+      <p class="mt-3">A treble clef with the wordmark, adopted on 17 August 2026. The proportion
+         inside the wordmark carries the meaning and never changes. The name is a proper noun
+         with one shape &mdash; <span class="brandname">Classical Music for Everyone</span>
+         &mdash; and is never set in capitals, never abbreviated in public copy, and never reset
+         in another typeface.</p>
+      <p class="footer-line mark-line">Bringing classical music where it&rsquo;s needed!</p>
+    </div>
+    <figure class="reveal mark-plate">
+      <img src="assets/logo-horizontal.svg" width="341" height="131"
+           alt="The Classical Music for Everyone mark: a treble clef beside the wordmark, with &lsquo;Everyone&rsquo; set large and in gold">
+      <figcaption>The horizontal mark, adopted 17 August 2026.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="identity">
+  <div class="wrap">
+    <div class="split split-center reveal">
+      <div class="logo-pair">
+        <figure class="logo-plate on-light">
+          <img src="assets/logo-horizontal.svg" width="341" height="131"
+               alt="The horizontal logo: a treble clef beside the wordmark">
+          <figcaption>On light &mdash; the default</figcaption>
+        </figure>
+        <figure class="logo-plate on-dark">
+          <img src="assets/logo-reversed.svg" width="341" height="131"
+               alt="The reversed logo, for dark backgrounds">
+          <figcaption>On navy &mdash; reversed</figcaption>
+        </figure>
+        <figure class="logo-plate on-light">
+          <img src="assets/logo-signature.png" width="600" height="210"
+               alt="The signature lock-up, used at the foot of an email">
+          <figcaption>Email signature &mdash; the same lock-up at mail size. A white-background
+            version is kept alongside it for clients that strip transparency.</figcaption>
+        </figure>
+      </div>
+      <div>
+        <h3 class="h-sub">Using the mark</h3>
+        <p class="mt-2">Light ground, horizontal; dark ground, reversed. The clef alone is for
+           favicons and profile pictures only. On a photograph, place it where the area behind it
+           is quiet, or give it a plain panel.</p>
+        <div class="rules mt-3">
+          <div class="do">
+            <h3 class="h-sub">Always</h3>
+            <ul>
+              <li>Clef and wordmark together</li>
+              <li>Clear space of half the clef&rsquo;s width, on all four sides</li>
+              <li>Light ground &rarr; horizontal; dark ground &rarr; reversed</li>
+              <li>At least 140px wide on screen, 28mm in print</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3 class="h-sub">Never</h3>
+            <ul>
+              <li>Stretch, squash, skew or recolour it</li>
+              <li>Add a shadow, outline or glow</li>
+              <li>Make &ldquo;for&rdquo; and &ldquo;Everyone&rdquo; the same size</li>
+              <li>Use the clef alone above favicon size</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Colour</p>
+      <h2 class="h-md">Eight values, defined once.</h2>
+      <p>Every colour on this site resolves to one of them or to a tint derived from one. A
+         component never invents a colour of its own.</p>
+    </div>
+    <div class="swatches reveal">
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--ink-navy)"></i><b>Ink Navy</b><code>#1D2430</code>
+        <span>Logo base, body text, dark bands</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-bronze)"></i><b>Gold Bronze</b><code>#B8893A</code>
+        <span>Logo gold, rules, arrows, diagram strokes</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-light)"></i><b>Light Gold</b><code>#D9B36A</code>
+        <span>The gold of the reversed logo, and on dark grounds</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--warm-cream)"></i><b>Warm Cream</b><code>#FAF5EE</code>
+        <span>The background of nearly every page</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--soft-navy)"></i><b>Soft Navy</b><code>#33405C</code>
+        <span>Panels and blocks in print material</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--antique-gold)"></i><b>Antique Gold</b><code>#B4914F</code>
+        <span>Accents in print material</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--dusty-rose)"></i><b>Dusty Rose</b><code>#8C4A56</code>
+        <span>Highlight &mdash; used sparingly, never for body text</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--slate)"></i><b>Slate</b><code>#5F6B7D</code>
+        <span>Secondary text</span></div>
+    </div>
+    <div class="callout reveal mt-3">
+      <p class="small"><strong>One rule that costs us the prettier option.</strong> Gold Bronze
+         is a 2.9:1 contrast against cream, which fails at body size. So gold as <em>text</em> is
+         always the darkened <code>#7F5C1C</code>, and the gold buttons carry ink navy lettering
+         rather than white. Every text and background pair on this site meets WCAG AA. The logo
+         is the one thing exempt, because a logo is an image and is never recoloured.</p>
+    </div>
+
+    <div class="section-head reveal mt-4">
+      <p class="eyebrow">Type</p>
+      <h2 class="h-md">Three faces and no fourth.</h2>
+      <p>EB Garamond is an old-style serif in the same lineage as the Cormorant Garamond of the
+         wordmark, so the headings rhyme with the logo rather than argue with it. Korean gets
+         more leading and less negative tracking, because Noto Sans KR needs both.</p>
+    </div>
+    <div class="specimen reveal">
+      <div>
+        <dfn>EB Garamond &mdash; headings</dfn>
+        <div class="sp-display">Bringing classical music where it&rsquo;s needed!</div>
+        <p>SemiBold. Titles, headlines and display sizes.</p>
+      </div>
+      <div>
+        <dfn>Plus Jakarta Sans &mdash; body and labels</dfn>
+        <div class="sp-body">We teach people to play, not only to listen.</div>
+        <p>Regular, SemiBold, Bold. Body text, tables, captions, every label.</p>
+      </div>
+      <div>
+        <dfn>Noto Sans KR &mdash; Korean</dfn>
+        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로!</div>
+        <p>Regular, Medium, Bold. Headings and body alike on the Korean pages.</p>
+      </div>
+      <div>
+        <dfn>Cormorant Garamond &mdash; logo only</dfn>
+        <div class="sp-body">Used for the wordmark and nowhere else.</div>
+        <p>The lettering in the logo is outlined, so the face is never loaded on this site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Diagrams</p>
+      <h2 class="h-md">Fourteen figures, four marks.</h2>
+      <p>Where an explanation runs past about eighty words, it stops being a paragraph and
+         becomes a figure. Every figure on this site is drawn from the same four marks, borrowed
+         from notation, so fourteen diagrams read as one set rather than fourteen flowcharts.</p>
+    </div>
+    <div class="reveal">{dg.vocabulary(L)}</div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">Words</p>
+      <h2 class="h-md">How the name is written.</h2>
+      <ul class="checklist mt-3">
+        <li><strong>In full, always</strong> &mdash; <span class="brandname">Classical Music for
+            Everyone</span>. Never in capitals, never shortened in public copy.</li>
+        <li><strong>Participants</strong>, not clients, students or the elderly. Older people,
+            not seniors.</li>
+        <li><strong>Social enterprise</strong>, not charity and not business.</li>
+        <li><strong>Irish English</strong> &mdash; programme, organisation, centre.</li>
+        <li><strong>No superlatives</strong>, no unverifiable claims, and no number without a
+            date.</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">The line</p>
+      <h2 class="h-md">One sentence for the whole organisation.</h2>
+      <p class="footer-line mark-line">Bringing classical music where it&rsquo;s needed!</p>
+      <p class="mt-3">The master line ends in an exclamation mark, and sits at the foot of every
+         page. The Korean working equivalent is <span lang="ko">클래식 음악을, 그것이 필요한
+         곳으로!</span></p>
+      <div class="btn-row"><a class="btn btn-quiet" href="about.html">Mission, values and the founder <span class="arrow">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+{CTA}"""

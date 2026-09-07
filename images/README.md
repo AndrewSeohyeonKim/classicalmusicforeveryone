@@ -44,12 +44,13 @@ gradient do the work.
 | File | Used on | Shows |
 |---|---|---|
 | `hero-outreach.jpg` | Home hero | Letters Ensemble, St Patrick's Day concert for a religious community |
-| `church-concert.jpg` | Home photo band | Ensemble in a church |
+| `church-concert.jpg` | Home photo band + Archive milestones | Ensemble in a church |
 | `conducting.jpg` | Home card 1 + Programmes + `programmes/recorder-ensemble` | Conducting a small ensemble |
 | `lecture-recital.jpg` | Home card 2 + Programmes + `programmes/getting-to-know` | A lecture-recital in progress |
 | `quartet-hall.jpg` | Home card 3 + Programmes + `programmes/concert-companion` + News + Get involved band | Ensemble performing in a bright hall |
 | `care-christmas.jpg` | Home card 4 + Programmes + `programmes/outreach-concerts` | Quartet in a care setting at Christmas |
-| `letters-ensemble.jpg` | Home card 5 + Programmes + `programmes/letters-ensemble` | The Letters Ensemble with their instruments |
+| `letters-ensemble.jpg` | Home card 5 + Home "one story" + Impact story + Programmes + `programmes/letters-ensemble` | The Letters Ensemble with their instruments |
+| `quartet-hall.jpg` (also) | Partner closing band | — |
 | `community-room.jpg` | spare | Clarinet in a community room |
 | `clarinet.jpg` | About | The founder playing at a parish liturgy |
 | `organ.jpg` | About band | Organ console |

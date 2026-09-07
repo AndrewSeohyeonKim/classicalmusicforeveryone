@@ -56,6 +56,10 @@ CTA = """<section class="band-inverse">
 </section>"""
 
 
+_MAIL_PARTNER_HOME = ("mailto:sby05034@gmail.com?subject=%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%20%EB%AC%B8%EC%9D%98"
+                      "&body=%EA%B8%B0%EA%B4%80%3A%20%0A%EC%9C%84%EC%B9%98%3A%20%0A%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EB%82%A0%EC%A7%9C%3A%20%0A"
+                      "%EC%83%9D%EA%B0%81%ED%95%98%EC%8B%9C%EB%8A%94%20%EA%B2%83%20%ED%95%9C%20%EC%A4%84%3A%20")
+
 # ---------------------------------------------------------------------------
 # 홈
 #
@@ -183,6 +187,31 @@ INDEX = f"""<section class="hero">
   </div>
 </section>
 
+<section class="band-raised">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">이야기 하나</p>
+      <h2>뒷줄에서 나온 질문.</h2>
+      <p class="lead mt-3">2024년 11월, Letters Ensemble이 위클로 주의 성 골롬반 선교
+         수녀회에서 연주했습니다. 연주가 끝나고 한 수녀님이 물었습니다. 다시 연주할 수
+         있을까요. 오래전에 바이올린을 켰다고 했습니다.</p>
+      <p class="mt-3">그 질문이 은퇴 프레젠테이션 수녀 일곱 분의 리코더 앙상블이 됐습니다.
+         10주의 연습, 아홉 곡의 부활 음악회, 일곱 분 전원 수료. 2026년 9월, 같은 과정이
+         멀허다트에서 누구에게나 무료로 열렸습니다. 질문 하나, 한 학기, 열린 문 하나.
+         이 모델의 전부입니다.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html">기록이 뒷받침하는 것 <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/letters-ensemble.jpg" width="1400" height="1050"
+             alt="악기를 든 Letters Ensemble 단원들">
+      </div>
+      <figcaption>Letters Ensemble. 2024년 11월 위클로 주 음악회가 가르치는 프로그램의
+        출발점이 됐습니다.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section class="band-mark">
   <div class="wrap split split-wide split-center">
     <div class="reveal">
@@ -200,7 +229,7 @@ INDEX = f"""<section class="hero">
       <img src="assets/logo-horizontal.svg" width="341" height="131"
            alt="Classical Music for Everyone 로고 — 높은음자리표와 워드마크. &lsquo;Everyone&rsquo;이 크고 금색으로 놓여 있다">
       <figcaption>가로형 로고, 2026년 8월 17일 확정.
-        <a class="link" href="about.html#identity">디자인 표준 전체 보기</a></figcaption>
+        <a class="link" href="identity.html">디자인 표준 전체 보기</a></figcaption>
     </figure>
   </div>
 </section>
@@ -229,8 +258,19 @@ INDEX = f"""<section class="hero">
         <div class="meta">현재는 자원봉사 운영 &middot; 비영리 CLG 설립 준비 중</div>
       </div>
     </div>
-    <div class="btn-row reveal">
-      <a class="btn btn-quiet" href="about.html">미션과 가치, 그리고 창립자 <span class="arrow">&rarr;</span></a>
+    <div class="next reveal mt-4">
+      <p class="eyebrow">가려는 곳</p>
+      <ol class="next-list">
+        <li><b>마침</b><span>2024년 창립 &middot; 파일럿 완료 &middot; 첫 공적 위촉 &middot; 첫 커뮤니티 과정</span></li>
+        <li><b>다음</b><span>이사진을 갖춘 비영리 보증유한책임회사로 법인 설립</span></li>
+        <li><b>그다음</b><span>두 번째 기수, 그리고 위클로·미스·라우스의 방들</span></li>
+        <li><b>그다음</b><span>첫 음악 교육가를 정식으로 고용</span></li>
+        <li><b>그다음</b><span>웰빙을 재어 이 사이트에 보고</span></li>
+      </ol>
+      <div class="btn-row">
+        <a class="btn btn-quiet" href="impact.html#next">가는 길, 순서대로 <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="about.html">미션과 가치, 그리고 창립자</a>
+      </div>
     </div>
   </div>
 </section>
@@ -269,7 +309,62 @@ INDEX = f"""<section class="hero">
     </div>
     <p class="lead center mt-4 reveal">다음 후원도 마찬가지입니다.
        못 가던 방 하나가 갈 수 있는 방이 됩니다.</p>
-    <div class="btn-row center-row reveal"><a class="btn btn-quiet" href="support.html">후원이 쓰이는 곳 <span class="arrow">→</span></a></div>
+    <div class="btn-row center-row reveal">
+      <a class="btn btn-quiet" href="impact.html">날짜가 있는 숫자, 그리고 증명되지 않은 것 <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="support.html">후원이 쓰이는 곳</a>
+    </div>
+  </div>
+  <div class="ticker mt-4" aria-label="함께한 기관">
+    <p class="eyebrow center-row">저희가 연주한 방들</p>
+    <div class="ticker-track">
+      <ul>
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>프레젠테이션 수녀회</li>
+        <li>성 골롬반 선교 수녀회</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>국립 콘서트홀</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>파리 외방전교회</li>
+        <li>루르드 성모 성지</li><li>런던 한인 천주교회</li>
+        <li>관덕정 순교기념관, 대구</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Tallaght University Hospital</li><li>Rua Red</li><li>The Civic Theatre</li>
+        <li>Clondalkin Lodge</li><li>Mulhuddart Community Centre</li><li>프레젠테이션 수녀회</li>
+        <li>성 골롬반 선교 수녀회</li><li>Dalgan Park</li><li>TU Dublin</li>
+        <li>국립 콘서트홀</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+        <li>Church of the Three Patrons, Rathgar</li><li>HSE EVE Goirtin Hub</li>
+        <li>Morning Star Hostel</li><li>파리 외방전교회</li>
+        <li>루르드 성모 성지</li><li>런던 한인 천주교회</li>
+        <li>관덕정 순교기념관, 대구</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">기관을 위한 안내</p>
+      <h2>요양시설이나 병원, 본당이신가요?</h2>
+      <p class="lead mt-3">방과 날짜만 알려 주세요. 문의는 2분이면 되고, 방을 뺀 나머지는
+         전부 저희가 가져갑니다. 연주자, 악기, 보면대, 프로그램, 보험까지.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="partner.html">기관 파트너십 <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-quiet" href="{_MAIL_PARTNER_HOME}">2분이면 되는 메일</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <ul class="checklist">
+        <li><strong>요양시설과 병원</strong> &mdash; 휴게실이나 아트리움에서 30분에서 60분,
+            어쿠스틱으로, 관객이 낼 돈 없이.</li>
+        <li><strong>본당과 수도 공동체</strong> &mdash; 전례 음악, 또는 미사 뒤의 음악회.
+            스무 번의 찾아가는 음악회 가운데 열여섯 번쯤이 성지와 본당이었습니다.</li>
+        <li><strong>커뮤니티 센터</strong> &mdash; 여러분의 방에서 여는 한 학기 초보 과정.
+            방과 담당자만 주시면 나머지는 저희가 합니다.</li>
+        <li><strong>지자체, 재단, 기업</strong> &mdash; 시즌을 후원하거나, 자리를 후원하거나,
+            사람을 데려오거나. 모든 파트너십에 담당자의 이름과 날짜 있는 보고가 따라옵니다.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -344,7 +439,7 @@ ABOUT = f"""<section class="page-hero">
   </div>
 </section>
 
-<section class="band-photo">
+<section class="band-photo" id="founder">
   <img src="images/organ.jpg" alt="" width="1400" height="1050">
   <div class="wrap narrow reveal">
     <p class="eyebrow">창립자</p>
@@ -495,7 +590,8 @@ ABOUT = f"""<section class="page-hero">
           <p class="small mt-1">지금 내놓을 수 있는 근거는 사람들이 왔고, 계속 왔고,
              이런 말을 해 주었다는 것까지입니다. 검증된 도구로 웰빙을 재 본 적이 없고,
              찾아가는 음악회의 관객 수도 세어 두지 않았습니다. 2026년 가을 기수부터
-             간단한 사전·사후 조사와 동의 절차를 시작합니다.</p>
+             간단한 사전·사후 조사와 동의 절차를 시작합니다.
+             <a class="link" href="impact.html#transparency">전체 내용 보기</a>.</p>
         </div>
       </div>
     </div>
@@ -520,131 +616,20 @@ ABOUT = f"""<section class="page-hero">
 </section>
 
 <section class="band-raised" id="identity">
-  <div class="wrap">
-    <div class="section-head wide reveal">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
       <p class="eyebrow">아이덴티티</p>
-      <h2>디자인 표준을 공개합니다.</h2>
-      <p>작은 단체일수록 내놓는 것이 다 같은 데서 나온 것처럼 보여야 합니다. 디자인
-         도구로 만들었든 본당 주보에 타이핑했든 마찬가지입니다. 저희 대신 무언가를
-         인쇄하는 곳에서도 그대로 쓰시라고 공개해 둡니다.</p>
+      <h2>금색은 <em>Everyone</em> 위에 놓입니다.</h2>
+      <p class="lead mt-3">로고와 색과 서체, 그리고 그것을 쓰는 규칙은 따로 한 페이지에
+         공개해 두었습니다. 저희 이름을 인쇄하는 누구든 그 기준으로 저희를 붙들어 두실 수
+         있도록.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="identity.html">상징과 표준 <span class="arrow">&rarr;</span></a></div>
     </div>
-
-    <div class="split split-center reveal">
-      <div class="logo-pair">
-        <figure class="logo-plate on-light">
-          <img src="assets/logo-horizontal.svg" width="341" height="131"
-               alt="가로형 로고 — 높은음자리표와 워드마크">
-          <figcaption>밝은 바탕 — 기본형</figcaption>
-        </figure>
-        <figure class="logo-plate on-dark">
-          <img src="assets/logo-reversed.svg" width="341" height="131"
-               alt="어두운 바탕용 반전 로고">
-          <figcaption>네이비 바탕 — 반전형</figcaption>
-        </figure>
-        <figure class="logo-plate on-light">
-          <img src="assets/logo-signature.png" width="600" height="210"
-               alt="이메일 서명용 로고 — 같은 조합을 메일 클라이언트 크기로">
-          <figcaption>이메일 서명 &mdash; 같은 조합을 메일 크기로. 투명도를 지우는 메일
-            클라이언트를 위해 흰 배경 판본을 함께 둡니다.</figcaption>
-        </figure>
-      </div>
-      <div>
-        <h3 class="h-sub">마크</h3>
-        <p class="mt-2">높은음자리표와 워드마크를 함께 쓰며, 2026년 8월 17일에 확정했습니다.
-           워드마크 안의 크기 차이가 뜻을 담고 있어서, 그 비례는 바꾸지 않습니다.
-           <strong>&lsquo;for&rsquo;는 작게, &lsquo;Everyone&rsquo;은 크고 금색으로.</strong>
-           이름은 모양이 하나뿐인 고유명사입니다. <span class="brandname">Classical Music
-           for Everyone</span>. 전부 대문자로 쓰지 않고, 대외 문안에서 CMFE로 줄이지 않으며,
-           다른 서체로 다시 조판하지 않습니다.</p>
-        <div class="rules mt-3">
-          <div class="do">
-            <h3 class="h-sub">언제나</h3>
-            <ul>
-              <li>자리표와 워드마크를 함께</li>
-              <li>네 면 모두에 자리표 너비의 절반만큼 여백</li>
-              <li>밝은 바탕 → 가로형, 어두운 바탕 → 반전형</li>
-              <li>사진 위에 놓을 때는 뒤가 조용한 자리에</li>
-            </ul>
-          </div>
-          <div class="dont">
-            <h3 class="h-sub">절대로</h3>
-            <ul>
-              <li>늘이거나 누르거나 기울이거나 색을 바꾸지 않습니다</li>
-              <li>그림자·외곽선·광채를 넣지 않습니다</li>
-              <li>&lsquo;for&rsquo;와 &lsquo;Everyone&rsquo;을 같은 크기로 두지 않습니다</li>
-              <li>파비콘 크기를 넘어서 자리표만 쓰지 않습니다</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">색</h3>
-      <p>여덟 개의 값을 한 번만 정의합니다. 이 사이트의 모든 색은 그중 하나이거나 거기서
-         파생된 톤입니다. 컴포넌트가 자기 색을 새로 만들어 쓰는 일은 없습니다.</p>
-    </div>
-    <div class="swatches reveal">
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--ink-navy)"></i><b>Ink Navy</b><code>#1D2430</code>
-        <span>로고 바탕색, 본문, 어두운 밴드</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-bronze)"></i><b>Gold Bronze</b><code>#B8893A</code>
-        <span>로고 금색, 괘선, 화살표, 도식 선</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-light)"></i><b>Light Gold</b><code>#D9B36A</code>
-        <span>반전 로고의 금색, 어두운 면 위 강조</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--warm-cream)"></i><b>Warm Cream</b><code>#FAF5EE</code>
-        <span>거의 모든 페이지의 배경</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--soft-navy)"></i><b>Soft Navy</b><code>#33405C</code>
-        <span>인쇄물의 패널과 블록</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--antique-gold)"></i><b>Antique Gold</b><code>#B4914F</code>
-        <span>인쇄물의 액센트</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--dusty-rose)"></i><b>Dusty Rose</b><code>#8C4A56</code>
-        <span>강조 — 아껴 쓰고, 본문에는 쓰지 않습니다</span></div>
-      <div class="swatch"><i aria-hidden="true" style="--sw:var(--slate)"></i><b>Slate</b><code>#5F6B7D</code>
-        <span>보조 텍스트</span></div>
-    </div>
-    <div class="callout reveal mt-3">
-      <p class="small"><strong>예쁜 쪽을 포기하게 만드는 규칙 하나.</strong>
-         Gold Bronze는 크림 바탕에서 대비가 2.9:1이라 본문 크기로 쓰면 읽기 어렵습니다. 그래서
-         <em>글자</em>로 쓰는 금색은 언제나 어둡게 조정한 <code>#7F5C1C</code>이고, 금색 버튼의
-         글자는 흰색이 아니라 잉크 네이비입니다. 이 사이트의 모든 글자·배경 조합은 WCAG AA를
-         통과합니다. 예외는 로고 하나뿐인데, 로고는 이미지이고 색을 바꾸지 않기 때문입니다.</p>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">서체</h3>
-      <p>세 벌이고, 네 번째는 들이지 않습니다. EB Garamond는 로고 워드마크의 Cormorant
-         Garamond과 같은 계보의 올드스타일 세리프라, 제목이 로고와 다투지 않고 맞물립니다.
-         한국어는 행간을 더 주고 자간은 덜 조입니다. Noto Sans KR이 그래야 읽힙니다.</p>
-    </div>
-    <div class="specimen reveal">
-      <div>
-        <dfn>EB Garamond — 제목</dfn>
-        <div class="sp-display">Bringing classical music where it&rsquo;s needed!</div>
-        <p>SemiBold. 제목·헤드라인·디스플레이 크기.</p>
-      </div>
-      <div>
-        <dfn>Plus Jakarta Sans — 영문 본문과 라벨</dfn>
-        <div class="sp-body">We teach people to play, not only to listen.</div>
-        <p>Regular · SemiBold · Bold. 본문, 표, 캡션, 모든 라벨.</p>
-      </div>
-      <div>
-        <dfn>Noto Sans KR — 한글</dfn>
-        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로!</div>
-        <p>Regular · Medium · Bold. 한국어 페이지의 제목과 본문 모두.</p>
-      </div>
-      <div>
-        <dfn>Cormorant Garamond — 로고 전용</dfn>
-        <div class="sp-body">워드마크에만 쓰고, 다른 어디에도 쓰지 않습니다.</div>
-        <p>로고의 글자는 외곽선으로 변환돼 있어, 이 사이트는 이 서체를 불러오지 않습니다.</p>
-      </div>
-    </div>
-
-    <div class="section-head reveal mt-4">
-      <h3 class="h-sub">도식</h3>
-      <p>설명이 여든 낱말을 넘어가면 문단 대신 그림으로 옮깁니다. 도식은 모두 같은 네
-         가지 표시로만 그려서, 열 개가 한 세트로 읽힙니다.</p>
-    </div>
-    <div class="reveal">{dg.vocabulary(L)}</div>
+    <figure class="reveal mark-plate">
+      <img src="assets/logo-horizontal.svg" width="341" height="131"
+           alt="Classical Music for Everyone 로고 — 높은음자리표와 워드마크. &lsquo;Everyone&rsquo;이 크고 금색으로 놓여 있다">
+      <figcaption>가로형 로고, 2026년 8월 17일 확정.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -676,7 +661,7 @@ PROGRAMMES = f"""<section class="page-hero">
           <tr><td><strong><a class="link" href="programmes/getting-to-know.html">클래식 음악과 친해지기</a></strong></td><td>배움</td>
               <td>운영 중 · 무료</td><td>강의·연주 17회 · 누적 참석 143명</td></tr>
           <tr><td><strong><a class="link" href="programmes/concert-companion.html">함께하는 음악여행</a></strong></td><td>배움</td>
-              <td>운영 중</td><td>기록된 동행 10회 · 두 해 연속 BBC 프롬스 포함</td></tr>
+              <td>운영 중</td><td>기록된 동행 10회 · 두 번의 여름에 BBC 프롬스 포함</td></tr>
           <tr><td><strong><a class="link" href="programmes/outreach-concerts.html">찾아가는 음악회</a></strong></td><td>나눔</td>
               <td>운영 중</td><td>20회 · 4개국 · 15곳 이상</td></tr>
           <tr><td style="padding-inline-start:34px">↳ 성지에 음악을</td><td>나눔</td>
@@ -756,7 +741,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <dl class="facts">
         <dt>규모</dt><dd>5명 안팎</dd>
         <dt>다녀온 곳</dt><dd>국립교향악단 · 아일랜드 국립오페라 · RTÉ 콘서트 오케스트라 · NCH 인터내셔널 시리즈</dd>
-        <dt>멀리는</dt><dd>두 해 연속 BBC 프롬스</dd>
+        <dt>멀리는</dt><dd>두 번의 여름, BBC 프롬스</dd>
         <dt>비용</dt><dd>티켓이 £8 정도인 경우도 있습니다</dd>
         <dt>현재까지</dt><dd>기록된 동행 10회</dd>
       </dl>
@@ -1029,10 +1014,11 @@ GET_INVOLVED = f"""<section class="page-hero">
 
 NEWS = f"""<section class="page-hero">
   <div class="wrap">
-    <p class="eyebrow">소식과 기록</p>
-    <h1>다가오는 일, 그리고 지나온 일.</h1>
-    <p>잘된 것만 골라 싣지 않고 있었던 일을 그대로 적습니다. 세션과 연주는 그날 기록해
-       두기 때문에, 여기 적힌 숫자는 어느 것이든 한 줄까지 되짚을 수 있습니다.</p>
+    <p class="eyebrow">일정과 소식</p>
+    <h1>다가오는 일, 그리고 올해 있었던 일.</h1>
+    <p>모집 중인 수업 하나, 문이 열려 있는 음악회 하나, 그리고 올해의 기록. 2023년부터의
+       모든 회차와 연주는 <a class="crumb" href="archive.html">기록</a> 페이지에 그날 날짜
+       그대로 있습니다.</p>
   </div>
 </section>
 
@@ -1088,57 +1074,15 @@ NEWS = f"""<section class="page-hero">
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">지나온 길</p>
-      <h2>클라리넷 하나에서 공동체까지.</h2>
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">기록</p>
+      <h2>2023년부터의 모든 회차와 연주, 한 페이지에.</h2>
+      <p class="lead mt-3">한 해에 오선 하나로 그린 연대기와 그 아래의 표. 지나온 길, 계획했지만
+         하지 못한 것, 적어 두지 못한 것까지 거기 있습니다.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="archive.html">기록 열기 <span class="arrow">&rarr;</span></a></div>
     </div>
-    <div class="split split-wide">
-      <div class="timeline reveal">
-        <div class="tl-item"><div class="tl-date">2023년 2월</div>
-          <h3>시작 이전</h3>
-          <p>루르드의 영어 미사에서 클라리넷 독주. 이름이 붙기 2년 전의 찾아가는 음악회.</p></div>
-        <div class="tl-item"><div class="tl-date">2024년 1월</div>
-          <h3>시작</h3>
-          <p>더블린에서 <span class="brandname">Classical Music for Everyone</span>이,
-             그리고 Letters Ensemble이 함께 만들어집니다. 첫 강의·연주는
-             Dublin 18에서 여섯 명과 함께.</p></div>
-        <div class="tl-item"><div class="tl-date">2024년</div>
-          <h3>음악이 나갑니다</h3>
-          <p>Dalgan Park와 성 골롬반 외방 선교 수녀회에서 음악회, 런던·파리·대구에서 연주.
-             강의 시리즈는 TU Dublin으로 옮겨 갑니다.</p></div>
-        <div class="tl-item"><div class="tl-date">2024–2025년</div>
-          <h3>함께 갑니다</h3>
-          <p>동행 관람이 독립된 갈래가 됩니다. 국립교향악단, 아일랜드 국립 오페라,
-             2년 연속 BBC Proms.</p></div>
-        <div class="tl-item"><div class="tl-date">2025년 10월</div>
-          <h3>관객이 연주자가 됩니다</h3>
-          <p>은퇴 프레젠테이션 수녀 일곱 분과의 리코더 앙상블 준비. 조사, 허가, 신원조회,
-             개별 레슨.</p></div>
-        <div class="tl-item"><div class="tl-date">2025년 12월</div>
-          <h3>국립 콘서트홀에서</h3>
-          <p>열다섯 번째 배움의 자리는 아일랜드 국립 콘서트홀에서 함께 본 공연이었습니다.</p></div>
-        <div class="tl-item"><div class="tl-date">2026년 1–4월</div>
-          <h3>파일럿, 그리고 그 음악회</h3>
-          <p>Warrenmount에서 10주 합주, 이어 Clondalkin Lodge에서 아홉 곡의 부활 음악회.
-             일곱 분 전원 수료.</p></div>
-        <div class="tl-item"><div class="tl-date">2026년 8월</div>
-          <h3>첫 공적 위촉</h3>
-          <p>South Dublin Live 2026을 위한 두 번의 연주. Tallaght University Hospital과
-             Rua Red.</p></div>
-        <div class="tl-item"><div class="tl-date">2026년 9월</div>
-          <h3>이 모델이 처음으로 일반에 열립니다</h3>
-          <p>첫 커뮤니티 리코더 앙상블 과정이 Dublin 15 Mulhuddart Community Centre에서
-             시작됩니다 — 12주, 무료.</p></div>
-      </div>
-      <div>
-        <figure class="reveal">
-          <div class="photo photo-4x3">
-            <img src="images/letters-ensemble.jpg" width="1400" height="1050"
-                 alt="악기를 든 Letters Ensemble 단원들">
-          </div>
-          <figcaption>2024년 1월에 만들어진 Letters Ensemble.</figcaption>
-        </figure>
+    <div>
         <div class="callout reveal mt-3">
           <h3 class="h-sub">기사와 기고</h3>
           <ul class="plainlist mt-1">
@@ -1150,7 +1094,6 @@ NEWS = f"""<section class="page-hero">
             <li><strong>The Echo</strong> 2026년 8월 — Rua Red·Tallaght 연주 광고</li>
           </ul>
         </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1165,11 +1108,39 @@ SUPPORT = f"""<section class="page-hero">
     <p class="eyebrow">후원</p>
     <h1>문이 계속 열려 있도록.</h1>
     <p>자원봉사로 운영합니다. 후원금은 리코더와 악보, 공간 대여, 그리고 그 방까지 가는
-       이동에 쓰입니다.</p>
+       이동에 쓰입니다. 후원이 이미 한 일, 후원이 되는 것, 후원하는 방법을 차례로 적었습니다.</p>
   </div>
 </section>
 
 <section>
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">후원이 이미 바꾼 것</p>
+      <h2>차가 생겼고, 그만큼 멀리 갑니다.</h2>
+      <p>유럽과 한국의 개인 후원이 모여 차량 한 대가 생겼습니다. 연주자와 악기와 보면대가
+         한 번에 실려, 버스 시간표에 없는 요양시설과 본당과 쉼터까지 갑니다. 위클로, 미스,
+         웨스트미스, 그리고 상의하면 더 멀리.</p>
+    </div>
+    <div class="grid grid-4 stagger">
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>누군가의 손에 들린 리코더</h3>
+        <p>소프라노 리코더 한 대는 8유로에서 15유로입니다. 사는 법을 알려 드리거나, 원가로
+           드리거나, 한 학기 빌려 드립니다.</p></div>
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>아무도 값을 치르지 않는 악보</h3>
+        <p>그날 온 사람 누구든 불 수 있게 편곡한 파트를, 눈이 필요로 하면 크게 확대해서,
+           저희 비용으로 인쇄합니다.</p></div>
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>한 학기 동안 쓸 방</h3>
+        <p>공간이 방을 내어 줄 수 없을 때 후원금으로 빌립니다. 매주 한 번 쓸 따뜻한 방이
+           있어야 과정이 열립니다.</p></div>
+      <div class="card"><span class="kicker">후원금은 이렇게 됩니다</span><h3>다음 방까지 가는 길</h3>
+        <p>후원자들이 사 준 차의 기름값입니다. 그래서 위클로 주의 휴게실 하나가 예산 항목
+           대신 오전 한나절이 됩니다.</p></div>
+    </div>
+    <p class="tiny mt-3 reveal">리코더 값 말고는 단가를 적지 않았습니다. 나머지는 방과 학기에
+       따라 달라지기 때문입니다. 물어보시면 생각하시는 프로그램의 지금 수치를 보여 드립니다.</p>
+  </div>
+</section>
+
+<section class="band-raised">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">돈이 도는 방식</p>
@@ -1178,57 +1149,6 @@ SUPPORT = f"""<section class="page-hero">
          구조여야 합니다.</p>
     </div>
     <div class="reveal">{dg.subsidy(L)}</div>
-  </div>
-</section>
-
-<section class="band-raised">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">지금까지</p>
-      <h2>누가 이 일을 받쳐 왔는가.</h2>
-      <p>2026년 이전은 전부 자비와 자원봉사였습니다. 후원을 검토하시는 분들이 가장 먼저
-         묻는 것이 &lsquo;지금까지 누가 냈는가&rsquo;여서 그대로 적어 둡니다.</p>
-    </div>
-    <div class="table-scroll reveal">
-      <table>
-        <thead><tr><th scope="col">출처</th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>
-        <tbody>
-          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">예술과 ·
-              South Dublin Live 2026</span></td>
-              <td><em>Shared Voices of South Dublin</em> 시리즈 위촉 — 처음으로 공적 자금이
-                  들어온 작업.</td><td>수령 완료</td></tr>
-          <tr><td><strong>명도회 장학금</strong><br><span class="tiny">한국 천주교 주교회의
-              평신도사도직위원회</span></td>
-              <td>2025년 3월부터 학기별 지원, 창립자의 음악 사도직을 위한 것.</td><td>종료</td></tr>
-          <tr><td><strong>개인 후원자</strong></td>
-              <td>유럽과 한국의 후원자들이 정기적인 찾아가는 음악회가 가능하도록 보내 준
-                  도움.</td><td>진행 중</td></tr>
-          <tr><td><strong>파트너 공간, 현물</strong></td>
-              <td>Tallaght University Hospital — 공간과 운영 시간. Mulhuddart Community Centre —
-                  수업 공간. TU Dublin — 연습 공간.</td><td>계속</td></tr>
-          <tr><td><strong>TU Dublin Venture Lab</strong></td>
-              <td>사회적기업 창업 프로그램, 2024년 9월부터.</td><td>수료</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="split split-center reveal mt-4">
-      <div class="quote">
-        <p>&ldquo;넉넉한 형편에서 하는 일이 아닙니다. 본인의 재정 형편이 빠듯한
-           가운데서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
-        <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
-      </div>
-      <div>
-        <h3 class="h-sub">South Dublin Live 신청을 위해 받은 서한</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>Rua Red</strong> — South Dublin의 현대예술센터</li>
-          <li><strong>The Civic Theatre</strong>, Tallaght</li>
-          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
-          <li><strong>SDCC 예술과</strong> — South Dublin Live 2026 선정</li>
-        </ul>
-        <p class="tiny mt-2">이 서한들은 그 한 건의 신청을 위해 써 주신 것입니다. 저희가 하는
-           모든 일에 대한 포괄적인 보증이 아니며, 그렇게 내세우지 않습니다.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1244,7 +1164,8 @@ SUPPORT = f"""<section class="page-hero">
            그 금액이 무엇을 감당하는지 함께 알려 드립니다.</p></div>
       <div class="card"><span class="kicker">02</span><h3>프로그램 지원</h3>
         <p>재단·기금·지자체·기업 후원자를 위해 전체 제안서와 예산, 활동 기록을 요청 시
-           보내 드립니다.</p></div>
+           보내 드립니다. <a class="link" href="partner.html">기관 파트너십</a> 페이지에
+           파트너십에 따라오는 것을 적어 두었습니다.</p></div>
       <div class="card"><span class="kicker">03</span><h3>문을 열어 주기</h3>
         <p>요양시설이나 본당, 커뮤니티 센터나 병원에 저희를 소개해 주시는 일은
            후원금만큼, 때로는 그보다 더 큰 도움이 됩니다.</p></div>
@@ -1254,6 +1175,7 @@ SUPPORT = f"""<section class="page-hero">
     </div>
     <div class="btn-row reveal center-row mt-4">
       <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=CMFE%20후원%20문의">후원 문의 <span class="arrow">→</span></a>
+      <a class="btn btn-quiet" href="partner.html">기관을 위한 안내</a>
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=CMFE%20파트너십·펀딩%20문의">제안서 요청</a>
     </div>
     <div class="callout reveal mt-4">
@@ -1261,6 +1183,24 @@ SUPPORT = f"""<section class="page-hero">
          자원봉사로 운영되는 사회적기업이며, 현재
          비영리 보증유한책임회사(CLG) 설립을 준비하고 있습니다. 아직 등록 자선단체가 아니므로
          기부금 세제 혜택은 적용되지 않습니다. 헷갈리실 수 있어 미리 밝혀 둡니다.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">지금까지</p>
+      <h2 class="h-md">누가 이 일을 받쳐 왔는가.</h2>
+      <p class="mt-3">2026년 이전은 전부 자비와 자원봉사였습니다. 지금까지의 지원 전체, South
+         Dublin Live 신청을 위해 받은 서한, 그리고 아직 증명하지 못한 것을 한 페이지에 함께
+         적어 두었습니다.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html#transparency">투명성 <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <div class="quote reveal">
+      <p>&ldquo;넉넉한 형편에서 하는 일이 아닙니다. 본인의 재정 형편이 빠듯한
+         가운데서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
+      <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
     </div>
   </div>
 </section>"""
@@ -1328,3 +1268,743 @@ CONTACT = """<section class="page-hero">
        자원봉사로 운영합니다. 커뮤니티 음악 · 사회적기업 · 예술과 건강.</p>
   </div>
 </section>"""
+
+
+# ---------------------------------------------------------------------------
+# 성과 — 무엇이 달라졌는지, 기록이 뒷받침하는 것만
+# ---------------------------------------------------------------------------
+
+import archive as ar
+
+
+def _fig(n, label, period, suffix=""):
+    return (f'<div class="figure"><b class="count" style="--n:{n}"><span>{n}{suffix}</span></b>'
+            f'<span class="figure-label">{label}</span>'
+            f'<span class="figure-period">{period}</span></div>')
+
+
+IMPACT = f"""<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">성과와 근거</p>
+    <h1>무엇이 달라졌는지, 기록이 뒷받침하는 것만 적었습니다.</h1>
+    <p>웰빙이 좋아졌다거나 고립이 줄었다는 말은 여기 없습니다. 아직 재 보지 않았기
+       때문입니다. 아래 숫자에는 전부 기간이 붙어 있고, 하나하나
+       <a class="crumb" href="archive.html">기록</a>의 한 줄로 되짚을 수 있습니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">날짜가 있는 숫자</p>
+      <h2>기간이 없는 숫자는 광고입니다. 이 숫자에는 기간이 있습니다.</h2>
+    </div>
+    <div class="figures stagger">
+      {_fig(40, "회의 세션과 연주", "2024 – 2026년", "+")}
+      {_fig(17, "회의 강의·연주", "2024년 1월 – 2026년 2월")}
+      {_fig(143, "명이 그 강의에 왔습니다", "1–15회차 · 2024 – 2025년")}
+      {_fig(20, "회의 찾아가는 음악회", "2023 – 2025년 · 4개국")}
+      {_fig(7, "명 중 7명이 파일럿을 마쳤습니다", "2026년 1 – 4월")}
+      {_fig(25, "곳의 공간과 기관", "2023 – 2026년")}
+      {_fig(213, "시간, 준비 시간까지 기록", "2026년 8월 27일 기준")}
+      {_fig(4, "회의 Letters Ensemble 음악회", "2024년 3월 – 2025년 12월")}
+    </div>
+    <p class="tiny mt-3 reveal">40회는 강의·연주 17회, 찾아가는 음악회 20회, 파일럿 음악회 1회,
+       South Dublin Live 음악회 2회를 더한 것입니다. 앙상블 음악회 4회는 20회 안에 들어 있어
+       두 번 세지 않았습니다. 찾아가는 음악회의 관객 수는 세어 둔 적이 없어 적지 않습니다.</p>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">달라진 것</p>
+      <h2>기록이 뒷받침하는 일곱 가지.</h2>
+      <p>하나하나 종이로 보여 드릴 수 있는 것들입니다. 그 종이가 편지인지, 프로그램인지,
+         출석부인지도 함께 적었습니다.</p>
+    </div>
+    <div class="evidence evidence-2 stagger">
+      <div><dl><dt>더 많은 사람이 왔습니다</dt>
+        <dd>무료 강의·연주의 참석은 첫 회 <strong>6명</strong>에서 <strong>14명</strong>까지
+            늘었고, 같은 분들이 다시 왔습니다. 두 해 동안 15회, 연 143명. 매회 그날
+            세었습니다.</dd></dl></div>
+      <div><dl><dt>관객이 연주자가 됐습니다</dt>
+        <dd>2024년 성 골롬반 선교 수녀회 음악회가 끝난 뒤, 한 수녀님이 다시 연주할 수 있을지
+            물었습니다. 그 질문이 2026년 은퇴 수도자 리코더 앙상블이 됐고, <strong>7명
+            전원</strong>이 10주를 마치고 아홉 곡을 사람들 앞에서 연주했습니다.</dd></dl></div>
+      <div><dl><dt>배움이 나눔을 먹였습니다</dt>
+        <dd>강의·연주에 왔던 한 분이 학교 다닐 때 비올라를 켰던 것을 떠올리고 Letters
+            Ensemble에 들어왔습니다. 두 축이 한 바퀴를 돈다는 말은 이런 뜻입니다.</dd></dl></div>
+      <div><dl><dt>닿기 어려운 곳에 닿았습니다</dt>
+        <dd>요양시설, 은퇴 수도 공동체, 노숙인 쉼터, HSE 주간 돌봄 서비스, 대학병원, 시골
+            본당, 순교 성지. 그리고 국립 콘서트홀에는 함께 갔습니다.</dd></dl></div>
+      <div><dl><dt>외부 기관이 인정했습니다</dt>
+        <dd>사우스더블린 카운티 의회 예술과가 <strong>South Dublin Live 2026</strong>에 이
+            프로젝트를 선정하고 비용을 지원했습니다. 그전까지는 전부 자비와 자원봉사였습니다.</dd></dl></div>
+      <div><dl><dt>교회가 보증했습니다</dt>
+        <dd>더블린 보좌주교 도날 로치의 추천서, 그리고 한국 천주교 주교회의
+            평신도사도직위원회의 장학금.</dd></dl></div>
+      <div><dl><dt>기관이 문을 열어 두었습니다</dt>
+        <dd>South Dublin Live 신청을 위해 Rua Red, The Civic, Tallaght University Hospital이
+            지지 서한을 썼습니다. 병원의 National Centre for Arts &amp; Health는 아트리움에서
+            저희를 만나 음악회를 함께 준비했고, 그 자리에서 음악회가 열렸습니다.</dd></dl></div>
+      <div><dl><dt>후원이 차를 샀습니다</dt>
+        <dd>유럽과 한국의 개인 후원이 모여 차량 한 대가 생겼습니다. 연주자와 악기와 보면대가
+            한 번에 실려, 버스 시간표에 없는 방까지 갑니다.</dd></dl></div>
+    </div>
+    <div class="reveal mt-4">{dg.attendance(L)}</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <figure class="reveal">
+      <div class="photo photo-4x3">
+        <img src="images/letters-ensemble.jpg" width="1400" height="1050"
+             alt="악기를 든 Letters Ensemble 단원들">
+      </div>
+      <figcaption>Letters Ensemble. 2024년 위클로 주 음악회가 가르치는 프로그램의 출발점이
+        됐습니다.</figcaption>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">이야기 하나</p>
+      <h2 class="h-md">뒷줄에서 나온 질문.</h2>
+      <p class="lead mt-2">2024년 11월, Letters Ensemble이 위클로 주의 성 골롬반 선교 수녀회에서
+         연주했습니다. 연주가 끝나고 한 수녀님이 물었습니다. 다시 연주할 수 있을까요.
+         오래전에 바이올린을 켰다고 했습니다.</p>
+      <p class="mt-2">그 질문이 은퇴 프레젠테이션 수녀 일곱 분의 리코더 앙상블이 됐습니다.
+         석 달의 준비, 워렌마운트에서의 10주 연습, 클론달킨 로지에서의 아홉 곡 부활 음악회.
+         일곱 분 모두 끝까지 함께했습니다. 2026년 9월, 같은 과정이 멀허다트 커뮤니티 센터에서
+         누구에게나 무료로 열렸습니다.</p>
+      <p class="mt-2">그 수녀님의 이름은 적지 않습니다. 아직 여쭙지 않았기 때문입니다. 이
+         사이트의 모든 이야기가 같은 규칙을 따릅니다.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="programmes/recorder-ensemble.html">그 질문에서 나온 과정 <span class="arrow">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">변화 이론</p>
+      <h2>방 하나, 한 시간, 리코더 하나가 무엇이 되어야 하는가.</h2>
+    </div>
+    <div class="reveal">{dg.theory_of_change(L)}</div>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">가려는 곳</p>
+      <h2>마친 일 넷, 할 일 넷. 이 순서대로 갑니다.</h2>
+      <p>목록이 교육가 고용에서 끝나는 이유가 두 번째 사회적 목표입니다. 자원봉사자 한
+         사람으로 굴러가는 모델은 파일럿입니다. 프로그램이 되려면 사람을 고용해야 합니다.</p>
+    </div>
+    <div class="reveal">{dg.roadmap(L)}</div>
+    <div class="grid grid-2 stagger mt-4">
+      <div class="card"><span class="kicker">재기</span>
+        <h3>2026년 가을부터, 간단한 사전·사후 조사</h3>
+        <p>멀허다트 과정부터 모든 기수에게 학기 처음과 끝에 관계와 자신감에 관한 짧은
+           질문을 같은 방식으로 묻습니다. 인용할 말은 서면 동의를 받습니다. 다음 보고에서는
+           출석만큼 자신 있게 웰빙을 말할 수 있게 됩니다.</p></div>
+      <div class="card"><span class="kicker">적기</span>
+        <h3>기록은 그날 남깁니다</h3>
+        <p>모든 회차와 연주를 그날 적습니다. 날짜, 장소, 한 일, 대략 몇 명이 있었는지, 어떤
+           증거가 남았는지. 이 실천은 연구로도 기록되고 있고, 앞으로도 그렇습니다. 세지
+           못한 것은 같은 표에 세지 못했다고 적습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised" id="transparency">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">투명성</p>
+      <h2>저희가 무엇이고, 무엇을 받았고, 무엇을 아직 증명하지 못했는가.</h2>
+      <p>후원자는 초기 단계를 이해합니다. 이해하지 못하는 것은 얼버무림입니다. 그래서 지금
+         단계를 그대로 적습니다.</p>
+    </div>
+    <div class="split reveal">
+      <div>
+        <h3 class="h-sub">현재 지위</h3>
+        <dl class="facts">
+          <dt>운영 형태</dt><dd>창립자가 이끄는 커뮤니티 음악 사회적기업. 자원봉사 운영.
+              2024년 1월 더블린에서 창립</dd>
+          <dt>법적 형태</dt><dd>비영리 보증유한책임회사(CLG) 설립 준비 중. 아직 등록 자선단체가
+              아니며, 기부금 세제 혜택은 적용되지 않습니다</dd>
+          <dt>이사진</dt><dd>아직 없습니다. 자원봉사 이사 세 명 이상의 이사회가 위 목록의 다음
+              걸음입니다</dd>
+          <dt>보험</dt><dd>공공배상책임보험 가입 완료, 2026년 8월부터</dd>
+          <dt>신원조회</dt><dd>일에 필요한 경우 Garda 신원조회를 마칩니다. 관련 서류는 파트너
+              공간에 요청 시 제공합니다</dd>
+          <dt>창립자</dt><dd>김서현 Andrew Seohyeon Kim, BMus (Hons), TU 더블린 음악원 &mdash;
+              <a class="link" href="about.html#founder">프로필</a></dd>
+        </dl>
+      </div>
+      <div>
+        <h3 class="h-sub">아직 증명하지 못한 것</h3>
+        <ul class="checklist mt-2">
+          <li><strong>웰빙을 재지 않았습니다.</strong> 검증된 도구도, 사전·사후 조사도 아직
+              없습니다. 고립이 줄었다는 말은 참가자가 해 준 말에 기대고 있습니다.</li>
+          <li><strong>관객을 세지 않았습니다.</strong> 스무 번의 찾아가는 음악회 어느 것에도
+              관객 수 기록이 없습니다.</li>
+          <li><strong>뒤를 좇지 않았습니다.</strong> 10주가 끝난 뒤 무엇이 남았는지
+              모릅니다.</li>
+          <li><strong>비교가 없습니다.</strong> 다른 악기, 다른 기수, 다른 교사를 견주어 본
+              적이 없습니다.</li>
+          <li><strong>실천한 사람이 곧 연구한 사람입니다.</strong> 설계에는 강점이고, 결과를
+              주장하는 데는 한계입니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-head reveal mt-4">
+      <h3 class="h-sub">지금까지의 지원</h3>
+      <p>2026년 이전은 전부 자비와 자원봉사였습니다. 후원을 검토하는 분이 가장 먼저 묻는
+         것이 &lsquo;지금까지 누가 냈는가&rsquo;여서, 아무리 작아도 그대로 적어 둡니다.</p>
+    </div>
+    <div class="table-scroll reveal">
+      <table>
+        <thead><tr><th scope="col">출처</th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>
+        <tbody>
+          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">예술과 ·
+              South Dublin Live 2026</span></td>
+              <td><em>Shared Voices of South Dublin</em>에 &euro;2,000. Tallaght University Hospital과
+                  Rua Red에서 음악회 두 번을 열었습니다. 처음으로 공적 자금이 들어온 작업.</td>
+              <td>수령 완료</td></tr>
+          <tr><td><strong>명도회 장학금</strong><br><span class="tiny">한국 천주교 주교회의
+              평신도사도직위원회</span></td>
+              <td>2025년 3월부터 학기별 지원. 창립자의 음악 사도직을 위한 것.</td><td>종료</td></tr>
+          <tr><td><strong>개인 후원자</strong></td>
+              <td>유럽과 한국의 후원자들이 보내 준 도움으로 차량 한 대가 생겼습니다.</td>
+              <td>진행 중</td></tr>
+          <tr><td><strong>파트너 공간, 현물</strong></td>
+              <td>Tallaght University Hospital &mdash; 공간과 운영 시간. Mulhuddart Community Centre
+                  &mdash; 수업 공간. TU Dublin &mdash; 연습 공간.</td><td>계속</td></tr>
+          <tr><td><strong>TU Dublin Venture Lab</strong></td>
+              <td>사회적기업 창업 프로그램, 2024년 9월부터.</td><td>수료</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="split split-center reveal mt-4">
+      <div class="quote">
+        <p>&ldquo;넉넉한 형편에서 하는 일이 아닙니다. 본인의 재정 형편이 빠듯한
+           가운데서도 시간과 에너지와 재능을 아낌없이 내어 주고 있습니다.&rdquo;</p>
+        <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
+      </div>
+      <div>
+        <h3 class="h-sub">South Dublin Live 신청을 위해 받은 서한</h3>
+        <ul class="plainlist mt-2">
+          <li><strong>Rua Red</strong> &mdash; South Dublin의 현대예술센터</li>
+          <li><strong>The Civic Theatre</strong>, Tallaght</li>
+          <li><strong>Tallaght University Hospital</strong> &mdash; National Centre for Arts &amp; Health</li>
+          <li><strong>SDCC 예술과</strong> &mdash; South Dublin Live 2026 선정</li>
+        </ul>
+        <p class="tiny mt-2">이 서한들은 그 한 건의 신청을 위해 써 주신 것입니다. 저희가 하는
+           모든 일에 대한 포괄적인 보증이 아니며, 그렇게 내세우지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{CTA}"""
+
+
+# ---------------------------------------------------------------------------
+# 기록 — 2023년부터 지금까지
+# ---------------------------------------------------------------------------
+
+ARCHIVE = f"""<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">기록</p>
+    <h1>2023년부터 지금까지, 모든 회차와 연주.</h1>
+    <p>잘된 것만 골라 싣지 않고 있었던 일을 그대로 적습니다. 한 줄 한 줄 그날 장소와 함께
+       기록해 두어서, 이 사이트 어디에 적힌 숫자든 여기 한 줄로 되짚을 수 있습니다. 정본이
+       &lsquo;확인 필요&rsquo;로 둔 행은 짐작으로 채우지 않고 뺐습니다.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap reveal">
+    {dg.chronicle(L)}
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">지나온 길</p>
+      <h2>클라리넷 하나에서 공동체까지.</h2>
+    </div>
+    <div class="split split-wide">
+      <div class="timeline reveal">
+        <div class="tl-item"><div class="tl-date">2023년 2월</div>
+          <h3>시작 이전</h3>
+          <p>루르드의 영어 미사에서 클라리넷 독주. 이름이 붙기 한 해 전의 찾아가는 음악회.</p></div>
+        <div class="tl-item"><div class="tl-date">2024년 1월</div>
+          <h3>시작</h3>
+          <p>더블린에서 <span class="brandname">Classical Music for Everyone</span>이,
+             그리고 Letters Ensemble이 함께 만들어집니다. 첫 강의·연주는
+             Dublin 18에서 여섯 명과 함께.</p></div>
+        <div class="tl-item"><div class="tl-date">2024년</div>
+          <h3>음악이 나갑니다</h3>
+          <p>Dalgan Park와 성 골롬반 선교 수녀회에서 음악회, 런던·파리·대구에서 연주.
+             강의 시리즈는 TU Dublin으로 옮겨 갑니다.</p></div>
+        <div class="tl-item"><div class="tl-date">2024–2025년</div>
+          <h3>함께 갑니다</h3>
+          <p>동행 관람이 독립된 갈래가 됩니다. NCH 인터내셔널 시리즈, 국립교향악단,
+             두 번의 여름에 BBC Proms.</p></div>
+        <div class="tl-item"><div class="tl-date">2025년 10월</div>
+          <h3>관객이 연주자가 됩니다</h3>
+          <p>은퇴 프레젠테이션 수녀 일곱 분과의 리코더 앙상블 준비. 조사, 허가, 신원조회,
+             개별 레슨.</p></div>
+        <div class="tl-item"><div class="tl-date">2025년 12월</div>
+          <h3>국립 콘서트홀에서</h3>
+          <p>열다섯 번째 배움의 자리는 아일랜드 국립 콘서트홀에서 함께 본 공연이었습니다.</p></div>
+        <div class="tl-item"><div class="tl-date">2026년 1–4월</div>
+          <h3>파일럿, 그리고 그 음악회</h3>
+          <p>Warrenmount에서 10주 합주, 이어 Clondalkin Lodge에서 아홉 곡의 부활 음악회.
+             일곱 분 전원 수료.</p></div>
+        <div class="tl-item"><div class="tl-date">2026년 8월</div>
+          <h3>첫 공적 위촉</h3>
+          <p>South Dublin Live 2026을 위한 두 번의 연주. Tallaght University Hospital과
+             Rua Red.</p></div>
+        <div class="tl-item"><div class="tl-date">2026년 9월</div>
+          <h3>이 모델이 처음으로 일반에 열립니다</h3>
+          <p>첫 커뮤니티 리코더 앙상블 과정이 Dublin 15 Mulhuddart Community Centre에서
+             시작됩니다 — 12주, 무료.</p></div>
+      </div>
+      <div>
+        <figure class="reveal">
+          <div class="photo photo-4x3">
+            <img src="images/church-concert.jpg" width="1400" height="1050"
+                 alt="성당에서 연주하는 앙상블">
+          </div>
+          <figcaption>성당에서의 앙상블. 스무 번의 찾아가는 음악회 가운데 열여섯 번쯤이
+            본당, 성지, 수도원, 전례였습니다.</figcaption>
+        </figure>
+        <div class="callout reveal mt-3">
+          <h3 class="h-sub">표 읽는 법</h3>
+          <p class="small mt-1">최근 해가 먼저 옵니다. 참석 인원은 강의·연주만 기록했고,
+             찾아가는 음악회의 관객은 세지 않았으므로 여기서 짐작해 적지 않았습니다.
+             <span class="tag">성지·본당 강</span> 표시는 신앙 공동체를 찾아가는 갈래입니다.
+             Letters Ensemble의 주간 연습은 2024년 1월부터 백 번이 훨씬 넘지만 기록해 두지
+             않아 싣지 않았습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{ar.tables(L)}
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">계획했지만 하지 못한 것</p>
+      <h2>2026년: 계획을 반으로 줄이고, 남은 것은 끝까지 했습니다.</h2>
+      <p>이것도 기록에 넣습니다. 졸업과 논문과 이사가 한 해에 겹치면서 계획한 넷이 둘이
+         됐고, 그 둘은 제대로 치렀습니다.</p>
+    </div>
+    <div class="grid grid-2 stagger">
+      <div class="card"><span class="kicker">열리지 않음 · 2026년 3월</span>
+        <h3>Our Lady of Dolours 사순 음악회</h3>
+        <p>자유 봉헌으로 여는 무료 본당 음악회. 클라리넷과 피아노, 이어 클라리넷과 Letters
+           Ensemble. 제안서와 포스터와 악보는 있었고, 열리지 못했습니다.</p></div>
+      <div class="card"><span class="kicker">논의 중</span>
+        <h3>Letters Ensemble 다섯 번째 음악회</h3>
+        <p>St John of God Hospital, Stillorgan. 프로그램 초안이 있습니다. 2026년 계획에서 첫
+           번째로 논의 중인 파트너십으로 적었고, 날짜는 아직 없습니다.</p></div>
+      <div class="card"><span class="kicker">열리지 않음 · 2026년 8월</span>
+        <h3>South Dublin Live — The Civic의 한국·아일랜드 음악회</h3>
+        <p>대극장에서 클라리넷과 피아노와 해금. 예술과에 제안한 네 음악회 가운데 이것과 아래
+           가족 음악회는 열리지 못했고, 열린 둘은 위 2026년 표에 있습니다.</p></div>
+      <div class="card"><span class="kicker">열리지 않음 · 2026년 9월</span>
+        <h3>South Dublin Live — 야외 가족 음악회</h3>
+        <p>광장에서 여는 45분 트리오 음악회. 비가 오면 카운티 도서관으로 옮길 계획까지
+           있었습니다. 넷 가운데 가장 값싸고 가장 열린 형식이라, 가장 먼저 다시 살아날
+           것입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">아직 기록되지 않은 것</p>
+      <h2 class="h-md">있었지만 적어 두지 않은 일.</h2>
+      <ul class="checklist mt-3">
+        <li>Letters Ensemble 연습. 2024년 1월부터 매주, 백 번이 훨씬 넘는데 하나도 적지
+            않았습니다. 이제부터 셉니다.</li>
+        <li>함께하는 음악여행의 실제 참석. 안내한 기록은 남았고, 몇 명이 갔는지는 남지
+            않았습니다.</li>
+        <li>스무 번의 찾아가는 음악회 대부분의 프로그램과 곡목.</li>
+        <li>모든 연주의 관객 수.</li>
+        <li>참가자의 증언. 2026년 가을 기수부터 동의를 받고 모읍니다.</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">기록을 남기는 법</p>
+      <h2 class="h-md">그날, 한 줄로.</h2>
+      <ol class="steps mt-3">
+        <li><strong>날짜, 정식 장소 이름, 기관 종류.</strong> 무엇을 했고, 누구를 위한
+            것이었는지.</li>
+        <li><strong>몇 명이 있었는지의 어림.</strong> 아무도 세지 않았어도 그날 저녁에
+            적습니다.</li>
+        <li><strong>준비 시간까지 넣은 시간.</strong> 예전 기록마다 빠져 있던 부분입니다.</li>
+        <li><strong>남은 증거.</strong> 심사자가 믿는 순서대로: 기관 레터헤드의 편지, 언론
+            보도, 프로그램이나 포스터, 사진.</li>
+      </ol>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html">이 기록이 무엇이 되는가 <span class="arrow">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+{CTA}"""
+
+
+# ---------------------------------------------------------------------------
+# 기관 파트너십
+# ---------------------------------------------------------------------------
+
+_MAIL_PARTNER = ("mailto:sby05034@gmail.com?subject=%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%20%EB%AC%B8%EC%9D%98"
+                 "&body=%EA%B8%B0%EA%B4%80%3A%20%0A%EC%9C%84%EC%B9%98%3A%20%0A%EA%B3%B5%EA%B0%84%EA%B3%BC%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EB%82%A0%EC%A7%9C%3A%20%0A"
+                 "%EC%83%9D%EA%B0%81%ED%95%98%EC%8B%9C%EB%8A%94%20%EA%B2%83%20%ED%95%9C%20%EC%A4%84%3A%20")
+
+_FAQ_KO = "\n".join(
+    f'      <details class="faq reveal"><summary>{q}</summary><p>{a}</p></details>'
+    for q, a in [
+        ("단체 전체가 아니라 프로그램 하나만 후원할 수 있나요?",
+         "네. 프로그램이나 공간의 종류를 지정해 주시면 그 후원은 거기에만 쓰고, 거기에 맞춰 "
+         "보고합니다."),
+        ("기부금 세제 혜택이 있나요?",
+         "아직 없습니다. 비영리 보증유한책임회사로 설립을 준비 중이고 등록 자선단체가 아니어서, "
+         "기부금은 세제 혜택 대상이 아닙니다. 오해가 생기기 전에 분명히 적어 둡니다."),
+        ("후원사 이름은 어디에 실리나요?",
+         "후원하신 연주의 인쇄 프로그램, 이 사이트의 후원 페이지, 그리고 받으시는 보고서에 "
+         "실립니다. 동의를 받은 뒤에만, 그 밖의 자리에는 싣지 않습니다."),
+        ("음악회를 열려면 공간이 무엇을 준비해야 하나요?",
+         "방 하나, 거기 살거나 일하는 사람들, 담당자 한 사람입니다. 연주자와 악기, 보면대, "
+         "프로그램, 보험은 저희가 가져갑니다. 무대도 피아노도 필요 없고, 관객이 낼 돈도 "
+         "없습니다."),
+    ])
+
+PARTNER = f"""<section class="page-hero page-hero-lead">
+  <div class="wrap">
+    <p class="eyebrow lift lift-1">기관 파트너십</p>
+    <h1 class="lift lift-2">방과 날짜만 알려 주세요.</h1>
+    <p class="lift lift-3">요양시설·병원·본당·커뮤니티 센터를 위한 안내이고, 지자체·재단·기금·기업을
+       위한 안내이기도 합니다. 문의는 2분이면 되고, 방을 뺀 나머지는 전부 저희가 가져갑니다.</p>
+    <div class="btn-row lift lift-4">
+      <a class="btn btn-accent" href="{_MAIL_PARTNER}">2분이면 되는 문의 <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-on-dark" href="#faq">자주 받는 질문</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">받으시는 것</p>
+      <h2>하루가 달라지는 방에 실황 연주가 들어갑니다. 직접 와서 보실 수 있습니다.</h2>
+      <p>후원은 병동과 휴게실과 본당 홀에 연주자를 세웁니다. 그리고 여러분의 팀에게 가서
+         볼 수 있고 함께할 수 있는 무언가를 줍니다. 모든 파트너십에는 담당자의 이름, 그 돈이
+         한 일을 날짜와 함께 적은 보고, 언제든 와서 보시라는 초대가 따라옵니다.</p>
+    </div>
+    <div class="reveal">{dg.partnership(L)}</div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">방을 맡고 계시다면</p>
+      <h2>오선 위쪽은 전부 차에 실려 옵니다.</h2>
+      <p>피아노도 무대도 예산도 없는 휴게실이 음악회를 열 수 있습니다. 30분에서 60분,
+         어쿠스틱으로, 곡마다 쉬운 말로 소개하고, 관객이 낼 돈은 없습니다. 공공배상책임보험에
+         들어 있고 일에 필요하면 Garda 신원조회를 마칩니다. 서류는 가기 전에 보내 드립니다.</p>
+    </div>
+    <div class="reveal">{dg.visit(L)}</div>
+    <div class="grid grid-3 stagger mt-4">
+      <div class="card"><span class="kicker">요양시설과 병원</span>
+        <h3>휴게실 음악회, 또는 아트리움 드롭인</h3>
+        <p>입소자와 환자, 가족과 직원이 이미 있는 그 방에서. 2026년 8월 Tallaght University
+           Hospital 음악회는 30분, 어쿠스틱, 오가며 듣는 형식이었습니다. 요양시설 음악회도
+           대개 같은 모양입니다.</p></div>
+      <div class="card"><span class="kicker">본당과 수도 공동체</span>
+        <h3>전례 음악, 또는 미사 뒤의 음악회</h3>
+        <p>스무 번의 찾아가는 음악회 가운데 열여섯 번쯤이 본당과 성지, 수도원과 전례였습니다.
+           창립자는 더블린의 한 본당에서 음악 감독을, 다른 본당에서 오르가니스트를 맡고
+           있습니다. 제의실에서 먼저 듣고 싶어 하는 말이 무엇인지 압니다.</p></div>
+      <div class="card"><span class="kicker">커뮤니티 센터</span>
+        <h3>여러분의 방에서 여는 한 학기 과정</h3>
+        <p>열 명에서 열두 명이 둥글게 앉을 따뜻한 방, 한 학기 동안 매주 한 번, 담당자 한
+           사람. 교사와 교육과정, 악보, 학기 말 음악회는 저희가 가져갑니다.
+           <a class="link" href="get-involved.html">공간이 준비할 것과 저희가 할 것</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">근거</p>
+      <h2>이미 함께한 곳.</h2>
+      <p>빌려온 신뢰는 확인할 수 있어야 하므로 이름을 그대로 적습니다. 하나하나
+         <a class="link" href="archive.html">기록</a>의 한 줄입니다.</p>
+    </div>
+    <ul class="names reveal">
+      <li>South Dublin County Council 예술과</li>
+      <li>Tallaght University Hospital</li>
+      <li>Rua Red</li>
+      <li>The Civic Theatre</li>
+      <li>Clondalkin Lodge</li>
+      <li>Mulhuddart Community Centre</li>
+      <li>프레젠테이션 수녀회</li>
+      <li>성 골롬반 선교 수녀회</li>
+      <li>Dalgan Park</li>
+      <li>TU Dublin</li>
+      <li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+      <li>Church of the Three Patrons, Rathgar</li>
+      <li>HSE EVE Goirtin Hub</li>
+      <li>Morning Star Hostel</li>
+      <li>파리 외방전교회</li>
+    </ul>
+    <div class="figures figures-4 stagger mt-4">
+      {_fig(20, "회의 찾아가는 음악회", "2023 – 2025년 · 4개국")}
+      {_fig(25, "곳의 공간과 기관", "2023 – 2026년")}
+      {_fig(7, "명 중 7명이 파일럿을 마쳤습니다", "2026년 1 – 4월")}
+      {_fig(2, "회의 South Dublin Live 음악회", "2026년 8월 · 첫 공적 위촉")}
+    </div>
+    <div class="quote reveal mt-4">
+      <p>&ldquo;음악으로, 그는 홀로 남았을 이들에게 격려와 존엄과
+         영적인 동행을 건넵니다.&rdquo;</p>
+      <cite>더블린 보좌주교 도날 로치 · 2026년 2월 16일</cite>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">자주 받는 질문</p>
+      <h2 class="h-md">네 가지, 있는 그대로 답합니다.</h2>
+    </div>
+    <div class="faq-list">
+{_FAQ_KO}
+    </div>
+  </div>
+</section>
+
+<section class="band-photo">
+  <img src="images/quartet-hall.jpg" alt="" width="1400" height="788">
+  <div class="wrap narrow center reveal">
+    <p class="eyebrow center-row">다음 걸음</p>
+    <h2 class="h-lg">이메일 한 통, 네 줄.</h2>
+    <p class="lead mt-2">기관, 위치, 공간과 가능한 날짜, 그리고 생각하시는 것 한 줄. 메일을
+       열면 그 네 줄이 미리 적혀 있습니다. 답장은 그 방에 직접 갈 사람이 보냅니다.</p>
+    <div class="btn-row center-row">
+      <a class="btn btn-accent" href="{_MAIL_PARTNER}">파트너 되기 <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-on-dark" href="contact.html">연락처 전체</a>
+    </div>
+  </div>
+</section>"""
+
+
+# ---------------------------------------------------------------------------
+# 상징과 표준
+# ---------------------------------------------------------------------------
+
+IDENTITY = f"""<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">상징과 표준</p>
+    <h1>금색은 <em>Everyone</em> 위에 놓입니다.</h1>
+    <p>장식이 아닙니다. 로고에서 &lsquo;for&rsquo;는 작게, &lsquo;Everyone&rsquo;은 크고
+       금색으로 놓습니다. 이 이름에서 지키기 어려운 낱말이 마지막 낱말이라서 그렇습니다.
+       이 페이지가 디자인 표준입니다. 저희 이름을 인쇄하는 누구든 이 기준으로 저희를
+       붙들어 두실 수 있도록 공개합니다.</p>
+  </div>
+</section>
+
+<section class="band-mark">
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">이름이 곧 숙제입니다</p>
+      <h2 class="h-md">이름에 해야 할 일이 적혀 있습니다.</h2>
+      <p class="lead mt-3">이 음악에 부족한 건 관객이 아니라 길입니다. 나이가 많거나, 몸이
+         아프거나, 도시에서 멀거나, 형편이 빠듯하거나, 이 음악이 자기 것이라는 말을 한 번도
+         못 들어 본 사람이 걸어 들어올 길. 저희가 무엇으로 평가받아야 하는지는 로고에 이미
+         적혀 있습니다.</p>
+      <p class="mt-3">높은음자리표와 워드마크, 2026년 8월 17일 확정. 워드마크 안의 비례가 뜻을
+         담고 있고, 바뀌지 않습니다. 이름은 한 가지 모양의 고유명사입니다 &mdash;
+         <span class="brandname">Classical Music for Everyone</span>. 전부 대문자로 쓰지 않고,
+         대외 문안에서 줄이지 않으며, 다른 서체로 다시 짜지 않습니다.</p>
+      <p class="footer-line mark-line">클래식 음악을, 그것이 필요한 곳으로!</p>
+    </div>
+    <figure class="reveal mark-plate">
+      <img src="assets/logo-horizontal.svg" width="341" height="131"
+           alt="Classical Music for Everyone 로고 — 높은음자리표와 워드마크. &lsquo;Everyone&rsquo;이 크고 금색으로 놓여 있다">
+      <figcaption>가로형 로고, 2026년 8월 17일 확정.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="identity">
+  <div class="wrap">
+    <div class="split split-center reveal">
+      <div class="logo-pair">
+        <figure class="logo-plate on-light">
+          <img src="assets/logo-horizontal.svg" width="341" height="131"
+               alt="가로형 로고 — 높은음자리표와 워드마크">
+          <figcaption>밝은 바탕 &mdash; 기본</figcaption>
+        </figure>
+        <figure class="logo-plate on-dark">
+          <img src="assets/logo-reversed.svg" width="341" height="131"
+               alt="어두운 바탕용 반전 로고">
+          <figcaption>네이비 바탕 &mdash; 반전</figcaption>
+        </figure>
+        <figure class="logo-plate on-light">
+          <img src="assets/logo-signature.png" width="600" height="210"
+               alt="이메일 끝에 쓰는 서명용 로고">
+          <figcaption>이메일 서명 &mdash; 같은 조합을 메일 크기로. 투명도를 지우는 메일
+            클라이언트를 위해 흰 바탕 판본을 함께 둡니다.</figcaption>
+        </figure>
+      </div>
+      <div>
+        <h3 class="h-sub">로고 쓰는 법</h3>
+        <p class="mt-2">밝은 바탕에는 가로형, 어두운 바탕에는 반전형. 높은음자리표만 따로 쓰는
+           것은 파비콘과 프로필 사진뿐입니다. 사진 위에 놓을 때는 뒤가 조용한 자리를 고르거나
+           단색 판을 깝니다.</p>
+        <div class="rules mt-3">
+          <div class="do">
+            <h3 class="h-sub">언제나</h3>
+            <ul>
+              <li>높은음자리표와 워드마크를 함께</li>
+              <li>사방에 높은음자리표 폭의 절반만큼 여백</li>
+              <li>밝은 바탕 &rarr; 가로형, 어두운 바탕 &rarr; 반전형</li>
+              <li>화면 140px, 인쇄 28mm 이상</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3 class="h-sub">절대로</h3>
+            <ul>
+              <li>늘리거나, 찌그러뜨리거나, 기울이거나, 색을 바꾸지 않기</li>
+              <li>그림자·외곽선·광채를 넣지 않기</li>
+              <li>&lsquo;for&rsquo;와 &lsquo;Everyone&rsquo;을 같은 크기로 만들지 않기</li>
+              <li>파비콘보다 큰 자리에 높은음자리표만 쓰지 않기</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">색</p>
+      <h2 class="h-md">여덟 가지 값, 한 번만 정의합니다.</h2>
+      <p>이 사이트의 모든 색은 이 여덟 가운데 하나이거나 거기서 파생한 톤입니다. 어떤
+         구성요소도 자기 색을 새로 만들지 않습니다.</p>
+    </div>
+    <div class="swatches reveal">
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--ink-navy)"></i><b>Ink Navy</b><code>#1D2430</code>
+        <span>로고 바탕, 본문, 어두운 띠</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-bronze)"></i><b>Gold Bronze</b><code>#B8893A</code>
+        <span>로고의 금색, 규칙선, 화살표, 도식의 선</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--gold-light)"></i><b>Light Gold</b><code>#D9B36A</code>
+        <span>반전 로고의 금색, 어두운 바탕 위의 강조</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--warm-cream)"></i><b>Warm Cream</b><code>#FAF5EE</code>
+        <span>거의 모든 페이지의 바탕</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--soft-navy)"></i><b>Soft Navy</b><code>#33405C</code>
+        <span>인쇄물의 패널과 블록</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--antique-gold)"></i><b>Antique Gold</b><code>#B4914F</code>
+        <span>인쇄물의 액센트</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--dusty-rose)"></i><b>Dusty Rose</b><code>#8C4A56</code>
+        <span>강조 &mdash; 드물게, 본문에는 쓰지 않음</span></div>
+      <div class="swatch"><i aria-hidden="true" style="--sw:var(--slate)"></i><b>Slate</b><code>#5F6B7D</code>
+        <span>보조 텍스트</span></div>
+    </div>
+    <div class="callout reveal mt-3">
+      <p class="small"><strong>더 예쁜 쪽을 포기하게 만드는 규칙 하나.</strong> Gold Bronze는
+         크림 위에서 대비가 2.9:1이라 본문 크기에서 읽히지 않습니다. 그래서 글자로 쓰는 금색은
+         언제나 어둡게 한 <code>#7F5C1C</code>이고, 금색 버튼의 글자는 흰색 대신 잉크
+         네이비입니다. 이 사이트의 모든 글자와 바탕 조합은 WCAG AA를 넘깁니다. 예외는 로고
+         하나뿐입니다. 로고는 이미지이고, 색을 바꾸지 않기 때문입니다.</p>
+    </div>
+
+    <div class="section-head reveal mt-4">
+      <p class="eyebrow">서체</p>
+      <h2 class="h-md">세 서체, 네 번째는 없습니다.</h2>
+      <p>EB Garamond은 워드마크의 Cormorant Garamond과 같은 올드스타일 계보라서, 제목이 로고와
+         다투지 않고 어울립니다. 한글은 행간을 더 주고 자간을 덜 조입니다. Noto Sans KR에는 둘
+         다 필요합니다.</p>
+    </div>
+    <div class="specimen reveal">
+      <div>
+        <dfn>EB Garamond &mdash; 제목</dfn>
+        <div class="sp-display">Bringing classical music where it&rsquo;s needed!</div>
+        <p>SemiBold. 제목, 헤드라인, 디스플레이 크기.</p>
+      </div>
+      <div>
+        <dfn>Plus Jakarta Sans &mdash; 본문과 라벨</dfn>
+        <div class="sp-body">We teach people to play, not only to listen.</div>
+        <p>Regular, SemiBold, Bold. 본문, 표, 캡션, 모든 라벨.</p>
+      </div>
+      <div>
+        <dfn>Noto Sans KR &mdash; 한글</dfn>
+        <div class="sp-kr">클래식 음악을, 그것이 필요한 곳으로!</div>
+        <p>Regular, Medium, Bold. 한국어 페이지에서는 제목과 본문 모두.</p>
+      </div>
+      <div>
+        <dfn>Cormorant Garamond &mdash; 로고 전용</dfn>
+        <div class="sp-body">워드마크에만 쓰고, 다른 어디에도 쓰지 않습니다.</div>
+        <p>로고의 글자는 외곽선으로 변환돼 있어, 이 사이트는 이 서체를 불러오지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">도식</p>
+      <h2 class="h-md">열네 개의 도식, 네 가지 표시.</h2>
+      <p>설명이 여든 낱말을 넘어가면 문단 대신 그림으로 옮깁니다. 이 사이트의 도식은 전부
+         악보에서 빌려 온 같은 네 가지 표시로만 그려서, 열네 개가 순서도 열네 장 대신 한
+         세트로 읽힙니다.</p>
+    </div>
+    <div class="reveal">{dg.vocabulary(L)}</div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">말</p>
+      <h2 class="h-md">이름을 적는 법.</h2>
+      <ul class="checklist mt-3">
+        <li><strong>언제나 전체 이름으로</strong> &mdash; <span class="brandname">Classical Music
+            for Everyone</span>. 대문자로만 쓰지 않고, 대외 문안에서 줄이지 않습니다.</li>
+        <li><strong>참가자</strong>라고 부릅니다. 고객이나 학생, 노인이라고 하지 않습니다.
+            어르신 대신 나이 많은 분.</li>
+        <li><strong>사회적기업</strong>입니다. 자선단체도, 사업체도 아닙니다.</li>
+        <li><strong>영문은 아일랜드식 철자</strong> &mdash; programme, organisation, centre.</li>
+        <li><strong>최상급 표현을 쓰지 않고</strong>, 확인할 수 없는 주장을 하지 않으며,
+            날짜 없는 숫자를 내놓지 않습니다.</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">한 문장</p>
+      <h2 class="h-md">단체 전체를 한 문장으로.</h2>
+      <p class="footer-line mark-line">Bringing classical music where it&rsquo;s needed!</p>
+      <p class="mt-3">마스터 태그라인은 느낌표로 끝나고, 모든 페이지 맨 아래에 있습니다.
+         한국어 내부 대역은 &lsquo;클래식 음악을, 그것이 필요한 곳으로!&rsquo;입니다.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="about.html">미션과 가치, 그리고 창립자 <span class="arrow">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+{CTA}"""

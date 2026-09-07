@@ -23,8 +23,10 @@
 <meta property="og:locale:alternate" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/church-concert.jpg">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/logo-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -61,6 +63,19 @@
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
     },
     {
+      "@type": "Person",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"},
+      "worksFor": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "sby05034@gmail.com",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
+    },
+    {
       "@type": "WebPage",
       "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html#page",
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html",
@@ -71,6 +86,13 @@
       "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/church-concert.jpg"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/"},
+        {"@type": "ListItem", "position": 2, "name": "Support", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html"}
+      ]
     }
   ]
 }
@@ -88,7 +110,14 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="Menu">
-      <a class="nav-link" href="about.html">About</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="about.html">About</a>
+        <div class="subnav">
+          <a href="about.html"><b>About us</b><span>Mission, values, the founder</span></a>
+          <a href="about.html#founder"><b>The founder</b><span>Andrew Seohyeon Kim</span></a>
+          <a href="identity.html"><b>The mark</b><span>Why the gold falls on Everyone</span></a>
+        </div>
+      </div>
       <div class="nav-item has-sub">
         <a class="nav-link" href="programmes.html">Programmes</a>
         <div class="subnav">
@@ -100,8 +129,28 @@
         </div>
       </div>
       <a class="nav-link" href="get-involved.html">Get Involved</a>
-      <a class="nav-link" href="news.html">News</a>
-      <a class="nav-link" href="support.html" aria-current="page">Support</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="news.html">What&rsquo;s On</a>
+        <div class="subnav">
+          <a href="news.html"><b>Coming up</b><span>Classes enrolling, concerts with the door open</span></a>
+          <a href="archive.html"><b>The record, 2023 to date</b><span>Every session and performance</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="impact.html">Impact</a>
+        <div class="subnav">
+          <a href="impact.html"><b>What has changed</b><span>Only what the record supports</span></a>
+          <a href="impact.html#next"><b>Where this is going</b><span>The next steps, in order</span></a>
+          <a href="impact.html#transparency"><b>Transparency</b><span>Status, money, what is not proved</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="support.html" aria-current="page">Support</a>
+        <div class="subnav">
+          <a href="support.html" aria-current="page"><b>Support us</b><span>Give, open a door, give a room</span></a>
+          <a href="partner.html"><b>Partner with us</b><span>For organisations and funders</span></a>
+        </div>
+      </div>
       <a class="btn btn-accent btn-nav" href="contact.html">Contact</a>
       <div class="lang-switch" role="group" aria-label="Language">
         <span aria-current="true">EN</span>
@@ -116,16 +165,46 @@
     <p class="eyebrow">Support</p>
     <h1>Help keep the door open.</h1>
     <p>We are volunteer-led. Support pays for recorders and scores, room hire, and the travel
-       that carries music to rooms it would not otherwise reach.</p>
+       that carries music to rooms it would not otherwise reach. Here is what it has done, what
+       it becomes, and how to give it.</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
+    <div class="section-head wide reveal">
+      <p class="eyebrow">What support has already done</p>
+      <h2>Support bought a vehicle. The vehicle bought distance.</h2>
+      <p>Gifts from individuals in Europe and Korea put a vehicle on the road. Players,
+         instruments and stands now travel together to care homes, parishes and hostels that no
+         bus timetable reaches &mdash; Wicklow, Meath, Westmeath, and further by arrangement.</p>
+    </div>
+    <div class="grid grid-4 stagger">
+      <div class="card"><span class="kicker">A gift becomes</span><h3>A recorder in someone&rsquo;s hands</h3>
+        <p>A descant recorder costs between &euro;8 and &euro;15. We advise on buying one, supply at
+           cost, or lend one for the term.</p></div>
+      <div class="card"><span class="kicker">A gift becomes</span><h3>Scores nobody has to pay for</h3>
+        <p>Every part, arranged so whoever turned up can play it, printed at our cost with
+           enlarged notation where eyes need it.</p></div>
+      <div class="card"><span class="kicker">A gift becomes</span><h3>A room for a term</h3>
+        <p>Where a venue cannot give the room, support hires it &mdash; and a warm room once a
+           week is where a course happens.</p></div>
+      <div class="card"><span class="kicker">A gift becomes</span><h3>The drive to the next room</h3>
+        <p>Fuel for the vehicle donors bought, so a day room in Co. Wicklow costs a morning, not
+           a budget line.</p></div>
+    </div>
+    <p class="tiny mt-3 reveal">No unit costs are quoted here beyond the price of a recorder,
+       because the others vary by room and by term. Ask, and we will show you the current
+       figures for the programme you have in mind.</p>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">How the money works</p>
       <h2>A paid booking is what keeps a free seat free.</h2>
-      <p>We are a social enterprise rather than a pure charity. That is not a technicality —
+      <p>We are a social enterprise rather than a pure charity. That is not a technicality &mdash;
          it is what lets the free places survive a dip in goodwill.</p>
     </div>
     <div class="reveal"><figure class="diagram">
@@ -182,60 +261,6 @@
   </div>
 </section>
 
-<section class="band-raised">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">Track record</p>
-      <h2>Who has backed this so far.</h2>
-      <p>Everything before 2026 was self-funded and voluntary. We publish the record because a
-         funder&rsquo;s first question is who came before them.</p>
-    </div>
-    <div class="table-scroll reveal">
-      <table>
-        <thead><tr><th scope="col">Source</th><th scope="col">Detail</th><th scope="col">Status</th></tr></thead>
-        <tbody>
-          <tr><td><strong>South Dublin County Council</strong><br><span class="tiny">Arts Office ·
-              South Dublin Live 2026</span></td>
-              <td>A commission for <em>Shared Voices of South Dublin</em> — our first publicly
-                  funded work.</td><td>Received</td></tr>
-          <tr><td><strong>Myongdohoe Scholarship</strong><br><span class="tiny">Lay Apostolate
-              Committee, Catholic Bishops&rsquo; Conference of Korea</span></td>
-              <td>Termly support from March 2025 for the founder&rsquo;s musical apostolate.</td>
-              <td>Concluded</td></tr>
-          <tr><td><strong>Individual donors</strong></td>
-              <td>Gifts from supporters in Europe and Korea towards making regular outreach
-                  possible.</td><td>Ongoing</td></tr>
-          <tr><td><strong>Partner venues, in kind</strong></td>
-              <td>Tallaght University Hospital — venue and operating time. Mulhuddart Community
-                  Centre — the room. TU Dublin — rehearsal space.</td><td>Continuing</td></tr>
-          <tr><td><strong>TU Dublin Venture Lab</strong></td>
-              <td>Social enterprise start-up programme, from September 2024.</td><td>Completed</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="split split-center reveal mt-4">
-      <div class="quote">
-        <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
-           within limited personal financial circumstances, he continues to give generously of his
-           time, energy, and talent.&rdquo;</p>
-        <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
-      </div>
-      <div>
-        <h3 class="h-sub">Letters written for the South Dublin Live application</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>Rua Red</strong> — South Dublin&rsquo;s contemporary arts centre</li>
-          <li><strong>The Civic Theatre</strong>, Tallaght</li>
-          <li><strong>Tallaght University Hospital</strong> — National Centre for Arts &amp; Health</li>
-          <li><strong>SDCC Arts Office</strong> — selection for South Dublin Live 2026</li>
-        </ul>
-        <p class="tiny mt-2">These letters were written in support of that one application. They
-           are not a general endorsement of everything we run, and we do not present them as
-           one.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="band-sunken">
   <div class="wrap">
     <div class="section-head reveal">
@@ -248,16 +273,18 @@
            and we will send the current payment details and say what it funds.</p></div>
       <div class="card"><span class="kicker">02</span><h3>Fund a programme</h3>
         <p>For trusts, foundations, councils and corporate funders: a full proposal, budget and
-           activity record on request.</p></div>
+           activity record on request. <a class="link" href="partner.html">Partner with us</a>
+           says what a partnership comes with.</p></div>
       <div class="card"><span class="kicker">03</span><h3>Open a door</h3>
         <p>An introduction to a care home, parish, community centre or hospital is worth as much
-           as a donation — often more.</p></div>
+           as a donation &mdash; often more.</p></div>
       <div class="card"><span class="kicker">04</span><h3>Give the room</h3>
         <p>A warm room once a week for a term is the most valuable in-kind gift there is. It
            converts directly into free places.</p></div>
     </div>
     <div class="btn-row reveal center-row mt-4">
-      <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20CMFE">Offer support <span class="arrow">→</span></a>
+      <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=I%20would%20like%20to%20support%20Classical%20Music%20for%20Everyone">Offer support <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-quiet" href="partner.html">For organisations</a>
       <a class="btn btn-quiet" href="mailto:sby05034@gmail.com?subject=Partnership%20and%20funding%20enquiry">Request the proposal</a>
     </div>
     <div class="callout reveal mt-4">
@@ -266,6 +293,25 @@
          currently formalising as a not-for-profit company limited by guarantee. We are not yet a
          registered charity, so gifts are not eligible for charitable tax relief. We would rather
          say so plainly than let anyone assume otherwise.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">Track record</p>
+      <h2 class="h-md">Who has backed this so far.</h2>
+      <p class="mt-3">Everything before 2026 was self-funded and voluntary. The full record of
+         funding and support, the letters written for the South Dublin Live application, and
+         what has not yet been proved are published together on one page.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="impact.html#transparency">Transparency <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <div class="quote reveal">
+      <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
+         within limited personal financial circumstances, he continues to give generously of his
+         time, energy, and talent.&rdquo;</p>
+      <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
     </div>
   </div>
 </section>
@@ -282,10 +328,18 @@
       <div>
         <h3>Explore</h3>
         <a href="about.html">About us</a>
+        <a href="identity.html">The mark</a>
         <a href="programmes.html">Programmes</a>
         <a href="get-involved.html">Get involved</a>
-        <a href="news.html">News &amp; record</a>
+        <a href="news.html">What&rsquo;s on</a>
+      </div>
+      <div>
+        <h3>Record &amp; support</h3>
+        <a href="impact.html">Our impact</a>
+        <a href="archive.html">The record, 2023 to date</a>
         <a href="support.html">Support our work</a>
+        <a href="partner.html">Partner with us</a>
+        <a href="impact.html#transparency">Transparency</a>
       </div>
       <div>
         <h3>Connect</h3>

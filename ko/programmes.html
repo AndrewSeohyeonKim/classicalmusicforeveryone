@@ -23,8 +23,10 @@
 <meta property="og:locale:alternate" content="en_IE">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/conducting.jpg">
+<meta name="author" content="Classical Music for Everyone">
 <link rel="icon" href="../assets/logo-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/logo-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
@@ -61,6 +63,19 @@
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
     },
     {
+      "@type": "Person",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
+      "name": "Andrew Seohyeon Kim",
+      "alternateName": "김서현",
+      "jobTitle": "Founder and Project Lead",
+      "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
+      "alumniOf": {"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"},
+      "worksFor": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
+      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "email": "sby05034@gmail.com",
+      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
+    },
+    {
       "@type": "WebPage",
       "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html#page",
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html",
@@ -71,6 +86,27 @@
       "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
       "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/conducting.jpg"}
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html#list",
+      "name": "Programmes",
+      "itemListOrder": "https://schema.org/ItemListUnordered",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "리코더 앙상블 과정", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/recorder-ensemble.html"},
+        {"@type": "ListItem", "position": 2, "name": "클래식 음악과 친해지기", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/getting-to-know.html"},
+        {"@type": "ListItem", "position": 3, "name": "함께하는 음악여행", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/concert-companion.html"},
+        {"@type": "ListItem", "position": 4, "name": "찾아가는 음악회", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html"},
+        {"@type": "ListItem", "position": 5, "name": "Letters Ensemble", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html"}
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/"},
+        {"@type": "ListItem", "position": 2, "name": "프로그램", "item": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html"}
+      ]
     }
   ]
 }
@@ -88,7 +124,14 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)">☰</button>
     <nav class="nav" id="nav" data-open="false" aria-label="메뉴">
-      <a class="nav-link" href="about.html">소개</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="about.html">소개</a>
+        <div class="subnav">
+          <a href="about.html"><b>단체 소개</b><span>미션, 가치, 창립자</span></a>
+          <a href="about.html#founder"><b>창립자</b><span>김서현</span></a>
+          <a href="identity.html"><b>상징과 표준</b><span>금색이 Everyone 위에 놓이는 이유</span></a>
+        </div>
+      </div>
       <div class="nav-item has-sub">
         <a class="nav-link" href="programmes.html" aria-current="page">프로그램</a>
         <div class="subnav">
@@ -100,8 +143,28 @@
         </div>
       </div>
       <a class="nav-link" href="get-involved.html">참여하기</a>
-      <a class="nav-link" href="news.html">소식</a>
-      <a class="nav-link" href="support.html">후원</a>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="news.html">일정과 소식</a>
+        <div class="subnav">
+          <a href="news.html"><b>다가오는 일정</b><span>모집 중인 수업, 열려 있는 음악회</span></a>
+          <a href="archive.html"><b>기록, 2023년부터</b><span>모든 회차와 연주</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="impact.html">성과</a>
+        <div class="subnav">
+          <a href="impact.html"><b>무엇이 달라졌나</b><span>기록이 뒷받침하는 것만</span></a>
+          <a href="impact.html#next"><b>가려는 곳</b><span>다음 걸음, 순서대로</span></a>
+          <a href="impact.html#transparency"><b>투명성</b><span>지위, 돈, 증명되지 않은 것</span></a>
+        </div>
+      </div>
+      <div class="nav-item has-sub">
+        <a class="nav-link" href="support.html">후원</a>
+        <div class="subnav">
+          <a href="support.html"><b>후원하기</b><span>기부, 문 열기, 방 내어 주기</span></a>
+          <a href="partner.html"><b>기관 파트너십</b><span>기관과 재단을 위한 안내</span></a>
+        </div>
+      </div>
       <a class="btn btn-accent btn-nav" href="contact.html">문의</a>
       <div class="lang-switch" role="group" aria-label="언어">
         <span aria-current="true">한국어</span>
@@ -134,7 +197,7 @@
           <tr><td><strong><a class="link" href="programmes/getting-to-know.html">클래식 음악과 친해지기</a></strong></td><td>배움</td>
               <td>운영 중 · 무료</td><td>강의·연주 17회 · 누적 참석 143명</td></tr>
           <tr><td><strong><a class="link" href="programmes/concert-companion.html">함께하는 음악여행</a></strong></td><td>배움</td>
-              <td>운영 중</td><td>기록된 동행 10회 · 두 해 연속 BBC 프롬스 포함</td></tr>
+              <td>운영 중</td><td>기록된 동행 10회 · 두 번의 여름에 BBC 프롬스 포함</td></tr>
           <tr><td><strong><a class="link" href="programmes/outreach-concerts.html">찾아가는 음악회</a></strong></td><td>나눔</td>
               <td>운영 중</td><td>20회 · 4개국 · 15곳 이상</td></tr>
           <tr><td style="padding-inline-start:34px">↳ 성지에 음악을</td><td>나눔</td>
@@ -250,7 +313,7 @@
       <dl class="facts">
         <dt>규모</dt><dd>5명 안팎</dd>
         <dt>다녀온 곳</dt><dd>국립교향악단 · 아일랜드 국립오페라 · RTÉ 콘서트 오케스트라 · NCH 인터내셔널 시리즈</dd>
-        <dt>멀리는</dt><dd>두 해 연속 BBC 프롬스</dd>
+        <dt>멀리는</dt><dd>두 번의 여름, BBC 프롬스</dd>
         <dt>비용</dt><dd>티켓이 £8 정도인 경우도 있습니다</dd>
         <dt>현재까지</dt><dd>기록된 동행 10회</dd>
       </dl>
@@ -421,10 +484,18 @@
       <div>
         <h3>둘러보기</h3>
         <a href="about.html">단체 소개</a>
+        <a href="identity.html">상징과 표준</a>
         <a href="programmes.html">프로그램</a>
         <a href="get-involved.html">참여하기</a>
-        <a href="news.html">소식과 기록</a>
+        <a href="news.html">일정과 소식</a>
+      </div>
+      <div>
+        <h3>기록과 후원</h3>
+        <a href="impact.html">성과와 근거</a>
+        <a href="archive.html">기록, 2023년부터</a>
         <a href="support.html">후원하기</a>
+        <a href="partner.html">기관 파트너십</a>
+        <a href="impact.html#transparency">투명성</a>
       </div>
       <div>
         <h3>연락</h3>
