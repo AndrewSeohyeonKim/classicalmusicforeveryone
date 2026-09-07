@@ -345,13 +345,14 @@
     </div>
     <div class="reveal"><figure class="diagram " role="group" aria-label="Four stages left to right: inputs buy activities, activities produce outputs, outputs point to change. The first three are marked counted and recorded; the fourth, drawn dashed, is reported but not yet measured.">
   <p class="diagram-title">From what goes in to what changes</p>
-  <div class="flow" style="--cols:4">
-    <div class="fs"><span class="fs-n">01</span><b class="fs-t"><i class="dot"></i>Inputs</b><ul class="fs-l"><li>Tutor and musicians</li><li>Recorders and scores</li><li>A room, weekly</li><li>Grants and fees</li></ul><i class="fs-edge">buys</i></div>
-    <div class="fs"><span class="fs-n">02</span><b class="fs-t"><i class="dot"></i>Activities</b><ul class="fs-l"><li>A term-long class</li><li>Playing together</li><li>Concerts in the room</li><li>Going to concerts</li></ul><i class="fs-edge">produces</i></div>
-    <div class="fs"><span class="fs-n">03</span><b class="fs-t"><i class="dot"></i>Outputs</b><ul class="fs-l"><li>Sessions delivered</li><li>People who completed</li><li>Venues reached</li><li>Concerts given</li></ul><i class="fs-edge">points to</i></div>
+  <div class="flow" style="--flow-tracks:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)">
+    <div class="fs"><span class="fs-n">01</span><b class="fs-t"><i class="dot"></i>Inputs</b><ul class="fs-l"><li>Tutor and musicians</li><li>Recorders and scores</li><li>A room, weekly</li><li>Grants and fees</li></ul></div><div class="fs-join"><i class="fs-edge">buys</i></div>
+    <div class="fs"><span class="fs-n">02</span><b class="fs-t"><i class="dot"></i>Activities</b><ul class="fs-l"><li>A term-long class</li><li>Playing together</li><li>Concerts in the room</li><li>Going to concerts</li></ul></div><div class="fs-join"><i class="fs-edge">produces</i></div>
+    <div class="fs"><span class="fs-n">03</span><b class="fs-t"><i class="dot"></i>Outputs</b><ul class="fs-l"><li>Sessions delivered</li><li>People who completed</li><li>Venues reached</li><li>Concerts given</li></ul></div><div class="fs-join"><i class="fs-edge">points to</i></div>
     <div class="fs is-claim"><span class="fs-n">04</span><b class="fs-t"><i class="dot"></i>Change</b><ul class="fs-l"><li>Less isolation</li><li>Dignity and achievement</li><li>Ties across age</li><li>Work for educators</li></ul></div>
+    <span class="ff" style="--gc:1 / 6">counted and recorded</span>
+    <span class="ff is-claim" style="--gc:7 / 8">reported, not yet measured</span>
   </div>
-  <div class="flow-foot" style="--cols:4"><span class="ff" style="--span:3">counted and recorded</span><span class="ff is-claim" style="--span:1">reported, not yet measured</span></div>
   <figcaption>Read left to right. The first three panels are what we count and can show you; the dashed fourth is what participants and hosts tell us, which we have not yet measured. We would rather mark the join than blur it.</figcaption>
 </figure></div>
   </div>
@@ -369,17 +370,23 @@
     <div class="reveal"><figure class="diagram " role="group" aria-label="Two rows of four steps. The first row, on the record: founded 2024, pilot completed 2026, first public commission 2026, first community course 2026. The second row, dashed and planned: incorporated with directors, a second cohort and new counties, the first educator employed, wellbeing measured and reported.">
   <p class="diagram-title">Where this is going</p>
   <p class="flow-group-t">on the record</p>
-  <div class="flow" style="--cols:4">
+  <div class="flow" style="--flow-tracks:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)">
     <div class="fs"><span class="fs-k">Jan 2024</span><b class="fs-t"><i class="dot"></i>Founded in Dublin</b></div>
+    <div class="fs-join"></div>
     <div class="fs"><span class="fs-k">Apr 2026</span><b class="fs-t"><i class="dot"></i>Pilot completed, seven of seven</b></div>
+    <div class="fs-join"></div>
     <div class="fs"><span class="fs-k">Aug 2026</span><b class="fs-t"><i class="dot"></i>First public commission</b></div>
+    <div class="fs-join"></div>
     <div class="fs"><span class="fs-k">Sep 2026</span><b class="fs-t"><i class="dot"></i>First community course opens</b></div>
   </div>
   <p class="flow-group-t is-claim">planned, not yet done</p>
-  <div class="flow" style="--cols:4">
+  <div class="flow" style="--flow-tracks:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)">
     <div class="fs is-claim"><span class="fs-k">Next</span><b class="fs-t"><i class="dot dot-open"></i>Incorporated, with directors</b></div>
+    <div class="fs-join"></div>
     <div class="fs is-claim"><span class="fs-k">Then</span><b class="fs-t"><i class="dot dot-open"></i>A second cohort, and new counties</b></div>
+    <div class="fs-join"></div>
     <div class="fs is-claim"><span class="fs-k">Then</span><b class="fs-t"><i class="dot dot-open"></i>The first educator properly employed</b></div>
+    <div class="fs-join"></div>
     <div class="fs is-claim"><span class="fs-k">Then</span><b class="fs-t"><i class="dot dot-open"></i>Wellbeing measured, and reported here</b></div>
   </div>
   <div class="wedge"><i></i><span class="wedge-a">one clarinet</span><span class="wedge-b">a community that plays</span></div>

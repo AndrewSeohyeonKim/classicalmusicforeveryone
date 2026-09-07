@@ -52,22 +52,38 @@ def step(title, rows=(), *, n=None, kicker=None, edge=None, claim=False, key=Fal
         parts.append(f'<span class="fs-s">{sub}</span>')
     if rows:
         parts.append(f'<ul class="fs-l">{_li(rows)}</ul>')
-    if edge:
-        parts.append(f'<i class="fs-edge">{edge}</i>')
     parts.append("</div>")
+    if edge:
+        # the connector is its own grid track (.fs-join), so the gap grows to
+        # fit the label instead of the label spilling onto the next panel
+        parts.append(f'<div class="fs-join"><i class="fs-edge">{edge}</i></div>')
     return "".join(parts)
 
 
-def flow(steps, cols):
-    return f'  <div class="flow" style="--cols:{cols}">\n    ' + "\n    ".join(steps) + "\n  </div>"
+def _tracks(cols):
+    """panel, join, panel, join … panel — the join tracks are `auto` so a
+    labelled connector widens to its label; an unlabelled one stays 44px."""
+    return " auto ".join(["minmax(0,1fr)"] * cols)
 
 
-def foot(spans, cols):
-    """A row of bracketed labels under a .flow; each (text, span, claim)."""
-    cells = "".join(
-        f'<span class="ff{" is-claim" if c else ""}" style="--span:{s}">{t}</span>'
-        for t, s, c in spans)
-    return f'  <div class="flow-foot" style="--cols:{cols}">{cells}</div>'
+def flow(steps, cols, foot=None):
+    """A row of panels with a connector between each pair. `foot` is an
+    optional row of bracketed labels underneath, each (text, span, claim);
+    they live in the same grid so they line up with the panels above."""
+    cells = []
+    for i, st in enumerate(steps):
+        cells.append(st)
+        if i < len(steps) - 1 and 'class="fs-join"' not in st:
+            cells.append('<div class="fs-join"></div>')
+    if foot:
+        col = 1
+        for text, span, claim in foot:
+            start, end = 2 * col - 1, 2 * (col + span) - 2
+            cells.append(f'<span class="ff{" is-claim" if claim else ""}" '
+                         f'style="--gc:{start} / {end}">{text}</span>')
+            col += span
+    return (f'  <div class="flow" style="--flow-tracks:{_tracks(cols)}">\n    '
+            + "\n    ".join(cells) + "\n  </div>")
 
 
 def item(title, sub=None, open_=False):
@@ -199,7 +215,7 @@ def theory_of_change(lang):
     for i, (title, rows) in enumerate(t["cols"]):
         steps.append(step(title, rows, n=i + 1,
                           edge=t["edges"][i] if i < 3 else None, claim=(i == 3)))
-    body = flow(steps, 4) + "\n" + foot([(t["evidenced"], 3, False), (t["claimed"], 1, True)], 4)
+    body = flow(steps, 4, foot=[(t["evidenced"], 3, False), (t["claimed"], 1, True)])
     return figure(t["aria"], body, t["caption"], t["title"])
 
 
@@ -398,8 +414,8 @@ def outing(lang):
     t = OUTING[lang]
     steps = [step(h, sub=s, key=(i == 1), edge=t["edges"][i] if i < 2 else None)
              for i, (h, s) in enumerate(t["parts"])]
-    body = flow(steps, 3) + "\n" + foot([(t["side_note"], 1, False), (t["mid_note"], 1, False),
-                                         (t["side_note"], 1, False)], 3)
+    body = flow(steps, 3, foot=[(t["side_note"], 1, False), (t["mid_note"], 1, False),
+                                (t["side_note"], 1, False)])
     return figure(t["aria"], body, t["caption"], t["title"])
 
 

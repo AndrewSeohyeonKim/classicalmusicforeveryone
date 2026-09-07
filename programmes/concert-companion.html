@@ -205,12 +205,14 @@
     </div>
     <div class="reveal"><figure class="diagram " role="group" aria-label="Three panels in a row: before, during and after an outing. The middle one, the concert itself, is highlighted; the two either side are marked as the parts that make the middle possible.">
   <p class="diagram-title">Why an outing is three parts, not one</p>
-  <div class="flow" style="--cols:3">
-    <div class="fs"><b class="fs-t"><i class="dot"></i>Before</b><span class="fs-s">what the piece is, what the room will do</span><i class="fs-edge">prepare</i></div>
-    <div class="fs is-key"><b class="fs-t"><i class="dot"></i>During</b><span class="fs-s">we sit together; questions at the interval</span><i class="fs-edge">sit together</i></div>
+  <div class="flow" style="--flow-tracks:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr)">
+    <div class="fs"><b class="fs-t"><i class="dot"></i>Before</b><span class="fs-s">what the piece is, what the room will do</span></div><div class="fs-join"><i class="fs-edge">prepare</i></div>
+    <div class="fs is-key"><b class="fs-t"><i class="dot"></i>During</b><span class="fs-s">we sit together; questions at the interval</span></div><div class="fs-join"><i class="fs-edge">sit together</i></div>
     <div class="fs"><b class="fs-t"><i class="dot"></i>After</b><span class="fs-s">say what you heard — there is no wrong answer</span></div>
+    <span class="ff" style="--gc:1 / 2">what makes the middle possible</span>
+    <span class="ff" style="--gc:3 / 4">the concert itself</span>
+    <span class="ff" style="--gc:5 / 6">what makes the middle possible</span>
   </div>
-  <div class="flow-foot" style="--cols:3"><span class="ff" style="--span:1">what makes the middle possible</span><span class="ff" style="--span:1">the concert itself</span><span class="ff" style="--span:1">what makes the middle possible</span></div>
   <figcaption>The ticket is rarely what stops someone. Not knowing what happens when you get there, and having nobody to go with, is. So the concert sits in the middle: the two parts either side are the ones that make it possible.</figcaption>
 </figure></div>
   </div>
