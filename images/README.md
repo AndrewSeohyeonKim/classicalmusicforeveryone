@@ -53,7 +53,24 @@ gradient do the work.
 | `quartet-hall.jpg` (also) | Partner closing band | — |
 | `community-room.jpg` | spare | Clarinet in a community room |
 | `clarinet.jpg` | About | The founder playing at a parish liturgy |
-| `organ.jpg` | About band | Organ console |
+| `organ.jpg` | About founder band + Founder closing band | Organ console |
+| `founder-portrait.jpg` | Founder hero + About founder band | The founder playing beneath stained glass (portrait, 4:5) |
+| `founder-speaking.jpg` | Founder page | The founder speaking at a lecture-recital (portrait, 4:5) |
+| `ruared-stage.jpg` | Home "why we exist" band + News + Founder gallery | The trio on the Rua Red stage, 29 Aug 2026 — **Ben Ryan / SDCC**, credit in the caption |
+| `ruared-trio.jpg` | News (South Dublin Live card) | The trio taking a bow at Rua Red — Ben Ryan / SDCC |
+| `ruared-andrew.jpg` | About founder band + Founder gallery | The founder playing under stage light at Rua Red — Ben Ryan / SDCC |
+| `ruared-pianist.jpg` | Founder (collaborating artists) | Dr Soo-Jung Ann at Rua Red — Ben Ryan / SDCC |
+| `ruared-soprano.jpg` | Founder (collaborating artists) | Hyelee Jung at Rua Red — Ben Ryan / SDCC |
+| `tuh-trio.jpg` | News + Founder gallery | Soprano, piano and clarinet in the TUH Atrium, 20 Aug 2026 — Tallaght University Hospital |
+| `tuh-haegeum.jpg` | Support + Founder (collaborating artists) | Jaewon Kim, haegeum, TUH Atrium — Tallaght University Hospital |
+| `tuh-atrium.jpg` | Partner closing band | The performers in the TUH Atrium — Tallaght University Hospital |
+| `tuh-andrew.jpg` | Founder gallery | The founder playing in the TUH Atrium — Tallaght University Hospital |
+
+The South Dublin Live photographs come from two sources and both are credited where a caption
+exists: Rua Red by **Ben Ryan Photography for South Dublin County Council** (folder
+`연주 Proposal/SDCC/benryanphotography_…`), and the hospital set supplied by **Tallaght University
+Hospital** (`wetransfer_photos-from-tuh-events-20-08-2026_…`). Only performers appear in the
+shots used; the group photographs with hospital staff were left out.
 
 Each programme detail page uses its own photograph three times — the figure, the
 closing photographic band, and the card for it in the "other four" strip at the foot of

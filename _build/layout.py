@@ -12,6 +12,12 @@ SITE_URL = "https://andrewseohyeonkim.github.io/classicalmusicforeveryone"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 EMAIL = "sby05034@gmail.com"
+# Public profiles of the founder (04 — Founder Profile §2). Leave a value
+# empty and its link is simply not rendered — never invent a handle.
+SOCIAL = {
+    "linkedin": "https://www.linkedin.com/in/andrewseohyeonkim",
+    "instagram": "https://www.instagram.com/sh.andrew_ryan",
+}
 PHONE_INTL = "+353 83 078 0635"
 PHONE_TEL = "+353830780635"
 
@@ -42,15 +48,15 @@ NAV = {
 # everywhere else; no entry is marked out as the main one.
 SUBNAV = {
     "about.html": {
-        "en": [("about.html", "About us", "Mission, values, the founder"),
-               ("about.html#founder", "The founder", "Andrew Seohyeon Kim"),
+        "en": [("about.html", "About us", "What we are, in three sentences"),
+               ("founder.html", "The founder", "Andrew Seohyeon Kim"),
                ("identity.html", "The mark", "Why the gold falls on Everyone")],
-        "ko": [("about.html", "단체 소개", "미션, 가치, 창립자"),
-               ("about.html#founder", "창립자", "김서현"),
+        "ko": [("about.html", "단체 소개", "세 문장으로 말하는 우리"),
+               ("founder.html", "창립자", "김서현"),
                ("identity.html", "상징과 표준", "금색이 Everyone 위에 놓이는 이유")],
     },
     "programmes.html": {
-        "en": [("programmes/recorder-ensemble.html", "Recorder Ensemble course",
+        "en": [("programmes/recorder-ensemble.html", "Free Recorder Ensemble course",
                 "A term for complete beginners"),
                ("programmes/getting-to-know.html", "Getting to Know Classical Music",
                 "Free lecture-recitals"),
@@ -60,7 +66,7 @@ SUBNAV = {
                 "Care homes, parishes, hospitals"),
                ("programmes/letters-ensemble.html", "Letters Ensemble",
                 "Amateur players, weekly")],
-        "ko": [("programmes/recorder-ensemble.html", "리코더 앙상블 과정",
+        "ko": [("programmes/recorder-ensemble.html", "무료 리코더 앙상블 과정",
                 "완전 초보를 위한 한 학기"),
                ("programmes/getting-to-know.html", "클래식 음악과 친해지기",
                 "무료 강의·연주"),
@@ -111,7 +117,7 @@ STR = {
         "f_connect": "Connect",
         "f_legal": "© 2026 Classical Music for Everyone · Dublin, Ireland",
         "f_status": "Volunteer-led · formalising as a not-for-profit company limited by guarantee",
-        "f_links": [("about.html", "About us"), ("identity.html", "The mark"),
+        "f_links": [("about.html", "About us"), ("founder.html", "The founder"), ("identity.html", "The mark"),
                     ("programmes.html", "Programmes"), ("get-involved.html", "Get involved"),
                     ("news.html", "What&rsquo;s on")],
         "f_links2": [("impact.html", "Our impact"), ("archive.html", "The record, 2023 to date"),
@@ -133,7 +139,7 @@ STR = {
         "f_connect": "연락",
         "f_legal": "© 2026 Classical Music for Everyone · 아일랜드 더블린",
         "f_status": "자원봉사로 운영 · 비영리 보증유한책임회사(CLG) 설립 준비 중",
-        "f_links": [("about.html", "단체 소개"), ("identity.html", "상징과 표준"),
+        "f_links": [("about.html", "단체 소개"), ("founder.html", "창립자"), ("identity.html", "상징과 표준"),
                     ("programmes.html", "프로그램"), ("get-involved.html", "참여하기"),
                     ("news.html", "일정과 소식")],
         "f_links2": [("impact.html", "성과와 근거"), ("archive.html", "기록, 2023년부터"),
@@ -163,7 +169,7 @@ ORG_NODE = """    {{
       "image": "{site}/images/hero-outreach.jpg",
       "description": "{desc}",
       "foundingDate": "2024-01",
-      "founder": {{"@type": "Person", "@id": "{site}/about.html#founder",
+      "founder": {{"@type": "Person", "@id": "{site}/founder.html#person",
                   "name": "Andrew Seohyeon Kim"}},
       "email": "{email}",
       "telephone": "{phone}",
@@ -177,16 +183,16 @@ ORG_NODE = """    {{
 # as public (04 §1–2): name, role, qualification, the LinkedIn profile.
 PERSON_NODE = """    {{
       "@type": "Person",
-      "@id": "{site}/about.html#founder",
+      "@id": "{site}/founder.html#person",
       "name": "Andrew Seohyeon Kim",
       "alternateName": "김서현",
       "jobTitle": "Founder and Project Lead",
       "description": "Clarinettist, organist and community music practitioner based in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
       "alumniOf": {{"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"}},
       "worksFor": {{"@id": "{site}/#organisation"}},
-      "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim"],
+      "sameAs": [{same_as}],
       "email": "{email}",
-      "url": "{site}/about.html#founder"
+      "url": "{site}/founder.html"
     }}"""
 
 PAGE_NODE = """    {{
@@ -404,7 +410,8 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=()):
     jsonld = _graph([
         ORG_NODE.format(site=SITE_URL, desc=desc, email=EMAIL, phone=PHONE_INTL),
         SITE_NODE.format(site=SITE_URL, lang=ld_lang),
-        PERSON_NODE.format(site=SITE_URL, email=EMAIL),
+        PERSON_NODE.format(site=SITE_URL, email=EMAIL,
+                           same_as=", ".join(f'"{u}"' for u in SOCIAL.values() if u)),
         PAGE_NODE.format(site=SITE_URL, canonical=canonical, title=title.replace('"', "'"),
                          desc=desc, lang=ld_lang, image=image),
         *extra_nodes,

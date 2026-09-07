@@ -14,6 +14,27 @@ L = "en"
 # Reusable blocks
 # ---------------------------------------------------------------------------
 
+from layout import SOCIAL as _SOCIAL
+
+_ICONS = {
+    "linkedin": ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>',
+                 "LinkedIn"),
+    "instagram": ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 7.75a3.05 3.05 0 1 1 0-6.1 3.05 3.05 0 0 1 0 6.1zM17.9 7.1a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM21 12c0-1.24 0-2.47-.07-3.7-.09-1.66-.46-3.14-1.67-4.35S16.5 2.37 14.83 2.28C13.6 2.2 12.36 2.2 11.13 2.2s-2.47 0-3.7.08C5.76 2.37 4.28 2.74 3.07 3.95S1.5 6.64 1.42 8.3C1.35 9.53 1.35 10.77 1.35 12s0 2.47.07 3.7c.09 1.66.46 3.14 1.67 4.35s2.69 1.58 4.35 1.67c1.23.07 2.47.07 3.7.07s2.47 0 3.7-.07c1.66-.09 3.14-.46 4.35-1.67s1.58-2.69 1.67-4.35c.08-1.23.08-2.47.08-3.7zm-2.08 5.3a3.4 3.4 0 0 1-1.92 1.92c-1.33.53-4.48.41-5.95.41s-4.63.12-5.95-.41a3.4 3.4 0 0 1-1.92-1.92c-.53-1.33-.41-4.48-.41-5.95s-.12-4.63.41-5.95A3.4 3.4 0 0 1 5.1 3.48c1.33-.53 4.48-.41 5.95-.41s4.63-.12 5.95.41a3.4 3.4 0 0 1 1.92 1.92c.53 1.33.41 4.48.41 5.95s.12 4.63-.41 5.95z"/></svg>',
+                  "Instagram"),
+}
+
+
+def social_links(email_label):
+    """The founder's public profiles, rendered only where a URL is set."""
+    out = []
+    for key, url in _SOCIAL.items():
+        if url:
+            icon, label = _ICONS[key]
+            out.append(f'<li><a href="{url}" rel="me noopener" target="_blank">{icon}{label}</a></li>')
+    out.append(f'<li><a href="mailto:sby05034@gmail.com">{email_label}</a></li>')
+    return '<ul class="social">' + "".join(out) + "</ul>"
+
+
 # The home page no longer opens on a band of figures. Counts answer "how much
 # of it is there" before the reader has been told what it is, and they made the
 # work read as a tally rather than as a programme. The same numbers still sit
@@ -120,7 +141,7 @@ INDEX = f"""<section class="hero">
         <div class="photo photo-3x2"><img src="images/conducting.jpg" width="1400" height="933" alt="A weekly class in a community room in Dublin"></div>
         <div class="prog-body">
           <span class="kicker">Learning</span>
-          <h3>Recorder Ensemble course</h3>
+          <h3>Free Recorder Ensemble course</h3>
           <p>A term for complete beginners, ending in a concert.</p>
           <div class="meta">weekly · a term</div>
         </div>
@@ -179,7 +200,7 @@ INDEX = f"""<section class="hero">
 </section>
 
 <section class="band-photo">
-  <img src="images/church-concert.jpg" alt="" width="1400" height="1050">
+  <img src="images/ruared-stage.jpg" alt="" width="1400" height="933">
   <div class="wrap narrow reveal">
     <p class="eyebrow">Why we exist</p>
     <h2 class="h-lg">It is playing, not only listening,
@@ -388,24 +409,37 @@ INDEX = f"""<section class="hero">
 ABOUT = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">About us</p>
-    <h1>Music should be a shared, everyday experience.</h1>
-    <p>A community music social enterprise founded in Dublin in January 2024. Not a performance
-       company — a participatory community, where playing is the point.</p>
+    <h1>We teach people to play. And we go where the music does not.</h1>
+    <p><span class="brandname">Classical Music for Everyone</span> is a Dublin social
+       enterprise that brings classical music to the places it reaches least. We play live in
+       care homes, hospitals and parishes, run ensembles in which older participants play
+       themselves, and hold listening talks anyone can come to. Neither age, health nor income
+       decides who gets to hear music.</p>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <dl class="glance reveal">
+      <div><dt>Founded</dt><dd>January 2024<small>Dublin, Ireland</small></dd></div>
+      <div><dt>What we run</dt><dd>Five programmes<small>two pillars: Learning and Sharing</small></dd></div>
+      <div><dt>Where we have played</dt><dd>Four countries<small>Ireland, France, the UK, Korea</small></dd></div>
+      <div><dt>Status</dt><dd>Volunteer-led<small>forming a not-for-profit CLG</small></dd></div>
+    </dl>
   </div>
 </section>
 
 <section>
-  <div class="wrap split split-wide">
+  <div class="wrap split split-wide split-center">
     <div class="reveal">
       <p class="eyebrow">Mission</p>
-      <p class="lead">To make live classical music genuinely available to everyone — regardless
-         of age, background, mobility, income or prior musical knowledge — by teaching people to
-         play, playing alongside them, and bringing music to the places it does not normally
-         reach.</p>
+      <p class="statement">Live classical music, <em>genuinely available to everyone</em> —
+         whatever their age, mobility, income or prior knowledge.</p>
+      <p class="mt-3">By teaching people to play, playing alongside them, and bringing music to
+         the places it does not normally reach.</p>
       <p class="eyebrow mt-4">Vision</p>
-      <p class="lead">An Ireland in which every community — urban, rural, in care, and living
-         with disability — has a welcoming pathway into making music together, delivered by
-         educators in secure, properly paid employment.</p>
+      <p class="statement statement-sm">An Ireland in which every community has a way into
+         making music together, <em>led by educators in secure, properly paid work.</em></p>
     </div>
     <figure class="reveal">
       <div class="photo photo-4x5">
@@ -421,206 +455,16 @@ ABOUT = f"""<section class="page-hero">
 <section class="band-raised">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="eyebrow">Theory of change</p>
-      <h2>What a room, an hour and a recorder are supposed to add up to.</h2>
-    </div>
-    <div class="reveal">{dg.theory_of_change(L)}</div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
       <p class="eyebrow">Values</p>
-      <h2>Five, described by what they cost us.</h2>
+      <h2>Five, and each one costs us something.</h2>
     </div>
-    <div class="grid grid-3 stagger">
-      <div class="card"><span class="kicker">01</span><h3>Dignity</h3>
-        <p>Everyone is treated as someone who can still create — regardless of age, health or
-           circumstance.</p></div>
-      <div class="card"><span class="kicker">02</span><h3>Accessibility</h3>
-        <p>We lower the barriers of price, distance and unfamiliarity — physical, environmental
-           and psychological alike.</p></div>
-      <div class="card"><span class="kicker">03</span><h3>Accompaniment</h3>
-        <p>We stay alongside people for a whole term, not for a one-off visit. Meaning grows
-           through continuity.</p></div>
-      <div class="card"><span class="kicker">04</span><h3>Community</h3>
-        <p>Music that connects people across age, background and language.</p></div>
-      <div class="card"><span class="kicker">05</span><h3>Hope</h3>
-        <p>We promise no dramatic transformation — only small, real moments of connection.</p></div>
-      <div class="card" style="--card-bg:var(--surface-sunken)"><span class="kicker">And</span>
-        <h3>Work for educators</h3>
-        <p>Music educators mostly work in precarious freelance conditions. Employing them
-           properly is our second social aim.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="band-photo" id="founder">
-  <img src="images/organ.jpg" alt="" width="1400" height="1050">
-  <div class="wrap narrow reveal">
-    <p class="eyebrow">The founder</p>
-    <h2 class="h-lg">Andrew Seohyeon Kim</h2>
-    <p class="lead mt-3">
-      Clarinettist, organist and community music practitioner, based in Dublin. He founded
-      <span class="brandname">Classical Music for Everyone</span> and the Letters Ensemble in
-      January 2024, and leads every programme on this site.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap split split-wide">
-    <div class="reveal">
-      <h3 class="h-sub">The practice</h3>
-      <p class="lead mt-2">He is in the room for all of it. The tutor at the recorder class,
-         the speaker at the lecture-recitals, the person who books the outing, the clarinettist
-         at the care home, and the conductor of the ensemble that plays there are the same
-         person.</p>
-      <p class="mt-3">That is a limit as much as a description — it is why the organisation
-         says five programmes rather than fifty sessions a week, and why employing music
-         educators properly is the second social aim rather than a nice idea. The work does not
-         scale on one person, and it is not meant to.</p>
-      <p class="mt-3">He graduated from TU Dublin Conservatoire with a Bachelor of Music (Hons)
-         in Performance in May 2026, studying clarinet with Dr Paul Roe alongside organ, cello
-         and piano. His final-year research was a practice-based study of the ten-week recorder
-         ensemble he designed and led for seven retired Presentation Sisters in Dublin — the
-         work the whole teaching programme is built on.</p>
-    </div>
-    <div class="reveal">
-      <div class="callout">
-        <h3 class="h-sub">Church and community, one practice</h3>
-        <p class="small mt-2">Music Director at Our Lady of Dolours Church, Dolphin&rsquo;s Barn
-           since September 2022, and principal Sunday organist at the Church of the Three
-           Patrons, Rathgar since September 2023 — Holy Week liturgies, school and remembrance
-           Masses, funerals and parish concerts.</p>
-        <p class="small mt-2">For parish and religious audiences the work is described as a lay
-           apostolate through music: a ministry of presence rather than a concert series. It is
-           the same practice as the community work, described to the people who asked for it.</p>
-      </div>
-      <div class="quote mt-4">
-        <p>&ldquo;Through music, he offers encouragement, dignity, and spiritual accompaniment to
-           those who may otherwise feel isolated.&rdquo;</p>
-        <cite>Donal Roche, Auxiliary Bishop of Dublin &middot; 16 February 2026</cite>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band-raised">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">Training and roles</p>
-      <h2 class="h-md">Where the practice comes from.</h2>
-    </div>
-    <div class="split reveal">
-      <div>
-        <h3 class="h-sub">Education and training</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>BMus (Hons) in Performance</strong> — TU Dublin Conservatoire,
-              2022–2026</li>
-          <li><strong>Clarinet</strong> — Dr Paul Roe</li>
-          <li><strong>Organ</strong> — Simon Harden &middot; <strong>Cello</strong> — Arun Rao
-              &middot; <strong>Piano</strong> — Sam Armstrong</li>
-          <li><strong>Conducting</strong> — Irish Association of Youth Orchestras &middot;
-              London Conducting Workshop &middot; TU Dublin Special Studies</li>
-          <li><strong>Social enterprise</strong> — TU Dublin Venture Lab, from September 2024</li>
-          <li><strong>Scholarship</strong> — Myongdohoe, Lay Apostolate Committee, Catholic
-              Bishops&rsquo; Conference of Korea, from March 2025</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="h-sub">Current roles</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>Founder &amp; Project Lead</strong> — <span class="brandname">Classical
-              Music for Everyone</span>, from January 2024</li>
-          <li><strong>Founder, Music Director &amp; Conductor</strong> — Letters Ensemble,
-              from January 2024</li>
-          <li><strong>Music Director</strong> — Our Lady of Dolours Church, Dolphin&rsquo;s Barn,
-              from September 2022</li>
-          <li><strong>Organist</strong> — Church of the Three Patrons, Rathgar,
-              from September 2023</li>
-          <li><strong>Student Ambassador</strong> — TU Dublin, from August 2024</li>
-        </ul>
-        <h3 class="h-sub mt-4">Before this</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>Baram</strong>, 2023–24 — a Korean traditional and classical duo;
-              embassy events and cultural exhibitions</li>
-          <li><strong>Chorus of Angels</strong>, 2023 — a children&rsquo;s choir for Korean and
-              mixed-heritage children in Dublin</li>
-          <li><strong>At Home Ensemble Project</strong>, 2020–21 — a virtual wind ensemble
-              during Covid-19</li>
-        </ul>
-      </div>
-    </div>
-    <div class="split reveal mt-4">
-      <div>
-        <h3 class="h-sub">Volunteering</h3>
-        <ul class="plainlist mt-2">
-          <li>World Youth Day, Lisbon, 2023 — logistics, music, liturgy, language assistance</li>
-          <li>ICA ClarinetFest, Dublin, 2024 — support and interpreting</li>
-          <li>13th Dublin International Piano Competition, 2025 — Team Harmony</li>
-          <li>Jubilee of Youth, Rome, 2025 &middot; Korea Festival, Farmleigh House, 2025</li>
-        </ul>
-        <p class="small mt-2">Portugal and Italy appear here as volunteering. The four countries
-           in our record are the four we have <em>performed</em> in.</p>
-      </div>
-      <div>
-        <h3 class="h-sub">Collaborating artists</h3>
-        <ul class="plainlist mt-2">
-          <li><strong>Dr Soo-Jung Ann</strong>, piano — Doctor of Music, RIAM 2022; first prize,
-              58th Maria Canals International Competition</li>
-          <li><strong>Hyelee Jung</strong>, soprano — Silla University; Conservatorio di Santa
-              Cecilia, Rome</li>
-          <li><strong>Jaewon Kim</strong>, haegeum — guest artist for <em>Shared Voices of
-              Care</em> and <em>An Autumn Concert</em>, 2026</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="eyebrow">Where we have played</p>
-      <h2>Rooms music does not usually enter.</h2>
-      <p>Residential and nursing care · religious communities · parishes · a university ·
-         a national concert hall · an HSE day service · a homeless hostel · community centres.</p>
-    </div>
-    <div class="split reveal">
-      <div>
-        <h3 class="h-sub">Ireland</h3>
-        <ul class="plainlist mt-2">
-          <li>National Concert Hall &amp; TU Dublin, Grangegorman</li>
-          <li>Tallaght University Hospital · Rua Red, Tallaght</li>
-          <li>Our Lady of Dolours, Dolphin&rsquo;s Barn · Three Patrons, Rathgar</li>
-          <li>Carmelite Community Centre · Blessed Sacrament Chapel</li>
-          <li>Clondalkin Lodge · Warrenmount, Dublin 8</li>
-          <li>Missionary Sisters of St Columban, Co. Wicklow</li>
-          <li>Franciscan Missionaries of Mary, Dublin 5</li>
-          <li>Dalgan Park &amp; Kilmessan Church, Co. Meath · Dysart, Co. Westmeath</li>
-          <li>HSE EVE Goirtin Hub · Morning Star Hostel, Dublin 7</li>
-          <li>Methodist Centenary Church, Ranelagh · Mulhuddart Community Centre, D15</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="h-sub">Abroad</h3>
-        <ul class="plainlist mt-2">
-          <li>Sanctuary of Our Lady of Lourdes, France</li>
-          <li>Missions Étrangères de Paris · Palais Brongniart, Paris</li>
-          <li>London Korean Catholic Church, United Kingdom</li>
-          <li>Gwandukjeong Martyrs Memorial Centre, Daegu, Korea</li>
-        </ul>
-        <div class="callout mt-3">
-          <h3 class="h-sub">What we do not claim</h3>
-          <p class="small mt-1">Our evidence is participation, retention and
-             testimony — not measured outcome. Wellbeing has not been measured with a validated
-             instrument, and outreach audiences were never counted. From the autumn 2026 cohort we
-             are introducing a simple pre/post measure and a consent framework.
-             <a class="link" href="impact.html#transparency">The full statement</a>.</p>
-        </div>
-      </div>
-    </div>
+    <ol class="values reveal">
+      <li><i>01</i><b>Dignity</b><span>Everyone is someone who can still create, whatever their age or health.</span></li>
+      <li><i>02</i><b>Accessibility</b><span>We lower the barriers of price, distance and unfamiliarity.</span></li>
+      <li><i>03</i><b>Accompaniment</b><span>A whole term alongside people, not a one-off visit.</span></li>
+      <li><i>04</i><b>Community</b><span>Music that connects people across age, background and language.</span></li>
+      <li><i>05</i><b>Hope</b><span>No dramatic transformation promised. Small, real moments, counted.</span></li>
+    </ol>
   </div>
 </section>
 
@@ -628,16 +472,59 @@ ABOUT = f"""<section class="page-hero">
   <div class="wrap">
     <div class="section-head wide reveal">
       <p class="eyebrow">What we run</p>
-      <h2>Five programmes, each with its own page.</h2>
-      <p>Two pillars — teaching people to play, and playing for people who cannot easily get to
-         a concert hall. Each programme is described at the same length, with the same facts, in
-         the same order, and none of them is the main one.</p>
+      <h2>Five programmes, two pillars, one circuit.</h2>
     </div>
     <div class="reveal">{dg.loop(L)}</div>
     <div class="btn-row reveal">
       <a class="btn btn-primary" href="programmes.html">All five in detail <span class="arrow">&rarr;</span></a>
       <a class="btn btn-quiet" href="get-involved.html">Ways to take part</a>
     </div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Where we have played</p>
+      <h2>Rooms music does not usually enter.</h2>
+      <p>Care homes, religious communities, parishes, a hospital, a homeless hostel, an HSE day
+         service, community centres, a university &mdash; and the National Concert Hall, attended
+         together.</p>
+    </div>
+    <ul class="names reveal">
+      <li>Tallaght University Hospital</li><li>Rua Red, Tallaght</li><li>Clondalkin Lodge</li>
+      <li>Warrenmount, Dublin 8</li><li>Mulhuddart Community Centre</li>
+      <li>Missionary Sisters of St Columban, Co. Wicklow</li><li>Franciscan Missionaries of Mary</li>
+      <li>Dalgan Park, Co. Meath</li><li>Kilmessan Church</li><li>Dysart Parish, Co. Westmeath</li>
+      <li>HSE EVE Goirtin Hub</li><li>Morning Star Hostel</li><li>TU Dublin</li>
+      <li>National Concert Hall</li><li>Our Lady of Dolours, Dolphin&rsquo;s Barn</li>
+      <li>Church of the Three Patrons, Rathgar</li><li>Carmelite Community Centre</li>
+      <li>Blessed Sacrament Chapel</li><li>Sanctuary of Our Lady of Lourdes</li>
+      <li>Missions &Eacute;trang&egrave;res de Paris</li><li>Palais Brongniart, Paris</li>
+      <li>London Korean Catholic Church</li><li>Gwandukjeong Martyrs Memorial Centre, Daegu</li>
+    </ul>
+    <p class="tiny mt-3 reveal">Our evidence is participation, retention and testimony, not
+       measured outcome. What has and has not been proved is set out on
+       <a class="link" href="impact.html#transparency">the Impact page</a>.</p>
+  </div>
+</section>
+
+<section class="band-photo" id="founder">
+  <img src="images/organ.jpg" alt="" width="1400" height="1050">
+  <div class="wrap split split-center">
+    <div class="reveal">
+      <p class="eyebrow">The founder</p>
+      <h2 class="h-lg">Andrew Seohyeon Kim</h2>
+      <p class="lead mt-3">Clarinettist, organist and community music practitioner. He is in the
+         room for all of it: tutor, speaker, driver, clarinettist and conductor are one person.</p>
+      <div class="btn-row"><a class="btn btn-on-dark" href="founder.html">Who he is, and how he works <span class="arrow">&rarr;</span></a></div>
+    </div>
+    <figure class="reveal">
+      <div class="photo photo-4x5" style="max-width:300px">
+        <img src="images/ruared-andrew.jpg" width="933" height="1400"
+             alt="Andrew Seohyeon Kim playing the clarinet beneath stained-glass windows">
+      </div>
+    </figure>
   </div>
 </section>
 
@@ -663,16 +550,221 @@ ABOUT = f"""<section class="page-hero">
 
 
 # ---------------------------------------------------------------------------
+# The founder — an artist's profile, not a CV
+#
+# Facts follow 04 — Founder Profile. The record is still here, complete, but
+# folded into an accordion so the page leads with who he is and how he works.
+# ---------------------------------------------------------------------------
+
+FOUNDER = f"""<section class="founder-hero">
+  <div class="wrap founder-grid">
+    <figure class="lift lift-2">
+      <div class="photo photo-4x5">
+        <img src="images/founder-portrait.jpg" width="790" height="1400"
+             alt="Andrew Seohyeon Kim playing the clarinet beneath stained-glass windows">
+      </div>
+    </figure>
+    <div>
+      <p class="eyebrow lift lift-1">The founder</p>
+      <h1 class="lift lift-2">Andrew Seohyeon Kim<span class="founder-kr">김서현</span></h1>
+      <p class="founder-role lift lift-3">Clarinettist, organist and community music practitioner.
+         Founder of <span class="brandname">Classical Music for Everyone</span> and the Letters
+         Ensemble. Dublin.</p>
+      <p class="statement lift lift-3">&ldquo;Rather than expecting people to come to music,
+         <em>we bring music to them.</em>&rdquo;</p>
+      <div class="lift lift-4">{social_links("Email")}</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split split-wide split-center">
+    <div class="reveal">
+      <p class="eyebrow">How he works</p>
+      <h2>He is in the room for all of it.</h2>
+      <p class="lead mt-3">The tutor at the recorder class, the speaker at the lecture-recitals,
+         the person who books the outing, the clarinettist at the care home and the conductor of
+         the ensemble that plays there are the same person.</p>
+      <p class="mt-3">That is a limit as much as a description. It is why the organisation says
+         five programmes rather than fifty sessions a week, and why employing music educators
+         properly is its second social aim. The work does not scale on one person, and it is not
+         meant to.</p>
+    </div>
+    <div class="reveal">
+      <dl class="facts">
+        <dt>Based</dt><dd>Dublin, Ireland</dd>
+        <dt>Trained</dt><dd>BMus (Hons) in Performance, TU Dublin Conservatoire, 2026</dd>
+        <dt>Clarinet</dt><dd>Dr Paul Roe &middot; organ with Simon Harden</dd>
+        <dt>Posts</dt><dd>Music Director, Our Lady of Dolours, Dolphin&rsquo;s Barn &middot; Organist,
+            Church of the Three Patrons, Rathgar</dd>
+        <dt>Founded</dt><dd><span class="brandname">Classical Music for Everyone</span> and the
+            Letters Ensemble, January 2024</dd>        <dt>Languages</dt><dd>English &middot; Korean</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">On stage, August 2026</p>
+      <h2 class="h-md">South Dublin Live: a hospital atrium and a black-box theatre.</h2>
+    </div>
+    <div class="gallery stagger">
+      <figure><div class="photo photo-3x2"><img src="images/ruared-stage.jpg" width="1400" height="933"
+          alt="The trio on the Rua Red stage, seen from the audience"></div>
+        <figcaption>Rua Red, 29 August. Photograph: Ben Ryan / South Dublin County Council</figcaption></figure>
+      <figure><div class="photo photo-4x5"><img src="images/tuh-andrew.jpg" width="1050" height="1400"
+          alt="Andrew Seohyeon Kim playing the clarinet in the hospital Atrium"></div>
+        <figcaption>Tallaght University Hospital, 20 August.</figcaption></figure>
+      <figure><div class="photo photo-4x5"><img src="images/ruared-andrew.jpg" width="933" height="1400"
+          alt="Andrew Seohyeon Kim playing the clarinet under stage light"></div>
+        <figcaption>Rua Red. Photograph: Ben Ryan / South Dublin County Council</figcaption></figure>
+      <figure><div class="photo photo-3x2"><img src="images/tuh-trio.jpg" width="1400" height="787"
+          alt="Soprano, piano and clarinet performing in the hospital Atrium"></div>
+        <figcaption>Shared Voices of Care, with Dr Soo-Jung Ann and Hyelee Jung.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band-raised">
+  <div class="wrap aside-fig">
+    <figure class="reveal">
+      <div class="photo photo-4x5" style="max-width:440px">
+        <img src="images/founder-speaking.jpg" width="1050" height="1400"
+             alt="Andrew Seohyeon Kim speaking at a lecture-recital with a microphone">
+      </div>
+    </figure>
+    <div class="reveal">
+      <p class="eyebrow">Where the practice comes from</p>
+      <h2 class="h-md">A church organ loft, and a room of retired sisters.</h2>
+      <p class="mt-3">Since 2022 he has played weekly in two Dublin parishes: Holy Week
+         liturgies, school and remembrance Masses, funerals, parish concerts. For parish and
+         religious audiences the work is a lay apostolate through music, a ministry of presence.
+         It is the same practice as the community work, described to the people who asked for it.</p>
+      <p class="mt-3">His final-year research was a ten-week recorder ensemble he designed and
+         led for seven retired Presentation Sisters at Warrenmount. All seven completed and
+         performed in public. The whole teaching programme is built on it.</p>
+      <div class="quote mt-4">
+        <p>&ldquo;Through music, he offers encouragement, dignity, and spiritual accompaniment to
+           those who may otherwise feel isolated.&rdquo;</p>
+        <cite>Donal Roche, Auxiliary Bishop of Dublin &middot; 16 February 2026</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Collaborating artists</p>
+      <h2 class="h-md">The people he plays with.</h2>
+    </div>
+    <div class="grid grid-3 stagger">
+      <article class="card card-media">
+        <div class="photo photo-4x3"><img src="images/ruared-pianist.jpg" width="1400" height="933"
+             alt="Dr Soo-Jung Ann at the piano on the Rua Red stage"></div>
+        <div class="card-body"><span class="kicker">Piano</span><h3>Dr Soo-Jung Ann</h3>
+          <p>Doctor of Music, RIAM 2022. First prize, 58th Maria Canals International Competition.</p></div>
+      </article>
+      <article class="card card-media">
+        <div class="photo photo-4x3"><img src="images/ruared-soprano.jpg" width="933" height="1400"
+             alt="Soprano Hyelee Jung singing at Rua Red"></div>
+        <div class="card-body"><span class="kicker">Soprano</span><h3>Hyelee Jung</h3>
+          <p>Silla University; Conservatorio di Santa Cecilia, Rome.</p></div>
+      </article>
+      <article class="card card-media">
+        <div class="photo photo-4x3"><img src="images/tuh-haegeum.jpg" width="1400" height="934"
+             alt="Jaewon Kim playing the haegeum at Tallaght University Hospital"></div>
+        <div class="card-body"><span class="kicker">Haegeum</span><h3>Jaewon Kim</h3>
+          <p>Guest artist for <em>Shared Voices of Care</em> and <em>An Autumn Concert</em>, 2026.</p></div>
+      </article>
+    </div>
+    <p class="tiny mt-3 reveal">Rua Red photographs: Ben Ryan / South Dublin County Council.
+       Hospital photographs: Tallaght University Hospital.</p>
+  </div>
+</section>
+
+<section class="band-sunken">
+  <div class="wrap narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">The record</p>
+      <h2 class="h-md">Training, roles and the rest, if you want it.</h2>
+    </div>
+    <div class="faq-list record">
+      <details class="faq reveal"><summary>Education and training</summary>
+        <ul class="plainlist">
+          <li><strong>BMus (Hons) in Performance</strong> &mdash; TU Dublin Conservatoire, 2022&ndash;2026</li>
+          <li><strong>Clarinet</strong> &mdash; Dr Paul Roe &middot; <strong>Organ</strong> &mdash; Simon Harden
+              &middot; <strong>Cello</strong> &mdash; Arun Rao &middot; <strong>Piano</strong> &mdash; Sam Armstrong</li>
+          <li><strong>Conducting</strong> &mdash; Irish Association of Youth Orchestras &middot; London
+              Conducting Workshop &middot; TU Dublin Special Studies</li>
+          <li><strong>Social enterprise</strong> &mdash; TU Dublin Venture Lab, from September 2024</li>
+          <li><strong>Scholarship</strong> &mdash; Myongdohoe, Lay Apostolate Committee, Catholic
+              Bishops&rsquo; Conference of Korea, from March 2025</li>
+        </ul>
+      </details>
+      <details class="faq reveal"><summary>Current roles</summary>
+        <ul class="plainlist">
+          <li><strong>Founder &amp; Project Lead</strong> &mdash; <span class="brandname">Classical Music for Everyone</span>, from January 2024</li>
+          <li><strong>Founder, Music Director &amp; Conductor</strong> &mdash; Letters Ensemble, from January 2024</li>
+          <li><strong>Music Director</strong> &mdash; Our Lady of Dolours Church, Dolphin&rsquo;s Barn, from September 2022</li>
+          <li><strong>Organist</strong> &mdash; Church of the Three Patrons, Rathgar, from September 2023</li>
+          <li><strong>Student Ambassador</strong> &mdash; TU Dublin, from August 2024</li>
+        </ul>
+      </details>
+      <details class="faq reveal"><summary>Before this</summary>
+        <ul class="plainlist">
+          <li><strong>Baram</strong>, 2023&ndash;24 &mdash; a Korean traditional and classical duo; embassy events and cultural exhibitions</li>
+          <li><strong>Chorus of Angels</strong>, 2023 &mdash; a children&rsquo;s choir for Korean and mixed-heritage children in Dublin</li>
+          <li><strong>At Home Ensemble Project</strong>, 2020&ndash;21 &mdash; a virtual wind ensemble during Covid-19</li>
+        </ul>
+      </details>
+      <details class="faq reveal"><summary>Volunteering</summary>
+        <ul class="plainlist">
+          <li>World Youth Day, Lisbon, 2023 &mdash; logistics, music, liturgy, language assistance</li>
+          <li>ICA ClarinetFest, Dublin, 2024 &mdash; support and interpreting</li>
+          <li>13th Dublin International Piano Competition, 2025 &mdash; Team Harmony</li>
+          <li>Jubilee of Youth, Rome, 2025 &middot; Korea Festival, Farmleigh House, 2025</li>
+        </ul>
+        <p class="small">Portugal and Italy appear here as volunteering. The four countries in our
+           record are the four we have <em>performed</em> in.</p>
+      </details>
+      <details class="faq reveal"><summary>Writing and press</summary>
+        <ul class="plainlist">
+          <li><strong>Kyunghyang Magazine</strong>, May 2026 &mdash; commissioned article for &ldquo;Young people, how are you?&rdquo;</li>
+          <li><strong>Catholic University student paper</strong>, March 2026 &mdash; &ldquo;F&aacute;ilte go h&Eacute;irinn!&rdquo;</li>
+          <li><strong>Concert review</strong>, March 2025 &mdash; &ldquo;Music: a gift God gave to everyone&rdquo;</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="band-photo">
+  <img src="images/organ.jpg" alt="" width="1400" height="1050">
+  <div class="wrap narrow center reveal">
+    <p class="eyebrow center-row">Write to him</p>
+    <h2 class="h-lg">Every enquiry reaches him directly.</h2>
+    <p class="lead mt-2">One line is enough: what you are asking about, and roughly where you are.</p>
+    <div class="btn-row center-row">
+      <a class="btn btn-accent" href="mailto:sby05034@gmail.com?subject=Enquiry%20—%20Classical%20Music%20for%20Everyone">Email <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-on-dark" href="contact.html">All contact details</a>
+    </div>
+  </div>
+</section>"""
+
+
+# ---------------------------------------------------------------------------
 # Programmes
 # ---------------------------------------------------------------------------
 
 PROGRAMMES = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">Programmes</p>
-    <h1>What we actually run.</h1>
-    <p>Five programmes under two pillars, plus one faith-based sub-strand. None of them is
-       the main one: each is described here at the same length, with the same facts, in the
-       same order.</p>
+    <h1>Five programmes. None of them is the main one.</h1>
+    <p>Three teach people to play; two bring the music to the room. Same length, same facts,
+       same order for each.</p>
   </div>
 </section>
 
@@ -685,7 +777,7 @@ PROGRAMMES = f"""<section class="page-hero">
           <th scope="col">Status</th><th scope="col">Delivered to date</th>
         </tr></thead>
         <tbody>
-          <tr><td><strong><a class="link" href="programmes/recorder-ensemble.html">Recorder Ensemble course</a></strong></td><td>Learning</td>
+          <tr><td><strong><a class="link" href="programmes/recorder-ensemble.html">Free Recorder Ensemble course</a></strong></td><td>Learning</td>
               <td>Running</td><td>Pilot complete; first community class from Sept 2026</td></tr>
           <tr><td><strong><a class="link" href="programmes/getting-to-know.html">Getting to Know Classical Music</a></strong></td><td>Learning</td>
               <td>Running · free</td><td>17 lecture-recitals · 143 attendances</td></tr>
@@ -714,9 +806,9 @@ PROGRAMMES = f"""<section class="page-hero">
     </figure>
     <div class="reveal">
       <p class="eyebrow">Learning</p>
-      <h2 class="h-md">Recorder Ensemble course</h2>
+      <h2 class="h-md">Free Recorder Ensemble course</h2>
       <p class="lead mt-2">A term for complete beginners, ending in a concert.</p>
-      <p class="mt-2">The recorder is gentle on the hands and breath, quick to a first satisfying sound, inexpensive, and made for playing together. That is why it works for people who have never played anything. Scores and handouts are printed by us, at no cost to participants.</p>
+      <p class="mt-2">Gentle on the hands, quick to a first sound, made for playing together. Nothing to buy, nothing to read beforehand.</p>
       <dl class="facts">
         <dt>Length</dt><dd>One term, weekly · 60–90 minutes</dd>
         <dt>For</dt><dd>Complete beginners — no music reading assumed</dd>
@@ -741,7 +833,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <p class="eyebrow">Learning</p>
       <h2 class="h-md">Getting to Know Classical Music</h2>
       <p class="lead mt-2">Free lecture-recitals for people with no prior knowledge.</p>
-      <p class="mt-2">Roughly monthly, with recorded and live performance, for anyone who has never known where to start. No entry requirement and nothing to prepare.</p>
+      <p class="mt-2">Roughly monthly, for anyone who never knew where to start. Nothing to prepare.</p>
       <dl class="facts">
         <dt>Three stages</dt><dd>Getting Closer · Experiencing Together · Discovering My Taste</dd>
         <dt>Seasonal specials</dt><dd>European summer festivals, the BBC Proms, Wexford Opera Festival, Christmas</dd>
@@ -766,7 +858,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <p class="eyebrow">Learning</p>
       <h2 class="h-md">Concert Guide &amp; Companion</h2>
       <p class="lead mt-2">Small groups accompanied to concerts they would not attend alone.</p>
-      <p class="mt-2">Preparation before, guidance during the interval, reflection after. The barrier is rarely the ticket price — it is not knowing what happens when you get there, or having nobody to go with.</p>
+      <p class="mt-2">Prepared before, sat with during, talked about after. The barrier is rarely the ticket.</p>
       <dl class="facts">
         <dt>Group size</dt><dd>About five</dd>
         <dt>Been to</dt><dd>National Symphony Orchestra · Irish National Opera · RTÉ Concert Orchestra · the NCH International Series</dd>
@@ -791,7 +883,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <p class="eyebrow">Sharing</p>
       <h2 class="h-md">Outreach Concerts</h2>
       <p class="lead mt-2">Live performance brought into the rooms people are already in.</p>
-      <p class="mt-2">Care homes, parishes, hospitals, hostels and community spaces — from a homeless hostel in Dublin 7 to a martyrs&rsquo; shrine in Daegu. We bring the instruments, the stands and the programme; the room provides the room.</p>
+      <p class="mt-2">From a hostel in Dublin 7 to a shrine in Daegu. We bring everything but the room.</p>
       <dl class="facts">
         <dt>Where</dt><dd>Care homes, parishes, hospitals, hostels, community spaces</dd>
         <dt>Growing into</dt><dd>Wicklow, Meath and Louth</dd>
@@ -816,7 +908,7 @@ PROGRAMMES = f"""<section class="page-hero">
       <p class="eyebrow">Sharing</p>
       <h2 class="h-md">Letters Ensemble</h2>
       <p class="lead mt-2">Amateur musicians living in Dublin, rehearsing every Saturday.</p>
-      <p class="mt-2">Repertoire is chosen so that any room can meet the music halfway — Irish traditional, Korean traditional, sacred repertoire and accessible arrangements. New amateur players are welcome.</p>
+      <p class="mt-2">Irish and Korean traditional, sacred, accessible arrangements. New amateur players welcome.</p>
       <dl class="facts">
         <dt>Founded</dt><dd>January 2024, by amateur musicians living in Dublin</dd>
         <dt>Rehearsals</dt><dd>Every Saturday</dd>
@@ -834,8 +926,7 @@ PROGRAMMES = f"""<section class="page-hero">
     <div class="section-head wide reveal">
       <p class="eyebrow">How a course is built</p>
       <h2>The first satisfying sound arrives in week one.</h2>
-      <p>Every teaching programme is built to the same shape, whatever the instrument: reach
-         something worth hearing early, move as a whole group, and finish in front of people.</p>
+      <p>Reach something worth hearing early, move as one group, finish in front of people.</p>
     </div>
     <div class="reveal">{dg.term(L)}</div>
 
@@ -843,13 +934,10 @@ PROGRAMMES = f"""<section class="page-hero">
       <div class="reveal">
         <p class="eyebrow">Where the model came from</p>
         <h3 class="h-md">The pilot.</h3>
-        <p class="lead mt-2">Seven retired Presentation Sisters. Ten weekly hours at
-           Warrenmount, Dublin 8. An Easter concert of nine pieces at Clondalkin Lodge.
-           Completed as Bachelor of Music research at TU Dublin Conservatoire.</p>
-        <p class="mt-2">Three months of preparation came first — a needs survey, permissions,
-           vetting, individual lessons, part allocation. Descant, alto, tenor and bass recorders
-           with melodica, xylophone and small percussion; enlarged scores. All seven completed
-           and performed in public.</p>
+        <p class="statement statement-sm mt-2">Seven retired sisters. Ten weekly hours.
+           <em>All seven completed</em> and played in public.</p>
+        <p class="mt-3">Warrenmount, Dublin 8, then an Easter concert of nine pieces at
+           Clondalkin Lodge. Completed as Bachelor of Music research at TU Dublin Conservatoire.</p>
       </div>
       <div class="reveal">
         <ul class="checklist">
@@ -874,10 +962,9 @@ PROGRAMMES = f"""<section class="page-hero">
   <div class="wrap narrow reveal">
     <p class="eyebrow">Sub-strand</p>
     <h2 class="h-md">Bringing Music to Sacred Places</h2>
-    <p class="mt-2">The faith-based strand — parishes, shrines, convents, liturgies and retired
-       religious communities, roughly sixteen of the twenty outreach performances. Described to
-       religious audiences as a lay apostolate through music: a ministry of presence rather than
-       a concert series.</p>
+    <p class="mt-2">Parishes, shrines, convents, liturgies and retired religious communities:
+       roughly sixteen of the twenty outreach performances. To religious audiences, a lay
+       apostolate through music.</p>
   </div>
 </section>
 
@@ -1049,10 +1136,9 @@ GET_INVOLVED = f"""<section class="page-hero">
 NEWS = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">What&rsquo;s on</p>
-    <h1>What is coming, and what has happened this year.</h1>
-    <p>One class enrolling, one concert with the door open, and the year so far. The full
-       ledger since 2023 &mdash; every session and performance, on the day it happened &mdash;
-       is on <a class="crumb" href="archive.html">the record</a>.</p>
+    <h1>What is coming, and what happened this year.</h1>
+    <p>One class enrolling, one concert with the door open. The full ledger since 2023 is on
+       <a class="crumb" href="archive.html">the record</a>.</p>
   </div>
 </section>
 
@@ -1078,30 +1164,37 @@ NEWS = f"""<section class="page-hero">
     </div>
     <div class="grid grid-3 stagger">
       <article class="card card-media">
-        <div class="photo photo-3x2"><img src="images/quartet-hall.jpg" width="1400" height="788"
-             alt="An ensemble performing in a bright hall"></div>
+        <div class="photo photo-3x2"><img src="images/ruared-trio.jpg" width="1400" height="933"
+             alt="Clarinet, soprano and piano taking a bow on the Rua Red stage"></div>
         <div class="card-body">
           <span class="tag tag-live">First public funding</span>
           <h3 class="mt-1">South Dublin Live 2026</h3>
-          <p>SDCC&rsquo;s Arts Office selected the project for its 2026 programme — the first work
-             funded by anyone other than ourselves.</p>
+          <p>Selected by SDCC&rsquo;s Arts Office: the first work funded by anyone other than
+             ourselves.</p>
           <div class="meta">August 2026 · SDCC Arts Office</div>
         </div>
       </article>
-      <article class="card">
-        <span class="kicker">20 August 2026</span>
-        <h3>Shared Voices of Care</h3>
-        <p>A thirty-minute acoustic drop-in performance in the Atrium of Tallaght University
-           Hospital with guest haegeum artist Jaewon Kim — for patients, families, visitors and
-           staff. Hosted by the hospital&rsquo;s National Centre for Arts &amp; Health.</p>
-        <div class="meta">Tallaght University Hospital</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img src="images/tuh-trio.jpg" width="1400" height="787"
+             alt="Soprano, piano and clarinet performing in the Atrium of Tallaght University Hospital"></div>
+        <div class="card-body">
+          <span class="kicker">20 August 2026</span>
+          <h3>Shared Voices of Care</h3>
+          <p>Thirty minutes, acoustic, drop-in, in the hospital Atrium, with guest haegeum
+             artist Jaewon Kim. For patients, families, visitors and staff.</p>
+          <div class="meta">Tallaght University Hospital</div>
+        </div>
       </article>
-      <article class="card">
-        <span class="kicker">29 August 2026</span>
-        <h3>Shared Voices of Classical Tradition</h3>
-        <p>A sixty-minute chamber recital for clarinet, piano and soprano in the Performance Space
-           at Rua Red, South Dublin&rsquo;s contemporary arts centre. Free admission.</p>
-        <div class="meta">Rua Red, Tallaght</div>
+      <article class="card card-media">
+        <div class="photo photo-3x2"><img src="images/ruared-stage.jpg" width="1400" height="933"
+             alt="The trio on the Rua Red stage, seen from the audience"></div>
+        <div class="card-body">
+          <span class="kicker">29 August 2026</span>
+          <h3>Shared Voices of Classical Tradition</h3>
+          <p>Sixty minutes for clarinet, piano and soprano in the Performance Space at Rua Red.
+             Free admission.</p>
+          <div class="meta">Rua Red, Tallaght &middot; photographs Ben Ryan / SDCC</div>
+        </div>
       </article>
     </div>
   </div>
@@ -1238,12 +1331,21 @@ SUPPORT = f"""<section class="page-hero">
          funding and support, the letters written for the South Dublin Live application, and
          what has not yet been proved are published together on one page.</p>
       <div class="btn-row"><a class="btn btn-quiet" href="impact.html#transparency">Transparency <span class="arrow">&rarr;</span></a></div>
-    </div>
-    <div class="quote reveal">
-      <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
-         within limited personal financial circumstances, he continues to give generously of his
-         time, energy, and talent.&rdquo;</p>
-      <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
+    </div>    <div class="reveal">
+      <figure>
+        <div class="photo photo-3x2">
+          <img src="images/tuh-haegeum.jpg" width="1400" height="934"
+               alt="Haegeum player Jaewon Kim performing in the Atrium of Tallaght University Hospital">
+        </div>
+        <figcaption>Shared Voices of Care, Tallaght University Hospital, 20 August 2026 &mdash; the
+          first publicly funded concert.</figcaption>
+      </figure>
+      <div class="quote mt-4">
+        <p>&ldquo;Andrew does not undertake this work from a position of material abundance. Even
+           within limited personal financial circumstances, he continues to give generously of his
+           time, energy, and talent.&rdquo;</p>
+        <cite>Donal Roche, Auxiliary Bishop of Dublin · 16 February 2026</cite>
+      </div>
     </div>
   </div>
 </section>"""
@@ -1500,7 +1602,7 @@ IMPACT = f"""<section class="page-hero">
           <dt>Vetting</dt><dd>Garda vetting completed where the work requires it; documentation
               available to partner venues on request</dd>
           <dt>Founder</dt><dd>Andrew Seohyeon Kim, BMus (Hons), TU Dublin Conservatoire &mdash;
-              <a class="link" href="about.html#founder">profile</a></dd>
+              <a class="link" href="founder.html">profile</a></dd>
         </dl>
       </div>
       <div>
@@ -1584,9 +1686,8 @@ ARCHIVE = f"""<section class="page-hero">
   <div class="wrap">
     <p class="eyebrow">The record</p>
     <h1>Every session and performance, 2023 to date.</h1>
-    <p>A ledger rather than a highlight reel. Each row is logged on the day, with the venue,
-       so any figure quoted anywhere on this site can be traced to a line here. Rows the record
-       marks as unconfirmed are left out rather than guessed at.</p>
+    <p>A ledger, not a highlight reel. Every figure on this site traces to a line here.
+       Unconfirmed rows are left out.</p>
   </div>
 </section>
 
@@ -1606,40 +1707,31 @@ ARCHIVE = f"""<section class="page-hero">
       <div class="timeline reveal">
         <div class="tl-item"><div class="tl-date">February 2023</div>
           <h3>Before the beginning</h3>
-          <p>A clarinet solo at the English-language Mass in Lourdes &mdash; the outreach strand,
-             a year before it had a name.</p></div>
+          <p>A clarinet solo at Mass in Lourdes, a year before the work had a name.</p></div>
         <div class="tl-item"><div class="tl-date">January 2024</div>
           <h3>It starts</h3>
-          <p><span class="brandname">Classical Music for Everyone</span> is founded in Dublin,
-             and the Letters Ensemble with it. The first lecture-recital is held in Dublin 18,
-             for six people.</p></div>
+          <p>Founded in Dublin, with the Letters Ensemble. First lecture-recital: six people.</p></div>
         <div class="tl-item"><div class="tl-date">2024</div>
           <h3>Music goes out</h3>
-          <p>Concerts at Dalgan Park and for the Missionary Sisters of St Columban; performances in
-             London, Paris and Daegu. The lecture series moves to TU Dublin.</p></div>
+          <p>Dalgan Park, Co. Wicklow, London, Paris, Daegu. The lectures move to TU Dublin.</p></div>
         <div class="tl-item"><div class="tl-date">2024–2025</div>
           <h3>Going together</h3>
-          <p>Accompanied concert-going becomes a strand of its own &mdash; the NCH International
-             Series, the National Symphony Orchestra, and the BBC Proms in two summers.</p></div>
+          <p>Accompanied concert-going becomes a strand: the NCH, the NSO, the BBC Proms.</p></div>
         <div class="tl-item"><div class="tl-date">October 2025</div>
           <h3>An audience becomes players</h3>
-          <p>Preparation begins for a recorder ensemble with seven retired Presentation Sisters
-             &mdash; survey, permissions, vetting, individual lessons.</p></div>
+          <p>Preparation begins for a recorder ensemble with seven retired sisters.</p></div>
         <div class="tl-item"><div class="tl-date">December 2025</div>
           <h3>To the National Concert Hall</h3>
-          <p>The fifteenth learning session is a concert at Ireland&rsquo;s National Concert Hall,
-             attended together.</p></div>
+          <p>The fifteenth session is a concert at the National Concert Hall, attended together.</p></div>
         <div class="tl-item"><div class="tl-date">Jan–Apr 2026</div>
           <h3>The pilot, and its concert</h3>
-          <p>Ten weekly rehearsals at Warrenmount, then an Easter concert of nine pieces at
-             Clondalkin Lodge. All seven completed.</p></div>
+          <p>Ten weeks at Warrenmount, an Easter concert at Clondalkin Lodge. All seven completed.</p></div>
         <div class="tl-item"><div class="tl-date">August 2026</div>
           <h3>First public commission</h3>
-          <p>Two concerts for South Dublin Live 2026 &mdash; Tallaght University Hospital and Rua Red.</p></div>
+          <p>South Dublin Live 2026: Tallaght University Hospital and Rua Red.</p></div>
         <div class="tl-item"><div class="tl-date">September 2026</div>
           <h3>The model opens to the public</h3>
-          <p>The first community recorder ensemble course begins at Mulhuddart Community Centre,
-             Dublin 15 &mdash; twelve weeks, free.</p></div>
+          <p>The first community course opens at Mulhuddart: twelve weeks, free.</p></div>
       </div>
       <div>
         <figure class="reveal">
@@ -1652,11 +1744,9 @@ ARCHIVE = f"""<section class="page-hero">
         </figure>
         <div class="callout reveal mt-3">
           <h3 class="h-sub">How to read the tables</h3>
-          <p class="small mt-1">Newest year first. <em>Present</em> is recorded for lecture-recitals
-             only; outreach audiences were never counted and are not estimated here. The
-             <span class="tag">Sacred Places</span> tag marks the faith-based sub-strand.
-             Weekly rehearsals of the Letters Ensemble &mdash; well over a hundred since January
-             2024 &mdash; were not logged and are not listed.</p>
+          <p class="small mt-1">Newest year first. Attendance is recorded for lecture-recitals
+             only. <span class="tag">Sacred Places</span> marks the faith-based strand. Letters
+             Ensemble rehearsals were never logged and are not listed.</p>
         </div>
       </div>
     </div>
@@ -1874,7 +1964,7 @@ PARTNER = f"""<section class="page-hero page-hero-lead">
 </section>
 
 <section class="band-photo">
-  <img src="images/quartet-hall.jpg" alt="" width="1400" height="788">
+  <img src="images/tuh-atrium.jpg" alt="" width="1400" height="1052">
   <div class="wrap narrow center reveal">
     <p class="eyebrow center-row">Next step</p>
     <h2 class="h-lg">One email, four lines.</h2>

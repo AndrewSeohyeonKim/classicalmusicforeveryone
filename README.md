@@ -8,9 +8,9 @@ needed to view or edit it — open any `.html` file in a browser.
 
 | Path | What it is |
 |---|---|
-| `index.html` and the ten pages beside it | The English site: home, about, programmes, get involved, what's on, impact, the record (archive), support, partner, the mark (identity), contact |
+| `index.html` and the eleven pages beside it | The English site: home, about, the founder, programmes, get involved, what's on, impact, the record (archive), support, partner, the mark (identity), contact |
 | `programmes/` | One detail page per programme — five more English pages |
-| `ko/` | The Korean site — the same sixteen pages, same structure |
+| `ko/` | The Korean site — the same seventeen pages, same structure |
 | `styles.css` | The one stylesheet both languages share |
 | `assets/` | The five official logo variants, copied from `10_CMFE_로고·브랜드셋업/` |
 | `images/` | Photographs used on the site |
@@ -33,7 +33,7 @@ rebuilt, which is easier).
 python3 _build/build.py
 ```
 
-That rewrites all thirty-two pages plus `404.html`, `sitemap.xml`, `robots.txt`,
+That rewrites all thirty-four pages plus `404.html`, `sitemap.xml`, `robots.txt`,
 `llms.txt` and `site.webmanifest`. It never touches `styles.css`, `assets/` or `images/`.
 
 - `_build/layout.py` — the shell: `<head>`, header, navigation, footer, site URL
@@ -62,13 +62,14 @@ transitions on the native cross-document View Transitions API. All of it is wrap
 `@supports` and `prefers-reduced-motion`, so an older browser simply shows a static page.
 There is one line of JavaScript on the site: the mobile menu toggle.
 
-**Diagrams instead of paragraphs** — fourteen hand-authored inline SVGs carry the explanations
-that would otherwise be long prose: the Learning/Sharing loop, the theory of change, the
-term-long participant journey, the cross-subsidy, one figure per programme, the four ways in,
-the chronicle of every activity since 2023, lecture attendance session by session, the road
-ahead, and the three ways to partner. All are drawn from the same four marks — stave,
-note-head, bracket, crescendo — and inherit `currentColor`, so the same figure works on the
-cream, white and navy bands. The key to reading them is on the Identity page.
+**Diagrams instead of paragraphs** — fourteen figures carry the explanations that would
+otherwise be long prose: the Learning/Sharing loop, the theory of change, the term-long
+participant journey, the cross-subsidy, one figure per programme, the four ways in, the
+chronicle of every activity since 2023, lecture attendance session by session, the road
+ahead, and the three ways to partner. Twelve are HTML and CSS — panels, dots, thin gold
+connectors, one wedge — so they wrap, scale with the reader's font size and reflow to a single
+column on a phone; the two that plot data (the chronicle, the attendance chart) are SVG. The
+key to reading them is on the Identity page.
 
 **Numbers with dates** — every figure on the Impact and Partner pages carries the period it
 covers and traces to a row in `_build/ledger.py`. The tiles count up as they scroll into view,

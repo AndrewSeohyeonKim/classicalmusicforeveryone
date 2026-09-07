@@ -13,7 +13,7 @@ DATA = {
 # ---------------------------------------------------------------------------
 "recorder-ensemble": dict(
     pillar="learn",
-    name="Recorder Ensemble course",
+    name="Free Recorder Ensemble course",
     one_line="A term for complete beginners, ending in a concert.",
     meta="weekly · a term",
     lead=("A term of weekly sessions for people who have never played anything, ending "

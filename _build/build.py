@@ -48,10 +48,10 @@ PAGES = [
 
     ("programmes.html",
      "Programmes — Classical Music for Everyone",
-     "Five programmes under two pillars: the Recorder Ensemble course, lecture-recitals, "
+     "Five programmes under two pillars: the Free Recorder Ensemble course, lecture-recitals, "
      "accompanied concert-going, outreach concerts and the Letters Ensemble.",
      "프로그램 — Classical Music for Everyone",
-     "두 축 아래 다섯 개의 프로그램: 리코더 앙상블 과정, 강의·연주, 함께하는 음악여행, "
+     "두 축 아래 다섯 개의 프로그램: 무료 리코더 앙상블 과정, 강의·연주, 함께하는 음악여행, "
      "찾아가는 음악회, Letters Ensemble.",
      en.PROGRAMMES, ko.PROGRAMMES),
 
@@ -115,6 +115,15 @@ PAGES = [
      "방식, 방문에 필요한 것, 가장 자주 받는 질문.",
      en.PARTNER, ko.PARTNER),
 
+    ("founder.html",
+     "Andrew Seohyeon Kim — Classical Music for Everyone",
+     "Clarinettist, organist and community music practitioner in Dublin; founder of Classical "
+     "Music for Everyone and the Letters Ensemble. Who he is, how he works, and the record.",
+     "김서현 — Classical Music for Everyone",
+     "더블린의 클라리네티스트이자 오르가니스트, 커뮤니티 음악 실천가. Classical Music for "
+     "Everyone과 Letters Ensemble의 창립자. 누구인지, 어떻게 일하는지, 그리고 기록.",
+     en.FOUNDER, ko.FOUNDER),
+
     ("identity.html",
      "The mark — Classical Music for Everyone",
      "The logo and what it commits us to: why the gold falls on Everyone, the colours, the "
@@ -130,10 +139,10 @@ PAGES = [
 # one; only the prose differs, and it is written natively in each language.
 SUB_META = {
     "recorder-ensemble": (
-        "Recorder Ensemble course — Classical Music for Everyone",
+        "Free Recorder Ensemble course — Classical Music for Everyone",
         "A term of weekly recorder sessions for complete beginners in Dublin, ending in a "
         "concert. Free at Mulhuddart Community Centre from September 2026.",
-        "리코더 앙상블 과정 — Classical Music for Everyone",
+        "무료 리코더 앙상블 과정 — Classical Music for Everyone",
         "완전 초보를 위한 더블린의 리코더 주간 수업. 마지막은 음악회. "
         "2026년 9월부터 Mulhuddart Community Centre에서 무료로 진행합니다."),
     "getting-to-know": (
@@ -184,7 +193,7 @@ EVENTS = {
     "en": ["""    {
       "@type": "EducationEvent",
       "@id": "%(site)s/programmes/recorder-ensemble.html#mulhuddart-2026",
-      "name": "Recorder Ensemble course — Mulhuddart",
+      "name": "Free Recorder Ensemble course — Mulhuddart",
       "description": "A term of weekly recorder sessions for complete beginners. No experience and no music reading assumed.",
       "startDate": "2026-09-09T19:00:00+01:00",
       "endDate": "2026-09-09T20:00:00+01:00",
@@ -245,6 +254,7 @@ OG = {
     "archive.html": "church-concert.jpg",
     "partner.html": "quartet-hall.jpg",
     "identity.html": "hero-outreach.jpg",
+    "founder.html": "founder-portrait.jpg",
     "programmes/recorder-ensemble.html": "conducting.jpg",
     "programmes/getting-to-know.html": "lecture-recital.jpg",
     "programmes/concert-companion.html": "quartet-hall.jpg",
@@ -257,7 +267,8 @@ CRUMB_PROG = {"en": "Programmes", "ko": "프로그램"}
 # second-level pages that hang off a first-level one, as the nav says they do
 PARENT = {"archive.html": ("news.html", {"en": "What&rsquo;s on", "ko": "일정과 소식"}),
           "partner.html": ("support.html", {"en": "Support", "ko": "후원"}),
-          "identity.html": ("about.html", {"en": "About", "ko": "소개"})}
+          "identity.html": ("about.html", {"en": "About", "ko": "소개"}),
+          "founder.html": ("about.html", {"en": "About", "ko": "소개"})}
 
 # The questions organisations actually ask (12 §11), answered the same way
 # on the page and in the graph so a search engine can show them.
@@ -395,7 +406,7 @@ def build_llms():
              "Founder and project lead: Andrew Seohyeon Kim, BMus (Hons), TU Dublin Conservatoire.",
              "Two pillars: Learning (we teach people to play) and Sharing (we bring live music "
              "to care homes, parishes, hospitals, hostels and community centres). Five "
-             "programmes of equal standing: Recorder Ensemble course, Getting to Know "
+             "programmes of equal standing: Free Recorder Ensemble course, Getting to Know "
              "Classical Music, Concert Guide & Companion, Outreach Concerts, Letters Ensemble.",
              "Record to date: over 40 sessions and performances since 2024 across Ireland, "
              "France, the United Kingdom and Korea; 17 lecture-recitals with 143 attendances "

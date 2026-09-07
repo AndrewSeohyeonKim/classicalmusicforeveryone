@@ -3,7 +3,7 @@
 > Classical Music for Everyone is a Dublin community music social enterprise that teaches people to play, not just listen, and brings live classical music to those it rarely reaches.
 
 Founded January 2024 in Dublin, Ireland. Volunteer-led; formalising as a not-for-profit company limited by guarantee; not yet a registered charity. Founder and project lead: Andrew Seohyeon Kim, BMus (Hons), TU Dublin Conservatoire.
-Two pillars: Learning (we teach people to play) and Sharing (we bring live music to care homes, parishes, hospitals, hostels and community centres). Five programmes of equal standing: Recorder Ensemble course, Getting to Know Classical Music, Concert Guide & Companion, Outreach Concerts, Letters Ensemble.
+Two pillars: Learning (we teach people to play) and Sharing (we bring live music to care homes, parishes, hospitals, hostels and community centres). Five programmes of equal standing: Free Recorder Ensemble course, Getting to Know Classical Music, Concert Guide & Companion, Outreach Concerts, Letters Ensemble.
 Record to date: over 40 sessions and performances since 2024 across Ireland, France, the United Kingdom and Korea; 17 lecture-recitals with 143 attendances (sessions 1–15); 20 outreach performances 2023–2025; 4 Letters Ensemble concerts; a ten-week pilot recorder ensemble completed by all seven participants; two concerts for South Dublin Live 2026, the first publicly funded commission.
 Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: English, Korean.
 
@@ -11,7 +11,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 - [Classical Music for Everyone](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/): A Dublin community music social enterprise. We teach people to play, not just listen, and bring live classical music to care homes, parishes, hospitals and community centres.
 - [About](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html): Our mission, vision and five values; the founder Andrew Seohyeon Kim; and the venues and institutions we have played in since 2024.
-- [Programmes](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html): Five programmes under two pillars: the Recorder Ensemble course, lecture-recitals, accompanied concert-going, outreach concerts and the Letters Ensemble.
+- [Programmes](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html): Five programmes under two pillars: the Free Recorder Ensemble course, lecture-recitals, accompanied concert-going, outreach concerts and the Letters Ensemble.
 - [Get involved](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/get-involved.html): Learn to play, come and listen, play with us, or host a course. Beginners welcome — no experience assumed and nothing to prepare.
 - [What's on](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html): A class enrolling, a concert with the door open, what happened in 2026, and press coverage. The full record since 2023 is on its own page.
 - [Support](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/support.html): What support pays for, who has backed the work so far, and four ways to help — including giving a room or opening a door.
@@ -19,8 +19,9 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 - [Our impact](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/impact.html): What has changed because of the work, backed only by the record: dated figures, one story, where it is going next, and what has not been proved.
 - [The record, 2023 to date](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/archive.html): Every session and performance since February 2023, year by year: lecture-recitals, outreach concerts, ensemble concerts, courses and outings, with venues and dates.
 - [Partner with us](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/partner.html): For care homes, hospitals, parishes, councils, trusts and companies: what a partnership brings, three ways to partner, what a visit needs, and the questions we are asked most.
+- [Andrew Seohyeon Kim](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/founder.html): Clarinettist, organist and community music practitioner in Dublin; founder of Classical Music for Everyone and the Letters Ensemble. Who he is, how he works, and the record.
 - [The mark](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/identity.html): The logo and what it commits us to: why the gold falls on Everyone, the colours, the type, the rules for using the mark, and how to read the diagrams on this site.
-- [Recorder Ensemble course](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html): A term of weekly recorder sessions for complete beginners in Dublin, ending in a concert. Free at Mulhuddart Community Centre from September 2026.
+- [Free Recorder Ensemble course](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html): A term of weekly recorder sessions for complete beginners in Dublin, ending in a concert. Free at Mulhuddart Community Centre from September 2026.
 - [Getting to Know Classical Music](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/getting-to-know.html): Free lecture-recitals in Dublin for people with no prior knowledge — three stages, seasonal specials, 17 sessions and 143 attendances so far.
 - [Concert Guide & Companion](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/concert-companion.html): Small groups accompanied to live concerts in Dublin and beyond — prepared beforehand, sat with during, and talked about afterwards.
 - [Outreach Concerts](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/outreach-concerts.html): Live classical music brought into care homes, parishes, hospitals and hostels — 20 performances across four countries since 2023.
@@ -30,7 +31,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 - [Classical Music for Everyone](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/): 더블린의 커뮤니티 음악 사회적기업. 듣는 데서 그치지 않고 직접 연주하도록 가르치고, 요양시설·본당·병원·커뮤니티 센터로 클래식 음악이 찾아갑니다.
 - [단체 소개](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html): 미션과 비전, 다섯 가지 가치, 창립자 김서현, 그리고 2024년 이후 연주해 온 공간과 기관.
-- [프로그램](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html): 두 축 아래 다섯 개의 프로그램: 리코더 앙상블 과정, 강의·연주, 함께하는 음악여행, 찾아가는 음악회, Letters Ensemble.
+- [프로그램](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html): 두 축 아래 다섯 개의 프로그램: 무료 리코더 앙상블 과정, 강의·연주, 함께하는 음악여행, 찾아가는 음악회, Letters Ensemble.
 - [참여하기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/get-involved.html): 연주를 배우거나, 들으러 오거나, 함께 연주하거나, 공간을 여는 네 가지 길. 완전 초보를 환영합니다.
 - [일정과 소식](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html): 모집 중인 수업, 열려 있는 음악회, 2026년에 있었던 일, 그리고 기사와 기고. 2023년부터의 전체 기록은 별도 페이지에 있습니다.
 - [후원](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/support.html): 후원이 실제로 쓰이는 곳, 지금까지 이 일을 받쳐 온 이들, 그리고 도울 수 있는 네 가지 방법.
@@ -38,8 +39,9 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 - [성과와 근거](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/impact.html): 기록이 뒷받침하는 것만 적었습니다. 날짜가 있는 숫자, 이야기 하나, 다음 걸음, 그리고 아직 증명되지 않은 것.
 - [기록, 2023년부터](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/archive.html): 2023년 2월 이후의 모든 회차와 연주를 해마다 정리했습니다. 강의·연주, 찾아가는 음악회, 앙상블 음악회, 과정과 동행, 장소와 날짜.
 - [기관 파트너십](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/partner.html): 요양시설·병원·본당·지자체·재단·기업을 위한 안내. 파트너십이 가져다주는 것, 세 가지 방식, 방문에 필요한 것, 가장 자주 받는 질문.
+- [김서현](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/founder.html): 더블린의 클라리네티스트이자 오르가니스트, 커뮤니티 음악 실천가. Classical Music for Everyone과 Letters Ensemble의 창립자. 누구인지, 어떻게 일하는지, 그리고 기록.
 - [상징과 표준](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/identity.html): 로고와 그것이 약속하는 것. 금색이 Everyone 위에 놓이는 이유, 색, 서체, 로고 사용 규칙, 그리고 이 사이트의 도식을 읽는 법.
-- [리코더 앙상블 과정](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/recorder-ensemble.html): 완전 초보를 위한 더블린의 리코더 주간 수업. 마지막은 음악회. 2026년 9월부터 Mulhuddart Community Centre에서 무료로 진행합니다.
+- [무료 리코더 앙상블 과정](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/recorder-ensemble.html): 완전 초보를 위한 더블린의 리코더 주간 수업. 마지막은 음악회. 2026년 9월부터 Mulhuddart Community Centre에서 무료로 진행합니다.
 - [클래식 음악과 친해지기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/getting-to-know.html): 사전 지식이 없는 분들을 위한 더블린의 무료 강의·연주. 세 단계와 계절 특집, 지금까지 17회에 연 143명이 참석했습니다.
 - [함께하는 음악여행](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/concert-companion.html): 혼자서는 가지 않았을 공연에 소그룹으로 함께 갑니다. 미리 준비하고, 옆자리에 앉고, 다녀와서 이야기를 나눕니다.
 - [찾아가는 음악회](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html): 요양시설·본당·병원·쉼터로 실황 연주가 찾아갑니다. 2023년 이후 4개국에서 20회를 연주했습니다.

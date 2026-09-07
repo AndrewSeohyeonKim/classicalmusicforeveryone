@@ -319,19 +319,6 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,cite,td,th,.lead,.small,.
     .stagger>*:nth-child(5){animation-range:entry 17% entry 56%}
     .stagger>*:nth-child(6){animation-range:entry 20% entry 59%}
 
-    /* diagrams: the arrows draw themselves, then the labels on them arrive.
-       The timeline is named on the figure because an SVG child is not itself
-       a view() subject. */
-    .diagram{timeline-scope:--dg;view-timeline-name:--dg;view-timeline-axis:block}
-    .diagram .dg-draw{
-      stroke-dasharray:1;
-      animation:draw-path linear both;
-      animation-timeline:--dg;animation-range:entry 20% entry 90%;
-    }
-    .diagram .dg-late{
-      animation:fade-in linear both;
-      animation-timeline:--dg;animation-range:entry 60% cover 6%;
-    }
     .hero::after{
       animation:note-drift 7s var(--ease) infinite alternate;
     }
@@ -936,63 +923,335 @@ figcaption{margin-top:12px;font-size:0.8125rem;color:var(--fg-muted);line-height
 .band-photo .eyebrow{color:var(--accent-inverse)}
 
 /* ==========================================================================
-   13. DIAGRAMS
+   13. DIAGRAMS  (redrawn 2026-09-07)
+
+   Four marks, in HTML wherever the figure is a structure and in SVG only
+   where it plots data (the chronicle, the attendance chart):
+     the panel      .fs / .cv-item / .cv-hub — one named thing
+     the dot        .dot — filled: on the record or Learning; open: planned
+                    or Sharing
+     the connector  a thin gold line with a small head, drawn by ::before /
+                    ::after on the panel it leaves
+     the wedge      .wedge — the one mark that means "grows"
+   A dashed panel (.is-claim) is a claim, not a count. Every figure reflows
+   to a single column under 55em, where the connectors turn downward.
    ========================================================================== */
 .diagram{
   background:var(--surface-raised);border:1px solid var(--line);
   border-radius:var(--radius-lg);padding:clamp(22px,2.6vw,38px) clamp(18px,2.4vw,34px) 24px;
   color:var(--fg);
 }
-.diagram-title{color:var(--accent-ink);margin:0 0 20px}
+.diagram-title{color:var(--accent-ink);margin:0 0 22px}
 .band-inverse .diagram-title{color:var(--accent-inverse)}
 .band-inverse .diagram{
   background:color-mix(in srgb,var(--white) 5%,transparent);
   border-color:var(--line-inverse);color:var(--fg-inverse);
 }
 .band-sunken .diagram{background:var(--surface-raised)}
+.diagram figcaption{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.band-inverse .diagram figcaption{border-top-color:var(--line-inverse);color:var(--fg-inverse-muted)}
+
+/* the two data figures keep a scrolling canvas so their labels stay legible */
 .diagram-canvas{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-inline:-4px;padding-inline:4px}
 .diagram svg{width:100%;height:auto;overflow:visible}
 @media (max-width:51.25em){
-  /* below this width the labels would fall under 8px — let the figure scroll instead */
   .diagram-canvas svg{min-width:680px}
   .diagram-canvas{
     -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);
     mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent);
   }
 }
-.diagram figcaption{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
-.band-inverse .diagram figcaption{border-top-color:var(--line-inverse);color:var(--fg-inverse-muted)}
-.dg-fill-soft{fill:color-mix(in srgb,currentColor 4%,transparent)}
-.dg-fill-accent{fill:color-mix(in srgb,var(--accent) 12%,transparent)}
-.dg-fill-panel{fill:var(--surface-sunken)}
-.band-sunken .dg-fill-panel,.band-raised .dg-fill-panel{fill:color-mix(in srgb,var(--accent) 6%,transparent)}
-.dg-stroke{stroke:currentColor;fill:none;stroke-width:1.25;opacity:.5}
-.dg-stroke-accent{stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round}
-.dg-box{stroke:currentColor;stroke-width:1.25;opacity:.75;fill:none}
-
-/* the stave: four quiet lines and one that carries the weight */
-.dg-stave{stroke:currentColor;fill:none;stroke-width:1;opacity:.3}
-.dg-stave-base{stroke:var(--accent);fill:none;stroke-width:1.5;opacity:.75}
-/* a note-head is the unit of every diagram here — always the same size */
-.dg-note{fill:var(--accent)}
-.dg-note-open{fill:var(--surface-raised);stroke:var(--accent);stroke-width:2}
-.band-sunken .dg-note-open{fill:var(--surface-raised)}
-.band-inverse .dg-note-open{fill:var(--surface-inverse)}
-.dg-tri{fill:var(--accent)}
-.dg-tri-q{fill:currentColor;opacity:.45}
-
-.dg-h{fill:currentColor;font-family:var(--font-display);font-size:19px;font-weight:600;
-  letter-spacing:-.015em;font-optical-sizing:auto}
-.dg-label{fill:currentColor;font-family:var(--font-body);font-size:14px;font-weight:600;
-  letter-spacing:-.005em}
+.dg-line{stroke:currentColor;opacity:.18;stroke-width:1}
+.dg-base{stroke:currentColor;opacity:.4;stroke-width:1.25}
+.dg-dot{fill:var(--accent)}
+.dg-dot-open{fill:var(--surface-raised);stroke:var(--accent);stroke-width:2}
+.dg-span{fill:var(--accent);opacity:.5}
+.dg-bar{fill:var(--accent)}
+.dg-bar-open{fill:none;stroke:var(--accent);stroke-width:2}
+.dg-h{fill:currentColor;font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.015em}
 .dg-sub{fill:currentColor;font-family:var(--font-body);font-size:12.5px;opacity:.66}
-.dg-edge{fill:var(--accent-ink);font-family:var(--font-body);font-size:11.5px;font-weight:700;
-  letter-spacing:.09em;text-transform:uppercase}
-.band-inverse .dg-edge{fill:var(--accent-inverse)}
-.dg-num{fill:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:700;
-  opacity:.85;font-variant-numeric:lining-nums}
-html[lang^="ko"] :is(.dg-h,.dg-label,.dg-sub,.dg-edge){font-family:var(--font-kr)}
-html[lang^="ko"] .dg-edge{letter-spacing:.03em;text-transform:none}
+.dg-num{fill:var(--accent-ink);font-family:var(--font-body);font-size:12px;font-weight:700;
+  font-variant-numeric:lining-nums}
+html[lang^="ko"] :is(.dg-h,.dg-sub,.dg-num){font-family:var(--font-kr)}
+.dg-ev{cursor:help}
+.dg-ev:hover circle{stroke:var(--fg);stroke-width:2}
+
+/* --- the dot ------------------------------------------------------------- */
+.dot{
+  display:inline-block;width:10px;height:10px;border-radius:50%;flex:0 0 auto;
+  background:var(--accent);vertical-align:middle;margin-inline-end:10px;
+}
+.dot-open{background:var(--surface-raised);box-shadow:inset 0 0 0 2px var(--accent)}
+.band-inverse .dot-open{background:var(--surface-inverse)}
+
+/* --- the panel ---------------------------------------------------------- */
+.fs,.cv-item,.cv-hub,.loop-panel,.cmp-side,.lg{
+  position:relative;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:16px 18px;min-width:0;
+}
+.band-sunken :is(.fs,.cv-item,.cv-hub,.loop-panel,.cmp-side,.lg),
+.band-raised :is(.fs,.cv-item,.cv-hub,.loop-panel,.cmp-side,.lg){background:var(--surface)}
+.band-inverse :is(.fs,.cv-item,.cv-hub,.loop-panel,.cmp-side,.lg){
+  background:color-mix(in srgb,var(--white) 4%,transparent);border-color:var(--line-inverse);
+}
+.is-claim{border-style:dashed;color:var(--fg-body)}
+.is-claim .fs-t{color:var(--fg-body)}
+.is-key{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,var(--surface))}
+.fs-n{
+  display:block;margin-bottom:8px;font-family:var(--font-body);font-size:var(--t-label-sm);
+  font-weight:700;letter-spacing:var(--label-track);color:var(--accent-ink);
+  font-variant-numeric:lining-nums;
+}
+.fs-k{
+  display:block;margin-bottom:8px;font-family:var(--font-body);font-size:var(--t-label);
+  font-weight:700;letter-spacing:var(--label-track);text-transform:uppercase;color:var(--accent-ink);
+}
+html[lang^="ko"] :is(.fs-n,.fs-k){font-family:var(--font-kr);letter-spacing:var(--label-track-kr)}
+.fs-t{
+  display:flex;align-items:baseline;font-family:var(--font-display);font-size:var(--t-h3);
+  font-weight:600;line-height:1.25;color:var(--fg);letter-spacing:-.008em;
+}
+.fs-t .dot{position:relative;top:-1px}
+html[lang^="ko"] .fs-t{font-family:var(--font-kr);font-weight:700;letter-spacing:-.028em}
+.fs-s{display:block;margin-top:8px;font-size:0.875rem;line-height:1.5;color:var(--fg-muted)}
+.fs-l{list-style:none;margin:12px 0 0;padding:0;font-size:0.9062rem;line-height:1.45;color:var(--fg-body)}
+.fs-l li{padding-block:5px;border-top:1px solid var(--line);display:flex;align-items:center}
+.fs-l li:first-child{border-top:0}
+.fs-l .dot{width:8px;height:8px}
+
+/* --- the flow: panels in a row, connectors between them ------------------- */
+.flow{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:0 44px;align-items:stretch}
+.fs:not(:last-child)::after{
+  content:"";position:absolute;top:50%;inset-inline-end:-44px;width:36px;height:1.5px;
+  background:var(--accent);
+}
+.fs:not(:last-child)::before{
+  content:"";position:absolute;top:calc(50% - 4.5px);inset-inline-end:-44px;
+  border-block:4.5px solid transparent;border-inline-start:7px solid var(--accent);
+}
+.fs-edge{
+  position:absolute;z-index:3;top:calc(50% - 24px);inset-inline-end:-44px;translate:50% 0;
+  font-style:normal;font-family:var(--font-body);font-size:var(--t-label-sm);font-weight:700;
+  letter-spacing:var(--label-track);text-transform:uppercase;color:var(--accent-ink);
+  white-space:nowrap;background:var(--surface-raised);padding-inline:4px;
+}
+html[lang^="ko"] .fs-edge{font-family:var(--font-kr);letter-spacing:var(--label-track-kr);text-transform:none}
+.band-sunken .fs-edge,.band-raised .fs-edge{background:var(--surface-raised)}
+.flow-foot{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);gap:0 44px;margin-top:14px}
+.ff{
+  grid-column:span var(--span,1);padding-top:10px;border-top:1.5px solid var(--accent);
+  font-size:0.8125rem;color:var(--fg-muted);text-align:center;
+}
+.ff.is-claim{border-top-style:dashed;border-color:var(--line-strong);background:none}
+.flow-note{margin:16px 0 0;font-size:0.875rem;color:var(--fg-muted)}
+.flow-group-t{
+  margin:0 0 10px;font-family:var(--font-body);font-size:var(--t-label);font-weight:700;
+  letter-spacing:var(--label-track);text-transform:uppercase;color:var(--accent-ink);
+}
+.flow-group-t.is-claim{color:var(--fg-muted);border:0;margin-top:22px}
+html[lang^="ko"] .flow-group-t{font-family:var(--font-kr);letter-spacing:var(--label-track-kr)}
+
+/* --- the wedge: a crescendo under a flow ----------------------------------- */
+.wedge{position:relative;margin-top:26px;padding-top:26px}
+.wedge i{
+  display:block;height:18px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent) 60%,transparent));
+  clip-path:polygon(0 72%,100% 0,100% 100%,0 100%);
+}
+.wedge span{position:absolute;top:0;font-size:0.8125rem;color:var(--fg-muted)}
+.wedge-a{inset-inline-start:0}
+.wedge-b{inset-inline-end:0}
+
+/* --- the loop: two panels and the circuit between them --------------------- */
+.loop{display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+.loop-panel ul{list-style:none;margin:14px 0 0;padding:0;font-size:0.9375rem}
+.loop-panel li{
+  display:flex;align-items:center;gap:0 10px;padding-block:9px;border-top:1px solid var(--line);
+}
+.loop-panel li span{flex:1;color:var(--fg);font-weight:600}
+.loop-panel li em{font-style:normal;font-size:0.8125rem;color:var(--fg-muted);text-align:end}
+.loop-arc{
+  grid-column:1/-1;position:relative;height:44px;margin-inline:25%;
+  border:1.5px solid var(--accent);
+}
+.loop-top{border-bottom:0;border-radius:26px 26px 0 0;margin-bottom:-1px}
+.loop-bottom{border-top:0;border-radius:0 0 26px 26px;margin-top:-1px}
+.loop-arc span{
+  position:absolute;inset-inline-start:50%;translate:-50% -50%;top:0;
+  padding:4px 12px;background:var(--surface-raised);
+  font-family:var(--font-body);font-size:var(--t-label-sm);font-weight:700;letter-spacing:var(--label-track);
+  text-transform:uppercase;color:var(--accent-ink);white-space:nowrap;
+}
+.loop-bottom span{top:100%}
+html[lang^="ko"] .loop-arc span{font-family:var(--font-kr);letter-spacing:var(--label-track-kr);text-transform:none}
+/* the arrowheads: the top arc lands on the right panel, the bottom on the left */
+.loop-top::after,.loop-bottom::after{
+  content:"";position:absolute;border-inline:4.5px solid transparent;
+}
+.loop-top::after{inset-inline-end:-5.5px;bottom:-2px;border-top:8px solid var(--accent)}
+.loop-bottom::after{inset-inline-start:-5.5px;top:-2px;border-bottom:8px solid var(--accent)}
+
+/* --- converge: a list, a collector, one destination ------------------------ */
+.cv{display:grid;grid-template-columns:1fr 60px minmax(220px,.85fr);align-items:center;gap:0}
+.cv-through{grid-template-columns:1fr 56px minmax(200px,.7fr) 56px 1fr}
+.cv-in,.cv-out{display:grid;gap:10px;align-content:center}
+.cv-group{display:grid;gap:10px}
+.cv-group + .cv-group{margin-top:12px}
+.cv-gt{
+  display:block;font-family:var(--font-body);font-size:var(--t-label);font-weight:700;
+  letter-spacing:var(--label-track);text-transform:uppercase;color:var(--accent-ink);margin-bottom:2px;
+}
+html[lang^="ko"] .cv-gt{font-family:var(--font-kr);letter-spacing:var(--label-track-kr)}
+.cv-item{padding:12px 16px;display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:0}
+.cv-item b{font-family:var(--font-display);font-size:1.0625rem;font-weight:600;color:var(--fg);line-height:1.3}
+html[lang^="ko"] .cv-item b{font-family:var(--font-kr);font-weight:700}
+.cv-s{grid-column:2;display:block;margin-top:3px;font-size:0.8125rem;color:var(--fg-muted);line-height:1.45}
+/* each item's tick runs to the collector rule in the join column */
+.cv-in .cv-item::after{
+  content:"";position:absolute;top:50%;inset-inline-end:-20px;width:20px;height:1px;
+  background:var(--line-strong);
+}
+.cv-out .cv-item::before{
+  content:"";position:absolute;top:50%;inset-inline-start:-20px;width:20px;height:1px;
+  background:var(--line-strong);
+}
+.cv-join{position:relative;align-self:stretch;min-height:120px}
+/* the collector: a gold rule between the first and last item centres, then
+   one line with a head into the hub */
+.cv-join::before{
+  content:"";position:absolute;inset-inline-start:20px;top:12%;bottom:12%;width:1.5px;
+  background:var(--accent);
+}
+.cv-join::after{
+  content:"";position:absolute;top:50%;inset-inline-start:20px;inset-inline-end:8px;height:1.5px;
+  background:var(--accent);
+}
+.cv-edge{
+  position:absolute;z-index:3;top:calc(50% - 22px);inset-inline-start:50%;translate:-50% 0;
+  font-style:normal;font-family:var(--font-body);font-size:var(--t-label-sm);font-weight:700;
+  letter-spacing:var(--label-track);text-transform:uppercase;color:var(--accent-ink);
+  white-space:nowrap;background:var(--surface-raised);padding:2px 6px;border-radius:999px;
+}
+html[lang^="ko"] .cv-edge{font-family:var(--font-kr);letter-spacing:var(--label-track-kr);text-transform:none}
+.cv-hub{position:relative}
+.cv-hub::before{
+  content:"";position:absolute;top:calc(50% - 4.5px);inset-inline-start:-8px;
+  border-block:4.5px solid transparent;border-inline-start:7px solid var(--accent);
+}
+.cv-hub .fs-t{display:block}
+.cv-hub .fs-l{margin-top:10px}
+/* the mirrored join, hub to outputs */
+.cv-join-out::before{inset-inline-start:auto;inset-inline-end:20px}
+.cv-join-out::after{inset-inline-start:8px;inset-inline-end:20px}
+.cv-through .cv-out .cv-item::before{background:var(--accent);width:20px}
+.cv-loop{grid-column:1/-1;margin-top:18px;text-align:center;font-size:0.8125rem;color:var(--fg-muted)}
+.cv-loop span{padding:6px 12px;border:1px dashed var(--line-strong);border-radius:999px}
+/* the dashed seam between linked items: people move between these */
+.cv-linked{position:relative;padding-inline-start:0}
+.cv-move{
+  margin-top:4px;font-size:0.8125rem;color:var(--fg-muted);
+  padding-inline-start:20px;position:relative;
+}
+/* a dashed seam down the linked list says: you can move between these */
+.cv-linked{padding-inline-start:14px;border-inline-start:1px dashed var(--line-strong)}
+.cv-move::before{content:"\2194";margin-inline-end:6px;color:var(--accent-ink)}
+
+/* --- compare: two panels, one connector ------------------------------------ */
+.cmp{display:grid;grid-template-columns:1fr 72px 1fr;align-items:stretch}
+.cmp-side{padding:22px 22px 20px}
+.cmp-num{
+  display:block;font-family:var(--font-display);font-size:clamp(2.2rem,3.6vw,3rem);
+  font-weight:700;line-height:1;color:var(--fg);letter-spacing:-.024em;font-variant-numeric:lining-nums;
+}
+html[lang^="ko"] .cmp-num{font-family:var(--font-kr);letter-spacing:-.03em}
+.cmp-t{display:block;margin-top:8px;font-size:0.9375rem;color:var(--fg);font-weight:600}
+.cmp-s{display:block;margin-top:12px;font-size:0.8125rem;color:var(--fg-muted)}
+.dots-many{
+  height:64px;margin-top:16px;border-radius:var(--radius-sm);
+  background:radial-gradient(circle,var(--accent) 2.2px,transparent 2.6px) 0 0/16px 16px;
+  opacity:.75;
+}
+.dots-few{display:flex;gap:14px;margin-top:22px;height:64px;align-items:center}
+.dots-few i{width:22px;height:22px;border-radius:50%;background:var(--accent)}
+.cmp-join{position:relative}
+.cmp-join::after{
+  content:"";position:absolute;top:50%;inset-inline:10px 16px;height:1.5px;background:var(--accent);
+}
+.cmp-join::before{
+  content:"";position:absolute;top:calc(50% - 4.5px);inset-inline-end:8px;
+  border-block:4.5px solid transparent;border-inline-start:7px solid var(--accent);
+}
+.cmp-join .cv-edge{top:calc(50% - 26px)}
+
+/* --- the legend ------------------------------------------------------------ */
+.legend{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.lg-mark{display:flex;align-items:center;gap:10px;height:34px;margin-bottom:12px}
+.lg-panel{display:block;width:34px;height:22px;border:1.5px solid var(--fg);opacity:.7;border-radius:6px}
+.lg-panel.is-claim{border-style:dashed}
+.lg-conn{
+  display:block;width:52px;height:1.5px;background:var(--accent);position:relative;
+}
+.lg-conn::after{
+  content:"";position:absolute;inset-inline-end:-1px;top:-4px;
+  border-block:4.5px solid transparent;border-inline-start:7px solid var(--accent);
+}
+.lg-wedge{
+  display:block;width:56px;height:16px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent) 60%,transparent));
+  clip-path:polygon(0 70%,100% 0,100% 100%,0 100%);
+}
+
+/* --- motion: panels arrive in sequence, connectors extend after them ------- */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .flow>.fs,.cv-item,.cv-hub,.loop-panel,.cmp-side,.lg{
+      animation:rise-in-soft linear both;animation-timeline:view();animation-range:entry 5% entry 40%;
+    }
+    .flow>.fs:nth-child(2),.cv-item:nth-child(2){animation-range:entry 9% entry 44%}
+    .flow>.fs:nth-child(3),.cv-item:nth-child(3){animation-range:entry 13% entry 48%}
+    .flow>.fs:nth-child(4),.cv-item:nth-child(4){animation-range:entry 17% entry 52%}
+    .fs:not(:last-child)::after,.cv-join::after,.cmp-join::after{
+      transform-origin:0 50%;animation:draw-rule linear both;
+      animation-timeline:view();animation-range:entry 20% entry 60%;
+    }
+  }
+}
+
+/* --- one column on a phone: connectors turn downward ------------------------ */
+@media (max-width:55em){
+  .flow,.flow-foot,.loop,.cv,.cv-through,.cmp,.legend{grid-template-columns:1fr;gap:34px 0}
+  .flow-foot{gap:10px 0;margin-top:20px}
+  .ff{grid-column:auto;text-align:start}
+  .fs:not(:last-child)::after{
+    top:auto;bottom:-34px;inset-inline:calc(50% - .75px) auto;width:1.5px;height:26px;
+  }
+  .fs:not(:last-child)::before{
+    top:auto;bottom:-34px;inset-inline:calc(50% - 4.5px) auto;
+    border-inline:4.5px solid transparent;border-inline-start-color:transparent;
+    border-top:7px solid var(--accent);border-bottom:0;
+  }
+  .fs-edge{top:auto;bottom:-24px;inset-inline:auto calc(50% + 16px);translate:0 0}
+  .loop-arc{margin-inline:6%;height:34px}
+  .cv-in .cv-item::after,.cv-out .cv-item::before{display:none}
+  .cv-join{min-height:40px}
+  .cv-join::before{display:none}
+  .cv-join::after{inset-inline:calc(50% - .75px) auto;top:0;bottom:0;width:1.5px;height:auto}
+  .cv-join .cv-edge{top:50%;translate:-50% -50%;background:var(--surface-raised);padding-inline:6px}
+  .cv-hub::before{
+    inset-inline-start:calc(50% - 4.5px);top:-8px;
+    border-inline:4.5px solid transparent;border-inline-start-color:transparent;
+    border-top:7px solid var(--accent);border-bottom:0;
+  }
+  .cv-join-out::after{inset-inline:calc(50% - .75px) auto}
+  .cv-linked{padding-inline-start:0;border-inline-start:0}
+  .cmp-join::after{inset-inline:calc(50% - .75px) auto;top:0;bottom:0;height:auto;width:1.5px}
+  .cmp-join::before{
+    inset-inline-end:auto;inset-inline-start:calc(50% - 4.5px);top:auto;bottom:0;
+    border-inline:4.5px solid transparent;border-inline-start-color:transparent;
+    border-top:7px solid var(--accent);border-bottom:0;
+  }
+  .cmp{gap:40px 0}
+}
 
 /* ==========================================================================
    14. NOTICES, QUOTES, LISTS, TABLES
@@ -1496,9 +1755,6 @@ html[lang^="ko"] .ticker-track li{font-family:var(--font-kr);font-size:1rem}
 .ledger td.small{color:var(--fg-body)}
 .ledger .tag{margin-top:6px;padding:4px 10px}
 
-/* the chronicle's note-heads answer the pointer, because each carries a title */
-.dg-ev{cursor:help}
-.dg-ev:hover ellipse{stroke:var(--fg);stroke-width:2}
 
 /* --- FAQ: the native disclosure, so no script -------------------------------- */
 .faq-list{border-top:1px solid var(--line)}
@@ -1548,3 +1804,100 @@ html[lang^="ko"] .faq summary{font-family:var(--font-kr);font-weight:700;letter-
   .hero::after{animation:heads-in var(--dur-slow) var(--ease-enter) 420ms both,
                          note-drift 7s var(--ease) 1.2s infinite alternate}
 }
+
+
+/* ==========================================================================
+   21. READING AIDS  (2026-09-07)
+
+   Andrew's note on the second pass: too much text, the key point hard to
+   find. These are the typographic devices that carry the point without
+   another paragraph: a statement set large with one gold phrase, an
+   at-a-glance strip, a compact values row, and a founder hero built like an
+   artist's profile rather than a CV.
+   ========================================================================== */
+
+/* one sentence, set big, with the phrase that matters in gold italic */
+.statement{
+  font-family:var(--font-display);font-size:var(--t-h2);line-height:1.14;
+  letter-spacing:-.012em;color:var(--fg);font-weight:600;max-width:20em;text-wrap:balance;
+}
+.statement em{font-style:italic;color:var(--accent-ink)}
+html[lang^="ko"] .statement{font-family:var(--font-kr);font-weight:700;letter-spacing:-.032em;line-height:1.32}
+html[lang^="ko"] .statement em{font-style:normal}
+.band-inverse .statement,.band-photo .statement{color:var(--fg-inverse)}
+.band-inverse .statement em,.band-photo .statement em{color:var(--accent-inverse)}
+.statement-sm{font-size:var(--t-h2-sm)}
+
+/* at a glance: four facts in one strip, label over value */
+.glance{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+}
+.glance>div{background:var(--surface-raised);padding:var(--pad-sm)}
+.band-raised .glance>div{background:var(--surface)}
+.glance dt{
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:700;
+  letter-spacing:var(--label-track);text-transform:uppercase;color:var(--accent-ink);
+}
+html[lang^="ko"] .glance dt{font-family:var(--font-kr);letter-spacing:var(--label-track-kr)}
+.glance dd{margin:8px 0 0;font-family:var(--font-display);font-size:1.25rem;line-height:1.3;color:var(--fg);font-weight:600}
+html[lang^="ko"] .glance dd{font-family:var(--font-kr);font-weight:700;font-size:1.125rem}
+.glance dd small{display:block;margin-top:4px;font-family:var(--font-body);font-size:0.8125rem;font-weight:400;color:var(--fg-muted)}
+html[lang^="ko"] .glance dd small{font-family:var(--font-kr)}
+@media (max-width:55em){.glance{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:35em){.glance{grid-template-columns:1fr}}
+
+/* five values as one row: number, word, a line — no card, no paragraph */
+.values{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.values li{padding-top:14px;border-top:2px solid var(--accent)}
+.values b{
+  display:block;font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;color:var(--fg);
+}
+html[lang^="ko"] .values b{font-family:var(--font-kr);font-weight:700}
+.values i{display:block;font-style:normal;font-size:var(--t-label-sm);font-weight:700;letter-spacing:var(--label-track);
+  color:var(--accent-ink);margin-bottom:6px;font-variant-numeric:lining-nums}
+.values span{display:block;margin-top:8px;font-size:0.9062rem;line-height:1.5;color:var(--fg-body)}
+@media (max-width:65em){.values{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:35em){.values{grid-template-columns:1fr}}
+
+/* the founder, as an artist's profile: portrait left, name and links right */
+.founder-hero{
+  background:var(--surface-inverse);color:var(--fg-inverse-body);
+  padding-block:clamp(56px,6vw,88px);position:relative;overflow:hidden;isolation:isolate;
+}
+.founder-hero::after{
+  content:"";position:absolute;z-index:-1;inset-block-end:-160px;inset-inline-end:-80px;
+  width:420px;height:420px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 68%);
+}
+.founder-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:clamp(32px,5vw,72px);align-items:center}
+.founder-hero .photo{border-radius:var(--radius-lg)}
+.founder-hero h1{color:var(--fg-inverse);font-size:var(--t-h1)}
+.founder-hero .eyebrow{color:var(--accent-inverse)}
+.founder-role{margin-top:14px;font-size:var(--t-lead);color:var(--fg-inverse-muted);max-width:30em}
+.founder-hero .statement{margin-top:26px;color:var(--fg-inverse);font-size:var(--t-h2-sm)}
+.founder-hero .statement em{color:var(--accent-inverse)}
+.founder-kr{display:block;margin-top:6px;font-family:var(--font-kr);font-size:var(--t-lead);font-weight:500;color:var(--fg-inverse-muted)}
+.social{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;padding:0;list-style:none}
+.social a{
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 16px;
+  border:1px solid rgb(255 255 255 / .38);border-radius:999px;color:var(--fg-inverse);
+  font-size:0.9062rem;font-weight:600;transition:border-color var(--dur-3) var(--ease),background var(--dur-3) var(--ease);
+}
+.social a:hover{border-color:var(--white);background:rgb(255 255 255 / .08);color:var(--fg-inverse)}
+.social svg{width:18px;height:18px;fill:currentColor}
+@media (max-width:55em){.founder-grid{grid-template-columns:1fr}.founder-hero .photo{max-width:420px}}
+
+/* the record as an accordion: open only what you came for */
+.record .faq summary{font-size:1.125rem}
+.record .faq .plainlist{padding-bottom:18px}
+
+/* a photograph with a caption set beside it, not under it */
+.aside-fig{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media (max-width:55em){.aside-fig{grid-template-columns:1fr}}
+
+/* a small gallery: two landscape, two portrait, on one grid */
+.gallery{display:grid;grid-template-columns:3fr 2fr 2fr 3fr;gap:20px;align-items:start}
+.gallery figure:nth-child(1),.gallery figure:nth-child(4){grid-column:span 1}
+@media (max-width:65em){.gallery{grid-template-columns:1fr 1fr}}
+@media (max-width:35em){.gallery{grid-template-columns:1fr}}
