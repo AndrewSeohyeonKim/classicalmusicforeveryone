@@ -1,0 +1,17 @@
+.DS_Store
+**/.DS_Store
+__pycache__/
+*.pyc
+.claude/
+
+# 내부 작업 문서와 폴더 (공개 저장소에 올리지 않음)
+CLAUDE.md
+02_CMFE_*.md
+_cowork/
+
+# 후원 문안 (후원을 받지 않는 동안 공개 저장소에 올리지 않음)
+_build/giving_en.py
+_build/giving_ko.py
+
+# 쓰지 않는 사진과 옛 이력 백업 (공개하지 않음)
+_retired/

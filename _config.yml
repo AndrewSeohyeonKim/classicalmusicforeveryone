@@ -1,0 +1,7 @@
+# GitHub Pages(Jekyll) 설정: 내부 작업 문서는 공개 사이트에서 뺀다
+exclude:
+  - CLAUDE.md
+  - README.md
+  - "02_CMFE_사이트_셋팅지침.md"
+  - "*.md"
+  - _build
