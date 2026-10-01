@@ -29,17 +29,20 @@ PHONE_TEL = "+353830780635"
 FONTS = ("https://fonts.googleapis.com/css2?"
          "family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500"
          "&family=Plus+Jakarta+Sans:wght@400;500;600;700"
-         "&family=Noto+Sans+KR:wght@400;500;700&display=swap")
+         "&family=Noto+Sans+KR:wght@400;700&display=swap")
 # An English page carries two Korean words (the language switch) and no
 # Korean text, so it does not wait for the Korean family: those two words
 # take the system's Korean face. The 404 page is in both languages.
-FONTS_EN = FONTS.replace("&family=Noto+Sans+KR:wght@400;500;700", "")
+FONTS_EN = FONTS.replace("&family=Noto+Sans+KR:wght@400;700", "")
+# Korean is set in two weights only, 400 and 700 (QA, 1 Oct 2026: three
+# weights meant 15-19 font files and a slow first paint on a phone).
 
 # The date the copy was last checked against the canonical set and the kit,
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
 UPDATED = {"en": "1 October 2026", "ko": "2026년 10월 1일"}
+UPDATED_ISO = "2026-10-01"
 
 # Six pages and the language switch, nothing else (2026-09-30: five pages,
 # then News & archive added back when the organisation was restructured).
@@ -76,10 +79,10 @@ STR = {
         "f_record": "Take part",
         "f_connect": "Connect",
         "f_legal": "© 2026 Classical Music for Everyone · Dublin, Ireland",
-        "f_status": ("A not-for-profit community music initiative, forming a company limited by "
-                     "guarantee. Not yet a registered charity."),
+        "f_status": ("Classical Music for Everyone is a not-for-profit community music initiative, "
+                     "forming a company limited by guarantee. It is not yet a registered charity."),
         "f_updated": "Updated",
-        "f_privacy": "Privacy",
+        "f_privacy": "Privacy notice",
         "nav_label": "Main",
         "f_links": [("index.html", "Home"), ("about.html", "About"),
                     ("programmes.html", "Programmes"), ("get-involved.html", "Get involved"),
@@ -105,9 +108,10 @@ STR = {
         "f_record": "함께하기",
         "f_connect": "연락",
         "f_legal": "© 2026 Classical Music for Everyone · 아일랜드 더블린",
-        "f_status": "보증유한회사(CLG) 설립을 준비하는 비영리 공동체 음악 단체입니다. 아직 등록된 자선단체는 아닙니다.",
+        "f_status": ("Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 "
+                     "음악 단체입니다. 아직 등록된 자선단체는 아닙니다."),
         "f_updated": "갱신",
-        "f_privacy": "개인정보",
+        "f_privacy": "개인정보 처리방침",
         "nav_label": "주 메뉴",
         "f_links": [("index.html", "홈"), ("about.html", "소개"),
                     ("programmes.html", "프로그램"), ("get-involved.html", "함께하기"),
@@ -143,7 +147,7 @@ RESET_JS = ("var n=document.getElementById('nav'),b=document.querySelector('.men
 # version from the messaging guide (kit 27), then its status sentence. It used
 # to take each page's own description, so the contact page described the
 # organisation as "email, phone and where we travel to".
-ORG_DESC = ("Classical Music for Everyone brings live classical music, talks and a free recorder "
+ORG_DESC = ("Classical Music for Everyone brings live classical music, talks and a community recorder "
             "ensemble to older people, migrant communities and care settings in Dublin. It is a "
             "not-for-profit community music initiative, forming a company limited by guarantee. It "
             "is not yet a registered charity.")
@@ -203,7 +207,7 @@ SITE_NODE = """    {{
       "@id": "{site}/#website",
       "url": "{site}/",
       "name": "Classical Music for Everyone",
-      "inLanguage": "{lang}",
+      "inLanguage": ["en-IE", "ko"],
       "publisher": {{"@id": "{site}/#organisation"}}
     }}"""
 
@@ -302,9 +306,13 @@ def _relink(markup, here, root):
 def header(lang, slug):
     p, r, s = _here(slug), _root(lang, slug), STR[lang]
     rows = []
+    # a programme page (programmes/<slug>.html) sits under Programmes: the
+    # parent link is marked as the current section, not as the current page
+    section = "programmes.html" if slug.startswith("programmes/") else None
     for i, (href, label) in enumerate(NAV[lang], start=1):
-        current = ' aria-current="page"' if href == slug else ""
-        mark = '<span class="nav-mark" aria-hidden="true"></span>' if href == slug else ""
+        current = (' aria-current="page"' if href == slug else
+                   ' aria-current="true"' if href == section else "")
+        mark = '<span class="nav-mark" aria-hidden="true"></span>' if current else ""
         rows.append(f'        <li><a class="nav-link" href="{p}{href}"{current}>'
                     f'<span class="nav-n" aria-hidden="true">{i:02d}</span>{label}{mark}</a></li>')
     links = "\n".join(rows)
@@ -347,7 +355,9 @@ def footer(lang, slug="index.html"):
     <p class="footer-line">{s['tagline']}</p>
     <div class="footer-grid">
       <div>
-        <img src="{r}assets/logo-reversed.svg" alt="{s['logo_alt']}"
+        <img class="logo-screen" src="{r}assets/logo-reversed.svg" alt="{s['logo_alt']}"
+             width="109" height="42" loading="lazy" decoding="async">
+        <img class="logo-print" src="{r}assets/logo-horizontal.svg" alt="" aria-hidden="true"
              width="109" height="42" loading="lazy" decoding="async">
         <p class="footer-about">{s['footer_about']}</p>
       </div>
@@ -388,9 +398,9 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
     p, r = _here(slug), _root(lang, slug)
     sub = "" if slug == "index.html" else slug
     # the first photograph is above the fold only when it opens the page:
-    # the home hero, or the plate under an interior page's title
+    # parts.py marks that figure with data-first (the home hero, a page head)
     first = body.find("<img")
-    eager = first != -1 and ("hero-figure open" in body[:first] or "ph-figure wrap open" in body[:first])
+    eager = first != -1 and "data-first" in body[:first]
     body = _images(body, eager_first=eager)
     body = _relink(body, p, r)
     canonical = f"{SITE_URL}/" + ("" if lang == "en" else "ko/") + sub
@@ -401,11 +411,12 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
     image = f"{SITE_URL}/images/{og_image}" if og_image else f"{SITE_URL}/images/hero-outreach.jpg"
     jsonld = _graph([
         ORG_NODE.format(site=SITE_URL, org_desc=ORG_DESC, email=EMAIL, phone=PHONE_INTL),
-        SITE_NODE.format(site=SITE_URL, lang=ld_lang),
+        SITE_NODE.format(site=SITE_URL),
         PERSON_NODE.format(site=SITE_URL, email=EMAIL,
                            same_as=", ".join(f'"{u}"' for u in SOCIAL.values() if u)),
-        PAGE_NODE.format(site=SITE_URL, canonical=canonical, title=title.replace('"', "'"),
-                         desc=desc, lang=ld_lang, image=image),
+        *([] if slug == "404.html" else
+          [PAGE_NODE.format(site=SITE_URL, canonical=canonical, title=title.replace('"', "'"),
+                            desc=desc, lang=ld_lang, image=image)]),
         *extra_nodes,
     ])
     return f"""<!DOCTYPE html>
@@ -435,7 +446,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{image}">
 <meta name="author" content="Classical Music for Everyone">
-<link rel="icon" href="{r}assets/logo-icon.svg" type="image/svg+xml">
+<link rel="icon" href="{r}assets/app-icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">
 <link rel="manifest" href="{r}site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">

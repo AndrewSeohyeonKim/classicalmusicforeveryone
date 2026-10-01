@@ -5,6 +5,8 @@ rather than as a sticker. Each is a single glyph for one noun the cards
 already name; none is decorative. Rendered inside a .ico disc, aria-hidden,
 because the card's own heading carries the meaning."""
 
+import re
+
 _P = {
     "recorder": '<path d="M12 2.5v19"/><path d="M9.5 2.5h5"/><circle cx="12" cy="8" r="1"/>'
                 '<circle cx="12" cy="12" r="1"/><circle cx="12" cy="16" r="1"/>',
@@ -21,7 +23,19 @@ _P = {
     "people":   '<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.5" r="2.5"/>'
                 '<path d="M14.5 20a4.5 4.5 0 0 1 6-4.2"/>',
     "mail":     '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7.5l8.5 6 8.5-6"/>',
+    # a ticket with notched ends and its perforation: going to a concert
+    "ticket":   '<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5'
+                'h-15A1.5 1.5 0 0 1 3 16.5v-2a2.5 2.5 0 0 0 0-5z"/><path d="M15.5 6.5v2M15.5 11v2M15.5 15.5v2"/>',
 }
+
+
+def glyph(name, cls="cover-mark"):
+    """The bare drawing, sized by its container (the programme covers). Each
+    stroke is given a path length of 1, so styles.css can draw it in as the
+    cover arrives, whatever the stroke's real length."""
+    body = re.sub(r"<(path|circle|rect)\b", r'<\1 pathLength="1"', _P[name])
+    return (f'<svg class="{cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+            f'{body}</svg>')
 
 
 def icon(name):

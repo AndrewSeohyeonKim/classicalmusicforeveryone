@@ -36,8 +36,20 @@ def _mail(subject, body=""):
     return href
 
 
-_MAIL_INVITE = _mail("Inviting Classical Music for Everyone",
-                     "Organisation: \nWhere: \nThe room and a possible date: \n")
+def _fields(prompts):
+    """A mail body with one line per prompt, for the reader to fill in."""
+    return "".join(f"{x}: \n" for x in prompts)
+
+
+# One invitation, the same wherever it is offered (Outreach Concerts, Get
+# involved, Contact), so a venue gets the same questions from every door.
+INVITE_FIELDS = ["Organisation and town",
+                 "The room (day room, chapel, hall) and whether it has a piano",
+                 "Who will be listening, and roughly how many",
+                 "Dates or times that suit",
+                 "A contact name and phone number"]
+MAIL_INVITE = _mail("Inviting an outreach concert", _fields(INVITE_FIELDS))
+_MAIL_INVITE = MAIL_INVITE
 _MAIL_BOARD = _mail("Founding board: Classical Music for Everyone",
                     "The role that interests me (Chair / Treasurer / Secretary / "
                     "Safeguarding and care / Community): \nA few lines about me: \n")
@@ -83,63 +95,259 @@ RECORDERS_ALT = "Six recorders of different sizes standing in a row"
 PROGRAMMES_DATA = [
     dict(slug="getting-to-know", pillar="learn", name="Getting to Know Classical Music",
          short="Getting to Know",
+         icon="score", vocab="Getting closer · Together · My taste",
          img=("lecture-recital.jpg", 1050, 1400, "A lecture-recital in progress"),
-         line="Classical music talks for adults and older people.",
-         who="Adults and older people who like the sound of classical music and never knew where "
-             "to start. No prior knowledge needed.",
-         # kit 02 §4: a three-stage curriculum, not a talk per composer
-         what="Talk, recordings and live playing, in three stages: getting closer, experiencing "
-              "together and finding your own taste. Usually six to fourteen people.",
-         # no date is fixed (Andrew, 1 Oct 2026), so a talk is offered on request
-         where="Dublin &middot; free &middot; on request",
-         how="Email us to ask about a talk. Libraries, parishes and groups can book one.",
-         btn="Ask about a talk", mail=_mail("Getting to Know Classical Music")),
+         line="Talks with live music for people who like classical music and never knew where to start.",
+         page=dict(
+             lead="Talks with live music for people who like the sound of classical music and never "
+                  "knew where to start. You do not need to know anything beforehand.",
+             cap=None,
+             glance=[("For", "Anyone curious about classical music"),
+                     ("Where", "Dublin"),
+                     ("When", "On request"),
+                     ("What you need", "No knowledge of music")],
+             now=("On request", "No talk is scheduled at the moment. Write to us and we will plan one "
+                                "with your group."),
+             # 02 §4: three stages, in this order; 08 §1 for what each covers
+             how_h2="Three stages, from first listening to your own taste.",
+             steps=[("Getting Closer",
+                     "What classical music is, by period and by instrument, with recordings and live "
+                     "playing."),
+                    ("Experiencing Together",
+                     "Orchestras and performers, including Ireland&rsquo;s own, and the practical side: "
+                     "booking a ticket, choosing a seat."),
+                    ("Discovering My Taste",
+                     "Finding what you like, for example by hearing one piece played by five different "
+                     "pianists.")],
+             expect_h2="Before your first talk.",
+             faq=[("Do I need to know anything first?",
+                   "No. The first stage starts from the question &lsquo;what is classical music?&rsquo;, "
+                   "and each talk explains the music it plays."),
+                  ("How many people come?",
+                   "Usually six to fourteen. Six came to the first talk in January 2024; fourteen came "
+                   "in April 2025."),
+                  ("Can our group ask for a talk?",
+                   "Yes. Talks are arranged on request. Tell us who the group is, roughly how many "
+                   "people, and where you could meet.")],
+             record_h2="Talks so far.",
+             record_lead="Every talk on the record, with its date, topic and place. In December 2025 "
+                         "the group went to a concert together instead.",
+             join_h2="Ask for a talk.",
+             join_text="Write with the group, the place and dates that suit. On your own? Write anyway, "
+                       "and we will tell you when a talk is arranged.",
+             join_btn="Ask about a talk",
+             mail=_mail("Getting to Know Classical Music",
+                        _fields(["Your name", "Your group or organisation (if any)",
+                                 "Where you could meet", "Roughly how many people",
+                                 "Dates or times that suit"])),
+             mail_fields=["Your name", "Your group or organisation (if any)", "Where you could meet",
+                          "Roughly how many people", "Dates or times that suit"],
+         )),
     dict(slug="outreach-concerts", pillar="share", name="Outreach Concerts",
          short="Outreach Concerts",
+         icon="room", vocab="Day room · Chapel · Atrium",
          img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
-         line="Live music in care homes, hospitals, religious houses and community settings.",
-         who="People who cannot easily get to a concert hall, and the places that care for them.",
-         what="Thirty to sixty minutes of acoustic music in the day room, chapel or atrium. Nothing "
-              "for the audience to pay.",
-         where="Dublin, Co. Meath, Co. Wicklow, Co. Westmeath, and further by arrangement",
-         how="Tell us your room and a date. We bring the players, instruments and stands.",
-         btn="Invite a concert", mail=_mail("Inviting an outreach concert")),
-    dict(slug="recorder-ensemble", pillar="learn", name="Free Recorder Ensemble course",
-         short="Recorder Ensemble",
+         line="Live classical music in the rooms where people already are: care homes, hospitals, "
+              "parishes and community centres.",
+         page=dict(
+             lead="We bring live classical music to the rooms where people already are: care homes, "
+                  "hospitals, religious communities, parishes and community centres. We explain the "
+                  "music as we go.",
+             cap=("Outreach concert", "Christmas 2025"),
+             glance=[("For", "Care homes, hospitals, parishes and community groups"),
+                     ("Where", "Your own room: Dublin, Co. Meath, Co. Wicklow, Co. Westmeath, or further "
+                               "by arrangement"),
+                     ("When", "By arrangement"),
+                     ("What you need", "A room, a date and a contact person")],
+             now=("Taking invitations", "No concert is fixed at the moment. Write with your room and a "
+                                        "few dates that suit."),
+             how_h2="From one email to music in your room.",
+             steps=[("You tell us",
+                     "Write with the room, the date you have in mind and who will be listening."),
+                    ("We plan the music",
+                     "We choose pieces people can enjoy on first hearing, for that room and those "
+                     "listeners."),
+                    ("We come and play",
+                     "Musicians and instruments come with us. We play for thirty to sixty minutes and "
+                     "introduce each piece.")],
+             expect_h2="Before you invite us.",
+             faq=[("Who plays?",
+                   "Our founder, Andrew Seohyeon Kim, clarinettist and organist, alone or with "
+                   "musicians he invites. Some concerts are given by our Letters Ensemble."),
+                  ("Who can listen?",
+                   "Whoever is in the room: residents or patients, family and staff. No one needs to "
+                   "know the music, and there is no dress code."),
+                  ("Where have you played?",
+                   "Care homes, religious communities, parishes, a university, an HSE day service and "
+                   "a homeless hostel, in Ireland, France, the UK and Korea.")],
+             record_h2="Concerts so far.",
+             record_lead="Every outreach concert on the record, with its date, its place and the music "
+                         "we brought. The Letters Ensemble gave four of them.",
+             join_h2="Invite a concert.",
+             join_text="Write with your organisation, the room, who will be listening and some dates "
+                       "that suit. We will reply to talk it through.",
+             join_btn="Invite a concert",
+             mail=MAIL_INVITE,
+             mail_fields=INVITE_FIELDS,
+         )),
+    dict(slug="recorder-ensemble", pillar="learn", name="Community Recorder Ensemble Class",
+         short="Recorder Ensemble Class",
+         icon="recorder", vocab="First notes · Reading · Your own part",
          img=("recorders.jpg", 1343, 1400, RECORDERS_ALT),
-         line="A free course for adults who have never played, ending in a concert.",
-         who="Adults who have never played an instrument. No music reading needed.",
-         # no class size and no instrument price in public copy (06 §6, 02 §2)
-         what="A small group in a circle: a first sound in week one, your own part in the "
-              "ensemble, and a short concert for family and friends.",
-         where="Mulhuddart Community Centre, Dublin 15 &middot; Wednesday evenings, 7:00&ndash;8:00pm "
-               "&middot; free",
-         how="Email us and we will tell you how to join. We can lend you a recorder.",
-         btn="Ask about the course", mail=_mail("Recorder Ensemble course")),
+         # renamed 1 Oct 2026
+         line="A weekly class for adults who have never played: first notes, then your own part in an "
+              "ensemble.",
+         page=dict(
+             lead="A weekly class for adults who have never played. You make a first sound in week one "
+                  "and, week by week, learn to play your own part in an ensemble.",
+             cap=("Recorders", "November 2025"),
+             # the pilot ensemble on the founder's own channel; our still until play is pressed
+             video=dict(kind="youtube", id="i7skwGKWSYY", poster="recorders.jpg",
+                        cap=("The pilot ensemble", "Retired Presentation Sisters playing the recorder "
+                                                   "together. The class grew from this group.")),
+             room_h2="Where the class began.",
+             glance=[("For", "Adults who have never played an instrument"),
+                     ("Where", "Mulhuddart Community Centre, Dublin 15"),
+                     ("When", "Wednesday evenings, 7:00&ndash;8:00pm, autumn 2026"),
+                     ("What you need", "No instrument and no music reading; we can lend you a recorder")],
+             now=("Running now", "Wednesday evenings, 7:00&ndash;8:00pm, at Mulhuddart Community Centre, "
+                                 "Dublin 15."),
+             live=True,
+             how_h2="From a first note to your own part.",
+             steps=[("Your first notes",
+                     "Hold the recorder, breathe and play. You make a real sound in the first week."),
+                    ("Reading from zero",
+                     "Small steps every week: notes and fingering one at a time, with scores we make "
+                     "for the class."),
+                    ("Your own part",
+                     "The group plays in harmony, and each player has a line of their own.")],
+             expect_h2="Before your first class.",
+             faq=[("Do I need my own recorder?",
+                   "No. We can lend you one."),
+                  ("Do I need to read music?",
+                   "No. Reading starts from zero, a few notes at a time, alongside playing."),
+                  ("Where did the class come from?",
+                   "From a ten-week pilot with seven retired Presentation Sisters, who rehearsed at "
+                   "Warrenmount, Dublin 8, and gave an Easter concert at Clondalkin Lodge.")],
+             record_h2="The story so far.",
+             record_lead="How the class came about: a question at a concert in 2024, the pilot with "
+                         "seven retired Presentation Sisters, and the class in Mulhuddart.",
+             join_h2="Join the class.",
+             join_text="Never played anything? That is who the class is for. Write with your name and we "
+                       "will tell you how to join.",
+             join_btn="Ask about the class",
+             mail=_mail("Community Recorder Ensemble Class",
+                        _fields(["Your name", "A phone number (optional)",
+                                 "Have you played an instrument before?",
+                                 "Would you like to borrow a recorder?"])),
+             mail_fields=["Your name", "A phone number (optional)",
+                          "Have you played an instrument before?",
+                          "Would you like to borrow a recorder?",
+                          "Anything that would make it easier to take part (optional)"],
+         )),
     dict(slug="letters-ensemble", pillar="share", name="Letters Ensemble",
          short="Letters Ensemble",
+         icon="people", vocab="Irish · Korean · Sacred",
          img=("letters-ensemble.jpg", 1400, 1050, "The Letters Ensemble with their instruments"),
-         line="Our ensemble of Dublin-based musicians, formed in January 2024.",
-         who="Amateur players of strings, winds and more.",
-         what="Irish and Korean traditional music, sacred music and accessible arrangements, played "
-              "in community settings.",
-         where="Dublin &middot; since January 2024",
-         # still recruiting (Andrew, 1 Oct 2026)
-         how="New players are welcome. Email us with your instrument.",
-         btn="Ask about joining", mail=_mail("Joining the Letters Ensemble")),
+         line="Amateur musicians in Dublin playing Irish, Korean and sacred music in community settings "
+              "since January 2024.",
+         page=dict(
+             lead="An ensemble of amateur musicians living in Dublin, formed in January 2024. We play "
+                  "Irish and Korean traditional music, sacred music and accessible arrangements in "
+                  "community settings.",
+             cap=("Letters Ensemble", "with their instruments"),
+             glance=[("For", "Amateur players of strings, winds and more"),
+                     ("Where", "Dublin"),
+                     ("When", "Ask us for rehearsal times"),
+                     ("What you need", "An instrument you play")],
+             now=("New players welcome", "No concert date is fixed yet. Write with your instrument and "
+                                         "we will tell you when we rehearse."),
+             how_h2="Rehearse in Dublin, play where people are.",
+             steps=[("Tell us your instrument",
+                     "Write with what you play. New players are welcome."),
+                    ("Rehearse together",
+                     "We rehearse in Dublin, directed by our founder, Andrew Seohyeon Kim."),
+                    ("Play for a community",
+                     "Concerts go to religious communities, parishes and care settings, often around a "
+                     "feast day or Christmas.")],
+             expect_h2="Before you join.",
+             faq=[("What does the ensemble play?",
+                   "Pieces such as Mozart&rsquo;s Ave verum corpus, Down by the Sally Gardens, Arirang "
+                   "and When You Wish Upon a Star."),
+                  ("I stopped playing years ago. Can I join?",
+                   "Write to us. One member joined after a talk reminded them of the viola they had "
+                   "played at school."),
+                  ("How many concerts has it given?",
+                   "Four formal concerts so far, from Dalgan Park, Co. Meath, in March 2024 to "
+                   "Clondalkin Lodge at Christmas 2025.")],
+             record_h2="Concerts so far.",
+             record_lead="The ensemble&rsquo;s formal concerts on the record, with the date, occasion "
+                         "and place of each.",
+             join_h2="Play with us.",
+             join_text="Write with your instrument, roughly how long you have played and when you last "
+                       "played. We will reply with rehearsal details.",
+             join_btn="Ask about joining",
+             mail=_mail("Joining the Letters Ensemble",
+                        _fields(["Your name", "Your instrument(s)",
+                                 "How long you have played, and when you last played",
+                                 "Days and times that usually suit you"])),
+             mail_fields=["Your name", "Your instrument(s)",
+                          "How long you have played, and when you last played",
+                          "Days and times that usually suit you"],
+         )),
     dict(slug="concert-companion", pillar="learn", name="Concert Guide &amp; Companion",
          short="Concert Guide &amp; Companion",
-         img=("dalgan-hall.jpg", 1400, 1050,
-              "A hall set out with chairs and music stands before a concert, with no one there yet"),
-         line="Going to concerts together, in small groups.",
-         who="People who would not go to a concert on their own, including people new to Ireland.",
-         what="Groups of about five. We prepare beforehand, sit together during, and talk it over "
-              "after.",
-         # 08 §2 and the ledger: the outings on record are in Dublin
-         where="Dublin &middot; concerts such as the National Symphony Orchestra, the RT&Eacute; "
-               "Concert Orchestra and the NCH International Series",
-         how="Email us and we will tell you when there is an outing to join.",
-         btn="Ask about an outing", mail=_mail("Concert Guide & Companion")),
+         icon="ticket", vocab="Before · During · After",
+         img=("proms-hall.jpg", 1400, 933,
+              "A full Royal Albert Hall during a BBC Prom, seen from high in the audience: the orchestra on a lit stage, beams of light and the acoustic discs overhead"),
+         line="Going to concerts in small groups, with preparation before and a conversation after.",
+         page=dict(
+             lead="For people who would rather not go to a concert alone. A small group prepares "
+                  "beforehand, goes together and talks it over afterwards.",
+             # the founder's own photograph from the audience at the BBC Proms; no group trip to the
+             # Proms is on the record, so the caption says whose view it is and gives no year
+             cap=("BBC Proms, Royal Albert Hall", "London · seen from the audience by our founder"),
+             room_h2="The hall, from the seats.",
+             glance=[("For", "Anyone who would rather not go to a concert alone"),
+                     ("Where", "Concert halls in Dublin"),
+                     ("When", "When there is an outing; we will email you"),
+                     ("What you need", "No knowledge of music; we prepare together first")],
+             now=("Next outing by email", "No outing is planned at the moment. Write to us and we will "
+                                          "tell you when there is one."),
+             how_h2="Before, during and after the concert.",
+             steps=[("Prepare beforehand",
+                     "We choose a concert in Dublin and prepare together: what the music is, and what "
+                     "happens in the hall."),
+                    ("Go as a group",
+                     "A group of about five goes together, with guidance during the concert."),
+                    ("Talk it over",
+                     "Afterwards we talk about what we heard. There is no wrong answer.")],
+             expect_h2="Before your first outing.",
+             faq=[("Which concerts have you suggested?",
+                   "The NCH International Series, the TU Dublin Philharmonic, the RT&Eacute; Concert "
+                   "Orchestra, the RIAM piano series and the National Symphony Orchestra."),
+                  ("How big is a group?",
+                   "About five. In December 2025 a group of six went together to a concert at the "
+                   "National Concert Hall."),
+                  ("New to Ireland. Is this for me?",
+                   "Yes. The programme is for anyone who would not go alone, including people new to "
+                   "Ireland. We work in English and Korean.")],
+             record_h2="Concerts suggested so far.",
+             record_lead="Concerts we introduced to participants, with group attendance organised, and "
+                         "the December 2025 concert we went to together.",
+             join_h2="Join an outing.",
+             join_text="Write with your name and the days and times that suit you. We will tell you when "
+                       "there is an outing to join.",
+             join_btn="Ask about an outing",
+             mail=_mail("Concert Guide & Companion",
+                        _fields(["Your name", "Days and times that suit you",
+                                 "Music you like, or would like to try (optional)",
+                                 "Language you prefer: English or Korean"])),
+             mail_fields=["Your name", "Days and times that suit you",
+                          "Music you like, or would like to try (optional)",
+                          "Anything we should check about access (optional)",
+                          "Language you prefer: English or Korean"],
+         )),
 ]
 
 
@@ -152,45 +360,45 @@ HOME = dict(
         eyebrow="Community music · Dublin, Ireland",
         title=["Classical music,", '<span class="for">for </span><em>Everyone.</em>'],
         master="Bringing classical music where it&rsquo;s needed!",
-        # kit 27: the 25-word version, then how we work
+        # kit 27: the 25-word version (with the class's new name), then how we work
         lead='<span class="brandname">Classical Music for Everyone</span> brings live classical music, '
-             "talks and a free recorder ensemble to older people, migrant communities and care "
+             "talks and a community recorder ensemble to older people, migrant communities and care "
              "settings in Dublin. We explain the music as we go, and we invite people to play as "
              "well as listen.",
-        # one action on the first screen; the three ways in follow under it
         cta=("get-involved.html", "Get involved"),
         more=("#programmes", "See what we do"),
         img=("hero-outreach.jpg", 1800, 1350,
              "The Letters Ensemble and their conductor playing a St Patrick&rsquo;s Day concert in a hall"),
         cap=("Letters Ensemble", "St Patrick&rsquo;s Day concert"),
     ),
-    strip_label="Three ways in",
-    strip=[
-        ("get-involved.html#invite", "Venues", "Bring a concert to your place",
-         "Care homes, hospitals, libraries and parishes: tell us your room and a date.",
-         "Invite us", False),
-        ("get-involved.html#play", "Musicians", "Perform with us",
-         "From 2027 we plan paid, mentored performances. Expressions of interest are open now.",
-         "CMFE Artists", False),
-        ("get-involved.html#board", "Volunteers", "Help us build it",
-         "We are forming our first board: five volunteer roles.", "The roles", True),
-    ],
+    # the ways in, as the contents line of a programme (no boxes, no tint):
+    # taking part comes first, because most visitors come to join something
+    ways_label="Ways in",
+    ways=[("programmes.html", "Take part", "Join a talk, the class, the ensemble or an outing",
+           "The programmes"),
+          ("get-involved.html#invite", "Venues", "Bring a concert to your place", "Invite us"),
+          ("get-involved.html#play", "Musicians", "Perform with us, from 2027", "Tell us about you"),
+          ("get-involved.html#board", "Volunteers", "Join the founding board", "The five roles")],
     progs=dict(
         label="What we do",
         h2="Five programmes.",
-        lead="Three help people listen and play. Two take live music out to the places where "
-             "people already are.",
+        lead="Three help people listen and play. Two take live music out to the places where people "
+             "already are.",
         # kit 27, message 3: a plan, said as a plan, with the one thing open now
         artists='From 2027 we plan paid, mentored performances for emerging musicians, as CMFE '
                 'Artists. <a class="link" href="get-involved.html#play">Expressions of interest are '
                 "open now</a>.",
     ),
+    # kit 27 ①, the opening of the one-page case, set in three parts so the
+    # answer stands out; Ireland rather than Dublin (Andrew, 1 Oct 2026). It
+    # describes the need, not our reach: never "across Ireland".
     why=dict(
         label="Why we exist",
-        # kit 27 ①, the opening of the one-page case
-        text="Many people in Dublin never get to a concert. Some live in a nursing home or rarely "
-             "leave the house. Some are new to Ireland and don&rsquo;t know where to begin. So we "
-             "go to them.",
+        premise="Many people in Ireland never get to a concert.",
+        reasons=["Some live in a nursing home.",
+                 "Some rarely leave the house.",
+                 "Some are new to the country and don&rsquo;t know where to begin."],
+        resolve="So we go to <em>them.</em>",
         link="About us",
     ),
     numbers=dict(
@@ -199,24 +407,22 @@ HOME = dict(
         figs=[(40, "sessions and performances", "since 2023", True),
               (5, "programmes, in Learning and Sharing", "as of October 2026", False),
               (4, "countries: Ireland, France, the UK and Korea", "2023 – 2025", False)],
+        forty=dict(aria="The {n} talks and performances on the record to August 2026, one square each: "
+                        "{talks} talks and {perf} performances.",
+                   talks="Talk ({n})", perf="Performance ({n})",
+                   period="On the record to August 2026, one square each"),
         # kit 27: a selection of the founder, said as such
         note="In 2026 South Dublin County Council&rsquo;s Arts Office selected our founder for South "
              'Dublin Live. <a class="link" href="news.html#record">See the record, month by month</a>',
     ),
-    bleed=dict(
-        img=("tuh-atrium.jpg", 1400, 1052, TUH_CHAPEL_ALT),
-        cap=("Tallaght University Hospital", "August 2026 · photo: Tallaght University Hospital"),
-    ),
     now=dict(
         img=("recorders.jpg", 1343, 1400, RECORDERS_ALT),
         label="Now running",
-        tag="Wednesday evenings",
-        h2="Free Recorder Ensemble course",
+        tag="Running now",
         facts=[("Where", "Mulhuddart Community Centre, Dublin 15"),
                ("When", "Wednesday evenings, 7:00&ndash;8:00pm"),
-               ("Cost", "Free. We can lend you a recorder")],
-        href="programmes.html#recorder-ensemble",
-        btn="About the course",
+               ("For", "Adults who have never played. We can lend you a recorder")],
+        btn="About the class",
     ),
 )
 
@@ -226,6 +432,7 @@ HOME = dict(
 # ---------------------------------------------------------------------------
 
 ABOUT_T = dict(
+    glance_sr="At a glance",
     head=dict(
         eyebrow="About us",
         title=["Why we exist."],
@@ -252,14 +459,17 @@ ABOUT_T = dict(
               "in Dublin; six people came to the first talk.",
               "By August 2026 there were forty recorded talks and performances, in care homes, "
               "religious communities, parishes, a hospital, a homeless hostel and community centres. "
-              "In 2026 a pilot recorder ensemble with seven retired Presentation Sisters led to a free "
-              "course at Mulhuddart, and South Dublin County Council&rsquo;s Arts Office selected our "
+              "In 2026 a pilot recorder ensemble with seven retired Presentation Sisters led to a community "
+              "class at Mulhuddart, and South Dublin County Council&rsquo;s Arts Office selected our "
               "founder for South Dublin Live 2026."],
         link="The full timeline",
     ),
     founder=dict(
-        img=("founder-speaking.jpg", 1050, 1400,
-             "Andrew Seohyeon Kim speaking at a lecture-recital with a microphone"),
+        # the founder playing, not speaking: the lecture photograph showed a
+        # projected slide with other recognisable people (art direction, 1 Oct 2026)
+        img=("founder-playing.jpg", 1050, 1400,
+             "Andrew Seohyeon Kim playing the clarinet in the chapel of Tallaght University Hospital"),
+        cap=("Tallaght University Hospital", "August 2026 · photo: Tallaght University Hospital"),
         label="The founder",
         name="Andrew Seohyeon Kim",
         role="Founder &amp; Artistic Director",
@@ -271,7 +481,7 @@ ABOUT_T = dict(
     ),
     run=dict(
         label="How we are run",
-        h2="A not-for-profit initiative.",
+        h2="A not&#8209;for&#8209;profit initiative.",
         # kit 27: the status sentence, exactly as written
         lead=STATUS,
         cols=[("Who decides", "Once the company is registered, an independent volunteer board will "
@@ -293,13 +503,39 @@ ABOUT_T = dict(
         # 08 §2: concerts introduced to participants, with group attendance organised
         lead="We have also introduced participants to concerts at the National Concert Hall and "
              "organised group attendance.",
-        names=["Tallaght University Hospital", "Rua Red, Tallaght", "Clondalkin Lodge",
-               "Warrenmount, Dublin 8", "Mulhuddart Community Centre",
-               "Missionary Sisters of St Columban, Co. Wicklow", "Dalgan Park, Co. Meath",
-               "Dysart Parish, Co. Westmeath", "HSE EVE Goirtin Hub", "Morning Star Hostel",
-               "TU Dublin", "Our Lady of Dolours, Dolphin&rsquo;s Barn",
-               "Church of the Three Patrons, Rathgar", "Missions &Eacute;trang&egrave;res de Paris",
-               "London Korean Catholic Church", "Gwandukjeong Martyrs Memorial Centre, Daegu"],
+        # every name is on the record (content review, 1 Oct 2026); grouped by
+        # the kind of place, each with where it is; counts are derived
+        groups=[
+            ("Hospital and care", [
+                ("Tallaght University Hospital", "Tallaght, Dublin"),
+                ("Clondalkin Lodge", "Dublin"),
+                ("HSE EVE Goirtin Hub", "Dublin 7"),
+                ("Morning Star Hostel", "Dublin 7")]),
+            ("Religious communities", [
+                ("Missionary Sisters of St Columban", "Magheramore, Co. Wicklow"),
+                ("Dalgan Park", "Co. Meath"),
+                ("Warrenmount", "Dublin 8")]),
+            ("Parishes", [
+                ("Our Lady of Dolours", "Dolphin&rsquo;s Barn, Dublin"),
+                ("Church of the Three Patrons", "Rathgar, Dublin 6"),
+                ("Dysart Parish", "Co. Westmeath")]),
+            ("Arts, education and community", [
+                ("Rua Red", "Tallaght, Dublin"),
+                ("TU Dublin", "Grangegorman, Dublin 7"),
+                ("Mulhuddart Community Centre", "Dublin 15")]),
+            ("Abroad", [
+                ("Missions &Eacute;trang&egrave;res de Paris", "Paris, France"),
+                ("London Korean Catholic Church", "London, United Kingdom"),
+                ("Gwandukjeong Martyrs Memorial Centre", "Daegu, Korea")]),
+        ],
+        map=dict(
+            labels={"dublin": ("Dublin", None), "meath": ("Co. Meath", "Dalgan Park"),
+                    "wicklow": ("Co. Wicklow", "Magheramore"), "westmeath": ("Co. Westmeath", "Dysart")},
+            count="{n} places",
+            aria="A map of the island of Ireland with the places in Ireland where we have played and "
+                 "taught: ten in Dublin, and one each in Co. Meath, Co. Wicklow and Co. Westmeath.",
+            caption="In Ireland: Dublin and three counties. Abroad: France, the United Kingdom and Korea.",
+        ),
     ),
     identity=dict(
         label="The name",
@@ -320,29 +556,15 @@ PROGRAMMES_T = dict(
     head=dict(
         eyebrow="Programmes",
         title=["Our programmes."],
-        lead="Talks, concerts where people live, a free class, an ensemble, and company at the "
-             "concert hall.",
-        img=("tuh-trio.jpg", 1400, 787,
-             "Soprano, piano and clarinet in the atrium of Tallaght University Hospital"),
-        cap=("Tallaght University Hospital", "August 2026 · photo: Tallaght University Hospital"),
+        lead="Three help people listen and play. Two take live music out to the places where people "
+             "already are. Each has its own page: how it works, what is on now and what it has done.",
     ),
-    toc_label="The five programmes",
-    fact_labels=("For", "What happens", "Where and when", "How to join"),
+    list_sr="The five programmes",
+    # kit 27, message 3: a plan, said as a plan, with the one thing open now
     artists=dict(
-        img=("ruared-trio.jpg", 1400, 933, "Clarinet, soprano and piano taking a bow on the Rua Red stage"),
-        cap=("Rua Red, Tallaght", "South Dublin Live 2026 · photo: Ben Ryan / SDCC"),
-        label="From 2027",
-        lead="We plan paid, mentored performances for emerging musicians, in care homes, hospitals, "
-             "libraries and community settings.",
-        facts=[("For", "Student, emerging, amateur and Korean musicians, alongside professional "
-                       "players."),
-               ("How it will work", "Professional, student and emerging players will be paid, in "
-                                    "line with the Arts Council&rsquo;s Paying the Artist policy; "
-                                    "amateur players will receive expenses. Student and emerging "
-                                    "players will go with a mentor on their first visits."),
-               ("Now", "Expressions of interest are open. We plan to open the first call, with "
-                       "its selection criteria, in 2027.")],
-        btn="Tell us about yourself",
+        label="For musicians",
+        text='CMFE Artists, planned for 2027: paid, mentored performances for emerging musicians. '
+             '<a class="link" href="get-involved.html#play">Expressions of interest are open now</a>.',
     ),
 )
 
@@ -359,24 +581,25 @@ GET_INVOLVED_T = dict(
         title=["Ways to get involved."],
         lead="Bring a concert to your place, tell us you would like to perform, or join the "
              "founding board. One line by email is enough to start.",
-        img=("church-aisle.jpg", 1050, 1400,
-             "A clarinet held up before the altar of a parish church in Co. Westmeath"),
-        cap=("Dysart, Co. Westmeath", "2025"),
     ),
-    ways=[("invite", "Bring a concert to your place", "Care homes, hospitals, parishes, community centres"),
-          ("play", "Perform with us", "CMFE Artists, for musicians, planned for 2027"),
-          ("board", "Join the founding board", "Five volunteer roles")],
+    ways_label="Three ways",
+    ways=[("#invite", "Venues", "Bring a concert to your place", "How it works"),
+          ("#play", "Musicians", "Perform with us, from 2027", "What to send"),
+          ("#board", "Volunteers", "Join the founding board", "The five roles")],
+    # the address and phone under each mail button
+    alt=dict(or_write="Or write to", email=EMAIL, tel="+353 83 078 0635", tel_href="+353830780635"),
     invite=dict(
         label="Partner venues",
         h2="Bring a concert to your place.",
         # kit 02 §2 and 29: what a host gives, and what we can promise
         text="Care homes, hospitals, libraries, parishes and community centres. Tell us your room "
              "and a date, and we bring the players, instruments, stands and programme. A community "
-             "centre can also host a free beginners&rsquo; course: you give a warm room once a week, "
-             "a contact and help letting local people know, and we bring the rest as funding allows.",
-        href=_MAIL_INVITE, btn="Invite us",
-        img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
-        cap=("Outreach concert", "Christmas"),
+             "centre can also host a beginners&rsquo; recorder class: you give a warm room once a "
+             "week, a contact and help letting local people know, and we bring the rest as funding "
+             "allows.",
+        # the same three steps as the Outreach Concerts page
+        steps=[s for s in PROGRAMMES_DATA[1]["page"]["steps"]],
+        href=MAIL_INVITE, btn="Invite us", more="About outreach concerts",
     ),
     play=dict(
         label="CMFE Artists",
@@ -384,7 +607,7 @@ GET_INVOLVED_T = dict(
         lead="For student, emerging, amateur and Korean musicians, and professional players who "
              "want to play where music is needed. We plan to begin CMFE Artists in 2027; tell us "
              "about yourself now and we will write when the first call opens. Amateur players can "
-             'join the <a class="link" href="programmes.html#letters-ensemble">Letters Ensemble</a> now.',
+             'join the <a class="link" href="programmes/letters-ensemble.html">Letters Ensemble</a> now.',
         sub="What to send us",
         fields=EOI_FIELDS,
         note="Professional, student and emerging players will be paid; amateur players will receive "
@@ -418,8 +641,34 @@ if OPEN_GIVING:
     import giving_en
     giving_en.apply(globals())
 
-INDEX = P.home(HOME, PROGRAMMES_DATA, PILLARS)
-ABOUT = P.about(ABOUT_T)
+# ---------------------------------------------------------------------------
+# PROGRAMME PAGES (programmes/<slug>.html), from 1 October 2026. The copy for
+# each page is the `page` dict of its programme above; these are the labels
+# the five pages share. The record on each page comes from ledger.py.
+# ---------------------------------------------------------------------------
+
+PROGRAMME_T = dict(
+    crumbs_label="Breadcrumb", crumb="Programmes",
+    how_label="How it works", expect_label="What to expect", record_label="On the record",
+    join_label="Take part", others_label="The other programmes", all_label="All five programmes",
+    room_label="In the room", room_h2="Where it happens.",
+    how_join="How to take part",
+    video_h="Watch", video_label="Video: {name}", play="Play the video", watch="Watch on {service}",
+    people="{n} people",
+    mail_hint="One line is enough. If it helps, tell us:",
+    or_write="Or write to", email=EMAIL, tel="+353 83 078 0635", tel_href="+353830780635",
+    strip=dict(aria="{n} sessions on the record for this programme, shown month by month from 2023 to 2026.",
+               learn="Learning", share="Sharing", note="Each mark is one session; a bar spans several months."),
+    att=dict(h3="How many came", lead="Attendance at each talk where it was recorded.",
+             aria="Attendance at {n} talks where it was recorded: from {lo} to {hi} people.",
+             people="{n} people"),
+)
+
+PROGRAMME_PAGES = {_p["slug"]: P.programme_page(PROGRAMME_T, _i, _p, PROGRAMMES_DATA, PILLARS, L)
+                   for _i, _p in enumerate(PROGRAMMES_DATA)}
+
+INDEX = P.home(HOME, PROGRAMMES_DATA, PILLARS, L)
+ABOUT = P.about(ABOUT_T, L)
 PROGRAMMES = P.programmes(PROGRAMMES_T, PROGRAMMES_DATA, PILLARS)
 GET_INVOLVED = P.get_involved(GET_INVOLVED_T, _ico)
 
@@ -436,18 +685,15 @@ NEWS_T = dict(
         lead="40+ sessions and performances since 2023. On the record to August 2026: seventeen "
              "talks, twenty outreach performances, one pilot concert and two concerts for South "
              "Dublin Live 2026.",
-        img=("quartet-hall.jpg", 1400, 791,
-             "A string quartet and its conductor playing in a hall decorated for St Patrick&rsquo;s Day"),
-        cap=("Letters Ensemble", "St Patrick&rsquo;s Day concert"),
     ),
     latest_sr="Latest",
     latest=[
         ("Autumn 2026", "Forming a founding board",
          "We are forming a company limited by guarantee and looking for volunteer directors.",
          "get-involved.html#board", "The roles"),
-        ("Autumn 2026", "Free Recorder Ensemble course",
+        ("Autumn 2026", "Community Recorder Ensemble Class",
          "Running at Mulhuddart Community Centre on Wednesday evenings.",
-         "programmes.html#recorder-ensemble", "About the course"),
+         "programmes/recorder-ensemble.html", "About the class"),
         ("August 2026", "South Dublin Live 2026",
          "Our founder was selected by South Dublin County Council&rsquo;s Arts Office: two concerts, "
          "at Tallaght University Hospital and at Rua Red, Tallaght.",
@@ -493,9 +739,9 @@ NEWS_T = dict(
              "Our founder was selected for South Dublin Live 2026 by South Dublin County "
              "Council&rsquo;s Arts Office: two concerts, at Tallaght University Hospital and Rua Red. "
              "The pilot group concludes the same month."),
-            ("Autumn 2026", "The course opens to the public",
-             "The Free Recorder Ensemble course runs at Mulhuddart Community Centre on Wednesday "
-             "evenings, free."),
+            ("Autumn 2026", "The class opens to the public",
+             "The Community Recorder Ensemble Class runs at Mulhuddart Community Centre on "
+             "Wednesday evenings."),
         ],
     ),
     gallery=dict(
@@ -503,35 +749,39 @@ NEWS_T = dict(
         h2="In the room.",
         lead="We show performers, instruments and empty rooms. Anyone else who can be recognised "
              "appears only with their written consent.",
+        # newest first, a contact sheet: every frame at its own shape, with a true caption
         rows=[
-            (("hero-outreach.jpg", 1800, 1350,
-              "The Letters Ensemble and their conductor playing a St Patrick&rsquo;s Day concert in a hall"),
-             "Letters Ensemble · St Patrick&rsquo;s Day concert"),
+            (("tuh-trio.jpg", 1236, 787,
+              "Soprano, piano and clarinet in the atrium of Tallaght University Hospital"),
+             "Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital"),
+            (("tuh-atrium.jpg", 1400, 1052, TUH_CHAPEL_ALT),
+             "Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital"),
+            (("tuh-haegeum.jpg", 1400, 934, "A haegeum player performing in a hospital atrium"),
+             "Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital"),
+            (("ruared-trio.jpg", 1400, 933, "Clarinet, soprano and piano taking a bow on the Rua Red stage"),
+             "Rua Red, Tallaght · August 2026 · photo: Ben Ryan / SDCC"),
             (("care-christmas.jpg", 1400, 1050, CARE_ALT),
-             "Outreach concert · Christmas"),
+             "Outreach concert · Christmas 2025"),
+            (("score-stand.jpg", 1050, 1400, "A string trio rehearsing behind a part on a music stand"),
+             "Before the Christmas concert · December 2025"),
+            (("recorders.jpg", 1343, 1400, RECORDERS_ALT),
+             "Recorders · November 2025"),
+            (("church-aisle.jpg", 1050, 1400,
+              "A clarinet held up before the altar of a parish church in Co. Westmeath"),
+             "Dysart, Co. Westmeath · 2025"),
             (("columban-ensemble.jpg", 1400, 1050,
               "Four string players of the Letters Ensemble and their conductor in a bright yellow room"),
              "Missionary Sisters of St Columban, Co. Wicklow · November 2024"),
             (("dalgan-hall.jpg", 1400, 1050,
               "A hall set out with chairs and music stands before a concert, with no one there yet"),
              "Dalgan Park, Co. Meath · March 2024"),
-            (("church-aisle.jpg", 1050, 1400,
-              "A clarinet held up before the altar of a parish church in Co. Westmeath"),
-             "Dysart, Co. Westmeath · 2025"),
-            (("score-stand.jpg", 1050, 1400, "A string trio rehearsing behind a part on a music stand"),
-             "Before the Christmas concert · December 2025"),
-            (("recorders.jpg", 1343, 1400, RECORDERS_ALT),
-             "Recorders · November 2025"),
-            (("tuh-trio.jpg", 1400, 787,
-              "Soprano, piano and clarinet in the atrium of Tallaght University Hospital"),
-             "Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital"),
-            (("ruared-trio.jpg", 1400, 933, "Clarinet, soprano and piano taking a bow on the Rua Red stage"),
-             "Rua Red, Tallaght · August 2026 · photo: Ben Ryan / SDCC"),
+            (("hero-outreach.jpg", 1800, 1350,
+              "The Letters Ensemble and their conductor playing a St Patrick&rsquo;s Day concert in a hall"),
+             "Letters Ensemble · St Patrick&rsquo;s Day concert"),
             (("letters-ensemble.jpg", 1400, 1050, "The Letters Ensemble with their instruments"),
              "Letters Ensemble"),
-            (("two-clarinets.jpg", 1050, 1400, "Two clarinets resting on the lid of a piano"), None),
-            (("tuh-haegeum.jpg", 1400, 934, "A haegeum player performing in a hospital atrium"),
-             "Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital"),
+            (("two-clarinets.jpg", 1050, 1400, "Two clarinets resting on the lid of a piano"),
+             "Instruments · two clarinets"),
         ],
     ),
 )
@@ -547,28 +797,44 @@ CONTACT_T = dict(
     head=dict(
         eyebrow="Contact",
         title=["Write to us."],
-        lead="We answer every message. One line is enough.",
+        lead="Choose what your message is about, or simply write. One line is enough, and we answer "
+             "every message.",
     ),
-    email_label="Email",
+    # what is it about? each row opens an email with its subject (and, for an
+    # invitation, the same questions as everywhere else); the address itself
+    # is quiet, underneath
+    topics_h2="What is it about?",
+    topics=[(_mail("Taking part"), "Taking part", "A talk, the class, the Letters Ensemble or an outing",
+             "Write"),
+            (MAIL_INVITE, "Venues", "Inviting a concert to your place", "Write"),
+            (_MAIL_EOI, "Musicians", "Performing with us, from 2027", "Write"),
+            (_MAIL_BOARD, "Founding board", "One of the five volunteer roles", "Write"),
+            (_mail("Personal data request"), "Your details", "Seeing, correcting or deleting what we hold",
+             "Write"),
+            (_mail("Enquiry: Classical Music for Everyone"), "Anything else",
+             "Questions, ideas, press or anything not on this list", "Write")],
+    direct_label="Or write directly",
     email=EMAIL,
     email_href=_mail("Enquiry: Classical Music for Everyone"),
-    btn="Email us",
     tel="+353 83 078 0635",
-    tel_href="tel:+353830780635",
+    tel_href="+353830780635",
     details_label="Details",
-    details_h2="Where we are.",
+    details_h2="Email, phone and where we travel.",
     # Insurance: the certificate is in hand (1 Oct 2026). Garda vetting is not
     # mentioned until it is complete.
-    details=[("Based in", "Dublin, Ireland"),
+    details=[("Email", f'<a class="link" href="mailto:{EMAIL}">{EMAIL}</a>'),
+             ("Phone", '<a class="link" href="tel:+353830780635">+353 83 078 0635</a>'),
+             ("Based in", "Dublin, Ireland"),
              ("We travel to", "Dublin, Co. Meath, Co. Wicklow, Co. Westmeath, and further by arrangement"),
              ("Languages", 'English · <span lang="ko">한국어</span>'),
              ("Insurance", "Public liability insurance. We show the certificate to a venue on request."),
              ("Who answers", "Andrew Seohyeon Kim, Founder &amp; Artistic Director")],
     privacy=dict(
-        label="Privacy",
-        h2="Your details.",
-        intro="This website has no forms, no cookies, no analytics and no advertising. Last updated "
-              "1 October 2026.",
+        label="Privacy notice",
+        h2="How we look after your details.",
+        intro="What we do with the details you send us, and your rights. Last updated 1 October 2026.",
+        # what this website does not have, said once and plainly
+        none=[("Forms", "None"), ("Cookies", "None of ours"), ("Analytics", "None"), ("Advertising", "None")],
         blocks=[
             ("Who is responsible", '<span class="brandname">Classical Music for Everyone</span>, a '
                                    "not-for-profit community music initiative in Dublin. For anything "
@@ -580,9 +846,11 @@ CONTACT_T = dict(
                                   "is optional."),
             ("Who else handles it", "This site is hosted by GitHub, which records visitors&rsquo; IP "
                                     "addresses for security. Its typefaces come from Google Fonts, which "
-                                    "also receives your IP address, and our email runs on Google. These "
-                                    "services may handle data outside the European Economic Area under "
-                                    "safeguards approved by the EU."),
+                                    "also receives your IP address, and our email runs on Google. The class "
+                                    "page has a video from YouTube: nothing loads from YouTube until you "
+                                    "press play, and then YouTube (Google) receives your IP address and may "
+                                    "set its own cookies. These services may handle data outside the "
+                                    "European Economic Area under safeguards approved by the EU."),
             ("Your rights", "You can ask to see, correct or delete what we hold about you, to restrict "
                             "or object to its use, or for a copy, at any time. If you are not satisfied "
                             'with our answer, you can complain to the <a class="link" '

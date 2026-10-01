@@ -40,26 +40,36 @@ For a full-bleed band, put the `<img>` directly inside `<section class="band-pho
 with `alt=""` (it is decorative; the heading carries the meaning) and let the
 gradient do the work.
 
-## Current set (2026-10-01)
+## Current set (2026-10-01, evening)
+
+Since the evening of 1 October 2026 the site leans on drawn things more than on photographs
+(Andrew: too many photographs, several unrelated to the text beside them). The five programmes are
+shown by typographic **covers** (`parts.cover`), not photographs; each programme's own page shows its
+one photograph under "In the room". Outside the News contact sheet there are now four photographs.
 
 | File | Used on | Shows |
 |---|---|---|
-| `hero-outreach.jpg` | Home hero · News gallery | The Letters Ensemble and their conductor, St Patrick's Day concert |
-| `lecture-recital.jpg` | Programme 01 (home card, Programmes block) | A lecture-recital in progress |
-| `care-christmas.jpg` | Programme 02 · Get involved `#invite` · News gallery | A clarinettist and three string players in a care setting at Christmas (20 Dec 2025) |
-| `recorders.jpg` | Programme 03 · Home "Now running" · News gallery | Six recorders of different sizes in a row, Nov 2025. Cropped on 2026-10-01 from the original (`무제 폴더/IMG_8160.JPG`, 1343×1400) to the instruments alone: the full frame showed a private room, with a laptop, a backpack and bags |
-| `letters-ensemble.jpg` | Programme 04 · News gallery | The Letters Ensemble with their instruments |
-| `dalgan-hall.jpg` | Programme 05 (Concert Guide & Companion) · News gallery | The hall at Dalgan Park set for a concert, 16 Mar 2024; no people |
-| `tuh-atrium.jpg` | Home full-bleed band | Clarinet, haegeum and keyboard in the **chapel** at Tallaght University Hospital, 20 Aug 2026 (the hospital set had an atrium half and a chapel half; the file name is older than that check) · photo: Tallaght University Hospital |
-| `columban-ensemble.jpg` | About page head · News gallery | Four string players of the Letters Ensemble and their conductor, Missionary Sisters of St Columban, 23 Nov 2024 |
-| `founder-speaking.jpg` | About `#founder` | The founder speaking at a lecture-recital (portrait, 4:5) |
-| `tuh-trio.jpg` | Programmes page head · News gallery | Soprano, piano and clarinet in the TUH atrium · photo: Tallaght University Hospital |
-| `ruared-trio.jpg` | Programmes `#cmfe-artists` · News gallery | The trio taking a bow at Rua Red · photo: Ben Ryan / SDCC |
-| `church-aisle.jpg` | Get involved page head · News gallery | A clarinet held up before the altar, Dysart parish church, Good Friday 2025; no people. Portrait (1050×1400); the page head shows a 2:1 band of it |
-| `quartet-hall.jpg` | News page head | A string quartet and its conductor in a hall decorated for St Patrick's Day |
-| `score-stand.jpg` | News gallery | A string trio rehearsing behind a part on a stand, Dec 2025 (caption names no venue). Portrait (1050×1400) |
-| `two-clarinets.jpg` | News gallery | Two clarinets on a piano lid. Portrait (1050×1400) |
+| `hero-outreach.jpg` | Home hero · News gallery | The Letters Ensemble and their conductor, St Patrick's Day concert (one non-performer at the back right, seen from behind and not recognisable; kept) |
+| `recorders.jpg` | Home "Now running" · News gallery · the still behind the video on the Community Recorder Ensemble Class page | Six recorders of different sizes in a row, Nov 2025 (cropped to the instruments; see below) |
+| `columban-ensemble.jpg` | About page head (3:2 over the text columns) · News gallery | Four string players of the Letters Ensemble and their conductor, Missionary Sisters of St Columban, 23 Nov 2024 |
+| `founder-playing.jpg` | About `#founder` | The founder playing the clarinet in the chapel of Tallaght University Hospital, 20 Aug 2026 (from the TUH set; added 1 Oct 2026 through `add-photo.sh`, metadata stripped) · photo: Tallaght University Hospital |
+| `lecture-recital.jpg` | Getting to Know Classical Music page | A lecture-recital in progress |
+| `care-christmas.jpg` | Outreach Concerts page · News gallery | A clarinettist and three string players in a care setting at Christmas (20 Dec 2025) |
+| `letters-ensemble.jpg` | Letters Ensemble page · News gallery | The Letters Ensemble with their instruments |
+| `dalgan-hall.jpg` | News gallery | The hall at Dalgan Park set for a concert, 16 Mar 2024; no people |
+| `proms-hall.jpg` | Concert Guide & Companion page ("In the room") and its share card | A full Royal Albert Hall during a BBC Prom, from high in the audience. A frame of the founder's own phone video (it sits in the BBC Proms lecture deck), cropped to the hall, stage and distant crowd so that no one close by is in it; added 1 Oct 2026 through `add-photo.sh`, metadata stripped. The year is not known, so the caption gives none. It is the founder's own view, not a group outing, and the caption says so |
+| `tuh-trio.jpg` | News gallery · Programmes share card | Soprano, piano and clarinet in the TUH atrium. **Cropped on 1 Oct 2026 (1236×787)** to take out the back of an audience member's head at the bottom right · photo: Tallaght University Hospital |
+| `tuh-atrium.jpg` | News gallery | Clarinet, haegeum and keyboard in the **chapel** at Tallaght University Hospital, 20 Aug 2026 · photo: Tallaght University Hospital |
 | `tuh-haegeum.jpg` | News gallery | A haegeum player in the TUH atrium · photo: Tallaght University Hospital |
+| `ruared-trio.jpg` | News gallery · News share card | The trio taking a bow at Rua Red · photo: Ben Ryan / SDCC |
+| `church-aisle.jpg` | News gallery | A clarinet held up before the altar, Dysart parish church, Good Friday 2025; no people |
+| `score-stand.jpg` | News gallery | A string trio rehearsing behind a part on a stand, Dec 2025 |
+| `two-clarinets.jpg` | News gallery | Two clarinets on a piano lid (caption: "Instruments · two clarinets") |
+
+The News gallery shows every frame at its own shape (portrait stays portrait), newest first.
+
+**Retired on 1 October 2026 (evening)** to `_retired/images/`: `founder-speaking.jpg` (the projected
+slide behind the founder shows other recognisable people) and `quartet-hall.jpg` (no longer used).
 
 **Retired on 2026-10-01 and moved out of this folder** to `_retired/images/`, which is neither
 published nor committed (`.gitignore`): a file in `images/` can be opened by anyone who guesses
@@ -85,9 +95,10 @@ instruments and empty rooms only. Every frame with an identifiable participant o
 left out, however good the picture. Where a caption names an event, the photograph's capture date
 matches a row in `_build/ledger.py`; where it does not match a row, the caption names no event.
 
-**Some components set the shape themselves**: the home programme cards (4:5), the interior page
-heads (2:1, 4:3 on a phone), the full-bleed band and the gallery (3:2). There the `.photo` wrapper
-carries no ratio class; everywhere else it does.
+**Some components set the shape themselves**: the interior page heads (3:2, over the text columns)
+and the News gallery (each photograph at its own shape). "In the room" on a programme page uses 4:5
+for a portrait and 3:2 for a landscape. There the `.photo` wrapper carries no ratio class, or the one
+the component chooses; everywhere else it does.
 
 The South Dublin Live photographs come from two sources and both are credited where a caption
 exists: Rua Red by **Ben Ryan Photography for South Dublin County Council** (folder
@@ -95,15 +106,11 @@ exists: Rua Red by **Ben Ryan Photography for South Dublin County Council** (fol
 Hospital** (`wetransfer_photos-from-tuh-events-20-08-2026_…`). Only performers appear in the
 shots used; the group photographs with hospital staff were left out.
 
-A programme is identified by one photograph everywhere it appears: its home card, its block on
-the Programmes page and, for the outreach and recorder programmes, the sections that point to
-them. Moving from a home card to its block, the photograph travels across the page change. To
-replace a programme's photograph, change the `img` entry in `PROGRAMMES_DATA` in both content
-files.
-
-The five home cards and the five programme blocks use **one photograph each, in the
-same order**. That pairing is what makes the five programmes read as equals. Do not
-give one of them two photographs or a larger crop.
+A programme is identified everywhere by its **cover** (number, emblem, three words; `parts.cover`),
+which is the same on the home page, the Programmes index and the programme's own page, and travels
+between them. Its photograph appears once, under "In the room" on its own page. To change a
+programme's photograph, change the `img` entry in `PROGRAMMES_DATA` in both content files; to give a
+programme a video, set `page["video"]` (see CLAUDE.md §000).
 
 ## Paths
 

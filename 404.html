@@ -22,12 +22,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg">
 <meta name="author" content="Classical Music for Everyone">
-<link rel="icon" href="/classicalmusicforeveryone/assets/logo-icon.svg" type="image/svg+xml">
+<link rel="icon" href="/classicalmusicforeveryone/assets/app-icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="/classicalmusicforeveryone/assets/apple-touch-icon.png">
 <link rel="manifest" href="/classicalmusicforeveryone/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;700&display=swap">
 <link rel="stylesheet" href="/classicalmusicforeveryone/styles.css">
 <link rel="expect" href="#main" blocking="render">
 <script type="application/ld+json">
@@ -42,7 +42,7 @@
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
       "logo": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png"},
       "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
-      "description": "Classical Music for Everyone brings live classical music, talks and a free recorder ensemble to older people, migrant communities and care settings in Dublin. It is a not-for-profit community music initiative, forming a company limited by guarantee. It is not yet a registered charity.",
+      "description": "Classical Music for Everyone brings live classical music, talks and a community recorder ensemble to older people, migrant communities and care settings in Dublin. It is a not-for-profit community music initiative, forming a company limited by guarantee. It is not yet a registered charity.",
       "foundingDate": "2024-01",
       "founder": {"@type": "Person", "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
                   "name": "Andrew Seohyeon Kim"},
@@ -61,7 +61,7 @@
       "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website",
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
       "name": "Classical Music for Everyone",
-      "inLanguage": "en-IE",
+      "inLanguage": ["en-IE", "ko"],
       "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"}
     },
     {
@@ -74,18 +74,6 @@
       "sameAs": ["https://www.linkedin.com/in/andrewseohyeonkim", "https://www.instagram.com/sh.andrew_ryan"],
       "email": "sby05034@gmail.com",
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/404.html#page",
-      "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/404.html",
-      "name": "Page not found · Classical Music for Everyone",
-      "description": "The page you asked for is not here. Links back to the English and Korean home, get-involved and contact pages.",
-      "inLanguage": "en-IE",
-      "isPartOf": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#website"},
-      "about": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
-      "publisher": {"@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/#organisation"},
-      "primaryImageOfPage": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg"}
     }
   ]
 }
@@ -155,7 +143,9 @@
     <p class="footer-line">Bringing classical music <em>where it&rsquo;s needed!</em></p>
     <div class="footer-grid">
       <div>
-        <img src="/classicalmusicforeveryone/assets/logo-reversed.svg" alt="Classical Music for Everyone"
+        <img class="logo-screen" src="/classicalmusicforeveryone/assets/logo-reversed.svg" alt="Classical Music for Everyone"
+             width="109" height="42" loading="lazy" decoding="async">
+        <img class="logo-print" src="/classicalmusicforeveryone/assets/logo-horizontal.svg" alt="" aria-hidden="true"
              width="109" height="42" loading="lazy" decoding="async">
         <p class="footer-about">We bring live classical music to the places it rarely reaches, and we invite people to play as well as listen.</p>
       </div>
@@ -189,8 +179,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span>A not-for-profit community music initiative, forming a company limited by guarantee. Not yet a registered charity.</span>
-      <span>Updated 1 October 2026 · <a href="/classicalmusicforeveryone/contact.html#privacy">Privacy</a></span>
+      <span>Classical Music for Everyone is a not-for-profit community music initiative, forming a company limited by guarantee. It is not yet a registered charity.</span>
+      <span>Updated 1 October 2026 · <a href="/classicalmusicforeveryone/contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>
