@@ -45,7 +45,7 @@
       "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/",
       "logo": {"@type": "ImageObject", "url": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/assets/logo-horizontal.png"},
       "image": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/hero-outreach.jpg",
-      "description": "Classical Music for Everyone brings live classical music, talks and a community recorder ensemble to older people, migrant communities and care settings in Dublin. It is a not-for-profit community music initiative, forming a company limited by guarantee. It is not yet a registered charity.",
+      "description": "Classical Music for Everyone brings live classical music, talks and a recorder class to people in Dublin who find it hard to get to concerts. Classical Music for Everyone is a not-for-profit community music initiative, forming a company limited by guarantee. It is not yet a registered charity.",
       "foundingDate": "2024-01",
       "founder": {"@type": "Person", "@id": "https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html#founder",
                   "name": "Andrew Seohyeon Kim"},
@@ -115,10 +115,10 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
-<header class="site-header" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=this.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
+<header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone"
@@ -148,7 +148,7 @@
     <p class="eyebrow lift">Programmes</p>
     <div class="ph-head">
       <h1 class="ph-title"><span class="ln"><span>Our programmes.</span></span></h1>
-      <p class="ph-lead lift lift-3">Three help people listen and play. Two take live music out to the places where people already are. Each has its own page: how it works, what is on now and what it has done.</p>
+      <p class="ph-lead lift lift-3">Most programmes need no experience. Write to us, and we will tell you how to start.</p>
     </div>
   </div>
 </section>
@@ -158,57 +158,57 @@
     <h2 class="sr-only">The five programmes</h2>
     <ol class="prog-index rv-stagger">
       <li class="pi" id="getting-to-know">
-        <div class="cover cover-sm" style="view-transition-name:prog-getting-to-know;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">01</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect pathLength="1" x="5" y="3" width="14" height="18" rx="1.5"/><circle pathLength="1" cx="10.4" cy="15.3" r="1.8"/><path pathLength="1" d="M12.2 15.3V6.9c1.7.4 2.6 1.4 2.6 3"/></svg><span class="cover-line">Getting closer · Together · My taste</span></div>
+        <div class="cover cover-sm" style="view-transition-name:prog-getting-to-know;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">01</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect pathLength="1" x="5" y="3" width="14" height="18" rx="1.5"/><circle pathLength="1" cx="10.4" cy="15.3" r="1.8"/><path pathLength="1" d="M12.2 15.3V6.9c1.7.4 2.6 1.4 2.6 3"/></svg><span class="cover-line">Getting closer · Together · My taste</span></div>
         <div class="pi-main">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
           <h2><a href="programmes/getting-to-know.html">Getting to Know Classical Music</a></h2>
-          <p>Talks with live music for people who like classical music and never knew where to start.</p>
+          <p>Talks with live music, for anyone curious about classical music.</p>
         </div>
         <div class="pi-state"><span class="tag">On request</span></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i>&rarr;</i></span></div>
       </li>
       <li class="pi" id="outreach-concerts">
-        <div class="cover cover-sm" style="view-transition-name:prog-outreach-concerts;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">02</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M4.5 21V10.5a7.5 7.5 0 0 1 15 0V21"/><path pathLength="1" d="M3 21h18"/><path pathLength="1" d="M12 3v18M4.5 13.5h15"/></svg><span class="cover-line">Day room · Chapel · Atrium</span></div>
+        <div class="cover cover-sm" style="view-transition-name:prog-outreach-concerts;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">02</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M4.5 21V10.5a7.5 7.5 0 0 1 15 0V21"/><path pathLength="1" d="M3 21h18"/><path pathLength="1" d="M12 3v18M4.5 13.5h15"/></svg><span class="cover-line">Day room · Chapel · Atrium</span></div>
         <div class="pi-main">
           <span class="kicker"><i class="dot dot-open" aria-hidden="true"></i>Sharing</span>
           <h2><a href="programmes/outreach-concerts.html">Outreach Concerts</a></h2>
-          <p>Live classical music in the rooms where people already are: care homes, hospitals, parishes and community centres.</p>
+          <p>Live classical music in care homes, hospitals, parishes and community centres.</p>
         </div>
         <div class="pi-state"><span class="tag">Taking invitations</span><dl class="pi-facts"><div><dt>When</dt><dd>By arrangement</dd></div></dl></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i>&rarr;</i></span></div>
       </li>
       <li class="pi" id="recorder-ensemble">
-        <div class="cover cover-sm" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M10.2 6.54V1.6l.75-3.64h2.1l.75 3.64v4.94"/><path pathLength="1" d="M11.7 2.12h.6"/><path pathLength="1" d="M10.1 6.54h3.8"/><path pathLength="1" d="M10.4 6.54l.2 13.26h2.8l.2-13.26"/><path pathLength="1" d="M10.6 19.8l-1 4.55h4.8l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">First notes · Reading · Your own part</span></div>
+        <div class="cover cover-sm" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M10.2 6.54V1.6l.75-3.64h2.1l.75 3.64v4.94"/><path pathLength="1" d="M11.7 2.12h.6"/><path pathLength="1" d="M10.1 6.54h3.8"/><path pathLength="1" d="M10.4 6.54l.2 13.26h2.8l.2-13.26"/><path pathLength="1" d="M10.6 19.8l-1 4.55h4.8l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">First notes · Reading · Your own part</span></div>
         <div class="pi-main">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
           <h2><a href="programmes/recorder-ensemble.html">Community Recorder Ensemble Class</a></h2>
-          <p>A weekly class for adults who have never played: first notes, then your own part in an ensemble.</p>
+          <p>A weekly class for adults who have never played an instrument.</p>
         </div>
-        <div class="pi-state"><span class="tag tag-live">Running now</span><dl class="pi-facts"><div><dt>When</dt><dd>Wednesday evenings, 7:00&#8288;&ndash;&#8288;8:00pm, autumn 2026</dd></div></dl></div>
+        <div class="pi-state"><span class="tag tag-live">Running now</span><dl class="pi-facts"><div><dt>When</dt><dd>Wednesday evenings, 7pm to 8pm, autumn 2026</dd></div></dl></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i>&rarr;</i></span></div>
       </li>
       <li class="pi" id="letters-ensemble">
-        <div class="cover cover-sm" style="view-transition-name:prog-letters-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">04</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="9" cy="8" r="3"/><path pathLength="1" d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle pathLength="1" cx="17" cy="9.5" r="2.5"/><path pathLength="1" d="M14.5 20a4.5 4.5 0 0 1 6-4.2"/></svg><span class="cover-line">Irish · Korean · Sacred</span></div>
+        <div class="cover cover-sm" style="view-transition-name:prog-letters-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">04</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle pathLength="1" cx="9" cy="8" r="3"/><path pathLength="1" d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle pathLength="1" cx="17" cy="9.5" r="2.5"/><path pathLength="1" d="M14.5 20a4.5 4.5 0 0 1 6-4.2"/></svg><span class="cover-line">Irish · Korean · Sacred</span></div>
         <div class="pi-main">
           <span class="kicker"><i class="dot dot-open" aria-hidden="true"></i>Sharing</span>
           <h2><a href="programmes/letters-ensemble.html">Letters Ensemble</a></h2>
-          <p>Amateur musicians in Dublin playing Irish, Korean and sacred music in community settings since January 2024.</p>
+          <p>Amateur musicians in Dublin playing Irish, Korean and sacred music.</p>
         </div>
         <div class="pi-state"><span class="tag">All players welcome</span><dl class="pi-facts"><div><dt>When</dt><dd>Ask us for rehearsal times</dd></div></dl></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i>&rarr;</i></span></div>
       </li>
       <li class="pi" id="concert-companion">
-        <div class="cover cover-sm" style="view-transition-name:prog-concert-companion;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">05</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16.5v-2a2.5 2.5 0 0 0 0-5z"/><path pathLength="1" d="M15.5 6.5v2M15.5 11v2M15.5 15.5v2"/></svg><span class="cover-line">Before · During · After</span></div>
+        <div class="cover cover-sm" style="view-transition-name:prog-concert-companion;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">05</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16.5v-2a2.5 2.5 0 0 0 0-5z"/><path pathLength="1" d="M15.5 6.5v2M15.5 11v2M15.5 15.5v2"/></svg><span class="cover-line">Before · During · After</span></div>
         <div class="pi-main">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
           <h2><a href="programmes/concert-companion.html">Concert Guide &amp; Companion</a></h2>
-          <p>Going to concerts in small groups, with preparation before and a conversation after.</p>
+          <p>Small groups go to concerts together, prepared beforehand.</p>
         </div>
-        <div class="pi-state"><span class="tag">Next outing by email</span></div>
+        <div class="pi-state"><span class="tag">Dates by email</span></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i>&rarr;</i></span></div>
       </li>
     </ol>
-    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">For musicians</span><span>CMFE Artists, planned for 2027: paid, mentored performances for emerging musicians. <a class="link" href="get-involved.html#play">Expressions of interest are open now</a>.</span></p>
+    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">For artists</span><span>From any field, <a class="link" href="get-involved.html#play">register interest</a> any time. CMFE Artists is planned for 2027.</span></p>
   </div>
 </section>
 </main>
@@ -221,7 +221,7 @@
              width="109" height="42" loading="lazy" decoding="async">
         <img class="logo-print" src="assets/logo-horizontal.svg" alt="" aria-hidden="true"
              width="109" height="42" loading="lazy" decoding="async">
-        <p class="footer-about">We bring live classical music to the places it rarely reaches, and we invite people to play as well as listen.</p>
+        
       </div>
       <nav aria-label="Explore">
         <h2>Explore</h2>

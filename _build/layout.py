@@ -74,8 +74,9 @@ STR = {
         "this_lang": "EN", "other_lang": "한국어",
         "tagline": "Bringing classical music <em>where it&rsquo;s needed!</em>",
         "tagline_plain": "Bringing classical music where it&rsquo;s needed!",
-        "footer_about": ("We bring live classical music to the places it rarely reaches, and we "
-                         "invite people to play as well as listen."),
+        # the footer's line about what we do went on 2 Oct 2026: it was the third
+        # telling of the hero lead on every page (content review); "" omits it
+        "footer_about": "",
         "f_explore": "Explore",
         "f_record": "Take part",
         "f_connect": "Connect",
@@ -103,8 +104,7 @@ STR = {
         "this_lang": "한국어", "other_lang": "EN",
         "tagline": '<span lang="en">Bringing classical music <em>where it&rsquo;s needed!</em></span>',
         "tagline_plain": '<span lang="en">Bringing classical music where it&rsquo;s needed!</span>',
-        "footer_about": ("클래식 음악이 잘 닿지 않는 곳으로 찾아가, 듣는 분들을 직접 연주하도록 "
-                         "초대합니다."),
+        "footer_about": "",
         "f_explore": "둘러보기",
         "f_record": "함께하기",
         "f_connect": "연락",
@@ -131,7 +131,7 @@ STR = {
 MENU_JS = ("var n=document.getElementById('nav');"
            "var o=n.getAttribute('data-open')!==&quot;true&quot;;"
            "n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)")
-ESC_JS = ("if(event.key==='Escape'){var n=document.getElementById('nav'),b=this.querySelector('.menu-toggle');"
+ESC_JS = ("if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');"
           "if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');"
           "b.setAttribute('aria-expanded','false');b.focus()}}")
 RESET_JS = ("var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');"
@@ -148,10 +148,10 @@ RESET_JS = ("var n=document.getElementById('nav'),b=document.querySelector('.men
 # version from the messaging guide (kit 27), then its status sentence. It used
 # to take each page's own description, so the contact page described the
 # organisation as "email, phone and where we travel to".
-ORG_DESC = ("Classical Music for Everyone brings live classical music, talks and a community recorder "
-            "ensemble to older people, migrant communities and care settings in Dublin. It is a "
-            "not-for-profit community music initiative, forming a company limited by guarantee. It "
-            "is not yet a registered charity.")
+ORG_DESC = ("Classical Music for Everyone brings live classical music, talks and a recorder class to "
+            "people in Dublin who find it hard to get to concerts. Classical Music for Everyone is a "
+            "not-for-profit community music initiative, forming a company limited by guarantee. It is "
+            "not yet a registered charity.")
 
 ORG_NODE = """    {{
       "@type": "Organization",
@@ -328,7 +328,7 @@ def header(lang, slug):
     other = "ko" if lang == "en" else "en"
     return f"""<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">{s['skip']}</a>
-<header class="site-header" onkeydown="{ESC_JS}">
+<header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="{p}index.html">
       <img src="{r}assets/logo-horizontal.svg" alt="{s['logo_alt']}"
@@ -367,7 +367,7 @@ def footer(lang, slug="index.html"):
              width="109" height="42" loading="lazy" decoding="async">
         <img class="logo-print" src="{r}assets/logo-horizontal.svg" alt="" aria-hidden="true"
              width="109" height="42" loading="lazy" decoding="async">
-        <p class="footer-about">{s['footer_about']}</p>
+        {f'<p class="footer-about">{s["footer_about"]}</p>' if s['footer_about'] else ''}
       </div>
       <nav aria-label="{s['f_explore']}">
         <h2>{s['f_explore']}</h2>
@@ -411,6 +411,9 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
     eager = first != -1 and "data-first" in body[:first]
     body = _images(body, eager_first=eager)
     body = _relink(body, p, r)
+    # a separator never starts a line: the space before it does not break
+    # (QA40-11: Korean keep-all lines began with "·" or "/")
+    body = body.replace(" · ", "\u00a0· ").replace(" / ", "\u00a0/ ")
     canonical = f"{SITE_URL}/" + ("" if lang == "en" else "ko/") + sub
     desc = description.replace('"', "'")
     ld_lang = "en-IE" if lang == "en" else "ko"
@@ -464,7 +467,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
 <link rel="expect" href="#main" blocking="render">
 {jsonld}
 </head>
-<body onpageshow="{RESET_JS}">
+<body onpageshow="{RESET_JS}" onkeydown="{ESC_JS}">
 {header(lang, slug)}
 <main id="main">
 {body}

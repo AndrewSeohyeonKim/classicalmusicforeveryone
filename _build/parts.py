@@ -104,9 +104,59 @@ def plate(img, ratio="", cap=None, cls="", sizes="half"):
     return f'<figure class="{c}">{photo(img, ratio, sizes)}{caption(cap)}</figure>'
 
 
-def facts(rows):
-    return ('<dl class="facts">' + "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in rows)
+def facts(rows, cls=""):
+    """Label above or beside its value. cls "facts-plain" sets them without
+    rules, label above value (the 4th pass, 2 Oct 2026)."""
+    c = f"facts {cls}".strip()
+    if "facts-plain" in cls:
+        # each pair in its own group, so a pair can sit in a column or a row
+        return (f'<dl class="{c}">' + "".join(f"<div><dt>{a}</dt><dd>{b}</dd></div>" for a, b in rows)
+                + "</dl>")
+    return (f'<dl class="{c}">' + "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in rows)
             + "</dl>")
+
+
+# ---------------------------------------------------------------------------
+# Patterns that replace running text (the 4th pass, 2 Oct 2026). Andrew: too
+# much running text, hard to read. Each of these says in structure what a
+# paragraph used to say in sentences; the reading budget (readability.py)
+# keeps the copy inside them short. None needs a box, a tint or a script.
+# ---------------------------------------------------------------------------
+
+def leadins(items, cls=""):
+    """Three to six parallel points, each with a lead-in in bold: rules,
+    rights, principles. items: (lead-in, text)."""
+    c = f"leadins {cls}".strip()
+    return (f'<ul class="{c}">' + "".join(f"<li><strong>{a}</strong> {b}</li>" for a, b in items)
+            + "</ul>")
+
+
+def pair(title, give, bring, labels):
+    """What a host gives and what we bring, side by side."""
+    li = lambda xs: "".join(f"<li>{x}</li>" for x in xs)
+    return (f'<div class="pair"><h3>{title}</h3><div class="pair-cols">'
+            f'<div><p class="pair-label">{labels[0]}</p><ul>{li(give)}</ul></div>'
+            f'<div><p class="pair-label">{labels[1]}</p><ul>{li(bring)}</ul></div></div></div>')
+
+
+def fold(summary, inner, cls=""):
+    """Reference most readers do not need, folded: the summary says what is
+    inside and how many. Never used for when, where, status or the action."""
+    c = f"fold {cls}".strip()
+    return f'<details class="{c}"><summary>{summary}</summary>{inner}</details>'
+
+
+def now_line(p, cls=""):
+    """The one programme running now, in two lines: its state and name, then
+    when (the value people scan for, in bold) and where."""
+    g = p["page"]
+    when, where = g["glance"][2][1], g["glance"][1][1]
+    c = f"now-line {cls}".strip()
+    return (f'<div class="{c}">'
+            f'<p class="now-head">{status_tag(g["now"][0], True)}'
+            f'<a class="now-name" href="programmes/{p["slug"]}.html">{p["name"]} {ARROW}</a></p>'
+            f'<p class="now-when"><strong>{when}</strong><span class="sr-only">, </span>'
+            f'<span>{where}</span></p></div>')
 
 
 def title_lines(lines):
@@ -206,29 +256,33 @@ def _fig(n, label, period, plus=False):
 
 
 def home(t, programmes, pillars, lang):
-    h, w, nb, n = t["hero"], t["why"], t["numbers"], t["now"]
+    """Hero, the five programmes, the record (the page's one ink band), then
+    why we exist on white, so the ink band never runs into the ink footer
+    (chief designer, 2 Oct 2026) and the page ends on "So we go to them",
+    which the footer's master line answers."""
+    h, w, nb = t["hero"], t["why"], t["numbers"]
     cards = "\n".join(prog_card(i, p, pillars) for i, p in enumerate(programmes))
     figs = "\n".join(_fig(*f) for f in nb["figs"])
     reasons = "\n".join(f"        <li>{x}</li>" for x in w["reasons"])
-    rec = next(p for p in programmes if p["slug"] == "recorder-ensemble")
+    # what is running now, said once at the top (4th pass): it replaced the
+    # Ways-in list and section IV, which said it again further down
+    live = [p for p in programmes if p["page"].get("live")]
+    now = f"\n        {now_line(live[0], 'lift lift-4')}" if live else ""
+    cta_lift = "lift-5" if live else "lift-4"
     return f"""<section class="hero">
   <div class="wrap">
     <p class="eyebrow lift">{h["eyebrow"]}</p>
     <h1 class="hero-title">{title_lines(h["title"])}</h1>
     <div class="hero-body">
       <div class="hero-copy">
-        <p class="master-line lift lift-3">{h["master"]}</p>
-        <p class="lead lift lift-4">{h["lead"]}</p>
-        <div class="btn-row hero-cta lift lift-5">{btn(h["cta"][0], h["cta"][1], "primary")}{go(h["more"][0], h["more"][1])}</div>
+        <p class="lead lift lift-3">{h["lead"]}</p>{now}
+        <div class="btn-row hero-cta lift {cta_lift}">{btn(h["cta"][0], h["cta"][1], "primary")}{go(h["more"][0], h["more"][1])}</div>
       </div>
       <figure class="hero-figure open" data-first>
         <span class="rings" aria-hidden="true"></span>
         {photo(h["img"], "4x3", sizes="hero")}
         {caption(h["cap"])}
       </figure>
-    </div>
-    <div class="hero-ways lift lift-6">
-  {contents(t["ways"], t["ways_label"])}
     </div>
   </div>
 </section>
@@ -239,29 +293,15 @@ def home(t, programmes, pillars, lang):
     <ul class="progs rv-stagger">
 {cards}
     </ul>
-    <p class="small progs-note rv">{t["progs"]["artists"]}</p>
+    <p class="progs-note rv">{t["progs"]["others"]}</p>
   </div>
 </section>
 
-<section class="manifesto band-white" aria-labelledby="why-h">
-  <div class="wrap why">
-    {eyebrow(w["label"], "II")}
-    <div>
-      <h2 class="why-premise" id="why-h"><span class="ink">{w["premise"]}</span></h2>
-      <ul class="why-reasons rv-stagger">
-{reasons}
-      </ul>
-      <p class="why-resolve">{w["resolve"]}</p>
-      <div class="btn-row">{go("about.html", w["link"])}</div>
-    </div>
-  </div>
-</section>
-
-<section class="band-ink" id="record">
+<section class="band-ink figs-band" id="record">
   <div class="wrap">
-    {eyebrow(nb["label"], "III")}
+    {eyebrow(nb["label"], "II")}
     <h2 class="sr-only">{nb["sr"]}</h2>
-    <div class="figs">
+    <div class="figs" style="--figs:{len(nb["figs"])}">
 {figs}
     </div>
     {artifacts.forty(lang, nb["forty"])}
@@ -269,14 +309,16 @@ def home(t, programmes, pillars, lang):
   </div>
 </section>
 
-<section id="now">
-  <div class="wrap now">
-    {plate(n["img"], "4x5", sizes="half")}
-    <div class="rv">
-      {eyebrow(n["label"], "IV")}
-      <h2>{rec["name"]}</h2>
-      {facts(n["facts"])}
-      <div class="btn-row">{btn("programmes/recorder-ensemble.html", n["btn"], "primary")}</div>
+<section class="manifesto band-white" aria-labelledby="why-h">
+  <div class="wrap why">
+    {eyebrow(w["label"], "III")}
+    <div>
+      <h2 class="why-premise" id="why-h"><span class="ink">{w["premise"]}</span></h2>
+      <ul class="why-reasons rv-stagger">
+{reasons}
+      </ul>
+      <p class="why-resolve">{w["resolve"]}</p>
+      <div class="btn-row">{go("about.html", w["link"])}</div>
     </div>
   </div>
 </section>"""
@@ -320,10 +362,18 @@ def about(t, lang):
 </section>
 
 """
-    trust = "\n".join(f"""      <div>
+    if r.get("items"):
+        trust = f"    {leadins(r['items'], 'rv')}"
+    else:
+        trust = '    <div class="trust rv-stagger">\n' + "\n".join(f"""      <div>
         <h3>{a}</h3>
         <p>{b}</p>
-      </div>""" for a, b in r["cols"])
+      </div>""" for a, b in r["cols"]) + "\n    </div>"
+    if f.get("facts"):
+        fbody = f'<p class="founder-line">{f["line"]}</p>\n      {facts(f["facts"], "facts-plain")}'
+    else:
+        fbody = f'<div class="prose mt-3"><p>{f["text"]}</p></div>'
+
     links = " ".join(go(h, l) for h, l in r["links"])
     return f"""{page_head(t["head"])}
 
@@ -351,7 +401,7 @@ def about(t, lang):
       {eyebrow(f["label"])}
       <h2>{f["name"]}</h2>
       <p class="founder-role">{f["role"]}</p>
-      <div class="prose mt-3"><p>{f["text"]}</p></div>
+      {fbody}
     </div>
   </div>
 </section>
@@ -359,10 +409,10 @@ def about(t, lang):
 <section id="run">
   <div class="wrap">
 {sh(r["label"], r["h2"], r["lead"], split=True)}
-    <div class="trust rv-stagger">
+    <div class="run-body">
 {trust}
+      <div class="btn-row rv">{links}</div>
     </div>
-    <div class="btn-row rv">{links}</div>
   </div>
 </section>
 
@@ -468,7 +518,23 @@ def _record(slug, lang, t):
           <span class="rec-when">{ledger.when(r, lang)}</span>
           <span class="rec-what">{what}</span>{extra}
         </li>""")
-    return len(rows), "\n".join(items)
+    return len(rows), items
+
+
+# A long record shows its newest rows and folds the earlier ones (4th pass,
+# 2 Oct 2026). The strip above it still draws every session, and the fold
+# keeps the order: earlier rows first, then the newest six.
+REC_OPEN, REC_FOLD_OVER = 6, 8
+
+
+def record_list(n, items, t):
+    rows = "\n".join(items)
+    if n <= REC_FOLD_OVER:
+        return f'    <ol class="rec rec-short rv">\n{rows}\n    </ol>'
+    early, late = "\n".join(items[:-REC_OPEN]), "\n".join(items[-REC_OPEN:])
+    inner = f'<ol class="rec rec-long">\n{early}\n    </ol>'
+    return (f'    <div class="rec-wrap rv">\n    {fold(t.get("earlier", "Earlier: {n} more").format(n=n - REC_OPEN), inner, "rec-fold")}\n'
+            f'    <ol class="rec rec-long">\n{late}\n    </ol>\n    </div>')
 
 
 def mail_alt(t):
@@ -497,6 +563,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
         <dd>{a}</dd>
       </div>""" for q, a in g["faq"])
     n, record = _record(p["slug"], lang, t)
+    reclist = record_list(n, record, t)
     rows = ledger.for_programme(p["slug"])
     strip = f"""
     <figure class="strip rv">{artifacts.strip(rows, lang, t["strip"])}
@@ -543,7 +610,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
   </div>
 </section>"""
     # a programme running now says so here too, so every page points to it
-    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n">{k + 1:02d}</span><b>{q["name"]}</b><span class="others-line">{q["line"]}</span>{status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
+    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n">{k + 1:02d}</span><b>{q["name"]}</b>{status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
                        for k, q in enumerate(programmes) if q["slug"] != p["slug"])
     return f"""<section class="pp-head">
   <div class="wrap">
@@ -558,7 +625,6 @@ def programme_page(t, i, p, programmes, pillars, lang):
         <div class="pp-now{" is-live" if g.get("live") else ""} lift lift-4">
           <p>{status_tag(g["now"][0], g.get("live"))}<span>{g["now"][1]}</span></p>
           <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}{go("#join", t["how_join"])}</div>
-          {mail_alt(t)}
         </div>
       </div>
       <div class="pp-cover lift lift-2">{cover(i, p)}</div>
@@ -588,20 +654,14 @@ def programme_page(t, i, p, programmes, pillars, lang):
 <section class="band-ink" id="record">
   <div class="wrap">
 {sh(t["record_label"], g["record_h2"], g["record_lead"], no=no_rec, split=True)}{strip}{chart}
-    <ol class="rec rec-{"long" if n > 8 else "short"} rv">
-{record}
-    </ol>
+{reclist}
   </div>
 </section>
 
 <section id="join">
-  <div class="wrap join">
-    <div class="rv">
-      {eyebrow(t["join_label"], no_join)}
-      <h2>{g["join_h2"]}</h2>
-      <p class="lead mt-2">{g["join_text"]}</p>
-    </div>
-    <div class="rv">
+  <div class="wrap">
+{sh(t["join_label"], g["join_h2"], g.get("join_text") or None, no=no_join, split=True)}
+    <div class="join-body rv">
       <p class="join-hint">{t["mail_hint"]}</p>
       <ul class="join-fields">{"".join(f"<li>{x}</li>" for x in g["mail_fields"])}</ul>
       <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}</div>
@@ -627,12 +687,34 @@ def programme_page(t, i, p, programmes, pillars, lang):
 
 def get_involved(t, icon):
     inv, play, sup = t["invite"], t["play"], t["support"]
-    fields = "\n".join(f"      <li>{x}</li>" for x in play["fields"])
-    visit = "\n".join(f"""        <li style="--i:{k}">
+    if inv.get("pairs"):
+        # what a host gives and what we bring (4th pass, 2 Oct 2026); the
+        # steps of a visit live on the Outreach Concerts page, one click away
+        invite_body = ('      <div class="pairs">'
+                       + "".join(pair(a, b, c, inv["pair_labels"]) for a, b, c in inv["pairs"])
+                       + "</div>")
+        more_href = "programmes/outreach-concerts.html#how"
+    else:
+        visit = "\n".join(f"""        <li style="--i:{k}">
           <span class="step-n" aria-hidden="true">{k + 1}</span>
           <h3>{a}</h3>
           <p>{b}</p>
         </li>""" for k, (a, b) in enumerate(inv["steps"]))
+        invite_body = f"""      <ol class="steps steps-compact rv-stagger">
+{visit}
+      </ol>"""
+        more_href = "programmes/outreach-concerts.html"
+    # interest is taken freely, from any field (Andrew, 2 Oct 2026): who it
+    # is for, how to begin and what a venue may ask, as facts; then what a
+    # performance with us has looked like, from the record, in place of the
+    # eleven-item form
+    examples = "".join(f"<li><b>{a}</b><span>{b}</span><span>{c}</span></li>" for a, b, c in play["examples"])
+    play_body = f"""      {facts(play["facts"], "facts-plain")}
+      <h3 class="kicker examples-label">{play["examples_label"]}</h3>
+      <ul class="examples">{examples}</ul>
+      <div class="btn-row">{btn(play["href"], play["btn"], "primary")}</div>
+      {mail_alt(t["alt"])}
+      <p class="small play-note">{play["note"]}</p>"""
     if sup.get("helps"):
         # giving is open: three ways to help, side by side, and the promise
         helps = "\n".join(f"""      <div class="help" id="{h["id"]}">
@@ -642,7 +724,7 @@ def get_involved(t, icon):
         <p>{h["text"]}</p>
         <div class="btn-row">{btn(h["href"], h["btn"], "quiet")}</div>
       </div>""" for h in sup["helps"])
-        support = f"""<section id="support">
+        support = f"""<section class="band-white" id="support">
   <div class="wrap">
 {sh(sup["label"], sup["h2"], sup["lead"], no="03", split=True)}
     <div class="helps rv-stagger">
@@ -655,11 +737,11 @@ def get_involved(t, icon):
         # giving is closed: the founding board is the one way to help, and
         # the page says plainly that no gifts are asked for or accepted
         b = sup["board"]
-        support = f"""<section id="support">
+        support = f"""<section class="band-white" id="support">
   <div class="wrap" id="board">
 {sh(sup["label"], b["h2"], b["lead"], no="03", split=True)}
     <div class="board rv">
-      {facts(b["facts"])}
+      {facts(b["facts"], "facts-plain")}
       <div>
         <div class="btn-row">{btn(b["href"], b["btn"], "primary")}</div>
         {mail_alt(t["alt"])}
@@ -668,6 +750,18 @@ def get_involved(t, icon):
     </div>
   </div>
 </section>"""
+    j = t.get("join")
+    join = (f"""
+
+<section class="tight band-white" id="join">
+  <div class="wrap">
+    <h2 class="sr-only">{j["tag"]}</h2>
+    <div class="callout rv">
+      <span class="kicker">{j["tag"]}</span>
+      <p>{j["text"]}</p>
+    </div>
+  </div>
+</section>""" if j else "")
     return f"""{page_head(t["head"])}
 
 <section class="tight gi-ways">
@@ -679,13 +773,11 @@ def get_involved(t, icon):
 
 <section class="band-white" id="invite">
   <div class="wrap">
-{sh(inv["label"], inv["h2"], inv["text"], no="01", split=True)}
+{sh(inv["label"], inv["h2"], inv.get("lead") or inv.get("text"), no="01", split=True)}
     <div class="invite rv">
-      <ol class="steps steps-compact rv-stagger">
-{visit}
-      </ol>
+{invite_body}
       <div class="invite-act">
-        <div class="btn-row">{btn(inv["href"], inv["btn"], "primary")}{go("programmes/outreach-concerts.html", inv["more"])}</div>
+        <div class="btn-row">{btn(inv["href"], inv["btn"], "primary")}{go(more_href, inv["more"])}</div>
         {mail_alt(t["alt"])}
       </div>
     </div>
@@ -696,28 +788,12 @@ def get_involved(t, icon):
   <div class="wrap">
 {sh(play["label"], play["h2"], play["lead"], no="02", split=True)}
     <div class="play rv">
-      <h3 class="kicker">{play["sub"]}</h3>
-      <ol class="checklist mt-2">
-{fields}
-      </ol>
-      <p class="small mt-3">{play["note"]}</p>
-      <div class="btn-row">{btn(play["href"], play["btn"], "primary")}</div>
-      {mail_alt(t["alt"])}
+{play_body}
     </div>
   </div>
 </section>
 
-{support}
-
-<section class="tight band-white" id="join">
-  <div class="wrap">
-    <h2 class="sr-only">{t["join"]["tag"]}</h2>
-    <div class="callout rv">
-      <span class="kicker">{t["join"]["tag"]}</span>
-      <p>{t["join"]["text"]}</p>
-    </div>
-  </div>
-</section>"""
+{support}{join}"""
 
 
 # ---------------------------------------------------------------------------
@@ -755,7 +831,9 @@ def chart(lang, t):
             k = used.get(m, 0)
             used[m] = k + 1
             col, row = k % 4, k // 4
-            sx = CH_X0 + (m - 1) * CH_COL + 9 + col * (CH_SQ + CH_GAP)
+            # four squares a row, centred in the month (QA40-09)
+            inset = (CH_COL - 1 - (4 * CH_SQ + 3 * CH_GAP)) / 2
+            sx = CH_X0 + (m - 1) * CH_COL + inset + col * (CH_SQ + CH_GAP)
             sy = y + 9 + row * (CH_SQ + CH_GAP)
             cls = "c-on" if r[3] == "lecture" else "c-open"
             label = ledger.public_label(r, lang)
@@ -774,7 +852,7 @@ def chart(lang, t):
     </figure>"""
 
 
-TL_X0, TL_TOP, TL_COL, TL_ROW, TL_SQ, TL_GAP = 46, 30, 74, 30, 13, 4
+TL_X0, TL_TOP, TL_COL, TL_ROW, TL_SQ, TL_GAP = 46, 30, 74, 30, 12, 4
 
 
 def _chart_tall(lang, rows, years, aria):
@@ -796,8 +874,11 @@ def _chart_tall(lang, rows, years, aria):
         yi, m = years.index(r[0]), r[1]
         k = used.get((yi, m), 0)
         used[(yi, m)] = k + 1
-        sx = TL_X0 + yi * TL_COL + 6 + k * (TL_SQ + TL_GAP)
-        sy = TL_TOP + (m - 1) * TL_ROW + (TL_ROW - TL_SQ) / 2
+        # four a row, then a second row in the same month, never into the
+        # next year's column (QA40-09)
+        col, row = k % 4, k // 4
+        sx = TL_X0 + yi * TL_COL + (TL_COL - 1 - (4 * TL_SQ + 3 * TL_GAP)) / 2 + col * (TL_SQ + TL_GAP)
+        sy = TL_TOP + (m - 1) * TL_ROW + (TL_ROW - TL_SQ) / 2 + row * (TL_SQ + 2)
         cls = "c-on" if r[3] == "lecture" else "c-open"
         p.append(f'<rect class="{cls}" x="{sx}" y="{sy:.1f}" width="{TL_SQ}" height="{TL_SQ}" rx="1"/>')
     h = TL_TOP + 12 * TL_ROW + 2
@@ -818,6 +899,13 @@ def news(t, lang):
       </li>""" for a, b, c in t["timeline"]["rows"])
     gal = "\n".join(f"      <li>{plate(img, '', cap, sizes='gallery')}</li>" for img, cap in t["gallery"]["rows"])
     c, tm, g = t["chart"], t["timeline"], t["gallery"]
+    figs = ""
+    if c.get("figs"):
+        # the forty in four figures with their period (4th pass): the counts
+        # the page lead used to spell out in a sentence
+        cells = "".join(f"<div><dt>{label}</dt><dd>{n}</dd></div>" for n, label in c["figs"])
+        figs = (f'\n    <div class="mini-figs rv"><dl>{cells}</dl>'
+                f'<p class="mini-period">{c["period"]}</p></div>')
     return f"""{page_head(t["head"])}
 
 <section class="tight">
@@ -831,7 +919,7 @@ def news(t, lang):
 
 <section class="band-white" id="record">
   <div class="wrap">
-{sh(c["label"], c["h2"], c["lead"], split=True)}
+{sh(c["label"], c["h2"], c["lead"], split=True)}{figs}
     {chart(lang, c)}
   </div>
 </section>
@@ -862,17 +950,33 @@ def news(t, lang):
 def contact(t):
     rows = "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in t["details"])
     pv = t["privacy"]
-    blocks = "\n".join(f"""      <li>
-        <h3>{a}</h3>
-        <p>{b}</p>
-      </li>""" for a, b in pv["blocks"])
+    def clause(b):
+        """A clause is a paragraph, a list or label/value rows (4th pass:
+        services and rights read faster as lists), with an optional closing
+        sentence. The old two-part form (title, paragraph) still works."""
+        if len(b) == 2:
+            title, body = b[0], f"<p>{b[1]}</p>"
+        else:
+            title, kind, content, after = b
+            if kind == "list":
+                body = '<ul class="clause-list">' + "".join(f"<li>{x}</li>" for x in content) + "</ul>"
+            elif kind == "rows":
+                body = facts(content, "facts-plain facts-rows")
+            else:
+                body = f"<p>{content}</p>"
+            if after:
+                body += f"<p>{after}</p>"
+        return f"""      <li>
+        <h3>{title}</h3>
+        {body}
+      </li>"""
+    blocks = "\n".join(clause(b) for b in pv["blocks"])
     none = "".join(f"<div><dt>{a}</dt><dd>{b}</dd></div>" for a, b in pv["none"])
     return f"""{page_head(t["head"])}
 
 <section class="tight ct-topics">
   <div class="wrap">
     <h2 class="sr-only">{t["topics_h2"]}</h2>
-    <p class="eyebrow rv">{t["topics_h2"]}</p>
   {contents(t["topics"], t["topics_h2"], icon_="mail")}
     <p class="direct rv"><span class="kicker">{t["direct_label"]}</span><span class="direct-links"><a href="{t["email_href"]}">{t["email"]}</a><a href="tel:{t["tel_href"]}">{t["tel"]}</a></span></p>
   </div>

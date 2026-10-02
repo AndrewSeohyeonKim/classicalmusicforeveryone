@@ -14,10 +14,11 @@ it from the semantic tokens (--accent-mark for data marks, --line for rules,
 """
 
 import html
+import os
 
 import geo_ireland as geo
 import ledger
-from layout import SITE_URL
+from layout import ROOT, SITE_URL
 
 
 # ---------------------------------------------------------------------------
@@ -107,6 +108,19 @@ def strip(rows, lang, t):
         x = ST_L + (year - ST_Y0) * 12 * ST_SLOT
         p.append(f'<line class="s-year-tick" x1="{x + .5}" x2="{x + .5}" y1="{ST_AXIS - 6}" y2="{ST_AXIS + 12}"/>')
         p.append(f'<text class="s-year" x="{x + 6 * ST_SLOT}" y="{ST_AXIS + 27}" text-anchor="middle">{year}</text>')
+    # a month covered by a bar (a course of weekly sessions) lifts its dots
+    # clear of the bar, so a concert inside a course reads as its own mark
+    # (QA40-04, 2 Oct 2026)
+    barred = set()
+    for r in rows:
+        if "until" in r[8]:
+            y, m = r[0], r[1]
+            m2 = r[8]["until"][0]
+            y2 = y if m2 >= m else y + 1
+            yy, mm = y, m
+            while (yy, mm) <= (y2, m2):
+                barred.add((yy, mm))
+                yy, mm = (yy + 1, 1) if mm == 12 else (yy, mm + 1)
     stack = {}
     for i, r in enumerate(rows):
         y, m = r[0], r[1]
@@ -122,7 +136,8 @@ def strip(rows, lang, t):
             continue
         k = stack.get((y, m), 0)
         stack[(y, m)] = k + 1
-        cy = ST_AXIS - 11 - k * ST_STEP - (10 if k else 0) * 0
+        lift = ST_STEP if (y, m) in barred else 0
+        cy = ST_AXIS - 11 - lift - k * ST_STEP
         p.append(f'<g class="s-ev" style="--i:{i}"><title>{tip}</title>'
                  f'<circle class="{cls}" cx="{mx(y, m):.1f}" cy="{cy:.1f}" r="{ST_DOT}"/></g>')
     aria = t["aria"].format(n=len(rows))
@@ -258,14 +273,18 @@ def video(v, label, play):
         src = f"https://www.youtube-nocookie.com/embed/{v['id']}?autoplay=1&amp;rel=0"
     else:
         src = f"https://player.vimeo.com/video/{v['id']}?autoplay=1&amp;dnt=1"
-    poster = f"{SITE_URL}/images/{v['poster']}"
+    # the 800px copy where there is one: the frame is never wider than that
+    small = v["poster"][:-4] + "-800.jpg"
+    name = small if os.path.exists(os.path.join(ROOT, "images", small)) else v["poster"]
+    poster = f"{SITE_URL}/images/{name}"
     doc = ("<style>*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;"
            "background:#1D2430}img{width:100%;height:100%;object-fit:cover;opacity:.88}"
            "i{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;"
            "background:#FAF5EE;box-shadow:0 0 0 1px #B8893A}i::before{content:'';position:absolute;"
            "left:29px;top:24px;border-left:20px solid #1D2430;border-top:12px solid transparent;"
            "border-bottom:12px solid transparent}b{position:absolute;width:1px;height:1px;overflow:hidden;"
-           "clip-path:inset(50%)}a:focus-visible{outline:3px solid #FAF5EE;outline-offset:-6px}</style>"
+           "clip-path:inset(50%)}a:focus{outline:none}a:focus-visible{box-shadow:inset 0 0 0 4px #1D2430,"
+           "inset 0 0 0 7px #FAF5EE}a:focus-visible i{box-shadow:0 0 0 3px #1D2430,0 0 0 6px #FAF5EE}</style>"
            f"<a href='{src}'><img src='{poster}' alt=''><i></i><b>{play}</b></a>")
     return (f'<iframe class="video-frame" title="{label}" loading="lazy" src="{src}" '
             f'srcdoc="{html.escape(doc)}" allow="autoplay; fullscreen; picture-in-picture"></iframe>')

@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import content_en as en          # noqa: E402
 import content_ko as ko          # noqa: E402
 import notfound                  # noqa: E402
+import readability               # noqa: E402
 from layout import (ROOT, SITE_URL, EMAIL, PHONE_INTL, UPDATED_ISO, breadcrumb, page, write, _here)   # noqa: E402
 
 PAGES = [
@@ -36,14 +37,13 @@ PAGES = [
      "Not-for-profit community music in Dublin: classical music talks, live concerts in care "
      "homes and hospitals, and a recorder class for adults learning to play.",
      "Classical Music for Everyone · 아일랜드 더블린의 공동체 음악",
-     "더블린의 비영리 공동체 음악 단체. 클래식 음악 강의, 요양시설·병원·지역 공간으로 "
-     "찾아가는 음악회, 처음 악기를 배우는 어른을 위한 커뮤니티 클래스.",
+     "더블린의 비영리 공동체 음악 단체. 찾아가는 음악회와 강의, 어른을 위한 리코더 클래스를 엽니다.",
      en.INDEX, ko.INDEX),
 
     ("about.html",
      "About · Classical Music for Everyone",
-     "Our story since 2024, the founder Andrew Seohyeon Kim, how we are run, and the "
-     "places we have played and taught.",
+     "A not-for-profit community music initiative in Dublin since 2024: our story, our founder, "
+     "how we are run and where we have played and taught.",
      "소개 · Classical Music for Everyone",
      "2024년부터의 이야기, 창립자 김서현, 운영 방식, 그리고 연주하고 가르쳐 온 곳.",
      en.ABOUT, ko.ABOUT),
@@ -59,10 +59,10 @@ PAGES = [
 
     ("get-involved.html",
      "Get involved · Classical Music for Everyone",
-     "Take part in a programme, bring a concert to your place, tell us you would like to perform, "
+     "Join a programme, bring a concert to your place, register interest as a musician or artist, "
      "or join the founding board.",
      "함께하기 · Classical Music for Everyone",
-     "프로그램 참여, 우리 공간으로 음악회 부르기, 함께 연주하기 참여 신청, 창립 이사회.",
+     "프로그램 참여, 음악회 초청, CMFE Artists 참여 신청, 창립 이사회.",
      en.GET_INVOLVED, ko.GET_INVOLVED),
 
     ("news.html",
@@ -127,6 +127,7 @@ def build_redirects():
 <meta http-equiv="refresh" content="0; url={rel}">
 <link rel="icon" href="{css[:-10]}assets/app-icon-512.png" type="image/png">
 <link rel="stylesheet" href="{css}">
+<style>@view-transition{{navigation:none}}</style>
 </head>
 <body>
 <main id="main">
@@ -301,26 +302,25 @@ def build_llms():
     """A plain-text summary at /llms.txt for AI assistants and answer engines.
     Facts only; nothing here that is not on the site or in the canonical set."""
     lines = ["# Classical Music for Everyone", "",
-             "> Classical Music for Everyone is a not-for-profit community music initiative in "
-             "Dublin, Ireland. We give classical music talks, bring live concerts to care homes, "
-             "hospitals, religious houses and community settings, and teach adults to play "
-             "together.", "",
-             "Founded January 2024 in Dublin. A not-for-profit community music initiative, "
-             "forming a company limited by guarantee; it is not yet a registered charity. "
-             "Founder & Artistic Director: Andrew Seohyeon Kim.",
+             "> Classical Music for Everyone gives classical music talks, brings live concerts to "
+             "care homes, hospitals, religious houses and community settings in Dublin, Ireland, and "
+             "teaches adults to play together.", "",
+             "Founded January 2024 in Dublin. Classical Music for Everyone is a not-for-profit "
+             "community music initiative, forming a company limited by guarantee. It is not yet a "
+             "registered charity. Founder & Artistic Director: Andrew Seohyeon Kim.",
              "Five programmes: Getting to Know Classical Music (talks), "
              "Outreach Concerts, the Community Recorder Ensemble Class, the Letters Ensemble, and "
-             "Concert Guide & Companion (going to concerts together). From 2027 it plans paid, "
-             "mentored performances for emerging musicians (CMFE Artists); expressions of "
-             "interest are open now.",
+             "Concert Guide & Companion (going to concerts together). Musicians and artists from any "
+             "field can register interest at any time; from 2027 it plans paid, mentored "
+             "performances for emerging musicians (CMFE Artists).",
              "Now running: the Community Recorder Ensemble Class at Mulhuddart Community Centre, "
-             "Dublin 15, Wednesday evenings 7:00-8:00pm.",
-             "Record: 40+ sessions and performances since 2024, in four countries: Ireland, "
+             "Dublin 15, Wednesday evenings 7pm to 8pm, autumn 2026.",
+             "Record: 40+ talks and performances since 2024, in four countries: Ireland, "
              "France, the United Kingdom and Korea. The forty on the record from January 2024 to "
              "September 2026 are 17 talks, 20 outreach performances, one pilot concert "
-             "and two concerts for South Dublin Live 2026, for which South Dublin County "
-             "Council's Arts Office selected the founder. A ten-week pilot recorder ensemble for "
-             "seven retired Presentation Sisters was completed by all seven.",
+             "and two South Dublin Live 2026 concerts (our founder was selected for South Dublin "
+             "Live 2026). In a ten-week pilot recorder ensemble, all seven retired Presentation "
+             "Sisters stayed to the end.",
              f"Contact: {EMAIL} · {PHONE_INTL} · Dublin, Ireland. Languages: English, Korean.", "",
              "## Pages (English)", ""]
     for slug, en_title, en_desc, *_ in PAGES:
@@ -368,8 +368,7 @@ def build_manifest():
          "start_url": urlparse(SITE_URL).path.rstrip("/") + "/", "display": "browser",
          "background_color": "#FAF5EE", "theme_color": "#1D2430", "lang": "en-IE",
          "icons": [{"src": "assets/app-icon-512.png", "sizes": "512x512", "type": "image/png"},
-                   {"src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},
-                   {"src": "assets/logo-icon.svg", "sizes": "any", "type": "image/svg+xml"}]}
+                   {"src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"}]}
     with open(os.path.join(ROOT, "site.webmanifest"), "w", encoding="utf-8") as fh:
         json.dump(m, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
@@ -396,7 +395,14 @@ def main():
     written += ["404.html", "sitemap.xml", "robots.txt", "llms.txt", "site.webmanifest"]
     for path in written:
         print("wrote", path)
-    print(f"\n{len(written)} files.")
+    print(f"\n{len(written)} files.\n")
+    # the reading budget (readability.py): a block over budget stops the
+    # build, as a missing string does. CMFE_LINT=warn reports and goes on.
+    faults = readability.report(ROOT)
+    if faults and os.environ.get("CMFE_LINT") != "warn":
+        print("\nThe pages were written, but some text is over its reading budget. Split it into "
+              "a pattern (facts, steps, a list) or shorten it; see _build/readability.py.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

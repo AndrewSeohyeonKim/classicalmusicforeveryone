@@ -43,7 +43,7 @@ ROWS = [
     (2024, 1, 28, "lecture",
      "Getting Closer", "친해지기",
      "Sandyford, Dublin 18", "더블린 18구 Sandyford",
-     dict(att=6, flag=("the first lecture-recital", "첫 강의·연주"))),
+     dict(att=6, flag=("the first talk", "첫 강의"))),
     (2024, 2, 25, "lecture",
      "Together (1)", "함께하기 (1)",
      "Our Lady of Dolours Church, Dolphin&rsquo;s Barn", "Our Lady of Dolours 성당",
@@ -221,7 +221,7 @@ ROWS = [
      "Warrenmount, Dublin 8", "Warrenmount, 더블린 8구",
      dict(until=(3, 17), att=7, flag=("Thursdays, one hour · seven retired Presentation Sisters · all seven completed",
                                       "목요일 1시간 · 프레젠테이션 수녀회 은퇴 수녀 7명 · 7명 전원 수료"),
-          pub=("Thursdays, one hour · seven retired Presentation Sisters · all seven completed",
+          pub=("Thursdays, one hour · seven retired Presentation Sisters · all seven stayed to the end",
                "목요일 1시간 · 은퇴한 Presentation 수녀님 일곱 분 · 일곱 분 모두 끝까지"))),
     (2026, 1, 23, "lecture",
      "My Taste", "내 취향 찾기",
@@ -271,7 +271,7 @@ ROWS = [
     (2026, 9, 0, "course",
      "Community Recorder Ensemble Class begins", "커뮤니티 리코더 앙상블 클래스 시작",
      "Mulhuddart Community Centre, Dublin 15", "Mulhuddart Community Centre, 더블린 15구",
-     dict(flag=("Wednesday evenings", "매주 수요일 저녁"))),
+     dict(season=("Autumn 2026", "2026년 가을"), flag=("Wednesday evenings", "매주 수요일 저녁"))),
     (2026, 9, 19, "outreach",
      "An Autumn Concert", "가을 음악회",
      "Methodist Centenary Church, Ranelagh, Dublin 6", "Methodist Centenary Church, 더블린 6구 Ranelagh",
@@ -297,6 +297,10 @@ def when(row, lang):
     """A short date string for a row, in either language."""
     y, m, d, *_ = row
     note = row[8]
+    if "season" in note:
+        # a row whose month is not published prints its season (the class's
+        # start: facts.md gives "autumn 2026" and no date)
+        return note["season"][0 if lang == "en" else 1]
     mon = MONTH[lang][m - 1]
     if "until" in note:
         m2, d2 = note["until"]
