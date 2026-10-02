@@ -118,12 +118,12 @@ PROGRAMMES_DATA = [
          short="Getting to Know",
          icon="score", vocab="Getting closer · Together · My taste",
          img=("lecture-recital.jpg", 1050, 1400, "A talk in progress, with live playing"),
-         line="Talks with live music, for anyone curious about classical music.",
+         line="Talks with <mark>live music</mark>, for anyone curious about Classical Music.",
          page=dict(
-             lead="We give talks on classical music, with live playing. They are for anyone curious to "
+             lead="We give talks on Classical Music, with <mark>live playing</mark>. They are for anyone curious to "
                   "hear more.",
              cap=None,
-             glance=[("For", "Anyone curious about classical music"),
+             glance=[("For", "Anyone curious about Classical Music"),
                      ("Where", "Dublin"),
                      ("When", "On request"),
                      ("What you need", "No knowledge of music")],
@@ -131,16 +131,16 @@ PROGRAMMES_DATA = [
              # 02 §4: three stages, in this order; 08 §1 for what each covers
              how_h2="Three stages, from first listening to your own taste.",
              steps=[("Getting Closer",
-                     "What classical music is, by period and by instrument, with recordings and live "
+                     "What Classical Music is, by period and by instrument, with recordings and live "
                      "playing."),
                     ("Together",
                      "Orchestras and performers, including Ireland&rsquo;s own. How to book a ticket and "
                      "choose a seat."),
                     ("My Taste",
-                     "Finding what you like, for example by hearing one piece played by five pianists.")],
+                     "<mark>Finding what you like</mark>, for example by hearing one piece played by five pianists.")],
              expect_h2="Before your first talk.",
              faq=[("Do I need to know anything first?",
-                   "<strong>No.</strong> We start from &lsquo;what is classical music?&rsquo; and explain "
+                   "<strong>No.</strong> We start from &lsquo;what is Classical Music?&rsquo; and explain "
                    "every piece we play."),
                   ("How many people come?",
                    "Six to fourteen people came to each talk we counted. The chart below shows those counts."),
@@ -159,11 +159,11 @@ PROGRAMMES_DATA = [
          short="Outreach Concerts",
          icon="room", vocab="Day room · Chapel · Atrium",
          img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
-         line="Live classical music in care homes, hospitals, parishes and community centres.",
+         line="Live Classical Music in <mark>care homes, hospitals</mark>, parishes and community centres.",
          page=dict(
              # each lead sentence fits its column on a laptop (typeset_check:
              # the longer first sentences folded into half lines)
-             lead="We play in the rooms where people already are. We explain the music as we go.",
+             lead="We play in the rooms <mark>where people already are</mark>. We explain the music as we go.",
              cap=("Outreach concert", "Christmas 2025"),
              glance=[("For", "Care homes, hospitals, parishes and community groups"),
                      ("Where", "Your own room, in Dublin and further by arrangement"),
@@ -173,7 +173,7 @@ PROGRAMMES_DATA = [
              how_h2="Three steps to a concert in your room.",
              steps=[("You tell us", "Write with the room, a date and who will be listening."),
                     ("We plan the music",
-                     "We choose pieces people can enjoy on first hearing, for your listeners."),
+                     "We choose pieces people can <mark>enjoy on first hearing</mark>, for your listeners."),
                     ("We come and play",
                      "Musicians, instruments and stands come with us, and we play in your room.")],
              expect_h2="Before you invite us.",
@@ -181,7 +181,7 @@ PROGRAMMES_DATA = [
                    "Andrew Seohyeon Kim, our founder, plays clarinet and organ, alone or with musicians he "
                    "invites. Our Letters Ensemble gives some concerts."),
                   ("Who can listen?",
-                   "Everyone in the room: residents or patients, family and staff. There is no dress code."),
+                   "<mark>Everyone in the room</mark>: residents or patients, family and staff. There is no dress code."),
                   ("Where have you played?",
                    "A hospital, a care home, religious communities and parishes, in four countries. See <a "
                    f'class="link" href="about.html#places">all {N_PLACES} places where we have played and '
@@ -199,9 +199,9 @@ PROGRAMMES_DATA = [
          icon="recorder", vocab="First notes · Reading · Your own part",
          img=("recorders.jpg", 1343, 1400, RECORDERS_ALT),
          # renamed 1 Oct 2026
-         line="A weekly class for adults who have never played an instrument.",
+         line="A weekly class for adults who have <mark>never played an instrument</mark>.",
          page=dict(
-             lead="For adults who have never played an instrument. You play your first notes in week one.",
+             lead="For adults who have never played an instrument. You play your first notes <mark>in week one</mark>.",
              cap=("Recorders", "November 2025"),
              # the pilot ensemble on the founder's own channel; our still until play is pressed
              video=dict(kind="youtube", id="i7skwGKWSYY", poster="recorders.jpg",
@@ -219,7 +219,7 @@ PROGRAMMES_DATA = [
                     ("Reading from zero",
                      "Notes and fingering, one at a time, with music we prepare for the class."),
                     ("Your own part",
-                     "The group plays in harmony. The term ends with a small concert of our own.")],
+                     "The group plays in harmony. The term ends with <mark>a small concert</mark> of our own.")],
              expect_h2="Before your first class.",
              faq=[("Do I need my own recorder?", "<strong>No.</strong> We can lend you one."),
                   ("Do I need to read music?",
@@ -243,9 +243,9 @@ PROGRAMMES_DATA = [
          short="Letters Ensemble",
          icon="people", vocab="Irish · Korean · Sacred",
          img=("letters-ensemble.jpg", 1400, 1050, "The Letters Ensemble with their instruments"),
-         line="Amateur musicians in Dublin playing Irish, Korean and sacred music.",
+         line="<mark>Amateur musicians</mark> in Dublin playing Irish, Korean and sacred music.",
          page=dict(
-             lead="Amateur musicians in Dublin, together since 2024. We play Irish, Korean and sacred music.",
+             lead="<mark>Amateur musicians</mark> in Dublin, together since 2024. We play Irish, Korean and sacred music.",
              cap=("Letters Ensemble", "with their instruments"),
              glance=[("For", "Amateur players of any background"),
                      ("Where", "Dublin"),
@@ -254,7 +254,7 @@ PROGRAMMES_DATA = [
              now=("All players welcome", "Write with your instrument, and we will send rehearsal times."),
              how_h2="Rehearse in Dublin, then play for communities.",
              steps=[("Tell us your instrument",
-                     "Write with what you play. Players of any background are welcome."),
+                     "Write with what you play. Players of <mark>any background</mark> are welcome."),
                     ("Rehearse together",
                      "We rehearse in Dublin, directed by our founder, Andrew Seohyeon Kim."),
                     ("Play for a community",
@@ -285,9 +285,9 @@ PROGRAMMES_DATA = [
          icon="ticket", vocab="Before · During · After",
          img=("proms-hall.jpg", 1400, 933,
               "A full Royal Albert Hall during a BBC Prom, seen from high in the audience: the orchestra on a lit stage, beams of light and the acoustic discs overhead"),
-         line="Small groups go to concerts together, prepared beforehand.",
+         line="<mark>Small groups</mark> go to concerts together, prepared beforehand.",
          page=dict(
-             lead="For people who would rather not go to a concert alone. We prepare, go together, then "
+             lead="For people who would rather not go to a concert alone. We prepare, <mark>go together</mark>, then "
                   "talk it over.",
              # the founder's own photograph from the audience at the BBC Proms; no group trip to the
              # Proms is on the record, so the caption says whose view it is. The month is the
@@ -303,7 +303,7 @@ PROGRAMMES_DATA = [
              steps=[("Prepare beforehand",
                      "We choose a concert. Then we go through the music and what happens in the hall."),
                     ("Go as a group", "The group goes together, with a guide during the concert."),
-                    ("Talk it over", "Afterwards we talk about what we heard. There is no wrong answer.")],
+                    ("Talk it over", "Afterwards we talk about what we heard. There is <mark>no wrong answer</mark>.")],
              expect_h2="Before your first outing.",
              faq=[("Which concerts have you suggested?",
                    "The National Symphony Orchestra, the TU Dublin Philharmonic and a National Concert "
@@ -343,10 +343,9 @@ for _p in PROGRAMMES_DATA:
 HOME = dict(
     hero=dict(
         eyebrow="Community music · Dublin, Ireland",
-        title=["Classical music,", '<span class="for">for </span><em>Everyone.</em>'],
-        # kit 27: the 25-word version (with the class's new name), then how we work
-        lead="We bring live music to people who find it hard to get to concerts. Come to listen, learn or "
-             "play.",
+        title=["Classical Music,", '<span class="for">for </span><em>Everyone.</em>'],
+        # under the title comes the master line (Andrew, 2 Oct 2026, evening), taken from
+        # layout.STR, the same string the footer sets, so the two cannot drift
         cta=("#programmes", "See the programmes"),
         more=("programmes/outreach-concerts.html", "Invite us to play"),
         img=("hero-outreach.jpg", 1800, 1350,
@@ -402,7 +401,7 @@ ABOUT_T = dict(
         eyebrow="About",
         title=["About us."],
         # kit 27, positioning: who, and how
-        lead="A community music initiative in Dublin. We play and teach where music is needed.",
+        lead="A community music initiative in Dublin. We play and teach <mark>where music is needed</mark>.",
         img=("columban-ensemble.jpg", 1400, 1050,
              "Four string players of the Letters Ensemble and their conductor in a bright yellow room"),
         cap=("Missionary Sisters of St Columban, Co. Wicklow", "November 2024"),
@@ -475,8 +474,8 @@ ABOUT_T = dict(
         label="The name",
         h2="Why <em>Everyone</em> is in gold",
         # the meaning is in the proportion (CLAUDE.md §1), so "for" stays in the sentence
-        text="Our logo sets &ldquo;for&rdquo; small and &ldquo;Everyone&rdquo; large. We have to live up "
-             "to that word.",
+        text="Our logo sets &ldquo;for&rdquo; small and &ldquo;Everyone&rdquo; large. We have to live up to "
+             "<mark>that word</mark>.",
         alt="The Classical Music for Everyone mark: a treble clef beside the wordmark, with "
             "&lsquo;Everyone&rsquo; set large and in gold",
     ),
@@ -491,7 +490,7 @@ PROGRAMMES_T = dict(
     head=dict(
         eyebrow="Programmes",
         title=["Our programmes."],
-        lead="Most programmes need no experience. Write to us, and we will tell you how to start.",
+        lead="Most programmes <mark>need no experience</mark>. Write to us, and we will tell you how to start.",
     ),
     list_sr="The five programmes",
     # kit 27, message 3: a plan, said as a plan, with the one thing open now
@@ -513,7 +512,7 @@ GET_INVOLVED_T = dict(
     head=dict(
         eyebrow="Get involved",
         title=["Ways to get involved."],
-        lead="One line by email is enough to start.",
+        lead="<mark>One line by email</mark> is enough to start.",
     ),
     ways_label="Four ways",
     ways=[("programmes.html", "Take part", "Join a programme",
@@ -526,7 +525,7 @@ GET_INVOLVED_T = dict(
     invite=dict(
         label="Partner venues",
         h2="Bring a concert to your place.",
-        lead="Care homes, hospitals, parishes and community centres can invite us.",
+        lead="Care homes, hospitals, parishes and community centres <mark>can invite us</mark>.",
         pair_labels=("You provide", "We bring"),
         pairs=[("A concert",
                 ["A room", "A date", "A contact person"],
@@ -543,7 +542,7 @@ GET_INVOLVED_T = dict(
     play=dict(
         label="CMFE Artists",
         h2="Perform with us.",
-        lead="We are ready to work with musicians and artists from any field, at any time.",
+        lead="We are ready to work with musicians and artists <mark>from any field</mark>, at any time.",
         facts=[("For", "Students, emerging, amateur and professional artists"),
                ("How", "A few lines about you, and a link to your work"),
                ("Garda vetting", "May be needed, depending on the venue"),
@@ -564,9 +563,11 @@ GET_INVOLVED_T = dict(
         label="Help us build it",
         board=dict(
             h2="Join the founding board.",
-            lead="We are looking for the first members of an independent volunteer board.",
+            lead="We are looking for the first members of <mark>an independent volunteer board</mark>.",
             facts=[("Roles", "Chair, treasurer, secretary, safeguarding and care lead, community lead"),
                    ("Conditions", "Unpaid, with reasonable expenses")],
+            # the same roles, one a seat at the drawn table (parts.table); no number of seats is said
+            roles=["Chair", "Treasurer", "Secretary", "Safeguarding and care lead", "Community lead"],
             href=_MAIL_BOARD, btn="Enquire about a role",
         ),
         gifts="We are not asking for or accepting gifts yet.",
@@ -743,21 +744,34 @@ CONTACT_T = dict(
         title=["Write to us."],
         # each sentence fits its column on a laptop (chief designer, typography
         # pass: the old pair folded into four half lines); now as the Korean says
-        lead="Choose a topic below, or simply write. We answer every message.",
+        lead="Choose a topic below, or simply write. We answer <mark>every message</mark>.",
     ),
-    # what is it about? each row opens an email with its subject (and, for an
-    # invitation, the same questions as everywhere else); the address itself
-    # is quiet, underneath
-    topics_h2="What is it about?",
-    topics=[(_mail("Taking part"), "Taking part", "Join a programme",
-             "Write"),
-            (MAIL_INVITE, "Venues", "Bring a concert to your place", "Write"),
-            (_MAIL_EOI, "Artists", "Register interest to perform", "Write"),
-            (_MAIL_BOARD, "Founding board", "Ask about a board role", "Write"),
-            (_mail("Personal data request"), "Your details", "See, correct or delete what we hold",
-             "Write"),
-            (_mail("Enquiry: Classical Music for Everyone"), "Anything else",
-             "Questions, ideas or press", "Write")],
+    # one form, a topic to choose (Andrew, 2 Oct 2026, evening). It is a mailto form: the
+    # visitor's own email app opens with the subject and the message; nothing passes through
+    # this site. Each topic shows what helps us answer (the same prompts as the mail buttons).
+    # research (2 Oct 2026): radios, not a dropdown (GOV.UK), named "subject" with today's
+    # subject lines as values; one textarea named "body"; nothing required; the button says
+    # what happens. A mailto URL stays safe under about 2,000 characters.
+    form=dict(
+        h2="Write to us",
+        topic_label="What is it about?",
+        topics=[("part", "Taking part", "Taking part in a programme",
+                 ["Which programme interests you", "How we can reach you"]),
+                ("venue", "Concert invitation", "A venue: invite us to play", INVITE_FIELDS),
+                ("artist", "CMFE Artists: expression of interest", "An artist: register interest", EOI_FIELDS),
+                ("board", "Founding board: Classical Music for Everyone", "The founding board",
+                 ["Which role interests you", "A few lines about you"]),
+                ("data", "Personal data request", "Your details: see, correct or delete",
+                 ["What you would like: to see, correct or delete it"]),
+                ("other", "Enquiry: Classical Music for Everyone", "Anything else", [])],
+        helps="Helpful to include:",
+        general="Choose a topic, or simply write.",
+        message_label="Your message",
+        button="Open in my email app",
+        # "keep it short" is always in view, beside the button (chief designer v2: a mailto
+        # address over about 2,000 characters may not open at all)
+        note="Keep it short here: you can finish and send it in your email app. If nothing opens, write to",
+    ),
     direct_label="Or write directly",
     email=EMAIL,
     email_href=_mail("Enquiry: Classical Music for Everyone"),
@@ -775,9 +789,11 @@ CONTACT_T = dict(
     privacy=dict(
         label="Privacy notice",
         h2="How we look after your details.",
-        intro="How we use the details you send, and your rights. Last updated 1 October 2026.",
+        intro="How we use the details you send, and your rights. Last updated 2 October 2026.",
         # what this website does not have, said once and plainly
-        none=[("Forms", "None"), ("Cookies", "None of ours"), ("Analytics", "None"), ("Advertising", "None")],
+        # the contact form is a mailto form: it sends nothing itself (2 Oct 2026)
+        none=[("Forms", "One, and it only opens your email app"), ("Cookies", "None of ours"),
+              ("Analytics", "None"), ("Advertising", "None")],
         blocks=[("Who is responsible",
                  "p",
                  '<span class="brandname">Classical Music for Everyone</span>, a not-for-profit community '
@@ -787,7 +803,7 @@ CONTACT_T = dict(
                 ("When you email us",
                  "list",
                  ["We use what you send only to reply and to do what you asked.",
-                  "We never sell it, and only the services listed below handle it for us.",
+                  "We <mark>never sell it</mark>, and only the services listed below handle it for us.",
                   "We keep artists&rsquo; details for up to two years, to offer them concerts.",
                   "Telling us about access needs is optional."],
                  ""),

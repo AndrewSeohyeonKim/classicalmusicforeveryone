@@ -36,6 +36,19 @@ _P = {
     # a ticket with notched ends and its perforation: going to a concert
     "ticket":   '<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5'
                 'h-15A1.5 1.5 0 0 1 3 16.5v-2a2.5 2.5 0 0 0 0-5z"/><path d="M15.5 6.5v2M15.5 11v2M15.5 15.5v2"/>',
+    # the drawings on Get involved (art direction, 2 Oct 2026 evening): what a
+    # host provides and what we bring, one icon a line
+    # a page of a calendar with its two rings and one day marked: a date
+    "calendar": '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/>'
+                '<rect x="13" y="13" width="3.5" height="3.5" rx=".6"/>',
+    # one person, head and shoulders, drawn like "people": a contact person
+    "person":   '<circle cx="12" cy="8" r="3.5"/><path d="M5 20.5a7 7 0 0 1 14 0"/>',
+    # a music stand: the desk with its lip, the pole, three feet
+    "stand":    '<path d="M4.5 4.5h15l-1 6h-13z"/><path d="M4.5 10.5h15"/><path d="M12 10.5v6.5"/>'
+                '<path d="M12 17l-4.5 4M12 17l4.5 4M12 17v4"/>',
+    # a megaphone with two arcs of sound: letting local people know
+    "announce": '<path d="M3.5 10.5v3a1 1 0 0 0 1 1H7l8 4.5v-15L7 9.5H4.5a1 1 0 0 0-1 1z"/>'
+                '<path d="M8 14.5l1.2 4.5h2.2l-1-3.6"/><path d="M18.5 9.8a3.2 3.2 0 0 1 0 4.4M20.6 7.6a6.3 6.3 0 0 1 0 8.8"/>',
 }
 
 

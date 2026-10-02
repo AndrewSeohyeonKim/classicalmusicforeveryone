@@ -34,7 +34,7 @@ PAGES = [
     #                     en body,        ko body
     ("index.html",
      "Classical Music for Everyone · community music in Dublin, Ireland",
-     "Not-for-profit community music in Dublin: classical music talks, live concerts in care "
+     "Not-for-profit community music in Dublin: Classical Music talks, live concerts in care "
      "homes and hospitals, and a recorder class for adults learning to play.",
      "Classical Music for Everyone · 아일랜드 더블린의 공동체 음악",
      "더블린의 비영리 공동체 음악 단체. 찾아가는 음악회와 강의, 어른을 위한 리코더 클래스를 엽니다.",
@@ -302,7 +302,7 @@ def build_llms():
     """A plain-text summary at /llms.txt for AI assistants and answer engines.
     Facts only; nothing here that is not on the site or in the canonical set."""
     lines = ["# Classical Music for Everyone", "",
-             "> Classical Music for Everyone gives classical music talks, brings live concerts to "
+             "> Classical Music for Everyone gives Classical Music talks, brings live concerts to "
              "care homes, hospitals, religious houses and community settings in Dublin, Ireland, and "
              "teaches adults to play together.", "",
              "Founded January 2024 in Dublin. Classical Music for Everyone is a not-for-profit "
@@ -363,7 +363,7 @@ def build_manifest():
     """A minimal web app manifest so a home-screen shortcut carries the mark."""
     import json
     m = {"name": "Classical Music for Everyone", "short_name": "CMFE",
-         "description": "Community music in Dublin: we bring live classical music to the places it "
+         "description": "Community music in Dublin: we bring live Classical Music to the places it "
                         "rarely reaches, and invite people to play as well as listen.",
          "start_url": urlparse(SITE_URL).path.rstrip("/") + "/", "display": "browser",
          "background_color": "#FAF5EE", "theme_color": "#1D2430", "lang": "en-IE",

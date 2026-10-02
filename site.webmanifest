@@ -1,7 +1,7 @@
 {
   "name": "Classical Music for Everyone",
   "short_name": "CMFE",
-  "description": "Community music in Dublin: we bring live classical music to the places it rarely reaches, and invite people to play as well as listen.",
+  "description": "Community music in Dublin: we bring live Classical Music to the places it rarely reaches, and invite people to play as well as listen.",
   "start_url": "/classicalmusicforeveryone/",
   "display": "browser",
   "background_color": "#FAF5EE",

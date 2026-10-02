@@ -13,12 +13,14 @@ layout.py adds the prefix each page needs. Class names are the contract with
 styles.css; the sections of that file follow the order of this one.
 """
 
+import math
 import os
+import re
 
 import artifacts
 import ledger
 from icons import glyph
-from layout import ROOT
+from layout import ROOT, STR
 
 ARROW = '<span class="arrow" aria-hidden="true"><i>&rarr;</i></span>'
 
@@ -35,20 +37,31 @@ def go(href, label):
     return f'<a class="go" href="{href}">{label} {ARROW}</a>'
 
 
-def eyebrow(text, no=None, cls=""):
-    n = f'<span class="no">{no}</span>' if no else ""
+def eyebrow(text, no=None, cls="", hidden=False):
+    # a Roman numeral takes a full stop, as in a concert programme ("I. What
+    # we do"): at the label's size a bare "I" could be read as the word
+    # (chief designer v2, P3-3)
+    n = f'<span class="no">{no}{"." if no and not no.strip("IVX") else ""}</span>' if no else ""
     c = f"eyebrow {cls}".strip()
-    return f'<p class="{c}">{n}{text}</p>'
+    h = ' aria-hidden="true"' if hidden else ""
+    return f'<p class="{c}"{h}>{n}{text}</p>'
 
 
 def sh(label, h2, lead=None, no=None, split=False, cls=""):
-    """A section head: a label in the margin, the heading, one paragraph."""
+    """A section head: a label in the margin, the heading, one paragraph.
+    The label names the section (Andrew, 2 Oct 2026 evening: it is what tells
+    a reader where they are, so it is set to be read, styles.css
+    .section-label). A screen reader hears it as part of the heading ("What
+    we do: Five programmes."); the visible copy is hidden from it, so it is
+    not read twice."""
     lead_ = f'\n      <p class="sh-lead">{lead}</p>' if lead else ""
     c = "sh" + (" sh-split" if split else "") + (f" {cls}" if cls else "")
+    label_ = eyebrow(label, no, "section-label", hidden=True)
+    h2_ = f'<h2><span class="sr-only">{label}: </span>{h2}</h2>'
     if split:
-        return (f'    <header class="{c}">\n      {eyebrow(label, no)}\n'
-                f'      <div><h2>{h2}</h2>{lead_}</div>\n    </header>')
-    return f'    <header class="{c}">\n      {eyebrow(label, no)}\n      <h2>{h2}</h2>{lead_}\n    </header>'
+        return (f'    <header class="{c}">\n      {label_}\n'
+                f'      <div>{h2_}{lead_}</div>\n    </header>')
+    return f'    <header class="{c}">\n      {label_}\n      {h2_}{lead_}\n    </header>'
 
 
 # How wide each kind of photograph is drawn, for the browser to pick a file.
@@ -131,12 +144,104 @@ def leadins(items, cls=""):
             + "</ul>")
 
 
-def pair(title, give, bring, labels):
-    """What a host gives and what we bring, side by side."""
-    li = lambda xs: "".join(f"<li>{x}</li>" for x in xs)
-    return (f'<div class="pair"><h3>{title}</h3><div class="pair-cols">'
-            f'<div><p class="pair-label">{labels[0]}</p><ul>{li(give)}</ul></div>'
-            f'<div><p class="pair-label">{labels[1]}</p><ul>{li(bring)}</ul></div></div></div>')
+# ---------------------------------------------------------------------------
+# Drawings in place of lists (Andrew, 2 Oct 2026 evening: "not text listed
+# one after another, but diagrams and design"). Art direction, v2: one kit of
+# stations (a ring holding a line icon), 1px strokes and open rings, drawn in
+# HTML and CSS so the words wrap and zoom. Nothing in them is new copy: every
+# word is a fact the deck already held.
+# ---------------------------------------------------------------------------
+
+# One icon per line of "You provide / We bring", by position and the same in
+# both languages; the build stops if a list and its icons differ in length.
+MEET_ICONS = ((("room", "calendar", "person"), ("people", "stand", "score")),
+              (("room", "person", "announce"), ("recorder", "score")))
+
+
+def meet(k, title, give, bring, labels):
+    """What a host provides and what we bring, drawn: two columns of stations
+    bracketed into one stem each, meeting at the event (a concert, a class).
+    The DOM reads the event, then each side with its list."""
+    gi, bi = MEET_ICONS[k]
+    if len(gi) != len(give) or len(bi) != len(bring):
+        raise ValueError(f"meet {k}: one icon per line")
+    def li(xs, ic, start):
+        return "".join(f'<li style="--i:{start + j}"><span class="meet-ico" aria-hidden="true">'
+                       f'{glyph(i, "meet-glyph")}</span><span class="meet-t">{x}</span></li>'
+                       for j, (x, i) in enumerate(zip(xs, ic)))
+    return (f'<div class="meet">'
+            f'<h3 class="meet-hub" id="meet-{k}">{title}</h3>'
+            f'<div class="meet-side meet-give"><p class="meet-label" id="meet-{k}-g">{labels[0]}</p>'
+            f'<ul class="meet-list" aria-labelledby="meet-{k}-g">{li(give, gi, 0)}</ul></div>'
+            f'<div class="meet-side meet-bring"><p class="meet-label" id="meet-{k}-b">{labels[1]}</p>'
+            f'<ul class="meet-list" aria-labelledby="meet-{k}-b">{li(bring, bi, len(give))}</ul></div>'
+            f'</div>')
+
+
+ROUTE_ICONS = ("people", "mail", "building")   # For, How, Garda vetting; the last station shows its year
+
+
+def route(rows):
+    """The facts of CMFE Artists as a route of stations: who, how and what a
+    venue may ask, which are true now. The plan (a row whose name holds a
+    year) is not on the route: a line into it read as "register now and it
+    leads to paid concerts in 2027" (chief designer v2, R19). It stands
+    apart under the route, its year in a ring, joined to nothing. A <dl>:
+    the icon sits inside each <dt>, hidden from screen readers."""
+    now = [r for r in rows if not re.search(r"\d{4}", r[0])]
+    plans = [r for r in rows if re.search(r"\d{4}", r[0])]
+    out = []
+    for k, (a, b) in enumerate(now):
+        mark = f'<span class="route-mark" aria-hidden="true">{glyph(ROUTE_ICONS[k], "route-glyph")}</span>'
+        out.append(f'<div class="route-st" style="--i:{k}"><dt>{mark}{a}</dt><dd>{b}</dd></div>')
+    plan = "".join(f'<dl class="route-plan"><dt><span class="route-mark route-year" aria-hidden="true">'
+                   f'{re.search(r"\d{4}", a).group(0)}</span>{a}</dt><dd>{b}</dd></dl>' for a, b in plans)
+    return '<dl class="route">' + "".join(out) + "</dl>" + plan
+
+
+def played(label, examples):
+    """Example programmes on one line of time, oldest first (a line of time
+    reads forward; the deck lists them newest first), each on the open dot
+    the record strip uses for a performance."""
+    sep = '<span class="sr-only">, </span>'
+    rows = "".join(f'<li style="--i:{k}"><span class="played-when">{c}</span>{sep}<b class="played-name">{a}</b>'
+                   f'{sep}<span class="played-who">{b}</span></li>' for k, (a, b, c) in enumerate(reversed(examples)))
+    return f'<h3 class="played-label">{label}</h3><ol class="played">{rows}</ol>'
+
+
+# a 40 x 21 drawing: the seats stand 6.75/40 of its width from the centre
+SEAT_R = 16.875    # cqw: the names stand on a circle this far out from the table's centre
+TABLE_R = 12.5     # cqw: the table itself is 25cqw across
+# the room a name needs around its point (cqw): the top name stands above it,
+# a side name is centred on it (two lines at most); 2cqw clear above and below
+NAME_ABOVE, NAME_HALF, TABLE_CLEAR = 5.6, 4.1, 2
+
+
+def table(roles, roles_label, cond):
+    """The board's roles set around a round table, the conditions lying on
+    the table. Names, not chairs: five drawn chairs read as a five-member
+    board, and no number of seats is said (chief designer v2, R19). The
+    build places the names and sizes the box to hug them (a fixed 40:21 box
+    left a band of empty table under the lowest names); styles.css draws the
+    table, and in a narrow column lists the names under "Roles". The label
+    stands on the content line, the drawing in the middle of the column (R2,
+    R20)."""
+    pts = []
+    for k, r in enumerate(roles):
+        a = math.radians(-90 + k * 360 / len(roles))
+        dx, dy, c = math.cos(a) * SEAT_R, math.sin(a) * SEAT_R, math.cos(a)
+        side = "t" if k == 0 else "r" if c > .01 else "l" if c < -.01 else "b"
+        above, below = {"t": (NAME_ABOVE, 0), "b": (0, NAME_ABOVE)}.get(side, (NAME_HALF, NAME_HALF))
+        pts.append((k, r, a, dx, dy, side, dy - above, dy + below))
+    up = max(TABLE_R, -min(p[6] for p in pts)) + TABLE_CLEAR
+    h = up + max(TABLE_R, max(p[7] for p in pts)) + TABLE_CLEAR
+    seats = "".join(f'<li class="seat seat-{side}" style="--x:{50 + dx:.2f}%;--y:{(up + dy) / h * 100:.2f}%;'
+                    f'--a:{math.degrees(a):.0f}deg;--i:{k}">{r}</li>'
+                    for k, r, a, dx, dy, side, _, _ in pts)
+    return (f'<div class="table-wrap"><p class="seats-label" id="board-roles">{roles_label}</p>'
+            f'<div class="table-box"><div class="table" style="--th:{h:.2f};--cy:{up / h * 100:.2f}%">'
+            f'<ul class="seats" aria-labelledby="board-roles">{seats}</ul>'
+            f'<dl class="table-top"><dt>{cond[0]}</dt><dd>{cond[1]}</dd></dl></div></div></div>')
 
 
 def fold(summary, inner, cls=""):
@@ -231,6 +336,13 @@ def status_tag(st, live=False):
 # HOME
 # ---------------------------------------------------------------------------
 
+def _unmark(text):
+    """Five cards side by side, each with a highlight, scattered: none stood
+    out (chief designer v2, R16). The cards drop it; the Programmes index,
+    where each line is read on its own row, keeps it."""
+    return text.replace("<mark>", "").replace("</mark>", "")
+
+
 def prog_card(i, p, pillars):
     label, dot = pillars[p["pillar"]]
     pg = p["page"]
@@ -239,7 +351,7 @@ def prog_card(i, p, pillars):
         <div class="pc-body">
           <span class="kicker"><i class="{dot}" aria-hidden="true"></i>{label}</span>
           <h3>{p["name"]}</h3>
-          <p>{p["line"]}</p>
+          <p>{_unmark(p["line"])}</p>
           {status_tag(pg["now"][0], pg.get("live"))}
         </div>
       </a></li>"""
@@ -282,15 +394,20 @@ def home(t, programmes, pillars, lang):
     # what is running now, said once at the top (4th pass): it replaced the
     # Ways-in list and section IV, which said it again further down
     live = [p for p in programmes if p["page"].get("live")]
-    now = f"\n        {now_line(live[0], 'lift lift-4')}" if live else ""
-    cta_lift = "lift-5" if live else "lift-4"
+    now = f"\n        {now_line(live[0], 'lift lift-3')}" if live else ""
+    cta_lift = "lift-4" if live else "lift-3"
+    # the master line is the title's subtitle (Andrew, 2 Oct 2026 evening), in
+    # the title's group; the string is the footer's (layout.STR), so the two
+    # cannot drift
     return f"""<section class="hero">
   <div class="wrap">
     <p class="eyebrow lift">{h["eyebrow"]}</p>
-    <h1 class="hero-title">{title_lines(h["title"])}</h1>
+    <hgroup class="hero-head">
+      <h1 class="hero-title">{title_lines(h["title"])}</h1>
+      <p class="hero-sub lift lift-2">{STR[lang]["tagline"]}</p>
+    </hgroup>
     <div class="hero-body">
-      <div class="hero-copy">
-        <p class="lead lift lift-3">{h["lead"]}</p>{now}
+      <div class="hero-copy">{now}
         <div class="btn-row hero-cta lift {cta_lift}">{btn(h["cta"][0], h["cta"][1], "primary")}{go(h["more"][0], h["more"][1])}</div>
       </div>
       <figure class="hero-figure open" data-first>
@@ -314,7 +431,7 @@ def home(t, programmes, pillars, lang):
 
 <section class="band-ink figs-band" id="record">
   <div class="wrap">
-    {eyebrow(nb["label"], "II")}
+    {eyebrow(nb["label"], "II", "section-label")}
     <h2 class="sr-only">{nb["sr"]}</h2>
     <div class="figs" style="--figs:{len(nb["figs"])}">
 {figs}
@@ -326,7 +443,7 @@ def home(t, programmes, pillars, lang):
 
 <section class="manifesto band-white" aria-labelledby="why-h">
   <div class="wrap why">
-    {eyebrow(w["label"], "III")}
+    {eyebrow(w["label"], "III", "section-label")}
     <div>
       <h2 class="why-premise" id="why-h"><span class="ink">{w["premise"]}</span></h2>
       <ul class="why-reasons rv-stagger">
@@ -413,7 +530,7 @@ def about(t, lang):
   <div class="wrap founder">
     {plate(f["img"], "", f.get("cap"), sizes="founder")}
     <div class="rv">
-      {eyebrow(f["label"])}
+      {eyebrow(f["label"], cls="section-label")}
       <h2>{f["name"]}</h2>
       <p class="founder-role">{f["role"]}</p>
       {fbody}
@@ -441,7 +558,7 @@ def about(t, lang):
 <section id="identity">
   <div class="wrap mark">
     <div class="rv">
-      {eyebrow(idn["label"])}
+      {eyebrow(idn["label"], cls="section-label")}
       <h2>{idn["h2"]}</h2>
       <p class="lead mt-3">{idn["text"]}</p>
     </div>
@@ -687,7 +804,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
 
 <section class="tight band-white" id="more">
   <div class="wrap">
-    <h2 class="eyebrow">{t["others_label"]}</h2>
+    <h2 class="eyebrow section-label">{t["others_label"]}</h2>
     <ul class="others">
 {others}
     </ul>
@@ -705,8 +822,8 @@ def get_involved(t, icon):
     if inv.get("pairs"):
         # what a host gives and what we bring (4th pass, 2 Oct 2026); the
         # steps of a visit live on the Outreach Concerts page, one click away
-        invite_body = ('      <div class="pairs">'
-                       + "".join(pair(a, b, c, inv["pair_labels"]) for a, b, c in inv["pairs"])
+        invite_body = ('      <div class="meets">'
+                       + "".join(meet(k, a, b, c, inv["pair_labels"]) for k, (a, b, c) in enumerate(inv["pairs"]))
                        + "</div>")
         more_href = "programmes/outreach-concerts.html#how"
     else:
@@ -723,10 +840,8 @@ def get_involved(t, icon):
     # is for, how to begin and what a venue may ask, as facts; then what a
     # performance with us has looked like, from the record, in place of the
     # eleven-item form
-    examples = "".join(f"<li><b>{a}</b><span>{b}</span><span>{c}</span></li>" for a, b, c in play["examples"])
-    play_body = f"""      {facts(play["facts"], "facts-plain")}
-      <h3 class="kicker examples-label">{play["examples_label"]}</h3>
-      <ul class="examples">{examples}</ul>
+    play_body = f"""      {route(play["facts"])}
+      {played(play["examples_label"], play["examples"])}
       <div class="btn-row">{btn(play["href"], play["btn"], "primary")}</div>
       {mail_alt(t["alt"])}
       <p class="small play-note">{play["note"]}</p>"""
@@ -756,8 +871,8 @@ def get_involved(t, icon):
   <div class="wrap" id="board">
 {sh(sup["label"], b["h2"], b["lead"], no="03", split=True)}
     <div class="board rv">
-      {facts(b["facts"], "facts-plain")}
-      <div>
+      {table(b["roles"], b["facts"][0][0], b["facts"][1])}
+      <div class="board-act">
         <div class="btn-row">{btn(b["href"], b["btn"], "primary")}</div>
         {mail_alt(t["alt"])}
         <p class="small mt-3">{sup["gifts"]}</p>
@@ -962,6 +1077,44 @@ def news(t, lang):
 # CONTACT, with the privacy notice
 # ---------------------------------------------------------------------------
 
+def contact_form(f, email):
+    """One contact form (Andrew, 2 Oct 2026 evening), with no server: a mailto
+    form. Six radios named "subject" (their values are the subject lines the
+    old buttons used) and one textarea named "body", the only two fields mail
+    apps can be relied on to read; submitted with GET, the browser builds
+    mailto:…?subject=…&body=… and the visitor's own email app opens with it.
+    Nothing is required and nothing is preselected (GOV.UK). The hint for the
+    chosen topic is shown with CSS (:has), inside one container the textarea
+    points to, so a screen reader hears only the hint that is shown."""
+    options = "\n".join(
+        f'          <label class="ct-option"><input type="radio" name="subject" value="{subj}" class="t-{key}">'
+        f'<span>{label}</span></label>' for key, subj, label, _ in f["topics"])
+    def hint(key, prompts):
+        if not prompts:
+            return ""
+        items = "".join(f"<li>{x}</li>" for x in prompts)
+        return f'<div class="ct-hint t-{key}"><p>{f["helps"]}</p><ol class="ct-fields">{items}</ol></div>'
+    hints = "".join(hint(key, prompts) for key, _, _, prompts in f["topics"])
+    rows = (len(f["topics"]) + 1) // 2
+    return f"""    <form class="ct-form rv" action="mailto:{email}" method="get">
+      <fieldset class="ct-topics">
+        <legend>{f["topic_label"]}</legend>
+        <div class="ct-options" style="--rows:{rows}">
+{options}
+        </div>
+      </fieldset>
+      <div class="ct-field">
+        <label for="ct-msg" class="ct-label">{f["message_label"]}</label>
+        <div class="ct-hints" id="ct-hint"><p class="ct-hint is-general">{f["general"]}</p>{hints}</div>
+        <textarea id="ct-msg" name="body" rows="7" aria-describedby="ct-hint ct-how"></textarea>
+      </div>
+      <div class="ct-act">
+        <button class="btn btn-primary" type="submit">{f["button"]} {ARROW}</button>
+        <p class="ct-how" id="ct-how">{f["note"]} <a class="link" href="mailto:{email}">{email}</a></p>
+      </div>
+    </form>"""
+
+
 def contact(t):
     rows = "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in t["details"])
     pv = t["privacy"]
@@ -989,10 +1142,10 @@ def contact(t):
     none = "".join(f"<div><dt>{a}</dt><dd>{b}</dd></div>" for a, b in pv["none"])
     return f"""{page_head(t["head"])}
 
-<section class="tight ct-topics">
+<section class="tight ct-write">
   <div class="wrap">
-    <h2 class="sr-only">{t["topics_h2"]}</h2>
-  {contents(t["topics"], t["topics_h2"], icon_="mail")}
+    <h2 class="sr-only">{t["form"]["h2"]}</h2>
+{contact_form(t["form"], t["email"])}
     <p class="direct rv"><span class="kicker">{t["direct_label"]}</span><span class="direct-links"><a href="{t["email_href"]}">{t["email"]}</a><a href="tel:{t["tel_href"]}">{t["tel"]}</a></span></p>
   </div>
 </section>

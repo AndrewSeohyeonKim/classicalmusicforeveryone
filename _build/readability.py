@@ -109,7 +109,7 @@ ALLOW = (
 # Which component a block belongs to: the first rule whose marks (classes
 # and tag names on the block and its ancestors) are all present wins.
 RULES = [
-    ("hero-lead",    ("hero-copy", "lead")),
+    ("statement",    ("hero-sub",)),
     ("page-lead",    ("ph-lead",)),
     ("page-lead",    ("pp-intro", "lead")),
     ("status-line",  ("pp-now",)),
@@ -122,7 +122,9 @@ RULES = [
     ("statement",    ("why-reasons",)),
     ("step",         ("steps",)),
     ("answer",       ("qa",)),
-    ("pair-item",    ("pair",)),
+    ("pair-item",    ("meet-list",)),
+    ("pair-item",    ("seats",)),
+    ("row",          ("played",)),
     ("clause-item",  ("notice-list", "li", "ul")),
     ("clause-item",  ("facts-rows", "dd")),
     ("value",        ("notice-list", "dd")),
@@ -173,6 +175,8 @@ BANNED = {
         (r"\bCMFE\b(?! Artists)", "the bare acronym"),
         (r"\b(organiz\w*|cent(er|ers)\b|colors?\b|favorite|traveled|catalog\b|program\b)",
          "US spelling"),
+        # Andrew, 2 Oct 2026: always a capital C and M
+        (r"\b(?:classical [Mm]usic|Classical music)\b", "'Classical Music' without its capitals"),
     ],
     "ko": [
         (r"—", "줄표"),
@@ -180,6 +184,7 @@ BANNED = {
         (r"자선\s?단체", "지위 문장 밖의 「자선단체」"),
         (r"아일랜드 전역", "「아일랜드 전역」"),
         (r"\bCMFE\b(?! Artists)", "단독 CMFE"),
+        (r"\b(?:classical [Mm]usic|Classical music)\b", "'Classical Music' without its capitals"),
     ],
 }
 
@@ -300,8 +305,33 @@ def _banned(lang, text):
     text = " ".join(text.split()).replace(" ".join(STATUS[lang].split()), "")
     found = []
     for pat, why in BANNED[lang]:
-        for m in re.finditer(pat, text, flags=re.I if lang == "en" and why != "the bare acronym" else 0):
+        exact = why in ("the bare acronym", "'Classical Music' without its capitals")
+        for m in re.finditer(pat, text, flags=re.I if lang == "en" and not exact else 0):
             found.append((why, text[max(0, m.start() - 40):m.end() + 40]))
+    return found
+
+
+# The highlighter (styles.css "the highlighter"): one key phrase per block,
+# never in a heading or a link, and not so many on a page that nothing stands
+# out any more (Andrew, 2 Oct 2026 evening: emphasis without bold).
+MARKS_PER_PAGE = 12
+_MARK_BLOCK = re.compile(r"<(p|li|dd|figcaption|summary)\b[^>]*>(.*?)</\1>", re.S)
+_MARK_IN = re.compile(r"<(h[1-4]|a)\b[^>]*>(?:(?!</\1>).)*?<mark", re.S)
+
+
+def _marks(main):
+    """Faults in a page's use of <mark>."""
+    found = []
+    for m in _MARK_BLOCK.finditer(main):
+        n = m.group(2).count("<mark")
+        if n > 1:
+            text = re.sub(r"<[^>]+>", "", m.group(2))
+            found.append((f"{n} highlights in one block", " ".join(text.split())[:80]))
+    for m in _MARK_IN.finditer(main):
+        found.append((f"a highlight inside <{m.group(1)}>", ""))
+    total = main.count("<mark")
+    if total > MARKS_PER_PAGE:
+        found.append((f"{total} highlights on one page (at most {MARKS_PER_PAGE})", ""))
     return found
 
 
@@ -323,6 +353,8 @@ def check(root, langs=("en", "ko")):
             with open(path, encoding="utf-8") as fh:
                 html_ = fh.read()
             main = html_[html_.find("<main"):html_.find("</main>")]
+            for why, where in _marks(main):
+                faults.append((lang, pg, "marks", 0, 0, 0, where, why))
             sections = re.findall(r'<section(?: class="([^"]*)")?', main)
             if sections and "band-ink" in (sections[-1] or "").split():
                 faults.append((lang, pg, "layout", 0, 0, 0, "", "the ink band is the last section: it runs into the footer"))

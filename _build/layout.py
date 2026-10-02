@@ -72,8 +72,8 @@ STR = {
         "lang_label": "Language",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "EN", "other_lang": "한국어",
-        "tagline": "Bringing classical music <em>where it&rsquo;s needed!</em>",
-        "tagline_plain": "Bringing classical music where it&rsquo;s needed!",
+        "tagline": "Bringing Classical Music <em>where it&rsquo;s needed!</em>",
+        "tagline_plain": "Bringing Classical Music where it&rsquo;s needed!",
         # the footer's line about what we do went on 2 Oct 2026: it was the third
         # telling of the hero lead on every page (content review); "" omits it
         "footer_about": "",
@@ -102,8 +102,8 @@ STR = {
         "lang_label": "언어",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "한국어", "other_lang": "EN",
-        "tagline": '<span lang="en">Bringing classical music <em>where it&rsquo;s needed!</em></span>',
-        "tagline_plain": '<span lang="en">Bringing classical music where it&rsquo;s needed!</span>',
+        "tagline": '<span lang="en">Bringing Classical Music <em>where it&rsquo;s needed!</em></span>',
+        "tagline_plain": '<span lang="en">Bringing Classical Music where it&rsquo;s needed!</span>',
         "footer_about": "",
         "f_explore": "둘러보기",
         "f_record": "함께하기",
@@ -148,7 +148,7 @@ RESET_JS = ("var n=document.getElementById('nav'),b=document.querySelector('.men
 # version from the messaging guide (kit 27), then its status sentence. It used
 # to take each page's own description, so the contact page described the
 # organisation as "email, phone and where we travel to".
-ORG_DESC = ("Classical Music for Everyone brings live classical music, talks and a recorder class to "
+ORG_DESC = ("Classical Music for Everyone brings live Classical Music, talks and a recorder class to "
             "people in Dublin who find it hard to get to concerts. Classical Music for Everyone is a "
             "not-for-profit community music initiative, forming a company limited by guarantee. It is "
             "not yet a registered charity.")
@@ -660,8 +660,8 @@ def _articles(text, before_tag):
 
 
 # Korean: a sentence does not end on one short word alone on a line; its last
-# two words stay together when they hold ten syllables or fewer (the same
-# rule the leads use, here for every block: answers, steps, values)
+# two words stay together when they hold eight syllables or fewer (the leads
+# allow ten, _ko_tail; here for every block: answers, steps, values, headings)
 _KO_LAST = re.compile(r"([^\s<]+) ([^\s<]+?[.!?](?:[”’」』)])?)(?=\s|$)")
 # nor does a particle start a line after a closing bracket or quote
 # (「Down by the Sally Gardens」 / 도)
@@ -671,11 +671,24 @@ _KO_CLOSE = re.compile("([」』’”)\\]])(?=[가-힣])")
 def _ko_sentence_ends(text):
     def bind(m):
         n = len(re.sub(r"[^가-힣A-Za-z0-9]", "", m.group(1) + m.group(2)))
-        return m.group(1) + (NBSP if n <= 10 and re.search("[가-힣]", m.group(2)) else " ") + m.group(2)
+        # eight syllables here (ten in the leads): a heading set large on a
+        # 320px phone cannot hold a longer tied run
+        return m.group(1) + (NBSP if n <= 8 and re.search("[가-힣]", m.group(2)) else " ") + m.group(2)
     return _KO_LAST.sub(bind, text)
 
 
+# A highlight (<mark>) sits inside a sentence: tie() must see the words on
+# both sides of it as one run, so the tags are masked while it works
+_MARK_OPEN, _MARK_CLOSE = "\ue000", "\ue001"
+
+
 def tie(markup, lang):
+    markup = markup.replace("<mark>", _MARK_OPEN).replace("</mark>", _MARK_CLOSE)
+    out = _tie(markup, lang)
+    return out.replace(_MARK_OPEN, "<mark>").replace(_MARK_CLOSE, "</mark>")
+
+
+def _tie(markup, lang):
     parts = re.split(r"(<[^>]+>)", markup)
     prev = ""
     for i in range(0, len(parts), 2):

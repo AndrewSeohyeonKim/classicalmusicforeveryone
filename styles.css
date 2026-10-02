@@ -106,6 +106,10 @@
      mixed a fifth of the way to ink it has 3.9:1 on cream, 3.5:1 on sunken
      cream and 4.2:1 on white, and still reads as the gold. */
   --accent-mark:color-mix(in srgb,var(--gold-bronze) 80%,var(--ink-navy));
+  /* the highlighter: emphasis without bold (Andrew, 2 Oct 2026 evening).
+     Light gold at 45% on cream; ink on it reads at about 11:1 */
+  --highlight:color-mix(in srgb,var(--gold-light) 55%,transparent);
+  --highlight-inverse:color-mix(in srgb,var(--gold-light) 30%,transparent);
 
   --line:var(--cream-edge);                /* decorative hairlines            */
   --line-strong:var(--cream-rule);
@@ -275,7 +279,7 @@ h1 em,h2 em,h3 em{font-style:italic;color:var(--accent-ink)}
 /* display faces and controls keep their own fit: the air is for running text */
 :is(h1,h2,h3,h4,.hero-title,.why-premise,.why-reasons li,.why-resolve,.fig b,.footer-line,.cover,
     .contents b,.others b,.pl-name,.glance dd,.pp-glance dd,.pi-facts dd,.qa dt,.rec-what b,.none-glance dd,
-    .direct a,.step-n,.att-head b,.mini-figs dd,.pair h3,.site-header,.btn,.tag,.go,.crumbs){word-spacing:normal}
+    .direct a,.step-n,.att-head b,.mini-figs dd,.site-header,.btn,.tag,.go,.crumbs){word-spacing:normal}
 .site-header,.btn,.tag{letter-spacing:0}
 
 /* Korean: no italic, more leading, tracked in rather than out. Headings
@@ -296,12 +300,12 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,td,th,a,span,b,small){
    set only colour, margin and layout. */
 .eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,
 .glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.contents .c-label,.details dt,
-.none-glance dt,.pair-label,.mini-period{
+.none-glance dt,.mini-period{
   font-family:var(--font-body);font-size:var(--t-label);font-weight:600;
   letter-spacing:var(--label-track);text-transform:uppercase;line-height:1.3;
   font-variant-numeric:lining-nums tabular-nums;
 }
-html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.contents .c-label,.details dt,.none-glance dt,.pair-label,.mini-period){
+html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.contents .c-label,.details dt,.none-glance dt,.mini-period){
   font-family:var(--font-kr);font-size:.84rem;letter-spacing:var(--label-track-kr);font-weight:700;
 }
 /* Korean has two weights: a field label steps down to 400 so the 700 value
@@ -314,6 +318,33 @@ html[lang^="ko"] :is(.glance dt,.facts dt,.pp-glance dt,.pi-facts dt,.details dt
   text-transform:none;color:var(--accent-ink);font-variant-numeric:lining-nums;
 }
 .kicker{color:var(--accent-ink)}
+/* --- the section label (Andrew, 2 Oct 2026 evening: "it says what the section is, but it is
+   smaller than the body and nobody sees it"; art direction v2) ---------------
+   The section's name, set to be read: sentence case at the lead's size,
+   Jakarta 600 (Korean Noto 700), deep gold; the movement number in
+   Garamond, 1.4 times the name, on the same baseline. It never outgrows the
+   lead beside it, so the H2 stays the one large thing in the head. Field
+   names (FOR, HOW, ROLES, YOU PROVIDE) keep the small capitals. */
+.eyebrow.section-label{
+  font-family:var(--font-body);font-size:var(--t-lead);font-weight:600;line-height:1.3;
+  letter-spacing:0;word-spacing:normal;text-transform:none;text-wrap:balance;
+  gap:.5em;margin:0 0 14px;color:var(--accent-ink);
+}
+.eyebrow.section-label .no{font-family:var(--font-display);font-size:1.4em;font-weight:500;line-height:1;
+  letter-spacing:0;color:var(--accent-ink);font-variant-numeric:lining-nums}
+html[lang^="ko"] .eyebrow.section-label{font-family:var(--font-kr);font-size:var(--t-lead);font-weight:700;
+  letter-spacing:-.01em}
+html[lang^="ko"] .eyebrow.section-label .no{font-family:var(--font-display);font-weight:500;letter-spacing:0}
+.band-ink .eyebrow.section-label,.band-ink .eyebrow.section-label .no{color:var(--accent-inverse)}
+/* beside the heading, on its first baseline (the grid already aligns by
+   baseline); the old .2em nudge was for 13px capitals */
+@media (min-width:55.0625em){
+  .sh-split .eyebrow.section-label{margin:0;padding-top:0}
+}
+/* stacked over a 32px heading on a phone, the number steps down so it never
+   rivals the heading under it */
+@media (max-width:55em){.eyebrow.section-label .no{font-size:1.2em}}
+.why .eyebrow.section-label{margin:0}
 
 .sr-only{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -341,6 +372,39 @@ html[lang^="ko"] :is(.glance dt,.facts dt,.pp-glance dt,.pi-facts dt,.details dt
 /* the status sentence splits only where it wraps (layout.SENTENCE_NARROW) */
 .sl-n{display:inline}
 @media (max-width:48em){.sl-n{display:block}}
+/* --- the highlighter -------------------------------------------------------
+   Andrew (2 Oct 2026, evening): "is there a way to emphasise other than bold?
+   Keep the text minimal and let the key words catch the eye." One key phrase
+   per block is marked like a gold marker on paper: a soft band behind the
+   lower part of the letters; the words stay ink and regular weight. Bold
+   stays for values people scan (when, Yes/No). Never in headings, links or
+   status pills; the build counts one per block (readability.py). */
+mark{color:inherit;background:none;padding:0}
+mark{
+  background-image:linear-gradient(transparent 50%,var(--highlight) 50%,var(--highlight) 94%,transparent 94%);
+  background-repeat:no-repeat;background-size:100% 100%;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  padding-inline:.1em;margin-inline:-.04em;border-radius:.16em;
+}
+.band-ink mark{--highlight:var(--highlight-inverse)}
+/* Noto Sans KR's box is taller and its letters sit higher, so the band rides
+   higher to sit under the same part of the letters */
+html[lang^="ko"] :is(mark,.ct-option input:checked+span){
+  background-image:linear-gradient(transparent 40%,var(--highlight) 40%,var(--highlight) 80%,transparent 80%)}
+@media (forced-colors:active){mark{background:Mark;color:MarkText;forced-color-adjust:none}}
+@media print{
+  .meet,.route,.route-plan,.played,.table-wrap{break-inside:avoid}
+  .ct-form{display:none !important}
+}
+@media (forced-colors:active){
+  .meet-hub::before{forced-color-adjust:none}
+  /* the drawn dot of a chosen radio is a background, which a forced palette
+     removes: give the radio back to the system */
+  .ct-option input{appearance:auto;-webkit-appearance:radio}
+  .ct-option input::before{content:none}
+}
+@media print{mark{background:none;text-decoration:underline;text-decoration-thickness:.1em;text-underline-offset:.15em}}
+
 /* a compound kept whole (layout.keep_whole) */
 .nowrap{white-space:nowrap}
 /* The build ties names, dates and counters with no-break spaces
@@ -359,14 +423,14 @@ main,.site-footer{overflow-wrap:break-word}
    text-wrap:pretty. Justified text was measured and left out: it would more
    than double the word spaces on most lines (CLAUDE.md, typography pass). */
 :is(.pc p,.pi p,.steps p,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,.facts dd,
-    .pp-glance dd,.pi-facts dd,.glance dd,figcaption,.rec-what>span,.rec-what small,.examples span){text-wrap:balance}
+    .pp-glance dd,.pi-facts dd,.glance dd,figcaption,.rec-what>span,.rec-what small){text-wrap:balance}
 /* Korean is wrapped pretty instead, leads included (research, 2 Oct 2026):
    balance breaks in the middle of a line and parts a modifier from its noun
    (어려운 / 분들을); pretty breaks before the predicate about twice as often.
    The build ties what must not part (여섯 명, 할 수 있습니다, 저녁 7시). */
 html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.pi-text,.founder-line,.play-note,
     .pc p,.pi p,.steps p,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,.facts dd,
-    .pp-glance dd,.pi-facts dd,.glance dd,figcaption,.rec-what>span,.rec-what small,.examples span,
+    .pp-glance dd,.pi-facts dd,.glance dd,figcaption,.rec-what>span,.rec-what small,
     .pp-now>p:not(.mail-alt)>span:not(.tag)){text-wrap:pretty}
 /* a secondary sentence: smaller, never fainter */
 .small{font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:var(--measure)}
@@ -426,6 +490,7 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.
   100%{opacity:0;scale:1.55}
 }
 @keyframes ink-fill{to{background-size:100% 100%,100% 100%}}
+@keyframes mark-draw{from{background-size:0% 100%}to{background-size:100% 100%}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes header-solid{
   to{background-color:color-mix(in srgb,var(--surface) 90%,transparent);
@@ -530,6 +595,10 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.
     .plate .photo>img{animation:develop linear backwards;animation-timeline:--plate-tl;
       animation-range:entry 0% entry min(60%, 160px)}
 
+    /* a highlighter mark is drawn across its words as they come on screen,
+       finished by the time the line is fully in view */
+    mark{animation:mark-draw linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+
     /* a cover's emblem draws itself in as the cover arrives */
     .cover{view-timeline:--cover block}
     .cover-mark *{stroke-dasharray:1;animation:stroke-in linear both;animation-timeline:--cover;
@@ -612,6 +681,26 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.
     .places-map{trigger-scope:--map;timeline-trigger:--map view() entry 0% exit 100%}
     .map-svg :is(.m-dot,.m-halo){animation:pop var(--dur-5) var(--ease-enter) both;animation-timeline:auto;
       animation-range:normal;animation-trigger:--map play-once;animation-delay:calc(var(--beat) * 3)}
+    /* the drawings on Get involved (art direction v2): each fires once 10% of
+       it is on screen; its stations, rings and seats are set down half a beat
+       apart, the dates on the line of time a beat apart, the event fades in.
+       A seat is placed with translate, so it pops and never rises. */
+    .meet,.route,.route-plan,.played,.table{trigger-scope:--draw;timeline-trigger:--draw view() entry 10% exit 100%}
+    :is(.meet-ico,.route-mark){animation:pop var(--dur-5) var(--ease-enter) both;animation-timeline:auto;
+      animation-range:normal;animation-trigger:--draw play-once;
+      animation-delay:calc(var(--beat) * 2 + var(--i,0) * var(--beat) / 2)}
+    .seat{animation:fade var(--dur-slow) var(--ease-enter) both;animation-timeline:auto;
+      animation-range:normal;animation-trigger:--draw play-once;
+      animation-delay:calc(var(--beat) * 2 + var(--i,0) * var(--beat) / 2)}
+    .played li{animation:rise-sm var(--dur-slow) var(--ease-enter) both;animation-timeline:auto;
+      animation-range:normal;animation-trigger:--draw play-once;animation-delay:calc(var(--beat) + var(--i,0) * var(--beat))}
+    .meet-hub{animation:fade var(--dur-slow) var(--ease-enter) both;animation-timeline:auto;animation-range:normal;
+      animation-trigger:--draw play-once}
+    /* a highlight is drawn across its words once, a beat after its line is a
+       third on screen, and never left half drawn because the reader stopped */
+    mark{trigger-scope:--mk;timeline-trigger:--mk view() entry 30% exit 100%;
+      animation:mark-draw var(--dur-slower) var(--ease) both;animation-timeline:auto;animation-range:normal;
+      animation-trigger:--mk play-once;animation-delay:var(--beat)}
   }
 }
 
@@ -850,14 +939,6 @@ html[lang^="ko"] .facts.facts-rows dt{font-family:var(--font-kr);font-weight:700
 .facts.facts-rows dd{margin:0}
 @media (max-width:30em){.facts-rows>div{grid-template-columns:minmax(0,1fr)}}
 
-/* what a host gives and what we bring, side by side */
-.pairs{display:grid;gap:clamp(32px,3.6vw,48px);margin-bottom:8px}
-.pair h3{font-size:var(--t-h3);margin:0 0 14px}
-.pair-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px var(--col-gap);max-width:46rem}
-.pair-label{margin:0 0 8px;color:var(--accent-ink)}
-.pair ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.pair li{color:var(--fg)}
-@media (max-width:35em){.pair-cols{grid-template-columns:minmax(0,1fr)}}
 
 /* three to six points, each with a lead-in */
 .leadins{list-style:none;margin:0;padding:0;display:grid;gap:clamp(16px,2vw,22px);max-width:var(--measure)}
@@ -896,18 +977,225 @@ html[lang^="ko"] .fold>summary{font-weight:700}
 /* a long record: the earlier rows folded above the newest */
 .rec-wrap>.fold{margin:0 0 10px}
 .rec-wrap .fold>.rec{margin-top:6px}
-/* example programmes (CMFE Artists): what a performance with us has looked
-   like, from the record, on the same columns as the facts above them; the
-   name in ink 600, then the line-up and the month, a line each (a separator
-   left hanging at the end of a wrapped line read as a stray mark) */
-.examples-label{margin:clamp(32px,3.6vw,44px) 0 0}
-.examples{list-style:none;margin:14px 0 0;padding:0;display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:18px var(--col-gap);max-width:52rem}
-.examples li{display:flex;flex-direction:column;gap:2px;min-width:0;color:var(--fg)}
-.examples b{font-weight:600;margin-bottom:2px}
-html[lang^="ko"] .examples b{font-weight:700}
-.examples span{font-size:var(--t-small);line-height:var(--lh-small)}
-.play .examples+.btn-row{margin-top:32px}
+/* --- shared by the three drawings on Get involved (3, 4, 5) ----------------
+   One kit: a station is a 40px ring with a line icon; a stroke is 1px of the
+   data gold (--accent-mark: 3.9:1 cream, 4.2:1 white); a station is filled
+   with its band's ground so a stroke behind it stops at its edge. Strokes
+   are borders, not backgrounds, so they survive forced colours. */
+.meet,.route,.route-plan,.played,.table{--stroke:var(--accent-mark);--ground:var(--surface)}
+.band-white :is(.meet,.route,.route-plan,.played,.table){--ground:var(--surface-raised)}
+:is(.meet-glyph,.route-glyph){width:1.375rem;height:1.375rem;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+/* the field names in these drawings take the label recipe */
+:is(.meet-label,.route dt,.route-plan dt,.seats-label,.table-top dt){
+  font-family:var(--font-body);font-size:var(--t-label);font-weight:600;letter-spacing:var(--label-track);
+  text-transform:uppercase;line-height:1.3;font-variant-numeric:lining-nums tabular-nums;color:var(--accent-ink)}
+html[lang^="ko"] :is(.meet-label,.route dt,.route-plan dt,.seats-label,.table-top dt){
+  font-family:var(--font-kr);font-size:.84rem;letter-spacing:var(--label-track-kr);font-weight:700}
+/* short blocks: English balanced, Korean pretty (R11) */
+:is(.meet-t,.route dd,.route-plan dd,.played-name,.played-who,.seat,.table-top dd){text-wrap:balance}
+html[lang^="ko"] :is(.meet-t,.route dd,.route-plan dd,.played-name,.played-who,.seat,.table-top dd){text-wrap:pretty}
+
+
+/* --- 3. THE MEETING: what a host provides and what we bring ----------------
+   Two columns of stations converge on the event. On a phone the same list
+   hangs from one spine under the event. */
+.invite .meets{grid-column:2}
+@media (max-width:55em){.invite .meets{grid-column:1}}
+.meets{display:grid;gap:clamp(48px,5.2vw,72px)}
+.meet{
+  --st:2.5rem;--tick:1.25rem;--hub:8.5rem;--cg:clamp(1.5rem,2.6vw,2.5rem);--row:14px;--lh-item:1.4;
+  display:grid;align-items:center;column-gap:var(--cg);row-gap:12px;
+  grid-template-columns:minmax(0,1fr) var(--hub) minmax(0,1fr);
+  grid-template-areas:"lg . lb" "give hub bring";
+}
+.meet-give,.meet-bring{display:contents}
+.meet-label{margin:0}
+.meet-give .meet-label{grid-area:lg;text-align:end;padding-inline-end:calc(var(--tick) + var(--st) + 14px)}
+.meet-bring .meet-label{grid-area:lb;padding-inline-start:calc(var(--tick) + var(--st) + 14px)}
+.meet-list{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:var(--row);align-self:center}
+.meet-give .meet-list{grid-area:give;padding-inline-end:var(--tick)}
+.meet-bring .meet-list{grid-area:bring;padding-inline-start:var(--tick)}
+.meet-list li{position:relative;display:flex;align-items:flex-start;gap:14px;
+  font-size:var(--t-body);line-height:var(--lh-item);color:var(--fg)}
+.meet-give li{flex-direction:row-reverse;text-align:end}
+/* the first line of the words sits level with the middle of its station */
+.meet-t{min-width:0;padding-top:calc((var(--st) - var(--lh-item) * 1em) / 2)}
+.meet-ico{position:relative;z-index:1;flex:0 0 auto;display:grid;place-items:center;width:var(--st);height:var(--st);
+  border:1px solid var(--stroke);border-radius:50%;background:var(--ground);color:var(--accent-ink)}
+/* a station's tick, out to the bracket */
+.meet-list li::after{content:"";position:absolute;top:calc(var(--st) / 2);width:var(--tick);border-top:1px solid var(--stroke)}
+.meet-give li::after{right:calc(-1 * var(--tick))}
+.meet-bring li::after{left:calc(-1 * var(--tick))}
+/* the bracket, from each tick to the next (exact whatever a line wraps to) */
+.meet-list li:not(:last-child)::before{content:"";position:absolute;top:calc(var(--st) / 2);
+  height:calc(100% + var(--row));border-left:1px solid var(--stroke)}
+.meet-give li::before{right:calc(-1 * var(--tick))}
+.meet-bring li::before{left:calc(-1 * var(--tick))}
+/* the stem, from the bracket to the event */
+.meet-list::after{content:"";position:absolute;top:50%;width:var(--cg);border-top:1px solid var(--stroke)}
+.meet-give .meet-list::after{left:100%}
+.meet-bring .meet-list::after{right:100%}
+/* the event, in its two rings (the rings of the hero and the covers) */
+.meet-hub{grid-area:hub;position:relative;display:grid;place-items:center;width:var(--hub);aspect-ratio:1;
+  margin:0;padding:.75rem;border:1px solid var(--stroke);border-radius:50%;background:var(--ground);
+  outline:1px solid color-mix(in srgb,var(--stroke) 35%,transparent);outline-offset:.5rem;
+  font-size:var(--t-h3);line-height:1.2;text-align:center;text-wrap:balance}
+html[lang^="ko"] .meet-hub{font-size:1.3rem;line-height:1.4;letter-spacing:-.01em}
+/* Hangul wants more leading than 1.4; the station padding follows it */
+html[lang^="ko"] .meet{--lh-item:1.55}
+/* R18: the stem leaves the list at 50%, so 50% must be the bracket's middle
+   whatever a line wraps to. Rows of one height, each station in the middle
+   of its row: the middle of the list is then the middle tick (or the middle
+   of the two middle ticks). Words wrapping to two lines no longer push the
+   bracket off the stem (chief designer v2, P1-1). */
+@media (min-width:45.0625em){
+  .meet-list{grid-auto-rows:1fr}
+  .meet-list li{align-items:center}
+  .meet-t{padding-top:0}
+  .meet-list li::after,.meet-list li:not(:last-child)::before{top:50%}
+}
+
+@media (max-width:45em){
+  .meet{display:block;position:relative}
+  .meet-give,.meet-bring{display:block}
+  .meet-bring{margin-top:22px}
+  .meet-hub{display:flex;align-items:center;gap:16px;width:auto;aspect-ratio:auto;padding:0;margin:0 0 18px;
+    border:0;outline:0;background:none;text-align:start}
+  .meet-hub::before{content:"";flex:0 0 auto;width:var(--st);height:var(--st);border:1px solid var(--stroke);
+    border-radius:50%;background:var(--ground);
+    outline:1px solid color-mix(in srgb,var(--stroke) 35%,transparent);outline-offset:4px}
+  .meet-hub::after{content:"";position:absolute;left:calc(var(--st) / 2 - .5px);top:50%;
+    height:calc(50% + 18px);border-left:1px solid var(--stroke)}
+  .meet-give .meet-label,.meet-bring .meet-label{position:relative;text-align:start;
+    padding:0 0 10px calc(var(--st) + 16px)}
+  .meet-label::before{content:"";position:absolute;left:calc(var(--st) / 2 - .5px);top:0;bottom:0;
+    border-left:1px solid var(--stroke)}
+  .meet-give .meet-list,.meet-bring .meet-list{padding:0}
+  .meet-give li{flex-direction:row;text-align:start}
+  .meet-list li::after,.meet-list::after{display:none}
+  .meet-give li::before,.meet-bring li::before{left:calc(var(--st) / 2 - .5px);right:auto}
+  /* the last station before "We bring" runs on to it */
+  .meet-give li:last-child::before{content:"";position:absolute;top:calc(var(--st) / 2);
+    height:calc(100% - var(--st) / 2 + 22px);border-left:1px solid var(--stroke)}
+}
+
+
+/* --- 4a. THE ROUTE (CMFE Artists): for, how, vetting; then the plan -------
+   The stations of the steps (44px ring, a line to the next), with an icon
+   for each fact that is true now. The plan is not on the route: a line into
+   2027 read as "register and it leads to paid concerts" (R19). Its year
+   stands in its own ring under the route, joined to nothing. */
+/* across from 1100px, where each value fits two lines (the longest,
+   "Students, emerging, amateur and professional artists", needs 228px of a
+   column); below it the route runs down the page, a value on one line */
+.route{--st:2.75rem;--route-gap:clamp(16px,1.6vw,32px);
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--route-gap);margin:0}
+.route-st{position:relative;min-width:0;padding-top:calc(var(--st) + 16px)}
+.route-mark{position:absolute;top:0;left:0;z-index:1;display:grid;place-items:center;width:var(--st);height:var(--st);
+  border:1px solid var(--stroke);border-radius:50%;background:var(--ground);color:var(--accent-ink)}
+.route-year{font-family:var(--font-display);font-size:.95rem;font-weight:600;letter-spacing:0;text-transform:none;
+  font-variant-numeric:lining-nums}
+.route-st:not(:last-child)::before{content:"";position:absolute;top:calc(var(--st) / 2);left:calc(var(--st) + 8px);
+  right:calc(-1 * var(--route-gap) + 8px);border-top:1px solid var(--stroke)}
+.route dt{margin:0}
+.route dd{margin:6px 0 0;max-width:16em;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg)}
+.route-plan{--st:2.75rem;position:relative;min-height:var(--st);margin:clamp(32px,3.6vw,44px) 0 0;
+  padding-inline-start:calc(var(--st) + 18px)}
+.route-plan dt{margin:0;padding-top:calc((var(--st) - 1.3em) / 2)}
+.route-plan dd{margin:6px 0 0;max-width:var(--measure);font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg)}
+@media (max-width:68.75em){
+  .route{grid-template-columns:minmax(0,1fr)}
+  .route dd{max-width:var(--measure)}
+  .route-st{padding:0 0 26px calc(var(--st) + 18px);min-height:var(--st)}
+  .route-st:last-child{padding-bottom:0}
+  .route dt{padding-top:calc((var(--st) - 1.3em) / 2)}
+  .route-st:not(:last-child)::before{left:calc(var(--st) / 2 - .5px);right:auto;top:calc(var(--st) + 6px);bottom:6px;
+    border-top:0;border-left:1px solid var(--stroke)}
+  .route-plan{margin-top:30px}
+}
+
+/* --- 4b. THE RECORD: four example programmes on one line of time ----------
+   Oldest to newest, a month above the line, the open dot of Sharing on it
+   (the record strip's own mark), the programme and its line-up below. */
+/* "Example programmes" is a small heading (h3, Garamond), not a field name:
+   the months below it are the one bold sans line of this group (R5) */
+.played-label{margin:clamp(44px,4.8vw,64px) 0 0;font-size:var(--t-h3)}
+.played{--when:1.25rem;--rail:1.875rem;--played-gap:clamp(20px,2.6vw,36px);
+  list-style:none;margin:14px 0 0;padding:0;position:relative;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:var(--played-gap)}
+.played::before{content:"";position:absolute;left:0;right:0;top:calc(var(--when) + var(--rail) / 2);
+  border-top:1px solid var(--stroke)}
+.played li{position:relative;display:flex;flex-direction:column;min-width:0;color:var(--fg)}
+.played li::before{content:"";position:absolute;z-index:1;left:0;top:calc(var(--when) + var(--rail) / 2 - .375rem);
+  width:.75rem;height:.75rem;box-sizing:border-box;border:1.5px solid var(--stroke);border-radius:50%;background:var(--ground)}
+.played-when{display:block;height:var(--when);margin-bottom:var(--rail);font-size:.9375rem;font-weight:600;
+  line-height:var(--when);white-space:nowrap;font-variant-numeric:lining-nums}
+html[lang^="ko"] .played-when{font-family:var(--font-kr);font-weight:700}
+.played-name{font-family:var(--font-display);font-size:clamp(1.125rem,1.3vw,1.25rem);font-weight:600;line-height:1.25}
+html[lang^="ko"] .played-name{font-family:var(--font-kr);font-weight:700;font-size:1.2rem;line-height:1.45;letter-spacing:-.01em}
+.played-who{margin-top:6px;font-size:var(--t-small);line-height:var(--lh-small)}
+@media (max-width:62.5em){
+  .played{grid-template-columns:minmax(0,1fr);row-gap:22px;padding-inline-start:2rem}
+  .played::before{display:none}
+  .played li::before{left:-2rem;top:calc(var(--when) / 2 - .375rem)}
+  .played li:not(:last-child)::after{content:"";position:absolute;left:calc(-2rem + .375rem - .5px);
+    top:calc(var(--when) / 2);height:calc(100% + 22px);border-left:1px solid var(--stroke)}
+  .played-when{margin-bottom:6px}
+}
+
+
+/* --- 5. THE FOUNDING BOARD: the roles at a round table ---------------------
+   The roles are set around the table and the conditions lie on it. No
+   chairs: five drawn seats read as a five-member board, and no number of
+   seats is said (R19); on a phone an open ring beside a word reads as a
+   radio button (R17). "Roles" stands in view above the drawing. Where the
+   column is narrower than 34rem (a phone) the names are a plain list.
+   Geometry is in container units, so the drawing scales with its box; the
+   build places the names (--x, --y, their angles --a) and sizes the box to
+   hug them (--th in cqw, the table's centre --cy). The label stands on the
+   content line (R2), the drawing in the middle of the column (R20). */
+.table-wrap{margin:0}
+/* a size container has no content width of its own: with auto margins it
+   shrank to nothing, so its width is set before it is centred */
+.table-box{container:board / inline-size;width:100%;max-width:40rem;margin-inline:auto}
+.table{position:relative}
+.seats-label{margin:0 0 12px}
+.seats{list-style:none;margin:0;padding:0;position:relative;display:grid;gap:14px}
+.seat{position:relative;display:block;
+  font-family:var(--font-display);font-size:1.1875rem;font-weight:600;line-height:1.25;color:var(--fg)}
+html[lang^="ko"] .seat{font-family:var(--font-kr);font-weight:700;font-size:1.125rem;line-height:1.45;letter-spacing:-.01em}
+.table-top{margin:26px 0 0}
+.table-top dt{margin:0}
+.table-top dd{margin:6px 0 0;font-size:var(--t-body);line-height:var(--lh-small);color:var(--fg)}
+@container board (min-width:34rem){
+  .table{height:calc(var(--th) * 1cqw)}
+  .seats{position:absolute;inset:0;display:block;padding:0}
+  /* the round table, seen from above, in the two rings of the event */
+  .seats::before{content:"";position:absolute;left:50%;top:var(--cy);width:25cqw;height:25cqw;translate:-50% -50%;
+    border:1px solid var(--stroke);border-radius:50%;background:var(--ground);
+    outline:1px solid color-mix(in srgb,var(--stroke) 35%,transparent);outline-offset:-.6rem}
+  .seat{position:absolute;left:var(--x);top:var(--y);max-width:27cqw;font-size:clamp(1.0625rem,2.9cqw,1.25rem)}
+  html[lang^="ko"] .seat{font-size:clamp(1.0625rem,2.8cqw,1.1875rem)}
+  /* a 1px tick from each name toward the table, along its own angle */
+  .seat::after{content:"";position:absolute;width:3cqw;border-top:1px solid var(--stroke);
+    transform-origin:0 0;rotate:calc(var(--a) + 180deg)}
+  .seat-r{translate:0 -50%;padding-inline-start:1.5cqw}
+  .seat-r::after{left:0;top:50%}
+  .seat-l{left:auto;right:calc(100% - var(--x));translate:0 -50%;padding-inline-end:1.5cqw;text-align:end}
+  .seat-l::after{left:100%;top:50%}
+  .seat-t,.seat-b{width:max-content;max-width:30cqw;text-align:center;translate:-50% 0}
+  .seat-t{top:auto;bottom:calc(100% - var(--y));padding-bottom:1.5cqw}
+  .seat-t::after{left:50%;top:100%}
+  .seat-b{padding-top:1.5cqw}
+  .seat-b::after{left:50%;top:0}
+  .table-top{position:absolute;left:50%;top:var(--cy);translate:-50% -50%;width:18.75cqw;margin:0;text-align:center}
+  .table-top dd{font-size:var(--t-small);line-height:1.35}
+}
+/* under the drawing: the board's row gap and 12px, so the action sits a
+   group's distance from the lowest name (R1), not a section's */
+.board .board-act .btn-row{margin-top:12px}
+.play .played+.btn-row{margin-top:clamp(32px,3.6vw,44px)}
 .play-note{margin-top:16px}
 
 
@@ -942,25 +1230,42 @@ html[lang^="ko"] .hero{--hero-fs:min(clamp(2.6rem,6.9vw,6.2rem),19vw)}
 html[lang^="ko"] .hero-title{font-size:var(--hero-fs);line-height:1.12;letter-spacing:-.045em}
 html[lang^="ko"] .hero-title .ln:nth-child(2){padding-inline-start:0}
 
-/* The lead starts about half the title's size below it, never less than
-   36px: measured from the ink, that leaves about 0.42 of the title between
-   the tail of "Everyone" and the first line (it was 15px on a laptop screen,
-   Andrew, 2 Oct 2026). Hangul has no descenders and the Korean title sits
-   in a taller line, so it needs less: .4 gives about half its size. */
-.hero-body{
-  display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,5vw,88px);
-  align-items:start;margin-top:max(36px,calc(var(--hero-fs) * .52));
-}
-html[lang^="ko"] .hero-body{margin-top:max(28px,calc(var(--hero-fs) * .4))}
+.hero-body{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,5vw,88px);align-items:start}
 /* the master line is never translated (06 §5), so on the Korean pages it is
    an English phrase and is set exactly as it is on the English ones. It lives
-   in the footer only: the hero dropped it (Andrew, 2 Oct 2026) */
+   in the footer only: the hero's subtitle takes the same string (layout.STR) */
 html[lang^="ko"] .footer-line :lang(en){font-family:var(--font-display);font-weight:500;letter-spacing:-.012em}
 html[lang^="ko"] .footer-line :lang(en){font-size:clamp(2.2rem,5.6vw,5rem);line-height:1.02;letter-spacing:-.02em}
 html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
-.hero-copy .lead{max-width:var(--measure-lead)}
+/* --- the hero's subtitle (Andrew, 2 Oct 2026 evening; art direction v2) ----
+   The master line is the title's subtitle: it sits in the title's group
+   (<hgroup>), in the title's face, set the way the footer sets it (roman,
+   "where it's needed!" in italic), in ink. Gold stays with "Everyone".
+   Measured from baselines, not from a descender (R15): under the title
+   .42 of the title, and never less than 36px of clear space under the
+   lowest ink (R9): the y of "Everyone" hangs about .1 of the title below
+   its line box (line height .96), hence 36px + .1. Under the subtitle .8
+   (60px at least), so the gap below is at least 1.25 times the gap above
+   and the subtitle reads with the title, the running-now block apart.
+   Korean has no descenders: .3 (30px at least) and .62 (56px). */
+.hero{--hero-sub:clamp(1.375rem,calc(var(--hero-fs) * .28),2.25rem)}
+.hero-head{margin:0}
+.hero-sub{
+  margin:max(calc(36px + var(--hero-fs) * .1),calc(var(--hero-fs) * .42)) 0 0;max-width:24em;
+  font-family:var(--font-display);font-size:var(--hero-sub);font-weight:400;font-style:normal;line-height:1.2;
+  letter-spacing:-.006em;word-spacing:normal;color:var(--fg);text-wrap:balance;font-feature-settings:"liga" 1,"kern" 1;
+}
+.hero-sub em{font-style:italic;color:inherit}
+html[lang^="ko"] .hero-sub{margin-top:max(30px,calc(var(--hero-fs) * .3))}
+html[lang^="ko"] .hero-sub>[lang="en"]{font-family:var(--font-display);letter-spacing:-.006em;word-break:normal}
+.hero-body{margin-top:max(60px,calc(var(--hero-fs) * .8))}
+html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
+.hero .now-line{margin-top:0}
+.hero .now-line+.hero-cta{margin-top:28px}
+@media (min-width:62.5625em) and (max-height:56em){
+  .hero .now-line+.hero-cta{margin-top:20px}
+}
 .hero-cta{margin-top:12px}
-.now-line+.hero-cta{margin-top:28px}
 
 /* the photograph bleeds off the right edge of the screen */
 .hero-figure{position:relative;margin-inline-end:calc((min(100vw,var(--wrap)) - 100vw) / 2 - var(--gutter))}
@@ -993,8 +1298,6 @@ html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
   .hero{padding-top:clamp(32px,4vh,56px);--hero-fs:min(clamp(3rem,min(8.4vw,13vh),7.6rem),19vw)}
   html[lang^="ko"] .hero{--hero-fs:min(clamp(2.6rem,min(6.9vw,13vh),6.2rem),19vw)}
   .hero .eyebrow{margin-bottom:12px}
-  .now-line{margin-top:18px}
-  .now-line+.hero-cta{margin-top:20px}
 }
 
 @media (max-width:55em){
@@ -1424,7 +1727,7 @@ html[lang^="ko"] .pl-name{font-family:var(--font-kr);font-weight:400;font-size:1
 section.gi-ways{padding-top:0}
 /* bring a concert: the visit in three steps, then the action */
 .invite{display:grid;grid-template-columns:3fr 9fr;gap:var(--gap)}
-.invite :is(.steps,.pairs){grid-column:2}
+.invite :is(.steps,.meets){grid-column:2}
 .invite-act{grid-column:2;margin-top:8px}
 .invite-act .btn-row{margin-top:20px}
 .play{margin-inline-start:var(--col4)}
@@ -1433,7 +1736,7 @@ section.gi-ways{padding-top:0}
 .board .btn-row{margin-top:28px}
 @media (max-width:55em){
   .invite,.board{grid-template-columns:1fr}
-  .invite :is(.steps,.pairs),.invite-act,.board>*{grid-column:1}
+  .invite :is(.steps,.meets),.invite-act,.board>*{grid-column:1}
   .play{margin-inline-start:0}
 }
 
@@ -1780,9 +2083,75 @@ html[lang^="ko"] .others b{font-family:var(--font-kr);font-weight:700;font-size:
 /* ==========================================================================
    18. CONTACT
    ========================================================================== */
-/* what is it about: the contents line, each row an email with its subject;
-   the address itself is quiet, underneath, for anyone who copies it */
-section.ct-topics{padding-top:0}
+/* One form (Andrew, 2 Oct 2026 evening): a topic, a message, a button that
+   opens the visitor's email app (parts.contact_form, a mailto form). It hangs
+   on the content line; the topics are radios in two columns, and the chosen
+   one is marked with the highlighter; the message box is the one boxed thing
+   on the page, because a field needs a visible edge (WCAG 1.4.11). */
+section.ct-write{padding-top:0}
+/* the form, refined (art direction v2): a topic, a message and one button
+   that opens the visitor's email app. On the content line, 40rem wide, so
+   the topics and the message box share one right edge and a typed line runs
+   about seventy characters. */
+.ct-form{display:grid;gap:clamp(32px,3.6vw,44px);max-width:40rem}
+@media (min-width:55.0625em){.ct-form{margin-inline-start:var(--col4)}}
+.ct-topics{border:0;margin:0;padding:0;min-width:0}
+.ct-topics legend,.ct-label{display:block;padding:0;margin:0 0 10px;font-family:var(--font-display);
+  font-size:var(--t-h3);font-weight:600;line-height:1.25;color:var(--fg)}
+html[lang^="ko"] :is(.ct-topics legend,.ct-label){font-family:var(--font-kr);font-size:1.25rem;font-weight:700;
+  letter-spacing:-.01em}
+/* two columns read down, then across: the order the arrow keys take */
+.ct-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:column;
+  grid-template-rows:repeat(var(--rows,3),auto);gap:4px var(--col-gap)}
+@media (max-width:40em){.ct-options{grid-template-columns:minmax(0,1fr);grid-auto-flow:row;grid-template-rows:none}}
+.ct-option{display:flex;align-items:center;gap:14px;min-height:48px;cursor:pointer;color:var(--fg);
+  font-size:var(--t-body);line-height:1.35}
+/* the same ring as the drawings: open, then filled when chosen */
+.ct-option input{appearance:none;-webkit-appearance:none;flex:0 0 auto;display:grid;place-items:center;
+  width:24px;height:24px;margin:0;border:1.5px solid var(--line-interactive);border-radius:50%;
+  background:var(--surface-raised);cursor:pointer;transition:border-color var(--dur-3) var(--ease)}
+.ct-option input::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent-ink);
+  scale:0;transition:scale var(--dur-3) var(--ease)}
+.ct-option input:checked{border-color:var(--accent-ink)}
+.ct-option input:checked::before{scale:1}
+.ct-option:hover input{border-color:var(--accent-ink)}
+/* a two-line option ends on two words, not one (R21) */
+.ct-option>span{text-wrap:balance}
+html[lang^="ko"] .ct-option>span{text-wrap:pretty}
+.ct-option input:checked+span{background-image:linear-gradient(transparent 50%,var(--highlight) 50%,
+  var(--highlight) 94%,transparent 94%);-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  padding-inline:.1em;margin-inline:-.1em}
+.ct-option input:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px;box-shadow:0 0 0 3px var(--focus-halo)}
+/* label, hint, field (GOV.UK order); the hint is the "tell us" list of the
+   programme pages, numbered in gold */
+.ct-hints{margin:0 0 12px;max-width:var(--measure);color:var(--fg)}
+.ct-hint{display:none;margin:0}
+.ct-hint.is-general{display:block;font-size:var(--t-small);line-height:var(--lh-small)}
+.ct-hint>p{margin:0;font-weight:600}
+/* Korean: the label above is Noto 700, so the hint steps back to 400 (R5) */
+html[lang^="ko"] .ct-hint>p{font-weight:400}
+.ct-fields{list-style:none;margin:6px 0 0;padding:0;counter-reset:cf}
+.ct-fields li{position:relative;padding:4px 0 4px 40px;counter-increment:cf;font-size:var(--t-small);
+  line-height:var(--lh-small);color:var(--fg)}
+.ct-fields li::before{content:counter(cf,decimal-leading-zero);position:absolute;left:0;top:calc(4px + .2em);
+  font-size:var(--t-label);font-weight:600;letter-spacing:.06em;line-height:1.3;color:var(--accent-ink);
+  font-variant-numeric:lining-nums tabular-nums}
+@supports selector(:has(*)){
+  .ct-form:has(.ct-options input:checked) .ct-hint.is-general{display:none}
+  .ct-form:has(input.t-part:checked) .ct-hint.t-part,
+  .ct-form:has(input.t-venue:checked) .ct-hint.t-venue,
+  .ct-form:has(input.t-artist:checked) .ct-hint.t-artist,
+  .ct-form:has(input.t-board:checked) .ct-hint.t-board,
+  .ct-form:has(input.t-data:checked) .ct-hint.t-data{display:block}
+}
+.ct-field textarea{display:block;width:100%;min-height:11rem;padding:14px 16px;border:1px solid var(--line-interactive);
+  border-radius:var(--radius-sm);background:var(--surface-raised);color:var(--fg);font:inherit;font-size:var(--t-body);
+  line-height:var(--lh-text);resize:vertical;transition:border-color var(--dur-3) var(--ease)}
+.ct-field textarea:hover{border-color:var(--fg)}
+.ct-field textarea:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;box-shadow:0 0 0 5px var(--focus-halo)}
+.ct-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+.ct-how{flex:1 1 18rem;margin:0;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:var(--measure)}
+.ct-write .direct{margin-top:clamp(40px,4.4vw,56px)}
 .direct{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 28px;margin:28px 0 0}
 .direct .kicker{flex-basis:auto}
 .direct a{font-family:var(--font-display);font-size:var(--t-h3);color:var(--fg);text-decoration:underline;

@@ -17,8 +17,17 @@ time: this Mac sits near its open-file limit). It reports:
          widest line, or a single short word (under 35%)
   tie    a run the build tied (no-break space, word joiner) that still
          breaks across lines
-  hero   the ink gap under the home title, as a share of the title size
-         (R9: 0.4 to 0.6)
+  hero   the home title and its subtitle as one group (R15), measured from
+         baselines, not from a descender: on a display title (72px and up)
+         English title baseline to the subtitle 0.5 to 0.7 of the title,
+         Korean (no descenders) 0.36 to 0.6; never under 36px of clear
+         space from the lowest ink (R9; on a phone this floor is the
+         measure); the space under the subtitle at least 1.25 times the
+         space above it; the first button on screen at 1440x789, 1366x768,
+         1280x720 and 390x844
+  meet   the meeting drawings at 768 to 1440, text 100% and 200% (R18):
+         the stem leaves each bracket at its middle (within 1px), each
+         tick meets its ring, and the stem meets the event's ring
 
 Known and accepted: a Korean date range in the narrow record column breaks
 after its en dash (ALLOW below).
@@ -43,7 +52,8 @@ VIEWPORTS = [(320, 700), (390, 844), (1024, 768), (1440, 789)]
 LEADS = (".lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.pi-text,.founder-line,.play-note,"
          ".pp-say,.join-hint")
 SHORT = (".pc p,.pi p,.steps p,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,"
-         ".facts dd,.pp-glance dd,.pi-facts dd,.rec-what>span,.examples span")
+         ".facts dd,.pp-glance dd,.pi-facts dd,.rec-what>span,.meet-t,.route dd,.route-plan dd,"
+         ".played-name,.played-who,.seat,.table-top dd,.ct-option>span")
 ALLOW = ("–",)  # a tied run may break after an en dash (a range in a narrow column)
 
 JS = r"""((LEADS, SHORT, wide) => {
@@ -129,18 +139,43 @@ JS = r"""((LEADS, SHORT, wide) => {
 
 HERO = r"""(() => {
   const t = document.querySelector('.hero-title'); const ln = t.querySelectorAll('.ln'); const last = ln[ln.length - 1];
-  const em = last.querySelector('em') || last; const lead = document.querySelector('.hero-copy .lead');
+  const em = last.querySelector('em') || last; const lead = document.querySelector('.hero-sub, .hero-copy .lead');
   const cv = document.createElement('canvas').getContext('2d');
   const font = el => { const c = getComputedStyle(el); return `${c.fontStyle} ${c.fontWeight} ${c.fontSize} ${c.fontFamily}`; };
   const r = document.createRange(); r.selectNodeContents(em); const rs = [...r.getClientRects()]; const box = rs[rs.length - 1];
   cv.font = font(em); const m = cv.measureText(em.textContent.trim());
-  const inkBottom = box.top + m.fontBoundingBoxAscent + m.actualBoundingBoxDescent;
-  const r2 = document.createRange(); r2.selectNodeContents(lead); const lb = [...r2.getClientRects()].find(x => x.width > 1);
-  cv.font = font(lead); const m2 = cv.measureText(lead.textContent.trim().split(/\s+/).slice(0, 3).join(' '));
-  const leadTop = lb.top + m2.fontBoundingBoxAscent - m2.actualBoundingBoxAscent;
+  const baseline = box.top + m.fontBoundingBoxAscent, inkBottom = baseline + m.actualBoundingBoxDescent;
+  // on the Korean pages the subtitle is an English span: measure its own face
+  const sub = lead.querySelector('[lang="en"]') || lead;
+  const r2 = document.createRange(); r2.selectNodeContents(lead); const lines = [...r2.getClientRects()].filter(x => x.width > 1);
+  cv.font = font(sub); const m2 = cv.measureText(lead.textContent.trim().split(/\s+/).slice(0, 3).join(' '));
+  const capTop = lines[0].top + m2.fontBoundingBoxAscent - m2.actualBoundingBoxAscent;
+  const subBase = lines[lines.length - 1].top + m2.fontBoundingBoxAscent;
   const size = parseFloat(getComputedStyle(t).fontSize);
-  return {size: Math.round(size), gap: Math.round(leadTop - inkBottom), ratio: +((leadTop - inkBottom) / size).toFixed(2),
+  // R15: from the title's baseline to the subtitle, and from the subtitle's
+  // baseline to the running-now block; a descender is not the measure
+  const pill = document.querySelector('.hero .now-line, .hero-cta').getBoundingClientRect().top;
+  const above = capTop - baseline, below = pill - subBase;
+  return {size: Math.round(size), above: Math.round(above), ratio: +(above / size).toFixed(2),
+          ink: Math.round(capTop - inkBottom), below: Math.round(below), group: +(below / above).toFixed(2),
           button: Math.round(document.querySelector('.hero-cta').getBoundingClientRect().bottom), height: innerHeight};
+})()"""
+
+
+MEET = r"""(() => {
+  const out = [], mid = el => { const b = el.getBoundingClientRect(); return b.top + b.height / 2; };
+  for (const ul of document.querySelectorAll('.meet-list')) {
+    if (getComputedStyle(ul, '::after').display === 'none') continue;   // a phone: one spine, no stem
+    const lis = [...ul.children], r = ul.getBoundingClientRect();
+    const stem = r.top + r.height / 2, bracket = (mid(lis[0]) + mid(lis[lis.length - 1])) / 2;
+    const hub = mid(ul.closest('.meet').querySelector('.meet-hub'));
+    const ticks = Math.max(...lis.map(li => Math.abs(mid(li) - mid(li.querySelector('.meet-ico')))));
+    const side = ul.parentElement.className.replace('meet-', '');
+    if (Math.abs(stem - bracket) >= 1 || Math.abs(stem - hub) >= 1 || ticks >= 1)
+      out.push({side, hub: ul.closest('.meet').querySelector('.meet-hub').textContent.trim(),
+                stem_off: +(stem - bracket).toFixed(1), hub_off: +(stem - hub).toFixed(1), tick_off: +ticks.toFixed(1)});
+  }
+  return out;
 })()"""
 
 
@@ -158,7 +193,7 @@ def serve():
 
 def main(strict=False):
     httpd, base = serve()
-    found = {"fold": [], "tail": [], "tie": [], "hero": []}
+    found = {"fold": [], "tail": [], "tie": [], "hero": [], "meet": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -172,14 +207,25 @@ def main(strict=False):
                         for k in ("fold", "tail"):
                             found[k] += [(lang, pg, w, x) for x in r[k]]
                         found["tie"] += [(lang, pg, w, x) for x in r["tie"] if not any(a in x for a in ALLOW)]
-                for w, h in ((1440, 789), (1280, 720), (390, 844)):
+                for w, h in ((1440, 789), (1366, 768), (1280, 720), (390, 844)):
                     c.viewport(w, h, 2 if w < 700 else 1, w < 700)
                     c.goto(base + ("" if lang == "en" else "ko/") + "index.html", settle=0.8)
                     c.js("document.fonts.ready.then(()=>1)")
                     hero = c.js(HERO)
-                    low = 0.38 if lang == "en" else 0.45
-                    if hero["ratio"] < low or hero["button"] > hero["height"]:
+                    lo, hi = (0.5, 0.7) if lang == "en" else (0.36, 0.6)
+                    if ((hero["size"] >= 72 and not lo <= hero["ratio"] <= hi) or hero["ink"] < 36
+                            or hero["group"] < 1.25 or hero["button"] > hero["height"]):
                         found["hero"].append((lang, w, h, hero))
+                # R18: the meeting drawings, at every desktop width, text 100% and 200%
+                for w in (768, 1024, 1280, 1440):
+                    for zoom in ("100%", "200%"):
+                        c.viewport(w, 900, 1, False)
+                        c.goto(base + ("" if lang == "en" else "ko/") + "get-involved.html", settle=0.4)
+                        if zoom == "200%":   # the browser's text size doubled: every rem doubles
+                            c.js("(h => h.style.fontSize = 2 * parseFloat(getComputedStyle(h).fontSize) + 'px')"
+                                 "(document.documentElement)")
+                        c.js("document.fonts.ready.then(()=>1)")
+                        found["meet"] += [(lang, w, zoom, x) for x in c.js(MEET)]
     finally:
         httpd.shutdown()
     for k, rows in found.items():
