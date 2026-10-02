@@ -205,7 +205,7 @@ def cover(i, p, size=""):
     return (f'<div class="cover{c}" style="view-transition-name:prog-{p["slug"]};view-transition-class:prog-cover" '
             f'aria-hidden="true">'
             f'<span class="cover-no">{i + 1:02d}</span>{glyph(p["icon"])}'
-            f'<span class="cover-line">{p["vocab"]}</span></div>')
+            f'<span class="cover-line">{_vocab(p["vocab"])}</span></div>')
 
 
 def contents(items, label, icon_=None):
@@ -255,6 +255,21 @@ def _fig(n, label, period, plus=False):
             f'<span class="fig-period">{period}</span></div>')
 
 
+def _vocab(words):
+    """A cover's three words: each stays whole, the line may turn only after a
+    dot ("Your / own part" split on the home card)."""
+    return " · ".join(w.replace(" ", "\u00a0") for w in words.split(" · "))
+
+
+def _pairs(text, lang):
+    """The Korean line under the home cards is two name-and-link pairs joined
+    by a dot; on a phone it broke between a name and its link. Each pair
+    takes its own line (the English says it in two sentences already)."""
+    if lang == "ko" and " · " in text:
+        return " ".join(f'<span class="sl">{x}</span>' for x in text.split(" · "))
+    return text
+
+
 def home(t, programmes, pillars, lang):
     """Hero, the five programmes, the record (the page's one ink band), then
     why we exist on white, so the ink band never runs into the ink footer
@@ -293,7 +308,7 @@ def home(t, programmes, pillars, lang):
     <ul class="progs rv-stagger">
 {cards}
     </ul>
-    <p class="progs-note rv">{t["progs"]["others"]}</p>
+    <p class="progs-note rv">{_pairs(t["progs"]["others"], lang)}</p>
   </div>
 </section>
 
@@ -481,7 +496,7 @@ def programmes(t, programmes_, pillars):
     <ol class="prog-index rv-stagger">
 {rows}
     </ol>
-    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">{a["label"]}</span><span>{a["text"]}</span></p>
+    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">{a["label"]}</span><span class="pi-text">{a["text"]}</span></p>
   </div>
 </section>"""
 
@@ -623,7 +638,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
         <h1 class="pp-title">{title_lines([p["name"]])}</h1>
         <p class="lead lift lift-3">{g["lead"]}</p>
         <div class="pp-now{" is-live" if g.get("live") else ""} lift lift-4">
-          <p>{status_tag(g["now"][0], g.get("live"))}<span>{g["now"][1]}</span></p>
+          <p>{status_tag(g["now"][0], g.get("live"))}<span class="pp-say">{g["now"][1]}</span></p>
           <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}{go("#join", t["how_join"])}</div>
         </div>
       </div>

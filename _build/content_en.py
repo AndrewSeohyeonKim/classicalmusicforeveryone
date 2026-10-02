@@ -120,8 +120,8 @@ PROGRAMMES_DATA = [
          img=("lecture-recital.jpg", 1050, 1400, "A talk in progress, with live playing"),
          line="Talks with live music, for anyone curious about classical music.",
          page=dict(
-             lead="We give talks that explain classical music, with live playing. They are for anyone "
-                  "curious to hear more.",
+             lead="We give talks on classical music, with live playing. They are for anyone curious to "
+                  "hear more.",
              cap=None,
              glance=[("For", "Anyone curious about classical music"),
                      ("Where", "Dublin"),
@@ -161,8 +161,9 @@ PROGRAMMES_DATA = [
          img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
          line="Live classical music in care homes, hospitals, parishes and community centres.",
          page=dict(
-             lead="We bring live music to the rooms where people already are. We explain the music as we "
-                  "go.",
+             # each lead sentence fits its column on a laptop (typeset_check:
+             # the longer first sentences folded into half lines)
+             lead="We play in the rooms where people already are. We explain the music as we go.",
              cap=("Outreach concert", "Christmas 2025"),
              glance=[("For", "Care homes, hospitals, parishes and community groups"),
                      ("Where", "Your own room, in Dublin and further by arrangement"),
@@ -200,8 +201,7 @@ PROGRAMMES_DATA = [
          # renamed 1 Oct 2026
          line="A weekly class for adults who have never played an instrument.",
          page=dict(
-             lead="This weekly class is for adults who have never played an instrument. You play your "
-                  "first notes in week one.",
+             lead="For adults who have never played an instrument. You play your first notes in week one.",
              cap=("Recorders", "November 2025"),
              # the pilot ensemble on the founder's own channel; our still until play is pressed
              video=dict(kind="youtube", id="i7skwGKWSYY", poster="recorders.jpg",
@@ -245,8 +245,7 @@ PROGRAMMES_DATA = [
          img=("letters-ensemble.jpg", 1400, 1050, "The Letters Ensemble with their instruments"),
          line="Amateur musicians in Dublin playing Irish, Korean and sacred music.",
          page=dict(
-             lead="Amateur musicians in Dublin, together since January 2024. We play Irish and Korean "
-                  "traditional music and sacred music.",
+             lead="Amateur musicians in Dublin, together since 2024. We play Irish, Korean and sacred music.",
              cap=("Letters Ensemble", "with their instruments"),
              glance=[("For", "Amateur players of any background"),
                      ("Where", "Dublin"),
@@ -475,8 +474,9 @@ ABOUT_T = dict(
     identity=dict(
         label="The name",
         h2="Why <em>Everyone</em> is in gold",
-        text="In our logo, &ldquo;for&rdquo; is small and &ldquo;Everyone&rdquo; is large and gold. We "
-             "have to live up to that word.",
+        # the meaning is in the proportion (CLAUDE.md §1), so "for" stays in the sentence
+        text="Our logo sets &ldquo;for&rdquo; small and &ldquo;Everyone&rdquo; large. We have to live up "
+             "to that word.",
         alt="The Classical Music for Everyone mark: a treble clef beside the wordmark, with "
             "&lsquo;Everyone&rsquo; set large and in gold",
     ),
@@ -741,8 +741,9 @@ CONTACT_T = dict(
     head=dict(
         eyebrow="Contact",
         title=["Write to us."],
-        lead="Choose what your message is about, or simply write. One line is enough, and we answer "
-             "every message.",
+        # each sentence fits its column on a laptop (chief designer, typography
+        # pass: the old pair folded into four half lines); now as the Korean says
+        lead="Choose a topic below, or simply write. We answer every message.",
     ),
     # what is it about? each row opens an email with its subject (and, for an
     # invitation, the same questions as everywhere else); the address itself

@@ -331,6 +331,43 @@ html[lang^="ko"] :is(.glance dt,.facts dt,.pp-glance dt,.pi-facts dt,.details dt
 
 .lead{font-size:var(--t-lead);line-height:var(--lh-lead);letter-spacing:var(--track-lead);color:var(--fg);
   max-width:var(--measure-lead)}
+/* A lead says one sentence a line, each line balanced (Andrew, 2 Oct 2026:
+   a sentence that began mid-line made the block read oddly). The build wraps
+   each sentence of these blocks in .sl (layout.sentence_lines); text-wrap is
+   inherited, so a one-sentence lead is balanced too. Running text (answers,
+   steps, paragraphs) keeps text-wrap:pretty and flows. */
+:is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.pi-text,.founder-line,.play-note){text-wrap:balance}
+.sl{display:block}
+/* the status sentence splits only where it wraps (layout.SENTENCE_NARROW) */
+.sl-n{display:inline}
+@media (max-width:48em){.sl-n{display:block}}
+/* a compound kept whole (layout.keep_whole) */
+.nowrap{white-space:nowrap}
+/* The build ties names, dates and counters with no-break spaces
+   (layout.tie). If a tied run is ever wider than its line (text at 200% on
+   a 320px screen), it may still break rather than spill out of its box.
+   break-word does not change how wide boxes are at normal sizes. Where a
+   box sizes itself to its content (a flex caption, a card title, a line in
+   a grid), anywhere lets it shrink too (audit, final build: five pages
+   scrolled sideways at 200% text). */
+main,.site-footer{overflow-wrap:break-word}
+:is(figcaption,figcaption>span,.pc h3,.tl-item,.pp-say,.now-when,.now-name){overflow-wrap:anywhere}
+/* Short blocks (two or three lines: card lines, steps, answers, values,
+   captions, clauses, record notes) are balanced as well, so none ends on a
+   word or two alone (the audit found 18 such endings in section leads and 9
+   in home cards). Longer running text, such as the About story, keeps
+   text-wrap:pretty. Justified text was measured and left out: it would more
+   than double the word spaces on most lines (CLAUDE.md, typography pass). */
+:is(.pc p,.pi p,.steps p,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,.facts dd,
+    .pp-glance dd,.pi-facts dd,.glance dd,figcaption,.rec-what>span,.rec-what small,.examples span){text-wrap:balance}
+/* Korean is wrapped pretty instead, leads included (research, 2 Oct 2026):
+   balance breaks in the middle of a line and parts a modifier from its noun
+   (어려운 / 분들을); pretty breaks before the predicate about twice as often.
+   The build ties what must not part (여섯 명, 할 수 있습니다, 저녁 7시). */
+html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.pi-text,.founder-line,.play-note,
+    .pc p,.pi p,.steps p,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,.facts dd,
+    .pp-glance dd,.pi-facts dd,.glance dd,figcaption,.rec-what>span,.rec-what small,.examples span,
+    .pp-now>p:not(.mail-alt)>span:not(.tag)){text-wrap:pretty}
 /* a secondary sentence: smaller, never fainter */
 .small{font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:var(--measure)}
 .muted{color:var(--fg-muted)}
@@ -788,12 +825,15 @@ html[lang^="ko"] .contents .c-go{font-weight:700}
 .now-name{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--fg);
   font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;line-height:1.25;
   transition:color var(--dur-3) var(--ease)}
-html[lang^="ko"] .now-name{font-family:var(--font-kr);font-size:1.12rem;font-weight:700}
+/* Korean has no Garamond, so the name steps up in size instead: at least 1.2
+   times the when line under it, so the two bold lines do not read as one
+   (chief designer, typography pass) */
+html[lang^="ko"] .now-name{font-family:var(--font-kr);font-size:clamp(1.25rem,1.6vw,1.45rem);font-weight:700}
 .now-name .arrow{color:var(--accent-ink)}
 .now-name:hover{color:var(--accent-ink)}
 /* when, in bold, and where, each on its own line: the two values people
    came for, read in one look */
-.now-when{display:grid;gap:2px;margin:2px 0 0;color:var(--fg)}
+.now-when{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;margin:2px 0 0;color:var(--fg)}
 .now-when strong{font-weight:700}
 
 /* label above value, in columns, without rules */
@@ -881,8 +921,14 @@ html[lang^="ko"] .examples b{font-weight:700}
 /* the section after the hero starts closer: the strip's rule already
    closes the hero, and a full section gap on top of it read as a void */
 .hero+section{padding-top:var(--section-tight)}
+/* the title's size is a token on the hero, so the space under it can follow
+   it: a 100px title with a hanging y needs more room than a 48px one */
+/* min(…, 19vw): with text at 200% on a phone the 3rem floor would push
+   "Everyone." past the screen; at normal sizes 19vw never binds */
+.hero{--hero-fs:min(var(--t-hero),19vw)}
+html[lang^="ko"] .hero{--hero-fs:min(clamp(2.6rem,6.9vw,6.2rem),19vw)}
 .hero-title{
-  font-size:var(--t-hero);line-height:.96;letter-spacing:-.022em;font-weight:500;
+  font-size:var(--hero-fs);line-height:.96;letter-spacing:-.022em;font-weight:500;
   max-width:none;text-wrap:initial;
 }
 /* "for" is small and "Everyone" large and gold, because that is what the
@@ -893,13 +939,19 @@ html[lang^="ko"] .examples b{font-weight:700}
 }
 .hero-title em{font-style:italic;font-weight:500;color:var(--accent-ink)}
 .hero-title .ln:nth-child(2){padding-inline-start:.9em}
-html[lang^="ko"] .hero-title{font-size:clamp(2.6rem,6.9vw,6.2rem);line-height:1.12;letter-spacing:-.045em}
+html[lang^="ko"] .hero-title{font-size:var(--hero-fs);line-height:1.12;letter-spacing:-.045em}
 html[lang^="ko"] .hero-title .ln:nth-child(2){padding-inline-start:0}
 
+/* The lead starts about half the title's size below it, never less than
+   36px: measured from the ink, that leaves about 0.42 of the title between
+   the tail of "Everyone" and the first line (it was 15px on a laptop screen,
+   Andrew, 2 Oct 2026). Hangul has no descenders and the Korean title sits
+   in a taller line, so it needs less: .4 gives about half its size. */
 .hero-body{
   display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,5vw,88px);
-  align-items:start;margin-top:clamp(36px,4.6vw,72px);
+  align-items:start;margin-top:max(36px,calc(var(--hero-fs) * .52));
 }
+html[lang^="ko"] .hero-body{margin-top:max(28px,calc(var(--hero-fs) * .4))}
 /* the master line is never translated (06 §5), so on the Korean pages it is
    an English phrase and is set exactly as it is on the English ones. It lives
    in the footer only: the hero dropped it (Andrew, 2 Oct 2026) */
@@ -938,9 +990,8 @@ html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
 /* a short laptop screen (1366x768, 1280x720): the now line and both
    actions stay on the first screen (chief designer, 2 Oct 2026) */
 @media (min-width:62.5625em) and (max-height:56em){
-  .hero{padding-top:clamp(32px,4vh,56px)}
-  .hero-title{font-size:clamp(3rem,min(8.4vw,13vh),7.6rem)}
-  .hero-body{margin-top:clamp(24px,3vh,40px)}
+  .hero{padding-top:clamp(32px,4vh,56px);--hero-fs:min(clamp(3rem,min(8.4vw,13vh),7.6rem),19vw)}
+  html[lang^="ko"] .hero{--hero-fs:min(clamp(2.6rem,min(6.9vw,13vh),6.2rem),19vw)}
   .hero .eyebrow{margin-bottom:12px}
   .now-line{margin-top:18px}
   .now-line+.hero-cta{margin-top:20px}
@@ -1037,7 +1088,7 @@ figcaption>span:not(.cap-label){max-width:36em}
   fill:none;stroke:var(--accent-inverse);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
 .cover-line{grid-row:3;font-family:var(--font-display);font-style:italic;font-size:clamp(.85rem,1.05vw,.98rem);line-height:1.3;
   color:var(--fg-inverse-body)}
-html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-size:.8rem;letter-spacing:-.01em}
+html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-size:.875rem;letter-spacing:-.01em}
 @container (max-width:180px){
   .cover-line{display:none}.cover-mark{width:44%}
   /* the outer rings would cross the number on a small cover (QA40-07) */
@@ -1102,7 +1153,7 @@ html[lang^="ko"] .pc h3{font-size:1.08rem;line-height:1.42}
 html[lang^="ko"] .pi h2{font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.36}
 .pi h2 a{color:var(--fg);transition:color var(--dur-3) var(--ease)}
 .pi h2 a::after{content:"";position:absolute;inset:0;z-index:1}
-.pi p{margin:8px 0 0;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:var(--measure)}
+.pi p{margin:14px 0 0;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:var(--measure)}
 .pi-state{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0;align-self:start}
 .pi-facts{margin:0}
 .pi-facts dt{color:var(--accent-ink)}
@@ -1306,7 +1357,7 @@ html[lang^="ko"] .glance dd small{font-family:var(--font-kr);font-weight:400;let
 .founder .photo{aspect-ratio:4/5}
 /* a portrait in a half column stays a comfortable size */
 :is(.founder,.now)>.plate{max-width:480px}
-.founder-role{margin-top:12px;color:var(--fg);font-weight:600}
+.founder-role{margin-top:20px;color:var(--fg);font-weight:600}
 .founder-line{margin:22px 0 0;font-size:var(--t-lead);line-height:var(--lh-lead);color:var(--fg);max-width:var(--measure-lead)}
 .founder .facts-plain{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:26px}
 html[lang^="ko"] .founder-role{font-weight:700}
@@ -1440,7 +1491,7 @@ html[lang^="ko"] .latest h3{font-size:1.22rem}
 .timeline::before,.timeline::after{content:"";position:absolute;inset-inline-start:6px;top:10px;bottom:10px;width:1px}
 .timeline::before{background:var(--line-strong)}
 .timeline::after{background:var(--accent);transform-origin:50% 0;scale:1 1}
-.tl-item{position:relative;display:grid;grid-template-columns:12em 1fr;gap:4px 32px;padding-bottom:40px}
+.tl-item{position:relative;display:grid;grid-template-columns:12em minmax(0,1fr);gap:4px 32px;padding-bottom:40px}
 .tl-item:last-child{padding-bottom:0}
 .timeline{--tl-ground:var(--surface)}
 .band-sunken .timeline{--tl-ground:var(--surface-sunken)}
@@ -1454,7 +1505,7 @@ html[lang^="ko"] .latest h3{font-size:1.22rem}
 html[lang^="ko"] .tl-date{font-family:var(--font-kr);font-weight:700}
 .tl-item h3{font-size:clamp(1.2rem,1.6vw,1.4rem)}
 .tl-item p{margin-top:8px;font-size:var(--t-body);line-height:var(--lh-text);color:var(--fg);max-width:var(--measure)}
-@media (max-width:48em){.tl-item{grid-template-columns:1fr}}
+@media (max-width:48em){.tl-item{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:no-preference){
   @supports (animation-timeline:view()){
     .timeline::after{scale:1 0;animation:draw-y linear both;animation-timeline:--tl;animation-range:cover 0% cover 100%}
@@ -1554,7 +1605,7 @@ html[lang^="ko"] .pp-glance .is-when dd{font-weight:700}
 .pp-now{margin-top:clamp(24px,3vw,36px);padding-top:4px;max-width:34em}
 .pp-now>p:not(.mail-alt){display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin:0;color:var(--fg)}
 /* when and where, said once and large: the line a visitor came for */
-.pp-now>p:not(.mail-alt)>span:not(.tag){flex-basis:100%;color:var(--fg)}
+.pp-now>p:not(.mail-alt)>span:not(.tag){flex-basis:100%;color:var(--fg);text-wrap:balance}
 .pp-now.is-live>p:not(.mail-alt)>span:not(.tag){font-family:var(--font-display);font-size:var(--t-h3);
   line-height:1.3;color:var(--fg)}
 html[lang^="ko"] .pp-now.is-live>p:not(.mail-alt)>span:not(.tag){font-family:var(--font-kr);font-size:1.12rem;line-height:1.6;
@@ -1800,6 +1851,8 @@ html[lang^="ko"] .footer-line em{font-style:normal}
   display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;font-size:var(--t-caption);color:var(--fg-inverse-body);
 }
 .footer-bottom>span:nth-child(2){grid-row:1 / span 2;grid-column:2;text-align:end}
+/* the status is a sentence people quote: never under 16px (audit, 2 Oct 2026) */
+.footer-status{font-size:var(--t-small);line-height:var(--lh-small)}
 @media (max-width:48em){.footer-bottom{grid-template-columns:1fr}.footer-bottom>span:nth-child(2){grid-row:auto;grid-column:auto;text-align:start}}
 .footer-bottom a{color:var(--fg-inverse-body);text-decoration:underline;text-decoration-color:var(--fg-inverse-muted);text-underline-offset:3px}
 .footer-bottom a:hover{color:var(--accent-inverse)}

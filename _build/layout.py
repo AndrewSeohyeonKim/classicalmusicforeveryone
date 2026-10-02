@@ -393,11 +393,308 @@ def footer(lang, slug="index.html"):
     </div>
     <div class="footer-bottom">
       <span>{s['f_legal']}</span>
-      <span>{s['f_status']}</span>
+      <span class="footer-status">{s['f_status']}</span>
       <span>{s['f_updated']} {UPDATED[lang]} · <a href="{p}contact.html#privacy">{s['f_privacy']}</a></span>
     </div>
   </div>
 </footer>"""
+
+
+# ---------------------------------------------------------------------------
+# A lead says one sentence a line (Andrew, 2 Oct 2026: "the sentences do not
+# break at the sentence, so readability and proportion look odd"). Each
+# sentence of a lead-type block is wrapped in <span class="sl">, which
+# styles.css sets as its own balanced block. Running text (answers, steps,
+# paragraphs, clauses) is left to flow. Done here, once, for every page, so a
+# new lead cannot slip through unsplit.
+# ---------------------------------------------------------------------------
+SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "progs-note", "pi-text")
+# split too, but the sentences sit side by side where the block fits one line
+# (styles.css .sl-n, a line each only under 48em): the programme status
+# ("Write to us. We will plan a talk with your group.") and the join hint
+# ("One line is enough. If it helps, tell us:") wrap only on a phone, and as
+# blocks on every screen they read as two separate notes (audit, after).
+SENTENCE_NARROW = ("pp-say", "join-hint")
+_SB_OPEN = re.compile(r'<(p|span|div)\b[^>]*?\bclass="([^"]*)"[^>]*>')
+_SB_TAG = re.compile(r"<(/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(/?)>")
+_SB_VOID = {"br", "img", "wbr", "input", "meta", "link", "hr", "source", "path", "circle", "rect", "line"}
+# the end of a sentence: . ! or ? (and a closing quote), then a space and the
+# start of the next one; English sentences start with a capital, a figure,
+# an opening quote or a tag
+_SB_END = {
+    "en": re.compile(r"[.!?](?:&rdquo;|&rsquo;|[”’)])?(?=\s+(?:&[lr]dquo;|&lsquo;|<|[“‘(A-Z0-9]))"),
+    "ko": re.compile(r"[.!?](?:&rdquo;|&rsquo;|[”’)])?(?=\s+\S)"),
+}
+# a full stop after these does not end a sentence (readability.py agrees)
+_SB_ABBR = re.compile(r"\b(?:Co|St|Dr|Mr|Mrs|Ms|Fr|Sr|Rev|No|approx|e\.g|i\.e|etc|vs)\.$")
+
+
+def _sentences(inner, lang):
+    """Split a block's inner HTML into sentences, only where the break falls
+    outside any inline element (a link or a strong that holds two sentences
+    stays whole)."""
+    depth, top = 0, []          # spans of inner that sit at depth 0
+    pos = 0
+    for m in _SB_TAG.finditer(inner):
+        if m.start() > pos and depth == 0:
+            top.append((pos, m.start()))
+        closing, name, selfclose = m.group(1), m.group(2).lower(), m.group(3)
+        if not selfclose and name not in _SB_VOID:
+            depth += -1 if closing else 1
+        pos = m.end()
+    if pos < len(inner) and depth == 0:
+        top.append((pos, len(inner)))
+    cuts = []
+    for m in _SB_END[lang].finditer(inner):
+        end = m.end()
+        if not any(a < end <= b for a, b in top):
+            continue
+        if _SB_ABBR.search(inner[max(0, m.start() - 8):m.start() + 1]):
+            continue
+        cuts.append(end)
+    parts, last = [], 0
+    for c in cuts:
+        parts.append(inner[last:c].strip())
+        last = c
+    parts.append(inner[last:].strip())
+    return [x for x in parts if x]
+
+
+def _close(markup, start, name):
+    """Index of the end tag that closes the element whose start tag ends at
+    start."""
+    depth = 1
+    for m in _SB_TAG.finditer(markup, start):
+        closing, tag, selfclose = m.group(1), m.group(2).lower(), m.group(3)
+        if selfclose or tag in _SB_VOID:
+            continue
+        depth += -1 if closing else 1
+        if depth == 0:
+            return m.start()
+    return -1
+
+
+def _text_sub(markup, pattern, repl):
+    """Apply a substitution to the text of markup, never inside a tag."""
+    parts = re.split(r"(<[^>]+>)", markup)
+    for i in range(0, len(parts), 2):
+        parts[i] = pattern.sub(repl, parts[i])
+    return "".join(parts)
+
+
+# English leads: "and" and "or" go to the next line with their word, never
+# hang at a line end ("Care homes, hospitals, parishes and / community"),
+# unless that word is already part of a tied name
+_LEAD_CONJ = re.compile(r"\b(and|or) (?=[^\s\u00a0<]+(?:[ \n.,;:!?]|$))")
+
+
+def _ko_tail(sentence):
+    """Korean leads: the last two words of a sentence stay on one line when
+    they hold ten syllables or fewer. Chrome's text-wrap:pretty does this;
+    Firefox and Safari before 26 do not, and left "연주합니다." alone."""
+    i, inside = len(sentence) - 1, False
+    while i >= 0:
+        ch = sentence[i]
+        if ch == ">":
+            inside = True
+        elif ch == "<":
+            inside = False
+        elif ch == " " and not inside:
+            break
+        i -= 1
+    if i <= 0:
+        return sentence
+    head, tail = sentence[:i], sentence[i + 1:]
+    last = re.sub(r"<[^>]+>", "", tail)
+    before = re.sub(r"<[^>]+>", "", head).split()[-1:] or [""]
+    if len(re.sub(r"[^가-힣A-Za-z0-9]", "", before[0] + last)) <= 10:
+        return head + NBSP + tail
+    return sentence
+
+
+def sentence_lines(body, lang):
+    out, pos = [], 0
+    for m in _SB_OPEN.finditer(body):
+        classes = set(m.group(2).split())
+        if m.start() < pos or not classes & set(SENTENCE_BLOCKS + SENTENCE_NARROW):
+            continue
+        cls = "sl" if classes & set(SENTENCE_BLOCKS) else "sl sl-n"
+        end = _close(body, m.end(), m.group(1))
+        if end == -1:
+            continue
+        inner = body[m.end():end]
+        # a block may carry its own language (the bilingual 404 page)
+        own = re.search(r'\blang="(en|ko)', m.group(0))
+        block_lang = own.group(1) if own else lang
+        parts = _sentences(inner, block_lang)
+        if block_lang == "ko":
+            parts = [_ko_tail(x) for x in parts]
+        else:
+            parts = [_text_sub(x, _LEAD_CONJ, lambda k: k.group(1) + NBSP) for x in parts]
+        out.append(body[pos:m.end()])
+        out.append(" ".join(f'<span class="{cls}">{x}</span>' for x in parts) if len(parts) > 1 else parts[0])
+        pos = end
+    out.append(body[pos:])
+    return "".join(out)
+
+
+# a compound that must not break at its own hyphen: at 390px the status
+# sentence read "is a not- / for-profit community" (typography audit, 2 Oct
+# 2026). A non-breaking hyphen would depend on the font having the glyph.
+KEEP_WHOLE = ("not-for-profit",)
+
+
+# Safari breaks a quoted word from the Korean particle after it ('Everyone'/은,
+# research department, 2 Oct 2026); neither keep-all nor a word joiner stops
+# it, only a no-wrap span does
+_QUOTE_PARTICLE = re.compile(r"((?:&lsquo;|‘)[^&<’]{1,24}(?:&rsquo;|’)[가-힣]{1,2})")
+
+
+def keep_whole(markup, lang="en"):
+    parts = re.split(r"(<[^>]+>)", markup)
+    for i in range(0, len(parts), 2):
+        for w in KEEP_WHOLE:
+            parts[i] = parts[i].replace(w, f'<span class="nowrap">{w}</span>')
+        if lang == "ko":
+            parts[i] = _QUOTE_PARTICLE.sub(r'<span class="nowrap">\1</span>', parts[i])
+    return "".join(parts)
+
+
+# Words that belong together never part at the end of a line (typography
+# pass, 2 Oct 2026; R6): a number and its counter (여섯 명, which split
+# "여섯 / 명이" on a phone), a district and its number (Dublin 15, 더블린 15구),
+# a day and its month, a month and its year, a time range (7pm to 8pm,
+# 저녁 7시). The space becomes a no-break space; nothing else changes.
+NBSP = "\u00a0"
+_MONTHS = "January|February|March|April|May|June|July|August|September|October|November|December"
+_TIME = r"\d{1,2}(?::\d{2})?(?:am|pm)"
+_KO_NUM = (r"(?:(?:열|스물|서른|마흔|쉰)?(?:한|두|세|네|다섯|여섯|일곱|여덟|아홉)|열|스무|스물|서른|마흔|쉰|몇"
+           r"|\d+)")
+_KO_COUNT = r"(?:번째|째|명|분|곳|번|가지|줄|해|달|주|시간|곡|대|개|쪽|사람|회|개국|주년|살|군데)"
+_KO_PART = r"[이가을를은는의도에과와만께로입]"
+_TIES = {
+    "en": [
+        re.compile(r"\b(Dublin) (?=\d)"),
+        re.compile(r"\b(Co\.|St|No\.) (?=[0-9A-Z])"),
+        # (articles are tied in tie(), which can see the next tag and the
+        # length of a tied name after them)
+        re.compile(rf"\b(\d{{1,2}}) (?=(?:{_MONTHS})\b)"),
+        re.compile(rf"\b((?:{_MONTHS})) (?=\d{{4}}\b)"),
+        re.compile(rf"\b({_TIME}) (?=to {_TIME})"),
+        re.compile(rf"\b({_TIME}[ \u00a0]to) (?={_TIME})"),
+    ],
+    "ko": [
+        re.compile(rf"(?<![가-힣])({_KO_NUM}) (?={_KO_COUNT}(?![가-힣])|{_KO_COUNT}{_KO_PART})"),
+        # (determiners such as 그 방 · 첫 주 are tied in tie(), which can see
+        # across a tag)
+        # a noun stays with the dependent noun after it (병원 등, 공연 중에도, 10주 동안)
+        re.compile(rf"([가-힣0-9]+) (?=(?:등|중|동안)(?:{_KO_PART}|[\s.,:]|$))"),
+        re.compile(r"(국립) (?=콘서트홀)"),
+        re.compile(r"(\S+에) (?=관한|대한)"),
+        re.compile(r"(더블린) (?=\d+구)"),
+        re.compile(r"(\d{4}년) (?=\d{1,2}월)"),
+        re.compile(r"(\d{1,2}월) (?=\d{1,2}일)"),
+        re.compile(r"(오전|오후|아침|낮|저녁|밤) (?=\d)"),
+    ],
+}
+
+
+# A Korean dependent noun stays with the word that governs it (할 수 있습니다,
+# 준비할 것, 읽을 줄, 있을 때): the governing word ends in a syllable with a
+# final ㄹ or ㄴ, which needs the syllable's final consonant, hence a function.
+_KO_DEP = re.compile(r"([가-힣]+) (?=(?:것|줄|때|데|뿐)(?:[이가을를은는도에만의로와과입]|[\s.,:]|$)|수 (?:있|없))")
+_KO_SU = re.compile("(?<=[가-힣][ \u00a0])(수) (?=있|없)")
+
+
+def _ko_dependent(text):
+    def bind(m):
+        last = m.group(1)[-1]
+        final = (ord(last) - 0xAC00) % 28
+        return m.group(1) + (NBSP if final in (4, 8) else " ")
+    text = _KO_DEP.sub(bind, text)
+    return _KO_SU.sub(lambda m: m.group(1) + NBSP, text)
+
+
+# two-word names balance used to split ("Presentation / Sisters", "South /
+# Dublin Live"); UKAAF: keep a name, a date or a number on one line
+NAMES = ("Presentation Sisters", "Letters Ensemble", "Community Centre", "Concert Hall", "TU Dublin",
+         "Dublin Live", "Royal Albert Hall", "Clondalkin Lodge", "Dalgan Park", "BBC Proms")
+_NAMES = re.compile("|".join(re.escape(n) for n in sorted(NAMES, key=len, reverse=True)))
+# a Korean list dot never starts a line ("세이프가딩 / ·돌봄"): a word joiner
+# before it forbids that break and leaves the break after it
+_KO_DOT = re.compile("(?<=[^\\s\u00a0\u2060])·")
+
+
+# a Korean determiner stays with its noun (그 방, 첫 주, 각 프로그램) -- but
+# 이 right after a word, a tag or a Latin name is the subject particle
+# ("Letters Ensemble이 맡는", "<strong>김서현</strong>이"), not "this"
+_KO_DET = re.compile(r"(그|이|저|첫|각|몇|모든) (?=[가-힣])")
+_WORDLIKE = re.compile(r"[가-힣A-Za-z0-9’”)\]]")
+
+
+def _ko_determiners(text, prev):
+    def bind(m):
+        before = text[m.start() - 1] if m.start() else prev
+        return m.group(0) if before and _WORDLIKE.match(before) else m.group(1) + NBSP
+    return _KO_DET.sub(bind, text)
+
+
+# An English article goes with the word after it ("the / Data Protection
+# Commission" ended a line), also when that word opens a link, and with a
+# tied name as long as the whole run stays within 20 characters (R12).
+_ARTICLE = re.compile(r"\b(a|an|the|A|An|The) (?=\S)")
+_ARTICLE_END = re.compile(r"\b(a|an|the|A|An|The) $")
+_INLINE_OPEN = re.compile(r"<(a|strong|em|b|i|span)\b")
+
+
+def _articles(text, before_tag):
+    def bind(m):
+        run = re.match(r"[^ \t\n\r<]+", text[m.end():])
+        if len(m.group(1)) + 1 + len(run.group(0) if run else "") <= 20:
+            return m.group(1) + NBSP
+        return m.group(0)
+    text = _ARTICLE.sub(bind, text)
+    if before_tag:
+        text = _ARTICLE_END.sub(lambda m: m.group(1) + NBSP, text)
+    return text
+
+
+# Korean: a sentence does not end on one short word alone on a line; its last
+# two words stay together when they hold ten syllables or fewer (the same
+# rule the leads use, here for every block: answers, steps, values)
+_KO_LAST = re.compile(r"([^\s<]+) ([^\s<]+?[.!?](?:[”’」』)])?)(?=\s|$)")
+# nor does a particle start a line after a closing bracket or quote
+# (「Down by the Sally Gardens」 / 도)
+_KO_CLOSE = re.compile("([」』’”)\\]])(?=[가-힣])")
+
+
+def _ko_sentence_ends(text):
+    def bind(m):
+        n = len(re.sub(r"[^가-힣A-Za-z0-9]", "", m.group(1) + m.group(2)))
+        return m.group(1) + (NBSP if n <= 10 and re.search("[가-힣]", m.group(2)) else " ") + m.group(2)
+    return _KO_LAST.sub(bind, text)
+
+
+def tie(markup, lang):
+    parts = re.split(r"(<[^>]+>)", markup)
+    prev = ""
+    for i in range(0, len(parts), 2):
+        parts[i] = _NAMES.sub(lambda m: m.group(0).replace(" ", NBSP), parts[i])
+        before_tag = i + 1 < len(parts) and bool(_INLINE_OPEN.match(parts[i + 1]))
+        parts[i] = _articles(parts[i], before_tag)
+        for pat in _TIES["en"] + (_TIES["ko"] if lang == "ko" else []):
+            parts[i] = pat.sub(lambda m: m.group(1) + NBSP, parts[i])
+        if lang == "ko":
+            parts[i] = _ko_determiners(parts[i], prev)
+            parts[i] = _ko_sentence_ends(parts[i])
+            parts[i] = _KO_CLOSE.sub("\\1\u2060", parts[i])
+            parts[i] = _ko_dependent(parts[i])
+            parts[i] = _KO_DOT.sub("\u2060·", parts[i])
+            # nor does a range part at its tilde (7시 / ~8시, 7시~ / 8시)
+            parts[i] = re.sub("(?<=\\S)~(?=\\d)", "\u2060~\u2060", parts[i])
+        if parts[i].strip():
+            prev = parts[i].rstrip()[-1]
+    return "".join(parts)
 
 
 def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og_alt=None, og_size=(1800, 1350)):
@@ -414,6 +711,9 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
     # a separator never starts a line: the space before it does not break
     # (QA40-11: Korean keep-all lines began with "·" or "/")
     body = body.replace(" · ", "\u00a0· ").replace(" / ", "\u00a0/ ")
+    body = sentence_lines(body, lang)
+    body = keep_whole(body, lang)
+    body = tie(body, lang)
     canonical = f"{SITE_URL}/" + ("" if lang == "en" else "ko/") + sub
     desc = description.replace('"', "'")
     ld_lang = "en-IE" if lang == "en" else "ko"
@@ -472,7 +772,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
 <main id="main">
 {body}
 </main>
-{footer(lang, slug)}
+{tie(keep_whole(footer(lang, slug), lang), lang)}
 </body>
 </html>
 """

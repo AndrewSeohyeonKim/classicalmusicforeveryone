@@ -267,7 +267,13 @@ _ABBR = re.compile(r"\b(Co|St|Dr|Mr|Mrs|Ms|Fr|Sr|Rev|No|approx|e\.g|i\.e|etc|vs)
 _LATIN = re.compile(r"[A-Za-zÀ-ɏ][A-Za-z0-9À-ɏ'’.&-]*")
 
 
+# zero-width characters the build inserts (a word joiner before a Korean list
+# dot) are typesetting, not text
+_ZW = re.compile("[\u200b-\u200d\u2060\ufeff]")
+
+
 def units(s, lang):
+    s = _ZW.sub("", s)
     if lang == "ko":
         latin = _LATIN.findall(s)
         rest = _LATIN.sub("", s)
