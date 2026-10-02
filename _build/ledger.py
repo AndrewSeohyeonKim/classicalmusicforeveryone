@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""The activity ledger — every session and performance, 2023 to date.
+"""The activity ledger — every session and performance, 2023 to date. The
+site counts from the founding, January 2024 (counted(), below); the two 2023
+rows are kept as history.
 
 One list, read by the chart on the News page (one square per talk or
 performance) and the counts beside it. Facts follow 03 — Track Record §3 and
@@ -31,11 +33,11 @@ ROWS = [
     (2023, 2, 11, "outreach",
      "Lourdes English Mass", "루르드 영어 미사",
      "Sanctuary of Our Lady of Lourdes, France", "루르드 성모 성지, 프랑스",
-     dict(bmsp=True, flag=("clarinet solo · before the founding", "클라리넷 독주 · 창립 이전"))),
+     dict(bmsp=True, pre=True, flag=("clarinet solo · before the founding", "클라리넷 독주 · 창립 이전"))),
     (2023, 7, 0, "companion",
      "BBC Proms", "BBC 프롬스",
      "Royal Albert Hall, London", "로열 앨버트 홀, 런던",
-     dict(not_in=("concert-companion",), flag=("attended · the first summer", "첫 번째 여름"))),
+     dict(pre=True, not_in=("concert-companion",), flag=("attended · the first summer", "첫 번째 여름"))),
 
     # ---- 2024 ---------------------------------------------------------------
     (2024, 1, 28, "lecture",
@@ -223,8 +225,9 @@ ROWS = [
                "목요일 1시간 · 은퇴한 Presentation 수녀님 일곱 분 · 일곱 분 모두 끝까지"))),
     (2026, 1, 23, "lecture",
      "My Taste", "내 취향 찾기",
-     "Dublin", "더블린",
-     dict(flag=("venue and attendance not recorded", "장소와 참석 인원은 기록되지 않음"), pub=None)),
+     "East Quad, TU Dublin Grangegorman", "East Quad, TU Dublin Grangegorman",
+     dict(flag=("more than five people · exact number not recorded", "다섯 명 넘게 · 정확한 인원은 기록되지 않음"),
+          pub=("more than five people", "다섯 명 넘게"))),
     (2026, 1, 0, "companion",
      "National Symphony Orchestra, RIAM piano series, RT&Eacute; Concert Orchestra",
      "국립 교향악단, RIAM 피아노 시리즈, RT&Eacute; 콘서트 오케스트라",
@@ -235,8 +238,9 @@ ROWS = [
                "참가자에게 안내, 단체 관람 준비"))),
     (2026, 2, 0, "lecture",
      "My Taste (2)", "내 취향 찾기 (2)",
-     "Dublin", "더블린",
-     dict(flag=("date and venue to confirm", "날짜와 장소 확인 중"), pub=None)),
+     "East Quad, TU Dublin Grangegorman", "East Quad, TU Dublin Grangegorman",
+     dict(flag=("day not recorded · more than five people", "날짜 미기록 · 다섯 명 넘게"),
+          pub=("more than five people", "다섯 명 넘게"))),
     (2026, 4, 0, "concert",
      "Easter Concert: Presentation Sisters Recorder Ensemble", "부활 음악회. Presentation 수녀회 리코더 앙상블",
      "Clondalkin Lodge, Dublin", "Clondalkin Lodge, 더블린",
@@ -251,13 +255,19 @@ ROWS = [
     (2026, 8, 20, "concert",
      "Shared Voices of Care", "Shared Voices of Care",
      "Tallaght University Hospital", "Tallaght University Hospital",
-     dict(flag=("South Dublin Live 2026 · acoustic, drop-in · atrium and chapel · guest haegeum artist",
-                "South Dublin Live 2026 · 어쿠스틱 · 아트리움과 경당 · 해금 객원"))),
+     dict(progs=("outreach-concerts",),
+          flag=("South Dublin Live 2026 · acoustic, drop-in · atrium and chapel · guest haegeum artist",
+                "South Dublin Live 2026 · 어쿠스틱 · 아트리움과 경당 · 해금 객원"),
+          pub=("our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player",
+               "창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원"))),
     (2026, 8, 29, "concert",
      "Shared Voices of Classical Tradition", "Shared Voices of Classical Tradition",
      "Rua Red Performance Space, Tallaght", "Rua Red, 더블린 Tallaght",
-     dict(flag=("South Dublin Live 2026 · clarinet, piano and soprano",
-                "South Dublin Live 2026 · 클라리넷·피아노·소프라노"))),
+     dict(progs=("outreach-concerts",),
+          flag=("South Dublin Live 2026 · clarinet, piano and soprano",
+                "South Dublin Live 2026 · 클라리넷·피아노·소프라노"),
+          pub=("our founder was selected for South Dublin Live 2026 · clarinet, piano and soprano",
+               "창립자가 South Dublin Live 2026에 선정 · 클라리넷·피아노·소프라노"))),
     (2026, 9, 0, "course",
      "Community Recorder Ensemble Class begins", "커뮤니티 리코더 앙상블 클래스 시작",
      "Mulhuddart Community Centre, Dublin 15", "Mulhuddart Community Centre, 더블린 15구",
@@ -265,7 +275,7 @@ ROWS = [
     (2026, 9, 19, "outreach",
      "An Autumn Concert", "가을 음악회",
      "Methodist Centenary Church, Ranelagh, Dublin 6", "Methodist Centenary Church, 더블린 6구 Ranelagh",
-     dict(flag=("soprano, haegeum, clarinet and piano · scheduled", "소프라노·해금·클라리넷·피아노 · 예정"))),
+     dict(flag=("soprano, haegeum, clarinet and piano", "소프라노·해금·클라리넷·피아노"))),
 ]
 
 KIND = {
@@ -312,7 +322,9 @@ def by_year():
 
 def counts():
     """The headline counts, derived rather than typed, so they cannot drift
-    from the rows above. 2023–2025 outreach must come to twenty (03 §1)."""
+    from the rows above. Counted rows only: from January 2024 to September
+    2026 the outreach rows and the ensemble's four come to twenty (03 §1,
+    request 05)."""
     c = dict(lecture=0, outreach=0, ensemble=0, concert=0, companion=0, course=0)
     for r in ROWS:
         c[r[3]] += 1
@@ -327,9 +339,10 @@ def counts():
 # include the ensemble's four), and the ensemble's concerts are also its own
 # record; courses are the recorder class and the pilot before it; outings
 # are Concert Guide & Companion. Then a row's note can add a programme
-# (progs) or take one away (not_in). The South Dublin Live concerts were a
-# selection of the founder (kit 25, 27) and stay out of every programme's
-# list. A row marked scheduled is never shown.
+# (progs) or take one away (not_in). The South Dublin Live concerts, a
+# selection of the founder (kit 25, 27), are on the Outreach Concerts record
+# and say so in their own line (Andrew, 1 Oct 2026). A row marked scheduled,
+# or from before the founding, is never shown.
 # ---------------------------------------------------------------------------
 
 BY_KIND = {
@@ -346,6 +359,13 @@ def scheduled(row):
     return "scheduled" in (row[8].get("flag") or ("", ""))[0]
 
 
+def counted(row):
+    """On the public record: not still to come, and not from before the
+    founding in January 2024 (pre). The two 2023 rows stay in the ledger as
+    history; the site counts from 2024 (Andrew, 1 Oct 2026)."""
+    return not scheduled(row) and not row[8].get("pre")
+
+
 def for_programme(slug):
     """Every row on the record for one programme, in date order."""
     out = []
@@ -353,7 +373,7 @@ def for_programme(slug):
         note = r[8]
         progs = set(BY_KIND[r[3]]) | set(note.get("progs", ()))
         progs -= set(note.get("not_in", ()))
-        if slug in progs and not scheduled(r):
+        if slug in progs and counted(r):
             out.append(r)
     return out
 
@@ -381,7 +401,7 @@ def public_label(row, lang):
     (TITLED, above, says why)."""
     i = 0 if lang == "en" else 1
     title, venue = row[4 + i], row[6 + i]
-    if row[3] == "outreach":
+    if row[3] == "outreach" or "outreach-concerts" in row[8].get("progs", ()):
         q = qualifier(row, lang)
         return f"{when(row, lang)} · {venue}" + (f" · {q}" if q else "")
     return f"{when(row, lang)} · {title} · {venue}"

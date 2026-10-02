@@ -111,6 +111,16 @@
   --line-interactive:color-mix(in srgb,var(--gold-deep) 78%,var(--warm-cream));
 
   --live:var(--green-deep);
+  --surface-status:var(--cream-edge);       /* the ground of a status pill   */
+  /* Emphasis, in three steps (art direction, 2 Oct 2026). Gold capitals
+     name a field; these answer it.
+       quiet      --fg-muted 400   captions, sources, crumbs, chart keys; never a fact
+       E1 firm    --fg 600         a value people scan for; a title in a list (= h3)
+       E2 strong  --fg 700         <strong> in copy, one per paragraph
+       E3 signal  .tag             ink 700 on --surface-status, --live when running;
+                                   one per block
+     Korean has 400 and 700 only: E1 is ink at 400 or 700 by context, E2 and
+     E3 are 700, and <em> is never used in Korean running text. */
   --live-tint:var(--green-tint);
 
   /* Focus: a dark ring outside a light halo (Spectrum), so the indicator
@@ -145,6 +155,10 @@
   --wrap:1280px;
   --gutter:clamp(20px,4.6vw,56px);
   --gap:clamp(16px,2.2vw,32px);
+  /* where column 4 of the 3/9 split starts, and how wide 4–12 is: one
+     measure for every block that hangs on the content line */
+  --col4:calc(25% + var(--gap) * .75);
+  --col4-w:calc(75% - var(--gap) * .75);
   --section:clamp(88px,10.5vw,168px);
   --section-tight:clamp(56px,6.5vw,104px);
   /* radii: photographs and panels are nearly square, which is what makes
@@ -235,15 +249,19 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,td,th,a,span,b,small){
 /* --- the small label ------------------------------------------------------
    One recipe for every uppercase label on the site; component rules below
    set only colour, margin and layout. */
-.eyebrow,.kicker,.tag,.fig-period,.tl-date,.cap-label,.site-footer h2,
-.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.contents .c-label{
+.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,
+.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.contents .c-label,.details dt,
+.none-glance dt{
   font-family:var(--font-body);font-size:var(--t-label);font-weight:600;
   letter-spacing:var(--label-track);text-transform:uppercase;line-height:1.3;
   font-variant-numeric:lining-nums tabular-nums;
 }
-html[lang^="ko"] :is(.eyebrow,.kicker,.tag,.fig-period,.tl-date,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.contents .c-label){
+html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.contents .c-label,.details dt,.none-glance dt){
   font-family:var(--font-kr);font-size:.78rem;letter-spacing:var(--label-track-kr);font-weight:700;
 }
+/* Korean has two weights: a field label steps down to 400 so the 700 value
+   beside it leads; gold already marks it as a label */
+html[lang^="ko"] :is(.glance dt,.facts dt,.pp-glance dt,.pi-facts dt,.details dt,.none-glance dt){font-weight:400}
 .eyebrow{display:flex;align-items:baseline;gap:14px;margin:0 0 22px;color:var(--accent-ink)}
 /* a section number in the margin, set like a movement in a programme */
 .eyebrow .no{
@@ -441,9 +459,6 @@ html[lang^="ko"] .lead{line-height:1.72}
     /* the steps: each station's line draws to the next */
     .steps li::before{animation:draw-x linear both;animation-timeline:view();animation-range:entry 40% entry 100%}
 
-    /* the contents line: the leaders run out to the action */
-    .contents .c-dots{transform-origin:0 50%;animation:draw-x linear both;animation-timeline:view();
-      animation-range:entry 20% entry 100%}
 
     /* charts and the map: marks appear in their order across the first part
        of the drawing's arrival, so a drawing on screen is always complete */
@@ -669,7 +684,7 @@ section.tight{padding-block:var(--section-tight)}
 .sh-lead{margin-top:24px;max-width:34em;font-size:var(--t-lead);line-height:1.56;color:var(--fg-body)}
 html[lang^="ko"] .sh-lead{line-height:1.74}
 .band-ink .sh-lead{color:var(--fg-inverse-body)}
-@media (min-width:55em){
+@media (min-width:55.0625em){
   .sh-split{display:grid;grid-template-columns:3fr 9fr;gap:var(--gap);align-items:baseline}
   .sh-split .eyebrow{margin:0;padding-top:.2em}
 }
@@ -677,32 +692,44 @@ html[lang^="ko"] .sh-lead{line-height:1.74}
 
 /* --- the contents line --------------------------------------------------
    The running order of a printed programme: a label in the margin, a title
-   in the measure, a dotted leader and the action at the edge. One pattern
-   for every list of ways in (the home page, Get involved, Contact), in
-   place of the boxed and tinted cells it replaced (2026-10-01). */
+   in the measure and the action in a column of its own, so the four actions
+   line up under one another. One pattern for every list of ways in (the
+   home page, Get involved, Contact), in place of the boxed and tinted cells
+   it replaced (2026-10-01). The dotted leader that once ran from the title
+   to the far edge is gone (2026-10-02): on a wide screen it became a long
+   rule through the middle of the page. */
 .contents{border-top:1px solid var(--fg)}
 .contents ol{list-style:none;margin:0;padding:0}
 .contents li+li{border-top:1px solid var(--line-strong)}
-.contents a{display:grid;grid-template-columns:3fr 9fr;gap:4px var(--gap);align-items:baseline;min-height:56px;
-  padding-block:15px;color:var(--fg)}
+.contents a{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:4px var(--gap);align-items:baseline;
+  min-height:56px;padding-block:18px;color:var(--fg)}
 .contents .c-label{color:var(--accent-ink);padding-top:.2em}
-.contents .c-row{display:flex;align-items:baseline;gap:16px;min-width:0}
-.contents b{font-family:var(--font-display);font-weight:500;font-size:var(--t-h3);line-height:1.22;
+/* the title starts on the content line (column 4), like every heading */
+.contents .c-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:4px var(--gap);align-items:baseline}
+.contents b{font-family:var(--font-display);font-weight:600;font-size:var(--t-h3);line-height:1.22;
   transition:color var(--dur-3) var(--ease)}
 html[lang^="ko"] .contents b{font-family:var(--font-kr);font-weight:700;font-size:1.08rem;letter-spacing:-.026em}
-.contents .c-dots{flex:1;min-width:24px;border-bottom:1px dotted var(--line-interactive);translate:0 -.3em;
-  transition:border-color var(--dur-3) var(--ease)}
-.contents .c-go{display:inline-flex;align-items:center;gap:10px;flex:0 0 auto;font-size:var(--t-small);font-weight:600;
-  white-space:nowrap;transition:color var(--dur-3) var(--ease)}
-html[lang^="ko"] .contents .c-go{font-weight:700}
-.contents .c-ico{display:inline-flex;width:18px;height:18px}
+.contents a{position:relative}
+.contents .c-go{display:inline-flex;align-items:center;gap:10px;justify-self:start;padding-bottom:3px;
+  font-size:var(--t-small);font-weight:500;color:var(--fg);border-bottom:1px solid var(--line-interactive);
+  transition:color var(--dur-3) var(--ease),border-color var(--dur-3) var(--ease)}
+html[lang^="ko"] .contents .c-go{font-weight:400}
+.contents :is(.arrow,.c-ico){color:var(--accent-ink)}
+.contents .c-ico{display:inline-flex;width:18px;height:18px;transition:translate var(--dur-3) var(--ease)}
 .contents .c-glyph{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+/* the row's own rule turns gold across its width: the leader's job, only on demand */
+.contents a::before{content:"";position:absolute;inset-inline:0;top:-1px;height:1px;background:var(--accent);
+  scale:0 1;transform-origin:0 50%;transition:scale var(--dur-4) var(--ease)}
+.contents a:is(:hover,:focus-visible)::before{scale:1 1}
 .contents a:hover :is(b,.c-go){color:var(--accent-ink)}
-.contents a:hover .c-dots{border-bottom-color:var(--accent)}
+.contents a:hover .c-go{border-bottom-color:var(--accent)}
+.contents a:hover .c-ico{translate:3px 0}
 .contents a:focus-visible{outline-offset:-2px}
 @media (max-width:55em){
-  .contents a{grid-template-columns:1fr;gap:4px;padding-block:14px}
-  .contents .c-dots{min-width:12px}
+  .contents a{grid-template-columns:minmax(0,1fr);gap:6px;padding-block:16px}
+  .contents .c-row{grid-template-columns:minmax(0,1fr) auto;gap:16px}
+  .contents .c-go{border:0;padding:0}
+  .contents .c-act{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 }
 
 /* ==========================================================================
@@ -802,7 +829,7 @@ html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
 .ph-title{max-width:12em}
 .ph-lead{font-size:var(--t-lead);line-height:1.56;color:var(--fg-body);max-width:32em;margin:0;padding-bottom:.4em}
 html[lang^="ko"] .ph-lead{line-height:1.74}
-.ph-figure{margin:clamp(40px,5vw,80px) 0 0 calc(3 / 12 * 100% + var(--gap) / 4)}
+.ph-figure{margin:clamp(40px,5vw,80px) 0 0 var(--col4)}
 .ph-figure .photo{aspect-ratio:3/2}
 .ph-plain{padding-bottom:clamp(24px,3vw,48px)}
 @media (max-width:55em){
@@ -855,14 +882,14 @@ figcaption .cap-label{color:var(--accent-ink);font-size:var(--t-label)}
   padding:clamp(14px,1.4vw,22px);border-radius:var(--radius-xs);background:var(--surface-inverse);color:var(--fg-inverse);
   transition:background-color var(--dur-5) var(--ease)}
 .cover::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.34;
-  background:repeating-radial-gradient(circle at 50% 52%,color-mix(in srgb,var(--accent-inverse) 60%,transparent) 0 1px,transparent 1px 17px);
-  -webkit-mask-image:radial-gradient(circle at 50% 52%,#000 6%,transparent 60%);
-  mask-image:radial-gradient(circle at 50% 52%,#000 6%,transparent 60%)}
+  background:repeating-radial-gradient(circle at 50% 50%,transparent 0 16px,color-mix(in srgb,var(--accent-inverse) 60%,transparent) 16px 17px);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,transparent 0 22%,#000 26%,transparent 60%);
+  mask-image:radial-gradient(circle at 50% 50%,transparent 0 22%,#000 26%,transparent 60%)}
 .cover-no{font-family:var(--font-display);font-size:clamp(1.5rem,2.1vw,2.05rem);line-height:1;color:var(--accent-inverse);
   font-variant-numeric:lining-nums}
-.cover-mark{align-self:center;justify-self:center;width:38%;height:auto;overflow:visible;
+.cover-mark{position:absolute;inset:0;margin:auto;width:38%;height:auto;overflow:visible;
   fill:none;stroke:var(--accent-inverse);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.cover-line{font-family:var(--font-display);font-style:italic;font-size:clamp(.85rem,1.05vw,.98rem);line-height:1.3;
+.cover-line{grid-row:3;font-family:var(--font-display);font-style:italic;font-size:clamp(.85rem,1.05vw,.98rem);line-height:1.3;
   color:var(--fg-inverse-body)}
 html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-size:.8rem;letter-spacing:-.01em}
 @container (max-width:180px){.cover-line{display:none}.cover-mark{width:44%}}
@@ -881,24 +908,26 @@ html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-s
 .pc h3{font-size:var(--t-h3);line-height:1.2;transition:color var(--dur-3) var(--ease)}
 html[lang^="ko"] .pc h3{font-size:1.08rem;line-height:1.42}
 .pc:hover h3{color:var(--accent-ink)}
-.pc p{margin:0;font-size:var(--t-small);line-height:1.52;color:var(--fg-muted)}
+.pc p{margin:0;font-size:var(--t-small);line-height:1.52;color:var(--fg-body)}
 .pc .tag{margin-top:auto}
 .pc .tag,.pi .tag,.pp-now .tag{white-space:normal;max-width:100%}
 /* in the row of five a card is too narrow for the longest status on one
    line, so each card closes on a hairline instead of a pill; two lines high,
-   so the five hairlines stand level. The list below 48em keeps the pill. */
-@media (min-width:48.0625em){
+   so the five hairlines stand level. The list below 62.5em keeps the pill
+   (at tablet width a card was 144px and its title took three lines). */
+@media (min-width:62.5625em){
   .pc .tag{align-self:stretch;align-items:flex-start;min-height:calc(2lh + 11px);padding:10px 0 0;border-radius:0;
     background:none;border-top:1px solid var(--line-strong)}
+  .pc .tag:not(.tag-live){color:var(--fg)}
   .pc .tag-live::before{margin-top:.3lh}
 }
 .progs-note{margin-top:clamp(32px,4vw,48px)}
 /* the pillar dot: filled for Learning, open for Sharing; always the same size */
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:0 0 auto;background:var(--accent)}
 .dot-open{background:transparent;box-shadow:inset 0 0 0 1.5px var(--accent)}
-/* the five stay in one row down to 48em, then become a list of the same
+/* the five stay in one row down to 62.5em, then become a list of the same
    cards, cover beside words, so no card is ever left alone on a row */
-@media (max-width:48em){
+@media (max-width:62.5em){
   .progs{grid-template-columns:1fr;gap:0}
   .pc{display:grid;grid-template-columns:clamp(96px,26vw,132px) minmax(0,1fr);column-gap:18px;align-items:start;
     padding-block:18px;border-top:1px solid var(--line-strong)}
@@ -910,7 +939,7 @@ html[lang^="ko"] .pc h3{font-size:1.08rem;line-height:1.42}
    id the old long block had, so programmes.html#letters-ensemble still lands
    on its programme, and a row arrived at that way says so in gold. */
 .prog-index{list-style:none;margin:0;padding:0;border-top:1px solid var(--fg)}
-.pi{position:relative;display:grid;grid-template-columns:4.6rem minmax(0,1fr) minmax(0,13rem) 15.5rem;
+.pi{position:relative;display:grid;grid-template-columns:4.6rem minmax(0,1fr) 15.5rem auto;
   gap:10px clamp(20px,3vw,48px);align-items:center;padding:clamp(22px,2.6vw,32px) 0;
   border-bottom:1px solid var(--line-strong);scroll-margin-top:110px;
   transition:background-color var(--dur-4) var(--ease)}
@@ -920,41 +949,45 @@ html[lang^="ko"] .pi h2{font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.36}
 .pi h2 a{color:var(--fg);transition:color var(--dur-3) var(--ease)}
 .pi h2 a::after{content:"";position:absolute;inset:0;z-index:1}
 .pi p{margin:8px 0 0;font-size:var(--t-small);line-height:1.55;color:var(--fg-body);max-width:36em}
+.pi-state{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0;align-self:start}
 .pi-facts{margin:0}
-.pi-facts dd{margin:6px 0 0;font-size:var(--t-small);line-height:1.5;color:var(--fg)}
-.pi-end{display:flex;align-items:center;justify-content:flex-end;gap:20px}
+.pi-facts dt{color:var(--accent-ink)}
+.pi-facts dd{margin:5px 0 0;font-family:var(--font-display);font-size:1.12rem;font-weight:600;line-height:1.35;color:var(--fg)}
+html[lang^="ko"] .pi-facts dd{font-family:var(--font-kr);font-weight:700;font-size:1rem}
+.pi-end{display:flex;align-items:center;justify-content:flex-end}
 .pi .cover-sm{align-self:start}
 .pi .arrow{color:var(--accent-ink)}
-@media (hover:hover){.pi:hover{background:color-mix(in srgb,var(--surface-raised) 70%,transparent)}}
+.pi::before{content:"";position:absolute;inset-inline:0;top:-1px;height:1px;background:var(--accent);
+  scale:0 1;transform-origin:0 50%;transition:scale var(--dur-4) var(--ease)}
+@media (hover:hover){.pi:hover::before{scale:1 1}}
 .pi:hover h2 a{color:var(--accent-ink)}
 .pi:hover .arrow i{translate:1.3em 0}
 .pi:target{border-bottom-color:var(--accent)}
 .pi:target .cover{background:var(--soft-navy)}
-.pi:target::before{content:"";position:absolute;inset-inline:0;top:-1px;height:2px;background:var(--accent)}
+.pi:target::before{content:"";position:absolute;inset-inline:0;top:-1px;height:2px;background:var(--accent);scale:1 1}
 .pi-note{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin:28px 0 0;font-size:var(--t-small);
   color:var(--fg-body);scroll-margin-top:110px}
-@media (max-width:30em){
+@media (max-width:22em){
   .pi{grid-template-columns:minmax(0,1fr) !important}
   .pi .cover-sm{width:4.2rem}
-  .pi-facts,.pi-end{grid-column:1 !important}
-  .pi-end{flex-wrap:wrap;gap:12px}
+  .pi-state{grid-column:1 !important}
 }
 /* below the menu breakpoint the status column would squeeze the name, so
    the When line and the status go under the name instead */
 @media (max-width:62.5em){
-  .pi{grid-template-columns:4.2rem minmax(0,1fr);gap:10px 16px}
-  .pi-facts,.pi-end{grid-column:2}
-  .pi-end{justify-self:start}
+  .pi{grid-template-columns:4.2rem minmax(0,1fr);gap:14px 16px}
+  .pi-state{grid-column:2}
+  .pi-end{display:none}
 }
 
 /* --- facts: a label beside its value, on hairlines ----------------------- */
 .facts{display:grid;grid-template-columns:minmax(8.5em,auto) 1fr;margin:30px 0 0;border-top:1px solid var(--fg)}
 .facts dt,.facts dd{padding-block:14px;border-bottom:1px solid var(--line-strong)}
-.facts dt{color:var(--fg-muted);padding-inline-end:20px;padding-top:17px}
-.facts dd{margin:0;color:var(--fg);font-size:var(--t-small);line-height:1.56}
+.facts dt{color:var(--accent-ink);padding-inline-end:20px;padding-top:17px}
+.facts dd{margin:0;color:var(--fg);font-size:var(--t-body);line-height:1.56}
 .band-ink .facts{border-top-color:var(--accent-inverse)}
 .band-ink .facts :is(dt,dd){border-bottom-color:var(--line-inverse)}
-.band-ink .facts dt{color:var(--fg-inverse-muted)}
+.band-ink .facts dt{color:var(--accent-inverse)}
 .band-ink .facts dd{color:var(--fg-inverse)}
 @media (max-width:35em){
   .facts{grid-template-columns:1fr}
@@ -968,12 +1001,21 @@ html[lang^="ko"] .pi h2{font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.36}
   padding:28px 0;border-block:1px solid var(--line-strong);
 }
 .callout p{margin:0;max-width:44em}
+.callout .tag{justify-self:start}
+.play>.small,.board .small{color:var(--fg-body)}
 @media (max-width:40em){.callout{grid-template-columns:1fr}}
 
+/* A status says what is open now, so it is set as data, not as a label:
+   bold, sentence case, ink on a darker cream (11.6:1), green when running.
+   Labels (gold capitals) name a field; a status answers it (UX review,
+   2 Oct 2026). */
 .tag{
-  display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius-pill);
-  color:var(--accent-ink);background:var(--surface-sunken);white-space:nowrap;
+  display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:var(--radius-pill);
+  font-family:var(--font-body);font-size:var(--t-small);font-weight:700;line-height:1.3;letter-spacing:0;
+  text-transform:none;font-variant-numeric:lining-nums;
+  color:var(--fg);background:var(--surface-status);white-space:nowrap;
 }
+html[lang^="ko"] .tag{font-family:var(--font-kr);font-size:.9rem;letter-spacing:-.01em}
 .tag-live{color:var(--live);background:var(--live-tint)}
 .tag-live::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 /* a live dot pulses three times and then rests */
@@ -1015,7 +1057,7 @@ html[lang^="ko"] .why-resolve em{font-style:normal}
         linear-gradient(var(--fg),var(--fg)) 0 0 / 0% 100% no-repeat,
         linear-gradient(color-mix(in srgb,var(--fg) 50%,var(--surface-raised)),color-mix(in srgb,var(--fg) 50%,var(--surface-raised))) 0 0 / 100% 100% no-repeat;
       -webkit-background-clip:text;background-clip:text;
-      animation:ink-fill linear both;animation-timeline:view();animation-range:entry 0% entry 100%;
+      animation:ink-fill linear both;animation-timeline:view();animation-range:entry 0% entry 80%;
     }
   }
 }
@@ -1084,16 +1126,20 @@ html[lang^="ko"] .fig b{font-family:var(--font-display)}
 .forty figcaption span{display:inline-flex;align-items:center;gap:8px}
 .forty figcaption i{width:11px;height:11px;border-radius:1px;background:var(--accent-inverse)}
 .forty figcaption i.o{background:transparent;box-shadow:inset 0 0 0 1.5px var(--accent-inverse)}
-@media (max-width:30em){.forty-row{max-width:calc(20 * 19px)}}
+@media (max-width:62.5em){.forty-row{max-width:calc(20 * 19px)}}
+@media (max-width:30em){.forty-row{max-width:calc(10 * 19px)}}
 
 /* ==========================================================================
    14. NOW RUNNING · the one thing open right now, with its photograph
    ========================================================================== */
 .now{display:grid;grid-template-columns:6fr 6fr;gap:clamp(32px,6vw,104px);align-items:center}
 .now h2{font-size:var(--t-h2-sm);margin-top:20px;max-width:14em}
+.now .facts dd{font-size:var(--t-body)}
+.now .facts dd:first-of-type{font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;line-height:1.3}
+html[lang^="ko"] .now .facts dd:first-of-type{font-family:var(--font-kr);font-weight:700;font-size:1.12rem;line-height:1.5}
 html[lang^="ko"] .now h2{font-size:clamp(1.5rem,2.4vw,2.05rem)}
 /* stacked, a full-width portrait would stand a screen and a half tall */
-@media (max-width:55em){.now{grid-template-columns:1fr;gap:30px}.now .photo-4x5{aspect-ratio:3/2}}
+@media (max-width:55em){.now{grid-template-columns:1fr;gap:30px}.now .photo-4x5{aspect-ratio:3/2}.now>.plate{max-width:none}}
 
 
 /* ==========================================================================
@@ -1102,12 +1148,12 @@ html[lang^="ko"] .now h2{font-size:clamp(1.5rem,2.4vw,2.05rem)}
 
 /* four facts at a glance: label over value, hairlines between */
 .glance{display:grid;grid-template-columns:repeat(4,1fr);margin:0;border-top:1px solid var(--fg)}
-.glance>div{padding:22px clamp(14px,2vw,28px) 6px 0}
+.glance>div{padding:22px clamp(14px,2vw,28px) 10px 0}
 .glance>div+div{padding-inline-start:clamp(14px,2vw,28px);border-inline-start:1px solid var(--line-strong)}
 .glance dt{color:var(--accent-ink)}
 .glance dd{margin:12px 0 0;font-family:var(--font-display);font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.15;color:var(--fg)}
 html[lang^="ko"] .glance dd{font-family:var(--font-kr);font-weight:700;font-size:1.2rem;letter-spacing:-.03em;line-height:1.4}
-.glance dd small{display:block;margin-top:8px;font-family:var(--font-body);font-size:var(--t-caption);line-height:1.45;color:var(--fg-muted)}
+.glance dd small{display:block;margin-top:8px;font-family:var(--font-body);font-size:var(--t-caption);line-height:1.45;color:var(--fg-body)}
 html[lang^="ko"] .glance dd small{font-family:var(--font-kr);font-weight:400;letter-spacing:0}
 @media (max-width:55em){
   .glance{grid-template-columns:repeat(2,1fr)}
@@ -1123,10 +1169,11 @@ html[lang^="ko"] .glance dd small{font-family:var(--font-kr);font-weight:400;let
 /* a label and heading held in the margin while the prose scrolls past */
 .prose-split{display:grid;grid-template-columns:3fr 9fr;gap:var(--gap);align-items:start}
 .prose-split .sh{margin:0}
+.prose-split .sh h2{font-size:var(--t-h2-sm)}
 .prose{font-size:1.125rem;line-height:1.72;max-width:36em}
 html[lang^="ko"] .prose{font-size:1.06rem;line-height:1.86}
 .prose p+p{margin-top:1.1em}
-@media (min-width:55em){.prose-split .sh{position:sticky;top:120px}}
+@media (min-width:55.0625em){.prose-split .sh{position:sticky;top:120px}}
 @media (max-width:55em){.prose-split{grid-template-columns:1fr}}
 
 /* the founder: a portrait, a name, a role, one paragraph */
@@ -1153,7 +1200,7 @@ html[lang^="ko"] .founder-role{font-weight:700}
 /* the places: the island beside the list. The list is the content, grouped
    by the kind of place, each with where it is; the map is its picture */
 .places{display:grid;grid-template-columns:5fr 7fr;gap:clamp(28px,4vw,64px);align-items:start}
-.places-map{margin:0;position:sticky;top:110px}
+.places-map{margin:0;position:sticky;top:110px;container-type:inline-size}
 .map-svg{width:100%;max-width:520px;height:auto;overflow:visible}
 .map-svg .m-land{fill:var(--surface-sunken);stroke:var(--line-strong);stroke-width:.9;stroke-linejoin:round}
 .map-svg .m-dot{fill:var(--accent-mark)}
@@ -1163,6 +1210,14 @@ html[lang^="ko"] .founder-role{font-weight:700}
 .map-svg .m-sub{fill:var(--fg-muted);font-family:var(--font-body);font-size:13px}
 html[lang^="ko"] .map-svg :is(.m-label,.m-sub){font-family:var(--font-kr)}
 html[lang^="ko"] .map-svg .m-label{font-size:17px;font-weight:700}
+/* where the map is drawn small (a phone, or the narrow column of a small
+   laptop), names and their lines are set larger, and each line steps down
+   to clear its name */
+@container (max-width:400px){
+  .map-svg .m-label{font-size:24px}
+  .map-svg .m-sub{font-size:20px;transform:translateY(6px)}
+  html[lang^="ko"] .map-svg .m-label{font-size:22px}
+}
 .places-map figcaption{margin-top:14px}
 .places-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,44px) var(--gap)}
 .places-group{border-top:1px solid var(--fg);padding-top:14px}
@@ -1202,7 +1257,7 @@ section.gi-ways{padding-top:0}
 .invite .steps{grid-column:2}
 .invite-act{grid-column:2;margin-top:8px}
 .invite-act .btn-row{margin-top:20px}
-.play{margin-inline-start:calc(3 / 12 * 100% + var(--gap) / 4)}
+.play{margin-inline-start:var(--col4)}
 .board{display:grid;grid-template-columns:3fr 9fr;gap:var(--gap)}
 .board>*{grid-column:2}
 .board .btn-row{margin-top:28px}
@@ -1265,6 +1320,8 @@ html[lang^="ko"] .help h3{font-size:1.28rem}
 .latest{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--fg)}
 .latest article{display:flex;flex-direction:column;padding:26px clamp(18px,2.4vw,40px) 6px 0}
 .latest article+article{padding-inline-start:clamp(18px,2.4vw,40px);border-inline-start:1px solid var(--line-strong)}
+.latest .kicker{font-size:var(--t-body);font-weight:600;letter-spacing:0;text-transform:none;color:var(--fg)}
+html[lang^="ko"] .latest .kicker{font-size:1rem;letter-spacing:-.01em}
 .latest h3{margin-top:12px;font-size:clamp(1.3rem,1.9vw,1.6rem)}
 html[lang^="ko"] .latest h3{font-size:1.22rem}
 .latest p{margin-top:12px;font-size:var(--t-small);line-height:1.6}
@@ -1293,7 +1350,9 @@ html[lang^="ko"] .latest h3{font-size:1.22rem}
   content:"";position:absolute;inset-inline-start:-40px;top:5px;width:13px;height:13px;border-radius:50%;
   background:var(--accent);box-shadow:0 0 0 4px var(--tl-ground);
 }
-.tl-date{color:var(--accent-ink);padding-top:3px}
+.tl-date{font-family:var(--font-body);font-size:var(--t-body);font-weight:600;line-height:1.35;color:var(--fg);
+  padding-top:2px;font-variant-numeric:lining-nums}
+html[lang^="ko"] .tl-date{font-family:var(--font-kr);font-weight:700}
 .tl-item h3{font-size:clamp(1.2rem,1.6vw,1.4rem)}
 .tl-item p{margin-top:8px;font-size:var(--t-small);line-height:1.6;color:var(--fg-body);max-width:34em}
 @media (max-width:48em){.tl-item{grid-template-columns:1fr}}
@@ -1368,17 +1427,29 @@ html[lang^="ko"] .pp-title{font-size:clamp(2.05rem,4.2vw,3.7rem);line-height:1.2
 .pp-intro .lead{margin-top:clamp(20px,2.4vw,32px);max-width:30em}
 .pp-cover{justify-self:end;width:100%;max-width:360px}
 .pp-glance{display:grid;grid-template-columns:repeat(4,1fr);margin:clamp(40px,5vw,72px) 0 0;border-top:1px solid var(--fg)}
-.pp-glance>div{padding:20px clamp(14px,2vw,28px) 4px 0}
+.pp-glance>div{padding:20px clamp(14px,2vw,28px) 10px 0}
 .pp-glance>div+div{padding-inline-start:clamp(14px,2vw,28px);border-inline-start:1px solid var(--line-strong)}
 .pp-glance dt{color:var(--accent-ink)}
 .pp-glance dd{margin:10px 0 0;font-family:var(--font-display);font-size:clamp(1.12rem,1.5vw,1.32rem);line-height:1.3;color:var(--fg)}
 html[lang^="ko"] .pp-glance dd{font-family:var(--font-kr);font-weight:400;font-size:1.02rem;line-height:1.6;letter-spacing:-.02em}
+/* the When cell is the one people scan for */
+.pp-glance .is-when dd{font-weight:600}
+html[lang^="ko"] .pp-glance .is-when dd{font-weight:700}
 @media (max-width:55em){
-  .pp-top{grid-template-columns:1fr;align-items:start;gap:28px}
-  .pp-cover{justify-self:start;max-width:min(220px,60vw)}
+  .pp-top{grid-template-columns:minmax(0,3fr) minmax(0,2fr);align-items:start;gap:28px}
   .pp-glance{grid-template-columns:repeat(2,1fr)}
   .pp-glance>div:nth-child(3){padding-inline-start:0;border-inline-start:0}
   .pp-glance>div:nth-child(n+3){border-top:1px solid var(--line-strong)}
+}
+@media (max-width:40em){
+  .pp-top{grid-template-columns:1fr}
+  .pp-cover{justify-self:start;max-width:min(220px,60vw)}
+  /* on a phone the four facts follow the button, and the drawn cover comes
+     after them: the facts are what a visitor needs before scrolling */
+  .pp-head>.wrap{display:flex;flex-direction:column}
+  .pp-head .pp-top{display:contents}
+  .pp-head .pp-glance{order:1}
+  .pp-head .pp-cover{order:2;margin-top:clamp(32px,8vw,48px);width:min(220px,60vw)}
 }
 @media (max-width:30em){
   .pp-glance{grid-template-columns:1fr}
@@ -1388,12 +1459,21 @@ html[lang^="ko"] .pp-glance dd{font-family:var(--font-kr);font-weight:400;font-s
 
 /* what is happening now, and the one action, on the first screen */
 .pp-now{margin-top:clamp(24px,3vw,36px);padding-top:20px;border-top:1px solid var(--line-strong);max-width:34em}
-.pp-now>p:not(.mail-alt){display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0;color:var(--fg)}
+.pp-now>p:not(.mail-alt){display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin:0;color:var(--fg)}
+/* when and where, said once and large: the line a visitor came for */
+.pp-now>p:not(.mail-alt)>span:not(.tag){flex-basis:100%;color:var(--fg-body)}
+.pp-now.is-live>p:not(.mail-alt)>span:not(.tag){font-family:var(--font-display);font-size:var(--t-h3);
+  line-height:1.3;color:var(--fg)}
+html[lang^="ko"] .pp-now.is-live>p:not(.mail-alt)>span:not(.tag){font-family:var(--font-kr);font-size:1.12rem;line-height:1.6;
+  letter-spacing:-.02em}
+.pp-now strong{font-weight:600;color:var(--fg)}
+html[lang^="ko"] .pp-now strong{font-weight:700}
+.pp-intro .lead{color:var(--fg-body)}
 .pp-now .btn-row{margin-top:22px}
 /* the address and phone under a mail button: a mail link alone does nothing
    on a shared desk or a tablet with no mail app */
-.mail-alt{display:flex;flex-wrap:wrap;align-items:center;gap:0 14px;margin:14px 0 0;font-size:var(--t-caption);line-height:1.6;color:var(--fg-muted)}
-.mail-alt a{color:var(--fg-body);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:3px}
+.mail-alt{display:flex;flex-wrap:wrap;align-items:center;gap:0 14px;margin:14px 0 0;font-size:var(--t-caption);line-height:1.6;color:var(--fg-body)}
+.mail-alt a{color:var(--fg);text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:3px}
 .mail-alt a:hover{color:var(--accent-ink);text-decoration-color:var(--accent-ink)}
 
 /* how it works: numbered stations on one line, read left to right */
@@ -1420,7 +1500,7 @@ html[lang^="ko"] .pp-glance dd{font-family:var(--font-kr);font-weight:400;font-s
 .qa{display:grid;grid-template-columns:repeat(3,1fr);margin:0;border-top:1px solid var(--fg)}
 .qa>div{padding:24px clamp(16px,2.2vw,32px) 8px 0}
 .qa>div+div{padding-inline-start:clamp(16px,2.2vw,32px);border-inline-start:1px solid var(--line-strong)}
-.qa dt{font-family:var(--font-display);font-size:var(--t-h3);line-height:1.25;color:var(--fg)}
+.qa dt{font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;line-height:1.25;color:var(--fg)}
 html[lang^="ko"] .qa dt{font-family:var(--font-kr);font-weight:700;font-size:1.12rem;line-height:1.5;letter-spacing:-.026em}
 .qa dd{margin:12px 0 0;font-size:var(--t-small);line-height:1.62}
 @media (max-width:55em){
@@ -1434,7 +1514,7 @@ html[lang^="ko"] .qa dt{font-family:var(--font-kr);font-weight:700;font-size:1.1
 .rec li{display:grid;grid-template-columns:8.6em minmax(0,1fr) auto;gap:2px 18px;align-items:baseline;padding:14px 0 15px;
   border-top:1px solid var(--line-strong);break-inside:avoid}
 .rec-when{font-size:var(--t-caption);font-weight:600;color:var(--accent-ink);font-variant-numeric:lining-nums tabular-nums;line-height:1.5}
-.rec-what b{display:block;font-family:var(--font-display);font-size:1.12rem;font-weight:500;line-height:1.3;color:var(--fg)}
+.rec-what b{display:block;font-family:var(--font-display);font-size:1.12rem;font-weight:600;line-height:1.3;color:var(--fg)}
 html[lang^="ko"] .rec-what b{font-family:var(--font-kr);font-weight:700;font-size:1rem;letter-spacing:-.02em;line-height:1.5}
 .rec-what>span{display:block;margin-top:2px;font-size:var(--t-small);line-height:1.5;color:var(--fg-body)}
 .rec-what small{display:block;margin-top:3px;font-size:var(--t-caption);line-height:1.5;color:var(--fg-muted)}
@@ -1443,10 +1523,12 @@ html[lang^="ko"] .rec-what b{font-family:var(--font-kr);font-weight:700;font-siz
 
 /* in the room: the programme's one photograph, at its own shape, with a
    true caption; a video takes its place when there is one */
+:target{animation:none !important}
 .room{display:flex;justify-content:flex-end}
-.room .plate{width:min(100%,calc(9 / 12 * 100%))}
-.room .room-portrait{width:min(100%,460px);margin-inline-end:auto;margin-inline-start:calc(3 / 12 * 100% + var(--gap) / 2)}
-.room .video{width:min(100%,calc(9 / 12 * 100%))}
+@media (min-width:55.0625em){#how .steps,#expect .qa,.rec-short{margin-inline-start:var(--col4)}}
+.room .plate{width:min(100%,var(--col4-w))}
+.room .room-portrait{width:min(100%,460px);margin-inline-end:auto;margin-inline-start:var(--col4)}
+.room .video{width:min(100%,var(--col4-w))}
 @media (max-width:55em){.room .plate,.room .video{width:100%}.room .room-portrait{margin-inline-start:0}}
 
 /* the record as one strip of months, 2023 to 2026: the same drawing on all
@@ -1461,6 +1543,13 @@ html[lang^="ko"] .rec-what b{font-family:var(--font-kr);font-weight:700;font-siz
 .band-white .strip .s-open{fill:var(--surface-raised)}
 .strip .s-span.s-on{fill:var(--accent-mark)}
 .strip .s-ev:hover :is(circle,rect){stroke:var(--fg);stroke-width:2}
+/* on a phone the strip is drawn at about half size: the years and the
+   marks are set larger so they stay readable (UX review, 2 Oct 2026) */
+@media (max-width:40em){
+  .strip .s-year{font-size:26px}
+  .strip circle{r:5.3px}
+  .strip .s-open{stroke-width:2}
+}
 .strip-key{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:14px;font-size:var(--t-caption);color:var(--fg-muted)}
 .strip-key span{display:inline-flex;align-items:center;gap:8px}
 .strip-key i{width:10px;height:10px;border-radius:50%;background:var(--accent-mark)}
@@ -1495,7 +1584,7 @@ html[lang^="ko"] .rec-what b{font-family:var(--font-kr);font-weight:700;font-siz
 /* attendance at the talks: one gold column per session where it was counted */
 .att{margin:0 0 clamp(44px,5vw,72px)}
 .att-head{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;margin:0 0 20px;font-size:var(--t-small);color:var(--fg-muted)}
-.att-head b{font-family:var(--font-display);font-size:var(--t-h3);font-weight:500;color:var(--fg)}
+.att-head b{font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;color:var(--fg)}
 html[lang^="ko"] .att-head b{font-family:var(--font-kr);font-weight:700;font-size:1.1rem}
 .att-plot{max-width:600px}
 .att-svg{width:100%;height:auto;overflow:visible}
@@ -1525,9 +1614,10 @@ html[lang^="ko"] .join h2{font-size:clamp(1.5rem,2.4vw,2.05rem)}
 .others a{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 18px;align-items:baseline;padding:18px 0;
   border-bottom:1px solid var(--line-strong);color:var(--fg)}
 .toc-n{color:var(--accent-ink)}
-.others .toc-n{grid-row:1/3}
+.others .toc-n{grid-row:1/4}
+.others .tag{grid-column:2;justify-self:start;margin-top:10px}
 #more h2.eyebrow{margin:0 0 18px}
-.others b{font-family:var(--font-display);font-size:clamp(1.25rem,1.8vw,1.5rem);font-weight:500;line-height:1.2;
+.others b{font-family:var(--font-display);font-size:clamp(1.25rem,1.8vw,1.5rem);font-weight:600;line-height:1.2;
   transition:color var(--dur-3) var(--ease)}
 html[lang^="ko"] .others b{font-family:var(--font-kr);font-weight:700;font-size:1.12rem;letter-spacing:-.026em}
 .others-line{grid-column:2;font-size:var(--t-small);color:var(--fg-muted)}
@@ -1550,16 +1640,16 @@ section.ct-topics{padding-top:0}
   text-decoration-color:var(--accent);text-decoration-thickness:1px;text-underline-offset:.2em;overflow-wrap:anywhere;
   transition:color var(--dur-3) var(--ease)}
 .direct a:hover{color:var(--accent-ink)}
-@media (min-width:55em){
-  .direct{display:grid;grid-template-columns:3fr auto auto 1fr;gap:var(--gap)}
+.direct-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 28px}
+@media (min-width:55.0625em){
+  .direct{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:var(--gap)}
 }
 
 .details{display:grid;grid-template-columns:minmax(9em,auto) 1fr;margin:0;border-top:1px solid var(--fg)}
 .details dt,.details dd{padding-block:16px;border-bottom:1px solid var(--line-strong)}
-.details dt{font-weight:600;color:var(--fg);padding-inline-end:24px}
-.details dd{margin:0;color:var(--fg-body)}
-html[lang^="ko"] .details dt{font-weight:700}
-@media (max-width:35em){.details{grid-template-columns:1fr}.details dt{border-bottom:0;padding-bottom:0}}
+.details dt{color:var(--accent-ink);padding-inline-end:24px;padding-top:calc(16px + .3em)}
+.details dd{margin:0;color:var(--fg)}
+@media (max-width:35em){.details{grid-template-columns:1fr}.details dt{border-bottom:0;padding-bottom:0}.details dd{padding-top:6px}}
 
 .notice-text{font-size:var(--t-small);line-height:1.65;max-width:44em}
 .notice-text h3{font-family:var(--font-body);font-size:1rem;font-weight:700;margin:0;letter-spacing:0}
@@ -1569,11 +1659,16 @@ html[lang^="ko"] .notice-text h3{font-family:var(--font-kr)}
 .none-glance{display:grid;grid-template-columns:repeat(4,1fr);margin:24px 0 8px;border-top:1px solid var(--fg)}
 .none-glance>div{padding:12px 12px 4px 0}
 .none-glance>div+div{padding-inline-start:12px;border-inline-start:1px solid var(--line-strong)}
-.none-glance dt{font-size:var(--t-caption);color:var(--fg-body)}
+.none-glance dt{color:var(--accent-ink)}
 .none-glance dd{margin:4px 0 0;font-family:var(--font-display);font-size:1.15rem;color:var(--fg)}
 html[lang^="ko"] .none-glance dd{font-family:var(--font-kr);font-weight:700;font-size:1rem}
-@media (max-width:30em){.none-glance{grid-template-columns:repeat(2,1fr)}
+@media (max-width:30em){.none-glance{grid-template-columns:repeat(2,minmax(0,1fr))}
   .none-glance>div:nth-child(3){padding-inline-start:0;border-inline-start:0}}
+/* one column where a label in capitals would not fit half the width (a
+   small phone, or any phone with large text: em queries follow text size) */
+@media (max-width:22em){.none-glance{grid-template-columns:minmax(0,1fr)}
+  .none-glance>div,.none-glance>div+div{padding-inline:0;border-inline-start:0}
+  .none-glance>div+div{border-top:1px solid var(--line-strong)}}
 /* the clauses, numbered in the margin like a programme's notes */
 .notice-list{list-style:none;margin:20px 0 0;padding:0;counter-reset:nl}
 .notice-list li{position:relative;counter-increment:nl;padding:18px 0 18px 44px;border-top:1px solid var(--line-strong)}
@@ -1623,7 +1718,8 @@ html[lang^="ko"] .footer-line em{font-style:normal}
   .footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
   /* the address and phone that stand on their own (under a mail button, on
      Contact) are targets in their own right, not words inside a sentence */
-  :is(.mail-alt,.direct) a,.details dd>a.link:only-child{display:inline-flex;align-items:center;min-height:44px}
+  :is(.mail-alt,.direct) a{display:inline-flex;align-items:center;min-height:44px}
+  .details dd>a.link:only-child{display:inline-block;padding-block:10px;margin-block:-10px}
   .lang-switch a,.lang-switch span,.nav-link{min-inline-size:44px;justify-content:center}
 }
 
@@ -1682,8 +1778,6 @@ html[lang^="ko"] .footer-line em{font-style:normal}
 }
 @media (max-width:23.75em){
   :is(h1,h2,h3,.hero-title,.footer-line,.others b,.others-line,.rec-what,.rec-what>*,.contents b,.pp-glance dd,.pl-name){overflow-wrap:anywhere}
-  .contents .c-row{flex-wrap:wrap}
-  .contents .c-dots{display:none}
   .contents .c-go{white-space:normal}
   .pc{grid-template-columns:minmax(0,1fr)}
   .pc .cover{max-width:160px}
@@ -1702,7 +1796,7 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
 .nf-list li+li a{padding-inline-start:24px;border-inline-start:1px solid var(--line-strong)}
 .nf-list li:nth-child(4) a{padding-inline-start:0;border-inline-start:0}
 .nf-list li:nth-child(n+4) a{border-top:1px solid var(--line-strong)}
-.nf-list b{font-family:var(--font-display);font-size:1.5rem;font-weight:500}
+.nf-list b{font-family:var(--font-display);font-size:1.5rem;font-weight:600}
 .nf-list [lang="ko"] b{font-family:var(--font-kr);font-weight:700;font-size:1.2rem}
 .nf-list span{font-size:var(--t-small);color:var(--fg-muted)}
 .nf-list a:hover b{color:var(--accent-ink)}
@@ -1749,7 +1843,6 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
   :is(.strip,.att) :is(.s-on,.c-bar){fill:#333 !important}
   :is(.strip) .s-open{fill:#fff !important;stroke:#333 !important}
   .map-svg .m-land{fill:#f2f2f2 !important;stroke:#999 !important}
-  .contents .c-dots{border-bottom-color:#bbb !important}
   /* the counter is frozen at 0 by the rule above: print the number itself */
   .count::before{content:none !important}
   .count>span{position:static !important;width:auto !important;height:auto !important;

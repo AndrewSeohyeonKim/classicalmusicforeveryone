@@ -83,7 +83,7 @@ def attendance(lang, t):
 
 
 # ---------------------------------------------------------------------------
-# A programme's record as one strip of months, January 2023 to December 2026
+# A programme's record as one strip of months, January 2024 to December 2026
 #
 # The same drawing on all five programme pages, so the five read alike. One
 # mark per session in its month (filled for the Learning kinds, open for the
@@ -91,9 +91,9 @@ def attendance(lang, t):
 # upwards; a course that runs over several months is a bar across them.
 # ---------------------------------------------------------------------------
 
-ST_Y0, ST_Y1 = 2023, 2026
-ST_L, ST_R, ST_SLOT = 6, 6, 15             # margins and the width of one month
-ST_AXIS, ST_STEP, ST_DOT = 70, 12, 4.4     # axis line, stack step, dot radius
+ST_Y0, ST_Y1 = 2024, 2026
+ST_L, ST_R, ST_SLOT = 6, 6, 20             # margins and the width of one month
+ST_AXIS, ST_STEP, ST_DOT = 70, 14, 4.4     # axis line, stack step, dot radius
 
 
 def strip(rows, lang, t):
@@ -142,7 +142,7 @@ FORTY_KINDS = ("lecture", "outreach", "ensemble", "concert")
 
 
 def forty(lang, t):
-    rows = [r for r in ledger.ROWS if r[3] in FORTY_KINDS and not ledger.scheduled(r)]
+    rows = [r for r in ledger.ROWS if r[3] in FORTY_KINDS and ledger.counted(r)]
     talks = sum(1 for r in rows if r[3] == "lecture")
     sq = "".join(f'<span class="{"f-on" if r[3] == "lecture" else "f-open"}" style="--i:{i}" '
                  f'title="{html.escape(html.unescape(ledger.public_label(r, lang)))}"></span>'
@@ -171,8 +171,11 @@ MAP_PAD_R = 170              # sea to the east, for the labels
 # kilometre): some of them are religious houses, and a map needs no more.
 PLACES_GEO = {
     "dublin": [(53.29, -6.38), (53.29, -6.37), (53.32, -6.39), (53.34, -6.28), (53.40, -6.40),
-               (53.36, -6.29), (53.35, -6.28), (53.35, -6.28), (53.33, -6.29), (53.31, -6.27)],
-    "meath": [(53.62, -6.66)],
+               (53.36, -6.29), (53.35, -6.28), (53.35, -6.28), (53.33, -6.29), (53.31, -6.27),
+               # Methodist Centenary Church (Ranelagh), Blessed Sacrament Chapel (Dublin 1),
+               # Franciscan Missionaries of Mary (Dublin 5, the area), Carmelite Community Centre
+               (53.33, -6.25), (53.35, -6.26), (53.38, -6.19), (53.34, -6.27)],
+    "meath": [(53.62, -6.66), (53.56, -6.62)],
     "wicklow": [(52.95, -6.05)],
     "westmeath": [(53.49, -7.47)],
 }
@@ -265,5 +268,4 @@ def video(v, label, play):
            "clip-path:inset(50%)}a:focus-visible{outline:3px solid #FAF5EE;outline-offset:-6px}</style>"
            f"<a href='{src}'><img src='{poster}' alt=''><i></i><b>{play}</b></a>")
     return (f'<iframe class="video-frame" title="{label}" loading="lazy" src="{src}" '
-            f'srcdoc="{html.escape(doc)}" allow="autoplay; fullscreen; picture-in-picture" '
-            f'allowfullscreen></iframe>')
+            f'srcdoc="{html.escape(doc)}" allow="autoplay; fullscreen; picture-in-picture"></iframe>')

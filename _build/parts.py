@@ -160,13 +160,13 @@ def cover(i, p, size=""):
 
 def contents(items, label, icon_=None):
     """The contents line of a printed programme: a label in the margin, a
-    title, a dotted leader and the action at the edge. One pattern for every
+    title and the action in its own column. One pattern for every
     list of ways in (home, Get involved, Contact). items: (href, label,
     title, action)."""
     mark = ARROW if not icon_ else f'<span class="c-ico" aria-hidden="true">{glyph(icon_, "c-glyph")}</span>'
     rows = "\n".join(f"""      <li><a href="{href}">
         <span class="c-label">{lab}</span>
-        <span class="c-row"><b>{title}</b><span class="c-dots" aria-hidden="true"></span><span class="c-go">{act} {mark}</span></span>
+        <span class="c-row"><b>{title}</b><span class="c-go"><span class="c-act">{act}</span> {mark}</span></span>
       </a></li>""" for href, lab, title, act in items)
     return f'<nav class="contents" aria-label="{label}">\n    <ol>\n{rows}\n    </ol>\n  </nav>'
 
@@ -274,7 +274,6 @@ def home(t, programmes, pillars, lang):
     {plate(n["img"], "4x5", sizes="half")}
     <div class="rv">
       {eyebrow(n["label"], "IV")}
-      {status_tag(n["tag"], True)}
       <h2>{rec["name"]}</h2>
       {facts(n["facts"])}
       <div class="btn-row">{btn("programmes/recorder-ensemble.html", n["btn"], "primary")}</div>
@@ -392,6 +391,12 @@ def about(t, lang):
 # PROGRAMMES: the index of the five
 # ---------------------------------------------------------------------------
 
+# On the index, the talks' When ("On request") and the outings' When ("we
+# will email you") repeat their status word for word or nearly; the row says
+# it once (UX review, 2 Oct 2026).
+WHEN_IN_STATUS = ("getting-to-know", "concert-companion")
+
+
 def prog_row(i, p, pillars):
     """One row of the index. The name is the one link, stretched over its
     row. The row keeps the id the old long block had, so an old address
@@ -400,6 +405,9 @@ def prog_row(i, p, pillars):
     label, dot = pillars[p["pillar"]]
     pg = p["page"]
     when = pg["glance"][2]
+    # the status first, then When, unless the status already says it
+    facts_ = ("" if p["slug"] in WHEN_IN_STATUS else
+              f'<dl class="pi-facts"><div><dt>{when[0]}</dt><dd>{when[1]}</dd></div></dl>')
     return f"""      <li class="pi" id="{p["slug"]}">
         {cover(i, p, "sm")}
         <div class="pi-main">
@@ -407,8 +415,8 @@ def prog_row(i, p, pillars):
           <h2><a href="programmes/{p["slug"]}.html">{p["name"]}</a></h2>
           <p>{p["line"]}</p>
         </div>
-        <dl class="pi-facts"><div><dt>{when[0]}</dt><dd>{when[1]}</dd></div></dl>
-        <div class="pi-end">{status_tag(pg["now"][0], pg.get("live"))}{ARROW}</div>
+        <div class="pi-state">{status_tag(pg["now"][0], pg.get("live"))}{facts_}</div>
+        <div class="pi-end">{ARROW}</div>
       </li>"""
 
 
@@ -474,7 +482,11 @@ def mail_alt(t):
 def programme_page(t, i, p, programmes, pillars, lang):
     g = p["page"]
     label, dot = pillars[p["pillar"]]
-    glance = "".join(f"<div><dt>{a}</dt><dd>{b}</dd></div>" for a, b in g["glance"])
+    # the third fact is always When, the one people scan for; it is bolded
+    # unless the head already bolds the time or the status already says it
+    bold_when = "<strong>" not in g["now"][1] and p["slug"] not in WHEN_IN_STATUS
+    glance = "".join(f'<div{" class=\"is-when\"" if k == 2 and bold_when else ""}><dt>{a}</dt><dd>{b}</dd></div>'
+                     for k, (a, b) in enumerate(g["glance"]))
     steps = "\n".join(f"""      <li style="--i:{k}">
         <span class="step-n" aria-hidden="true">{k + 1}</span>
         <h3>{a}</h3>
@@ -516,12 +528,12 @@ def programme_page(t, i, p, programmes, pillars, lang):
         body = pic
         if vid:
             v = g["video"]
-            label, text = v["cap"]
+            vlabel, vtext = v["cap"]
             out = artifacts.watch_url(v)
             link = (f' <a class="link" href="{out[1]}">{t["watch"].format(service=out[0])}</a>'
                     if out else "")
-            body = (f'<figure class="video">{vid}<figcaption><span class="cap-label">{label}</span>'
-                    f'<span>{text}{link}</span></figcaption></figure>')
+            body = (f'<figure class="video">{vid}<figcaption><span class="cap-label">{vlabel}</span>'
+                    f'<span>{vtext}{link}</span></figcaption></figure>')
         room = f"""
 
 <section class="band-white" id="room">
@@ -530,7 +542,8 @@ def programme_page(t, i, p, programmes, pillars, lang):
     <div class="room rv">{body}</div>
   </div>
 </section>"""
-    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n">{k + 1:02d}</span><b>{q["name"]}</b><span class="others-line">{q["line"]}</span>{ARROW}</a></li>"""
+    # a programme running now says so here too, so every page points to it
+    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n">{k + 1:02d}</span><b>{q["name"]}</b><span class="others-line">{q["line"]}</span>{status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
                        for k, q in enumerate(programmes) if q["slug"] != p["slug"])
     return f"""<section class="pp-head">
   <div class="wrap">
@@ -542,7 +555,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
         <p class="eyebrow lift"><span class="no">{i + 1:02d}</span><i class="{dot}" aria-hidden="true"></i>{label}</p>
         <h1 class="pp-title">{title_lines([p["name"]])}</h1>
         <p class="lead lift lift-3">{g["lead"]}</p>
-        <div class="pp-now lift lift-4">
+        <div class="pp-now{" is-live" if g.get("live") else ""} lift lift-4">
           <p>{status_tag(g["now"][0], g.get("live"))}<span>{g["now"][1]}</span></p>
           <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}{go("#join", t["how_join"])}</div>
           {mail_alt(t)}
@@ -643,9 +656,9 @@ def get_involved(t, icon):
         # the page says plainly that no gifts are asked for or accepted
         b = sup["board"]
         support = f"""<section id="support">
-  <div class="wrap">
+  <div class="wrap" id="board">
 {sh(sup["label"], b["h2"], b["lead"], no="03", split=True)}
-    <div class="board rv" id="board">
+    <div class="board rv">
       {facts(b["facts"])}
       <div>
         <div class="btn-row">{btn(b["href"], b["btn"], "primary")}</div>
@@ -700,7 +713,7 @@ def get_involved(t, icon):
   <div class="wrap">
     <h2 class="sr-only">{t["join"]["tag"]}</h2>
     <div class="callout rv">
-      <span class="tag">{t["join"]["tag"]}</span>
+      <span class="kicker">{t["join"]["tag"]}</span>
       <p>{t["join"]["text"]}</p>
     </div>
   </div>
@@ -720,7 +733,7 @@ CH_X0, CH_TOP, CH_COL, CH_ROW, CH_SQ, CH_GAP = 96, 34, 82, 58, 14, 5
 
 
 def _chart_rows():
-    return [r for r in ledger.ROWS if r[3] in CHART_KINDS and not ledger.scheduled(r)]
+    return [r for r in ledger.ROWS if r[3] in CHART_KINDS and ledger.counted(r)]
 
 
 def chart(lang, t):
@@ -861,7 +874,7 @@ def contact(t):
     <h2 class="sr-only">{t["topics_h2"]}</h2>
     <p class="eyebrow rv">{t["topics_h2"]}</p>
   {contents(t["topics"], t["topics_h2"], icon_="mail")}
-    <p class="direct rv"><span class="kicker">{t["direct_label"]}</span><a href="{t["email_href"]}">{t["email"]}</a><a href="tel:{t["tel_href"]}">{t["tel"]}</a></p>
+    <p class="direct rv"><span class="kicker">{t["direct_label"]}</span><span class="direct-links"><a href="{t["email_href"]}">{t["email"]}</a><a href="tel:{t["tel_href"]}">{t["tel"]}</a></span></p>
   </div>
 </section>
 

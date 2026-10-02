@@ -42,10 +42,10 @@ PAGES = [
 
     ("about.html",
      "About · Classical Music for Everyone",
-     "Our story since 2023, the founder Andrew Seohyeon Kim, how we are run, and the "
+     "Our story since 2024, the founder Andrew Seohyeon Kim, how we are run, and the "
      "places we have played and taught.",
      "소개 · Classical Music for Everyone",
-     "2023년부터의 이야기, 창립자 김서현, 운영 방식, 그리고 연주하고 가르쳐 온 곳.",
+     "2024년부터의 이야기, 창립자 김서현, 운영 방식, 그리고 연주하고 가르쳐 온 곳.",
      en.ABOUT, ko.ABOUT),
 
     ("programmes.html",
@@ -59,18 +59,18 @@ PAGES = [
 
     ("get-involved.html",
      "Get involved · Classical Music for Everyone",
-     "Bring a concert to your place, tell us you would like to perform, or join the founding "
-     "board.",
+     "Take part in a programme, bring a concert to your place, tell us you would like to perform, "
+     "or join the founding board.",
      "함께하기 · Classical Music for Everyone",
-     "우리 공간으로 음악회 부르기, 함께 연주하기 참여 신청, 창립 이사회.",
+     "프로그램 참여, 우리 공간으로 음악회 부르기, 함께 연주하기 참여 신청, 창립 이사회.",
      en.GET_INVOLVED, ko.GET_INVOLVED),
 
     ("news.html",
      "News & archive · Classical Music for Everyone",
-     "What is new, the forty talks and performances on the record from 2023 to August 2026, "
+     "What is new, the forty talks and performances on the record from 2024 to September 2026, "
      "a dated timeline and photographs.",
      "소식·기록 · Classical Music for Everyone",
-     "새 소식, 2023년부터 2026년 8월까지 기록된 강의와 연주 마흔 번, 연표, 그리고 사진.",
+     "새 소식, 2024년부터 2026년 9월까지 기록된 강의와 연주 마흔 번, 연표, 그리고 사진.",
      en.NEWS, ko.NEWS),
 
     ("contact.html",
@@ -315,9 +315,9 @@ def build_llms():
              "interest are open now.",
              "Now running: the Community Recorder Ensemble Class at Mulhuddart Community Centre, "
              "Dublin 15, Wednesday evenings 7:00-8:00pm.",
-             "Record: 40+ sessions and performances since 2023, in four countries: Ireland, "
-             "France, the United Kingdom and Korea. The forty on the record from February 2023 to "
-             "August 2026 are 17 talks, 20 outreach performances (2023-2025), one pilot concert "
+             "Record: 40+ sessions and performances since 2024, in four countries: Ireland, "
+             "France, the United Kingdom and Korea. The forty on the record from January 2024 to "
+             "September 2026 are 17 talks, 20 outreach performances, one pilot concert "
              "and two concerts for South Dublin Live 2026, for which South Dublin County "
              "Council's Arts Office selected the founder. A ten-week pilot recorder ensemble for "
              "seven retired Presentation Sisters was completed by all seven.",

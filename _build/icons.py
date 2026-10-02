@@ -8,10 +8,20 @@ because the card's own heading carries the meaning."""
 import re
 
 _P = {
-    "recorder": '<path d="M12 2.5v19"/><path d="M9.5 2.5h5"/><circle cx="12" cy="8" r="1"/>'
-                '<circle cx="12" cy="12" r="1"/><circle cx="12" cy="16" r="1"/>',
-    "score":    '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>',
-    "room":     '<path d="M4.5 21V10.5a7.5 7.5 0 0 1 15 0V21"/><path d="M3 21h18"/><path d="M9.5 21v-5h5v5"/>',
+    # a descant recorder held at an angle: the head narrowing to the beak, its
+    # window, the joint, a body tapering to the foot, four finger holes as dots
+    # (dots, not rings: rings at the cover's stroke merge into a bead chain)
+    # (drawn long, corner to corner, so it carries the same weight as the
+    # other emblems on a small cover; the joint is the body's width)
+    "recorder": '<g transform="rotate(-45 12 12)"><path d="M10.2 6.54V1.6l.75-3.64h2.1l.75 3.64v4.94"/>'
+                '<path d="M11.7 2.12h.6"/><path d="M10.1 6.54h3.8"/><path d="M10.4 6.54l.2 13.26h2.8l.2-13.26"/>'
+                '<path d="M10.6 19.8l-1 4.55h4.8l-1-4.55"/>'
+                '<path d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g>',
+    # a sheet of music: one quaver on the page (three ruled lines read as a letter)
+    "score":    '<rect x="5" y="3" width="14" height="18" rx="1.5"/><circle cx="10.4" cy="15.3" r="1.8"/>'
+                '<path d="M12.2 15.3V6.9c1.7.4 2.6 1.4 2.6 3"/>',
+    # an arched window: the day room, the chapel, the atrium
+    "room":     '<path d="M4.5 21V10.5a7.5 7.5 0 0 1 15 0V21"/><path d="M3 21h18"/><path d="M12 3v18M4.5 13.5h15"/>',
     "road":     '<path d="M4 20.5c1-6 6-7 10-8s6-3 6-8"/><path d="M17 6.5l3-2 .5 3.5"/>',
     "gift":     '<path d="M20 12v8.5H4V12"/><path d="M2.5 7.5h19v4.5h-19z"/><path d="M12 7.5v13"/>'
                 '<path d="M12 7.5c-2.5 0-4.5-1.5-4.5-3S9.5 2 12 7.5c2.5-5.5 4.5-3 4.5-1.5s-2 1.5-4.5 1.5"/>',

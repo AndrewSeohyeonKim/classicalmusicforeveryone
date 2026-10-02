@@ -5,6 +5,7 @@ after editing content, or edit the generated .html files directly.
 Directories beginning with an underscore are not published by GitHub Pages.
 """
 
+import html
 import os
 import re
 
@@ -41,8 +42,8 @@ FONTS_EN = FONTS.replace("&family=Noto+Sans+KR:wght@400;700", "")
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
-UPDATED = {"en": "1 October 2026", "ko": "2026년 10월 1일"}
-UPDATED_ISO = "2026-10-01"
+UPDATED = {"en": "2 October 2026", "ko": "2026년 10월 2일"}
+UPDATED_ISO = "2026-10-02"
 
 # Six pages and the language switch, nothing else (2026-09-30: five pages,
 # then News & archive added back when the organisation was restructured).
@@ -211,6 +212,13 @@ SITE_NODE = """    {{
       "publisher": {{"@id": "{site}/#organisation"}}
     }}"""
 
+
+
+def _jtext(text):
+    """Text for a JSON-LD string: entities decoded (a <script> block does not
+    decode them, so "&amp;" would reach a search engine as five characters),
+    then made safe inside double quotes."""
+    return html.unescape(text).replace("\\", "\\\\").replace('"', '\\"')
 
 def _graph(nodes):
     return ('<script type="application/ld+json">\n'
@@ -415,8 +423,8 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
         PERSON_NODE.format(site=SITE_URL, email=EMAIL,
                            same_as=", ".join(f'"{u}"' for u in SOCIAL.values() if u)),
         *([] if slug == "404.html" else
-          [PAGE_NODE.format(site=SITE_URL, canonical=canonical, title=title.replace('"', "'"),
-                            desc=desc, lang=ld_lang, image=image)]),
+          [PAGE_NODE.format(site=SITE_URL, canonical=canonical, title=_jtext(title),
+                            desc=_jtext(desc), lang=ld_lang, image=image)]),
         *extra_nodes,
     ])
     return f"""<!DOCTYPE html>
