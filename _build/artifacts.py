@@ -196,6 +196,34 @@ PLACES_GEO = {
 }
 
 
+# The island with Dublin marked: the picture of "Based in" on Contact (art
+# direction v3, 2 Oct 2026 night). The same outline and the same Dublin mark
+# as the map above (the centre of the Dublin places, a dot in a ring), cropped
+# to the island. Nothing else on it: no rings round Dublin (they read as a
+# service area), no other places (the travel value names none), no count
+# (R19). Decorative: the facts beside it say the same in words. The build
+# hands styles.css where the mark is, as shares of the map's width, so the
+# leader from the mark to "Based in" is placed by the drawing, not by eye.
+LOC_VB = (10, 2, 302, 394)
+LOC_HALO = 11
+
+
+def locator():
+    """(svg, style): the drawing, and the custom properties that place the
+    leader: --dub-y, how far down the map Dublin is, and --dub-r, how much of
+    the map lies to the right of the ring."""
+    pts = [geo.project(a, b) for a, b in PLACES_GEO["dublin"]]
+    x = sum(p[0] for p in pts) / len(pts)
+    y = sum(p[1] for p in pts) / len(pts)
+    vx, vy, vw, vh = LOC_VB
+    svg = (f'<svg class="wa-svg" viewBox="{vx} {vy} {vw} {vh}" aria-hidden="true" focusable="false">'
+           f'<path class="m-land" d="{geo.ISLAND}"/>'
+           f'<circle class="m-halo" cx="{x:.2f}" cy="{y:.2f}" r="{LOC_HALO}"/>'
+           f'<circle class="m-dot" cx="{x:.2f}" cy="{y:.2f}" r="5.5"/></svg>')
+    style = f"--dub-y:{(y - vy) / vw:.4f};--dub-r:{1 - (x + LOC_HALO - vx) / vw:.4f}"
+    return svg, style
+
+
 def ireland(labels, t):
     """labels: {key: (label, sub)} for dublin, meath, wicklow and westmeath;
     a sub of None on Dublin prints the count of its places. t: aria."""

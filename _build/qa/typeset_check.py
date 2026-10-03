@@ -28,6 +28,20 @@ time: this Mac sits near its open-file limit). It reports:
   meet   the meeting drawings at 768 to 1440, text 100% and 200% (R18):
          the stem leaves each bracket at its middle (within 1px), each
          tick meets its ring, and the stem meets the event's ring
+  leader Contact's island (R18): the leader from Dublin to "Based in" runs
+         through the middle of Dublin's ring and starts at its edge (within
+         1px), at 390 to 1440, text 100% and 200%
+  names  "Classical Music" in the master line (footer, hero) and the founder's
+         name in Contact's signature stay on one line (R23), 390 to 1920
+  rings  a page head's sound rings sit on no drawing's ring (doors, stations,
+         the meeting, the route, numbered steps) and stop before the next
+         band with another ground (R22), 768 to 1440
+  wide   text at 200% the way a reader sets it, the browser's own text size
+         doubled (so em media and container queries move too, unlike a
+         doubled root size): no page scrolls sideways and nothing sticks
+         out of the screen, every page, at 320, 390, 768 and 1280
+
+"200%" below always means the browser's text size (Page.setFontSizes).
 
 Known and accepted: a Korean date range in the narrow record column breaks
 after its en dash (ALLOW below).
@@ -179,6 +193,52 @@ MEET = r"""(() => {
 })()"""
 
 
+LEADER = r"""(() => { const dt = document.querySelector('.wa-based dt'); if (!dt) return null;
+  const cs = getComputedStyle(dt, '::before'); if (cs.content === 'none') return null;   // stacked: no leader
+  const r = dt.getBoundingClientRect(), y = r.top + parseFloat(cs.top) + .5;
+  const x1 = r.left - (parseFloat(cs.right) - r.width) - parseFloat(cs.width);
+  const h = document.querySelector('.wa-svg .m-halo').getBoundingClientRect();
+  const dy = y - (h.top + h.height / 2), dx = x1 - h.right;
+  return Math.abs(dy) < 1 && Math.abs(dx) < 1 ? null : {dy: +dy.toFixed(2), dx: +dx.toFixed(2)}; })()"""
+
+WIDE = r"""(() => { const W = document.documentElement.clientWidth, out = [];
+  for (const el of document.querySelectorAll('main *, .site-footer *, .site-header *')) {
+    const r = el.getBoundingClientRect(); if (!r.width || !r.height) continue;
+    if (el.closest('.sr-only,.hero-figure') || getComputedStyle(el).position === 'fixed') continue;
+    if (r.right > W + 1 || r.left < -1) out.push(el.tagName.toLowerCase() + '.' + [...el.classList].join('.'));
+  }
+  const scroll = document.documentElement.scrollWidth - W;
+  return scroll > 0 || out.length ? {scroll, els: out.slice(0, 4)} : null; })()"""
+
+
+NAMES = r"""(() => { const lines = el => { const r = document.createRange(); r.selectNodeContents(el);
+    return new Set([...r.getClientRects()].filter(x => x.width > 1).map(x => Math.round(x.top))).size; };
+  const out = [];
+  for (const el of document.querySelectorAll('.footer-line .cm, .hero-sub .cm, .wa-who .wa-st:first-child dd .sl:first-child'))
+    if (lines(el) > 1) out.push(el.closest('p,dd').className + ': ' + el.textContent);
+  return out; })()"""
+
+RINGS = r"""(() => { const ph = document.querySelector('.ph, .pp-head'); if (!ph) return [];
+  const cs = getComputedStyle(ph, '::before'); if (cs.content === 'none' || cs.display === 'none') return [];
+  const pr = ph.getBoundingClientRect(), w = parseFloat(cs.width);
+  const cx = pr.right - parseFloat(cs.right) - w / 2, cy = pr.top + parseFloat(cs.top) + w / 2;
+  const rv = .75 * .62 * Math.SQRT1_2 * w, out = [];   // where the rings can still be seen
+  for (const el of document.querySelectorAll('.d-ring,.wa-ring,.meet-ico,.meet-hub,.route-mark,.step-n')) {
+    const r = el.getBoundingClientRect(); if (!r.width) continue;
+    const d = Math.hypot(r.left + r.width / 2 - cx, r.top + r.height / 2 - cy);
+    if (d < rv + r.width / 2) out.push('over ' + el.className.split(' ')[0]);
+  }
+  const bg = getComputedStyle(ph).backgroundColor; let sec = ph.nextElementSibling;
+  while (sec && getComputedStyle(sec).backgroundColor === bg) sec = sec.nextElementSibling;
+  if (sec && cy + rv > sec.getBoundingClientRect().top + 1) out.push('into ' + (sec.id || sec.className));
+  return out; })()"""
+
+
+def text_size(c, px):
+    """The reader's text size: 16 is the browser's default, 32 is 200%."""
+    c.call("Page.setFontSizes", fontSizes={"standard": px, "fixed": round(px * 13 / 16)})
+
+
 class _Quiet(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
@@ -193,7 +253,8 @@ def serve():
 
 def main(strict=False):
     httpd, base = serve()
-    found = {"fold": [], "tail": [], "tie": [], "hero": [], "meet": []}
+    found = {"fold": [], "tail": [], "tie": [], "hero": [], "meet": [], "leader": [], "names": [], "rings": [],
+             "wide": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -216,16 +277,45 @@ def main(strict=False):
                     if ((hero["size"] >= 72 and not lo <= hero["ratio"] <= hi) or hero["ink"] < 36
                             or hero["group"] < 1.25 or hero["button"] > hero["height"]):
                         found["hero"].append((lang, w, h, hero))
-                # R18: the meeting drawings, at every desktop width, text 100% and 200%
-                for w in (768, 1024, 1280, 1440):
-                    for zoom in ("100%", "200%"):
+                # R23: names kept whole; R22: a head's rings on no drawing, in their own band
+                for pg in ("index", "contact"):
+                    for w in (390, 768, 1024, 1280, 1440, 1920):
+                        c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
+                        c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
+                        c.js("document.fonts.ready.then(()=>1)")
+                        found["names"] += [(lang, pg, w, x) for x in c.js(NAMES)]
+                for pg in PAGES[1:]:
+                    for w in (768, 1024, 1280, 1366, 1440):
+                        c.viewport(w, 900, 1, False)
+                        c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
+                        found["rings"] += [(lang, pg, w, x) for x in c.js(RINGS)]
+                # R18: the meeting drawings and Contact's leader, text 100% and 200%
+                for px in (16, 32):
+                    text_size(c, px)
+                    zoom = "100%" if px == 16 else "200%"
+                    for w in (768, 1024, 1280, 1440):
                         c.viewport(w, 900, 1, False)
                         c.goto(base + ("" if lang == "en" else "ko/") + "get-involved.html", settle=0.4)
-                        if zoom == "200%":   # the browser's text size doubled: every rem doubles
-                            c.js("(h => h.style.fontSize = 2 * parseFloat(getComputedStyle(h).fontSize) + 'px')"
-                                 "(document.documentElement)")
                         c.js("document.fonts.ready.then(()=>1)")
                         found["meet"] += [(lang, w, zoom, x) for x in c.js(MEET)]
+                    for w in (390, 768, 1024, 1280, 1440):
+                        c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
+                        c.goto(base + ("" if lang == "en" else "ko/") + "contact.html", settle=0.4)
+                        c.js("document.fonts.ready.then(()=>1)")
+                        r = c.js(LEADER)
+                        if r:
+                            found["leader"].append((lang, w, zoom, r))
+                # text at 200%, every page: nothing past the edge of the screen
+                text_size(c, 32)
+                for pg in PAGES:
+                    for w in (320, 390, 768, 1280):
+                        c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
+                        c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
+                        c.js("document.fonts.ready.then(()=>1)")
+                        r = c.js(WIDE)
+                        if r:
+                            found["wide"].append((lang, pg, w, r))
+                text_size(c, 16)
     finally:
         httpd.shutdown()
     for k, rows in found.items():

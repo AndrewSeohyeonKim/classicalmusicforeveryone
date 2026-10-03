@@ -72,7 +72,8 @@ STR = {
         "lang_label": "Language",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "EN", "other_lang": "한국어",
-        "tagline": "Bringing Classical Music <em>where it&rsquo;s needed!</em>",
+        # "Classical Music" is one unit (R23): balance once split it, "Bringing Classical / Music"
+        "tagline": 'Bringing <span class="cm">Classical Music</span> <em>where it&rsquo;s needed!</em>',
         "tagline_plain": "Bringing Classical Music where it&rsquo;s needed!",
         # the footer's line about what we do went on 2 Oct 2026: it was the third
         # telling of the hero lead on every page (content review); "" omits it
@@ -89,7 +90,7 @@ STR = {
         "f_links": [("index.html", "Home"), ("about.html", "About"),
                     ("programmes.html", "Programmes"), ("get-involved.html", "Get involved"),
                     ("news.html", "News &amp; archive")],
-        "f_links2": [("get-involved.html#invite", "Bring a concert"), ("get-involved.html#play", "Perform with us"),
+        "f_links2": [("get-involved.html#invite", "Invite us to play"), ("get-involved.html#play", "Perform with us"),
                      ("get-involved.html#board", "Founding board")]
                     + ([("get-involved.html#friends", "Friends"), ("get-involved.html#sponsor", "Sponsor a concert")]
                        if OPEN_GIVING else []),
@@ -102,7 +103,8 @@ STR = {
         "lang_label": "언어",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "한국어", "other_lang": "EN",
-        "tagline": '<span lang="en">Bringing Classical Music <em>where it&rsquo;s needed!</em></span>',
+        "tagline": '<span lang="en">Bringing <span class="cm">Classical Music</span> '
+                   '<em>where it&rsquo;s needed!</em></span>',
         "tagline_plain": '<span lang="en">Bringing Classical Music where it&rsquo;s needed!</span>',
         "footer_about": "",
         "f_explore": "둘러보기",
@@ -364,9 +366,9 @@ def footer(lang, slug="index.html"):
     <div class="footer-grid">
       <div>
         <img class="logo-screen" src="{r}assets/logo-reversed.svg" alt="{s['logo_alt']}"
-             width="109" height="42" loading="lazy" decoding="async">
+             width="229" height="88" loading="lazy" decoding="async">
         <img class="logo-print" src="{r}assets/logo-horizontal.svg" alt="" aria-hidden="true"
-             width="109" height="42" loading="lazy" decoding="async">
+             width="229" height="88" loading="lazy" decoding="async">
         {f'<p class="footer-about">{s["footer_about"]}</p>' if s['footer_about'] else ''}
       </div>
       <nav aria-label="{s['f_explore']}">
@@ -408,14 +410,16 @@ def footer(lang, slug="index.html"):
 # paragraphs, clauses) is left to flow. Done here, once, for every page, so a
 # new lead cannot slip through unsplit.
 # ---------------------------------------------------------------------------
-SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "progs-note", "pi-text")
+# and a value of two sentences on Contact (the insurance line), a line each,
+# and the status sentence in the footer ("…guarantee. It / is not yet…")
+SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "progs-note", "pi-text", "wa-v", "footer-status")
 # split too, but the sentences sit side by side where the block fits one line
 # (styles.css .sl-n, a line each only under 48em): the programme status
 # ("Write to us. We will plan a talk with your group.") and the join hint
 # ("One line is enough. If it helps, tell us:") wrap only on a phone, and as
 # blocks on every screen they read as two separate notes (audit, after).
 SENTENCE_NARROW = ("pp-say", "join-hint")
-_SB_OPEN = re.compile(r'<(p|span|div)\b[^>]*?\bclass="([^"]*)"[^>]*>')
+_SB_OPEN = re.compile(r'<(p|span|div|dd)\b[^>]*?\bclass="([^"]*)"[^>]*>')
 _SB_TAG = re.compile(r"<(/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(/?)>")
 _SB_VOID = {"br", "img", "wbr", "input", "meta", "link", "hr", "source", "path", "circle", "rect", "line"}
 # the end of a sentence: . ! or ? (and a closing quote), then a space and the
@@ -618,7 +622,12 @@ def _ko_dependent(text):
 # two-word names balance used to split ("Presentation / Sisters", "South /
 # Dublin Live"); UKAAF: keep a name, a date or a number on one line
 NAMES = ("Presentation Sisters", "Letters Ensemble", "Community Centre", "Concert Hall", "TU Dublin",
-         "Dublin Live", "Royal Albert Hall", "Clondalkin Lodge", "Dalgan Park", "BBC Proms")
+         "Dublin Live", "Royal Albert Hall", "Clondalkin Lodge", "Dalgan Park", "BBC Proms",
+         # the founder's name: "Andrew / Seohyeon Kim" may break, never "Seohyeon / Kim"
+         # (the whole name, 19 letters, did not fit a 320px column and broke inside)
+         "Seohyeon Kim",
+         # the base, in the footer's copyright line and on Contact ("Dublin, / Ireland")
+         "Dublin, Ireland")
 _NAMES = re.compile("|".join(re.escape(n) for n in sorted(NAMES, key=len, reverse=True)))
 # a Korean list dot never starts a line ("세이프가딩 / ·돌봄"): a word joiner
 # before it forbids that break and leaves the break after it
@@ -785,7 +794,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
 <main id="main">
 {body}
 </main>
-{tie(keep_whole(footer(lang, slug), lang), lang)}
+{tie(keep_whole(sentence_lines(footer(lang, slug), lang), lang), lang)}
 </body>
 </html>
 """

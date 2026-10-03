@@ -46,7 +46,7 @@ INVITE_FIELDS = ["기관 이름과 지역",
 MAIL_INVITE = _mail("찾아가는 음악회 초청", _fields(INVITE_FIELDS))
 _MAIL_INVITE = MAIL_INVITE
 _MAIL_BOARD = _mail("창립 이사회 문의",
-                    "관심 있는 자리 (의장 / 재무 / 사무 / 세이프가딩·돌봄 / 지역사회): \r\n"
+                    "관심 있는 역할 (의장 / 재무 / 사무 / 세이프가딩·돌봄 / 지역사회): \r\n"
                     "저에 대해 몇 줄: \r\n")
 
 # CMFE Artists: 관심은 자유롭게 받는다(Andrew, 2026-10-02). 키트 15의 신청서 대신 네 줄,
@@ -468,10 +468,11 @@ GET_INVOLVED_T = dict(
         lead="어느 길이든 <mark>메일 한 줄로</mark> 시작하시면 됩니다.",
     ),
     ways_label="네 가지 길",
-    ways=[("programmes.html", "참여", "프로그램에 함께하기", "프로그램 보기"),
+    # 네 개의 문(2026-10-02 밤): 누구의 길인지, 그 길이 닿는 섹션의 제목, 거기 있는 것(parts.doors)
+    ways=[("programmes.html", "누구나", "프로그램에 참여하기", "프로그램 보기"),
           ("#invite", "공간", "음악회 초청하기", "준비할 것"),
-          ("#play", "예술가", "CMFE Artists 참여 신청", "예시 프로그램"),
-          ("#board", "자원봉사", "창립 이사회에 함께하기", "이사회 자리")],
+          ("#play", "예술가", "함께 연주하기", "예시 프로그램"),
+          ("#board", "자원봉사자", "창립 이사회에 참여하기", "이사회 역할")],
     alt=dict(or_write="또는", email=EMAIL, tel="+353 83 078 0635", tel_href="+353830780635"),
     invite=dict(
         label="파트너 공간",
@@ -516,7 +517,7 @@ GET_INVOLVED_T = dict(
                    ("조건", "무보수, 합당한 실비 지급")],
             # 같은 역할을 그림의 탁자 둘레에 하나씩(parts.table). 자리 수는 말하지 않는다
             roles=["의장", "재무", "사무", "세이프가딩·돌봄 담당", "지역사회 담당"],
-            href=_MAIL_BOARD, btn="자리 문의하기",
+            href=_MAIL_BOARD, btn="이사회 문의하기",
         ),
         gifts="아직은 후원을 요청하거나 받지 않습니다.",
     ),
@@ -577,7 +578,7 @@ NEWS_T = dict(
              "창립 이사회를 꾸립니다",
              "보증유한회사 설립을 준비하며 자원봉사 이사를 찾습니다.",
              "get-involved.html#board",
-             "이사 자리 보기"),
+             "이사회 역할 보기"),
             ("2026년 가을",
              "커뮤니티 리코더 앙상블 클래스",
              "매주 수요일 저녁 Mulhuddart Community Centre에서 열립니다.",
@@ -694,7 +695,7 @@ CONTACT_T = dict(
         topics=[("part", "프로그램 참여 문의", "프로그램 참여", ["관심 있는 프로그램", "연락받을 방법"]),
                 ("venue", "찾아가는 음악회 초청", "공간: 음악회 초청", INVITE_FIELDS),
                 ("artist", "CMFE Artists 참여 신청", "예술가: 참여 신청", EOI_FIELDS),
-                ("board", "창립 이사회 문의", "창립 이사회", ["관심 있는 자리", "자기소개 몇 줄"]),
+                ("board", "창립 이사회 문의", "창립 이사회", ["관심 있는 역할", "자기소개 몇 줄"]),
                 ("data", "개인정보 요청", "내 정보 보기·고치기·지우기", ["보기, 고치기, 지우기 중 원하시는 것"]),
                 ("other", "Classical Music for Everyone 문의", "그 밖의 일", [])],
         helps="이런 것을 적어 주시면 도움이 됩니다:",
@@ -709,14 +710,18 @@ CONTACT_T = dict(
     email_href=_mail("Classical Music for Everyone 문의"),
     tel="+353 83 078 0635",
     tel_href="+353830780635",
-    details_label="연락처",
+    details_label="기본 정보",
     details_h2="어디에 있고, 누가 답하나요?",
     # 보험: 증서 보유(2026-10-01 확인). Garda 신원조회는 마친 뒤에 쓴다.
+    # 찾아가는 곳(Andrew, 2026-10-02 밤): 범위가 아니라 필요를 말한다. 연주해 온 주는 소개 쪽 기록과
+    # areaServed에 남는다. 「아일랜드 전역」 금지. 라벨이 「활동 지역」이면 범위를 주장하는 말로 읽힌다
     details=[("거점", "아일랜드 더블린"),
-             ("활동 지역", "더블린, 미스 주, 위클로 주, 웨스트미스 주, 그 밖은 협의"),
+             ("찾아가는 곳", "음악이 필요한&nbsp;곳 어디든지"),
              ("언어", '한국어 · <span lang="en">English</span>'),
              ("보험", "공공배상책임보험에 들어 있습니다. 증서는 요청 시 보여 드립니다."),
-             ("답하는 사람", "창립자·예술감독 Andrew Seohyeon Kim(김서현)")],
+             # 서명처럼 이름 줄, 그다음 역할 줄(R23: 노트북 폭에서 이름이 「Andrew / Seohyeon Kim」으로 갈렸다)
+             ("답하는 사람", '<span class="sl">Andrew Seohyeon Kim(김서현)</span> '
+                           '<span class="sl">창립자·예술감독</span>')],
     privacy=dict(
         label="개인정보 처리방침",
         h2="보내 주신 정보는 이렇게 다룹니다.",

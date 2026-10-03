@@ -244,6 +244,33 @@ def table(roles, roles_label, cond):
             f'<dl class="table-top"><dt>{cond[0]}</dt><dd>{cond[1]}</dd></dl></div></div></div>')
 
 
+# who answers, in the order the heading asks it: the person, the languages
+# they answer in, what they hold (one icon each, by position)
+WHO_ICONS = ("person", "speech", "certificate")
+
+
+def whereabouts(rows):
+    """Contact's details as a drawing (Andrew, 2 Oct 2026 night: "not only
+    text"; art direction v3). The island with Dublin marked, a leader from
+    the mark to "Based in"; "We travel to" under it, in the master line's
+    italic; the three facts about who answers as stations with no line
+    between them (they are not steps). rows: the deck's five pairs in its
+    order (Based in, We travel to, Languages, Insurance, Who answers). The
+    island is decorative: the two <dl> say every fact in words."""
+    if len(rows) != 5:
+        raise ValueError("whereabouts: five facts")
+    based, travel, langs, insur, who = rows
+    svg, place = artifacts.locator()
+    st = "".join(f'<div class="wa-st" style="--i:{k + 1}"><dt><span class="wa-ring" aria-hidden="true">'
+                 f'{glyph(WHO_ICONS[k], "wa-glyph")}</span>{a}</dt><dd class="wa-v">{b}</dd></div>'
+                 for k, (a, b) in enumerate((who, langs, insur)))
+    return (f'<div class="wa rv"><div class="wa-top" style="{place}">'
+            f'<div class="wa-map">{svg}</div>'
+            f'<dl class="wa-where"><div class="wa-based"><dt>{based[0]}</dt><dd>{based[1]}</dd></div>'
+            f'<div class="wa-travel"><dt>{travel[0]}</dt><dd>{travel[1]}</dd></div></dl></div>'
+            f'<dl class="wa-who">{st}</dl></div>')
+
+
 def fold(summary, inner, cls=""):
     """Reference most readers do not need, folded: the summary says what is
     inside and how many. Never used for when, where, status or the action."""
@@ -313,17 +340,28 @@ def cover(i, p, size=""):
             f'<span class="cover-line">{_vocab(p["vocab"])}</span></div>')
 
 
-def contents(items, label, icon_=None):
-    """The contents line of a printed programme: a label in the margin, a
-    title and the action in its own column. One pattern for every
-    list of ways in (home, Get involved, Contact). items: (href, label,
-    title, action)."""
-    mark = ARROW if not icon_ else f'<span class="c-ico" aria-hidden="true">{glyph(icon_, "c-glyph")}</span>'
-    rows = "\n".join(f"""      <li><a href="{href}">
-        <span class="c-label">{lab}</span>
-        <span class="c-row"><b>{title}</b><span class="c-go"><span class="c-act">{act}</span> {mark}</span></span>
-      </a></li>""" for href, lab, title, act in items)
-    return f'<nav class="contents" aria-label="{label}">\n    <ol>\n{rows}\n    </ol>\n  </nav>'
+# who each way is for, as a picture: the people who join, a venue, a
+# performer's stand, a hand put up to help (same order in both languages)
+WAY_ICONS = ("people", "building", "stand", "hand")
+
+
+def doors(items, label):
+    """The ways in as four doors (Andrew, 2 Oct 2026 night: "more readable,
+    with diagram and design"; art direction v3). A station, who the way is
+    for, the title in Garamond (the heading of the section it leads to) and
+    where it leads. No line joins them: the four are parallel and in no
+    order (R19), so the list is unordered. Each door is one link, read with
+    pauses. items: (href, label, title, action)."""
+    if len(items) != len(WAY_ICONS):
+        raise ValueError("doors: one icon per way")
+    sep = '<span class="sr-only">, </span>'
+    cells = "\n".join(
+        f'      <li style="--i:{k}"><a href="{href}">'
+        f'<span class="d-ring" aria-hidden="true">{glyph(WAY_ICONS[k], "d-glyph")}</span>'
+        f'<span class="d-label">{lab}</span>{sep}<b class="d-title">{title}</b>{sep}'
+        f'<span class="d-go"><span class="d-act">{act}</span> {ARROW}</span></a></li>'
+        for k, (href, lab, title, act) in enumerate(items))
+    return f'<nav class="doors" aria-label="{label}">\n    <ul>\n{cells}\n    </ul>\n  </nav>'
 
 
 def status_tag(st, live=False):
@@ -897,7 +935,7 @@ def get_involved(t, icon):
 <section class="tight gi-ways">
   <div class="wrap">
     <h2 class="sr-only">{t["ways_label"]}</h2>
-  {contents(t["ways"], t["ways_label"])}
+  {doors(t["ways"], t["ways_label"])}
   </div>
 </section>
 
@@ -1116,7 +1154,6 @@ def contact_form(f, email):
 
 
 def contact(t):
-    rows = "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in t["details"])
     pv = t["privacy"]
     def clause(b):
         """A clause is a paragraph, a list or label/value rows (4th pass:
@@ -1153,9 +1190,7 @@ def contact(t):
 <section class="band-white" id="details">
   <div class="wrap prose-split">
 {sh(t["details_label"], t["details_h2"])}
-    <div class="rv">
-      <dl class="details">{rows}</dl>
-    </div>
+    {whereabouts(t["details"])}
   </div>
 </section>
 

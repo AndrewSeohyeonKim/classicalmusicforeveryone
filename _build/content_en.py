@@ -515,10 +515,12 @@ GET_INVOLVED_T = dict(
         lead="<mark>One line by email</mark> is enough to start.",
     ),
     ways_label="Four ways",
-    ways=[("programmes.html", "Take part", "Join a programme",
-           "The programmes"),
-          ("#invite", "Venues", "Bring a concert to your place", "What it takes"),
-          ("#play", "Artists", "Register interest to perform", "Example programmes"),
+    # four doors (2 Oct 2026 night): who each way is for, then the heading of
+    # the section it leads to, then what is there (parts.doors)
+    ways=[("programmes.html", "Anyone", "Join a programme", "The programmes"),
+          # the approved action (R8), as in the footer and on the home page: one line, like the others
+          ("#invite", "Venues", "Invite us to play", "What it takes"),
+          ("#play", "Artists", "Perform with us", "Example programmes"),
           ("#board", "Volunteers", "Join the founding board", "The roles")],
     # the address and phone under each mail button
     alt=dict(or_write="Or write to", email=EMAIL, tel="+353 83 078 0635", tel_href="+353830780635"),
@@ -780,12 +782,16 @@ CONTACT_T = dict(
     details_label="Details",
     details_h2="Where we travel, and who answers.",
     # Insurance: the certificate is in hand (1 Oct 2026). Garda vetting is not
-    # mentioned until it is complete.
+    # mentioned until it is complete. We travel to (Andrew, 2 Oct 2026 night): a
+    # need, not a territory. The counties on the record stay on About and in
+    # areaServed; never "across Ireland".
     details=[("Based in", "Dublin, Ireland"),
-             ("We travel to", "Dublin, Co. Meath, Co. Wicklow, Co. Westmeath, and further by arrangement"),
+             ("We travel to", "Wherever music is needed"),
              ("Languages", 'English · <span lang="ko">한국어</span>'),
              ("Insurance", "Public liability insurance. We show the certificate on request."),
-             ("Who answers", "Andrew Seohyeon Kim, Founder &amp; Artistic Director")],
+             # a signature: the name on its own line, then the role (R23)
+             ("Who answers", '<span class="sl">Andrew Seohyeon Kim</span> '
+                             '<span class="sl">Founder &amp; Artistic Director</span>')],
     privacy=dict(
         label="Privacy notice",
         h2="How we look after your details.",

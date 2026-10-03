@@ -46,6 +46,22 @@ _P = {
     # a music stand: the desk with its lip, the pole, three feet
     "stand":    '<path d="M4.5 4.5h15l-1 6h-13z"/><path d="M4.5 10.5h15"/><path d="M12 10.5v6.5"/>'
                 '<path d="M12 17l-4.5 4M12 17l4.5 4M12 17v4"/>',
+    # Contact and Get involved (art direction v3, 2 Oct 2026 night)
+    # two speech bubbles, one behind the other: the two languages we answer in
+    "speech":   '<path d="M4.2 4.5h9.6a1.7 1.7 0 0 1 1.7 1.7v5.6a1.7 1.7 0 0 1-1.7 1.7H9.2L5.6 16.6v-3.1H4.2'
+                'a1.7 1.7 0 0 1-1.7-1.7V6.2a1.7 1.7 0 0 1 1.7-1.7z"/>'
+                '<path d="M18.5 9h1.3a1.7 1.7 0 0 1 1.7 1.7v5.6a1.7 1.7 0 0 1-1.7 1.7h-1.4v3l-3.5-3h-4.2'
+                'a1.7 1.7 0 0 1-1.7-1.7v-.6"/>',
+    # a certificate with its seal: the insurance certificate we show on
+    # request (not a shield or a tick, which read as a safety check passed)
+    "certificate": '<path d="M13 21H6.5A1.5 1.5 0 0 1 5 19.5v-15A1.5 1.5 0 0 1 6.5 3h11A1.5 1.5 0 0 1 19 4.5V11"/>'
+                   '<path d="M8.5 7.5h7M8.5 10.5h4.5"/><circle cx="16.5" cy="15" r="2.7"/>'
+                   '<path d="M14.9 17.2 14 21.5l2.5-1.3 2.5 1.3-.9-4.3"/>',
+    # a raised open hand: putting a hand up to help (the founding board)
+    "hand":     '<path d="M8.6 12.4V5.6a1.4 1.4 0 0 1 2.8 0v5.6"/><path d="M11.4 11.2V4.2a1.4 1.4 0 0 1 2.8 0v7"/>'
+                '<path d="M14.2 11.2V5.4a1.4 1.4 0 0 1 2.8 0v6.4"/>'
+                '<path d="M17 11.8V8.6a1.4 1.4 0 0 1 2.8 0v5.2c0 4.3-2.9 7.4-6.9 7.4-2.4 0-4.1-1-5.4-2.9l-3.2-4.8'
+                'a1.5 1.5 0 0 1 2.4-1.8l1.9 2.3"/>',
     # a megaphone with two arcs of sound: letting local people know
     "announce": '<path d="M3.5 10.5v3a1 1 0 0 0 1 1H7l8 4.5v-15L7 9.5H4.5a1 1 0 0 0-1 1z"/>'
                 '<path d="M8 14.5l1.2 4.5h2.2l-1-3.6"/><path d="M18.5 9.8a3.2 3.2 0 0 1 0 4.4M20.6 7.6a6.3 6.3 0 0 1 0 8.8"/>',
