@@ -364,6 +364,38 @@ def doors(items, label):
     return f'<nav class="doors" aria-label="{label}">\n    <ul>\n{cells}\n    </ul>\n  </nav>'
 
 
+# The same doors, two of them, under the five programmes on the home page:
+# the third and fourth ways in, in the order of WAY_ICONS
+PAIR_ICONS = WAY_ICONS[2:]
+
+
+def _arrowed(title):
+    """A door's title with its arrow: the arrow keeps the last word's company
+    and never starts a line alone."""
+    head, _, last = title.rpartition(" ")
+    tail = f'<span class="nowrap">{last} {ARROW}</span>'
+    return f"{head} {tail}" if head else tail
+
+
+def door_pair(items):
+    """The two ways in that the five cards do not cover, for artists and for
+    volunteers (Andrew, 3 Oct 2026: two links inside two sentences did not
+    read as actions). They are doors of Get involved in their phone form:
+    the station beside who the way is for and the action, the arrow after
+    it (styles.css .doors-pair). Each door is one link, read with a pause
+    ("Artists, Register your interest"); a list, unordered, no line between
+    them (R19). items: (href, label, title)."""
+    if len(items) != len(PAIR_ICONS):
+        raise ValueError("door_pair: one icon per way")
+    sep = '<span class="sr-only">, </span>'
+    cells = "\n".join(
+        f'      <li style="--i:{k}"><a href="{href}">'
+        f'<span class="d-ring" aria-hidden="true">{glyph(PAIR_ICONS[k], "d-glyph")}</span>'
+        f'<span class="d-label">{lab}</span>{sep}<b class="d-title">{_arrowed(title)}</b></a></li>'
+        for k, (href, lab, title) in enumerate(items))
+    return f'    <ul class="doors doors-pair">\n{cells}\n    </ul>'
+
+
 def status_tag(st, live=False):
     """A programme's state: green, with a dot that pulses three times, when it
     is running now; plain otherwise."""
@@ -388,7 +420,8 @@ def prog_card(i, p, pillars):
         {cover(i, p)}
         <div class="pc-body">
           <span class="kicker"><i class="{dot}" aria-hidden="true"></i>{label}</span>
-          <h3>{p["name"]}</h3>
+          <div class="pc-name"><h3>{p["name"]}</h3>
+          <p class="pc-topics">{_vocab(p["vocab"])}</p></div>
           <p>{_unmark(p["line"])}</p>
           {status_tag(pg["now"][0], pg.get("live"))}
         </div>
@@ -409,15 +442,6 @@ def _vocab(words):
     """A cover's three words: each stays whole, the line may turn only after a
     dot ("Your / own part" split on the home card)."""
     return " · ".join(w.replace(" ", "\u00a0") for w in words.split(" · "))
-
-
-def _pairs(text, lang):
-    """The Korean line under the home cards is two name-and-link pairs joined
-    by a dot; on a phone it broke between a name and its link. Each pair
-    takes its own line (the English says it in two sentences already)."""
-    if lang == "ko" and " · " in text:
-        return " ".join(f'<span class="sl">{x}</span>' for x in text.split(" · "))
-    return text
 
 
 def home(t, programmes, pillars, lang):
@@ -463,7 +487,7 @@ def home(t, programmes, pillars, lang):
     <ul class="progs rv-stagger">
 {cards}
     </ul>
-    <p class="progs-note rv">{_pairs(t["progs"]["others"], lang)}</p>
+{door_pair(t["progs"]["others"])}
   </div>
 </section>
 

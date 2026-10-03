@@ -134,6 +134,7 @@ RULES = [
     ("card-line",    ("pi-main",)),
     ("value",        ("pi-facts", "dd")),
     ("news-card",    ("latest",)),
+    # the four doors on Get involved and the two under the home cards
     ("contents-row", ("doors",)),
     ("row",          ("now-line",)),
     ("row",          ("others",)),
@@ -142,7 +143,6 @@ RULES = [
     ("value",        ("dd",)),
     ("paragraph",    ("prose",)),
     ("note",         ("figs-note",)),
-    ("note",         ("progs-note",)),
     ("note",         ("pi-note",)),
     ("note",         ("small",)),
     ("note",         ("callout",)),

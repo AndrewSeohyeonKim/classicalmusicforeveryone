@@ -31,6 +31,16 @@ time: this Mac sits near its open-file limit). It reports:
   leader Contact's island (R18): the leader from Dublin to "Based in" runs
          through the middle of Dublin's ring and starts at its edge (within
          1px), at 390 to 1440, text 100% and 200%
+  axis   the home hero's title group stands on one ink edge (R28): the header
+         logo's clef, the line over the title, both title lines (for "for",
+         the body of the f; its tail may hang) and the subtitle meet within
+         1px, at 1440x789, 1366x768, 1280x720 and 390x844
+  width  the master line is as wide as "Classical Music" (R29): on a laptop its
+         right end within 3px of the end of "Music" in line 1; on a phone
+         (its 22px floor) never wider than that line
+  group  a home card's three words stand under its name as one group (R30):
+         the name's last line to the words' first line 8px or less, at 1024,
+         1100, 1280 and 1440
   names  "Classical Music" in the master line (footer, hero) and the founder's
          name in Contact's signature stay on one line (R23), 390 to 1920
   rings  a page head's sound rings sit on no drawing's ring (doors, stations,
@@ -63,7 +73,7 @@ PAGES = ["index", "about", "programmes", "get-involved", "news", "contact",
          "programmes/getting-to-know", "programmes/outreach-concerts", "programmes/recorder-ensemble",
          "programmes/letters-ensemble", "programmes/concert-companion"]
 VIEWPORTS = [(320, 700), (390, 844), (1024, 768), (1440, 789)]
-LEADS = (".lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.pi-text,.founder-line,.play-note,"
+LEADS = (".lead,.ph-lead,.sh-lead,.figs-note,.pi-text,.founder-line,.play-note,"
          ".pp-say,.join-hint")
 SHORT = (".pc p,.pi p,.steps p,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,"
          ".facts dd,.pp-glance dd,.pi-facts dd,.rec-what>span,.meet-t,.route dd,.route-plan dd,"
@@ -211,6 +221,56 @@ WIDE = r"""(() => { const W = document.documentElement.clientWidth, out = [];
   return scroll > 0 || out.length ? {scroll, els: out.slice(0, 4)} : null; })()"""
 
 
+AXIS = r"""(() => {
+  const cv = document.createElement('canvas').getContext('2d');
+  const font = el => { const c = getComputedStyle(el); return `${c.fontStyle} ${c.fontWeight} ${c.fontSize} ${c.fontFamily}`; };
+  const first = el => { const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const i = n.textContent.search(/\S/); if (i >= 0 && !n.parentElement.closest('.sr-only')) return [n, i]; } };
+  const ink = el => {
+    const [n, i] = first(el); const p = n.parentElement; const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1);
+    const box = r.getClientRects()[0]; let ch = n.textContent[i];
+    if (getComputedStyle(p).textTransform === 'uppercase') ch = ch.toUpperCase();
+    if (p.closest('.for')) {  // the f's body: its leftmost ink above its own baseline
+      const c2 = document.createElement('canvas'); c2.width = 1400; c2.height = 1100; const x = c2.getContext('2d', {willReadFrequently: true});
+      const s = getComputedStyle(p); x.font = `${s.fontStyle} ${s.fontWeight} 1000px ${s.fontFamily}`; x.fillText(ch, 400, 1100);
+      const d = x.getImageData(0, 0, 1400, 1100).data; let best = 1e9;
+      for (let y = 0; y < 1100; y++) for (let X = 0; X < 1400; X++) if (d[(y * 1400 + X) * 4 + 3] > 127) { if (X < best) best = X; break; }
+      return box.left + (best - 400) / 1000 * parseFloat(s.fontSize);
+    }
+    cv.font = font(p); return box.left - cv.measureText(ch).actualBoundingBoxLeft;
+  };
+  const img = document.querySelector('.brand img').getBoundingClientRect();
+  const k = Math.min(img.width / 341.04, img.height / 131.04);  // the file is drawn into its box with "meet"
+  const edges = {clef: img.left + (img.width - 341.04 * k) / 2 + 19.626 * k,  // the clef's ink in logo-horizontal.svg
+    eyebrow: ink(document.querySelector('.hero .eyebrow')),
+    ...Object.fromEntries([...document.querySelectorAll('.hero-title .ln')].map((l, k) => ['line' + (k + 1), ink(l)])),
+    subtitle: ink(document.querySelector('.hero-sub'))};
+  const v = Object.values(edges);
+  return {spread: +(Math.max(...v) - Math.min(...v)).toFixed(1), edges: Object.fromEntries(Object.entries(edges).map(([k, x]) => [k, +x.toFixed(1)]))};
+})()"""
+
+
+WIDTH = r"""(() => {
+  const rects = el => { const r = document.createRange(); r.selectNodeContents(el);
+    return [...r.getClientRects()].filter(x => x.width > 1); };
+  const ln = document.querySelector('.hero-title .ln'); const w = document.createTreeWalker(ln, NodeFilter.SHOW_TEXT);
+  let n, text = null; while ((n = w.nextNode())) { if (n.textContent.trim()) { text = n; break; } }
+  const t = text.textContent, end = t.search(/[,，]?\s*$/);   // the line without its comma
+  const r = document.createRange(); r.setStart(text, t.search(/\S/)); r.setEnd(text, end);
+  const line = [...r.getClientRects()].filter(x => x.width > 1);
+  const titleRight = Math.max(...line.map(x => x.right)), titleLeft = Math.min(...line.map(x => x.left));
+  const sub = rects(document.querySelector('.hero-sub'));
+  const subRight = Math.max(...sub.map(x => x.right));
+  const tops = new Set(sub.map(x => Math.round(x.top)));
+  return {lines: tops.size, d: +(subRight - titleRight).toFixed(1), sub: Math.round(subRight - titleLeft),
+          title: Math.round(titleRight - titleLeft)}; })()"""
+
+GROUP = r"""(() => [...document.querySelectorAll('.pc')].map(pc => {
+    const r = el => { const g = document.createRange(); g.selectNodeContents(el); return [...g.getClientRects()].filter(x => x.width > 1); };
+    const h = r(pc.querySelector('h3')), t = r(pc.querySelector('.pc-topics'));
+    return {name: pc.querySelector('h3').textContent.trim(), gap: Math.round(t[0].top - h[h.length - 1].bottom)};
+  }).filter(x => x.gap > 8))()"""
+
 NAMES = r"""(() => { const lines = el => { const r = document.createRange(); r.selectNodeContents(el);
     return new Set([...r.getClientRects()].filter(x => x.width > 1).map(x => Math.round(x.top))).size; };
   const out = [];
@@ -253,8 +313,8 @@ def serve():
 
 def main(strict=False):
     httpd, base = serve()
-    found = {"fold": [], "tail": [], "tie": [], "hero": [], "meet": [], "leader": [], "names": [], "rings": [],
-             "wide": []}
+    found = {"fold": [], "tail": [], "tie": [], "hero": [], "axis": [], "width": [], "group": [], "meet": [],
+             "leader": [], "names": [], "rings": [], "wide": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -277,6 +337,17 @@ def main(strict=False):
                     if ((hero["size"] >= 72 and not lo <= hero["ratio"] <= hi) or hero["ink"] < 36
                             or hero["group"] < 1.25 or hero["button"] > hero["height"]):
                         found["hero"].append((lang, w, h, hero))
+                    axis = c.js(AXIS)
+                    if axis["spread"] > 1:
+                        found["axis"].append((lang, w, h, axis))
+                    width = c.js(WIDTH)
+                    if (width["lines"] == 1 and abs(width["d"]) > 3) or (width["lines"] > 1 and width["sub"] > width["title"] + 1):
+                        found["width"].append((lang, w, h, width))
+                for w in (1024, 1100, 1280, 1440):
+                    c.viewport(w, 900, 1, False)
+                    c.goto(base + ("" if lang == "en" else "ko/") + "index.html", settle=0.4)
+                    c.js("document.fonts.ready.then(()=>1)")
+                    found["group"] += [(lang, w, x) for x in c.js(GROUP)]
                 # R23: names kept whole; R22: a head's rings on no drawing, in their own band
                 for pg in ("index", "contact"):
                     for w in (390, 768, 1024, 1280, 1440, 1920):

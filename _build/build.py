@@ -199,12 +199,13 @@ def programme_pages():
         out.append(dict(
             slug=slug, key=pe["slug"],
             # the section in the title keeps EN and KO titles apart where the
-            # programme's name is the same in both (Letters Ensemble); the one
-            # line under the name is short enough for a search result
+            # programme's name is the same in both (Letters Ensemble); the page's
+            # own lead describes it (the card line leaves out what the card's
+            # three words say, so Letters lost "Irish, Korean and sacred")
             en_title=f"{_plain(pe['name'])} · Programmes · Classical Music for Everyone",
-            en_desc=_plain(pe["line"]),
+            en_desc=_plain(pe["page"]["lead"]),
             ko_title=f"{_plain(pk['name'])} · 프로그램 · Classical Music for Everyone",
-            ko_desc=_plain(pk["line"]),
+            ko_desc=_plain(pk["page"]["lead"]),
             en_body=en.PROGRAMME_PAGES[pe["slug"]], ko_body=ko.PROGRAMME_PAGES[pk["slug"]],
             img=pe["img"][0], en_alt=pe["img"][3], ko_alt=pk["img"][3],
             en_name=pe["name"], ko_name=pk["name"]))

@@ -33,9 +33,44 @@ _P = {
     "people":   '<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.5" r="2.5"/>'
                 '<path d="M14.5 20a4.5 4.5 0 0 1 6-4.2"/>',
     "mail":     '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7.5l8.5 6 8.5-6"/>',
-    # a ticket with notched ends and its perforation: going to a concert
-    "ticket":   '<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5'
-                'h-15A1.5 1.5 0 0 1 3 16.5v-2a2.5 2.5 0 0 0 0-5z"/><path d="M15.5 6.5v2M15.5 11v2M15.5 15.5v2"/>',
+    # the programme covers redrawn (illustration desk, 3 Oct 2026; Andrew: 01 a Classical Music class,
+    # a teacher teaching; 02 a classical concert in a venue; 04 a string quartet; 05 the ticket one of
+    # the set). Drawn in the recorder's hand: one 1.2 stroke on the cover, round caps, no fill; a note
+    # head is a small tilted oval the stroke closes into a solid head. "score", "room" and "people"
+    # stay for Get involved, each with its one meaning there (R17).
+    # 01 a teacher at a board, pointing to two beamed quavers on it: a talk about the music
+    "lesson": '<rect x="9.4" y="3" width="12.4" height="10.8" rx="1.2"/>'
+              '<path d="M12.89 11.42a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/>'
+              '<path d="M17.49 10.42a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/>'
+              '<path d="M14.48 10.9v-4.7l4.6-1v4.7"/><circle cx="5" cy="11" r="2.2"/>'
+              '<path d="M1.3 21.8v-1.4a3.8 3.8 0 0 1 7.6 0v1.4"/><path d="M7.9 17l4.6-4.9"/>',
+    # 02 a grand piano, lid up on its stick, on the stage boards: a concert (an arch round it read as a bell jar)
+    "piano": '<path d="M1.8 19.1h20.4"/><path d="M4.6 10.9h15.5a.9 .9 0 0 1 .9 .9v.4a.9 .9 0 0 1-.9 .9h-15.5z"/>'
+             '<path d="M7.4 10.9l13.6-8.2"/><path d="M16.33 10.9l-.5-4.88"/><path d="M5.5 10.9l.7-2.4"/>'
+             '<path d="M4.6 12h-1.4"/><path d="M5.8 13.1v6M19.6 13.1v6M9 13.1v3.8"/>',
+    # 04 two violins and a cello, scrolls and the cello's spike: the ensemble's strings (f-holes closed up at 1.2)
+    "strings": '<path d="M12 6.6c1.86 0 3.04 .74 3.04 2.36c0 1.11-.13 1.73-.25 2.17c-.81 .06-1.24 .55-1.24 1.3'
+               'c0 .74 .43 1.3 1.36 1.36c.5 .25 .81 1.37 .81 2.61c0 1.86-1.61 2.6-3.72 2.6'
+               'c-2.11 0-3.72-.74-3.72-2.6c0-1.24 .31-2.36 .81-2.61c.93-.06 1.36-.62 1.36-1.36'
+               'c0-.75-.43-1.24-1.24-1.3c-.12-.44-.25-1.06-.25-2.17c0-1.62 1.18-2.36 3.04-2.36z"/>'
+               '<path d="M12 6.6v-3.75a.85 .85 0 1 1 .85-.85"/><path d="M12 19v1.6"/>'
+               '<path d="M3.6 10.2c1.32 0 2.16 .53 2.16 1.67c0 .79-.09 1.23-.18 1.54c-.57 .05-.88 .4-.88 .93'
+               'c0 .52 .31 .92 .97 .96c.35 .18 .57 .97 .57 1.85c0 1.32-1.14 1.85-2.64 1.85'
+               'c-1.5 0-2.64-.53-2.64-1.85c0-.88 .22-1.67 .57-1.85c.66-.04 .97-.44 .97-.96c0-.53-.31-.88-.88-.93'
+               'c-.09-.31-.18-.75-.18-1.54c0-1.14 .84-1.67 2.16-1.67z"/>'
+               '<path d="M3.6 10.2v-3.35a.85 .85 0 1 1 .85-.85"/>'
+               '<path d="M20.4 10.2c1.32 0 2.16 .53 2.16 1.67c0 .79-.09 1.23-.18 1.54c-.57 .05-.88 .4-.88 .93'
+               'c0 .52 .31 .92 .97 .96c.35 .18 .57 .97 .57 1.85c0 1.32-1.14 1.85-2.64 1.85'
+               'c-1.5 0-2.64-.53-2.64-1.85c0-.88 .22-1.67 .57-1.85c.66-.04 .97-.44 .97-.96c0-.53-.31-.88-.88-.93'
+               'c-.09-.31-.18-.75-.18-1.54c0-1.14 .84-1.67 2.16-1.67z"/>'
+               '<path d="M20.4 10.2v-3.35a.85 .85 0 1 1 .85-.85"/>',
+    # 05 a ticket, tilted in the hand: notched ends, perforation as holes, the covers' quaver: going to a concert
+    "ticket": '<g transform="rotate(-14 12 12)">'
+              '<path d="M2.6 7.4a1.6 1.6 0 0 1 1.6-1.6h15.6a1.6 1.6 0 0 1 1.6 1.6v2.1a2.5 2.5 0 0 0 0 5v2.1'
+              'a1.6 1.6 0 0 1-1.6 1.6h-15.6a1.6 1.6 0 0 1-1.6-1.6v-2.1a2.5 2.5 0 0 0 0-5z"/>'
+              '<path d="M15.6 8.5h.01M15.6 10.83h.01M15.6 13.17h.01M15.6 15.5h.01"/>'
+              '<path d="M7.49 14.92a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/>'
+              '<path d="M9.08 14.4v-5.8c1.5 .35 2.4 1.3 2.4 2.8"/></g>',
     # the drawings on Get involved (art direction, 2 Oct 2026 evening): what a
     # host provides and what we bring, one icon a line
     # a page of a calendar with its two rings and one day marked: a date

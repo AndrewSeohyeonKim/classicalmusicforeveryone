@@ -412,7 +412,7 @@ def footer(lang, slug="index.html"):
 # ---------------------------------------------------------------------------
 # and a value of two sentences on Contact (the insurance line), a line each,
 # and the status sentence in the footer ("…guarantee. It / is not yet…")
-SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "progs-note", "pi-text", "wa-v", "footer-status")
+SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "pi-text", "wa-v", "footer-status")
 # split too, but the sentences sit side by side where the block fits one line
 # (styles.css .sl-n, a line each only under 48em): the programme status
 # ("Write to us. We will plan a talk with your group.") and the join hint

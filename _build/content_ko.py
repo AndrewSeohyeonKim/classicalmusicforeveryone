@@ -101,7 +101,8 @@ N_PLACES = sum(len(rows) for _, rows in PLACES)
 PROGRAMMES_DATA = [
     dict(slug="getting-to-know", pillar="learn", name="클래식 음악과 친해지기",
          short="클래식 음악과 친해지기",
-         icon="score", vocab="친해지기 · 함께하기 · 내 취향 찾기",
+         # 강의가 다루는 것, Andrew의 말(2026-10-03, 「야화」는 「밤 강의」로도 읽혀 「뒷이야기」로). 단계 이름은 쪽에 남는다
+         icon="lesson", vocab="음악사 · 이론 · 뒷이야기",
          img=("lecture-recital.jpg", 1050, 1400, "실황 연주를 곁들인 강의 장면"),
          line="<mark>연주를 눈앞에서</mark> 들으며 처음부터 알아 가는 강의입니다.",
          page=dict(
@@ -139,7 +140,7 @@ PROGRAMMES_DATA = [
          )),
     dict(slug="outreach-concerts", pillar="share", name="찾아가는 음악회",
          short="찾아가는 음악회",
-         icon="room", vocab="휴게실 · 경당 · 로비",
+         icon="piano", vocab="휴게실 · 경당 · 로비",
          img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
          line="<mark>요양시설과 병원</mark>, 본당, 커뮤니티 센터로 찾아가 연주합니다.",
          page=dict(
@@ -174,7 +175,7 @@ PROGRAMMES_DATA = [
          )),
     dict(slug="recorder-ensemble", pillar="learn", name="커뮤니티 리코더 앙상블 클래스",
          short="리코더 앙상블 클래스",
-         icon="recorder", vocab="첫 소리 · 악보 · 나만의 성부",
+         icon="recorder", vocab="첫 소리 · 악보 읽기 · 화음",
          img=("recorders.jpg", 1343, 1400, RECORDERS_ALT),
          # 2026-10-01 이름을 바꿨다
          line="<mark>악기를 처음 잡는</mark> 어른이 함께 배우는 클래스입니다.",
@@ -218,9 +219,9 @@ PROGRAMMES_DATA = [
          )),
     dict(slug="letters-ensemble", pillar="share", name="Letters Ensemble",
          short="Letters Ensemble",
-         icon="people", vocab="아일랜드 · 한국 · 성가",
+         icon="strings", vocab="아일랜드 · 한국 · 성가",
          img=("letters-ensemble.jpg", 1400, 1050, "악기를 든 Letters Ensemble 단원들"),
-         line="<mark>아마추어 연주자들</mark>이 아일랜드와 한국 음악, 성가를 연주합니다.",
+         line="더블린의 <mark>아마추어 연주자들</mark>이 공동체를&nbsp;위해 연주합니다.",
          page=dict(
              lead="2024년 1월 더블린에서 생긴 <mark>아마추어 앙상블</mark>입니다. 아일랜드와 한국의 전통 음악, 성가를 "
                   "연주합니다.",
@@ -327,8 +328,11 @@ HOME = dict(
         label="우리가 하는 일",
         h2="프로그램 다섯 가지.",
         lead="셋은 함께 배우는 자리, 둘은 찾아가 연주하는 자리입니다.",
-        others='연주자·예술가: <a class="link" href="get-involved.html#play">언제든 참여 신청</a> · '
-               '자원봉사: <a class="link" href="get-involved.html#board">창립 이사회</a>',
+        # 카드가 다루지 않는 두 길을 문 두 개로(Andrew, 2026-10-03: 문장 속 링크는 동작으로 읽히지
+        # 않았다). 라벨은 함께하기의 문과 같고, 제목은 그 길 끝의 동작이다. CMFE Artists는 계획이라
+        # 지금 열린 것은 참여 신청뿐(키트 27 메시지 3, parts.door_pair)
+        others=[("get-involved.html#play", "예술가", "참여 신청 보내기"),
+                ("get-involved.html#board", "자원봉사자", "창립 이사회에 참여하기")],
     ),
     # 키트 27 ①을 세 부분으로 나눠 답이 드러나게. 더블린 대신 아일랜드(Andrew,
     # 2026-10-01). 필요를 말하는 문장이지 활동 범위가 아니다(「아일랜드 전역」 금지)

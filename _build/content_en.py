@@ -116,7 +116,8 @@ N_PLACES = sum(len(rows) for _, rows in PLACES)
 PROGRAMMES_DATA = [
     dict(slug="getting-to-know", pillar="learn", name="Getting to Know Classical Music",
          short="Getting to Know",
-         icon="score", vocab="Getting closer · Together · My taste",
+         # what the talks cover, in Andrew's words (3 Oct 2026); the stage names stay on the page
+         icon="lesson", vocab="Music history · Theory · Stories",
          img=("lecture-recital.jpg", 1050, 1400, "A talk in progress, with live playing"),
          line="Talks with <mark>live music</mark>, for anyone curious about Classical Music.",
          page=dict(
@@ -157,7 +158,9 @@ PROGRAMMES_DATA = [
          )),
     dict(slug="outreach-concerts", pillar="share", name="Outreach Concerts",
          short="Outreach Concerts",
-         icon="room", vocab="Day room · Chapel · Atrium",
+         # the grand piano is the sign of a concert, not a list of what we bring
+         # (pianos are on the record: clarinet and piano, the autumn concert)
+         icon="piano", vocab="Day room · Chapel · Atrium",
          img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
          line="Live Classical Music in <mark>care homes, hospitals</mark>, parishes and community centres.",
          page=dict(
@@ -196,7 +199,7 @@ PROGRAMMES_DATA = [
          )),
     dict(slug="recorder-ensemble", pillar="learn", name="Community Recorder Ensemble Class",
          short="Recorder Ensemble Class",
-         icon="recorder", vocab="First notes · Reading · Your own part",
+         icon="recorder", vocab="First notes · Reading music · Harmony",
          img=("recorders.jpg", 1343, 1400, RECORDERS_ALT),
          # renamed 1 Oct 2026
          line="A weekly class for adults who have <mark>never played an instrument</mark>.",
@@ -241,9 +244,9 @@ PROGRAMMES_DATA = [
          )),
     dict(slug="letters-ensemble", pillar="share", name="Letters Ensemble",
          short="Letters Ensemble",
-         icon="people", vocab="Irish · Korean · Sacred",
+         icon="strings", vocab="Irish · Korean · Sacred",
          img=("letters-ensemble.jpg", 1400, 1050, "The Letters Ensemble with their instruments"),
-         line="<mark>Amateur musicians</mark> in Dublin playing Irish, Korean and sacred music.",
+         line="<mark>Amateur musicians</mark> in Dublin who play for communities.",
          page=dict(
              lead="<mark>Amateur musicians</mark> in Dublin, together since 2024. We play Irish, Korean and sacred music.",
              cap=("Letters Ensemble", "with their instruments"),
@@ -285,7 +288,7 @@ PROGRAMMES_DATA = [
          icon="ticket", vocab="Before · During · After",
          img=("proms-hall.jpg", 1400, 933,
               "A full Royal Albert Hall during a BBC Prom, seen from high in the audience: the orchestra on a lit stage, beams of light and the acoustic discs overhead"),
-         line="<mark>Small groups</mark> go to concerts together, prepared beforehand.",
+         line="<mark>Small groups</mark> go to concerts together, with a guide.",
          page=dict(
              lead="For people who would rather not go to a concert alone. We prepare, <mark>go together</mark>, then "
                   "talk it over.",
@@ -358,10 +361,13 @@ HOME = dict(
         label="What we do",
         h2="Five programmes.",
         lead="Three help you listen and play; two take live music out to people.",
-        others='Musicians and artists can <a class="link" href="get-involved.html#play">register '
-               'interest</a> any time. Volunteers can <a class="link" '
-               'href="get-involved.html#board">join the founding board</a>.',
-        # kit 27, message 3: a plan, said as a plan, with the one thing open now
+        # the two ways in the cards do not cover, as two doors (Andrew, 3 Oct
+        # 2026: inside two sentences they did not read as actions): the labels
+        # of the doors on Get involved, and the action each leads to. Kit 27,
+        # message 3: CMFE Artists is a plan, so the one thing open now is to
+        # register interest (parts.door_pair)
+        others=[("get-involved.html#play", "Artists", "Register your interest"),
+                ("get-involved.html#board", "Volunteers", "Join the founding board")],
     ),
     # kit 27 ①, the opening of the one-page case, set in three parts so the
     # answer stands out; Ireland rather than Dublin (Andrew, 1 Oct 2026). It

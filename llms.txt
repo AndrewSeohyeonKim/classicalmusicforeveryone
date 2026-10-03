@@ -19,11 +19,11 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 ## Programme pages (English)
 
-- [Getting to Know Classical Music](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/getting-to-know.html): Talks with live music, for anyone curious about Classical Music.
-- [Outreach Concerts](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/outreach-concerts.html): Live Classical Music in care homes, hospitals, parishes and community centres.
-- [Community Recorder Ensemble Class](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html): A weekly class for adults who have never played an instrument.
-- [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/letters-ensemble.html): Amateur musicians in Dublin playing Irish, Korean and sacred music.
-- [Concert Guide & Companion](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/concert-companion.html): Small groups go to concerts together, prepared beforehand.
+- [Getting to Know Classical Music](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/getting-to-know.html): We give talks on Classical Music, with live playing. They are for anyone curious to hear more.
+- [Outreach Concerts](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/outreach-concerts.html): We play in the rooms where people already are. We explain the music as we go.
+- [Community Recorder Ensemble Class](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html): For adults who have never played an instrument. You play your first notes in week one.
+- [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/letters-ensemble.html): Amateur musicians in Dublin, together since 2024. We play Irish, Korean and sacred music.
+- [Concert Guide & Companion](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/concert-companion.html): For people who would rather not go to a concert alone. We prepare, go together, then talk it over.
 
 ## Pages (Korean)
 
@@ -36,11 +36,11 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 ## Programme pages (Korean)
 
-- [클래식 음악과 친해지기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/getting-to-know.html): 연주를 눈앞에서 들으며 처음부터 알아 가는 강의입니다.
-- [찾아가는 음악회](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html): 요양시설과 병원, 본당, 커뮤니티 센터로 찾아가 연주합니다.
-- [커뮤니티 리코더 앙상블 클래스](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/recorder-ensemble.html): 악기를 처음 잡는 어른이 함께 배우는 클래스입니다.
-- [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html): 아마추어 연주자들이 아일랜드와 한국 음악, 성가를 연주합니다.
-- [함께하는 음악여행](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/concert-companion.html): 혼자 가기 어려운 공연장에 소그룹으로 함께 갑니다.
+- [클래식 음악과 친해지기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/getting-to-know.html): 어디서부터 들어야 할지 모르는 분을 위한 강의입니다. 이야기와 녹음, 실황 연주로 클래식과 친해집니다.
+- [찾아가는 음악회](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html): 사람들이 이미 계신 방으로 찾아가 연주합니다. 곡마다 이야기를 곁들입니다.
+- [커뮤니티 리코더 앙상블 클래스](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/recorder-ensemble.html): 악기를 한 번도 다뤄 보지 않은 어른이 매주 함께 배웁니다. 첫 주에 첫 소리를 냅니다.
+- [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html): 2024년 1월 더블린에서 생긴 아마추어 앙상블입니다. 아일랜드와 한국의 전통 음악, 성가를 연주합니다.
+- [함께하는 음악여행](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/concert-companion.html): 혼자 공연장에 가기 망설여지는 분을 위한 프로그램입니다. 미리 준비하고, 함께 가고, 다녀와서 이야기합니다.
 
 ## House rules for quoting us
 

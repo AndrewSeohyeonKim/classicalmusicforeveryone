@@ -367,7 +367,7 @@ html[lang^="ko"] .eyebrow.section-label .no{font-family:var(--font-display);font
    each sentence of these blocks in .sl (layout.sentence_lines); text-wrap is
    inherited, so a one-sentence lead is balanced too. Running text (answers,
    steps, paragraphs) keeps text-wrap:pretty and flows. */
-:is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.pi-text,.founder-line,.play-note){text-wrap:balance}
+:is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.founder-line,.play-note){text-wrap:balance}
 .sl{display:block}
 /* the status sentence splits only where it wraps (layout.SENTENCE_NARROW) */
 .sl-n{display:inline}
@@ -428,7 +428,7 @@ main,.site-footer{overflow-wrap:break-word}
    balance breaks in the middle of a line and parts a modifier from its noun
    (어려운 / 분들을); pretty breaks before the predicate about twice as often.
    The build ties what must not part (여섯 명, 할 수 있습니다, 저녁 7시). */
-html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.pi-text,.founder-line,.play-note,
+html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.founder-line,.play-note,
     .pc p,.pi p,.steps p,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,.facts dd,
     .pp-glance dd,.pi-facts dd,.glance dd,figcaption,.rec-what>span,.rec-what small,
     .pp-now>p:not(.mail-alt)>span:not(.tag)){text-wrap:pretty}
@@ -477,7 +477,10 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.
    picture comes up in it, settling the last 3 per cent */
 @keyframes develop{from{opacity:0;scale:1.03}to{opacity:1;scale:1}}
 /* a line of a drawing drawn along its own length (pathLength="1") */
-@keyframes stroke-in{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+/* from just past the end, with a gap a little longer than the stroke: at 1
+   and 1 the round cap of a stroke's empty first dash showed as a dot in the
+   first frame (illustration desk, 3 Oct 2026) */
+@keyframes stroke-in{from{stroke-dashoffset:1.02}to{stroke-dashoffset:0}}
 /* a mark set down on the page: a square, a dot, a column */
 @keyframes pop{from{opacity:0;scale:.5}to{opacity:1;scale:1}}
 @keyframes grow-y{from{scale:1 0}to{scale:1 1}}
@@ -510,6 +513,14 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.
 /* a line of a page heading: its own block, so the lines break where the
    copy says, with or without motion */
 .ln,.ln>span{display:block}
+/* With motion on, each title line rises inside a mask (.ln) whose padding
+   (.12em above, .3em below) is paid back by negative margins; between two
+   lines the bottom margin of one and the top margin of the next collapsed
+   to the larger, so .12em was never paid back and the hero's lines stood
+   1.08 of the title apart in English and 1.24 in Korean, not the .96 and
+   1.12 the role table sets (R13). In a flex column margins do not collapse,
+   so the step is the declared line height with motion on or off. */
+:is(.hero-title,.ph-title,.pp-title):has(>.ln){display:flex;flex-direction:column}
 
 @media (prefers-reduced-motion:no-preference){
 
@@ -601,7 +612,7 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.
 
     /* a cover's emblem draws itself in as the cover arrives */
     .cover{view-timeline:--cover block}
-    .cover-mark *{stroke-dasharray:1;animation:stroke-in linear both;animation-timeline:--cover;
+    .cover-mark *{stroke-dasharray:1 1.1;animation:stroke-in linear both;animation-timeline:--cover;
       animation-range:entry 20% entry 90%}
 
     /* the steps: each station's line draws to the next */
@@ -732,10 +743,20 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.progs-note,.join-hint,.
 /* wraps rather than overflows at large text sizes (Fluent: reflow) */
 .header-inner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px;min-height:76px}
 .brand{margin-inline-end:auto;display:flex;align-items:center;padding-block:10px}
-.brand img{height:44px;width:auto;transition:opacity var(--dur-3) var(--ease)}
+/* The logo file keeps a margin left of the clef (.15 of its height), so the
+   clef stood 6 to 8px inside the page edge, over a title that now meets the
+   edge exactly. As in the footer (v3), the margin is taken back and the
+   clef, the line over the title, the title and the subtitle share one edge
+   from the top of the page (R28); the gutter is the clear space on that
+   side (06: .142 of the height). max-width:none: the link is only as wide
+   as what it holds, so a max-width of 100% would take the same 7px off the
+   logo's width and draw it 6% smaller. */
+.brand{--brand-h:44px}
+.brand img{height:var(--brand-h);width:auto;max-width:none;margin-inline-start:calc(var(--brand-h) * -.15);
+  transition:opacity var(--dur-3) var(--ease)}
 /* the larger mark only where the one-row menu has room for it (at 1001px the
    50px logo pushed the English menu onto a second row) */
-@media (min-width:75em){.brand img{height:50px}}
+@media (min-width:75em){.brand{--brand-h:50px}}
 .brand:hover img{opacity:.7}
 
 .nav{display:flex;align-items:center;gap:6px}
@@ -1208,6 +1229,9 @@ html[lang^="ko"] :is(.wa dt,.d-label){font-family:var(--font-kr);font-size:.84re
    "Everyone." past the screen; at normal sizes 19vw never binds */
 .hero{--hero-fs:min(var(--t-hero),19vw)}
 html[lang^="ko"] .hero{--hero-fs:min(clamp(2.6rem,6.9vw,6.2rem),19vw)}
+/* at 320px the 48px floor broke "Classical / Music," (R23): a narrower
+   screen takes the title down with it */
+@media (max-width:22em){.hero{--hero-fs:min(var(--t-hero),14.6vw)}}
 .hero-title{
   font-size:var(--hero-fs);line-height:.96;letter-spacing:-.022em;font-weight:500;
   max-width:none;text-wrap:initial;
@@ -1219,9 +1243,30 @@ html[lang^="ko"] .hero{--hero-fs:min(clamp(2.6rem,6.9vw,6.2rem),19vw)}
   vertical-align:.62em;
 }
 .hero-title em{font-style:italic;font-weight:500;color:var(--accent-ink)}
-.hero-title .ln:nth-child(2){padding-inline-start:.9em}
 html[lang^="ko"] .hero-title{font-size:var(--hero-fs);line-height:1.12;letter-spacing:-.045em}
-html[lang^="ko"] .hero-title .ln:nth-child(2){padding-inline-start:0}
+/* Korean loads 400 and 700 only, so the 500 asked for above drew 「모두에게.」
+   at 400 against a 700 first line; the role table sets the title at 700 (R13) */
+html[lang^="ko"] .hero-title em{font-weight:700}
+/* --- one edge for the title group (Andrew, 3 Oct 2026: "shouldn't the title
+   and the subtitle be aligned?"; art direction option A, R28) ---------------
+   The line over the title, both title lines and the subtitle start on one
+   edge, the page edge, the way the logo sets "Classical Music" and "for
+   Everyone" on one edge. The second line's .9em indent was an edge nothing
+   else on the page used, the subtitle went back to the page edge under it,
+   and the Korean title never had it.
+   Ink, not boxes: at display size a letter's own side bearing shows (the C
+   of "Classical" stands .04em inside its box, 4px at 103px), so each title
+   line is drawn back by its first letter's bearing (--hang) and the ink of
+   all four lines meets half a pixel inside the page edge. For "for" the
+   body of the f is the edge; its tail hooks left under the baseline and
+   hangs, as it does in the logo. The bearings belong to these letters (C,
+   the italic f, 클, 모): if the title's first letters change, measure them
+   again (typeset_check axis). The .12em of padding, paid back by the
+   margin, keeps the f's tail inside the mask that clips a rising line. */
+.hero-title .ln{--hang:.04em;padding-inline-start:.12em;margin-inline-start:calc(.5px - .12em - var(--hang))}
+.hero-title .ln:nth-child(2){--hang:.0222em}
+html[lang^="ko"] .hero-title .ln{--hang:.042em}
+html[lang^="ko"] .hero-title .ln:nth-child(2){--hang:.041em}
 
 .hero-body{display:grid;grid-template-columns:5fr 7fr;gap:clamp(32px,5vw,88px);align-items:start}
 /* the master line is never translated (06 §5), so on the Korean pages it is
@@ -1245,15 +1290,25 @@ html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
    (60px at least), so the gap below is at least 1.25 times the gap above
    and the subtitle reads with the title, the running-now block apart.
    Korean has no descenders: .3 (30px at least) and .62 (56px). */
-.hero{--hero-sub:clamp(1.375rem,calc(var(--hero-fs) * .28),2.25rem)}
+/* R29: the master line is as wide as "Classical Music", the lockup's own
+   rule (chief designer v4). The ratio is measured: the ink width of
+   "Classical Music" (5.66 of the title's em; Korean 「클래식 음악을」 5.45)
+   over the master line's (.356, .343 of the title's size), measure again if
+   either line changes. At its 22px floor (a phone) the line is never wider
+   than the title: it turns after "Classical Music" (balance, .cm nowrap). */
+.hero{--hero-sub:max(1.375rem,calc(var(--hero-fs) * .356))}
+html[lang^="ko"] .hero{--hero-sub:max(1.375rem,calc(var(--hero-fs) * .343))}
 .hero-head{margin:0}
 .hero-sub{
-  margin:max(calc(36px + var(--hero-fs) * .1),calc(var(--hero-fs) * .42)) 0 0;max-width:24em;
+  margin:max(calc(36px + var(--hero-fs) * .1),calc(var(--hero-fs) * .42)) 0 0;max-width:calc(var(--hero-fs) * 5.9);
   font-family:var(--font-display);font-size:var(--hero-sub);font-weight:400;font-style:normal;line-height:1.2;
   letter-spacing:-.006em;word-spacing:normal;color:var(--fg);text-wrap:balance;font-feature-settings:"liga" 1,"kern" 1;
 }
 .hero-sub em{font-style:italic;color:inherit}
-html[lang^="ko"] .hero-sub{margin-top:max(30px,calc(var(--hero-fs) * .3))}
+html[lang^="ko"] .hero-sub{margin-top:max(30px,calc(var(--hero-fs) * .3));max-width:calc(var(--hero-fs) * 5.7)}
+/* one line from 1001px: tighter leading keeps R15 at 1280x720 (title
+   baseline to the subtitle .5 to .7 of the title, the gap below 1.25 times) */
+@media (min-width:62.5625em){.hero-sub{line-height:1.1}}
 html[lang^="ko"] .hero-sub>[lang="en"]{font-family:var(--font-display);letter-spacing:-.006em;word-break:normal}
 .hero-body{margin-top:max(60px,calc(var(--hero-fs) * .8))}
 html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
@@ -1412,13 +1467,32 @@ html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-s
 .pc-body{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:18px;flex:1}
 .pc .kicker{display:inline-flex;align-items:center;gap:8px}
 .pc h3{font-size:var(--t-h3);line-height:1.2;transition:color var(--dur-3) var(--ease)}
-/* in the row of five the titles take one, two or three lines: every card
-   keeps the same height of title, so the lines below start level */
-@media (min-width:62.5625em){.pc h3{min-height:2lh}}
-@media (min-width:62.5625em) and (max-width:68.75em){.pc h3{min-height:3lh}}
+/* the name and its three words are one group, 6px apart (R1). In the row
+   of five the names take one, two or three lines, so the group, not the
+   name, keeps the height that starts the sentences level (R30: a reserved
+   height reserved inside the group left the three words floating 29 to 55px
+   under a one-line name) */
+.pc-name{display:flex;flex-direction:column;gap:6px;margin-bottom:4px}
+@media (min-width:62.5625em){
+  .pc-name{min-height:calc(var(--t-h3) * 1.2 * 2 + 6px + 1.0625rem * 1.3 * 2)}
+  html[lang^="ko"] .pc-name{min-height:calc(1.08rem * 1.42 * 2 + 6px + .9375rem * 1.5)}
+}
+@media (min-width:62.5625em) and (max-width:68.75em){
+  .pc-name{min-height:calc(var(--t-h3) * 1.2 * 3 + 6px + 1.0625rem * 1.3 * 2)}
+}
 html[lang^="ko"] .pc h3{font-size:1.08rem;line-height:1.42}
 .pc:hover h3{color:var(--accent-ink)}
 .pc p{margin:0;font-size:var(--t-small);line-height:var(--lh-small);letter-spacing:var(--track-small);color:var(--fg)}
+/* what each programme is, in three words (Andrew, 3 Oct 2026: "a small
+   description of each"): the cover's own line, set under the name as its
+   subtitle, in the name's face and the master line's italic, 6px under
+   the name in one group (.pc-name). The line turns only after a dot
+   (parts._vocab). Korean has no italic: the same line in the text face. */
+.pc .pc-topics{font-family:var(--font-display);font-style:italic;font-size:1.0625rem;line-height:1.3;
+  letter-spacing:0;text-wrap:balance}
+html[lang^="ko"] .pc .pc-topics{font-family:var(--font-kr);font-style:normal;font-size:.9375rem;line-height:1.5;
+  letter-spacing:-.01em;text-wrap:pretty}
+
 .pc .tag{margin-top:auto}
 .pc .tag,.pi .tag,.pp-now .tag{white-space:normal;max-width:100%}
 /* in the row of five a card is too narrow for the longest status on one
@@ -1431,7 +1505,6 @@ html[lang^="ko"] .pc h3{font-size:1.08rem;line-height:1.42}
   .pc .tag:not(.tag-live){color:var(--fg)}
   .pc .tag-live::before{margin-top:.3lh}
 }
-.progs-note{margin-top:clamp(32px,4vw,48px);max-width:var(--measure-lead)}
 /* the pillar dot: filled for Learning, open for Sharing; always the same size */
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:0 0 auto;background:var(--accent)}
 .dot-open{background:transparent;box-shadow:inset 0 0 0 1.5px var(--accent)}
@@ -1785,6 +1858,78 @@ html[lang^="ko"] .d-go{font-family:var(--font-kr);font-weight:400}
   .doors a{display:flex;flex-direction:column}
   .d-ring{grid-row:auto}
   .d-label{margin-top:14px}
+}
+/* --- two of the doors under the five programmes (home, section I) ---------
+   Andrew (3 Oct 2026): "the register button or the see-details button
+   should catch the eye more". The two ways in that the five cards do not
+   cover, for artists and for volunteers, were two links inside two
+   sentences, so they read as copy and not as actions.
+
+   They are now the third and fourth doors of Get involved: the same ring,
+   the same icons (a music stand, a raised hand), the same label and the
+   same Garamond line (R17: one vocabulary). Two doors need far less height
+   than four, so each is set the way a door is set on a phone: the station
+   beside its words, who the way is for over the action, the arrow after
+   the action's last word. A reader who follows one finds the same door
+   again on Get involved.
+
+   How loud: the hero's filled button stays the one solid action on the
+   page, and the five covers stay the weight of this section. A door has no
+   fill, no box and no shadow; a gold line ring, a title the size of a
+   card's title and an arrow are enough to say "door" (R5: the title is its
+   one strong line; R16: never a highlight). */
+.doors.doors-pair{
+  list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:6px var(--col-gap);
+}
+/* Where: on the content line (R2: an action hangs on it), under the heading
+   of the section. Side by side only where both titles hold one line (from
+   1001px), and then in the two columns of the figures in the ink band just
+   below, so the doors stand over "40+" and "4": the second door takes a
+   line the page already has (R25). Narrower, one door a row: at 900px
+   "Join the founding board" took two lines beside one, and the labels of
+   the two doors no longer stood level. */
+@media (min-width:55.0625em){.doors.doors-pair{margin-inline-start:var(--col4)}}
+@media (min-width:62.5625em){.doors.doors-pair{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* A door is its link, and the link is only as wide as the door, so the
+   focus ring and the hover area are the door, not an empty half column.
+   The ring stands level with the middle of its two lines; the label sits
+   4px over the title (R1: inside a group, 8px or less). At least 56px
+   high (a 44px ring, 6px above and below), wider than 44px everywhere. */
+.doors.doors-pair a{
+  flex:0 1 auto;display:grid;grid-template-columns:var(--st) minmax(0,1fr);
+  column-gap:18px;row-gap:4px;align-items:center;justify-items:start;padding-block:10px;
+}
+.doors.doors-pair .d-ring{grid-row:1 / span 2}
+.doors.doors-pair .d-label{grid-column:2;margin:0;align-self:end}
+.doors.doors-pair .d-title{grid-column:2;margin:0;max-width:none;align-self:start}
+@media (min-width:62.5625em){.doors.doors-pair a{padding-block:6px}}
+/* Korean: the cards above set their titles at 17px (five in a row), so the
+   doors step down to 18px, the floor of the role (R13), and never outsize
+   the programmes they follow */
+html[lang^="ko"] .doors-pair .d-title{font-size:1.125rem;line-height:1.45}
+
+/* The arrow is the action's own, in its gold: it follows the last word
+   (parts.door_pair keeps the two together, so it never starts a line
+   alone) and moves on hover and focus like every arrow on the site. */
+.doors-pair .d-title .arrow{color:var(--accent-ink);margin-inline-start:.06em}
+/* Hover: the title and its ring turn gold (the doors' own answer, §16).
+   Pressed: the ring fills with the sunken cream, the way a button goes
+   down (Fluent 2: rest, hover, pressed, focus); this also gives the four
+   doors on Get involved their pressed state. Focus: the site's two rings,
+   6px out, round the whole door (§16). */
+.doors a:active .d-ring{background:var(--surface-sunken)}
+
+/* Text at 200% on a phone (the em query follows the reader's own text
+   size): the station over the words, as the doors on Get involved do, so a
+   40px title has the whole width (R27) */
+@media (max-width:19.99em){
+  .doors.doors-pair a{display:flex;flex-direction:column;align-items:flex-start}
+  /* the grid's end/start placement would push the label to the right edge
+     in a column (seen at 320px with text at 200%) */
+  .doors.doors-pair :is(.d-label,.d-title){align-self:auto}
+  .doors.doors-pair .d-label{margin-top:14px}
 }
 /* bring a concert: the visit in three steps, then the action */
 .invite{display:grid;grid-template-columns:3fr 9fr;gap:var(--gap)}
@@ -2415,7 +2560,7 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
   html:has(.nav[data-open="true"]) :is(main,.site-footer){visibility:hidden}
   .menu-toggle{display:block}
   .header-inner{min-height:68px}
-  .brand img{height:38px}
+  .brand{--brand-h:38px}
   /* The drawer hangs from the bottom of the header. It cannot be
      position:fixed: the header's backdrop-filter makes the header the
      containing block of any fixed descendant, which collapsed the drawer
