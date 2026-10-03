@@ -299,51 +299,45 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,td,th,a,span,b,small){
    One recipe for every uppercase label on the site; component rules below
    set only colour, margin and layout. */
 .eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,
-.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,
+.glance dt,.facts dt,.lang-switch,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,
 .none-glance dt,.mini-period{
   font-family:var(--font-body);font-size:var(--t-label);font-weight:600;
   letter-spacing:var(--label-track);text-transform:uppercase;line-height:1.3;
   font-variant-numeric:lining-nums tabular-nums;
 }
-html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.toc-n,.pp-glance dt,.pi-facts dt,.places-group h3,.none-glance dt,.mini-period){
+html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,.none-glance dt,.mini-period){
   font-family:var(--font-kr);font-size:.84rem;letter-spacing:var(--label-track-kr);font-weight:700;
 }
 /* Korean has two weights: a field label steps down to 400 so the 700 value
    beside it leads; gold already marks it as a label */
 html[lang^="ko"] :is(.glance dt,.facts dt,.pp-glance dt,.pi-facts dt,.none-glance dt){font-weight:400}
 .eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 22px;color:var(--accent-ink)}
-/* a section number in the margin, set like a movement in a programme */
-.eyebrow .no{
-  font-family:var(--font-display);font-size:1rem;font-weight:500;letter-spacing:0;
-  text-transform:none;color:var(--accent-ink);font-variant-numeric:lining-nums;
-}
+/* a section number, set like a movement in a programme: in the face, size
+   and weight of the words it leads, so the line is one voice (R33; Andrew,
+   3 Oct 2026: a Garamond "I." before a Jakarta "What we do" read as a mistake) */
+.eyebrow .no{color:var(--accent-ink);font-variant-numeric:lining-nums tabular-nums}
 .kicker{color:var(--accent-ink)}
 /* --- the section label (Andrew, 2 Oct 2026 evening: "it says what the section is, but it is
    smaller than the body and nobody sees it"; art direction v2) ---------------
    The section's name, set to be read: sentence case at the lead's size,
-   Jakarta 600 (Korean Noto 700), deep gold; the movement number in
-   Garamond, 1.4 times the name, on the same baseline. It never outgrows the
-   lead beside it, so the H2 stays the one large thing in the head. Field
-   names (FOR, HOW, ROLES, YOU PROVIDE) keep the small capitals. */
+   Jakarta 600 (Korean Noto 700), deep gold; the movement number in the same
+   face, size and weight, half an em before the name (R33: the Garamond number
+   at 1.4 times read as a second typeface). It never outgrows the lead beside
+   it, so the H2 stays the one large thing in the head. Field names (FOR, HOW,
+   ROLES, YOU PROVIDE) keep the small capitals. */
 .eyebrow.section-label{
   font-family:var(--font-body);font-size:var(--t-lead);font-weight:600;line-height:1.3;
   letter-spacing:0;word-spacing:normal;text-transform:none;text-wrap:balance;
   gap:.5em;margin:0 0 14px;color:var(--accent-ink);
 }
-.eyebrow.section-label .no{font-family:var(--font-display);font-size:1.4em;font-weight:500;line-height:1;
-  letter-spacing:0;color:var(--accent-ink);font-variant-numeric:lining-nums}
 html[lang^="ko"] .eyebrow.section-label{font-family:var(--font-kr);font-size:var(--t-lead);font-weight:700;
   letter-spacing:-.01em}
-html[lang^="ko"] .eyebrow.section-label .no{font-family:var(--font-display);font-weight:500;letter-spacing:0}
 .band-ink .eyebrow.section-label,.band-ink .eyebrow.section-label .no{color:var(--accent-inverse)}
 /* beside the heading, on its first baseline (the grid already aligns by
    baseline); the old .2em nudge was for 13px capitals */
 @media (min-width:55.0625em){
   .sh-split .eyebrow.section-label{margin:0;padding-top:0}
 }
-/* stacked over a 32px heading on a phone, the number steps down so it never
-   rivals the heading under it */
-@media (max-width:55em){.eyebrow.section-label .no{font-size:1.2em}}
 .why .eyebrow.section-label{margin:0}
 
 .sr-only{
@@ -479,8 +473,11 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
 /* a line of a drawing drawn along its own length (pathLength="1") */
 /* from just past the end, with a gap a little longer than the stroke: at 1
    and 1 the round cap of a stroke's empty first dash showed as a dot in the
-   first frame (illustration desk, 3 Oct 2026) */
-@keyframes stroke-in{from{stroke-dashoffset:1.02}to{stroke-dashoffset:0}}
+   first frame (illustration desk, 3 Oct 2026). The dash also grows to 1.1 and
+   its gap closes to 0, so the finished drawing is a solid line whatever the
+   browser takes the length to be: a 1 1.1 dash left a gap in the teacher's
+   head on most screens (v5) */
+@keyframes stroke-in{from{stroke-dasharray:1 2;stroke-dashoffset:1.02}to{stroke-dasharray:1.1 0;stroke-dashoffset:0}}
 /* a mark set down on the page: a square, a dot, a column */
 @keyframes pop{from{opacity:0;scale:.5}to{opacity:1;scale:1}}
 @keyframes grow-y{from{scale:1 0}to{scale:1 1}}
@@ -612,7 +609,7 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
 
     /* a cover's emblem draws itself in as the cover arrives */
     .cover{view-timeline:--cover block}
-    .cover-mark *{stroke-dasharray:1 1.1;animation:stroke-in linear both;animation-timeline:--cover;
+    .cover-mark *{animation:stroke-in linear both;animation-timeline:--cover;
       animation-range:entry 20% entry 90%}
 
     /* the steps: each station's line draws to the next */
@@ -821,9 +818,18 @@ html[lang^="ko"] .btn{font-family:var(--font-kr);font-weight:700}
 /* pressed puts the button back down (Fluent 2: rest, hover, pressed, focus) */
 .btn:active{translate:0 1px;transition-duration:var(--dur-1)}
 
-/* the arrow leaves on the right and a second one arrives from the left */
-.arrow{display:inline-flex;overflow:hidden;width:1em;flex:0 0 auto;line-height:1}
-.arrow i{font-style:normal;display:block;text-shadow:-1.3em 0 currentColor;transition:translate var(--dur-slow) var(--ease-enter-expressive)}
+/* the arrow leaves on the right and a second one arrives from the left. One
+   arrow on the whole site, drawn (parts.ARROW, R33): no font the site loads
+   has the arrow character, so each device used to draw it from its own fonts
+   (Times after a Garamond name, the system sans elsewhere). Its middle sits
+   about .3em over the baseline, as a typeset arrow does: centred in a flex
+   row, and lowered .13em where it stands in a line of text */
+.arrow{display:inline-flex;overflow:hidden;width:1em;flex:0 0 auto;line-height:1;vertical-align:-.13em}
+.arrow i{display:block;transition:translate var(--dur-slow) var(--ease-enter-expressive)}
+.arrow svg{display:block;width:1em;height:1em;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round}
+/* beside Noto 700 the Korean arrow takes a heavier line (its stems are thicker) */
+html[lang^="ko"] .arrow svg{stroke-width:1.75}
 a:hover .arrow i,.btn:hover .arrow i,a:focus-visible .arrow i{translate:1.3em 0}
 
 .btn-primary{--btn-bg:var(--fg);--btn-fg:var(--fg-inverse)}
@@ -1088,8 +1094,11 @@ html[lang^="ko"] .meet{--lh-item:1.55}
 .route-st{position:relative;min-width:0;padding-top:calc(var(--st) + 16px)}
 .route-mark{position:absolute;top:0;left:0;z-index:1;display:grid;place-items:center;width:var(--st);height:var(--st);
   border:1px solid var(--stroke);border-radius:50%;background:var(--ground);color:var(--accent-ink)}
-.route-year{font-family:var(--font-display);font-size:.95rem;font-weight:600;letter-spacing:0;text-transform:none;
+/* the year in its label's face (R33): Jakarta 600, Korean Noto 700, small enough to
+   leave the ring some air */
+.route-year{font-family:var(--font-body);font-size:.8125rem;font-weight:600;letter-spacing:0;text-transform:none;
   font-variant-numeric:lining-nums}
+html[lang^="ko"] .route-year{font-family:var(--font-kr);font-weight:700}
 .route-st:not(:last-child)::before{content:"";position:absolute;top:calc(var(--st) / 2);left:calc(var(--st) + 8px);
   right:calc(-1 * var(--route-gap) + 8px);border-top:1px solid var(--stroke)}
 .route dt{margin:0}
@@ -1366,7 +1375,7 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
    and the photograph below it opens like a curtain. One plate per page.
    ========================================================================== */
 .ph{position:relative;isolation:isolate;overflow-x:clip;padding-block:clamp(56px,7vw,120px) 0}
-.ph::before,.pp-head::before{
+.ph::before{
   content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%;
   inset-inline-end:-16%;inset-block-start:-48%;width:min(80vw,920px);aspect-ratio:1;
   background:repeating-radial-gradient(circle at center,color-mix(in srgb,var(--accent) 60%,transparent) 0 1px,transparent 1px 44px);
@@ -1374,10 +1383,13 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
   mask-image:radial-gradient(circle at center,#000 16%,transparent 62%);
   opacity:.22;
 }
-/* R22, one drawing to a head: on Get involved the four doors are the head's
-   drawing. The sound rings stood centred on one door (Volunteers, at 1024px)
-   and ran on over the white band below (chief designer v3) */
-.ph:has(+ .gi-ways)::before{content:none}
+/* R22, one drawing to a head, and the rings stay in their head: a head with
+   no photograph is short, and its 920px circle ran on over the next section,
+   behind the programme rows, the news cards and the contact form (chief
+   designer v5; before that, centred on a door on Get involved, v3). Only the
+   About head, which holds a photograph, is tall enough for them.
+   typeset_check rings fails if a head's rings reach anything a reader reads. */
+.ph-plain::before{content:none}
 .ph-head{display:grid;grid-template-columns:7fr 5fr;gap:clamp(28px,5vw,88px);align-items:end}
 .ph-title{max-width:12em}
 .ph-lead{font-size:var(--t-lead);line-height:var(--lh-lead);letter-spacing:var(--track-lead);color:var(--fg);
@@ -1429,18 +1441,16 @@ figcaption>span:not(.cap-label){max-width:36em}
 
 /* --- the programme covers ------------------------------------------------
    Five typographic covers in place of five photographs: the number, the
-   programme's emblem inside the rings the hero uses for sound leaving the
-   room, and three words of its own vocabulary, on ink. They are a matched
-   set because they are drawn, and Concert Guide & Companion, which has no
-   truthful photograph, stands with the other four. */
+   programme's emblem and three words of its own vocabulary, on ink. They are
+   a matched set because they are drawn, and Concert Guide & Companion, which
+   has no truthful photograph, stands with the other four. The emblem stands
+   alone: the ring ground behind it (a repeating gradient) ran through every
+   emblem and broke into stray arcs on screen (Andrew, 3 Oct 2026: "the lines
+   overlap and some are not needed"). */
 .cover{position:relative;isolation:isolate;overflow:clip;aspect-ratio:4/5;display:grid;grid-template-rows:auto 1fr auto;
   container-type:inline-size;
   padding:clamp(14px,1.4vw,22px);border-radius:var(--radius-xs);background:var(--surface-inverse);color:var(--fg-inverse);
   transition:background-color var(--dur-5) var(--ease)}
-.cover::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.34;
-  background:repeating-radial-gradient(circle at 50% 50%,transparent 0 16px,color-mix(in srgb,var(--accent-inverse) 60%,transparent) 16px 17px);
-  -webkit-mask-image:radial-gradient(circle at 50% 50%,transparent 0 22%,#000 26%,transparent 60%);
-  mask-image:radial-gradient(circle at 50% 50%,transparent 0 22%,#000 26%,transparent 60%)}
 .cover-no{font-family:var(--font-display);font-size:clamp(1.5rem,2.1vw,2.05rem);line-height:1;color:var(--accent-inverse);
   font-variant-numeric:lining-nums}
 .cover-mark{position:absolute;inset:0;margin:auto;width:38%;height:auto;overflow:visible;
@@ -1448,12 +1458,7 @@ figcaption>span:not(.cap-label){max-width:36em}
 .cover-line{grid-row:3;font-family:var(--font-display);font-style:italic;font-size:clamp(.85rem,1.05vw,.98rem);line-height:1.3;
   color:var(--fg-inverse-body)}
 html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-size:.875rem;letter-spacing:-.01em}
-@container (max-width:180px){
-  .cover-line{display:none}.cover-mark{width:44%}
-  /* the outer rings would cross the number on a small cover (QA40-07) */
-  .cover::before{-webkit-mask-image:radial-gradient(circle at 50% 50%,transparent 0 18%,#000 22%,transparent 40%);
-    mask-image:radial-gradient(circle at 50% 50%,transparent 0 18%,#000 22%,transparent 40%)}
-}
+@container (max-width:180px){.cover-line{display:none}.cover-mark{width:44%}}
 .cover-sm{padding:8px 9px;grid-template-rows:auto 1fr}
 .cover-sm .cover-no{font-size:1.05rem}
 .cover-sm .cover-mark{width:46%}
@@ -1769,7 +1774,8 @@ html[lang^="ko"] .map-svg .m-label{font-size:17px;font-weight:700}
 .places-map figcaption{margin-top:14px}
 .places-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,44px) var(--gap)}
 .places-group h3{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;color:var(--accent-ink)}
-.pl-n{font-family:var(--font-display);font-size:1rem;letter-spacing:0;color:var(--fg-muted)}
+/* the count is set like the heading it ends (R33); grey says it is a count */
+.pl-n{color:var(--fg-muted)}
 .places-group ul{list-style:none;margin:0;padding:0}
 .places-group li{padding-block:5px}
 .pl-name{display:block;font-family:var(--font-display);font-size:1.15rem;line-height:1.3;color:var(--fg)}
@@ -2139,6 +2145,8 @@ html[lang^="ko"] .pp-now strong{font-weight:700}
 .step-n{position:absolute;top:0;left:0;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;
   border:1px solid var(--accent);background:var(--surface);color:var(--accent-ink);
   font-family:var(--font-display);font-size:1.25rem;line-height:1;font-variant-numeric:lining-nums}
+/* the number is set in the face of the title beside it (R33): Noto for a Korean title */
+html[lang^="ko"] .step-n{font-family:var(--font-kr);font-size:1.125rem}
 .steps h3{font-size:var(--t-h3)}
 .steps p{margin-top:10px;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:22em}
 /* the steps run across only where a column holds a readable line; below
@@ -2236,7 +2244,8 @@ html[lang^="ko"] .rec-what b{font-family:var(--font-kr);font-weight:700;font-siz
 
 /* attendance at the talks: one gold column per session where it was counted */
 .att{margin:0 0 clamp(44px,5vw,72px)}
-.att-head{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;margin:0 0 20px;font-size:var(--t-small);color:var(--fg-muted)}
+/* the chart's name, then what it shows: one line each (R33) */
+.att-head{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin:0 0 20px;font-size:var(--t-small);color:var(--fg-muted)}
 .att-head b{font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;color:var(--fg)}
 html[lang^="ko"] .att-head b{font-family:var(--font-kr);font-weight:700;font-size:1.1rem}
 .att-plot{max-width:600px}
@@ -2274,14 +2283,18 @@ html[lang^="ko"] .att :is(.c-tick,.c-year,.c-val){font-family:var(--font-kr)}
   #more :is(.others,.btn-row){grid-column:2}
 }
 .toc-n{color:var(--accent-ink)}
-.others .toc-n{grid-row:1/4}
+/* the number in the face, size and weight of the name it leads, gold as on
+   the covers (R33; it was a 13px Jakarta label before a Garamond name) */
+.others .toc-n{grid-row:1/4;font-family:var(--font-display);font-size:clamp(1.25rem,1.8vw,1.5rem);font-weight:600;
+  line-height:1.2;color:var(--accent-ink);font-variant-numeric:lining-nums tabular-nums}
+html[lang^="ko"] .others .toc-n{font-family:var(--font-kr);font-weight:700;font-size:1.12rem;letter-spacing:-.01em}
 .others .tag{grid-column:2;justify-self:start;margin-top:10px}
 #more h2.eyebrow{margin:0 0 18px}
 .others b{font-family:var(--font-display);font-size:clamp(1.25rem,1.8vw,1.5rem);font-weight:600;line-height:1.2;
   transition:color var(--dur-3) var(--ease)}
 html[lang^="ko"] .others b{font-family:var(--font-kr);font-weight:700;font-size:1.12rem;letter-spacing:-.01em}
 .others-line{grid-column:2;font-size:var(--t-small);color:var(--fg-muted)}
-.others .arrow{grid-row:1;grid-column:3;color:var(--accent-ink)}
+.others .arrow{grid-row:1;grid-column:3;align-self:center;color:var(--accent-ink)}
 .others a:hover b{color:var(--accent-ink)}
 
 /* the video, when there is one: our still until the reader presses play */
@@ -2464,12 +2477,13 @@ html[lang^="ko"] .none-glance dd{font-family:var(--font-kr);font-weight:700;font
 /* one column where a label in capitals would not fit half the width (a
    small phone, or any phone with large text: em queries follow text size) */
 @media (max-width:22em){.none-glance{grid-template-columns:minmax(0,1fr)}}
-/* the clauses, numbered in the margin like a programme's notes */
+/* the clauses, numbered in the margin like a programme's notes; the heading
+   draws its own number, so the number has the heading's face and baseline (R33) */
 .notice-list{list-style:none;margin:28px 0 0;padding:0;counter-reset:nl}
 .notice-list>li{position:relative;counter-increment:nl;padding:0 0 0 44px}
 .notice-list>li+li{margin-top:clamp(24px,2.8vw,32px)}
-.notice-list>li::before{content:counter(nl);position:absolute;left:0;top:-2px;font-family:var(--font-display);
-  font-size:1.6rem;line-height:1;color:var(--accent-ink);font-variant-numeric:lining-nums}
+.notice-list>li>h3::before{content:counter(nl);position:absolute;left:0;color:var(--accent-ink);
+  font-variant-numeric:lining-nums tabular-nums}
 
 
 /* ==========================================================================
@@ -2648,7 +2662,6 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
   .site-footer .logo-print{display:block !important}
   .band-ink,.band-ink *,.site-footer,.site-footer *{color:#222 !important;border-color:#bbb !important}
   .cover{background:none !important;border:1px solid #999;color:#222}
-  .cover::before{display:none}
   .cover-mark{stroke:#333 !important}
   .cover-no,.cover-line{color:#222 !important}
   .forty-row span{background:#333 !important}

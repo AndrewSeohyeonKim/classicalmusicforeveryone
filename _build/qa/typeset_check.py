@@ -44,8 +44,17 @@ time: this Mac sits near its open-file limit). It reports:
   names  "Classical Music" in the master line (footer, hero) and the founder's
          name in Contact's signature stay on one line (R23), 390 to 1920
   rings  a page head's sound rings sit on no drawing's ring (doors, stations,
-         the meeting, the route, numbered steps) and stop before the next
-         band with another ground (R22), 768 to 1440
+         the meeting, the route, numbered steps), stop before the next band
+         with another ground, and lie under nothing a reader reads below the
+         head (a row, a card, a pill, an arrow, a form hint: v5) (R22), 768 to
+         1440
+  faces  one line, one face (R33): within a phrase (pieces on one baseline
+         band, closer than 1.6 times the larger size; a dot or an icon between
+         them belongs to the phrase) no two typefaces meet, every page at 320,
+         390, 1024 and 1440: a number takes the face, size and weight of the
+         words it leads ("I. What we do", "01 Learning", "02 Outreach
+         Concerts"). Columns across a gutter (a date beside a title, a
+         question beside its answer) may differ
   wide   text at 200% the way a reader sets it, the browser's own text size
          doubled (so em media and container queries move too, unlike a
          doubled root size): no page scrolls sideways and nothing sticks
@@ -291,7 +300,48 @@ RINGS = r"""(() => { const ph = document.querySelector('.ph, .pp-head'); if (!ph
   const bg = getComputedStyle(ph).backgroundColor; let sec = ph.nextElementSibling;
   while (sec && getComputedStyle(sec).backgroundColor === bg) sec = sec.nextElementSibling;
   if (sec && cy + rv > sec.getBoundingClientRect().top + 1) out.push('into ' + (sec.id || sec.className));
+  // the rings stay in their own head: nothing below it that a reader reads lies under them
+  const meets = r => { const nx = Math.max(r.left, Math.min(cx, r.right)), ny = Math.max(r.top, Math.min(cy, r.bottom));
+    return Math.hypot(nx - cx, ny - cy) < rv; };
+  for (let n = ph.nextElementSibling, k = 0; n && k < 2; n = n.nextElementSibling, k++)
+    for (const el of n.querySelectorAll('p,li,h2,h3,dt,dd,.tag,.arrow,.cover,figure,a')) {
+      const r = el.getBoundingClientRect(); if (r.width && meets(r)) { out.push('under ' + (el.className || el.tagName)); break; } }
   return out; })()"""
+
+
+FACES = r"""(() => {
+  const fam = cs => cs.fontFamily.split(',')[0].replace(/["']/g, '').trim();
+  const shown = el => { for (let e = el; e && e !== document.body; e = e.parentElement) {
+      const cs = getComputedStyle(e);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || e.classList.contains('sr-only')) return false;
+      if (e.parentElement && e.parentElement.tagName === 'DETAILS' && !e.parentElement.open && e.tagName !== 'SUMMARY') return false; }
+    return true; };
+  const f = [], add = (el, cs, b, text, face) => { if (b.width < 1 || b.height < 1) return;
+    f.push({fam: face, fs: parseFloat(cs.fontSize), text, cls: el.className && el.className.baseVal === undefined ? el.className : el.tagName,
+            x0: b.left, x1: b.right, y0: b.top, y1: b.bottom}); };
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {acceptNode: n => /[\p{L}\p{N}]/u.test(n.nodeValue) ? 1 : 2});
+  for (let n; (n = w.nextNode());) { const el = n.parentElement;
+    if (!el || el.closest('script,style,noscript,template,title') || !shown(el)) continue;
+    const cs = getComputedStyle(el), r = document.createRange(); r.selectNodeContents(n);
+    for (const b of r.getClientRects()) add(el, cs, b, n.nodeValue.trim().slice(0, 40), fam(cs)); }
+  for (const el of document.querySelectorAll('body *')) { if (!shown(el)) continue;
+    for (const ps of ['::before', '::after']) { const cs = getComputedStyle(el, ps), c = cs.content;
+      if (!c || c === 'none' || c === 'normal' || !(/counter\(/.test(c) || /"[^"]*[\p{L}\p{N}][^"]*"/u.test(c))) continue;
+      const b = el.getBoundingClientRect(), fs = parseFloat(cs.fontSize);
+      add(el, cs, {left: b.left - 1, right: b.left + fs, top: b.top, bottom: b.top + fs * 1.3, width: fs, height: fs}, ps + c.slice(0, 20), fam(cs)); } }
+  for (const t of document.querySelectorAll('svg text')) if (shown(t)) add(t, getComputedStyle(t), t.getBoundingClientRect(), t.textContent.trim().slice(0, 30), fam(getComputedStyle(t)));
+  // a dot or a small icon inside a line joins the words either side of it
+  for (const d of document.querySelectorAll('i.dot,i.dot-open,.arrow,p svg,h3 svg,a svg')) if (shown(d)) {
+    const b = d.getBoundingClientRect(); if (b.width && b.width < 40) add(d, getComputedStyle(d), b, '', null); }
+  const p = f.map((_, i) => i), find = i => p[i] === i ? i : (p[i] = find(p[i]));
+  for (let i = 0; i < f.length; i++) for (let j = i + 1; j < f.length; j++) { const a = f[i], b = f[j];
+    if (Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0) < .5 * Math.min(a.y1 - a.y0, b.y1 - b.y0)) continue;
+    const big = Math.max(a.fs, b.fs), small = Math.min(a.fs, b.fs);
+    if (Math.max(a.x0, b.x0) - Math.min(a.x1, b.x1) > 1.6 * big || big > 2.2 * small) continue;
+    p[find(i)] = find(j); }
+  const g = {}; f.forEach((x, i) => (g[find(i)] ||= []).push(x));
+  return Object.values(g).filter(x => new Set(x.map(y => y.fam).filter(Boolean)).size > 1)
+    .map(x => x.filter(y => y.fam).sort((a, b) => a.x0 - b.x0).map(y => `${y.fam.split(' ')[0]}:${y.text}`).join(' | ')); })()"""
 
 
 def text_size(c, px):
@@ -314,7 +364,7 @@ def serve():
 def main(strict=False):
     httpd, base = serve()
     found = {"fold": [], "tail": [], "tie": [], "hero": [], "axis": [], "width": [], "group": [], "meet": [],
-             "leader": [], "names": [], "rings": [], "wide": []}
+             "leader": [], "names": [], "rings": [], "faces": [], "wide": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -328,6 +378,7 @@ def main(strict=False):
                         for k in ("fold", "tail"):
                             found[k] += [(lang, pg, w, x) for x in r[k]]
                         found["tie"] += [(lang, pg, w, x) for x in r["tie"] if not any(a in x for a in ALLOW)]
+                        found["faces"] += [(lang, pg, w, x) for x in c.js(FACES)]
                 for w, h in ((1440, 789), (1366, 768), (1280, 720), (390, 844)):
                     c.viewport(w, h, 2 if w < 700 else 1, w < 700)
                     c.goto(base + ("" if lang == "en" else "ko/") + "index.html", settle=0.8)

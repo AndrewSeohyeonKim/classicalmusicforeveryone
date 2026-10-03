@@ -12,11 +12,13 @@ _P = {
     # window, the joint, a body tapering to the foot, four finger holes as dots
     # (dots, not rings: rings at the cover's stroke merge into a bead chain)
     # (drawn long, corner to corner, so it carries the same weight as the
-    # other emblems on a small cover; the joint is the body's width)
-    "recorder": '<g transform="rotate(-45 12 12)"><path d="M10.2 6.54V1.6l.75-3.64h2.1l.75 3.64v4.94"/>'
-                '<path d="M11.7 2.12h.6"/><path d="M10.1 6.54h3.8"/><path d="M10.4 6.54l.2 13.26h2.8l.2-13.26"/>'
-                '<path d="M10.6 19.8l-1 4.55h4.8l-1-4.55"/>'
-                '<path d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g>',
+    # other emblems on a small cover; v5: the body half again as wide, so each
+    # hole keeps a full unit of dark round it instead of fusing with the outline
+    # at small sizes, and the foot flares a unit each side as before)
+    "recorder": '<g transform="rotate(-45 12 12)"><path d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/>'
+                '<path d="M11.8 2.3h.4"/><path d="M9.4 6.54h5.2"/><path d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/>'
+                '<path d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/>'
+                '</g>',
     # a sheet of music: one quaver on the page (three ruled lines read as a letter)
     "score":    '<rect x="5" y="3" width="14" height="18" rx="1.5"/><circle cx="10.4" cy="15.3" r="1.8"/>'
                 '<path d="M12.2 15.3V6.9c1.7.4 2.6 1.4 2.6 3"/>',
@@ -37,33 +39,44 @@ _P = {
     # a teacher teaching; 02 a classical concert in a venue; 04 a string quartet; 05 the ticket one of
     # the set). Drawn in the recorder's hand: one 1.2 stroke on the cover, round caps, no fill; a note
     # head is a small tilted oval the stroke closes into a solid head. "score", "room" and "people"
-    # stay for Get involved, each with its one meaning there (R17).
-    # 01 a teacher at a board, pointing to two beamed quavers on it: a talk about the music
-    "lesson": '<rect x="9.4" y="3" width="12.4" height="10.8" rx="1.2"/>'
-              '<path d="M12.89 11.42a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/>'
-              '<path d="M17.49 10.42a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/>'
-              '<path d="M14.48 10.9v-4.7l4.6-1v4.7"/><circle cx="5" cy="11" r="2.2"/>'
-              '<path d="M1.3 21.8v-1.4a3.8 3.8 0 0 1 7.6 0v1.4"/><path d="M7.9 17l4.6-4.9"/>',
-    # 02 a grand piano, lid up on its stick, on the stage boards: a concert (an arch round it read as a bell jar)
-    "piano": '<path d="M1.8 19.1h20.4"/><path d="M4.6 10.9h15.5a.9 .9 0 0 1 .9 .9v.4a.9 .9 0 0 1-.9 .9h-15.5z"/>'
-             '<path d="M7.4 10.9l13.6-8.2"/><path d="M16.33 10.9l-.5-4.88"/><path d="M5.5 10.9l.7-2.4"/>'
-             '<path d="M4.6 12h-1.4"/><path d="M5.8 13.1v6M19.6 13.1v6M9 13.1v3.8"/>',
-    # 04 two violins and a cello, scrolls and the cello's spike: the ensemble's strings (f-holes closed up at 1.2)
-    "strings": '<path d="M12 6.6c1.86 0 3.04 .74 3.04 2.36c0 1.11-.13 1.73-.25 2.17c-.81 .06-1.24 .55-1.24 1.3'
-               'c0 .74 .43 1.3 1.36 1.36c.5 .25 .81 1.37 .81 2.61c0 1.86-1.61 2.6-3.72 2.6'
-               'c-2.11 0-3.72-.74-3.72-2.6c0-1.24 .31-2.36 .81-2.61c.93-.06 1.36-.62 1.36-1.36'
-               'c0-.75-.43-1.24-1.24-1.3c-.12-.44-.25-1.06-.25-2.17c0-1.62 1.18-2.36 3.04-2.36z"/>'
-               '<path d="M12 6.6v-3.75a.85 .85 0 1 1 .85-.85"/><path d="M12 19v1.6"/>'
-               '<path d="M3.6 10.2c1.32 0 2.16 .53 2.16 1.67c0 .79-.09 1.23-.18 1.54c-.57 .05-.88 .4-.88 .93'
-               'c0 .52 .31 .92 .97 .96c.35 .18 .57 .97 .57 1.85c0 1.32-1.14 1.85-2.64 1.85'
-               'c-1.5 0-2.64-.53-2.64-1.85c0-.88 .22-1.67 .57-1.85c.66-.04 .97-.44 .97-.96c0-.53-.31-.88-.88-.93'
-               'c-.09-.31-.18-.75-.18-1.54c0-1.14 .84-1.67 2.16-1.67z"/>'
-               '<path d="M3.6 10.2v-3.35a.85 .85 0 1 1 .85-.85"/>'
-               '<path d="M20.4 10.2c1.32 0 2.16 .53 2.16 1.67c0 .79-.09 1.23-.18 1.54c-.57 .05-.88 .4-.88 .93'
-               'c0 .52 .31 .92 .97 .96c.35 .18 .57 .97 .57 1.85c0 1.32-1.14 1.85-2.64 1.85'
-               'c-1.5 0-2.64-.53-2.64-1.85c0-.88 .22-1.67 .57-1.85c.66-.04 .97-.44 .97-.96c0-.53-.31-.88-.88-.93'
-               'c-.09-.31-.18-.75-.18-1.54c0-1.14 .84-1.67 2.16-1.67z"/>'
-               '<path d="M20.4 10.2v-3.35a.85 .85 0 1 1 .85-.85"/>',
+    # stay for Get involved, each with its one meaning there (R17). v5 (Andrew: "the lines overlap
+    # and some are not needed"): path and rect only (Chrome left a gap in a <circle>'s drawn-in dash),
+    # no stroke crosses another, strokes that do not join keep a full unit of clear space (R31)
+    # 01 a teacher beside a board with two beamed quavers on it, the arm raised
+    # towards it and stopping short (v5: the pointer crossed the frame and landed on
+    # a note head, and a line ending on the frame read as a speech bubble's tail;
+    # now nothing touches the board, every gap is a unit or more)
+    "lesson": '<rect x="9.3" y="2.4" width="13.8" height="11" rx="1"/>'
+              '<path d="M12.89 10.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/>'
+              '<path d="M18.59 9.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/>'
+              '<path d="M14.31 10.18V5.88l5.7-1v4.3"/>'
+              '<path d="M4.7 11.2c1.22 0 2.2.98 2.2 2.2s-.98 2.2-2.2 2.2-2.2-.98-2.2-2.2.98-2.2 2.2-2.2z"/>'
+              '<path d="M.9 22c0-2.1 1.7-3.8 3.8-3.8s3.8 1.7 3.8 3.8"/><path d="M7.69 19.66l4.43-3.46"/>',
+    # 02 a grand piano on the stage boards: one case with its curved tail, the lid
+    # up on its stick, two legs (v5: no keyboard, desk or pedal stubs, and the case
+    # is one outline, not a 2-unit bar that read as a double line)
+    "piano": '<path d="M3 11.4h12.4c3.6 0 6 1.2 6 3.2 0 .4-.3.6-.9.6H3z"/><path d="M5.8 11.4l11.4-8.7"/>'
+             '<path d="M15 11.4V4.38"/><path d="M5 15.2V21"/><path d="M18.2 15.2V21"/><path d="M1.6 21h20.8"/>',
+    # 04 two violins and a cello, scrolls and the cello's spike: the ensemble's strings
+    # (v5: the scrolls are open curls that no longer close on themselves, the
+    # bodies keep a unit apart, and the violins stand level with the cello's body)
+    "strings": '<g transform="translate(0 -.6)">'
+               '<path d="M12 7.8c1.86 0 3.04.74 3.04 2.36c0 1.11-.13 1.73-.25 2.17c-.81.06-1.24.55-1.24 1.3'
+               'c0 .74.43 1.3 1.36 1.36c.5.25.81 1.37.81 2.61c0 1.86-1.61 2.6-3.72 2.6c-2.11 0-3.72-.74-3.72-2.6'
+               'c0-1.24.31-2.36.81-2.61c.93-.06 1.36-.62 1.36-1.36c0-.75-.43-1.24-1.24-1.3'
+               'c-.12-.44-.25-1.06-.25-2.17c0-1.62 1.18-2.36 3.04-2.36z"/>'
+               '<path d="M12 7.8v-3.4c-.69 0-1.25-.56-1.25-1.25c0-.69.56-1.25 1.25-1.25c.33 0 .65.13.88.37"/>'
+               '<path d="M12 20.2v1.8"/>'
+               '<path d="M3.4 12.2c1.21 0 1.99.49 1.99 1.54c0 .72-.09 1.13-.17 1.41c-.52.05-.67.37-.67 1.12'
+               'c0 .73.15 1.1.75 1.14c.33.16.53.89.53 1.7c0 1.21-1.05 1.7-2.43 1.7c-1.38 0-2.43-.49-2.43-1.7'
+               'c0-.81.2-1.54.53-1.7c.6-.04.75-.41.75-1.14c0-.75-.15-1.07-.67-1.12c-.08-.28-.17-.69-.17-1.41'
+               'c0-1.05.78-1.54 1.99-1.54z"/>'
+               '<path d="M3.4 12.2v-2.6c-.64 0-1.15-.51-1.15-1.15c0-.64.51-1.15 1.15-1.15c.2 0 .4.05.58.15"/>'
+               '<path d="M20.6 12.2c1.21 0 1.99.49 1.99 1.54c0 .72-.09 1.13-.17 1.41c-.52.05-.67.37-.67 1.12'
+               'c0 .73.15 1.1.75 1.14c.33.16.53.89.53 1.7c0 1.21-1.05 1.7-2.43 1.7c-1.38 0-2.43-.49-2.43-1.7'
+               'c0-.81.2-1.54.53-1.7c.6-.04.75-.41.75-1.14c0-.75-.15-1.07-.67-1.12c-.08-.28-.17-.69-.17-1.41'
+               'c0-1.05.78-1.54 1.99-1.54z"/>'
+               '<path d="M20.6 12.2v-2.6c-.64 0-1.15-.51-1.15-1.15c0-.64.51-1.15 1.15-1.15c.2 0 .4.05.58.15"/></g>',
     # 05 a ticket, tilted in the hand: notched ends, perforation as holes, the covers' quaver: going to a concert
     "ticket": '<g transform="rotate(-14 12 12)">'
               '<path d="M2.6 7.4a1.6 1.6 0 0 1 1.6-1.6h15.6a1.6 1.6 0 0 1 1.6 1.6v2.1a2.5 2.5 0 0 0 0 5v2.1'

@@ -22,7 +22,13 @@ import ledger
 from icons import glyph
 from layout import ROOT, STR
 
-ARROW = '<span class="arrow" aria-hidden="true"><i>&rarr;</i></span>'
+# One arrow on the whole site, drawn (v5). "\u2192" is in none of the font
+# subsets the site loads, so every device drew it from its own fonts: Times
+# after a Garamond name, the system sans elsewhere, Noto on Korean pages. The
+# second arrow waits 1.3em to the left and slides in on hover (styles.css).
+ARROW = ('<span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false">'
+         '<path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/>'
+         '</svg></i></span>')
 
 
 # ---------------------------------------------------------------------------
@@ -774,7 +780,9 @@ def programme_page(t, i, p, programmes, pillars, lang):
     vid = artifacts.video(g.get("video"), t["video_label"].format(name=p["name"]), t["play"])
     has_room = g.get("room", True) or bool(vid)
     # the sections are numbered in the margin, in reading order, with no gap
-    # where a page has no "In the room"
+    # where a page has no "In the room". The programme's own number is not in
+    # the head's eyebrow: the cover beside the title carries it in Garamond, and
+    # repeated in the label's face it was one number in two faces (R33)
     seq = iter(f"{k:02d}" for k in range(1, 9))
     no_how, no_exp = next(seq), next(seq)
     no_room = next(seq) if has_room else None
@@ -813,7 +821,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
     </nav>
     <div class="pp-top">
       <div class="pp-intro">
-        <p class="eyebrow lift"><span class="no">{i + 1:02d}</span><i class="{dot}" aria-hidden="true"></i>{label}</p>
+        <p class="eyebrow lift"><i class="{dot}" aria-hidden="true"></i>{label}</p>
         <h1 class="pp-title">{title_lines([p["name"]])}</h1>
         <p class="lead lift lift-3">{g["lead"]}</p>
         <div class="pp-now{" is-live" if g.get("live") else ""} lift lift-4">
