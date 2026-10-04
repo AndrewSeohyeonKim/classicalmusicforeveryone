@@ -72,6 +72,16 @@ time: this Mac sits near its open-file limit). It reports:
   venues the long place names stay on one line in English at 1024 to 1440
          (Mulhuddart Community Centre, Methodist Centenary Church, Tallaght
          University Hospital), every page (CD v6)
+  yearline a year label (the timeline's, the record's) stands on one line inside
+         its column with 3px to spare, at the four viewports and at 1512 and 1728 (v6: the timeline
+         year wrapped from 1512px and on phones, and at line-height 0 its two
+         lines drew over each other: "2024" read "202" with "4" on its "2")
+  motion with motion on, the way most visitors see the site, every page is
+         walked to its end and nothing it animates in is left unseen: no
+         element under 99% opacity (a drawn arrow's waiting second stroke
+         aside), every highlight drawn full width, at 1440 and 390 (v6: the
+         News panels' rings waited for a trigger declared nowhere above them
+         and stayed at opacity 0; captures run with motion off never saw it)
   wide   text at 200% the way a reader sets it, the browser's own text size
          doubled (so em media and container queries move too, unlike a
          doubled root size): no page scrolls sideways and nothing sticks
@@ -434,11 +444,39 @@ VENUES_JS = """((names) => { const out = [];
   return out; })"""
 
 
+YEARLINE = """(() => { const out = [];
+  for (const y of document.querySelectorAll('.tl-y, .ry-y')) {
+    const n = [...y.childNodes].find(x => x.nodeType === 3 && x.textContent.trim()); if (!n) continue;
+    const r = document.createRange(); r.selectNodeContents(n); const rects = [...r.getClientRects()].filter(x => x.width > .5);
+    const cs = getComputedStyle(y), b = y.getBoundingClientRect();
+    const left = b.left + parseFloat(cs.paddingLeft), right = b.right - parseFloat(cs.paddingRight);
+    const g = r.getBoundingClientRect();
+    // three pixels to spare: another browser's figures may set a little wider
+    const spare = (right - left) - g.width;
+    if (rects.length > 1 || spare < 3 || g.left < left - .5 || g.right > right + .5)
+      out.push({year: n.textContent.trim(), lines: rects.length, spare: Math.round(spare * 10) / 10}); }
+  return out; })()"""
+WALK = """(async () => { const step = Math.round(innerHeight * .4);
+  for (let y = 0; y < document.documentElement.scrollHeight; y += step) { scrollTo(0, y); await new Promise(r => setTimeout(r, 90)); }
+  scrollTo(0, document.documentElement.scrollHeight); await new Promise(r => setTimeout(r, 1800)); return 1; })()"""
+UNSEEN = """(() => { const out = [];
+  for (const e of document.querySelectorAll('main *')) {
+    if (e.closest('.arrow, .sr-only, [hidden]')) continue;
+    const fold = e.closest('details:not([open])'); if (fold && !e.closest('summary') && getComputedStyle(fold).display !== 'none'
+        && !e.closest('.ry-fold')) continue;
+    const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+    const b = e.getBoundingClientRect(); if (b.width < 1 || b.height < 1) continue;
+    if (parseFloat(cs.opacity) < .99) out.push((e.className && e.className.baseVal === undefined ? e.className : e.tagName) + ' ' + cs.opacity); }
+  for (const m of document.querySelectorAll('main mark')) {
+    const bs = getComputedStyle(m).backgroundSize; if (!/^100%/.test(bs)) out.push('mark "' + m.textContent.slice(0, 20) + '" ' + bs); }
+  return [...new Set(out)].slice(0, 12); })()"""
+
+
 def main(strict=False):
     httpd, base = serve()
     found = {"fold": [], "tail": [], "tie": [], "hero": [], "axis": [], "width": [], "group": [], "meet": [],
              "leader": [], "names": [], "rings": [], "faces": [], "twins": [], "marks": [], "gallery": [],
-             "years": [], "venues": [], "wide": []}
+             "years": [], "venues": [], "yearline": [], "motion": [], "wide": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -455,6 +493,7 @@ def main(strict=False):
                         found["faces"] += [(lang, pg, w, x) for x in c.js(FACES)]
                         found["marks"] += [(lang, pg, w, x) for x in c.js(MARKS)]
                         found["years"] += [(lang, pg, w, x) for x in c.js(YEARS)]
+                        found["yearline"] += [(lang, pg, w, x) for x in c.js(YEARLINE)]
                         if lang == "en" and w >= 1024:
                             found["venues"] += [(pg, w, x) for x in c.js(f"({VENUES_JS})({json.dumps(VENUES)})")]
                 for w, h in ((1440, 789), (1366, 768), (1280, 720), (390, 844)):
@@ -507,6 +546,10 @@ def main(strict=False):
                         r = c.js(LEADER)
                         if r:
                             found["leader"].append((lang, w, zoom, r))
+                # back to the reader's usual text size: the drawings pass above ends
+                # at 200%, and what follows is measured at 100% (v6: the gallery check
+                # ran at 200% and measured a page that was not the one meant)
+                text_size(c, 16)
                 # R6, R13: a Garamond figure is one size in both languages (once,
                 # with the Korean pass); v6: the News gallery's rows
                 if lang == "ko":
@@ -532,6 +575,20 @@ def main(strict=False):
                           return (i.complete && i.naturalWidth) ? 1 : new Promise(r => { i.onload = i.onerror = r; }); })),
                           new Promise(r => setTimeout(r, 8000))])""")
                     found["gallery"] += [(lang, w, x) for x in c.js(GALLERY)]
+                # the years on wide screens too (the timeline's grew to 2.1rem)
+                for w in (1512, 1728):
+                    c.viewport(w, 900, 1, False)
+                    c.goto(base + ("" if lang == "en" else "ko/") + "news.html", settle=0.4)
+                    found["yearline"] += [(lang, "news", w, x) for x in c.js(YEARLINE)]
+                # with motion on, nothing animated in is left unseen
+                c.motion(True)
+                for pg in PAGES:
+                    for w in (1440, 390):
+                        c.viewport(w, 900 if w > 700 else 844, 2 if w < 700 else 1, w < 700)
+                        c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
+                        c.js(WALK)
+                        found["motion"] += [(lang, pg, w, x) for x in c.js(UNSEEN)]
+                c.motion(False)
                 # text at 200%, every page: nothing past the edge of the screen
                 text_size(c, 32)
                 for pg in PAGES:

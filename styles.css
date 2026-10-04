@@ -718,6 +718,11 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
        trigger names in one rule */
     .wa.rv{trigger-scope:--rv,--draw;timeline-trigger:--rv view() entry 0% exit 100%,--draw view() entry 10% exit 100%}
     .doors{trigger-scope:--draw;timeline-trigger:--draw view() entry 10% exit 100%}
+    /* the News panels are a stagger and a drawing: one rule declares both trigger
+       names (alone, --draw was never in scope and the rings stayed at opacity 0
+       for every reader with motion on, v6) */
+    .latest.rv-stagger{trigger-scope:--rvs,--draw;
+      timeline-trigger:--rvs view() entry 0% exit 100%,--draw view() entry 10% exit 100%}
     :is(.wa-ring,.d-ring,.wa-svg .m-dot,.wa-svg .m-halo){animation:pop var(--dur-5) var(--ease-enter) both;
       animation-timeline:auto;animation-range:normal;animation-trigger:--draw play-once;
       animation-delay:calc(var(--beat) * 2 + var(--i,0) * var(--beat) / 2)}
@@ -2057,7 +2062,7 @@ html[lang^="ko"] .help h3{font-size:1.28rem}
    station (the board's raised hand, the class's recorder, the concert's
    piano), what kind of news and when, the title, one line, and where to go.
    Side by side the parts stand level across the three (subgrid). */
-.latest{--stroke:var(--accent-mark);--ground:var(--surface-raised);--st:3rem;
+.latest{--stroke:var(--accent-mark);--ground:var(--surface-raised);--st:3.5rem;
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
 /* a box is one link (the line system's L4, CD v6): the whole panel answers
    its link, as the home panels do, and rises the same way on hover. The
@@ -2074,9 +2079,15 @@ html[lang^="ko"] .help h3{font-size:1.28rem}
 .lt:has(.go:active){translate:0 0;box-shadow:none}
 .lt:has(.go:focus-visible){outline:2px solid var(--focus-ring);outline-offset:4px;box-shadow:0 0 0 6px var(--focus-halo)}
 .lt .go:focus-visible{outline:none;box-shadow:none}
-.lt-top{display:flex;align-items:center;gap:14px}
+/* the item's pictogram (its programme's own, or its Get involved door) stands
+   above its kind and date, so every line of the panel starts on one edge
+   (Andrew, 4 Oct 2026: "this is not aligned") */
+.lt-top{display:flex;flex-direction:column;align-items:stretch;gap:16px}
+/* the kind and date take the panel's width, so at 200% text a long date wraps
+   inside it (sized to its own longest line, it ran 49px past a 320px phone) */
+.lt-top>.d-ring{align-self:flex-start}
 .lt .d-ring{flex:0 0 auto}
-.lt .d-glyph{width:1.5rem;height:1.5rem}
+.lt .d-glyph{width:1.6rem;height:1.6rem}
 .lt-when{display:flex;flex-direction:column;gap:3px;min-width:0}
 .lt-kind{color:var(--accent-ink)}
 .lt-date{font-size:var(--t-body);font-weight:600;line-height:1.3;color:var(--fg);font-variant-numeric:lining-nums}
@@ -2121,7 +2132,10 @@ html[lang^="ko"] .tl-date{font-family:var(--font-kr);font-weight:700}
    in Garamond, gold, on the baseline of its first row; the rows keep only
    their month. The line and the dots keep their places (the dot is 40px left
    of a row, the line 34px). */
-.timeline-years{--yw:5.6rem;padding:0}
+/* the year column holds the widest year with room to spare (2.1rem "2024" is
+   67px: 5.6rem left 66px, so from 1512px it wrapped, and at line-height 0 its
+   second line drew over the first, v6) */
+.timeline-years{--yw:6rem;padding:0}
 .timeline-years::before,.timeline-years::after{inset-inline-start:calc(var(--yw) + 6px)}
 .tl-year{display:grid;grid-template-columns:var(--yw) minmax(0,1fr);column-gap:40px;align-items:baseline}
 .tl-year+.tl-year{margin-top:48px}
@@ -2130,7 +2144,8 @@ html[lang^="ko"] .tl-date{font-family:var(--font-kr);font-weight:700}
    section label's, CD v6); the month and the title share one baseline in
    both languages (Korean titles sat 2px low) */
 .tl-y{grid-column:1;padding-inline-end:24px;text-align:end;font-family:var(--font-display);
-  font-size:clamp(1.6rem,2.2vw,2.1rem);font-weight:500;line-height:0;color:var(--accent-ink);font-variant-numeric:lining-nums}
+  font-size:clamp(1.6rem,2.2vw,2.1rem);font-weight:500;line-height:0;color:var(--accent-ink);font-variant-numeric:lining-nums;
+  white-space:nowrap}
 .timeline-years .tl-item{align-items:baseline}
 .timeline-years .tl-date{padding-top:0}
 /* Noto's taller box puts the Korean row 2px under the label: measured, taken back */
@@ -2147,7 +2162,7 @@ html[lang^="ko"] .timeline-years .tl-item::before{top:7px}
    the room English needs for 「Through the year」 */
 html[lang^="ko"] .timeline-years .tl-item{grid-template-columns:6.5em minmax(0,1fr)}
 @media (max-width:48em){
-  .timeline-years{--yw:3.6rem}
+  .timeline-years{--yw:4rem}
   .tl-y{padding-inline-end:16px;font-size:1.35rem}
   :is(html,html[lang^="ko"]) .timeline-years .tl-item{grid-template-columns:minmax(0,1fr)}
 }

@@ -1091,12 +1091,23 @@ def record_years(lang, t):
     return '<div class="record-years rv">\n' + "\n".join(out) + "\n    </div>"
 
 
-# the three latest items' stations: the raised hand of the board, the class's
-# recorder, the concert's piano (the covers' own emblems, the same meaning)
-LATEST_ICONS = ("hand", "recorder", "piano")
+# a news item wears the pictogram its page already wears (Andrew, 4 Oct 2026:
+# "the pictograms already applied, by category"): a programme's cover emblem,
+# or the Get involved door the item leads to (WAY_ICONS)
+DOOR_ICONS = {"#invite": "building", "#play": "stand", "#board": "hand"}
 
 
-def _latest(items):
+def _latest_icon(href, programmes):
+    for p in programmes:
+        if f"programmes/{p['slug']}" in href:
+            return p["icon"]
+    for anchor, ico in DOOR_ICONS.items():
+        if anchor in href:
+            return ico
+    return "announce"
+
+
+def _latest(items, programmes=()):
     """The latest three as panels (Andrew, 3 Oct 2026 evening: "News and
     archive does not catch the eye"): a station, what kind of news and when,
     the title, one line, and where to go, each part level across the three
@@ -1105,7 +1116,7 @@ def _latest(items):
     out = []
     for k, it in enumerate(items):
         kind, date, title, line, href, action = it if len(it) == 6 else ("",) + tuple(it)
-        ico = LATEST_ICONS[k] if k < len(LATEST_ICONS) else "mail"
+        ico = _latest_icon(href, programmes)
         kind_ = f'<span class="lt-kind">{kind}</span>{SEP}' if kind else ""
         out.append(f'      <article class="lt">\n'
                    f'        <div class="lt-top"><span class="d-ring" aria-hidden="true">{glyph(ico, "d-glyph")}</span>'
@@ -1177,7 +1188,7 @@ def _whole_parts(text, room):
     return " · ".join(x.replace(" ", "\u00a0") if " " in x and est(x) <= room else x for x in text.split(" · "))
 
 
-def news(t, lang):
+def news(t, lang, programmes=()):
     shots = t["gallery"]["rows"]
     ars = [img[1] / img[2] for img, _ in shots]
     # each photograph's share of its row in the wide cut (--w, --n) and in
@@ -1222,7 +1233,7 @@ def news(t, lang):
   <div class="wrap">
     <h2 class="sr-only">{t["latest_sr"]}</h2>
     <div class="latest rv-stagger">
-{_latest(t["latest"])}
+{_latest(t["latest"], programmes)}
     </div>
   </div>
 </section>

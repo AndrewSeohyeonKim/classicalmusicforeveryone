@@ -671,7 +671,7 @@ NEWS_T = dict(
     ),
 )
 
-NEWS = P.news(NEWS_T, L)
+NEWS = P.news(NEWS_T, L, PROGRAMMES_DATA)
 
 
 # ---------------------------------------------------------------------------
