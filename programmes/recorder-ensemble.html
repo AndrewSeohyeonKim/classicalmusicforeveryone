@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -117,7 +117,8 @@
       <ul class="nav-list">
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
-        <li><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a></li>
+        <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="../programmes/recorder-ensemble.html" aria-current="page"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
@@ -139,15 +140,15 @@
       <div class="pp-intro">
         <p class="eyebrow lift"><i class="dot" aria-hidden="true"></i>Learning</p>
         <h1 class="pp-title"><span class="ln"><span>Community Recorder Ensemble Class</span></span></h1>
-        <p class="lead lift lift-3"><span class="sl">For adults who have never played an instrument.</span> <span class="sl">You play your first notes <mark>in week one</mark>.</span></p>
+        <p class="lead lift lift-3"><span class="sl">For adults who have never played an instrument.</span> <span class="sl">You play your first notes <mark>in week one</mark>.</span></p>
         <div class="pp-now is-live lift lift-4">
           <p><span class="tag tag-live">Running now</span><span class="pp-say"><strong>Wednesday evenings, 7pm to 8pm</strong>, Mulhuddart Community Centre, Dublin 15.</span></p>
           <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Community%20Recorder%20Ensemble%20Class&amp;body=Your%20name%3A%20%0D%0AA%20phone%20number%20%28optional%29%3A%20%0D%0AHave%20you%20played%20an%20instrument%20before%3F%20%0D%0ADo%20you%20need%20a%20recorder%3F%20%0D%0AAny%20access%20needs%20%28optional%29%3A%20%0D%0A">Ask about the class <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">How to take part <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
-      <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">First notes · Reading music · Harmony</span></div></div>
+      <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">First notes · Scores · Harmony</span></div></div>
     </div>
-    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Adults who have never played an instrument</dd></div><div><dt>Where</dt><dd>Mulhuddart Community Centre, Dublin 15</dd></div><div><dt>When</dt><dd>Wednesday evenings, 7pm to 8pm, autumn 2026</dd></div><div><dt>What you need</dt><dd>No instrument and no music reading</dd></div></dl>
+    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Adults who have never played an instrument</dd></div><div><dt>Where</dt><dd>Mulhuddart, Dublin 15</dd></div><div><dt>When</dt><dd>Wednesday evenings, 7pm to 8pm, autumn 2026</dd></div><div><dt>What you need</dt><dd>No instrument and no music reading</dd></div></dl>
   </div>
 </section>
 
@@ -171,7 +172,7 @@
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
         <h3>Your own part</h3>
-        <p>The group plays in harmony. The term ends with <mark>a small concert</mark> of our own.</p>
+        <p>The group plays in harmony. The term ends with <mark>a small concert</mark> of our own.</p>
       </li>
     </ol>
   </div>
@@ -186,15 +187,15 @@
     <dl class="qa rv-stagger">
       <div>
         <dt>Do I need my own recorder?</dt>
-        <dd><strong>No.</strong> We can lend you one.</dd>
+        <dd><strong>No.</strong> We can <mark>lend you one</mark>.</dd>
       </div>
       <div>
         <dt>Do I need to read music?</dt>
-        <dd><strong>No.</strong> You learn to read a few notes at a time, as you play.</dd>
+        <dd><strong>No.</strong> You learn to read a few notes at a time, <mark>as you play</mark>.</dd>
       </div>
       <div>
         <dt>Where did the class come from?</dt>
-        <dd>From a ten-week pilot with seven retired Presentation Sisters, shown in the video below.</dd>
+        <dd>From <mark>a ten-week pilot</mark> with seven retired Presentation Sisters, shown in the video below.</dd>
       </div>
     </dl>
   </div>
@@ -318,8 +319,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 2 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 4 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

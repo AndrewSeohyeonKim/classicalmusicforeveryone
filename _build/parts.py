@@ -93,7 +93,8 @@ def _srcset(src, w, sizes):
     small = src[:-4] + "-800.jpg"
     if not sizes or w <= 800 or not os.path.exists(os.path.join(ROOT, "images", small)):
         return ""
-    return f' srcset="images/{small} 800w, images/{src} {w}w" sizes="{SIZES[sizes]}"'
+    # a key of SIZES, or a sizes list worked out for one photograph (the gallery)
+    return f' srcset="images/{small} 800w, images/{src} {w}w" sizes="{SIZES.get(sizes, sizes)}"'
 
 
 def photo(img, ratio="", sizes=None):
@@ -107,13 +108,27 @@ def photo(img, ratio="", sizes=None):
             f'width="{w}" height="{h}" alt="{alt}"></div>')
 
 
+_CREDIT = re.compile(r"\s·\s((?:photo|사진):\s.+)$")
+
+
+def _credited(text):
+    """The photographer's credit on a line of its own, without the dot that
+    joined it ("…August 2026 · / photo: …" broke at the dot, CD v6)."""
+    m = _CREDIT.search(text)
+    if not m:
+        return f"<span>{text}</span>"
+    return f'<span>{text[:m.start()]}</span><span class="cap-credit">{m.group(1)}</span>'
+
+
 def caption(cap):
     """cap is (label, text) or a plain string or None."""
     if not cap:
         return ""
     if isinstance(cap, tuple):
         label, text = cap
-        return f'<figcaption><span class="cap-label">{label}</span><span>{text}</span></figcaption>'
+        return f'<figcaption><span class="cap-label">{label}</span>{_credited(text)}</figcaption>'
+    if _CREDIT.search(cap):
+        return f"<figcaption>{_credited(cap)}</figcaption>"
     return f"<figcaption>{cap}</figcaption>"
 
 
@@ -258,8 +273,8 @@ WHO_ICONS = ("person", "speech", "certificate")
 def whereabouts(rows):
     """Contact's details as a drawing (Andrew, 2 Oct 2026 night: "not only
     text"; art direction v3). The island with Dublin marked, a leader from
-    the mark to "Based in"; "We travel to" under it, in the master line's
-    italic; the three facts about who answers as stations with no line
+    the mark to "Based in"; "We travel to" under it, a size up, in the master
+    line's roman face (v6: one style a line); the three facts about who answers as stations with no line
     between them (they are not steps). rows: the deck's five pairs in its
     order (Based in, We travel to, Languages, Insurance, Who answers). The
     island is decorative: the two <dl> say every fact in words."""
@@ -375,31 +390,29 @@ def doors(items, label):
 PAIR_ICONS = WAY_ICONS[2:]
 
 
-def _arrowed(title):
-    """A door's title with its arrow: the arrow keeps the last word's company
-    and never starts a line alone."""
-    head, _, last = title.rpartition(" ")
-    tail = f'<span class="nowrap">{last} {ARROW}</span>'
-    return f"{head} {tail}" if head else tail
-
-
 def door_pair(items):
     """The two ways in that the five cards do not cover, for artists and for
     volunteers (Andrew, 3 Oct 2026: two links inside two sentences did not
-    read as actions). They are doors of Get involved in their phone form:
-    the station beside who the way is for and the action, the arrow after
-    it (styles.css .doors-pair). Each door is one link, read with a pause
-    ("Artists, Register your interest"); a list, unordered, no line between
-    them (R19). items: (href, label, title)."""
+    read as actions; evening: align them and let them catch the eye). Two
+    panels under the cards, edge to edge with the row of five: the station,
+    who the way is for, the action in Garamond, one line on what it is, and
+    a round arrow at the end. Each panel is one link, read with pauses
+    ("Artists, Register your interest, ..."); a list, unordered, no line
+    between them (R19). items: (href, label, title[, note])."""
     if len(items) != len(PAIR_ICONS):
         raise ValueError("door_pair: one icon per way")
     sep = '<span class="sr-only">, </span>'
-    cells = "\n".join(
-        f'      <li style="--i:{k}"><a href="{href}">'
-        f'<span class="d-ring" aria-hidden="true">{glyph(PAIR_ICONS[k], "d-glyph")}</span>'
-        f'<span class="d-label">{lab}</span>{sep}<b class="d-title">{_arrowed(title)}</b></a></li>'
-        for k, (href, lab, title) in enumerate(items))
-    return f'    <ul class="doors doors-pair">\n{cells}\n    </ul>'
+    cells = []
+    for k, item in enumerate(items):
+        href, lab, title = item[:3]
+        note = item[3] if len(item) > 3 else ""
+        note_ = f'{sep}<span class="d-note">{note}</span>' if note else ""
+        cells.append(
+            f'      <li style="--i:{k}"><a href="{href}">'
+            f'<span class="d-ring" aria-hidden="true">{glyph(PAIR_ICONS[k], "d-glyph")}</span>'
+            f'<span class="d-text"><span class="d-label">{lab}</span>{sep}<b class="d-title">{title}</b>{note_}</span>'
+            f'<span class="d-cta" aria-hidden="true">{ARROW}</span></a></li>')
+    return '    <ul class="doors doors-pair">\n' + "\n".join(cells) + '\n    </ul>'
 
 
 def status_tag(st, live=False):
@@ -1005,105 +1018,202 @@ def get_involved(t, icon):
 # Outings and the courses are part of the work but not of that count, so
 # they are not drawn; a row the ledger marks as scheduled is never drawn.
 CHART_KINDS = ("lecture", "outreach", "ensemble", "concert")
-CH_X0, CH_TOP, CH_COL, CH_ROW, CH_SQ, CH_GAP = 96, 34, 82, 58, 14, 5
 
 
 def _chart_rows():
     return [r for r in ledger.ROWS if r[3] in CHART_KINDS and ledger.counted(r)]
 
 
-def chart(lang, t):
+# a pause for a screen reader between parts drawn apart on screen
+SEP = '<span class="sr-only">, </span>'
+
+
+def _rec_lines(r, lang):
+    """A row of the record as two lines: what (a talk's title, a concert's
+    title, or an outreach concert's place) and where or with what (the place,
+    or what was played). The rule of ledger.public_label: an outreach row is
+    its place and its instruments (ledger.TITLED says why)."""
+    i = 0 if lang == "en" else 1
+    title, venue = r[4 + i], r[6 + i]
+    if r[3] == "outreach" or "outreach-concerts" in r[8].get("progs", ()):
+        return venue, ledger.qualifier(r, lang)
+    return title, venue
+
+
+# a month's whole name, for a screen reader (the list draws three letters)
+MONTH_NAME = {"en": ["January", "February", "March", "April", "May", "June", "July", "August",
+                     "September", "October", "November", "December"]}
+
+
+def record_years(lang, t):
+    """The forty on the record, a year at a time (Andrew, 3 Oct 2026 evening:
+    the squares did not say what was done, and a tooltip on hover was an
+    awkward tool). The year stands at the page edge, like the timeline's year
+    beside its months (R2), and the year's months flow in two balanced
+    columns from the content line: each month once, then its events, each a
+    dot of its kind (filled: a talk; open: a performance, the key is the
+    figures above) and two lines, what and where. Nothing to hover: every
+    event can be read, by every reader; a screen reader hears each event's
+    kind, which the dot only draws."""
     rows = _chart_rows()
     years = sorted({r[0] for r in rows})
-    p = []
-    for i, mon in enumerate(ledger.MONTH[lang]):
-        x = CH_X0 + (i + .5) * CH_COL
-        p.append(f'<text class="c-mon" x="{x:.0f}" y="{CH_TOP - 14}" text-anchor="middle">{mon}</text>')
-    for yi, year in enumerate(years):
-        y = CH_TOP + yi * CH_ROW
-        p.append(f'<text class="c-year" x="0" y="{y + 31}">{year}</text>')
-        for i in range(12):
-            p.append(f'<rect class="c-cell" x="{CH_X0 + i * CH_COL + .5}" y="{y + .5}" width="{CH_COL - 1}" '
-                     f'height="{CH_ROW - 9}" rx="1"/>')
-        used = {}
-        for r in [r for r in rows if r[0] == year]:
-            m = r[1]
-            k = used.get(m, 0)
-            used[m] = k + 1
-            col, row = k % 4, k // 4
-            # four squares a row, centred in the month (QA40-09)
-            inset = (CH_COL - 1 - (4 * CH_SQ + 3 * CH_GAP)) / 2
-            sx = CH_X0 + (m - 1) * CH_COL + inset + col * (CH_SQ + CH_GAP)
-            sy = y + 9 + row * (CH_SQ + CH_GAP)
-            cls = "c-on" if r[3] == "lecture" else "c-open"
-            label = ledger.public_label(r, lang)
-            p.append(f'<g class="c-ev"><title>{label}</title><rect class="{cls}" x="{sx}" y="{sy}" '
-                     f'width="{CH_SQ}" height="{CH_SQ}" rx="1"/></g>')
-    h = CH_TOP + len(years) * CH_ROW
-    talks = sum(1 for r in rows if r[3] == "lecture")
-    perf = len(rows) - talks
-    aria = t["aria"].format(n=len(rows), talks=talks, perf=perf)
-    svg = (f'<svg viewBox="0 0 {CH_X0 + 12 * CH_COL + 2} {h}" role="img" aria-label="{aria}">'
-           + "".join(p) + "</svg>")
-    return f"""<figure class="chart rv">
-      <div class="chart-wide">{svg}</div>
-      <div class="chart-tall">{_chart_tall(lang, rows, years, aria)}</div>
-      <figcaption class="chart-key"><span><i aria-hidden="true"></i>{t["key_talk"].format(n=talks)}</span><span><i class="o" aria-hidden="true"></i>{t["key_perf"].format(n=perf)}</span><span>{t["key_note"]}</span></figcaption>
-    </figure>"""
+    out = []
+    for y in years:
+        mine = [r for r in rows if r[0] == y]
+        months = []
+        for m in sorted({r[1] for r in mine}):
+            evs = []
+            for r in (r for r in mine if r[1] == m):
+                talk = r[3] == "lecture"
+                # the dot is the item's own mark (::before), so the month can
+                # stand on the first title's baseline (an empty dot first in
+                # the row gave the row no text baseline)
+                cls = "ry-t" if talk else "ry-p"
+                kind = t["row_talk"] if talk else t["row_perf"]
+                what, where = _rec_lines(r, lang)
+                where_ = f'{SEP}<span>{where}</span>' if where else ""
+                evs.append(f'              <li class="{cls}"><span class="ry-what">'
+                           f'<span class="sr-only">{kind}: </span><b>{what}</b>{where_}</span></li>')
+            short = ledger.MONTH[lang][m - 1]
+            full = MONTH_NAME.get(lang, ledger.MONTH[lang])[m - 1]
+            name = short if full == short else f'<span aria-hidden="true">{short}</span><span class="sr-only">{full}</span>'
+            months.append(f'          <li class="ry-mo"><span class="ry-m">{name}</span>\n'
+                          f'            <ol class="ry-list">\n' + "\n".join(evs) + "\n            </ol>\n          </li>")
+        head = f'{y}{SEP}<span class="ry-n">{t["year_count"].format(n=len(mine))}</span>'
+        body = '        <ol class="ry-months">\n' + "\n".join(months) + "\n        </ol>"
+        if y != years[-1]:
+            # a past year folds on a phone (Andrew, 4 Oct 2026: the record ran
+            # to about 4,150px there); from 40em it is always open and the
+            # summary is not drawn (styles.css, ::details-content)
+            more = t["year_more"].format(n=len(mine), y=y)
+            body = f'        <details class="fold ry-fold"><summary>{more}</summary>\n{body}\n        </details>'
+        out.append(f'      <div class="ry">\n        <h3 class="ry-y">{head}</h3>\n{body}\n      </div>')
+    return '<div class="record-years rv">\n' + "\n".join(out) + "\n    </div>"
 
 
-TL_X0, TL_TOP, TL_COL, TL_ROW, TL_SQ, TL_GAP = 46, 30, 74, 30, 12, 4
+# the three latest items' stations: the raised hand of the board, the class's
+# recorder, the concert's piano (the covers' own emblems, the same meaning)
+LATEST_ICONS = ("hand", "recorder", "piano")
 
 
-def _chart_tall(lang, rows, years, aria):
-    """The same forty squares turned on their side for a phone: one column per
-    year, one row per month, so nothing has to scroll sideways. Only one of
-    the two drawings is ever displayed, so a screen reader meets one."""
-    p = []
-    for yi, year in enumerate(years):
-        x = TL_X0 + (yi + .5) * TL_COL
-        p.append(f'<text class="c-year c-year-sm" x="{x:.0f}" y="{TL_TOP - 10}" text-anchor="middle">{year}</text>')
-    for i, mon in enumerate(ledger.MONTH[lang]):
-        y = TL_TOP + i * TL_ROW
-        p.append(f'<text class="c-mon" x="0" y="{y + 19}">{mon}</text>')
-        for yi in range(len(years)):
-            p.append(f'<rect class="c-cell" x="{TL_X0 + yi * TL_COL + .5}" y="{y + .5}" width="{TL_COL - 1}" '
-                     f'height="{TL_ROW - 1}" rx="1"/>')
-    used = {}
-    for r in rows:
-        yi, m = years.index(r[0]), r[1]
-        k = used.get((yi, m), 0)
-        used[(yi, m)] = k + 1
-        # four a row, then a second row in the same month, never into the
-        # next year's column (QA40-09)
-        col, row = k % 4, k // 4
-        sx = TL_X0 + yi * TL_COL + (TL_COL - 1 - (4 * TL_SQ + 3 * TL_GAP)) / 2 + col * (TL_SQ + TL_GAP)
-        sy = TL_TOP + (m - 1) * TL_ROW + (TL_ROW - TL_SQ) / 2 + row * (TL_SQ + 2)
-        cls = "c-on" if r[3] == "lecture" else "c-open"
-        p.append(f'<rect class="{cls}" x="{sx}" y="{sy:.1f}" width="{TL_SQ}" height="{TL_SQ}" rx="1"/>')
-    h = TL_TOP + 12 * TL_ROW + 2
-    return (f'<svg viewBox="0 0 {TL_X0 + len(years) * TL_COL + 2} {h}" role="img" aria-label="{aria}">'
-            + "".join(p) + "</svg>")
+def _latest(items):
+    """The latest three as panels (Andrew, 3 Oct 2026 evening: "News and
+    archive does not catch the eye"): a station, what kind of news and when,
+    the title, one line, and where to go, each part level across the three
+    (subgrid). items: (kind, date, title, line, href, action), or the older
+    (date, title, line, href, action) with no kind."""
+    out = []
+    for k, it in enumerate(items):
+        kind, date, title, line, href, action = it if len(it) == 6 else ("",) + tuple(it)
+        ico = LATEST_ICONS[k] if k < len(LATEST_ICONS) else "mail"
+        kind_ = f'<span class="lt-kind">{kind}</span>{SEP}' if kind else ""
+        out.append(f'      <article class="lt">\n'
+                   f'        <div class="lt-top"><span class="d-ring" aria-hidden="true">{glyph(ico, "d-glyph")}</span>'
+                   f'<span class="lt-when">{kind_}<span class="lt-date">{date}</span></span></div>\n'
+                   f'        <h3>{title}</h3>\n'
+                   f'        <p>{line}</p>\n'
+                   f'        <div class="lt-go">{go(href, action)}</div>\n'
+                   f'      </article>')
+    return "\n".join(out)
+
+
+def _timeline(tm):
+    """How it grew, one year at a time (Andrew, 3 Oct 2026 evening: "the year
+    once, on the left, and only the month in each row"). tm["years"]:
+    [(year, [(when, title, text), ...]), ...]; a deck with the older flat
+    rows [(date, title, text)] is drawn as before."""
+    # each sentence its own line (layout.SENTENCE_BLOCKS "tl-text"): the Korean
+    # rows turned mid-sentence (「첫 강의에 / 여섯 명이」, CD v6)
+    item = ('{i}<li class="tl-item">\n{i}  <span class="tl-date">{a}</span>\n'
+            '{i}  <div><h3>{b}</h3><p class="tl-text">{c}</p></div>\n{i}</li>')
+    if "years" not in tm:
+        rows = "\n".join(item.format(i="      ", a=a, b=b, c=c) for a, b, c in tm["rows"])
+        return '    <ol class="timeline">\n' + rows + "\n    </ol>"
+    years = []
+    for y, rows in tm["years"]:
+        items = "\n".join(item.format(i="          ", a=a, b=b, c=c) for a, b, c in rows)
+        years.append(f'      <li class="tl-year"><span class="tl-y">{y}</span>\n'
+                     f'        <ol class="tl-items">\n{items}\n        </ol>\n      </li>')
+    return '    <ol class="timeline timeline-years">\n' + "\n".join(years) + "\n    </ol>"
+
+
+def _gallery_rows(ars, sizes=(3, 4), width=1168, gap=24):
+    """The photographs in rows that each fill the measure (v6; Andrew, 3 Oct
+    2026 evening: "the heights are all different, align them"). Order stays
+    newest first; each row holds sizes[0] to sizes[1] photographs (three or
+    four on a wide screen, two or three on a narrower one, where four left a
+    portrait too narrow for its caption), and of the ways to cut the list,
+    the one whose rows change least in height from one row to the next (then
+    the narrowest spread) wins. A row's height is the measure over the sum of
+    its shapes, so no photograph is cropped."""
+    n = len(ars)
+
+    def cuts(i):
+        if i == n:
+            yield []
+            return
+        for k in range(sizes[0], sizes[1] + 1):
+            if i + k <= n:
+                for rest in cuts(i + k):
+                    yield [(i, i + k)] + rest
+
+    def score(rows):
+        h = [(width - (b - a - 1) * gap) / sum(ars[a:b]) for a, b in rows]
+        return sum(abs(x - y) for x, y in zip(h, h[1:])) + max(h) - min(h)
+
+    best = min(cuts(0), key=score, default=None)
+    # a list no cut fits (too few photographs): one row
+    return best or [(0, n)]
+
+
+def _whole_parts(text, room):
+    """A gallery caption's parts (between its dots) each stay whole when they
+    fit the narrowest width the photograph is ever given ("Chapel · Tallaght
+    University / Hospital" split the name, CD v6); a part that would not fit
+    keeps its spaces. Widths are estimated at the caption size, 14px: a Latin
+    letter about 7.2px, a Hangul syllable 14px."""
+    def est(x):
+        return sum(14 if "\uac00" <= ch <= "\ud7a3" else 7.2 for ch in x)
+    return " · ".join(x.replace(" ", "\u00a0") if " " in x and est(x) <= room else x for x in text.split(" · "))
 
 
 def news(t, lang):
-    latest = "\n".join(f"""      <article>
-        <span class="kicker">{a}</span>
-        <h3>{b}</h3>
-        <p>{c}</p>
-        <div class="btn-row">{go(d, e)}</div>
-      </article>""" for a, b, c, d, e in t["latest"])
-    tl = "\n".join(f"""      <li class="tl-item">
-        <span class="tl-date">{a}</span>
-        <div><h3>{b}</h3><p>{c}</p></div>
-      </li>""" for a, b, c in t["timeline"]["rows"])
-    gal = "\n".join(f"      <li>{plate(img, '', cap, sizes='gallery')}</li>" for img, cap in t["gallery"]["rows"])
+    shots = t["gallery"]["rows"]
+    ars = [img[1] / img[2] for img, _ in shots]
+    # each photograph's share of its row in the wide cut (--w, --n) and in
+    # the narrower one (--w2, --n2)
+    share = [{}, {}]
+    for j, (sizes, width, gap) in enumerate((((3, 4), 1168, 24), ((2, 3), 930, 18))):
+        for a, b in _gallery_rows(ars, sizes, width, gap):
+            for k in range(a, b):
+                share[j][k] = (ars[k] / sum(ars[a:b]), b - a)
+    items = []
+    for k, (img, cap) in enumerate(shots):
+        (w, n), (w2, n2) = share[0][k], share[1][k]
+        # its own sizes: its share of the measure in each cut (a two-up row at
+        # 1024 drew the 800px file 1006px wide on a 2x screen); the wrap's
+        # measure is at most 1168px, and about 91vw under 75em
+        sz = f"(max-width:40em) 92vw, (max-width:75em) {round(w2 * 91)}vw, {round(w * 1168)}px"
+        # the narrowest width this photograph's caption gets: a phone's line
+        # (280px at 320), its share of a row at 641px (582px measure) and at
+        # 1200px (1090px)
+        room = min(280, (582 - (n2 - 1) * 14) * w2, (1090 - (n - 1) * 19) * w)
+        items.append(f'      <li style="--ar:{ars[k]:.4f};--w:{w:.5f};--n:{n};--w2:{w2:.5f};--n2:{n2}">'
+                     f'{plate(img, "", _whole_parts(cap, room), sizes=sz)}</li>')
+    gal = "\n".join(items)
     c, tm, g = t["chart"], t["timeline"], t["gallery"]
     figs = ""
     if c.get("figs"):
         # the forty in four figures with their period (4th pass): the counts
         # the page lead used to spell out in a sentence
-        cells = "".join(f"<div><dt>{label}</dt><dd>{n}</dd></div>" for n, label in c["figs"])
+        # each figure's label carries the dot its rows wear below, so the
+        # figures are the record's key (v6)
+        def cell(f):
+            n, label, kind = f if len(f) == 3 else (*f, "")
+            dot = {"talk": '<i class="dot" aria-hidden="true"></i>',
+                   "perf": '<i class="dot dot-open" aria-hidden="true"></i>'}.get(kind, "")
+            return f"<div><dt>{dot}{label}</dt><dd>{n}</dd></div>"
+        cells = "".join(cell(f) for f in c["figs"])
         figs = (f'\n    <div class="mini-figs rv"><dl>{cells}</dl>'
                 f'<p class="mini-period">{c["period"]}</p></div>')
     return f"""{page_head(t["head"])}
@@ -1112,7 +1222,7 @@ def news(t, lang):
   <div class="wrap">
     <h2 class="sr-only">{t["latest_sr"]}</h2>
     <div class="latest rv-stagger">
-{latest}
+{_latest(t["latest"])}
     </div>
   </div>
 </section>
@@ -1120,16 +1230,14 @@ def news(t, lang):
 <section class="band-white" id="record">
   <div class="wrap">
 {sh(c["label"], c["h2"], c["lead"], split=True)}{figs}
-    {chart(lang, c)}
+    {record_years(lang, c)}
   </div>
 </section>
 
 <section id="timeline">
   <div class="wrap prose-split">
 {sh(tm["label"], tm["h2"])}
-    <ol class="timeline">
-{tl}
-    </ol>
+{_timeline(tm)}
   </div>
 </section>
 

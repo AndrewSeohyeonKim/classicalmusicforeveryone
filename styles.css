@@ -201,6 +201,8 @@
   --radius-pill:999px;
   /* elevation is reserved for the one overlay (the mobile menu) */
   --shadow-overlay:0 24px 48px rgb(29 36 48 / .14),0 0 18px rgb(29 36 48 / .06);
+  /* a panel that offers an action, answering the pointer (home doors) */
+  --shadow-raise:0 10px 24px rgb(29 36 48 / .08),0 1px 3px rgb(29 36 48 / .06);
 
   /* --- motion · SEED duration.yaml / timing-function.yaml ---------------- */
   --dur-1:50ms;  --dur-2:100ms; --dur-3:150ms;
@@ -275,7 +277,9 @@ h1{font-size:var(--t-h1);line-height:1.02;letter-spacing:-.016em}
 h2{font-size:var(--t-h2);line-height:1.08;letter-spacing:-.012em}
 h3{font-size:var(--t-h3);line-height:1.24;letter-spacing:-.004em;font-weight:600}
 h4{font-size:1.125rem;line-height:1.3;font-weight:600}
-h1 em,h2 em,h3 em{font-style:italic;color:var(--accent-ink)}
+/* a word picked out inside a heading is gold, not italic: an italic inside a
+   roman line read as a second typeface (R33, Andrew 3 Oct 2026 evening) */
+h1 em,h2 em,h3 em{font-style:normal;color:var(--accent-ink)}
 /* display faces and controls keep their own fit: the air is for running text */
 :is(h1,h2,h3,h4,.hero-title,.why-premise,.why-reasons li,.why-resolve,.fig b,.footer-line,.cover,
     .d-title,.wa-where dd,.others b,.pl-name,.glance dd,.pp-glance dd,.pi-facts dd,.qa dt,.rec-what b,.none-glance dd,
@@ -300,12 +304,12 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,td,th,a,span,b,small){
    set only colour, margin and layout. */
 .eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,
 .glance dt,.facts dt,.lang-switch,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,
-.none-glance dt,.mini-period{
+.none-glance dt,.mini-period,.ry-m,.ry-n,.lt-kind{
   font-family:var(--font-body);font-size:var(--t-label);font-weight:600;
   letter-spacing:var(--label-track);text-transform:uppercase;line-height:1.3;
   font-variant-numeric:lining-nums tabular-nums;
 }
-html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,.none-glance dt,.mini-period){
+html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.lang-switch,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,.none-glance dt,.mini-period,.ry-m,.ry-n,.lt-kind){
   font-family:var(--font-kr);font-size:.84rem;letter-spacing:var(--label-track-kr);font-weight:700;
 }
 /* Korean has two weights: a field label steps down to 400 so the 700 value
@@ -379,6 +383,10 @@ mark{
   background-repeat:no-repeat;background-size:100% 100%;
   -webkit-box-decoration-break:clone;box-decoration-break:clone;
   padding-inline:.1em;margin-inline:-.04em;border-radius:.16em;
+  /* a short highlight is one tied run (layout._mark_whole); at 200% text on a
+     phone it may still be wider than the line, and then it breaks rather than
+     pushing its list item past the screen (R27) */
+  overflow-wrap:anywhere;
 }
 .band-ink mark{--highlight:var(--highlight-inverse)}
 /* Noto Sans KR's box is taller and its letters sit higher, so the band rides
@@ -774,6 +782,44 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
 .nav-mark{position:absolute;inset-inline:12px;bottom:9px;height:2px;background:var(--accent);border-radius:2px;pointer-events:none}
 .nav-n{display:none}
 
+/* --- the programmes panel (Andrew, 3 Oct 2026 evening: "from the menu I
+   want to see each programme and choose it") -------------------------------
+   Under Programmes, on hover and on keyboard focus: the five programme pages,
+   numbered as on their covers, in the menu's face (R33). The site's one
+   overlay: white, a hairline, the overlay shadow. A bridge keeps it open
+   while the pointer travels down; it leaves a beat later than it comes, so a
+   pointer passing across the menu does not flash it. Escape shuts it and
+   leaves the focus on Programmes (WCAG 1.4.13; layout.ESC_JS). In the phone
+   menu the five are listed under Programmes. */
+.has-sub{position:relative}
+.nav-sub{list-style:none;margin:0;padding:0}
+@media (min-width:62.5625em){
+  /* the panel hangs 12px under the header's rule (the item is 44px, centred
+     in the 76px header: 16px to the rule, and the rule itself), and its
+     numbers stand under the P of Programmes: the link's 12px padding less the
+     panel's border, padding and link inset (1 + 8 + 14). The bridge spans the
+     gap, so the pointer can travel down to it. */
+  .has-sub::after{content:"";position:absolute;inset-inline:0;top:100%;height:29px}
+  .nav-sub{
+    position:absolute;top:calc(100% + 29px);left:-11px;z-index:60;width:max-content;min-width:18rem;max-width:24rem;
+    padding:8px;background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius-sm);
+    box-shadow:var(--shadow-overlay);opacity:0;visibility:hidden;translate:0 -4px;
+    transition:opacity var(--dur-3) var(--ease) var(--dur-2),translate var(--dur-3) var(--ease) var(--dur-2),
+               visibility 0s linear calc(var(--dur-3) + var(--dur-2));
+  }
+  .has-sub:is(:hover,:focus-within):not([data-shut]) .nav-sub{
+    opacity:1;visibility:visible;translate:0 0;
+    transition:opacity var(--dur-3) var(--ease),translate var(--dur-3) var(--ease),visibility 0s;
+  }
+  .nav-sub a{display:flex;align-items:baseline;gap:12px;min-height:44px;padding:11px 14px;border-radius:calc(var(--radius-sm) - 1px);
+    font-size:.9375rem;font-weight:500;line-height:1.35;color:var(--fg);transition:background-color var(--dur-3) var(--ease),color var(--dur-3) var(--ease)}
+  .nav-sub a:hover{background:var(--surface-sunken);color:var(--accent-ink)}
+  .nav-sub a:focus-visible{outline-offset:-3px}
+  .nav-sub a[aria-current="page"]{color:var(--accent-ink);font-weight:600}
+  .ns-n{min-width:1.6em;color:var(--accent-ink);font-variant-numeric:lining-nums tabular-nums}
+}
+html[lang^="ko"] .nav-sub a{font-family:var(--font-kr)}
+
 .btn-nav{min-height:42px;padding-inline:20px;margin-inline-start:10px}
 .btn-nav[aria-current="page"]{--btn-bg:var(--soft-navy);box-shadow:inset 0 -2px 0 var(--gold-light)}
 
@@ -957,10 +1003,14 @@ html[lang^="ko"] .fold>summary{font-weight:700}
 /* a count with its period, in a row */
 .mini-figs{margin:0 0 clamp(32px,4vw,52px)}
 @media (min-width:55.0625em){.mini-figs{margin-inline-start:var(--col4)}}
-.mini-figs dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px var(--col-gap);margin:0;max-width:52rem}
+/* two a row; four from 75em, the full content width, so the third starts on the
+   record's second column line below (CD v6); one under 22em */
+.mini-figs dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px var(--col-gap);margin:0;max-width:52rem}
+@media (min-width:75em){.mini-figs dl{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none}}
 .mini-figs dl>div{display:flex;flex-direction:column}
 .mini-figs dd{order:-1}
-@media (max-width:40em){.mini-figs dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* under 352px a half cell (130px) is narrower than 「South Dublin Live」, a name kept whole */
+@media (max-width:22em){.mini-figs dl{grid-template-columns:minmax(0,1fr)}}
 .mini-figs dd{margin:0;font-family:var(--font-display);font-size:clamp(2.4rem,4vw,3.4rem);line-height:1;color:var(--fg);
   font-variant-numeric:lining-nums}
 .mini-figs dt{margin-top:8px;font-size:var(--t-small);line-height:1.35;color:var(--fg);max-width:12em}
@@ -1281,7 +1331,6 @@ html[lang^="ko"] .hero-title .ln:nth-child(2){--hang:.041em}
 /* the master line is never translated (06 §5), so on the Korean pages it is
    an English phrase and is set exactly as it is on the English ones. It lives
    in the footer only: the hero's subtitle takes the same string (layout.STR) */
-html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
 /* the brand words stay on one line (R23); only where they cannot fit at all
    (a phone with text at 200%: em queries follow the reader's text size) do
    they part, between the words, never inside one */
@@ -1290,8 +1339,9 @@ html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
 @media (max-width:12em){.hero-sub .cm{white-space:normal}}
 /* --- the hero's subtitle (Andrew, 2 Oct 2026 evening; art direction v2) ----
    The master line is the title's subtitle: it sits in the title's group
-   (<hgroup>), in the title's face, set the way the footer sets it (roman,
-   "where it's needed!" in italic), in ink. Gold stays with "Everyone".
+   (<hgroup>), in the title's face, set the way the footer sets it (roman
+   from end to end since v6, R33), in ink. Gold stays with "Everyone" (the
+   footer, on its own, gives "where it's needed!" the gold).
    Measured from baselines, not from a descender (R15): under the title
    .42 of the title, and never less than 36px of clear space under the
    lowest ink (R9): the y of "Everyone" hangs about .1 of the title below
@@ -1302,18 +1352,21 @@ html[lang^="ko"] .footer-line :lang(en) em{font-style:italic}
 /* R29: the master line is as wide as "Classical Music", the lockup's own
    rule (chief designer v4). The ratio is measured: the ink width of
    "Classical Music" (5.66 of the title's em; Korean 「클래식 음악을」 5.45)
-   over the master line's (.356, .343 of the title's size), measure again if
-   either line changes. At its 22px floor (a phone) the line is never wider
+   over the master line's (.352, .338 of the title's size; .356 and .343 while
+   "where it's needed!" was italic, v6 set it roman), measure again if either
+   line changes. At its 22px floor (a phone) the line is never wider
    than the title: it turns after "Classical Music" (balance, .cm nowrap). */
-.hero{--hero-sub:max(1.375rem,calc(var(--hero-fs) * .356))}
-html[lang^="ko"] .hero{--hero-sub:max(1.375rem,calc(var(--hero-fs) * .343))}
+.hero{--hero-sub:max(1.375rem,calc(var(--hero-fs) * .352))}
+html[lang^="ko"] .hero{--hero-sub:max(1.375rem,calc(var(--hero-fs) * .338))}
 .hero-head{margin:0}
 .hero-sub{
   margin:max(calc(36px + var(--hero-fs) * .1),calc(var(--hero-fs) * .42)) 0 0;max-width:calc(var(--hero-fs) * 5.9);
   font-family:var(--font-display);font-size:var(--hero-sub);font-weight:400;font-style:normal;line-height:1.2;
   letter-spacing:-.006em;word-spacing:normal;color:var(--fg);text-wrap:balance;font-feature-settings:"liga" 1,"kern" 1;
 }
-.hero-sub em{font-style:italic;color:inherit}
+/* one style for the whole line (R33; Andrew, 3 Oct 2026 evening: "why are
+   there two typefaces?"): the italic "where it's needed!" read as a second face */
+.hero-sub em{font-style:normal;color:inherit}
 html[lang^="ko"] .hero-sub{margin-top:max(30px,calc(var(--hero-fs) * .3));max-width:calc(var(--hero-fs) * 5.7)}
 /* one line from 1001px: tighter leading keeps R15 at 1280x720 (title
    baseline to the subtitle .5 to .7 of the title, the gap below 1.25 times) */
@@ -1430,8 +1483,10 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
 
 figcaption{
   margin-top:14px;font-size:var(--t-caption);line-height:1.5;color:var(--fg-muted);
-  display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
+  display:flex;gap:2px 10px;align-items:baseline;flex-wrap:wrap;
 }
+/* the photographer's credit, a line of its own (parts._credited) */
+figcaption .cap-credit{flex-basis:100%}
 figcaption .cap-label{color:var(--accent-ink);font-size:var(--t-label)}
 figcaption>span:not(.cap-label){max-width:36em}
 
@@ -1472,26 +1527,32 @@ html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-s
 .pc-body{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:18px;flex:1}
 .pc .kicker{display:inline-flex;align-items:center;gap:8px}
 .pc h3{font-size:var(--t-h3);line-height:1.2;transition:color var(--dur-3) var(--ease)}
-/* the name and its three words are one group, 6px apart (R1). In the row
-   of five the names take one, two or three lines, so the group, not the
-   name, keeps the height that starts the sentences level (R30: a reserved
-   height reserved inside the group left the three words floating 29 to 55px
-   under a one-line name) */
+/* the name and its three words are one group, 6px apart (R1) */
 .pc-name{display:flex;flex-direction:column;gap:6px;margin-bottom:4px}
+/* In the row of five the cards share their rows (R30, v6; Andrew, 3 Oct 2026
+   evening: "make each section the same height, they sit awkwardly on the same
+   line"): cover, kicker, name, three words, sentence and status each start
+   level across the five, whatever the names wrap to (subgrid). The space a
+   short name leaves stays under it, as in a table's row. */
 @media (min-width:62.5625em){
-  .pc-name{min-height:calc(var(--t-h3) * 1.2 * 2 + 6px + 1.0625rem * 1.3 * 2)}
-  html[lang^="ko"] .pc-name{min-height:calc(1.08rem * 1.42 * 2 + 6px + .9375rem * 1.5)}
-}
-@media (min-width:62.5625em) and (max-width:68.75em){
-  .pc-name{min-height:calc(var(--t-h3) * 1.2 * 3 + 6px + 1.0625rem * 1.3 * 2)}
+  .progs{row-gap:0}
+  .progs>li{display:grid;grid-row:span 6;grid-template-rows:subgrid}
+  .pc{grid-row:1 / -1;display:grid;grid-template-rows:subgrid;height:auto}
+  .pc-body{grid-row:2 / -1;display:grid;grid-template-rows:subgrid;gap:0;padding-top:0}
+  .pc-name{display:contents}
+  .pc .kicker{margin-top:18px}
+  .pc h3{margin-top:10px}
+  .pc .pc-topics{margin-top:6px}
+  .pc-body>p:not(.pc-topics){margin-top:16px}
+  .pc .pc-body>.tag{margin-top:16px}
 }
 html[lang^="ko"] .pc h3{font-size:1.08rem;line-height:1.42}
 .pc:hover h3{color:var(--accent-ink)}
 .pc p{margin:0;font-size:var(--t-small);line-height:var(--lh-small);letter-spacing:var(--track-small);color:var(--fg)}
 /* what each programme is, in three words (Andrew, 3 Oct 2026: "a small
    description of each"): the cover's own line, set under the name as its
-   subtitle, in the name's face and the master line's italic, 6px under
-   the name in one group (.pc-name). The line turns only after a dot
+   subtitle, in the name's face and in italic (a line of its own, so the
+   line is one style, R33), 6px under the name in one group (.pc-name). The line turns only after a dot
    (parts._vocab). Korean has no italic: the same line in the text face. */
 .pc .pc-topics{font-family:var(--font-display);font-style:italic;font-size:1.0625rem;line-height:1.3;
   letter-spacing:0;text-wrap:balance}
@@ -1508,7 +1569,10 @@ html[lang^="ko"] .pc .pc-topics{font-family:var(--font-kr);font-style:normal;fon
   .pc .tag{align-self:stretch;align-items:flex-start;min-height:calc(2lh + 5px);padding:4px 0 0;border-radius:0;
     background:none}
   .pc .tag:not(.tag-live){color:var(--fg)}
-  .pc .tag-live::before{margin-top:.3lh}
+  /* the dot's middle on the middle of the letters (measured: Jakarta's x-height
+     centre is 12.2px into a 19.5px line, Hangul's about 10.9px) */
+  .pc .tag-live::before{margin-top:calc(.5lh - 1.5px)}
+  html[lang^="ko"] .pc .tag-live::before{margin-top:calc(.5lh - 2.5px)}
 }
 /* the pillar dot: filled for Learning, open for Sharing; always the same size */
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:0 0 auto;background:var(--accent)}
@@ -1601,7 +1665,12 @@ html[lang^="ko"] .pi-facts dd{font-family:var(--font-kr);font-weight:700;font-si
 }
 html[lang^="ko"] .tag{font-family:var(--font-kr);font-size:.9375rem;letter-spacing:-.01em}
 .tag-live{color:var(--live);background:var(--live-tint)}
-.tag-live::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.tag-live::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;
+  translate:0 1.5px}
+/* centred on the line box, the dot rode above the letters' middle (Jakarta's
+   x-height sits low in its line); Hangul sits higher */
+html[lang^="ko"] .tag-live::before{translate:0 .5px}
+@media (min-width:62.5625em){.pc .tag-live::before{translate:none}}
 /* a live dot pulses three times and then rests */
 @media (prefers-reduced-motion:no-preference){.tag-live::before{animation:pulse 1.8s var(--ease) 2}}
 
@@ -1624,7 +1693,7 @@ html[lang^="ko"] .why-premise{font-size:clamp(1.55rem,3vw,2.55rem);line-height:1
 html[lang^="ko"] .why-reasons li{font-family:var(--font-kr);font-size:var(--t-lead);font-weight:400;line-height:1.6;letter-spacing:-.01em}
 .why-resolve{margin:clamp(28px,3.4vw,48px) 0 0;font-family:var(--font-display);font-size:var(--t-h2);line-height:1.04;
   font-weight:500;letter-spacing:-.012em;color:var(--fg)}
-.why-resolve em{font-style:italic;color:var(--accent-ink)}
+.why-resolve em{font-style:normal;color:var(--accent-ink)}
 html[lang^="ko"] .why-resolve{font-family:var(--font-kr);font-weight:700;font-size:clamp(1.75rem,3.1vw,2.7rem);
   line-height:1.3;letter-spacing:-.034em}
 html[lang^="ko"] .why-resolve em{font-style:normal}
@@ -1789,7 +1858,7 @@ html[lang^="ko"] .pl-name{font-family:var(--font-kr);font-weight:400;font-size:1
 
 /* the mark, at full size, once */
 .mark{display:grid;grid-template-columns:6fr 6fr;gap:clamp(32px,6vw,104px);align-items:center}
-.mark h2 em{font-style:italic;color:var(--accent-ink)}
+.mark h2 em{font-style:normal;color:var(--accent-ink)}
 .mark-plate{display:grid;place-items:center;padding:clamp(40px,6vw,88px);background:var(--surface-raised)}
 .mark-plate img{width:min(360px,100%);height:auto}
 @media (max-width:55em){.mark{grid-template-columns:1fr}}
@@ -1865,78 +1934,73 @@ html[lang^="ko"] .d-go{font-family:var(--font-kr);font-weight:400}
   .d-ring{grid-row:auto}
   .d-label{margin-top:14px}
 }
-/* --- two of the doors under the five programmes (home, section I) ---------
-   Andrew (3 Oct 2026): "the register button or the see-details button
-   should catch the eye more". The two ways in that the five cards do not
-   cover, for artists and for volunteers, were two links inside two
-   sentences, so they read as copy and not as actions.
-
-   They are now the third and fourth doors of Get involved: the same ring,
-   the same icons (a music stand, a raised hand), the same label and the
-   same Garamond line (R17: one vocabulary). Two doors need far less height
-   than four, so each is set the way a door is set on a phone: the station
-   beside its words, who the way is for over the action, the arrow after
-   the action's last word. A reader who follows one finds the same door
-   again on Get involved.
-
-   How loud: the hero's filled button stays the one solid action on the
-   page, and the five covers stay the weight of this section. A door has no
-   fill, no box and no shadow; a gold line ring, a title the size of a
-   card's title and an arrow are enough to say "door" (R5: the title is its
-   one strong line; R16: never a highlight). */
+/* --- two doors under the five programmes (home, section I) ---------------
+   Andrew (3 Oct 2026): the ways in for artists and volunteers must read as
+   actions; evening: "align them so they are seen better, and make them catch
+   the eye". Two panels, edge to edge with the row of five covers (R2: the
+   page edge and the cards' far edge), each one link: the station (the same
+   ring and icon as the doors of Get involved, R17), who the way is for, the
+   action in Garamond, one line on what it is, and a round arrow at the end,
+   the one shape on the page that says "go". A raised panel with a hairline
+   (on hover the one raised shadow, --shadow-raise); the hero's filled
+   button stays the one solid action on the page. */
 .doors.doors-pair{
-  list-style:none;margin:clamp(32px,4vw,48px) 0 0;padding:0;
-  display:grid;grid-template-columns:minmax(0,1fr);gap:6px var(--col-gap);
+  --st:3.5rem;list-style:none;margin:clamp(36px,4.4vw,56px) 0 0;padding:0;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(14px,1.6vw,24px);
 }
-/* Where: on the content line (R2: an action hangs on it), under the heading
-   of the section. Side by side only where both titles hold one line (from
-   1001px), and then in the two columns of the figures in the ink band just
-   below, so the doors stand over "40+" and "4": the second door takes a
-   line the page already has (R25). Narrower, one door a row: at 900px
-   "Join the founding board" took two lines beside one, and the labels of
-   the two doors no longer stood level. */
-@media (min-width:55.0625em){.doors.doors-pair{margin-inline-start:var(--col4)}}
 @media (min-width:62.5625em){.doors.doors-pair{grid-template-columns:repeat(2,minmax(0,1fr))}}
-
-/* A door is its link, and the link is only as wide as the door, so the
-   focus ring and the hover area are the door, not an empty half column.
-   The ring stands level with the middle of its two lines; the label sits
-   4px over the title (R1: inside a group, 8px or less). At least 56px
-   high (a 44px ring, 6px above and below), wider than 44px everywhere. */
+.doors.doors-pair li{display:flex;min-width:0}
 .doors.doors-pair a{
-  flex:0 1 auto;display:grid;grid-template-columns:var(--st) minmax(0,1fr);
-  column-gap:18px;row-gap:4px;align-items:center;justify-items:start;padding-block:10px;
+  flex:1 1 auto;display:grid;grid-template-columns:var(--st) minmax(0,1fr) 2.75rem;align-items:center;
+  column-gap:clamp(16px,1.8vw,24px);min-width:0;padding:clamp(18px,2vw,26px) clamp(18px,2.2vw,30px);
+  background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--fg);
+  transition:border-color var(--dur-3) var(--ease),box-shadow var(--dur-4) var(--ease),translate var(--dur-3) var(--ease-enter);
 }
-.doors.doors-pair .d-ring{grid-row:1 / span 2}
-.doors.doors-pair .d-label{grid-column:2;margin:0;align-self:end}
-.doors.doors-pair .d-title{grid-column:2;margin:0;max-width:none;align-self:start}
-@media (min-width:62.5625em){.doors.doors-pair a{padding-block:6px}}
-/* Korean: the cards above set their titles at 17px (five in a row), so the
-   doors step down to 18px, the floor of the role (R13), and never outsize
-   the programmes they follow */
-html[lang^="ko"] .doors-pair .d-title{font-size:1.125rem;line-height:1.45}
-
-/* The arrow is the action's own, in its gold: it follows the last word
-   (parts.door_pair keeps the two together, so it never starts a line
-   alone) and moves on hover and focus like every arrow on the site. */
-.doors-pair .d-title .arrow{color:var(--accent-ink);margin-inline-start:.06em}
-/* Hover: the title and its ring turn gold (the doors' own answer, §16).
-   Pressed: the ring fills with the sunken cream, the way a button goes
-   down (Fluent 2: rest, hover, pressed, focus); this also gives the four
-   doors on Get involved their pressed state. Focus: the site's two rings,
-   6px out, round the whole door (§16). */
+.doors.doors-pair .d-ring{width:var(--st);height:var(--st)}
+.doors.doors-pair .d-glyph{width:1.6rem;height:1.6rem}
+.doors.doors-pair .d-text{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
+.doors.doors-pair .d-label{margin:0}
+.doors.doors-pair .d-title{margin:0;max-width:none;font-size:clamp(1.35rem,1.9vw,1.6rem);line-height:1.15}
+html[lang^="ko"] .doors.doors-pair .d-title{font-size:clamp(1.2rem,1.6vw,1.35rem);line-height:1.4}
+.doors.doors-pair .d-note{font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);text-wrap:balance}
+html[lang^="ko"] .doors.doors-pair .d-note{text-wrap:pretty}
+/* the round arrow: a gold ring with the site's arrow; filled gold on hover */
+.doors.doors-pair .d-cta{display:grid;place-items:center;width:2.75rem;height:2.75rem;border:1px solid var(--accent-mark);
+  border-radius:50%;color:var(--accent-ink);font-size:1.15rem;
+  transition:background-color var(--dur-3) var(--ease),color var(--dur-3) var(--ease),border-color var(--dur-3) var(--ease)}
+.doors.doors-pair a:hover{border-color:var(--accent-mark);box-shadow:var(--shadow-raise);translate:0 -1px}
+.doors.doors-pair a:hover .d-cta{background:var(--accent);border-color:var(--accent);color:var(--ink-navy)}
+.doors.doors-pair a:hover .d-title{color:var(--accent-ink)}
+.doors.doors-pair a:active{translate:0 0;box-shadow:none}
+.doors.doors-pair a:focus-visible{outline-offset:4px}
+/* side by side, the two share their rows (label, title, line), so the labels
+   and titles stand level whatever the lines wrap to; the ring and the round
+   arrow stand in the middle of all three */
+@media (min-width:62.5625em){
+  .doors.doors-pair{row-gap:0}
+  .doors.doors-pair li{display:grid;grid-row:span 3;grid-template-rows:subgrid}
+  .doors.doors-pair a{grid-row:1 / -1;grid-template-rows:subgrid;row-gap:6px}
+  .doors.doors-pair .d-text{display:contents}
+  .doors.doors-pair .d-ring{grid-column:1;grid-row:1 / -1;align-self:center}
+  .doors.doors-pair :is(.d-label,.d-title,.d-note){grid-column:2}
+  .doors.doors-pair .d-label{grid-row:1;align-self:end}
+  .doors.doors-pair .d-title{grid-row:2}
+  .doors.doors-pair .d-note{grid-row:3;align-self:start}
+  .doors.doors-pair .d-cta{grid-column:3;grid-row:1 / -1;align-self:center}
+}
+/* a narrow phone, or text at 200%: the round arrow goes under the words */
+@media (max-width:23.75em){
+  .doors.doors-pair a{grid-template-columns:var(--st) minmax(0,1fr);row-gap:14px}
+  .doors.doors-pair .d-cta{grid-column:2}
+}
+@media (max-width:16em){
+  .doors.doors-pair a{grid-template-columns:minmax(0,1fr)}
+  .doors.doors-pair .d-cta{grid-column:1}
+}
+/* pressed: the ring fills with the sunken cream, the way a button goes down
+   (the four doors on Get involved) */
 .doors a:active .d-ring{background:var(--surface-sunken)}
 
-/* Text at 200% on a phone (the em query follows the reader's own text
-   size): the station over the words, as the doors on Get involved do, so a
-   40px title has the whole width (R27) */
-@media (max-width:19.99em){
-  .doors.doors-pair a{display:flex;flex-direction:column;align-items:flex-start}
-  /* the grid's end/start placement would push the label to the right edge
-     in a column (seen at 320px with text at 200%) */
-  .doors.doors-pair :is(.d-label,.d-title){align-self:auto}
-  .doors.doors-pair .d-label{margin-top:14px}
-}
 /* bring a concert: the visit in three steps, then the action */
 .invite{display:grid;grid-template-columns:3fr 9fr;gap:var(--gap)}
 .invite :is(.steps,.meets){grid-column:2}
@@ -1987,14 +2051,45 @@ html[lang^="ko"] .help h3{font-size:1.28rem}
 /* ==========================================================================
    17. NEWS & ARCHIVE
    ========================================================================== */
-.latest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px var(--col-gap)}
-.latest article{display:flex;flex-direction:column}
-.latest .kicker{font-size:var(--t-body);font-weight:600;letter-spacing:0;text-transform:none;color:var(--fg)}
-html[lang^="ko"] .latest .kicker{font-size:1rem;letter-spacing:-.01em}
-.latest h3{margin-top:12px;font-size:clamp(1.3rem,1.9vw,1.6rem)}
-html[lang^="ko"] .latest h3{font-size:1.22rem}
-.latest p{margin-top:12px;font-size:var(--t-small);line-height:var(--lh-small)}
-.latest .btn-row{margin-top:auto;padding-top:20px}
+/* --- the latest three, as panels (v6; Andrew, 3 Oct 2026 evening: "News and
+   archive does not catch the eye") -------------------------------------------
+   Each is a raised panel with a hairline, the way the home doors are: a
+   station (the board's raised hand, the class's recorder, the concert's
+   piano), what kind of news and when, the title, one line, and where to go.
+   Side by side the parts stand level across the three (subgrid). */
+.latest{--stroke:var(--accent-mark);--ground:var(--surface-raised);--st:3rem;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
+/* a box is one link (the line system's L4, CD v6): the whole panel answers
+   its link, as the home panels do, and rises the same way on hover. The
+   link's ::after covers the panel; its words stay the link's name. The
+   44px link leaves 10px under its words, so the panel's bottom padding is
+   10px less than its top. */
+.lt{position:relative;display:flex;flex-direction:column;min-width:0;
+  padding:clamp(20px,2.2vw,28px) clamp(20px,2.2vw,28px) calc(clamp(20px,2.2vw,28px) - 10px);
+  background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius-sm);
+  transition:border-color var(--dur-3) var(--ease),box-shadow var(--dur-4) var(--ease),translate var(--dur-3) var(--ease-enter)}
+.lt .go::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.lt:has(.go:hover){border-color:var(--accent-mark);box-shadow:var(--shadow-raise);translate:0 -1px}
+.lt:has(.go:hover) h3{color:var(--accent-ink)}
+.lt:has(.go:active){translate:0 0;box-shadow:none}
+.lt:has(.go:focus-visible){outline:2px solid var(--focus-ring);outline-offset:4px;box-shadow:0 0 0 6px var(--focus-halo)}
+.lt .go:focus-visible{outline:none;box-shadow:none}
+.lt-top{display:flex;align-items:center;gap:14px}
+.lt .d-ring{flex:0 0 auto}
+.lt .d-glyph{width:1.5rem;height:1.5rem}
+.lt-when{display:flex;flex-direction:column;gap:3px;min-width:0}
+.lt-kind{color:var(--accent-ink)}
+.lt-date{font-size:var(--t-body);font-weight:600;line-height:1.3;color:var(--fg);font-variant-numeric:lining-nums}
+html[lang^="ko"] .lt-date{font-family:var(--font-kr);font-weight:700;font-size:1rem}
+.lt h3{margin-top:20px;font-size:clamp(1.3rem,1.9vw,1.6rem)}
+html[lang^="ko"] .lt h3{font-size:1.22rem}
+.lt p{margin-top:10px;font-size:var(--t-small);line-height:var(--lh-small)}
+.lt-go{margin-top:auto;padding-top:18px}
+@media (min-width:55.0625em){
+  .latest{row-gap:0}
+  .lt{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0}
+  .lt-go{margin-top:0;align-self:end}
+}
 @media (max-width:55em){.latest{grid-template-columns:minmax(0,1fr)}}
 
 /* --- the timeline: a gold line drawn down the page as it is read ---------
@@ -2021,6 +2116,41 @@ html[lang^="ko"] .tl-date{font-family:var(--font-kr);font-weight:700}
 .tl-item h3{font-size:clamp(1.2rem,1.6vw,1.4rem)}
 .tl-item p{margin-top:8px;font-size:var(--t-body);line-height:var(--lh-text);color:var(--fg);max-width:var(--measure)}
 @media (max-width:48em){.tl-item{grid-template-columns:minmax(0,1fr)}}
+/* a year at a time (v6; Andrew, 3 Oct 2026 evening: "the year once, on the
+   left, and only the month in each row"): the year stands left of the line,
+   in Garamond, gold, on the baseline of its first row; the rows keep only
+   their month. The line and the dots keep their places (the dot is 40px left
+   of a row, the line 34px). */
+.timeline-years{--yw:5.6rem;padding:0}
+.timeline-years::before,.timeline-years::after{inset-inline-start:calc(var(--yw) + 6px)}
+.tl-year{display:grid;grid-template-columns:var(--yw) minmax(0,1fr);column-gap:40px;align-items:baseline}
+.tl-year+.tl-year{margin-top:48px}
+/* the year hangs on its first row's baseline without pushing the row down
+   (line-height 0: a 2.1rem year set the shared baseline 5px lower than the
+   section label's, CD v6); the month and the title share one baseline in
+   both languages (Korean titles sat 2px low) */
+.tl-y{grid-column:1;padding-inline-end:24px;text-align:end;font-family:var(--font-display);
+  font-size:clamp(1.6rem,2.2vw,2.1rem);font-weight:500;line-height:0;color:var(--accent-ink);font-variant-numeric:lining-nums}
+.timeline-years .tl-item{align-items:baseline}
+.timeline-years .tl-date{padding-top:0}
+/* Noto's taller box puts the Korean row 2px under the label: measured, taken back */
+html[lang^="ko"] .timeline-years{margin-top:-2px}
+/* and its dots 2px lower, so each sits on the middle of its year's figures (measured
+   within 0.7px at 1024 and 1440, as in English) */
+html[lang^="ko"] .timeline-years .tl-item::before{top:7px}
+/* the line ends at the last dot: a patch of the ground covers its tail */
+:is(.timeline>.tl-item:last-child,.timeline-years>.tl-year:last-child .tl-item:last-child)::after{
+  content:"";position:absolute;z-index:1;inset-inline-start:-36px;top:22px;bottom:-12px;width:5px;background:var(--tl-ground)}
+.tl-items{grid-column:2;list-style:none;margin:0;padding:0}
+.timeline-years .tl-item{grid-template-columns:9em minmax(0,1fr)}
+/* Korean months are short (「1월」, 「한 해 동안」): their column gives the text
+   the room English needs for 「Through the year」 */
+html[lang^="ko"] .timeline-years .tl-item{grid-template-columns:6.5em minmax(0,1fr)}
+@media (max-width:48em){
+  .timeline-years{--yw:3.6rem}
+  .tl-y{padding-inline-end:16px;font-size:1.35rem}
+  :is(html,html[lang^="ko"]) .timeline-years .tl-item{grid-template-columns:minmax(0,1fr)}
+}
 @media (prefers-reduced-motion:no-preference){
   @supports (animation-timeline:view()){
     .timeline::after{scale:1 0;animation:draw-y linear both;animation-timeline:--tl;animation-range:cover 0% cover 100%}
@@ -2030,40 +2160,87 @@ html[lang^="ko"] .tl-date{font-family:var(--font-kr);font-weight:700}
   }
 }
 
-/* --- the activity chart: every session and performance, month by month --- */
-.chart{margin:0}
-.chart svg{width:100%;height:auto;overflow:visible}
-/* two drawings of the same forty: a calendar across the page, and the same
-   calendar turned on its side for a phone, so nothing scrolls sideways */
-.chart-tall{display:none}
-.chart-tall svg{max-width:420px}
-@media (max-width:62.5em){.chart-wide{display:none}.chart-tall{display:block}}
-.chart .c-year-sm{font-size:15px}
-.chart .c-year{fill:var(--fg);font-family:var(--font-display);font-size:22px}
-.chart .c-mon{fill:var(--fg-muted);font-family:var(--font-body);font-size:11px;letter-spacing:.1em}
-html[lang^="ko"] .chart .c-mon{font-family:var(--font-kr);letter-spacing:0}
-/* the calendar's months are quiet ground, not thirty-six outlined boxes */
-.chart .c-cell{fill:var(--surface);stroke:none}
-.chart .c-on{fill:var(--accent-mark)}
-.chart .c-open{fill:var(--surface-raised);stroke:var(--accent-mark);stroke-width:1.6}
-.chart .c-ev:hover rect{stroke:var(--fg);stroke-width:2}
-.chart-key{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:18px;font-size:var(--t-caption);color:var(--fg-muted)}
-:is(.chart-key,.strip-key)>span:last-child{flex:1 1 24em;max-width:34em}
-.chart-key span{display:inline-flex;align-items:center;gap:8px}
-.chart-key i{width:12px;height:12px;border-radius:1px;background:var(--accent-mark)}
-.chart-key i.o{background:var(--surface-raised);box-shadow:inset 0 0 0 1.6px var(--accent-mark)}
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    .chart .c-ev{animation:fade linear both;animation-timeline:view();animation-range:entry 0% entry 90%}
+/* --- the record, year by year (v6; Andrew, 3 Oct 2026 evening: the squares
+   did not say what was done, and hovering for a tooltip was awkward) -------
+   Three lists, a year each: a year's events in the order they happened, the
+   month once (at its first event), the dot of the kind (filled a talk, open a
+   performance, as everywhere on the site) and two lines, what and where. The
+   lines are the ledger's own (parts._rec_lines). Every event can be read, on
+   any screen, with nothing to hover. */
+/* the record, a year at a time (v6; Andrew, 3 Oct 2026 evening: the squares
+   did not say what was done). The year stands at the page edge and stays in
+   view beside its months (like the timeline's year), the months flow in two
+   balanced columns from the content line (R2); each month once, its events
+   under it, each with the dot of its kind (the key is the figures above). */
+.record-years{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(44px,4.6vw,64px);margin:0}
+.ry{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.ry-y{display:flex;flex-direction:column;gap:8px;margin:0;font-size:clamp(2rem,3vw,2.6rem);line-height:1;
+  font-variant-numeric:lining-nums}
+/* the year is a figure, set as in English (the Korean h3 size would win) */
+html[lang^="ko"] .ry-y{font-family:var(--font-display);font-size:clamp(2rem,3vw,2.6rem);font-weight:500;
+  line-height:1;letter-spacing:-.01em}
+/* a year is gold on this page, in the record as in the timeline (R34) */
+.ry-y{color:var(--accent-ink)}
+.ry-n{color:var(--accent-ink)}
+.ry-months{list-style:none;margin:0;padding:0;columns:2;column-gap:var(--col-gap)}
+.ry-mo{display:grid;grid-template-columns:3.4em minmax(0,1fr);column-gap:12px;align-items:baseline;
+  break-inside:avoid;padding-bottom:20px}
+.ry-m{color:var(--accent-ink)}
+/* one column grids are minmax(0,1fr) (R27): an auto column grew to the longest
+   word at 200% text on a phone */
+.ry-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+/* the dot of the kind: filled, a talk; open, a performance (the figures above
+   carry the key) */
+.ry-list li{position:relative;padding-inline-start:20px}
+.ry-list li::before{content:"";position:absolute;inset-inline-start:0;top:.55em;width:8px;height:8px;border-radius:50%;
+  background:var(--accent)}
+.ry-list li.ry-p::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--accent)}
+.ry-what{min-width:0}
+.ry-what b{display:block;font-family:var(--font-display);font-size:1.125rem;font-weight:600;line-height:1.3;color:var(--fg)}
+html[lang^="ko"] .ry-what b{font-family:var(--font-kr);font-weight:700;font-size:1rem;line-height:1.45}
+.ry-what span{display:block;margin-top:2px;font-size:var(--t-small);line-height:1.45;color:var(--fg)}
+@media (max-width:40em){.ry-months{columns:1}}
+@media (min-width:75em){
+  /* the year stands on its first month's baseline, as the timeline's does */
+  .ry{grid-template-columns:calc(var(--col4) - var(--gap)) minmax(0,1fr);column-gap:var(--gap);align-items:baseline}
+  .ry-y{align-self:baseline;position:sticky;top:120px}
+}
+/* a past year folds on a phone (Andrew, 4 Oct 2026: the record ran to about
+   4,150px there); the latest year stays open. From 40em every year is open
+   and its summary is not drawn, so a laptop shows the whole record with no
+   control to announce. A browser without ::details-content keeps the fold. */
+.ry-fold{margin:0}
+@supports selector(::details-content){
+  @media (min-width:40.0625em){
+    .ry-fold>summary{display:none}
+    .ry-fold::details-content{content-visibility:visible;display:block}
   }
 }
+@media (max-width:40em){.ry-fold[open]>summary{margin-bottom:12px}}
+/* the figures above are the list's key: each label wears its rows' dot */
+.mini-figs dt .dot{margin-inline-end:8px;vertical-align:.1em}
+/* a wrapped label hangs past its dot, as the record's titles do */
+.mini-figs dt:has(.dot){padding-inline-start:16px;text-indent:-16px}
 
 /* --- the gallery: a contact sheet of plates with true captions ----------- */
-/* each frame at its own shape, in columns, newest first; every one has a
-   true caption */
-.gallery{columns:3 16rem;column-gap:var(--gap);list-style:none;margin:0;padding:0}
-.gallery>li{break-inside:avoid;margin:0 0 clamp(22px,2.6vw,36px)}
-.gallery .photo>img{height:auto}
+/* each frame at its own shape, newest first; every one has a true caption */
+/* rows of one height (v6; Andrew, 3 Oct 2026 evening: "the heights are all
+   different, align them"): the build cuts the list into rows of three or four
+   (parts._gallery_rows; two or three a row below 75em, --w2 --n2) and gives
+   each photograph its share of its row (--w, its shape over the row's) so
+   every row fills the measure and its
+   photographs share one height. Nothing is cropped; order stays newest
+   first. The .5px keeps a row from spilling a photograph to the next line on
+   rounding (flex-grow gives it back). Under 40em, one photograph a line. */
+.gallery{--g:clamp(14px,1.6vw,24px);display:flex;flex-wrap:wrap;gap:clamp(24px,2.6vw,36px) var(--g);
+  list-style:none;margin:0;padding:0}
+.gallery>li{flex:1 1 calc((100% - (var(--n2) - 1) * var(--g)) * var(--w2) - .5px);min-width:0;margin:0}
+@media (min-width:75em){.gallery>li{flex-basis:calc((100% - (var(--n) - 1) * var(--g)) * var(--w) - .5px)}}
+.gallery .photo{aspect-ratio:var(--ar)}
+.gallery .photo>img{width:100%;height:100%;object-fit:cover}
+/* one a line under 40em: a row's share was too narrow there for a caption's place
+   name (parts._whole_parts keeps it whole) */
+@media (max-width:40em){.gallery>li{flex-basis:100%}}
 
 
 
@@ -2392,7 +2569,7 @@ html[lang^="ko"] .ct-hint>p{font-weight:400}
    from the mark to that fact, so the fact is the map's label. Nothing else
    is on the map: no rings round Dublin (they read as a service area), no
    other places (the travel value names none), no count (R19). "We travel
-   to" stands under it in the italic of the master line it echoes. The
+   to" stands under it in the master line's face (roman, R33). The
    three facts about who answers are stations with no line between them
    (they are not steps): side by side where there is room for three, one
    under another where there is not.
@@ -2425,7 +2602,7 @@ html[lang^="ko"] .wa{--lab-half:.546rem}
   color:var(--fg);text-wrap:balance}
 /* the travel value is the master line's own phrase, set the way the footer
    and the hero set "where it's needed!" */
-.wa-travel dd{font-size:calc(var(--t-h3) * 1.2);font-style:italic;line-height:1.2}
+.wa-travel dd{font-size:calc(var(--t-h3) * 1.2);font-style:normal;line-height:1.2}
 html[lang^="ko"] .wa-where dd{font-family:var(--font-kr);font-size:1.125rem;font-weight:400;line-height:1.6;
   letter-spacing:-.01em;text-wrap:pretty}
 html[lang^="ko"] .wa-travel dd{font-size:calc(1.125rem * 1.2);font-weight:700;font-style:normal;line-height:1.45}
@@ -2494,7 +2671,8 @@ html[lang^="ko"] .none-glance dd{font-family:var(--font-kr);font-weight:700;font
   font-family:var(--font-display);font-weight:500;font-size:clamp(2.2rem,5.6vw,5rem);line-height:1.02;
   letter-spacing:-.02em;color:var(--fg-inverse);margin:0;max-width:13em;text-wrap:balance;
 }
-.footer-line em{font-style:italic;color:var(--accent-inverse)}
+/* gold, not italic: the line is one face (R33) */
+.footer-line em{font-style:normal;color:var(--accent-inverse)}
 /* the master line is English on the Korean pages too (06 §5): the whole
    block takes the English face, size, leading and measure, not only the span
    inside it; sized at the Korean block's size, its 13em measure was 707px
@@ -2529,11 +2707,14 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
 .site-footer li a:hover{color:var(--accent-inverse)}
 .footer-bottom{
   margin-top:clamp(48px,5vw,72px);padding-top:22px;border-top:1px solid var(--line-inverse);
-  display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;font-size:var(--t-caption);color:var(--fg-inverse-body);
+  display:grid;grid-template-columns:1fr 1fr;gap:8px 28px;font-size:var(--t-caption);line-height:1.6;color:var(--fg-inverse-body);
 }
 .footer-bottom>span:nth-child(2){grid-row:1 / span 2;grid-column:2;text-align:end}
-/* the status is a sentence people quote: never under 16px (audit, 2 Oct 2026) */
-.footer-status{font-size:var(--t-small);line-height:var(--lh-small)}
+/* the date stands on the status's last line, however many lines it takes */
+.footer-bottom>span:nth-child(3){align-self:end}
+/* the colophon is fine print, a step under the links above it (Andrew,
+   3 Oct 2026 evening: "too big"): the caption size, at a reading leading */
+.footer-status{font-size:var(--t-caption);line-height:1.6}
 @media (max-width:48em){.footer-bottom{grid-template-columns:1fr}.footer-bottom>span:nth-child(2){grid-row:auto;grid-column:auto;text-align:start}}
 .footer-bottom a{color:var(--fg-inverse-body);text-decoration:underline;text-decoration-color:var(--fg-inverse-muted);text-underline-offset:3px}
 .footer-bottom a:hover{color:var(--accent-inverse)}
@@ -2589,9 +2770,19 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
   }
   .nav[data-open="true"]{display:flex}
   .nav-list{flex-direction:column;align-items:stretch;gap:0;counter-reset:nv}
-  .nav-list li{border-bottom:1px solid var(--line)}
+  .nav-list>li{border-bottom:1px solid var(--line)}
+  /* one numbering in the drawer, the pages' own: a programme's cover number
+     beside "04 Get involved" read as a second list (CD v6). Programme names
+     are Garamond, as everywhere (R5); the current one is gold. */
+  .nav-sub{margin:-8px 0 14px;padding-inline-start:calc(2.2em * .8125 + 18px)}
+  .nav-sub a{display:flex;align-items:baseline;min-height:44px;padding:6px 0;font-family:var(--font-display);
+    font-size:1.25rem;font-weight:500;line-height:1.3;color:var(--fg);text-wrap:balance}
+  html[lang^="ko"] .nav-sub a{font-family:var(--font-kr);font-size:1.0625rem;font-weight:500}
+  .nav-sub a[aria-current="page"]{color:var(--accent-ink)}
+  .ns-n{display:none}
+  /* the page's number stands on its name's baseline (it rode 6px high) */
   .nav-link{
-    min-height:64px;padding:0;gap:18px;width:100%;justify-content:flex-start;
+    min-height:64px;padding:0;gap:18px;width:100%;justify-content:flex-start;align-items:baseline;
     font-family:var(--font-display);font-size:clamp(1.7rem,7vw,2.3rem);font-weight:500;letter-spacing:-.012em;
   }
   html[lang^="ko"] .nav-link{font-family:var(--font-kr);font-weight:700;font-size:clamp(1.35rem,5.6vw,1.8rem);letter-spacing:-.03em}
@@ -2602,11 +2793,11 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
   .lang-switch{margin:20px 0 0;padding:0;border:0;align-self:flex-start}
   .lang-switch a,.lang-switch span{padding-inline:0;margin-inline-end:20px}
   @media (prefers-reduced-motion:no-preference){
-    .nav[data-open="true"] .nav-list li{animation:rise-sm var(--dur-slow) var(--ease-enter-expressive) both}
-    .nav[data-open="true"] .nav-list li:nth-child(2){animation-delay:calc(var(--beat) * .5)}
-    .nav[data-open="true"] .nav-list li:nth-child(3){animation-delay:calc(var(--beat) * 1)}
-    .nav[data-open="true"] .nav-list li:nth-child(4){animation-delay:calc(var(--beat) * 1.5)}
-    .nav[data-open="true"] .nav-list li:nth-child(5){animation-delay:calc(var(--beat) * 2)}
+    .nav[data-open="true"] .nav-list>li{animation:rise-sm var(--dur-slow) var(--ease-enter-expressive) both}
+    .nav[data-open="true"] .nav-list>li:nth-child(2){animation-delay:calc(var(--beat) * .5)}
+    .nav[data-open="true"] .nav-list>li:nth-child(3){animation-delay:calc(var(--beat) * 1)}
+    .nav[data-open="true"] .nav-list>li:nth-child(4){animation-delay:calc(var(--beat) * 1.5)}
+    .nav[data-open="true"] .nav-list>li:nth-child(5){animation-delay:calc(var(--beat) * 2)}
     .nav[data-open="true"] :is(.btn-nav,.lang-switch){animation:fade var(--dur-slow) var(--ease) calc(var(--beat) * 2.5) both}
   }
 }
@@ -2640,7 +2831,7 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
    colour, or their own where they are only decoration. */
 @media (forced-colors:active){
   .menu-toggle i{background:CanvasText}
-  :is(.chart-key i,.dot,.tl-item::before,.nav-mark,.forty-row span,.forty figcaption i,.strip-key i){forced-color-adjust:none}
+  :is(.dot,.ry-list li::before,.tl-item::before,.nav-mark,.forty-row span,.forty figcaption i,.strip-key i){forced-color-adjust:none}
   .cover{border:1px solid CanvasText}
   .cover-mark{stroke:CanvasText}
   :is(.strip,.att,.map-svg,.wa-svg) :is(circle,rect,path){forced-color-adjust:none}

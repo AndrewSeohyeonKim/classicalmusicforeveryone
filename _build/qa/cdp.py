@@ -115,6 +115,11 @@ class WS:
 
 class Chrome:
     def __init__(self, port=9341, width=1440, height=900, dpr=1, mobile=False, reduce_motion=True):
+        self._start(port, width, height, dpr, mobile, reduce_motion)
+        self.font_sizes = None
+
+    def _start(self, port, width, height, dpr, mobile, reduce_motion):
+        self.reduce_motion = reduce_motion
         self.port, self.width, self.height, self.dpr, self.mobile = port, width, height, dpr, mobile
         self.profile = tempfile.mkdtemp(prefix=f"cmfe-chrome{port}-")
         args = [CHROME, "--headless=new", f"--remote-debugging-port={port}", "--remote-allow-origins=*",
@@ -148,6 +153,8 @@ class Chrome:
 
     # --- protocol -----------------------------------------------------------
     def call(self, method, **params):
+        if method == "Page.setFontSizes":
+            self.font_sizes = params.get("fontSizes")
         self.n += 1
         mid = self.n
         self.ws.send(json.dumps({"id": mid, "method": method, "params": params}))
@@ -188,15 +195,39 @@ class Chrome:
                   deviceScaleFactor=dpr, mobile=mobile)
 
     def motion(self, on=True):
+        self.reduce_motion = not on
         self.call("Emulation.setEmulatedMedia",
                   features=[{"name": "prefers-reduced-motion", "value": "no-preference" if on else "reduce"}])
 
     # --- pages --------------------------------------------------------------
+    def restart(self):
+        """A renderer that stopped answering (it happens, rarely, on this Mac):
+        a new Chrome on the same port, with the same viewport, motion and text size."""
+        fs = self.font_sizes
+        self.quit()
+        self._start(self.port, self.width, self.height, self.dpr, self.mobile, self.reduce_motion)
+        if fs:
+            self.call("Page.setFontSizes", fontSizes=fs)
+        self.font_sizes = fs
+
     def goto(self, url, settle=0.8):
+        for attempt in range(3):
+            try:
+                return self._goto(url, settle)
+            except (TimeoutError, OSError, ConnectionError) as e:
+                if attempt == 2:
+                    raise
+                print(f"  (Chrome did not answer on {url}: {type(e).__name__}; restarting)", flush=True)
+                self.restart()
+
+    def _goto(self, url, settle=0.8):
         self.events.clear()
         self.call("Page.navigate", url=url)
         self.wait_event("Page.loadEventFired", timeout=30)
-        self.js("document.fonts ? document.fonts.ready.then(()=>1) : 1", awaitp=True)
+        # never wait on the fonts for ever: a page whose font promise stalls (it has
+        # happened, intermittently) gives up after 5s instead of hanging the run
+        self.js("document.fonts ? Promise.race([document.fonts.ready.then(()=>1),"
+                " new Promise(r=>setTimeout(()=>r(0),5000))]) : 1", awaitp=True)
         time.sleep(settle)
 
     def js(self, expr, awaitp=True):

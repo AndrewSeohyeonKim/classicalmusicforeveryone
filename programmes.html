@@ -115,7 +115,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -130,7 +130,8 @@
       <ul class="nav-list">
         <li><a class="nav-link" href="index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
-        <li><a class="nav-link" href="programmes.html" aria-current="page"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a></li>
+        <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="programmes.html" aria-current="page"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
+          <ul class="nav-sub"><li><a href="programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
         <li><a class="nav-link" href="get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
@@ -148,7 +149,7 @@
     <p class="eyebrow lift">Programmes</p>
     <div class="ph-head">
       <h1 class="ph-title"><span class="ln"><span>Our programmes.</span></span></h1>
-      <p class="ph-lead lift lift-3"><span class="sl">Most programmes <mark>need no experience</mark>.</span> <span class="sl">Write to us, and we will tell you how to start.</span></p>
+      <p class="ph-lead lift lift-3"><span class="sl">Most programmes <mark>need no experience</mark>.</span> <span class="sl">Write to us, and we will tell you how to start.</span></p>
     </div>
   </div>
 </section>
@@ -162,7 +163,7 @@
         <div class="pi-main">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
           <h2><a href="programmes/getting-to-know.html">Getting to Know Classical Music</a></h2>
-          <p>Talks with <mark>live music</mark>, for anyone curious about Classical Music.</p>
+          <p>Talks with <mark>live music</mark>, for anyone curious about Classical Music.</p>
         </div>
         <div class="pi-state"><span class="tag">On request</span></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></div>
@@ -178,7 +179,7 @@
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></div>
       </li>
       <li class="pi" id="recorder-ensemble">
-        <div class="cover cover-sm" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">First notes · Reading music · Harmony</span></div>
+        <div class="cover cover-sm" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">First notes · Scores · Harmony</span></div>
         <div class="pi-main">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
           <h2><a href="programmes/recorder-ensemble.html">Community Recorder Ensemble Class</a></h2>
@@ -192,7 +193,7 @@
         <div class="pi-main">
           <span class="kicker"><i class="dot dot-open" aria-hidden="true"></i>Sharing</span>
           <h2><a href="programmes/letters-ensemble.html">Letters Ensemble</a></h2>
-          <p><mark>Amateur musicians</mark> in Dublin who play for communities.</p>
+          <p><mark>Amateur musicians</mark> in Dublin who play for communities.</p>
         </div>
         <div class="pi-state"><span class="tag">All players welcome</span><dl class="pi-facts"><div><dt>When</dt><dd>Ask us for rehearsal times</dd></div></dl></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></div>
@@ -202,7 +203,7 @@
         <div class="pi-main">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
           <h2><a href="programmes/concert-companion.html">Concert Guide &amp; Companion</a></h2>
-          <p><mark>Small groups</mark> go to concerts together, with a guide.</p>
+          <p><mark>Small groups</mark> go to concerts together, with a guide.</p>
         </div>
         <div class="pi-state"><span class="tag">Dates by email</span></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></div>
@@ -253,8 +254,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 2 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 4 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

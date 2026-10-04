@@ -139,6 +139,7 @@ RULES = [
     ("row",          ("now-line",)),
     ("row",          ("others",)),
     ("row",          ("rec",)),
+    ("row",          ("record-years",)),
     ("caption",      ("figcaption",)),
     ("value",        ("dd",)),
     ("paragraph",    ("prose",)),
@@ -368,8 +369,10 @@ def check(root, langs=("en", "ko")):
                 n, ns, longest = measure(text, lang)
                 rows.append((lang, pg, comp, n, ns, longest, text))
                 # the page budget counts open text: a folded list (<details>)
-                # is reference the reader opens on purpose
-                if "details" not in marks:
+                # is reference the reader opens on purpose, and the rows the
+                # ledger writes (a programme's record, News's year lists) are
+                # data, measured as rows but not prose (v6)
+                if "details" not in marks and not {"rec", "record-years"} & set(marks):
                     page_rows.append(n)
                 if any(a in text for a in ALLOW):
                     continue

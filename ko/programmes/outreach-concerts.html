@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 <header class="site-header">
@@ -117,7 +117,8 @@
       <ul class="nav-list">
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>홈</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>소개</a></li>
-        <li><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>프로그램<span class="nav-mark" aria-hidden="true"></span></a></li>
+        <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>프로그램<span class="nav-mark" aria-hidden="true"></span></a>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>클래식 음악과 친해지기</a></li><li><a href="../programmes/outreach-concerts.html" aria-current="page"><span class="ns-n" aria-hidden="true">02</span>찾아가는 음악회</a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>커뮤니티 리코더 앙상블 클래스</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>함께하는 음악여행</a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>함께하기</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>소식·기록</a></li>
       </ul>
@@ -139,9 +140,9 @@
       <div class="pp-intro">
         <p class="eyebrow lift"><i class="dot dot-open" aria-hidden="true"></i>나눔</p>
         <h1 class="pp-title"><span class="ln"><span>찾아가는 음악회</span></span></h1>
-        <p class="lead lift lift-3"><span class="sl">사람들이 <mark>이미 계신 방</mark>으로 찾아가 연주합니다.</span> <span class="sl">곡마다 이야기를 곁들입니다.</span></p>
+        <p class="lead lift lift-3"><span class="sl">사람들이 <mark>이미 계신 방으로</mark> 찾아가 연주합니다.</span> <span class="sl">곡마다 이야기를 곁들입니다.</span></p>
         <div class="pp-now lift lift-4">
-          <p><span class="tag">초청받는 중</span><span class="pp-say">방과 가능한 날짜를 적어 메일을 주세요.</span></p>
+          <p><span class="tag">초청받는 중</span><span class="pp-say">방과 가능한 날짜를 적어 메일을 주세요.</span></p>
           <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=%EC%B0%BE%EC%95%84%EA%B0%80%EB%8A%94%20%EC%9D%8C%EC%95%85%ED%9A%8C%20%EC%B4%88%EC%B2%AD&amp;body=%EA%B8%B0%EA%B4%80%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%3A%20%0D%0A%EC%97%B0%EC%A3%BC%ED%95%A0%20%EB%B0%A9%2C%20%ED%94%BC%EC%95%84%EB%85%B8%EA%B0%80%20%EC%9E%88%EB%8A%94%EC%A7%80%3A%20%0D%0A%EB%93%A4%EC%9C%BC%EC%8B%A4%20%EB%B6%84%EB%93%A4%EA%B3%BC%20%EB%8C%80%EB%9E%B5%EC%9D%98%20%EC%9D%B8%EC%9B%90%3A%20%0D%0A%EA%B0%80%EB%8A%A5%ED%95%9C%20%EB%82%A0%EC%A7%9C%EB%82%98%20%EC%8B%9C%EA%B0%84%3A%20%0D%0A%EB%8B%B4%EB%8B%B9%EC%9E%90%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%3A%20%0D%0A">음악회 초청하기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">함께하는 방법 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
@@ -166,7 +167,7 @@
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
         <h3>곡을 고릅니다</h3>
-        <p><mark>처음 들어도</mark> 즐길 수 있는 곡을 그 방과 듣는 분들에 맞춰 고릅니다.</p>
+        <p><mark>처음 들어도</mark> 즐길 수 있는 곡을 그 방과 듣는 분들에 맞춰 고릅니다.</p>
       </li>
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
@@ -186,15 +187,15 @@
     <dl class="qa rv-stagger">
       <div>
         <dt>누가 연주하나요?</dt>
-        <dd><strong>창립자 김서현</strong>이 클라리넷과 오르간으로 혼자, 또는 연주자를 불러 함께 연주합니다. Letters Ensemble이 맡는 음악회도 있습니다.</dd>
+        <dd><mark>창립자 김서현이</mark> 클라리넷과 오르간으로 혼자, 또는 연주자를 불러 함께 연주합니다. Letters Ensemble이 맡는 음악회도 있습니다.</dd>
       </div>
       <div>
-        <dt>누가 들을 수 있나요?</dt>
-        <dd>입주자나 환자, 가족, 직원까지 그 방에 계신 분 <mark>누구나</mark> 들으실 수 있습니다. 복장 규정은 없습니다.</dd>
+        <dt>누가 들을 수 있나요?</dt>
+        <dd>입주자나 환자, 가족, 직원까지 그 방에 계신 분 <mark>누구나</mark> 들으실 수 있습니다. 복장 규정은 없습니다.</dd>
       </div>
       <div>
         <dt>어디에서 연주해 왔나요?</dt>
-        <dd>가르친 곳까지 <strong>4개국 22곳</strong>입니다. 요양시설과 수도 공동체, 본당, 병원 등 모든 곳이 <a class="link" href="../about.html#places">단체 소개</a>에 있습니다.</dd>
+        <dd>가르친 곳까지 <mark>4개국</mark> 22곳입니다. 요양시설과 수도 공동체, 본당, 병원 등 모든 곳이 <a class="link" href="../about.html#places">단체 소개</a>에 있습니다.</dd>
       </div>
     </dl>
   </div>
@@ -215,10 +216,10 @@
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">04</span>기록</p>
       <div><h2><span class="sr-only">기록: </span>지금까지의 음악회.</h2>
-      <p class="sh-lead">기록에 남은 음악회를 날짜와 장소, 편성과 함께 모았습니다.</p></div>
+      <p class="sh-lead">기록에 남은 음악회를 날짜와 장소, 편성과 함께 모았습니다.</p></div>
     </header>
-    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="이 프로그램의 기록 22건을 2024년부터 2026년까지 달마다 표시했다."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>2024년 3월 16일 · 성 파트리치오 축일 음악회 · Dalgan Park, 미스 주</title><circle class="s-open" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>2024년 5월 5일 · Rathgar 본당 음악회 · Church of the Three Patrons, 더블린 Rathgar</title><circle class="s-open" cx="96.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>2024년 8월 4일 · 런던 한인 천주교회, 영국 · 클라리넷과 오르간</title><circle class="s-open" cx="156.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>2024년 10월 27일 · 파리 외방전교회, 프랑스 · 클라리넷 독주 · 은퇴 선교사들</title><circle class="s-open" cx="196.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>2024년 10월 28일 · Palais Brongniart, 파리 · 클라리넷 독주</title><circle class="s-open" cx="196.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>2024년 11월 23일 · 성 골롬반 축일 음악회 · 성 골롬반 외방선교 수녀회, 위클로 주</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>2024년 12월 28일 · 관덕정 순교기념관, 대구 · 클라리넷과 피아노</title><circle class="s-open" cx="236.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>2025년 3월 16일 · Dalgan Park, 미스 주 · 국악 앙상블과 클라리넷</title><circle class="s-open" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>2025년 4월 17일 · HSE EVE Goirtin Hub, 더블린 7구 · 클라리넷 독주 · 주간 돌봄 서비스</title><circle class="s-open" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>2025년 4월 17일 · Blessed Sacrament Chapel, 더블린 1구 · 오르간과 클라리넷</title><circle class="s-open" cx="316.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>2025년 4월 18일 · Dysart 본당, 웨스트미스 주 · 클라리넷 독주</title><circle class="s-open" cx="316.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>2025년 5월 27일 · Kilmessan 성당, 미스 주 · 오르간과 클라리넷</title><circle class="s-open" cx="336.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>2025년 6월 4일 · Dalgan Park, 미스 주</title><circle class="s-open" cx="356.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>2025년 7월 21일 · Morning Star Hostel, 더블린 7구 · 오르간과 클라리넷 · 노숙인 쉼터</title><circle class="s-open" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>2025년 11월 20일 · TU Dublin · 오르간과 클라리넷</title><circle class="s-open" cx="456.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>2025년 11월 22일 · TU Dublin · 클라리넷, 피아노, 하프</title><circle class="s-open" cx="456.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>2025년 11월 23일 · 성 골롬반 외방선교 수녀회, 위클로 주 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:17"><title>2025년 11월 30일 · 마리아의 프란치스코 선교 수녀회, 더블린 5구 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="17.0" r="4.4"/></g><g class="s-ev" style="--i:18"><title>2025년 12월 20일 · 성탄 음악회 · Clondalkin Lodge, 더블린</title><circle class="s-open" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:19"><title>2026년 8월 20일 · Tallaght University Hospital · 창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</title><circle class="s-open" cx="636.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:20"><title>2026년 8월 29일 · Rua Red, 더블린 Tallaght · 창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</title><circle class="s-open" cx="636.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:21"><title>2026년 9월 19일 · Methodist Centenary Church, 더블린 6구 Ranelagh · 소프라노⁠·해금⁠·클라리넷⁠·피아노</title><circle class="s-open" cx="656.0" cy="59.0" r="4.4"/></g></svg>
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>배움</span><span><i class="o" aria-hidden="true"></i>나눔</span><span>점 하나가 모임 하나, 막대는 여러 달에 걸친 것입니다.</span></figcaption>
+    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="이 프로그램의 기록 22건을 2024년부터 2026년까지 달마다 표시했다."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>2024년 3월 16일 · 성 파트리치오 축일 음악회 · Dalgan Park, 미스 주</title><circle class="s-open" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>2024년 5월 5일 · Rathgar 본당 음악회 · Church of the Three Patrons, 더블린 Rathgar</title><circle class="s-open" cx="96.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>2024년 8월 4일 · 런던 한인 천주교회, 영국 · 클라리넷과 오르간</title><circle class="s-open" cx="156.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>2024년 10월 27일 · 파리 외방전교회, 프랑스 · 클라리넷 독주 · 은퇴 선교사들</title><circle class="s-open" cx="196.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>2024년 10월 28일 · Palais Brongniart, 파리 · 클라리넷 독주</title><circle class="s-open" cx="196.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>2024년 11월 23일 · 성 골롬반 축일 음악회 · 성 골롬반 외방선교 수녀회, 위클로 주</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>2024년 12월 28일 · 관덕정 순교기념관, 대구 · 클라리넷과 피아노</title><circle class="s-open" cx="236.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>2025년 3월 16일 · Dalgan Park, 미스 주 · 국악 앙상블과 클라리넷</title><circle class="s-open" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>2025년 4월 17일 · HSE EVE Goirtin Hub, 더블린 7구 · 클라리넷 독주 · 주간 돌봄 서비스</title><circle class="s-open" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>2025년 4월 17일 · Blessed Sacrament Chapel, 더블린 1구 · 오르간과 클라리넷</title><circle class="s-open" cx="316.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>2025년 4월 18일 · Dysart 본당, 웨스트미스 주 · 클라리넷 독주</title><circle class="s-open" cx="316.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>2025년 5월 27일 · Kilmessan 성당, 미스 주 · 오르간과 클라리넷</title><circle class="s-open" cx="336.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>2025년 6월 4일 · Dalgan Park, 미스 주</title><circle class="s-open" cx="356.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>2025년 7월 21일 · Morning Star Hostel, 더블린 7구 · 오르간과 클라리넷 · 노숙인 쉼터</title><circle class="s-open" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>2025년 11월 20일 · TU Dublin, 더블린 7구 · 오르간과 클라리넷</title><circle class="s-open" cx="456.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>2025년 11월 22일 · TU Dublin, 더블린 7구 · 클라리넷, 피아노, 하프</title><circle class="s-open" cx="456.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>2025년 11월 23일 · 성 골롬반 외방선교 수녀회, 위클로 주 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:17"><title>2025년 11월 30일 · 마리아의 프란치스코 선교 수녀회, 더블린 5구 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="17.0" r="4.4"/></g><g class="s-ev" style="--i:18"><title>2025년 12월 20일 · 성탄 음악회 · Clondalkin Lodge, 더블린</title><circle class="s-open" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:19"><title>2026년 8월 20일 · Tallaght University Hospital · 창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</title><circle class="s-open" cx="636.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:20"><title>2026년 8월 29일 · Rua Red, 더블린 Tallaght · 창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</title><circle class="s-open" cx="636.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:21"><title>2026년 9월 19일 · Methodist Centenary Church, 더블린 6구 Ranelagh · 소프라노⁠·해금⁠·클라리넷⁠·피아노</title><circle class="s-open" cx="656.0" cy="59.0" r="4.4"/></g></svg>
+      <figcaption class="strip-key"><span><i aria-hidden="true"></i>배움</span><span><i class="o" aria-hidden="true"></i>나눔</span><span>점 하나가 모임 하나, 막대는 여러 달에 걸친 것입니다.</span></figcaption>
     </figure>
     <div class="rec-wrap rv">
     <details class="fold rec-fold"><summary>이전 기록 16건 보기</summary><ol class="rec rec-long">
@@ -280,11 +281,11 @@
         </li>
         <li>
           <span class="rec-when">2025년 11월 20일</span>
-          <span class="rec-what"><b>TU Dublin</b><span>오르간과 클라리넷</span></span>
+          <span class="rec-what"><b>TU Dublin, 더블린 7구</b><span>오르간과 클라리넷</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 11월 22일</span>
-          <span class="rec-what"><b>TU Dublin</b><span>클라리넷, 피아노, 하프</span></span>
+          <span class="rec-what"><b>TU Dublin, 더블린 7구</b><span>클라리넷, 피아노, 하프</span></span>
         </li>
     </ol></details>
     <ol class="rec rec-long">
@@ -302,11 +303,11 @@
         </li>
         <li>
           <span class="rec-when">2026년 8월 20일</span>
-          <span class="rec-what"><b>Tallaght University Hospital</b><span>창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</span></span>
+          <span class="rec-what"><b>Tallaght University Hospital</b><span>창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</span></span>
         </li>
         <li>
           <span class="rec-when">2026년 8월 29일</span>
-          <span class="rec-what"><b>Rua Red, 더블린 Tallaght</b><span>창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</span></span>
+          <span class="rec-what"><b>Rua Red, 더블린 Tallaght</b><span>창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</span></span>
         </li>
         <li>
           <span class="rec-when">2026년 9월 19일</span>
@@ -386,8 +387,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Classical Music for Everyone · 아일랜드 더블린</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
-      <span>갱신 2026년 10월 2일 · <a href="../contact.html#privacy">개인정보 처리방침</a></span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
+      <span>갱신 2026년 10월 4일 · <a href="../contact.html#privacy">개인정보 처리방침</a></span>
     </div>
   </div>
 </footer>

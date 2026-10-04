@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -117,7 +117,8 @@
       <ul class="nav-list">
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
-        <li><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a></li>
+        <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="../programmes/letters-ensemble.html" aria-current="page"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
@@ -139,7 +140,7 @@
       <div class="pp-intro">
         <p class="eyebrow lift"><i class="dot dot-open" aria-hidden="true"></i>Sharing</p>
         <h1 class="pp-title"><span class="ln"><span>Letters Ensemble</span></span></h1>
-        <p class="lead lift lift-3"><span class="sl"><mark>Amateur musicians</mark> in Dublin, together since 2024.</span> <span class="sl">We play Irish, Korean and sacred music.</span></p>
+        <p class="lead lift lift-3"><span class="sl"><mark>Amateur musicians</mark> in Dublin, together since 2024.</span> <span class="sl">We play Irish, Korean and sacred music.</span></p>
         <div class="pp-now lift lift-4">
           <p><span class="tag">All players welcome</span><span class="pp-say">Write with your instrument, and we will send rehearsal times.</span></p>
           <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Joining%20the%20Letters%20Ensemble&amp;body=Your%20name%3A%20%0D%0AYour%20instrument%28s%29%3A%20%0D%0AHow%20long%20you%20have%20played%3A%20%0D%0AWhen%20you%20last%20played%3A%20%0D%0ADays%20and%20times%20that%20suit%20you%3A%20%0D%0A">Ask about joining <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">How to take part <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
@@ -161,7 +162,7 @@
       <li style="--i:0">
         <span class="step-n" aria-hidden="true">1</span>
         <h3>Tell us your instrument</h3>
-        <p>Write with what you play. Players of <mark>any background</mark> are welcome.</p>
+        <p>Write with what you play. Players of <mark>any background</mark> are welcome.</p>
       </li>
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
@@ -194,7 +195,7 @@
       </div>
       <div>
         <dt>How many concerts has it given?</dt>
-        <dd>Four formal concerts, from Dalgan Park in March 2024 to Christmas 2025.</dd>
+        <dd><mark>Four formal concerts</mark>, from Dalgan Park in March 2024 to Christmas 2025.</dd>
       </div>
     </dl>
   </div>
@@ -310,8 +311,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 2 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 4 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

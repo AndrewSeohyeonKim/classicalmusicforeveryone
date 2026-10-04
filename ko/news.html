@@ -101,7 +101,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 <header class="site-header">
@@ -116,7 +116,8 @@
       <ul class="nav-list">
         <li><a class="nav-link" href="index.html"><span class="nav-n" aria-hidden="true">01</span>홈</a></li>
         <li><a class="nav-link" href="about.html"><span class="nav-n" aria-hidden="true">02</span>소개</a></li>
-        <li><a class="nav-link" href="programmes.html"><span class="nav-n" aria-hidden="true">03</span>프로그램</a></li>
+        <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="programmes.html"><span class="nav-n" aria-hidden="true">03</span>프로그램</a>
+          <ul class="nav-sub"><li><a href="programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>클래식 음악과 친해지기</a></li><li><a href="programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>찾아가는 음악회</a></li><li><a href="programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>커뮤니티 리코더 앙상블 클래스</a></li><li><a href="programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>함께하는 음악여행</a></li></ul></li>
         <li><a class="nav-link" href="get-involved.html"><span class="nav-n" aria-hidden="true">04</span>함께하기</a></li>
         <li><a class="nav-link" href="news.html" aria-current="page"><span class="nav-n" aria-hidden="true">05</span>소식·기록<span class="nav-mark" aria-hidden="true"></span></a></li>
       </ul>
@@ -134,7 +135,7 @@
     <p class="eyebrow lift">소식⁠·기록</p>
     <div class="ph-head">
       <h1 class="ph-title"><span class="ln"><span>새 소식과 지나온 기록.</span></span></h1>
-      <p class="ph-lead lift lift-3">2024년부터 해 온 일을 달력과 연표, 사진으로 모았습니다.</p>
+      <p class="ph-lead lift lift-3">새 소식과 2024년부터 <mark>해 온 강의와 연주</mark>, 사진을 모았습니다.</p>
     </div>
   </div>
 </section>
@@ -143,23 +144,23 @@
   <div class="wrap">
     <h2 class="sr-only">새 소식</h2>
     <div class="latest rv-stagger">
-      <article>
-        <span class="kicker">2026년 가을</span>
+      <article class="lt">
+        <div class="lt-top"><span class="d-ring" aria-hidden="true"><svg class="d-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M8.6 12.4V5.6a1.4 1.4 0 0 1 2.8 0v5.6"/><path pathLength="1" d="M11.4 11.2V4.2a1.4 1.4 0 0 1 2.8 0v7"/><path pathLength="1" d="M14.2 11.2V5.4a1.4 1.4 0 0 1 2.8 0v6.4"/><path pathLength="1" d="M17 11.8V8.6a1.4 1.4 0 0 1 2.8 0v5.2c0 4.3-2.9 7.4-6.9 7.4-2.4 0-4.1-1-5.4-2.9l-3.2-4.8a1.5 1.5 0 0 1 2.4-1.8l1.9 2.3"/></svg></span><span class="lt-when"><span class="lt-kind">이사회</span><span class="sr-only">, </span><span class="lt-date">2026년 가을</span></span></div>
         <h3>창립 이사회를 꾸립니다</h3>
         <p>보증유한회사 설립을 준비하며 자원봉사 이사를 찾습니다.</p>
-        <div class="btn-row"><a class="go" href="get-involved.html#board">이사회 역할 보기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+        <div class="lt-go"><a class="go" href="get-involved.html#board">이사회 역할 보기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       </article>
-      <article>
-        <span class="kicker">2026년 가을</span>
+      <article class="lt">
+        <div class="lt-top"><span class="d-ring" aria-hidden="true"><svg class="d-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg></span><span class="lt-when"><span class="lt-kind">클래스</span><span class="sr-only">, </span><span class="lt-date">2026년 가을</span></span></div>
         <h3>커뮤니티 리코더 앙상블 클래스</h3>
         <p>매주 수요일 저녁 Mulhuddart Community Centre에서 열립니다.</p>
-        <div class="btn-row"><a class="go" href="programmes/recorder-ensemble.html">클래스 안내 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+        <div class="lt-go"><a class="go" href="programmes/recorder-ensemble.html">클래스 안내 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       </article>
-      <article>
-        <span class="kicker">2026년 9월 19일</span>
-        <h3>Methodist Centenary Church 가을 음악회</h3>
-        <p>Ranelagh에서 소프라노⁠·해금⁠·클라리넷⁠·피아노로 연주했습니다.</p>
-        <div class="btn-row"><a class="go" href="programmes/outreach-concerts.html#record">음악회 기록 보기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+      <article class="lt">
+        <div class="lt-top"><span class="d-ring" aria-hidden="true"><svg class="d-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 11.4h12.4c3.6 0 6 1.2 6 3.2 0 .4-.3.6-.9.6H3z"/><path pathLength="1" d="M5.8 11.4l11.4-8.7"/><path pathLength="1" d="M15 11.4V4.38"/><path pathLength="1" d="M5 15.2V21"/><path pathLength="1" d="M18.2 15.2V21"/><path pathLength="1" d="M1.6 21h20.8"/></svg></span><span class="lt-when"><span class="lt-kind">음악회</span><span class="sr-only">, </span><span class="lt-date">2026년 9월 19일</span></span></div>
+        <h3>가을 음악회</h3>
+        <p>Ranelagh의 Methodist Centenary Church에서 열었습니다.</p>
+        <div class="lt-go"><a class="go" href="programmes/outreach-concerts.html#record">음악회 기록 보기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       </article>
     </div>
   </div>
@@ -169,15 +170,171 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true">기록</p>
-      <div><h2><span class="sr-only">기록: </span>마흔 번, 한 칸에 하나씩.</h2>
-      <p class="sh-lead">기록된 강의와 연주를 달마다 놓았습니다.</p></div>
+      <div><h2><span class="sr-only">기록: </span>마흔 번, 연도별로.</h2>
+      <p class="sh-lead">기록된 강의와 연주마다 무엇을 어디서 했는지 적었습니다.</p></div>
     </header>
-    <div class="mini-figs rv"><dl><div><dt>강의</dt><dd>17</dd></div><div><dt>찾아가는 음악회</dt><dd>20</dd></div><div><dt>파일럿 음악회</dt><dd>1</dd></div><div><dt>South Dublin Live 2026 음악회</dt><dd>2</dd></div></dl><p class="mini-period">2024년 1월⁠~⁠2026년 9월</p></div>
-    <figure class="chart rv">
-      <div class="chart-wide"><svg viewBox="0 0 1082 208" role="img" aria-label="2024년부터 2026년까지의 달력. 기록된 40회를 한 칸씩 표시했다: 강의 17회, 연주 23회."><text class="c-mon" x="137" y="20" text-anchor="middle">1월</text><text class="c-mon" x="219" y="20" text-anchor="middle">2월</text><text class="c-mon" x="301" y="20" text-anchor="middle">3월</text><text class="c-mon" x="383" y="20" text-anchor="middle">4월</text><text class="c-mon" x="465" y="20" text-anchor="middle">5월</text><text class="c-mon" x="547" y="20" text-anchor="middle">6월</text><text class="c-mon" x="629" y="20" text-anchor="middle">7월</text><text class="c-mon" x="711" y="20" text-anchor="middle">8월</text><text class="c-mon" x="793" y="20" text-anchor="middle">9월</text><text class="c-mon" x="875" y="20" text-anchor="middle">10월</text><text class="c-mon" x="957" y="20" text-anchor="middle">11월</text><text class="c-mon" x="1039" y="20" text-anchor="middle">12월</text><text class="c-year" x="0" y="65">2024</text><rect class="c-cell" x="96.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="178.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="260.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="342.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="424.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="506.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="588.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="670.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="752.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="834.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="916.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="998.5" y="34.5" width="81" height="49" rx="1"/><g class="c-ev"><title>2024년 1월 28일 · 친해지기 · 더블린 18구 Sandyford</title><rect class="c-on" x="101.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 2월 25일 · 함께하기 (1) · Our Lady of Dolours 성당</title><rect class="c-on" x="183.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 3월 16일 · 성 파트리치오 축일 음악회 · Dalgan Park, 미스 주</title><rect class="c-open" x="265.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 3월 23일 · 함께하기 (2) · Our Lady of Dolours 성당</title><rect class="c-on" x="284.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 4월 14일 · 내 취향 찾기 (1) · Our Lady of Dolours 성당</title><rect class="c-on" x="347.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 4월 27일 · 내 취향 찾기 (2) · Our Lady of Dolours 성당</title><rect class="c-on" x="366.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 5월 5일 · Rathgar 본당 음악회 · Church of the Three Patrons, 더블린 Rathgar</title><rect class="c-open" x="429.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 6월 22일 · 유럽의 여름 축제 · Our Lady of Dolours 성당</title><rect class="c-on" x="511.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 8월 4일 · 런던 한인 천주교회, 영국 · 클라리넷과 오르간</title><rect class="c-open" x="675.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 10월 27일 · 파리 외방전교회, 프랑스 · 클라리넷 독주 · 은퇴 선교사들</title><rect class="c-open" x="839.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 10월 28일 · Palais Brongniart, 파리 · 클라리넷 독주</title><rect class="c-open" x="858.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 11월 8일 · 친해지기 + 함께하기 (1) · TU Dublin</title><rect class="c-on" x="921.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 11월 15일 · 친해지기 + 함께하기 (2) · TU Dublin</title><rect class="c-on" x="940.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 11월 23일 · 성 골롬반 축일 음악회 · 성 골롬반 외방선교 수녀회, 위클로 주</title><rect class="c-open" x="959.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2024년 12월 28일 · 관덕정 순교기념관, 대구 · 클라리넷과 피아노</title><rect class="c-open" x="1003.0" y="43" width="14" height="14" rx="1"/></g><text class="c-year" x="0" y="123">2025</text><rect class="c-cell" x="96.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="178.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="260.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="342.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="424.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="506.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="588.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="670.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="752.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="834.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="916.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="998.5" y="92.5" width="81" height="49" rx="1"/><g class="c-ev"><title>2025년 2월 21일 · 친해지기 + 함께하기 (1) · TU Dublin</title><rect class="c-on" x="183.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 3월 7일 · 친해지기 + 함께하기 (2) · TU Dublin</title><rect class="c-on" x="265.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 3월 16일 · Dalgan Park, 미스 주 · 국악 앙상블과 클라리넷</title><rect class="c-open" x="284.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 4월 11일 · 내 취향 찾기 · TU Dublin</title><rect class="c-on" x="347.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 4월 17일 · HSE EVE Goirtin Hub, 더블린 7구 · 클라리넷 독주 · 주간 돌봄 서비스</title><rect class="c-open" x="366.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 4월 17일 · Blessed Sacrament Chapel, 더블린 1구 · 오르간과 클라리넷</title><rect class="c-open" x="385.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 4월 18일 · Dysart 본당, 웨스트미스 주 · 클라리넷 독주</title><rect class="c-open" x="404.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 5월 27일 · Kilmessan 성당, 미스 주 · 오르간과 클라리넷</title><rect class="c-open" x="429.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 6월 4일 · Dalgan Park, 미스 주</title><rect class="c-open" x="511.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 7월 21일 · BBC 프롬스 · Carmelite Community Centre, 더블린</title><rect class="c-on" x="593.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 7월 21일 · Morning Star Hostel, 더블린 7구 · 오르간과 클라리넷 · 노숙인 쉼터</title><rect class="c-open" x="612.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 9월 26일 · 친해지기 + 함께하기 (1) · TU Dublin</title><rect class="c-on" x="757.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 10월 17일 · 친해지기 + 함께하기 (2) · TU Dublin</title><rect class="c-on" x="839.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 11월 20일 · TU Dublin · 오르간과 클라리넷</title><rect class="c-open" x="921.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 11월 22일 · TU Dublin · 클라리넷, 피아노, 하프</title><rect class="c-open" x="940.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 11월 23일 · 성 골롬반 외방선교 수녀회, 위클로 주 · 클라리넷 독주</title><rect class="c-open" x="959.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 11월 30일 · 마리아의 프란치스코 선교 수녀회, 더블린 5구 · 클라리넷 독주</title><rect class="c-open" x="978.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 12월 5일 · 함께하기 (1): 함께 간 연주회 · 국립 콘서트홀, 더블린</title><rect class="c-on" x="1003.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2025년 12월 20일 · 성탄 음악회 · Clondalkin Lodge, 더블린</title><rect class="c-open" x="1022.0" y="101" width="14" height="14" rx="1"/></g><text class="c-year" x="0" y="181">2026</text><rect class="c-cell" x="96.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="178.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="260.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="342.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="424.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="506.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="588.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="670.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="752.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="834.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="916.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="998.5" y="150.5" width="81" height="49" rx="1"/><g class="c-ev"><title>2026년 1월 23일 · 내 취향 찾기 · East Quad, TU Dublin Grangegorman</title><rect class="c-on" x="101.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2026년 2월 · 내 취향 찾기 (2) · East Quad, TU Dublin Grangegorman</title><rect class="c-on" x="183.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2026년 4월 · 부활 음악회. Presentation 수녀회 리코더 앙상블 · Clondalkin Lodge, 더블린</title><rect class="c-open" x="347.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2026년 8월 20일 · Tallaght University Hospital · 창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</title><rect class="c-open" x="675.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2026년 8월 29일 · Rua Red, 더블린 Tallaght · 창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</title><rect class="c-open" x="694.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>2026년 9월 19일 · Methodist Centenary Church, 더블린 6구 Ranelagh · 소프라노⁠·해금⁠·클라리넷⁠·피아노</title><rect class="c-open" x="757.0" y="159" width="14" height="14" rx="1"/></g></svg></div>
-      <div class="chart-tall"><svg viewBox="0 0 270 392" role="img" aria-label="2024년부터 2026년까지의 달력. 기록된 40회를 한 칸씩 표시했다: 강의 17회, 연주 23회."><text class="c-year c-year-sm" x="83" y="20" text-anchor="middle">2024</text><text class="c-year c-year-sm" x="157" y="20" text-anchor="middle">2025</text><text class="c-year c-year-sm" x="231" y="20" text-anchor="middle">2026</text><text class="c-mon" x="0" y="49">1월</text><rect class="c-cell" x="46.5" y="30.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="30.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="30.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="79">2월</text><rect class="c-cell" x="46.5" y="60.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="60.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="60.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="109">3월</text><rect class="c-cell" x="46.5" y="90.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="90.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="90.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="139">4월</text><rect class="c-cell" x="46.5" y="120.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="120.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="120.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="169">5월</text><rect class="c-cell" x="46.5" y="150.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="150.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="150.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="199">6월</text><rect class="c-cell" x="46.5" y="180.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="180.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="180.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="229">7월</text><rect class="c-cell" x="46.5" y="210.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="210.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="210.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="259">8월</text><rect class="c-cell" x="46.5" y="240.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="240.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="240.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="289">9월</text><rect class="c-cell" x="46.5" y="270.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="270.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="270.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="319">10월</text><rect class="c-cell" x="46.5" y="300.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="300.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="300.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="349">11월</text><rect class="c-cell" x="46.5" y="330.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="330.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="330.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="379">12월</text><rect class="c-cell" x="46.5" y="360.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="360.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="360.5" width="73" height="29" rx="1"/><rect class="c-on" x="52.5" y="39.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="69.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-on" x="68.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-on" x="68.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="159.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="189.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="249.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="309.0" width="12" height="12" rx="1"/><rect class="c-open" x="68.5" y="309.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-on" x="68.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="84.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="369.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="69.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="158.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="174.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="126.5" y="159.0" width="12" height="12" rx="1"/><rect class="c-open" x="126.5" y="189.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="219.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="219.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="279.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="309.0" width="12" height="12" rx="1"/><rect class="c-open" x="126.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="158.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="174.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="369.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="369.0" width="12" height="12" rx="1"/><rect class="c-on" x="200.5" y="39.0" width="12" height="12" rx="1"/><rect class="c-on" x="200.5" y="69.0" width="12" height="12" rx="1"/><rect class="c-open" x="200.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="200.5" y="249.0" width="12" height="12" rx="1"/><rect class="c-open" x="216.5" y="249.0" width="12" height="12" rx="1"/><rect class="c-open" x="200.5" y="279.0" width="12" height="12" rx="1"/></svg></div>
-      <figcaption class="chart-key"><span><i aria-hidden="true"></i>강의 (17)</span><span><i class="o" aria-hidden="true"></i>연주 (23)</span><span>2025년 12월 강의는 함께 간 음악회였습니다.</span></figcaption>
-    </figure>
+    <div class="mini-figs rv"><dl><div><dt><i class="dot" aria-hidden="true"></i>강의</dt><dd>17</dd></div><div><dt><i class="dot dot-open" aria-hidden="true"></i>찾아가는 음악회</dt><dd>20</dd></div><div><dt><i class="dot dot-open" aria-hidden="true"></i>파일럿 음악회</dt><dd>1</dd></div><div><dt><i class="dot dot-open" aria-hidden="true"></i>South Dublin Live 2026 음악회</dt><dd>2</dd></div></dl><p class="mini-period">2024년 1월⁠~⁠2026년 9월</p></div>
+    <div class="record-years rv">
+      <div class="ry">
+        <h3 class="ry-y">2024<span class="sr-only">, </span><span class="ry-n">강의와 연주 15회</span></h3>
+        <details class="fold ry-fold"><summary>2024년 15건 모두 보기</summary>
+        <ol class="ry-months">
+          <li class="ry-mo"><span class="ry-m">1월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>친해지기</b><span class="sr-only">, </span><span>더블린 18구 Sandyford</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">2월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>함께하기 (1)</b><span class="sr-only">, </span><span>Our Lady of Dolours 성당</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">3월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>성 파트리치오 축일 음악회</b><span class="sr-only">, </span><span>Dalgan Park, 미스 주</span></span></li>
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>함께하기 (2)</b><span class="sr-only">, </span><span>Our Lady of Dolours 성당</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">4월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>내 취향 찾기 (1)</b><span class="sr-only">, </span><span>Our Lady of Dolours 성당</span></span></li>
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>내 취향 찾기 (2)</b><span class="sr-only">, </span><span>Our Lady of Dolours 성당</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">5월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Rathgar 본당 음악회</b><span class="sr-only">, </span><span>Church of the Three Patrons, 더블린 Rathgar</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">6월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>유럽의 여름 축제</b><span class="sr-only">, </span><span>Our Lady of Dolours 성당</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">8월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>런던 한인 천주교회, 영국</b><span class="sr-only">, </span><span>클라리넷과 오르간</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">10월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>파리 외방전교회, 프랑스</b><span class="sr-only">, </span><span>클라리넷 독주 · 은퇴 선교사들</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Palais Brongniart, 파리</b><span class="sr-only">, </span><span>클라리넷 독주</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">11월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>친해지기 + 함께하기 (1)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>친해지기 + 함께하기 (2)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>성 골롬반 축일 음악회</b><span class="sr-only">, </span><span>성 골롬반 외방선교 수녀회, 위클로 주</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">12월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>관덕정 순교기념관, 대구</b><span class="sr-only">, </span><span>클라리넷과 피아노</span></span></li>
+            </ol>
+          </li>
+        </ol>
+        </details>
+      </div>
+      <div class="ry">
+        <h3 class="ry-y">2025<span class="sr-only">, </span><span class="ry-n">강의와 연주 19회</span></h3>
+        <details class="fold ry-fold"><summary>2025년 19건 모두 보기</summary>
+        <ol class="ry-months">
+          <li class="ry-mo"><span class="ry-m">2월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>친해지기 + 함께하기 (1)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">3월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>친해지기 + 함께하기 (2)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Dalgan Park, 미스 주</b><span class="sr-only">, </span><span>국악 앙상블과 클라리넷</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">4월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>내 취향 찾기</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>HSE EVE Goirtin Hub, 더블린 7구</b><span class="sr-only">, </span><span>클라리넷 독주 · 주간 돌봄 서비스</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Blessed Sacrament Chapel, 더블린 1구</b><span class="sr-only">, </span><span>오르간과 클라리넷</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Dysart 본당, 웨스트미스 주</b><span class="sr-only">, </span><span>클라리넷 독주</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">5월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Kilmessan 성당, 미스 주</b><span class="sr-only">, </span><span>오르간과 클라리넷</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">6월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Dalgan Park, 미스 주</b></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">7월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>BBC 프롬스</b><span class="sr-only">, </span><span>Carmelite Community Centre, 더블린</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Morning Star Hostel, 더블린 7구</b><span class="sr-only">, </span><span>오르간과 클라리넷 · 노숙인 쉼터</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">9월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>친해지기 + 함께하기 (1)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">10월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>친해지기 + 함께하기 (2)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">11월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>TU Dublin, 더블린 7구</b><span class="sr-only">, </span><span>오르간과 클라리넷</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>TU Dublin, 더블린 7구</b><span class="sr-only">, </span><span>클라리넷, 피아노, 하프</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>성 골롬반 외방선교 수녀회, 위클로 주</b><span class="sr-only">, </span><span>클라리넷 독주</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>마리아의 프란치스코 선교 수녀회, 더블린 5구</b><span class="sr-only">, </span><span>클라리넷 독주</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">12월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>함께하기 (1): 함께 간 연주회</b><span class="sr-only">, </span><span>국립 콘서트홀, 더블린</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>성탄 음악회</b><span class="sr-only">, </span><span>Clondalkin Lodge, 더블린</span></span></li>
+            </ol>
+          </li>
+        </ol>
+        </details>
+      </div>
+      <div class="ry">
+        <h3 class="ry-y">2026<span class="sr-only">, </span><span class="ry-n">강의와 연주 6회</span></h3>
+        <ol class="ry-months">
+          <li class="ry-mo"><span class="ry-m">1월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>내 취향 찾기 (1)</b><span class="sr-only">, </span><span>East Quad, TU Dublin Grangegorman</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">2월</span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">강의: </span><b>내 취향 찾기 (2)</b><span class="sr-only">, </span><span>East Quad, TU Dublin Grangegorman</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">4월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>부활 음악회: Presentation 수녀회 리코더 앙상블</b><span class="sr-only">, </span><span>Clondalkin Lodge, 더블린</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">8월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Tallaght University Hospital</b><span class="sr-only">, </span><span>창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Rua Red, 더블린 Tallaght</b><span class="sr-only">, </span><span>창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">9월</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">연주: </span><b>Methodist Centenary Church, 더블린 6구 Ranelagh</b><span class="sr-only">, </span><span>소프라노⁠·해금⁠·클라리넷⁠·피아노</span></span></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -187,42 +344,54 @@
       <p class="eyebrow section-label" aria-hidden="true">연표</p>
       <h2><span class="sr-only">연표: </span>자라 온 길.</h2>
     </header>
-    <ol class="timeline">
-      <li class="tl-item">
-        <span class="tl-date">2024년 1월</span>
-        <div><h3>시작</h3><p>더블린에서 Letters Ensemble과 함께 창립했습니다. 첫 강의에 여섯 명이 왔습니다.</p></div>
+    <ol class="timeline timeline-years">
+      <li class="tl-year"><span class="tl-y">2024</span>
+        <ol class="tl-items">
+          <li class="tl-item">
+            <span class="tl-date">1월</span>
+            <div><h3>시작</h3><p class="tl-text"><span class="sl">더블린에서 Letters Ensemble과 함께 창립했습니다.</span> <span class="sl">첫 강의에 <mark>여섯 명이</mark> 왔습니다.</span></p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">한 해 동안</span>
+            <div><h3>더블린 밖으로</h3><p class="tl-text">미스⁠·위클로 주와 런던, 파리, 대구에서 연주했습니다.</p></div>
+          </li>
+        </ol>
       </li>
-      <li class="tl-item">
-        <span class="tl-date">2024년</span>
-        <div><h3>해외에서도</h3><p>미스⁠·위클로 주와 런던, 파리, 대구에서 연주했습니다.</p></div>
+      <li class="tl-year"><span class="tl-y">2025</span>
+        <ol class="tl-items">
+          <li class="tl-item">
+            <span class="tl-date">가을</span>
+            <div><h3>공연을 안내합니다</h3><p class="tl-text">참가자에게 공연을 안내하고 단체 관람을 준비하기 시작했습니다.</p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">10월</span>
+            <div><h3>관객이 연주자가 됩니다</h3><p class="tl-text">은퇴한 Presentation <mark>수녀님 일곱 분과</mark> 리코더 앙상블 준비를 시작했습니다.</p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">12월</span>
+            <div><h3>함께 본 음악회</h3><p class="tl-text">강의 열다섯 번째 모임은 국립 콘서트홀에서 함께 들은 음악회였습니다.</p></div>
+          </li>
+        </ol>
       </li>
-      <li class="tl-item">
-        <span class="tl-date">2025년 가을</span>
-        <div><h3>공연을 안내합니다</h3><p>참가자에게 공연을 안내하고 단체 관람을 준비하기 시작했습니다.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">2025년 10월</span>
-        <div><h3>관객이 연주자가 됩니다</h3><p>은퇴한 Presentation 수녀님 일곱 분과 리코더 앙상블 준비를 시작했습니다.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">2025년 12월</span>
-        <div><h3>함께 본 음악회</h3><p>강의 열다섯 번째 모임은 국립 콘서트홀에서 함께 들은 음악회였습니다.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">2026년 1&ndash;4월</span>
-        <div><h3>일곱 분 모두 끝까지</h3><p>파일럿은 Warrenmount에서 10주 동안 연습했습니다. 부활 음악회는 Clondalkin Lodge에서 열었습니다.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">2026년 8월</span>
-        <div><h3>Tallaght에서 두 번</h3><p>창립자가 South Dublin Live 2026에 선정됐습니다. 병원과 Rua Red에서 연주했습니다.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">2026년 9월</span>
-        <div><h3>가을 음악회</h3><p>더블린 6구 Methodist Centenary Church에서 열었습니다.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">2026년 가을</span>
-        <div><h3>일반에 열린 클래스</h3><p>파일럿에서 나온 클래스가 Mulhuddart에서 시작됐습니다.</p></div>
+      <li class="tl-year"><span class="tl-y">2026</span>
+        <ol class="tl-items">
+          <li class="tl-item">
+            <span class="tl-date">1월⁠~⁠4월</span>
+            <div><h3>일곱 분 모두 끝까지</h3><p class="tl-text"><span class="sl">Warrenmount에서 10주 동안 연습했습니다.</span> <span class="sl"><mark>부활 음악회는</mark> Clondalkin Lodge에서 무대에 올랐습니다.</span></p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">8월</span>
+            <div><h3>Tallaght에서 두 번</h3><p class="tl-text"><span class="sl">창립자가 South Dublin Live에 선정됐습니다.</span> <span class="sl">병원과 Rua Red에서 연주했습니다.</span></p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">9월</span>
+            <div><h3>가을 음악회</h3><p class="tl-text">더블린 6구 Methodist Centenary Church에서 열었습니다.</p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">가을</span>
+            <div><h3>일반에 열린 클래스</h3><p class="tl-text"><mark>파일럿에서 나온</mark> 클래스를 Mulhuddart에서 엽니다.</p></div>
+          </li>
+        </ol>
       </li>
     </ol>
   </div>
@@ -236,19 +405,19 @@
       <p class="sh-lead">최근 사진부터 실었습니다.</p></div>
     </header>
     <ul class="gallery">
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/tuh-trio.jpg" srcset="../images/tuh-trio-800.jpg 800w, ../images/tuh-trio.jpg 1236w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1236" height="787" alt="Tallaght University Hospital 아트리움의 소프라노·피아노·클라리넷"></div><figcaption>Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/tuh-atrium.jpg" srcset="../images/tuh-atrium-800.jpg 800w, ../images/tuh-atrium.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1052" alt="Tallaght University Hospital 경당에서 연주하는 클라리넷·해금·키보드"></div><figcaption>Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/tuh-haegeum.jpg" srcset="../images/tuh-haegeum-800.jpg 800w, ../images/tuh-haegeum.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="934" alt="병원 아트리움에서 해금을 연주하는 연주자"></div><figcaption>Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/ruared-trio.jpg" srcset="../images/ruared-trio-800.jpg 800w, ../images/ruared-trio.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="933" alt="Rua Red 무대에서 인사하는 클라리넷·소프라노·피아노"></div><figcaption>Rua Red, Tallaght · 2026년 8월 · 사진: Ben Ryan / SDCC</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/care-christmas.jpg" srcset="../images/care-christmas-800.jpg 800w, ../images/care-christmas.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="성탄절 요양시설에서 연주하는 클라리넷과 현악 연주자 세 명"></div><figcaption>찾아가는 음악회 · 2025년 성탄</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/score-stand.jpg" srcset="../images/score-stand-800.jpg 800w, ../images/score-stand.jpg 1050w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1050" height="1400" alt="보면대 위 파트 악보 너머로 연습하는 현악 3중주"></div><figcaption>성탄 음악회를 앞두고 · 2025년 12월</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/recorders.jpg" srcset="../images/recorders-800.jpg 800w, ../images/recorders.jpg 1343w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1343" height="1400" alt="나란히 세워 둔 크기가 다른 리코더 여섯 대"></div><figcaption>리코더 · 2025년 11월</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/church-aisle.jpg" srcset="../images/church-aisle-800.jpg 800w, ../images/church-aisle.jpg 1050w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1050" height="1400" alt="웨스트미스 주 본당 제대 앞에 든 클라리넷"></div><figcaption>Dysart, 웨스트미스 주 · 2025년</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/columban-ensemble.jpg" srcset="../images/columban-ensemble-800.jpg 800w, ../images/columban-ensemble.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="노란 방에서 악기를 든 Letters Ensemble 현악 연주자 네 명과 지휘자"></div><figcaption>성 골롬반 외방선교 수녀회, 위클로 주 · 2024년 11월</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/dalgan-hall.jpg" srcset="../images/dalgan-hall-800.jpg 800w, ../images/dalgan-hall.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="음악회를 앞두고 의자와 보면대를 놓아 둔, 아직 아무도 없는 홀"></div><figcaption>Dalgan Park, 미스 주 · 2024년 3월</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/hero-outreach.jpg" srcset="../images/hero-outreach-800.jpg 800w, ../images/hero-outreach.jpg 1800w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1800" height="1350" alt="성 파트리치오 축일 음악회에서 연주하는 Letters Ensemble과 지휘자"></div><figcaption>Letters Ensemble · 성 파트리치오 축일 음악회</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/letters-ensemble.jpg" srcset="../images/letters-ensemble-800.jpg 800w, ../images/letters-ensemble.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="악기를 든 Letters Ensemble 단원들"></div><figcaption>Letters Ensemble</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/two-clarinets.jpg" srcset="../images/two-clarinets-800.jpg 800w, ../images/two-clarinets.jpg 1050w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1050" height="1400" alt="피아노 뚜껑 위에 놓인 클라리넷 두 대"></div><figcaption>악기 · 클라리넷 두 대</figcaption></figure></li>
+      <li style="--ar:1.5705;--w:0.35692;--n:3;--w2:0.54131;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/tuh-trio.jpg" srcset="../images/tuh-trio-800.jpg 800w, ../images/tuh-trio.jpg 1236w" sizes="(max-width:40em) 92vw, (max-width:75em) 49vw, 417px" width="1236" height="787" alt="Tallaght University Hospital 아트리움의 소프라노·피아노·클라리넷"></div><figcaption><span>아트리움 · Tallaght University Hospital · 2026년 8월</span><span class="cap-credit">사진: Tallaght University Hospital</span></figcaption></figure></li>
+      <li style="--ar:1.3308;--w:0.30244;--n:3;--w2:0.45869;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/tuh-atrium.jpg" srcset="../images/tuh-atrium-800.jpg 800w, ../images/tuh-atrium.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 42vw, 353px" width="1400" height="1052" alt="Tallaght University Hospital 경당에서 연주하는 클라리넷·해금·키보드"></div><figcaption><span>경당 · Tallaght University Hospital · 2026년 8월</span><span class="cap-credit">사진: Tallaght University Hospital</span></figcaption></figure></li>
+      <li style="--ar:1.4989;--w:0.34065;--n:3;--w2:0.49973;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/tuh-haegeum.jpg" srcset="../images/tuh-haegeum-800.jpg 800w, ../images/tuh-haegeum.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 45vw, 398px" width="1400" height="934" alt="병원 아트리움에서 해금을 연주하는 연주자"></div><figcaption><span>해금 · Tallaght University Hospital · 2026년 8월</span><span class="cap-credit">사진: Tallaght University Hospital</span></figcaption></figure></li>
+      <li style="--ar:1.5005;--w:0.33028;--n:4;--w2:0.50027;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/ruared-trio.jpg" srcset="../images/ruared-trio-800.jpg 800w, ../images/ruared-trio.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 46vw, 386px" width="1400" height="933" alt="Rua Red 무대에서 인사하는 클라리넷·소프라노·피아노"></div><figcaption><span>Rua Red, Tallaght · 2026년 8월</span><span class="cap-credit">사진: Ben Ryan / SDCC</span></figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.29348;--n:4;--w2:0.43822;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/care-christmas.jpg" srcset="../images/care-christmas-800.jpg 800w, ../images/care-christmas.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 40vw, 343px" width="1400" height="1050" alt="성탄절 요양시설에서 연주하는 클라리넷과 현악 연주자 세 명"></div><figcaption>찾아가는 음악회 · 2025년 성탄</figcaption></figure></li>
+      <li style="--ar:0.7500;--w:0.16508;--n:4;--w2:0.24650;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/score-stand.jpg" srcset="../images/score-stand-800.jpg 800w, ../images/score-stand.jpg 1050w" sizes="(max-width:40em) 92vw, (max-width:75em) 22vw, 193px" width="1050" height="1400" alt="보면대 위 파트 악보 너머로 연습하는 현악 3중주"></div><figcaption>음악회를 앞두고 · 2025년 성탄</figcaption></figure></li>
+      <li style="--ar:0.9593;--w:0.21115;--n:4;--w2:0.31528;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/recorders.jpg" srcset="../images/recorders-800.jpg 800w, ../images/recorders.jpg 1343w" sizes="(max-width:40em) 92vw, (max-width:75em) 29vw, 247px" width="1343" height="1400" alt="나란히 세워 둔 크기가 다른 리코더 여섯 대"></div><figcaption>리코더 · 2025년 11월</figcaption></figure></li>
+      <li style="--ar:0.7500;--w:0.21951;--n:3;--w2:0.21951;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/church-aisle.jpg" srcset="../images/church-aisle-800.jpg 800w, ../images/church-aisle.jpg 1050w" sizes="(max-width:40em) 92vw, (max-width:75em) 20vw, 256px" width="1050" height="1400" alt="웨스트미스 주 본당 제대 앞에 든 클라리넷"></div><figcaption>Dysart, 웨스트미스 주 · 2025년</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/columban-ensemble.jpg" srcset="../images/columban-ensemble-800.jpg 800w, ../images/columban-ensemble.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1400" height="1050" alt="노란 방에서 악기를 든 Letters Ensemble 현악 연주자 네 명과 지휘자"></div><figcaption>성 골롬반 외방선교 수녀회, 위클로 주 · 2024년 11월</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/dalgan-hall.jpg" srcset="../images/dalgan-hall-800.jpg 800w, ../images/dalgan-hall.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1400" height="1050" alt="음악회를 앞두고 의자와 보면대를 놓아 둔, 아직 아무도 없는 홀"></div><figcaption>Dalgan Park, 미스 주 · 2024년 3월</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/hero-outreach.jpg" srcset="../images/hero-outreach-800.jpg 800w, ../images/hero-outreach.jpg 1800w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1800" height="1350" alt="성 파트리치오 축일 음악회에서 연주하는 Letters Ensemble과 지휘자"></div><figcaption>Letters Ensemble · 성 파트리치오 축일 음악회</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/letters-ensemble.jpg" srcset="../images/letters-ensemble-800.jpg 800w, ../images/letters-ensemble.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1400" height="1050" alt="악기를 든 Letters Ensemble 단원들"></div><figcaption>Letters Ensemble</figcaption></figure></li>
+      <li style="--ar:0.7500;--w:0.21951;--n:3;--w2:0.21951;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="../images/two-clarinets.jpg" srcset="../images/two-clarinets-800.jpg 800w, ../images/two-clarinets.jpg 1050w" sizes="(max-width:40em) 92vw, (max-width:75em) 20vw, 256px" width="1050" height="1400" alt="피아노 뚜껑 위에 놓인 클라리넷 두 대"></div><figcaption>악기 · 클라리넷 두 대</figcaption></figure></li>
     </ul>
   </div>
 </section>
@@ -294,8 +463,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Classical Music for Everyone · 아일랜드 더블린</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
-      <span>갱신 2026년 10월 2일 · <a href="contact.html#privacy">개인정보 처리방침</a></span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
+      <span>갱신 2026년 10월 4일 · <a href="contact.html#privacy">개인정보 처리방침</a></span>
     </div>
   </div>
 </footer>

@@ -38,9 +38,11 @@ time: this Mac sits near its open-file limit). It reports:
   width  the master line is as wide as "Classical Music" (R29): on a laptop its
          right end within 3px of the end of "Music" in line 1; on a phone
          (its 22px floor) never wider than that line
-  group  a home card's three words stand under its name as one group (R30):
-         the name's last line to the words' first line 8px or less, at 1024,
-         1100, 1280 and 1440
+  group  the parts of cards that stand in one row start level (R30, v6:
+         Andrew, "each section the same height"): the five home cards'
+         kicker, name, three words, sentence and status, and the three News
+         panels' title, line and link, each within 1px across the row, at
+         1024, 1100, 1280 and 1440
   names  "Classical Music" in the master line (footer, hero) and the founder's
          name in Contact's signature stay on one line (R23), 390 to 1920
   rings  a page head's sound rings sit on no drawing's ring (doors, stations,
@@ -55,6 +57,21 @@ time: this Mac sits near its open-file limit). It reports:
          words it leads ("I. What we do", "01 Learning", "02 Outreach
          Concerts"). Columns across a gutter (a date beside a title, a
          question beside its answer) may differ
+  twins  a figure set in Garamond is the same size in both languages (R6,
+         R13; v6: a Korean heading rule drew the record's years at 21px
+         against 42px): the record's and the timeline's years, the News
+         figures, the home figures, at 390, 1024 and 1440
+  marks  a short highlight (20 letters, ten Korean syllables: one tied run,
+         layout._mark_whole) never breaks across lines, every page, at 320,
+         390, 1024 and 1440 (v6: 「부활 / 음악회는」)
+  gallery the News gallery's rows fill its width and the photographs of a
+         row share one height, each within 1px, at 390 to 1440 (v6)
+  years  no line inside a timeline entry starts with a year: beside the gold
+         year at the line's left it reads as a second year (CD v6: "…for
+         South Dublin Live / 2026: two concerts"), every viewport
+  venues the long place names stay on one line in English at 1024 to 1440
+         (Mulhuddart Community Centre, Methodist Centenary Church, Tallaght
+         University Hospital), every page (CD v6)
   wide   text at 200% the way a reader sets it, the browser's own text size
          doubled (so em media and container queries move too, unlike a
          doubled root size): no page scrolls sideways and nothing sticks
@@ -274,11 +291,16 @@ WIDTH = r"""(() => {
   return {lines: tops.size, d: +(subRight - titleRight).toFixed(1), sub: Math.round(subRight - titleLeft),
           title: Math.round(titleRight - titleLeft)}; })()"""
 
-GROUP = r"""(() => [...document.querySelectorAll('.pc')].map(pc => {
-    const r = el => { const g = document.createRange(); g.selectNodeContents(el); return [...g.getClientRects()].filter(x => x.width > 1); };
-    const h = r(pc.querySelector('h3')), t = r(pc.querySelector('.pc-topics'));
-    return {name: pc.querySelector('h3').textContent.trim(), gap: Math.round(t[0].top - h[h.length - 1].bottom)};
-  }).filter(x => x.gap > 8))()"""
+GROUP = r"""((card, parts) => { const cards = [...document.querySelectorAll(card)]; if (cards.length < 2) return [];
+  const tops = cards.map(c => Math.round(c.getBoundingClientRect().top));
+  if (Math.max(...tops) - Math.min(...tops) > 1) return [];   // not one row: nothing to level
+  const out = [];
+  for (const sel of parts) {
+    const ts = cards.map(c => c.querySelector(sel)).filter(Boolean).map(e => e.getBoundingClientRect().top);
+    if (ts.length > 1 && Math.max(...ts) - Math.min(...ts) > 1) out.push(card + ' ' + sel + ' ' + Math.round(Math.max(...ts) - Math.min(...ts)) + 'px'); }
+  return out; })"""
+CARD_ROWS = ((".pc", ".kicker", "h3", ".pc-topics", ".pc-body>p:not(.pc-topics)", ".tag"),)
+LATEST_ROWS = ((".lt", "h3", "p", ".lt-go"),)
 
 NAMES = r"""(() => { const lines = el => { const r = document.createRange(); r.selectNodeContents(el);
     return new Set([...r.getClientRects()].filter(x => x.width > 1).map(x => Math.round(x.top))).size; };
@@ -361,10 +383,62 @@ def serve():
     return httpd, f"http://127.0.0.1:{httpd.server_address[1]}/"
 
 
+TWINS = (".ry-y", ".tl-y", ".mini-figs dd", ".fig b")
+TWINS_JS = """((sels) => Object.fromEntries(sels.map(s => { const e = document.querySelector(s);
+  return [s, e ? parseFloat(getComputedStyle(e).fontSize) : null]; })))"""
+MARKS = """(() => { const out = [];
+  for (const m of document.querySelectorAll('main mark')) {
+    const t = m.textContent.replace(/\\s+/g, ' ').trim();
+    const ko = (t.match(/[\\uac00-\\ud7a3]/g) || []).length;
+    const short = ko ? ko + (t.match(/[A-Za-z0-9]/g) || []).length <= 10 : t.length <= 20;
+    if (!short || !t.includes(' ')) continue;
+    const r = m.getClientRects(); if (r.length < 2) continue;
+    const tops = new Set([...r].map(x => Math.round(x.top)));
+    if (tops.size > 1) out.push(t); }
+  return out; })()"""
+GALLERY = """(() => { const g = document.querySelector('.gallery'); if (!g) return [];
+  const W = g.getBoundingClientRect().width, gap = parseFloat(getComputedStyle(g).columnGap) || 0;
+  const rows = new Map();
+  // every photograph drawn (a capture once showed alt text where a file was slow)
+  const out = [...g.querySelectorAll('img')].filter(i => !(i.complete && i.naturalWidth > 0)).map(i => ({missing: i.getAttribute('src')}));
+  for (const li of g.children) { const r = li.getBoundingClientRect(), p = li.querySelector('.photo').getBoundingClientRect();
+    const k = Math.round(r.top); if (!rows.has(k)) rows.set(k, []); rows.get(k).push({w: r.width, h: p.height}); }
+  for (const [top, items] of rows) {
+    const span = items.reduce((a, x) => a + x.w, 0) + gap * (items.length - 1);
+    const hs = items.map(x => x.h);
+    if (Math.abs(span - W) > 1) out.push({row: top, n: items.length, span: Math.round(span), width: Math.round(W)});
+    if (Math.max(...hs) - Math.min(...hs) > 1) out.push({row: top, heights: hs.map(Math.round)}); }
+  return out; })()"""
+
+
+YEARS = """(() => { const out = [];
+  for (const p of document.querySelectorAll('.tl-item p')) {
+    const w = document.createTreeWalker(p, NodeFilter.SHOW_TEXT); let n, top = null, line = ''; const lines = [];
+    while ((n = w.nextNode())) for (let i = 0; i < n.length; i++) {
+      const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + 1); const b = r.getClientRects()[0];
+      if (!b) continue; const t = Math.round(b.top);
+      if (top !== null && t !== top) { lines.push(line); line = ''; } top = t; line += n.textContent[i]; }
+    lines.push(line);
+    for (const l of lines.slice(1)) if (/^\\s*\\d{4}\\b/.test(l)) out.push(l.trim().slice(0, 40)); }
+  return out; })()"""
+VENUES = ("Mulhuddart Community Centre", "Methodist Centenary Church", "Tallaght University Hospital")
+VENUES_JS = """((names) => { const out = [];
+  const w = document.createTreeWalker(document.querySelector('main'), NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) { if (n.parentElement.closest('.sr-only')) continue;
+    const t = n.textContent.replace(/\\u00a0/g, ' ');
+    for (const name of names) { let i = t.indexOf(name);
+      while (i >= 0) { const r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + name.length);
+        const tops = new Set([...r.getClientRects()].filter(x => x.width > .5).map(x => Math.round(x.top)));
+        if (tops.size > 1) out.push(t.slice(Math.max(0, i - 24), i + name.length + 8));
+        i = t.indexOf(name, i + 1); } } }
+  return out; })"""
+
+
 def main(strict=False):
     httpd, base = serve()
     found = {"fold": [], "tail": [], "tie": [], "hero": [], "axis": [], "width": [], "group": [], "meet": [],
-             "leader": [], "names": [], "rings": [], "faces": [], "wide": []}
+             "leader": [], "names": [], "rings": [], "faces": [], "twins": [], "marks": [], "gallery": [],
+             "years": [], "venues": [], "wide": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -373,16 +447,20 @@ def main(strict=False):
                         mobile = w < 700
                         c.viewport(w, h, 2 if mobile else 1, mobile)
                         c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
-                        c.js("document.fonts.ready.then(()=>1)")
+                        c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
                         r = c.js(f"({JS})({json.dumps(LEADS)}, {json.dumps(SHORT)}, {'true' if w >= 1024 else 'false'})")
                         for k in ("fold", "tail"):
                             found[k] += [(lang, pg, w, x) for x in r[k]]
                         found["tie"] += [(lang, pg, w, x) for x in r["tie"] if not any(a in x for a in ALLOW)]
                         found["faces"] += [(lang, pg, w, x) for x in c.js(FACES)]
+                        found["marks"] += [(lang, pg, w, x) for x in c.js(MARKS)]
+                        found["years"] += [(lang, pg, w, x) for x in c.js(YEARS)]
+                        if lang == "en" and w >= 1024:
+                            found["venues"] += [(pg, w, x) for x in c.js(f"({VENUES_JS})({json.dumps(VENUES)})")]
                 for w, h in ((1440, 789), (1366, 768), (1280, 720), (390, 844)):
                     c.viewport(w, h, 2 if w < 700 else 1, w < 700)
                     c.goto(base + ("" if lang == "en" else "ko/") + "index.html", settle=0.8)
-                    c.js("document.fonts.ready.then(()=>1)")
+                    c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
                     hero = c.js(HERO)
                     lo, hi = (0.5, 0.7) if lang == "en" else (0.36, 0.6)
                     if ((hero["size"] >= 72 and not lo <= hero["ratio"] <= hi) or hero["ink"] < 36
@@ -396,15 +474,17 @@ def main(strict=False):
                         found["width"].append((lang, w, h, width))
                 for w in (1024, 1100, 1280, 1440):
                     c.viewport(w, 900, 1, False)
-                    c.goto(base + ("" if lang == "en" else "ko/") + "index.html", settle=0.4)
-                    c.js("document.fonts.ready.then(()=>1)")
-                    found["group"] += [(lang, w, x) for x in c.js(GROUP)]
+                    for pg, specs in (("index", CARD_ROWS), ("news", LATEST_ROWS)):
+                        c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
+                        c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
+                        for card, *parts in specs:
+                            found["group"] += [(lang, w, x) for x in c.js(f"({GROUP})({json.dumps(card)}, {json.dumps(parts)})")]
                 # R23: names kept whole; R22: a head's rings on no drawing, in their own band
                 for pg in ("index", "contact"):
                     for w in (390, 768, 1024, 1280, 1440, 1920):
                         c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
                         c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
-                        c.js("document.fonts.ready.then(()=>1)")
+                        c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
                         found["names"] += [(lang, pg, w, x) for x in c.js(NAMES)]
                 for pg in PAGES[1:]:
                     for w in (768, 1024, 1280, 1366, 1440):
@@ -418,22 +498,47 @@ def main(strict=False):
                     for w in (768, 1024, 1280, 1440):
                         c.viewport(w, 900, 1, False)
                         c.goto(base + ("" if lang == "en" else "ko/") + "get-involved.html", settle=0.4)
-                        c.js("document.fonts.ready.then(()=>1)")
+                        c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
                         found["meet"] += [(lang, w, zoom, x) for x in c.js(MEET)]
                     for w in (390, 768, 1024, 1280, 1440):
                         c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
                         c.goto(base + ("" if lang == "en" else "ko/") + "contact.html", settle=0.4)
-                        c.js("document.fonts.ready.then(()=>1)")
+                        c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
                         r = c.js(LEADER)
                         if r:
                             found["leader"].append((lang, w, zoom, r))
+                # R6, R13: a Garamond figure is one size in both languages (once,
+                # with the Korean pass); v6: the News gallery's rows
+                if lang == "ko":
+                    for pg in ("index", "news"):
+                        for w in (390, 1024, 1440):
+                            sizes = {}
+                            for l2 in ("en", "ko"):
+                                c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
+                                c.goto(base + ("" if l2 == "en" else "ko/") + pg + ".html", settle=0.4)
+                                sizes[l2] = c.js(f"({TWINS_JS})({json.dumps(TWINS)})")
+                            for sel in TWINS:
+                                a, b = sizes["en"].get(sel), sizes["ko"].get(sel)
+                                if a and b and abs(a - b) > 0.5:
+                                    found["twins"].append((pg, w, sel, {"en": a, "ko": b}))
+                for w in (390, 768, 1024, 1280, 1440):
+                    c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
+                    c.goto(base + ("" if lang == "en" else "ko/") + "news.html", settle=0.4)
+                    # every photograph loaded; one the local server dropped is asked
+                    # for again (twice) before it counts as missing
+                    for _ in range(3):
+                        c.js("""Promise.race([Promise.all([...document.querySelectorAll('.gallery img')].map(i => { i.loading = 'eager';
+                          if (i.complete && i.naturalWidth === 0) { const s = i.srcset; i.srcset = ''; i.srcset = s; i.src = i.src; }
+                          return (i.complete && i.naturalWidth) ? 1 : new Promise(r => { i.onload = i.onerror = r; }); })),
+                          new Promise(r => setTimeout(r, 8000))])""")
+                    found["gallery"] += [(lang, w, x) for x in c.js(GALLERY)]
                 # text at 200%, every page: nothing past the edge of the screen
                 text_size(c, 32)
                 for pg in PAGES:
                     for w in (320, 390, 768, 1280):
                         c.viewport(w, 900, 2 if w < 700 else 1, w < 700)
                         c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
-                        c.js("document.fonts.ready.then(()=>1)")
+                        c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
                         r = c.js(WIDE)
                         if r:
                             found["wide"].append((lang, pg, w, r))

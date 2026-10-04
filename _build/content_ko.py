@@ -14,7 +14,7 @@ from urllib.parse import quote
 
 import parts as P
 from icons import icon as _ico
-from layout import OPEN_GIVING
+from layout import OPEN_GIVING, PROG_MENU
 
 L = "ko"
 EMAIL = "sby05034@gmail.com"
@@ -106,7 +106,7 @@ PROGRAMMES_DATA = [
          img=("lecture-recital.jpg", 1050, 1400, "실황 연주를 곁들인 강의 장면"),
          line="<mark>연주를 눈앞에서</mark> 들으며 처음부터 알아 가는 강의입니다.",
          page=dict(
-             lead="어디서부터 들어야 할지 모르는 분을 위한 강의입니다. 이야기와 녹음, <mark>실황 연주</mark>로 클래식과 "
+             lead="어디서부터 들어야 할지 모르는 분을 위한 강의입니다. 이야기와 녹음, <mark>실황 연주로</mark> 클래식과 "
                   "친해집니다.",
              cap=None,
              glance=[("대상", "클래식 음악이 궁금한 분 누구나"),
@@ -119,20 +119,20 @@ PROGRAMMES_DATA = [
                     ("함께하기",
                      "아일랜드의 오케스트라와 연주자를 소개합니다. 표 예매와 좌석 고르기도 알려 드립니다."),
                     ("내 취향 찾기",
-                     "한 곡을 피아니스트 다섯 명의 연주로 견주어 들으며 <mark>내 취향</mark>을 찾아봅니다.")],
+                     "한 곡을 피아니스트 다섯 명의 연주로 견주어 들으며 <mark>내 취향을</mark> 찾아봅니다.")],
              expect_h2="첫 강의 전에.",
              faq=[("미리 알아야 할 것이 있나요?",
-                   "<strong>아니요.</strong> 첫 단계는 「클래식 음악이란 무엇인가」에서 시작하고, 곡마다 "
-                   "설명을 곁들입니다."),
+                   "<strong>아니요.</strong> 첫 단계는 「클래식 음악이란 무엇인가」에서 시작하고, "
+                   "<mark>곡마다 설명을</mark> 곁들입니다."),
                   ("몇 명쯤 모이나요?",
-                   "인원을 센 강의에는 <strong>여섯에서 열네 명</strong>이 왔습니다. 강의마다의 인원은 아래 "
+                   "인원을 센 강의에는 <mark>여섯에서 열네 명이</mark> 왔습니다. 강의마다의 인원은 아래 "
                    "도표에 있습니다."),
                   ("우리 모임에서도 요청할 수 있나요?",
                    "<strong>네.</strong> 모임 이름과 인원, 모일 곳을 메일로 알려 주세요.")],
              record_h2="지금까지의 강의.",
              record_lead="기록에 남은 강의를 날짜, 주제, 장소와 함께 모았습니다.",
              join_h2="강의를 요청해 주세요.",
-             join_text="혼자이셔도 괜찮습니다.",
+             join_text="<mark>혼자이셔도</mark> 괜찮습니다.",
              join_btn="강의 문의",
              mail_subject="클래식 음악과 친해지기",
              mail_fields=["이름", "모임이나 기관 (있다면)", "모일 수 있는 곳", "대략의 인원",
@@ -144,7 +144,7 @@ PROGRAMMES_DATA = [
          img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
          line="<mark>요양시설과 병원</mark>, 본당, 커뮤니티 센터로 찾아가 연주합니다.",
          page=dict(
-             lead="사람들이 <mark>이미 계신 방</mark>으로 찾아가 연주합니다. 곡마다 이야기를 곁들입니다.",
+             lead="사람들이 <mark>이미 계신 방으로</mark> 찾아가 연주합니다. 곡마다 이야기를 곁들입니다.",
              cap=("찾아가는 음악회", "2025년 성탄"),
              glance=[("대상", "요양시설, 병원, 본당, 지역 모임"),
                      ("장소", "초청하신 방, 더블린과 그 밖은 협의"),
@@ -157,13 +157,13 @@ PROGRAMMES_DATA = [
                     ("찾아가 연주합니다", "연주자와 악기, 보면대까지 저희가 챙겨 갑니다.")],
              expect_h2="초청하시기 전에.",
              faq=[("누가 연주하나요?",
-                   "<strong>창립자 김서현</strong>이 클라리넷과 오르간으로 혼자, 또는 연주자를 불러 함께 "
+                   "<mark>창립자 김서현이</mark> 클라리넷과 오르간으로 혼자, 또는 연주자를 불러 함께 "
                    "연주합니다. Letters Ensemble이 맡는 음악회도 있습니다."),
                   ("누가 들을 수 있나요?",
                    "입주자나 환자, 가족, 직원까지 그 방에 계신 분 <mark>누구나</mark> 들으실 수 "
                    "있습니다. 복장 규정은 없습니다."),
                   ("어디에서 연주해 왔나요?",
-                   f"가르친 곳까지 <strong>4개국 {N_PLACES}곳</strong>입니다. 요양시설과 수도 공동체, 본당, 병원 등 "
+                   f"가르친 곳까지 <mark>4개국</mark> {N_PLACES}곳입니다. 요양시설과 수도 공동체, 본당, 병원 등 "
                    '모든 곳이 <a class="link" href="about.html#places">단체 소개</a>에 있습니다.')],
              record_h2="지금까지의 음악회.",
              record_lead="기록에 남은 음악회를 날짜와 장소, 편성과 함께 모았습니다.",
@@ -187,7 +187,7 @@ PROGRAMMES_DATA = [
                         cap=("파일럿 앙상블", "은퇴한 Presentation 수녀님들의 리코더 합주입니다.")),
              room_h2="클래스가 시작된 곳.",
              glance=[("대상", "악기를 처음 잡는 어른"),
-                     ("장소", "Mulhuddart Community Centre, 더블린 15구"),
+                     ("장소", "Mulhuddart, 더블린 15구"),
                      ("언제", "2026년 가을, 매주 수요일 저녁 7시~8시"),
                      ("준비물", "악기도, 악보 지식도 없어도 됩니다")],
              now=("진행 중", "<strong>매주 수요일 저녁 7시~8시</strong> · Mulhuddart Community Centre, 더블린 15구"),
@@ -197,13 +197,13 @@ PROGRAMMES_DATA = [
                     ("악보는 처음부터",
                      "음과 손가락 짚는 법을 하나씩 익힙니다. 악보는 저희가 클래스에 맞춰 만듭니다."),
                     ("나만의 성부",
-                     "한 사람이 한 성부씩 맡아 화음을 냅니다. 학기 끝에는 우리들의 <mark>작은 음악회</mark>를 엽니다.")],
+                     "한 사람이 한 성부씩 맡아 화음을 냅니다. 학기 끝에는 우리들의 <mark>작은 음악회를</mark> 엽니다.")],
              expect_h2="첫 수업 전에.",
-             faq=[("리코더가 없어도 되나요?", "<strong>네.</strong> 리코더는 빌려 드립니다."),
+             faq=[("리코더가 없어도 되나요?", "<strong>네.</strong> 리코더는 <mark>빌려 드립니다</mark>."),
                   ("악보를 읽을 줄 알아야 하나요?",
-                   "<strong>아니요.</strong> 연주하면서 악보 읽기도 처음부터 조금씩 배웁니다."),
+                   "<strong>아니요.</strong> <mark>연주하면서</mark> 악보 읽기도 처음부터 조금씩 배웁니다."),
                   ("이 클래스는 어떻게 시작됐나요?",
-                   "<strong>10주 파일럿</strong>에서 시작했습니다. 은퇴한 Presentation 수녀님 일곱 분이 "
+                   "<mark>10주 파일럿에서</mark> 시작했습니다. 은퇴한 Presentation 수녀님 일곱 분이 "
                    "함께했고, 아래 영상이 그 모임입니다.")],
              record_h2="이 클래스가 생겨나기까지.",
              record_lead="음악회에서 나온 질문 하나에서 시작합니다.",
@@ -221,9 +221,9 @@ PROGRAMMES_DATA = [
          short="Letters Ensemble",
          icon="strings", vocab="아일랜드 · 한국 · 성가",
          img=("letters-ensemble.jpg", 1400, 1050, "악기를 든 Letters Ensemble 단원들"),
-         line="더블린의 <mark>아마추어 연주자들</mark>이 공동체를&nbsp;위해 연주합니다.",
+         line="더블린의 <mark>아마추어</mark> 연주자들이 공동체를&nbsp;위해 연주합니다.",
          page=dict(
-             lead="2024년 1월 더블린에서 생긴 <mark>아마추어 앙상블</mark>입니다. 아일랜드와 한국의 전통 음악, 성가를 "
+             lead="2024년 1월 더블린에서 생긴 <mark>아마추어</mark> 앙상블입니다. 아일랜드와 한국의 전통 음악, 성가를 "
                   "연주합니다.",
              cap=("Letters Ensemble", "악기를 든 단원들"),
              glance=[("대상", "악기를 연주하는 아마추어 누구나"),
@@ -244,7 +244,7 @@ PROGRAMMES_DATA = [
                    "<strong>네.</strong> 강의에 왔다가 학창 시절의 비올라를 다시 잡고 단원이 된 분도 "
                    "있습니다."),
                   ("음악회는 몇 번 했나요?",
-                   "정식 음악회는 <strong>네 번</strong>입니다. 첫 음악회는 2024년 3월 Dalgan Park, 가장 "
+                   "정식 음악회는 <mark>네 번입니다</mark>. 첫 음악회는 2024년 3월 Dalgan Park, 가장 "
                    "최근은 2025년 성탄입니다.")],
              record_h2="지금까지의 음악회.",
              record_lead="정식 음악회 네 번을 날짜, 행사, 장소와 함께 모았습니다.",
@@ -280,9 +280,9 @@ PROGRAMMES_DATA = [
              faq=[("어떤 공연을 안내했나요?",
                    "국립 콘서트홀 인터내셔널 시리즈와 국립교향악단, TU Dublin 필하모닉 같은 공연입니다."),
                   ("몇 명이 함께 가나요?",
-                   "2025년 12월에는 <strong>여섯 명</strong>이 국립 콘서트홀 음악회에 함께 갔습니다."),
+                   "2025년 12월에는 <mark>여섯 명이</mark> 국립 콘서트홀 음악회에 함께 갔습니다."),
                   ("아일랜드에 온 지 얼마 안 됐어요. 괜찮을까요?",
-                   "<strong>네.</strong> 아일랜드에 처음 온 분도 반기고, 영어와 한국어로 이야기합니다.")],
+                   "<strong>네.</strong> 아일랜드에 처음 온 분도 반기고, <mark>영어와 한국어로</mark> 진행합니다.")],
              record_h2="지금까지 안내한 공연.",
              record_lead="안내한 공연과 함께 간 음악회를 날짜순으로 모았습니다.",
              join_h2="음악여행에 함께하세요.",
@@ -310,6 +310,9 @@ for _p in PROGRAMMES_DATA:
 # 홈
 # ---------------------------------------------------------------------------
 
+# the five, under Programmes in the header (layout.PROG_MENU)
+PROG_MENU["ko"][:] = [(q["slug"], q["name"]) for q in PROGRAMMES_DATA]
+
 HOME = dict(
     hero=dict(
         eyebrow="공동체 음악 · 아일랜드 더블린",
@@ -331,17 +334,19 @@ HOME = dict(
         # 카드가 다루지 않는 두 길을 문 두 개로(Andrew, 2026-10-03: 문장 속 링크는 동작으로 읽히지
         # 않았다). 라벨은 함께하기의 문과 같고, 제목은 그 길 끝의 동작이다. CMFE Artists는 계획이라
         # 지금 열린 것은 참여 신청뿐(키트 27 메시지 3, parts.door_pair)
-        others=[("get-involved.html#play", "예술가", "참여 신청 보내기"),
-                ("get-involved.html#board", "자원봉사자", "창립 이사회에 참여하기")],
+        others=[("get-involved.html#play", "예술가", "참여 신청 보내기",
+                 "분야를 가리지 않고 언제든 받습니다."),
+                ("get-involved.html#board", "자원봉사자", "창립 이사회에 참여하기",
+                 "독립된 이사회의 첫 이사를 찾습니다.")],
     ),
     # 키트 27 ①을 세 부분으로 나눠 답이 드러나게. 더블린 대신 아일랜드(Andrew,
     # 2026-10-01). 필요를 말하는 문장이지 활동 범위가 아니다(「아일랜드 전역」 금지)
     why=dict(
         label="이 일을 하는 이유",
         premise="아일랜드에는 음악회를 그리워하고, 지금도 음악이 필요한 분이 많습니다.",
-        reasons=["요양원에 계신 분이 있습니다.",
-                 "집 밖에 잘 나가지 못하는 분도 있습니다.",
-                 "이 나라에 온 지 얼마 되지 않아 어디서 시작할지 모르는 분도 있습니다."],
+        reasons=["<mark>요양원에</mark> 계신 분이 있습니다.",
+                 "집 밖에 <mark>잘 나가지 못하는</mark> 분도 있습니다.",
+                 "이 나라에 <mark>온 지 얼마 되지 않아</mark> 어디서 시작할지 모르는 분도 있습니다."],
         resolve="그래서 <em>저희가 찾아갑니다.</em>",
         link="단체 소개",
     ),
@@ -355,7 +360,7 @@ HOME = dict(
                    talks="강의 ({n})", perf="연주 ({n})",
                    period="2026년 9월까지의 기록, 한 칸에 하나씩"),
         note='창립자가 South Dublin Live 2026에 선정됐습니다. <a class="link" '
-             'href="news.html#record">달별 기록 보기</a>',
+             'href="news.html#record">연도별 기록 보기</a>',
     ),
 )
 
@@ -369,7 +374,7 @@ ABOUT_T = dict(
     head=dict(
         eyebrow="소개",
         title=["단체 소개."],
-        lead="더블린에서 활동하는 공동체 음악 단체입니다. <mark>음악이 필요한 곳</mark>을 찾아가 연주하고 가르칩니다.",
+        lead="더블린에서 활동하는 공동체 음악 단체입니다. <mark>음악이 필요한 곳을</mark> 찾아가 연주하고 가르칩니다.",
         img=("columban-ensemble.jpg", 1400, 1050,
              "노란 방에서 악기를 든 Letters Ensemble 현악 연주자 네 명과 지휘자"),
         cap=("성 골롬반 외방선교 수녀회, 위클로 주", "2024년 11월"),
@@ -382,7 +387,7 @@ ABOUT_T = dict(
         label="지나온 길",
         h2="2024년부터.",
         text=["2024년 1월 더블린에서 Letters Ensemble과 함께 시작했습니다. 첫 강의에는 여섯 명이 왔습니다.",
-              "2026년 9월까지 기록된 강의와 연주는 마흔 번입니다. 은퇴한 수녀님 일곱 분과 함께한 "
+              "2026년 9월까지 기록된 강의와 연주는 <mark>마흔 번입니다</mark>. 은퇴한 수녀님 일곱 분과 함께한 "
               "파일럿에서 Mulhuddart의 리코더 클래스가 나왔습니다."],
         link="전체 연표 보기",
     ),
@@ -393,7 +398,7 @@ ABOUT_T = dict(
         label="창립자",
         name="Andrew Seohyeon Kim (김서현)",
         role="창립자·예술감독",
-        line="더블린의 클라리넷·오르간 연주자이자 공동체 음악가입니다.",
+        line="더블린의 클라리넷·오르간 연주자이자 <mark>공동체</mark> 음악가입니다.",
         facts=[("학력", "TU Dublin Conservatoire 연주 전공 학사(BMus Hons)"),
                ("맡은 일", "Our Lady of Dolours 성당(Dolphin&rsquo;s Barn) 음악감독"),
                ("졸업 연구", "은퇴한 Presentation 수녀님 일곱 분과 10주 리코더 합주, 모두 공개 연주까지")],
@@ -408,7 +413,7 @@ ABOUT_T = dict(
         items=[("운영:",
                 "법인이 등록되면 독립된 자원봉사 이사회가 맡습니다. 지금 첫 이사를 모집하고 있습니다."),
                ("돈:",
-                "아직은 후원을 요청하거나 받지 않습니다. 저희를 대신해 개인 계좌로 돈을 보내 달라고 하는 "
+                "아직은 후원을 요청하거나 받지 않습니다. 저희를 대신해 <mark>개인 계좌로</mark> 돈을 보내 달라고 하는 "
                 "사람은 없습니다."),
                ("사진:",
                 "연주자와 악기, 빈 공간을 싣습니다. 그 밖에 알아볼 수 있는 분은 서면 동의가 있을 때만 "
@@ -418,7 +423,7 @@ ABOUT_T = dict(
         label="장소",
         h2="연주하고 가르쳐 온 곳.",
         # 08 §2: 참가자에게 공연을 안내하고 단체 관람을 준비했다
-        lead=f"4개국 {N_PLACES}곳을 종류별로 모았습니다.",
+        lead=f"4개국 <mark>{N_PLACES}곳을</mark> 종류별로 모았습니다.",
         # 모두 기록에 있는 곳(2026-10-01 검토). 곳의 성격으로 묶고 지역을 붙였다. 개수는 계산한다
         groups=PLACES,
         map=dict(
@@ -433,8 +438,8 @@ ABOUT_T = dict(
     identity=dict(
         label="이름",
         h2="<em>Everyone</em>이 금색인 이유",
-        text="로고에서 &lsquo;for&rsquo;는 작게, &lsquo;Everyone&rsquo;은 크고 금색으로 썼습니다. 그 "
-             "낱말이 저희가 <mark>지켜야 할 약속</mark>입니다.",
+        text="로고에서 &lsquo;for&rsquo;는 작게, &lsquo;Everyone&rsquo;은 크고 금색으로 썼습니다. "
+             "<mark>그 낱말이</mark> 저희가 지켜야 할 약속입니다.",
         alt="Classical Music for Everyone 로고: 높은음자리표 옆 워드마크, &lsquo;Everyone&rsquo;이 "
             "크고 금색으로 놓여 있다",
     ),
@@ -507,7 +512,7 @@ GET_INVOLVED_T = dict(
                   ("요양시설의 성탄", "클라리넷과 현악 3중주", "2025년 12월"),
                   ("노숙인 쉼터", "오르간과 클라리넷", "2025년 7월"),
                   ("수도 공동체의 성 파트리치오 축일", "국악 앙상블과 클라리넷", "2025년 3월")],
-        note='아마추어 연주자라면 누구나 지금 <a class="link" href="programmes/letters-ensemble.html">Letters '
+        note='아마추어 연주자라면 <mark>누구나</mark> 지금 <a class="link" href="programmes/letters-ensemble.html">Letters '
              "Ensemble</a>에도 함께하실 수 있습니다.",
         href=_MAIL_EOI, btn="참여 신청 보내기",
     ),
@@ -515,7 +520,7 @@ GET_INVOLVED_T = dict(
         label="함께 세우기",
         board=dict(
             h2="창립 이사회에 함께해 주세요.",
-            lead="<mark>독립된 자원봉사 이사회</mark>의 첫 이사를 모집하고 있습니다.",
+            lead="<mark>독립된 자원봉사</mark> 이사회의 첫 이사를 모집하고 있습니다.",
             # 그림의 칸 이름은 「역할」(영문 Roles): 「자리」는 의자 수로 읽힐 수 있다(총괄 디자이너 v2, R19)
             facts=[("역할", "의장, 재무, 사무, 세이프가딩·돌봄, 지역사회"),
                    ("조건", "무보수, 합당한 실비 지급")],
@@ -575,68 +580,59 @@ NEWS_T = dict(
         eyebrow="소식·기록",
         title=["새 소식과 지나온 기록."],
         # 2024년부터 40+ · 2026년 9월까지 기록된 40 = 17 + 20 + 1 + 2 (03 §1)
-        lead="2024년부터 해 온 일을 달력과 연표, 사진으로 모았습니다.",
+        lead="새 소식과 2024년부터 <mark>해 온 강의와 연주</mark>, 사진을 모았습니다.",
     ),
     latest_sr="새 소식",
-    latest=[("2026년 가을",
+    latest=[("이사회", "2026년 가을",
              "창립 이사회를 꾸립니다",
              "보증유한회사 설립을 준비하며 자원봉사 이사를 찾습니다.",
              "get-involved.html#board",
              "이사회 역할 보기"),
-            ("2026년 가을",
+            ("클래스", "2026년 가을",
              "커뮤니티 리코더 앙상블 클래스",
              "매주 수요일 저녁 Mulhuddart Community Centre에서 열립니다.",
              "programmes/recorder-ensemble.html",
              "클래스 안내"),
-            ("2026년 9월 19일",
-             "Methodist Centenary Church 가을 음악회",
-             "Ranelagh에서 소프라노·해금·클라리넷·피아노로 연주했습니다.",
+            ("음악회", "2026년 9월 19일",
+             "가을 음악회",
+             "Ranelagh의 Methodist Centenary Church에서 열었습니다.",
              "programmes/outreach-concerts.html#record",
              "음악회 기록 보기")],
     chart=dict(
         label="기록",
-        h2="마흔 번, 한 칸에 하나씩.",
-        lead="기록된 강의와 연주를 달마다 놓았습니다.",
-        figs=[(17, "강의"),
-              (20, "찾아가는 음악회"),
-              (1, "파일럿 음악회"),
-              (2, "South Dublin Live 2026 음악회")],
+        h2="마흔 번, 연도별로.",
+        lead="기록된 강의와 연주마다 무엇을 어디서 했는지 적었습니다.",
+        figs=[(17, "강의", "talk"),
+              (20, "찾아가는 음악회", "perf"),
+              (1, "파일럿 음악회", "perf"),
+              (2, "South Dublin Live 2026 음악회", "perf")],
         period="2024년 1월~2026년 9월",
-        aria=("2024년부터 2026년까지의 달력. 기록된 {n}회를 한 칸씩 표시했다: 강의 {talks}회, "
-              "연주 {perf}회."),
-        scroll="달별 기록",
-        key_talk="강의 ({n})",
-        key_perf="연주 ({n})",
-        # 활동대장의 강의 15 메모(2025-12-05)
-        key_note="2025년 12월 강의는 함께 간 음악회였습니다.",
+        year_count="강의와 연주 {n}회",
+        year_more="{y}년 {n}건 모두 보기",
+        row_talk="강의",
+        row_perf="연주",
     ),
     timeline=dict(
         label="연표",
         h2="자라 온 길.",
-        rows=[("2024년 1월",
-               "시작",
-               "더블린에서 Letters Ensemble과 함께 창립했습니다. 첫 강의에 여섯 명이 왔습니다."),
-              ("2024년",
-               "해외에서도",
-               "미스·위클로 주와 런던, 파리, 대구에서 연주했습니다."),
-              ("2025년 가을",
-               "공연을 안내합니다",
-               "참가자에게 공연을 안내하고 단체 관람을 준비하기 시작했습니다."),
-              ("2025년 10월",
-               "관객이 연주자가 됩니다",
-               "은퇴한 Presentation 수녀님 일곱 분과 리코더 앙상블 준비를 시작했습니다."),
-              ("2025년 12월",
-               "함께 본 음악회",
-               "강의 열다섯 번째 모임은 국립 콘서트홀에서 함께 들은 음악회였습니다."),
-              ("2026년 1&ndash;4월",
-               "일곱 분 모두 끝까지",
-               "파일럿은 Warrenmount에서 10주 동안 연습했습니다. 부활 음악회는 Clondalkin Lodge에서 "
-               "열었습니다."),
-              ("2026년 8월",
-               "Tallaght에서 두 번",
-               "창립자가 South Dublin Live 2026에 선정됐습니다. 병원과 Rua Red에서 연주했습니다."),
-              ("2026년 9월", "가을 음악회", "더블린 6구 Methodist Centenary Church에서 열었습니다."),
-              ("2026년 가을", "일반에 열린 클래스", "파일럿에서 나온 클래스가 Mulhuddart에서 시작됐습니다.")],
+        years=[("2024", [("1월", "시작",
+                          "더블린에서 Letters Ensemble과 함께 창립했습니다. 첫 강의에 <mark>여섯 명이</mark> 왔습니다."),
+                         ("한 해 동안", "더블린 밖으로",
+                          "미스·위클로 주와 런던, 파리, 대구에서 연주했습니다.")]),
+               ("2025", [("가을", "공연을 안내합니다",
+                          "참가자에게 공연을 안내하고 단체 관람을 준비하기 시작했습니다."),
+                         ("10월", "관객이 연주자가 됩니다",
+                          "은퇴한 Presentation <mark>수녀님 일곱 분과</mark> 리코더 앙상블 준비를 시작했습니다."),
+                         ("12월", "함께 본 음악회",
+                          "강의 열다섯 번째 모임은 국립 콘서트홀에서 함께 들은 음악회였습니다.")]),
+               ("2026", [("1월~4월", "일곱 분 모두 끝까지",
+                          "Warrenmount에서 10주 동안 연습했습니다. <mark>부활 음악회는</mark> Clondalkin "
+                          "Lodge에서 무대에 올랐습니다."),
+                         ("8월", "Tallaght에서 두 번",
+                          "창립자가 South Dublin Live에 선정됐습니다. 병원과 Rua Red에서 연주했습니다."),
+                         ("9월", "가을 음악회", "더블린 6구 Methodist Centenary Church에서 열었습니다."),
+                         ("가을", "일반에 열린 클래스",
+                          "<mark>파일럿에서 나온</mark> 클래스를 Mulhuddart에서 엽니다.")])],
     ),
     gallery=dict(
         label="사진",
@@ -646,17 +642,17 @@ NEWS_T = dict(
         rows=[
             (("tuh-trio.jpg", 1236, 787,
               "Tallaght University Hospital 아트리움의 소프라노·피아노·클라리넷"),
-             "Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital"),
+             "아트리움 · Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital"),
             (("tuh-atrium.jpg", 1400, 1052, TUH_CHAPEL_ALT),
-             "Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital"),
+             "경당 · Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital"),
             (("tuh-haegeum.jpg", 1400, 934, "병원 아트리움에서 해금을 연주하는 연주자"),
-             "Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital"),
+             "해금 · Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital"),
             (("ruared-trio.jpg", 1400, 933, "Rua Red 무대에서 인사하는 클라리넷·소프라노·피아노"),
              "Rua Red, Tallaght · 2026년 8월 · 사진: Ben Ryan / SDCC"),
             (("care-christmas.jpg", 1400, 1050, CARE_ALT),
              "찾아가는 음악회 · 2025년 성탄"),
             (("score-stand.jpg", 1050, 1400, "보면대 위 파트 악보 너머로 연습하는 현악 3중주"),
-             "성탄 음악회를 앞두고 · 2025년 12월"),
+             "음악회를 앞두고 · 2025년 성탄"),
             (("recorders.jpg", 1343, 1400, RECORDERS_ALT),
              "리코더 · 2025년 11월"),
             (("church-aisle.jpg", 1050, 1400, "웨스트미스 주 본당 제대 앞에 든 클라리넷"),
@@ -741,7 +737,7 @@ CONTACT_T = dict(
                  ""),
                 ("메일을 보내 주시면",
                  "list",
-                 ["답장하고 요청하신 일을 하는 데만 씁니다.",
+                 ["답장하고 요청하신 일을 <mark>하는 데만 씁니다</mark>.",
                   "<mark>팔지 않으며</mark>, 아래 업체만 저희를 대신해 다룹니다.",
                   "연주자·예술가 정보는 연주 기회를 드리려고 최대 2년 보관합니다.",
                   "접근성 필요는 원하실 때만 적어 주세요."],
@@ -758,7 +754,7 @@ CONTACT_T = dict(
                  ["저희가 가진 정보를 보거나 고치거나 지우기",
                   "사용을 멈추게 하거나 사용에 반대하기",
                   "사본 받기"],
-                 '언제든 메일로 요청하실 수 있습니다. 답에 만족하지 못하시면 아일랜드 <a class="link" '
+                 '<mark>언제든</mark> 메일로 요청하실 수 있습니다. 답에 만족하지 못하시면 아일랜드 <a class="link" '
                  'href="https://www.dataprotection.ie/">개인정보보호위원회(Data Protection '
                  "Commission)</a>에 민원을 내실 수 있습니다.")],
     ),

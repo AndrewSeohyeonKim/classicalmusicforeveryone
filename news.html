@@ -101,7 +101,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -116,7 +116,8 @@
       <ul class="nav-list">
         <li><a class="nav-link" href="index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
-        <li><a class="nav-link" href="programmes.html"><span class="nav-n" aria-hidden="true">03</span>Programmes</a></li>
+        <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="programmes.html"><span class="nav-n" aria-hidden="true">03</span>Programmes</a>
+          <ul class="nav-sub"><li><a href="programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
         <li><a class="nav-link" href="get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="news.html" aria-current="page"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive<span class="nav-mark" aria-hidden="true"></span></a></li>
       </ul>
@@ -134,7 +135,7 @@
     <p class="eyebrow lift">News &amp; archive</p>
     <div class="ph-head">
       <h1 class="ph-title"><span class="ln"><span>What is new, and what we have done.</span></span></h1>
-      <p class="ph-lead lift lift-3">The latest news, every talk and performance since 2024, and photographs.</p>
+      <p class="ph-lead lift lift-3">The latest news, <mark>every talk and performance</mark> since 2024, and photographs.</p>
     </div>
   </div>
 </section>
@@ -143,23 +144,23 @@
   <div class="wrap">
     <h2 class="sr-only">Latest</h2>
     <div class="latest rv-stagger">
-      <article>
-        <span class="kicker">Autumn 2026</span>
+      <article class="lt">
+        <div class="lt-top"><span class="d-ring" aria-hidden="true"><svg class="d-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M8.6 12.4V5.6a1.4 1.4 0 0 1 2.8 0v5.6"/><path pathLength="1" d="M11.4 11.2V4.2a1.4 1.4 0 0 1 2.8 0v7"/><path pathLength="1" d="M14.2 11.2V5.4a1.4 1.4 0 0 1 2.8 0v6.4"/><path pathLength="1" d="M17 11.8V8.6a1.4 1.4 0 0 1 2.8 0v5.2c0 4.3-2.9 7.4-6.9 7.4-2.4 0-4.1-1-5.4-2.9l-3.2-4.8a1.5 1.5 0 0 1 2.4-1.8l1.9 2.3"/></svg></span><span class="lt-when"><span class="lt-kind">Board</span><span class="sr-only">, </span><span class="lt-date">Autumn 2026</span></span></div>
         <h3>Forming a founding board</h3>
         <p>We are looking for volunteers for the founding board.</p>
-        <div class="btn-row"><a class="go" href="get-involved.html#board">The roles <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+        <div class="lt-go"><a class="go" href="get-involved.html#board">The roles <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       </article>
-      <article>
-        <span class="kicker">Autumn 2026</span>
+      <article class="lt">
+        <div class="lt-top"><span class="d-ring" aria-hidden="true"><svg class="d-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg></span><span class="lt-when"><span class="lt-kind">Class</span><span class="sr-only">, </span><span class="lt-date">Autumn 2026</span></span></div>
         <h3>Community Recorder Ensemble Class</h3>
-        <p>Running at Mulhuddart Community Centre on Wednesday evenings.</p>
-        <div class="btn-row"><a class="go" href="programmes/recorder-ensemble.html">About the class <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+        <p>Wednesday evenings at Mulhuddart Community Centre.</p>
+        <div class="lt-go"><a class="go" href="programmes/recorder-ensemble.html">About the class <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       </article>
-      <article>
-        <span class="kicker">19 September 2026</span>
+      <article class="lt">
+        <div class="lt-top"><span class="d-ring" aria-hidden="true"><svg class="d-glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 11.4h12.4c3.6 0 6 1.2 6 3.2 0 .4-.3.6-.9.6H3z"/><path pathLength="1" d="M5.8 11.4l11.4-8.7"/><path pathLength="1" d="M15 11.4V4.38"/><path pathLength="1" d="M5 15.2V21"/><path pathLength="1" d="M18.2 15.2V21"/><path pathLength="1" d="M1.6 21h20.8"/></svg></span><span class="lt-when"><span class="lt-kind">Concert</span><span class="sr-only">, </span><span class="lt-date">19 September 2026</span></span></div>
         <h3>An autumn concert</h3>
-        <p>Soprano, haegeum, clarinet and piano at Methodist Centenary Church, Ranelagh.</p>
-        <div class="btn-row"><a class="go" href="programmes/outreach-concerts.html#record">All outreach concerts <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+        <p>At Methodist Centenary Church, Ranelagh, with soprano, haegeum, clarinet and piano.</p>
+        <div class="lt-go"><a class="go" href="programmes/outreach-concerts.html#record">All outreach concerts <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       </article>
     </div>
   </div>
@@ -169,15 +170,171 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true">The record</p>
-      <div><h2><span class="sr-only">The record: </span>Forty, one square each.</h2>
-      <p class="sh-lead">Every talk and performance on the record, month by month.</p></div>
+      <div><h2><span class="sr-only">The record: </span>Forty, by year.</h2>
+      <p class="sh-lead">Each talk and performance on the record, with what it was and where.</p></div>
     </header>
-    <div class="mini-figs rv"><dl><div><dt>talks</dt><dd>17</dd></div><div><dt>outreach performances</dt><dd>20</dd></div><div><dt>pilot concert</dt><dd>1</dd></div><div><dt>South Dublin Live 2026 concerts</dt><dd>2</dd></div></dl><p class="mini-period">January 2024 &ndash; September 2026</p></div>
-    <figure class="chart rv">
-      <div class="chart-wide"><svg viewBox="0 0 1082 208" role="img" aria-label="A calendar from 2024 to 2026 with one square for each of the 40 talks and performances on the record: 17 talks and 23 performances."><text class="c-mon" x="137" y="20" text-anchor="middle">Jan</text><text class="c-mon" x="219" y="20" text-anchor="middle">Feb</text><text class="c-mon" x="301" y="20" text-anchor="middle">Mar</text><text class="c-mon" x="383" y="20" text-anchor="middle">Apr</text><text class="c-mon" x="465" y="20" text-anchor="middle">May</text><text class="c-mon" x="547" y="20" text-anchor="middle">Jun</text><text class="c-mon" x="629" y="20" text-anchor="middle">Jul</text><text class="c-mon" x="711" y="20" text-anchor="middle">Aug</text><text class="c-mon" x="793" y="20" text-anchor="middle">Sep</text><text class="c-mon" x="875" y="20" text-anchor="middle">Oct</text><text class="c-mon" x="957" y="20" text-anchor="middle">Nov</text><text class="c-mon" x="1039" y="20" text-anchor="middle">Dec</text><text class="c-year" x="0" y="65">2024</text><rect class="c-cell" x="96.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="178.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="260.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="342.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="424.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="506.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="588.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="670.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="752.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="834.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="916.5" y="34.5" width="81" height="49" rx="1"/><rect class="c-cell" x="998.5" y="34.5" width="81" height="49" rx="1"/><g class="c-ev"><title>28 Jan 2024 · Getting Closer · Sandyford, Dublin 18</title><rect class="c-on" x="101.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>25 Feb 2024 · Together (1) · Our Lady of Dolours Church, Dolphin&rsquo;s Barn</title><rect class="c-on" x="183.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>16 Mar 2024 · St Patrick&rsquo;s Day Concert · Dalgan Park, Co. Meath</title><rect class="c-open" x="265.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>23 Mar 2024 · Together (2) · Our Lady of Dolours Church</title><rect class="c-on" x="284.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>14 Apr 2024 · My Taste (1) · Our Lady of Dolours Church</title><rect class="c-on" x="347.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>27 Apr 2024 · My Taste (2) · Our Lady of Dolours Church</title><rect class="c-on" x="366.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>5 May 2024 · Rathgar Parish Concert · Church of the Three Patrons, Rathgar</title><rect class="c-open" x="429.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>22 Jun 2024 · Summer Festivals · Our Lady of Dolours Church</title><rect class="c-on" x="511.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>4 Aug 2024 · London Korean Catholic Church, United Kingdom · clarinet and organ</title><rect class="c-open" x="675.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>27 Oct 2024 · Missions &Eacute;trang&egrave;res de Paris, France · clarinet solo · retired missionaries</title><rect class="c-open" x="839.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>28 Oct 2024 · Palais Brongniart, Paris · clarinet solo</title><rect class="c-open" x="858.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>8 Nov 2024 · Getting Closer + Together (1) · TU Dublin, Grangegorman</title><rect class="c-on" x="921.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>15 Nov 2024 · Getting Closer + Together (2) · TU Dublin</title><rect class="c-on" x="940.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>23 Nov 2024 · St Columban&rsquo;s Day Concert · Missionary Sisters of St Columban, Co. Wicklow</title><rect class="c-open" x="959.0" y="43" width="14" height="14" rx="1"/></g><g class="c-ev"><title>28 Dec 2024 · Gwandukjeong Martyrs Memorial Centre, Daegu, Korea · clarinet and piano</title><rect class="c-open" x="1003.0" y="43" width="14" height="14" rx="1"/></g><text class="c-year" x="0" y="123">2025</text><rect class="c-cell" x="96.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="178.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="260.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="342.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="424.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="506.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="588.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="670.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="752.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="834.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="916.5" y="92.5" width="81" height="49" rx="1"/><rect class="c-cell" x="998.5" y="92.5" width="81" height="49" rx="1"/><g class="c-ev"><title>21 Feb 2025 · Getting Closer + Together (1) · TU Dublin</title><rect class="c-on" x="183.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>7 Mar 2025 · Getting Closer + Together (2) · TU Dublin</title><rect class="c-on" x="265.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>16 Mar 2025 · Dalgan Park, Co. Meath · Korean traditional ensemble and clarinet</title><rect class="c-open" x="284.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>11 Apr 2025 · My Taste · TU Dublin</title><rect class="c-on" x="347.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>17 Apr 2025 · HSE EVE Goirtin Hub, Dublin 7 · clarinet solo · a day service</title><rect class="c-open" x="366.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>17 Apr 2025 · Blessed Sacrament Chapel, Dublin 1 · organ and clarinet</title><rect class="c-open" x="385.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>18 Apr 2025 · Dysart Parish, Co. Westmeath · clarinet solo</title><rect class="c-open" x="404.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>27 May 2025 · Kilmessan Church, Co. Meath · organ and clarinet</title><rect class="c-open" x="429.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>4 Jun 2025 · Dalgan Park, Co. Meath</title><rect class="c-open" x="511.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>21 Jul 2025 · BBC Proms · Carmelite Community Centre, Dublin</title><rect class="c-on" x="593.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>21 Jul 2025 · Morning Star Hostel, Dublin 7 · organ and clarinet · a homeless hostel</title><rect class="c-open" x="612.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>26 Sep 2025 · Getting Closer + Together (1) · TU Dublin</title><rect class="c-on" x="757.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>17 Oct 2025 · Getting Closer + Together (2) · TU Dublin</title><rect class="c-on" x="839.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>20 Nov 2025 · TU Dublin, Dublin 7 · organ and clarinet</title><rect class="c-open" x="921.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>22 Nov 2025 · TU Dublin, Dublin 7 · clarinet, piano and harp</title><rect class="c-open" x="940.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>23 Nov 2025 · Missionary Sisters of St Columban, Co. Wicklow · clarinet solo</title><rect class="c-open" x="959.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>30 Nov 2025 · Franciscan Missionaries of Mary, Dublin 5 · clarinet solo</title><rect class="c-open" x="978.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin</title><rect class="c-on" x="1003.0" y="101" width="14" height="14" rx="1"/></g><g class="c-ev"><title>20 Dec 2025 · Christmas Concert · Clondalkin Lodge, Dublin</title><rect class="c-open" x="1022.0" y="101" width="14" height="14" rx="1"/></g><text class="c-year" x="0" y="181">2026</text><rect class="c-cell" x="96.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="178.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="260.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="342.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="424.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="506.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="588.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="670.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="752.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="834.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="916.5" y="150.5" width="81" height="49" rx="1"/><rect class="c-cell" x="998.5" y="150.5" width="81" height="49" rx="1"/><g class="c-ev"><title>23 Jan 2026 · My Taste · East Quad, TU Dublin Grangegorman</title><rect class="c-on" x="101.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>Feb 2026 · My Taste (2) · East Quad, TU Dublin Grangegorman</title><rect class="c-on" x="183.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>Apr 2026 · Easter Concert: Presentation Sisters Recorder Ensemble · Clondalkin Lodge, Dublin</title><rect class="c-open" x="347.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>20 Aug 2026 · Tallaght University Hospital · our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player</title><rect class="c-open" x="675.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>29 Aug 2026 · Rua Red Performance Space, Tallaght · our founder was selected for South Dublin Live 2026 · clarinet, piano and soprano</title><rect class="c-open" x="694.0" y="159" width="14" height="14" rx="1"/></g><g class="c-ev"><title>19 Sep 2026 · Methodist Centenary Church, Ranelagh, Dublin 6 · soprano, haegeum, clarinet and piano</title><rect class="c-open" x="757.0" y="159" width="14" height="14" rx="1"/></g></svg></div>
-      <div class="chart-tall"><svg viewBox="0 0 270 392" role="img" aria-label="A calendar from 2024 to 2026 with one square for each of the 40 talks and performances on the record: 17 talks and 23 performances."><text class="c-year c-year-sm" x="83" y="20" text-anchor="middle">2024</text><text class="c-year c-year-sm" x="157" y="20" text-anchor="middle">2025</text><text class="c-year c-year-sm" x="231" y="20" text-anchor="middle">2026</text><text class="c-mon" x="0" y="49">Jan</text><rect class="c-cell" x="46.5" y="30.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="30.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="30.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="79">Feb</text><rect class="c-cell" x="46.5" y="60.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="60.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="60.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="109">Mar</text><rect class="c-cell" x="46.5" y="90.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="90.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="90.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="139">Apr</text><rect class="c-cell" x="46.5" y="120.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="120.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="120.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="169">May</text><rect class="c-cell" x="46.5" y="150.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="150.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="150.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="199">Jun</text><rect class="c-cell" x="46.5" y="180.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="180.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="180.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="229">Jul</text><rect class="c-cell" x="46.5" y="210.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="210.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="210.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="259">Aug</text><rect class="c-cell" x="46.5" y="240.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="240.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="240.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="289">Sep</text><rect class="c-cell" x="46.5" y="270.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="270.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="270.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="319">Oct</text><rect class="c-cell" x="46.5" y="300.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="300.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="300.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="349">Nov</text><rect class="c-cell" x="46.5" y="330.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="330.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="330.5" width="73" height="29" rx="1"/><text class="c-mon" x="0" y="379">Dec</text><rect class="c-cell" x="46.5" y="360.5" width="73" height="29" rx="1"/><rect class="c-cell" x="120.5" y="360.5" width="73" height="29" rx="1"/><rect class="c-cell" x="194.5" y="360.5" width="73" height="29" rx="1"/><rect class="c-on" x="52.5" y="39.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="69.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-on" x="68.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-on" x="68.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="159.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="189.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="249.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="309.0" width="12" height="12" rx="1"/><rect class="c-open" x="68.5" y="309.0" width="12" height="12" rx="1"/><rect class="c-on" x="52.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-on" x="68.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="84.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="52.5" y="369.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="69.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="99.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="158.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="174.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="126.5" y="159.0" width="12" height="12" rx="1"/><rect class="c-open" x="126.5" y="189.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="219.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="219.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="279.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="309.0" width="12" height="12" rx="1"/><rect class="c-open" x="126.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="158.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-open" x="174.5" y="339.0" width="12" height="12" rx="1"/><rect class="c-on" x="126.5" y="369.0" width="12" height="12" rx="1"/><rect class="c-open" x="142.5" y="369.0" width="12" height="12" rx="1"/><rect class="c-on" x="200.5" y="39.0" width="12" height="12" rx="1"/><rect class="c-on" x="200.5" y="69.0" width="12" height="12" rx="1"/><rect class="c-open" x="200.5" y="129.0" width="12" height="12" rx="1"/><rect class="c-open" x="200.5" y="249.0" width="12" height="12" rx="1"/><rect class="c-open" x="216.5" y="249.0" width="12" height="12" rx="1"/><rect class="c-open" x="200.5" y="279.0" width="12" height="12" rx="1"/></svg></div>
-      <figcaption class="chart-key"><span><i aria-hidden="true"></i>Talk (17)</span><span><i class="o" aria-hidden="true"></i>Performance (23)</span><span>The December 2025 talk was a concert, attended together.</span></figcaption>
-    </figure>
+    <div class="mini-figs rv"><dl><div><dt><i class="dot" aria-hidden="true"></i>talks</dt><dd>17</dd></div><div><dt><i class="dot dot-open" aria-hidden="true"></i>outreach performances</dt><dd>20</dd></div><div><dt><i class="dot dot-open" aria-hidden="true"></i>pilot concert</dt><dd>1</dd></div><div><dt><i class="dot dot-open" aria-hidden="true"></i>South Dublin Live 2026 concerts</dt><dd>2</dd></div></dl><p class="mini-period">January 2024 &ndash; September 2026</p></div>
+    <div class="record-years rv">
+      <div class="ry">
+        <h3 class="ry-y">2024<span class="sr-only">, </span><span class="ry-n">15 talks and performances</span></h3>
+        <details class="fold ry-fold"><summary>Show all 15 from 2024</summary>
+        <ol class="ry-months">
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Jan</span><span class="sr-only">January</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Getting Closer</b><span class="sr-only">, </span><span>Sandyford, Dublin 18</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Feb</span><span class="sr-only">February</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Together (1)</b><span class="sr-only">, </span><span>Our Lady of Dolours Church, Dolphin&rsquo;s Barn</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Mar</span><span class="sr-only">March</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>St Patrick&rsquo;s Day Concert</b><span class="sr-only">, </span><span>Dalgan Park, Co. Meath</span></span></li>
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Together (2)</b><span class="sr-only">, </span><span>Our Lady of Dolours Church</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Apr</span><span class="sr-only">April</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>My Taste (1)</b><span class="sr-only">, </span><span>Our Lady of Dolours Church</span></span></li>
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>My Taste (2)</b><span class="sr-only">, </span><span>Our Lady of Dolours Church</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">May</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Rathgar Parish Concert</b><span class="sr-only">, </span><span>Church of the Three Patrons, Rathgar</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Jun</span><span class="sr-only">June</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Summer Festivals</b><span class="sr-only">, </span><span>Our Lady of Dolours Church</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Aug</span><span class="sr-only">August</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>London Korean Catholic Church, United Kingdom</b><span class="sr-only">, </span><span>clarinet and organ</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Oct</span><span class="sr-only">October</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Missions &Eacute;trang&egrave;res de Paris, France</b><span class="sr-only">, </span><span>clarinet solo · retired missionaries</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Palais Brongniart, Paris</b><span class="sr-only">, </span><span>clarinet solo</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Nov</span><span class="sr-only">November</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Getting Closer + Together (1)</b><span class="sr-only">, </span><span>TU Dublin, Grangegorman</span></span></li>
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Getting Closer + Together (2)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>St Columban&rsquo;s Day Concert</b><span class="sr-only">, </span><span>Missionary Sisters of St Columban, Co. Wicklow</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Dec</span><span class="sr-only">December</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Gwandukjeong Martyrs Memorial Centre, Daegu, Korea</b><span class="sr-only">, </span><span>clarinet and piano</span></span></li>
+            </ol>
+          </li>
+        </ol>
+        </details>
+      </div>
+      <div class="ry">
+        <h3 class="ry-y">2025<span class="sr-only">, </span><span class="ry-n">19 talks and performances</span></h3>
+        <details class="fold ry-fold"><summary>Show all 19 from 2025</summary>
+        <ol class="ry-months">
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Feb</span><span class="sr-only">February</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Getting Closer + Together (1)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Mar</span><span class="sr-only">March</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Getting Closer + Together (2)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Dalgan Park, Co. Meath</b><span class="sr-only">, </span><span>Korean traditional ensemble and clarinet</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Apr</span><span class="sr-only">April</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>My Taste</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>HSE EVE Goirtin Hub, Dublin 7</b><span class="sr-only">, </span><span>clarinet solo · a day service</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Blessed Sacrament Chapel, Dublin 1</b><span class="sr-only">, </span><span>organ and clarinet</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Dysart Parish, Co. Westmeath</b><span class="sr-only">, </span><span>clarinet solo</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m">May</span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Kilmessan Church, Co. Meath</b><span class="sr-only">, </span><span>organ and clarinet</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Jun</span><span class="sr-only">June</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Dalgan Park, Co. Meath</b></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Jul</span><span class="sr-only">July</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>BBC Proms</b><span class="sr-only">, </span><span>Carmelite Community Centre, Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Morning Star Hostel, Dublin 7</b><span class="sr-only">, </span><span>organ and clarinet · a homeless hostel</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Sep</span><span class="sr-only">September</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Getting Closer + Together (1)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Oct</span><span class="sr-only">October</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Getting Closer + Together (2)</b><span class="sr-only">, </span><span>TU Dublin</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Nov</span><span class="sr-only">November</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>TU Dublin, Dublin 7</b><span class="sr-only">, </span><span>organ and clarinet</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>TU Dublin, Dublin 7</b><span class="sr-only">, </span><span>clarinet, piano and harp</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Missionary Sisters of St Columban, Co. Wicklow</b><span class="sr-only">, </span><span>clarinet solo</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Franciscan Missionaries of Mary, Dublin 5</b><span class="sr-only">, </span><span>clarinet solo</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Dec</span><span class="sr-only">December</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>Together (1): a concert, attended together</b><span class="sr-only">, </span><span>National Concert Hall, Dublin</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Christmas Concert</b><span class="sr-only">, </span><span>Clondalkin Lodge, Dublin</span></span></li>
+            </ol>
+          </li>
+        </ol>
+        </details>
+      </div>
+      <div class="ry">
+        <h3 class="ry-y">2026<span class="sr-only">, </span><span class="ry-n">6 talks and performances</span></h3>
+        <ol class="ry-months">
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Jan</span><span class="sr-only">January</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>My Taste (1)</b><span class="sr-only">, </span><span>East Quad, TU Dublin Grangegorman</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Feb</span><span class="sr-only">February</span></span>
+            <ol class="ry-list">
+              <li class="ry-t"><span class="ry-what"><span class="sr-only">Talk: </span><b>My Taste (2)</b><span class="sr-only">, </span><span>East Quad, TU Dublin Grangegorman</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Apr</span><span class="sr-only">April</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Easter Concert: Presentation Sisters Recorder Ensemble</b><span class="sr-only">, </span><span>Clondalkin Lodge, Dublin</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Aug</span><span class="sr-only">August</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Tallaght University Hospital</b><span class="sr-only">, </span><span>our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player</span></span></li>
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Rua Red Performance Space, Tallaght</b><span class="sr-only">, </span><span>our founder was selected for South Dublin Live 2026 · clarinet, piano and soprano</span></span></li>
+            </ol>
+          </li>
+          <li class="ry-mo"><span class="ry-m"><span aria-hidden="true">Sep</span><span class="sr-only">September</span></span>
+            <ol class="ry-list">
+              <li class="ry-p"><span class="ry-what"><span class="sr-only">Performance: </span><b>Methodist Centenary Church, Ranelagh, Dublin 6</b><span class="sr-only">, </span><span>soprano, haegeum, clarinet and piano</span></span></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -187,42 +344,54 @@
       <p class="eyebrow section-label" aria-hidden="true">Timeline</p>
       <h2><span class="sr-only">Timeline: </span>How it grew.</h2>
     </header>
-    <ol class="timeline">
-      <li class="tl-item">
-        <span class="tl-date">January 2024</span>
-        <div><h3>It starts</h3><p>Founded in Dublin, with the Letters Ensemble. Six people come to the first talk.</p></div>
+    <ol class="timeline timeline-years">
+      <li class="tl-year"><span class="tl-y">2024</span>
+        <ol class="tl-items">
+          <li class="tl-item">
+            <span class="tl-date">January</span>
+            <div><h3>It starts</h3><p class="tl-text"><span class="sl">Founded in Dublin, with the Letters Ensemble.</span> <span class="sl"><mark>Six people</mark> come to the first talk.</span></p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">Through the year</span>
+            <div><h3>Music goes out</h3><p class="tl-text">Concerts in Co. Meath, Co. Wicklow, London, Paris and Daegu.</p></div>
+          </li>
+        </ol>
       </li>
-      <li class="tl-item">
-        <span class="tl-date">2024</span>
-        <div><h3>Music goes out</h3><p>Concerts in Co. Meath, Co. Wicklow, London, Paris and Daegu.</p></div>
+      <li class="tl-year"><span class="tl-y">2025</span>
+        <ol class="tl-items">
+          <li class="tl-item">
+            <span class="tl-date">Autumn</span>
+            <div><h3>Introducing concerts</h3><p class="tl-text">We start introducing concerts to participants and organising group attendance.</p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">October</span>
+            <div><h3>An audience becomes players</h3><p class="tl-text">Preparation begins for a recorder ensemble with <mark>seven retired Presentation Sisters</mark>.</p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">December</span>
+            <div><h3>A concert, attended together</h3><p class="tl-text">For the fifteenth talk, we go to a concert at the National Concert Hall.</p></div>
+          </li>
+        </ol>
       </li>
-      <li class="tl-item">
-        <span class="tl-date">Autumn 2025</span>
-        <div><h3>Introducing concerts</h3><p>We start introducing concerts to participants and organising group attendance.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">October 2025</span>
-        <div><h3>An audience becomes players</h3><p>Preparation begins for a recorder ensemble with seven retired Presentation Sisters.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">December 2025</span>
-        <div><h3>A concert, attended together</h3><p>For the fifteenth talk, we go to a concert at the National Concert Hall.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">January&ndash;April 2026</span>
-        <div><h3>All seven, to the end</h3><p>Ten weekly rehearsals at Warrenmount, then an Easter concert at Clondalkin Lodge.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">August 2026</span>
-        <div><h3>South Dublin Live 2026</h3><p>Our founder was selected for South Dublin Live 2026: two concerts in Tallaght.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">September 2026</span>
-        <div><h3>An autumn concert</h3><p>We held it at Methodist Centenary Church, Ranelagh, Dublin 6.</p></div>
-      </li>
-      <li class="tl-item">
-        <span class="tl-date">Autumn 2026</span>
-        <div><h3>The public class begins</h3><p>The class born from the pilot opens to the public in Mulhuddart.</p></div>
+      <li class="tl-year"><span class="tl-y">2026</span>
+        <ol class="tl-items">
+          <li class="tl-item">
+            <span class="tl-date">January to&nbsp;April</span>
+            <div><h3>All seven, to the end</h3><p class="tl-text">Ten weekly rehearsals at Warrenmount, then <mark>an Easter concert</mark> at Clondalkin Lodge.</p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">August</span>
+            <div><h3>South Dublin Live 2026</h3><p class="tl-text"><span class="sl">Our founder was selected.</span> <span class="sl">We played twice in Tallaght.</span></p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">September</span>
+            <div><h3>An autumn concert</h3><p class="tl-text">In Ranelagh, Dublin 6, at Methodist Centenary Church.</p></div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-date">Autumn</span>
+            <div><h3>The public class begins</h3><p class="tl-text">The class <mark>born from the pilot</mark> opens to the public in Mulhuddart.</p></div>
+          </li>
+        </ol>
       </li>
     </ol>
   </div>
@@ -236,19 +405,19 @@
       <p class="sh-lead">From our concerts and rehearsals, newest first.</p></div>
     </header>
     <ul class="gallery">
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/tuh-trio.jpg" srcset="images/tuh-trio-800.jpg 800w, images/tuh-trio.jpg 1236w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1236" height="787" alt="Soprano, piano and clarinet in the atrium of Tallaght University Hospital"></div><figcaption>Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/tuh-atrium.jpg" srcset="images/tuh-atrium-800.jpg 800w, images/tuh-atrium.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1052" alt="Clarinet, haegeum and keyboard in the chapel of Tallaght University Hospital"></div><figcaption>Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/tuh-haegeum.jpg" srcset="images/tuh-haegeum-800.jpg 800w, images/tuh-haegeum.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="934" alt="A haegeum player performing in a hospital atrium"></div><figcaption>Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/ruared-trio.jpg" srcset="images/ruared-trio-800.jpg 800w, images/ruared-trio.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="933" alt="Clarinet, soprano and piano taking a bow on the Rua Red stage"></div><figcaption>Rua Red, Tallaght · August 2026 · photo: Ben Ryan / SDCC</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/care-christmas.jpg" srcset="images/care-christmas-800.jpg 800w, images/care-christmas.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="A clarinettist and three string players performing in a care setting at Christmas"></div><figcaption>Outreach concert · Christmas 2025</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/score-stand.jpg" srcset="images/score-stand-800.jpg 800w, images/score-stand.jpg 1050w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1050" height="1400" alt="A string trio rehearsing behind a part on a music stand"></div><figcaption>Before the Christmas concert · December 2025</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/recorders.jpg" srcset="images/recorders-800.jpg 800w, images/recorders.jpg 1343w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1343" height="1400" alt="Six recorders of different sizes standing in a row"></div><figcaption>Recorders · November 2025</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/church-aisle.jpg" srcset="images/church-aisle-800.jpg 800w, images/church-aisle.jpg 1050w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1050" height="1400" alt="A clarinet held up before the altar of a parish church in Co. Westmeath"></div><figcaption>Dysart, Co. Westmeath · 2025</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/columban-ensemble.jpg" srcset="images/columban-ensemble-800.jpg 800w, images/columban-ensemble.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="Four string players of the Letters Ensemble and their conductor in a bright yellow room"></div><figcaption>Missionary Sisters of St Columban, Co. Wicklow · November 2024</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/dalgan-hall.jpg" srcset="images/dalgan-hall-800.jpg 800w, images/dalgan-hall.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="A hall set out with chairs and music stands before a concert, with no one there yet"></div><figcaption>Dalgan Park, Co. Meath · March 2024</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/hero-outreach.jpg" srcset="images/hero-outreach-800.jpg 800w, images/hero-outreach.jpg 1800w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1800" height="1350" alt="The Letters Ensemble and their conductor playing a St Patrick&rsquo;s Day concert in a hall"></div><figcaption>Letters Ensemble · St Patrick&rsquo;s Day concert</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/letters-ensemble.jpg" srcset="images/letters-ensemble-800.jpg 800w, images/letters-ensemble.jpg 1400w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1400" height="1050" alt="The Letters Ensemble with their instruments"></div><figcaption>Letters Ensemble</figcaption></figure></li>
-      <li><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/two-clarinets.jpg" srcset="images/two-clarinets-800.jpg 800w, images/two-clarinets.jpg 1050w" sizes="(max-width:35em) 92vw, (max-width:55em) 46vw, 33vw" width="1050" height="1400" alt="Two clarinets resting on the lid of a piano"></div><figcaption>Instruments · two clarinets</figcaption></figure></li>
+      <li style="--ar:1.5705;--w:0.35692;--n:3;--w2:0.54131;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/tuh-trio.jpg" srcset="images/tuh-trio-800.jpg 800w, images/tuh-trio.jpg 1236w" sizes="(max-width:40em) 92vw, (max-width:75em) 49vw, 417px" width="1236" height="787" alt="Soprano, piano and clarinet in the atrium of Tallaght University Hospital"></div><figcaption><span>Atrium · Tallaght University Hospital · August 2026</span><span class="cap-credit">photo: Tallaght University Hospital</span></figcaption></figure></li>
+      <li style="--ar:1.3308;--w:0.30244;--n:3;--w2:0.45869;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/tuh-atrium.jpg" srcset="images/tuh-atrium-800.jpg 800w, images/tuh-atrium.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 42vw, 353px" width="1400" height="1052" alt="Clarinet, haegeum and keyboard in the chapel of Tallaght University Hospital"></div><figcaption><span>Chapel · Tallaght University Hospital · August 2026</span><span class="cap-credit">photo: Tallaght University Hospital</span></figcaption></figure></li>
+      <li style="--ar:1.4989;--w:0.34065;--n:3;--w2:0.49973;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/tuh-haegeum.jpg" srcset="images/tuh-haegeum-800.jpg 800w, images/tuh-haegeum.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 45vw, 398px" width="1400" height="934" alt="A haegeum player performing in a hospital atrium"></div><figcaption><span>Haegeum · Tallaght University Hospital · August 2026</span><span class="cap-credit">photo: Tallaght University Hospital</span></figcaption></figure></li>
+      <li style="--ar:1.5005;--w:0.33028;--n:4;--w2:0.50027;--n2:2"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/ruared-trio.jpg" srcset="images/ruared-trio-800.jpg 800w, images/ruared-trio.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 46vw, 386px" width="1400" height="933" alt="Clarinet, soprano and piano taking a bow on the Rua Red stage"></div><figcaption><span>Rua Red, Tallaght · August 2026</span><span class="cap-credit">photo: Ben Ryan / SDCC</span></figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.29348;--n:4;--w2:0.43822;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/care-christmas.jpg" srcset="images/care-christmas-800.jpg 800w, images/care-christmas.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 40vw, 343px" width="1400" height="1050" alt="A clarinettist and three string players performing in a care setting at Christmas"></div><figcaption>Outreach concert · Christmas 2025</figcaption></figure></li>
+      <li style="--ar:0.7500;--w:0.16508;--n:4;--w2:0.24650;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/score-stand.jpg" srcset="images/score-stand-800.jpg 800w, images/score-stand.jpg 1050w" sizes="(max-width:40em) 92vw, (max-width:75em) 22vw, 193px" width="1050" height="1400" alt="A string trio rehearsing behind a part on a music stand"></div><figcaption>Before the concert · Christmas 2025</figcaption></figure></li>
+      <li style="--ar:0.9593;--w:0.21115;--n:4;--w2:0.31528;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/recorders.jpg" srcset="images/recorders-800.jpg 800w, images/recorders.jpg 1343w" sizes="(max-width:40em) 92vw, (max-width:75em) 29vw, 247px" width="1343" height="1400" alt="Six recorders of different sizes standing in a row"></div><figcaption>Recorders · November 2025</figcaption></figure></li>
+      <li style="--ar:0.7500;--w:0.21951;--n:3;--w2:0.21951;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/church-aisle.jpg" srcset="images/church-aisle-800.jpg 800w, images/church-aisle.jpg 1050w" sizes="(max-width:40em) 92vw, (max-width:75em) 20vw, 256px" width="1050" height="1400" alt="A clarinet held up before the altar of a parish church in Co. Westmeath"></div><figcaption>Dysart, Co. Westmeath · 2025</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/columban-ensemble.jpg" srcset="images/columban-ensemble-800.jpg 800w, images/columban-ensemble.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1400" height="1050" alt="Four string players of the Letters Ensemble and their conductor in a bright yellow room"></div><figcaption>Missionary Sisters of St Columban, Co. Wicklow · November 2024</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/dalgan-hall.jpg" srcset="images/dalgan-hall-800.jpg 800w, images/dalgan-hall.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1400" height="1050" alt="A hall set out with chairs and music stands before a concert, with no one there yet"></div><figcaption>Dalgan Park, Co. Meath · March 2024</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/hero-outreach.jpg" srcset="images/hero-outreach-800.jpg 800w, images/hero-outreach.jpg 1800w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1800" height="1350" alt="The Letters Ensemble and their conductor playing a St Patrick&rsquo;s Day concert in a hall"></div><figcaption>Letters Ensemble · St Patrick&rsquo;s Day concert</figcaption></figure></li>
+      <li style="--ar:1.3333;--w:0.39024;--n:3;--w2:0.39024;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/letters-ensemble.jpg" srcset="images/letters-ensemble-800.jpg 800w, images/letters-ensemble.jpg 1400w" sizes="(max-width:40em) 92vw, (max-width:75em) 36vw, 456px" width="1400" height="1050" alt="The Letters Ensemble with their instruments"></div><figcaption>Letters Ensemble</figcaption></figure></li>
+      <li style="--ar:0.7500;--w:0.21951;--n:3;--w2:0.21951;--n2:3"><figure class="plate"><div class="photo"><img loading="lazy" decoding="async" src="images/two-clarinets.jpg" srcset="images/two-clarinets-800.jpg 800w, images/two-clarinets.jpg 1050w" sizes="(max-width:40em) 92vw, (max-width:75em) 20vw, 256px" width="1050" height="1400" alt="Two clarinets resting on the lid of a piano"></div><figcaption>Instruments · two clarinets</figcaption></figure></li>
     </ul>
   </div>
 </section>
@@ -294,8 +463,8 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 2 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 4 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>
