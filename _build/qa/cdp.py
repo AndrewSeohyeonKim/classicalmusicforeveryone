@@ -220,14 +220,42 @@ class Chrome:
                 print(f"  (Chrome did not answer on {url}: {type(e).__name__}; restarting)", flush=True)
                 self.restart()
 
+    # the site's web fonts, loaded for real (chief designer v7: a round of captures went out in the
+    # system's faces, Iowan, the system sans and Apple SD Gothic Neo, because the wait gave up after
+    # 5s and the run carried on; round 5: a page whose Google Fonts sheet never arrived has no EB
+    # Garamond face at all, and the old guard took that for "a page without the site's fonts").
+    # Now: a page that links fonts.googleapis.com needs that sheet loaded, each family declared,
+    # and every face the site uses to pass document.fonts.check (Garamond 400 500 600, italic 400
+    # 500; Jakarta 400 600 700; on Korean pages Noto Sans KR 400 700).
+    FONTS_OK = """(async () => { if (!document.fonts) return true;
+      const link = [...document.querySelectorAll('link[rel="stylesheet"]')].find(l => (l.href || '').includes('fonts.googleapis.com'));
+      if (!link) return true;   // a page that does not ask for the site's fonts
+      if (!link.sheet) return false;   // the Google Fonts sheet did not arrive
+      const ko = (document.documentElement.lang || '').startsWith('ko');
+      const faces = [['400', 'EB Garamond', 'a'], ['500', 'EB Garamond', 'a'], ['600', 'EB Garamond', 'a'],
+                     ['italic 400', 'EB Garamond', 'a'], ['italic 500', 'EB Garamond', 'a'],
+                     ['400', 'Plus Jakarta Sans', 'a'], ['600', 'Plus Jakarta Sans', 'a'], ['700', 'Plus Jakarta Sans', 'a']]
+                    .concat(ko ? [['400', 'Noto Sans KR', '\\uac00'], ['700', 'Noto Sans KR', '\\uac00']] : []);
+      const fams = new Set([...document.fonts].map(f => f.family.replace(/["']/g, '')));
+      if (!faces.every(([w, f]) => fams.has(f))) return false;   // check() passes a family it has never heard of
+      try { await Promise.race([Promise.all(faces.map(([w, f, s]) => document.fonts.load(w + ' 16px "' + f + '"', s))),
+                                new Promise(r => setTimeout(r, 8000))]); } catch (e) {}
+      return faces.every(([w, f, s]) => document.fonts.check(w + ' 16px "' + f + '"', s)); })()"""
+
     def _goto(self, url, settle=0.8):
-        self.events.clear()
-        self.call("Page.navigate", url=url)
-        self.wait_event("Page.loadEventFired", timeout=30)
-        # never wait on the fonts for ever: a page whose font promise stalls (it has
-        # happened, intermittently) gives up after 5s instead of hanging the run
-        self.js("document.fonts ? Promise.race([document.fonts.ready.then(()=>1),"
-                " new Promise(r=>setTimeout(()=>r(0),5000))]) : 1", awaitp=True)
+        for tries in range(4):
+            self.events.clear()
+            self.call("Page.navigate", url=url)
+            self.wait_event("Page.loadEventFired", timeout=30)
+            # never wait on the fonts for ever: a page whose font promise stalls (it has
+            # happened, intermittently) gives up after 5s instead of hanging the run
+            self.js("document.fonts ? Promise.race([document.fonts.ready.then(()=>1),"
+                    " new Promise(r=>setTimeout(()=>r(0),5000))]) : 1", awaitp=True)
+            if self.js(self.FONTS_OK, awaitp=True):
+                break
+            if tries == 3:
+                raise RuntimeError(f"the web fonts did not load on {url}")
+            print(f"  (web fonts not loaded on {url}; loading it again)", flush=True)
         time.sleep(settle)
 
     def js(self, expr, awaitp=True):

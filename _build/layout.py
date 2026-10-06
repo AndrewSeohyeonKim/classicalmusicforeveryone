@@ -42,8 +42,8 @@ FONTS_EN = FONTS.replace("&family=Noto+Sans+KR:wght@400;700", "")
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
-UPDATED = {"en": "4 October 2026", "ko": "2026년 10월 4일"}
-UPDATED_ISO = "2026-10-04"
+UPDATED = {"en": "5 October 2026", "ko": "2026년 10월 5일"}
+UPDATED_ISO = "2026-10-05"
 
 # Six pages and the language switch (2026-09-30: five pages, then News &
 # archive added back when the organisation was restructured). Five plain
@@ -74,6 +74,7 @@ STR = {
         "cta": "Contact",
         "contact": "Contact",
         "menu": "Menu",
+        "running": ", running now",
         "lang_label": "Language",
         "logo_alt": "Classical Music for Everyone",
         "this_lang": "EN", "other_lang": "한국어",
@@ -84,7 +85,7 @@ STR = {
         # telling of the hero lead on every page (content review); "" omits it
         "footer_about": "",
         "f_explore": "Explore",
-        "f_record": "Take part",
+        "f_record": "Get involved",
         "f_connect": "Connect",
         "f_legal": "© 2026 Classical Music for Everyone · Dublin, Ireland",
         "f_status": ("Classical Music for Everyone is a not-for-profit community music initiative, "
@@ -105,9 +106,10 @@ STR = {
         "cta": "문의",
         "contact": "문의",
         "menu": "메뉴",
+        "running": ", 진행 중",
         "lang_label": "언어",
         "logo_alt": "Classical Music for Everyone",
-        "this_lang": "한국어", "other_lang": "EN",
+        "this_lang": "한국어", "other_lang": "English",
         "tagline": '<span lang="en">Bringing <span class="cm">Classical Music</span> '
                    '<em>where it&rsquo;s needed!</em></span>',
         "tagline_plain": '<span lang="en">Bringing Classical Music where it&rsquo;s needed!</span>',
@@ -116,8 +118,8 @@ STR = {
         "f_record": "함께하기",
         "f_connect": "연락",
         "f_legal": "© 2026 Classical Music for Everyone · 아일랜드 더블린",
-        "f_status": ("Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리\u00a0공동체 "
-                     "음악 단체입니다. 아직 등록된 자선단체는 아닙니다."),
+        "f_status": ("Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 "
+                     "비영리\u00a0공동체\u00a0음악\u00a0단체입니다. 아직 등록된 자선단체는 아닙니다."),
         "f_updated": "갱신",
         "f_privacy": "개인정보 처리방침",
         "nav_label": "주 메뉴",
@@ -139,10 +141,10 @@ MENU_JS = ("var n=document.getElementById('nav');"
            "var o=n.getAttribute('data-open')!==&quot;true&quot;;"
            "n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)")
 ESC_JS = ("if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),"
-          "h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');"
+          "a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');"
           "if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');"
           "b.setAttribute('aria-expanded','false');b.focus()}"
-          "else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}")
+          "else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}")
 # the programmes panel, shut with Escape, opens again once the pointer or
 # the focus has left it
 SUB_JS = ("onmouseleave=\"this.removeAttribute('data-shut')\" "
@@ -339,8 +341,10 @@ def header(lang, slug):
         if href == "programmes.html" and PROG_MENU[lang]:
             subs = "".join(
                 f'<li><a href="{p}programmes/{s_}.html"{" aria-current=\"page\"" if slug == f"programmes/{s_}.html" else ""}>'
-                f'<span class="ns-n" aria-hidden="true">{k:02d}</span>{name}</a></li>'
-                for k, (s_, name) in enumerate(PROG_MENU[lang], start=1))
+                f'<span class="ns-n" aria-hidden="true">{k:02d}</span><span class="ns-name">{name}'
+                + (f'<span class="ns-live" aria-hidden="true"></span><span class="sr-only">{s["running"]}</span>' if live else "")
+                + '</span></a></li>'
+                for k, (s_, name, live) in enumerate(PROG_MENU[lang], start=1))
             rows.append(f'        <li class="has-sub" {SUB_JS}>{link}\n'
                         f'          <ul class="nav-sub">{subs}</ul></li>')
         else:
@@ -348,6 +352,9 @@ def header(lang, slug):
     links = "\n".join(rows)
     cta_current = ' aria-current="page"' if slug == "contact.html" else ""
     other = "ko" if lang == "en" else "en"
+    rel = "" if slug == "404.html" else ' rel="alternate"'
+    tongue = (f'href="{_switch(lang, slug)}" hreflang="{other}" lang="{other}"{rel} '
+              f'translate="no">{s["other_lang"]}</a>')
     return f"""<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">{s['skip']}</a>
 <header class="site-header">
@@ -356,27 +363,24 @@ def header(lang, slug):
       <img src="{r}assets/logo-horizontal.svg" alt="{s['logo_alt']}"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" {tongue}
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="{s['menu']}" onclick="{MENU_JS}"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="{s['nav_label']}">
       <ul class="nav-list">
 {links}
       </ul>
-      <a class="btn btn-primary btn-nav" href="{p}contact.html"{cta_current}>{s['cta']}</a>
-      <div class="lang-switch" role="group" aria-label="{s['lang_label']}">
-        <span aria-current="true">{s['this_lang']}</span>
-        <a href="{_switch(lang, slug)}" hreflang="{other}" lang="{other}">{s['other_lang']}</a>
-      </div>
+      <a class="btn btn-nav" href="{p}contact.html"{cta_current}>{s['cta']}</a>
     </nav>
+    <a class="lang lang-wide" {tongue}
   </div>
 </header>"""
 
 
 def footer(lang, slug="index.html"):
     p, r, s = _here(slug), _root(lang, slug), STR[lang]
-    # the footer language link always goes to the other language's home page,
-    # not to this page's twin: that is what the header switcher is for
-    home_other = r + ("ko/index.html" if lang == "en" else "index.html")
+    # the footer's language link goes to this page in the other language, as
+    # the header's does (v7: it went to the other home page)
     other = "ko" if lang == "en" else "en"
     links = "\n".join(f'          <li><a href="{p}{h}">{t}</a></li>' for h, t in s["f_links"])
     links2 = "\n".join(f'          <li><a href="{p}{h}">{t}</a></li>' for h, t in s["f_links2"])
@@ -409,7 +413,7 @@ def footer(lang, slug="index.html"):
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
           <li><a href="tel:{PHONE_TEL}">{PHONE_INTL}</a></li>
           <li><a href="{p}contact.html">{s['contact']}</a></li>
-          <li><a href="{home_other}" hreflang="{other}" lang="{other}">{s['other_lang']}</a></li>
+          <li><a href="{_switch(lang, slug)}" hreflang="{other}" lang="{other}" rel="alternate" translate="no">{s['other_lang']}</a></li>
         </ul>
       </div>
     </div>
@@ -432,14 +436,21 @@ def footer(lang, slug="index.html"):
 # ---------------------------------------------------------------------------
 # and a value of two sentences on Contact (the insurance line), a line each,
 # and the status sentence in the footer ("…guarantee. It / is not yet…")
-SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "pi-text", "wa-v", "footer-status", "tl-text")
+SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "pi-text", "wa-v", "footer-status", "tl-text",
+                   # v7, chief designer: the answers on About and the programme pages
+                   # ("gifts yet. We / will never ask"), and the privacy notice's intro
+                   "qa-a", "pv-intro",
+                   # v7, chief designer round 3: "concert. Then / we go", "Dublin. For"
+                   # (the privacy clauses flow again: legal sentences longer than their line
+                   # stepped short, long, short, long, a fresh reviewer, v7)
+                   "step-t", "ct-how", "map-cap")
 # split too, but the sentences sit side by side where the block fits one line
 # (styles.css .sl-n, a line each only under 48em): the programme status
 # ("Write to us. We will plan a talk with your group.") and the join hint
 # ("One line is enough. If it helps, tell us:") wrap only on a phone, and as
 # blocks on every screen they read as two separate notes (audit, after).
-SENTENCE_NARROW = ("pp-say", "join-hint")
-_SB_OPEN = re.compile(r'<(p|span|div|dd)\b[^>]*?\bclass="([^"]*)"[^>]*>')
+SENTENCE_NARROW = ("pp-say", "join-hint", "ct-hint", "ct-help")
+_SB_OPEN = re.compile(r'<(p|span|div|dd|figcaption)\b[^>]*?\bclass="([^"]*)"[^>]*>')
 _SB_TAG = re.compile(r"<(/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?(/?)>")
 _SB_VOID = {"br", "img", "wbr", "input", "meta", "link", "hr", "source", "path", "circle", "rect", "line"}
 # the end of a sentence: . ! or ? (and a closing quote), then a space and the
@@ -603,9 +614,16 @@ _TIES = {
         # (articles are tied in tie(), which can see the next tag and the
         # length of a tied name after them)
         re.compile(rf"\b(\d{{1,2}}) (?=(?:{_MONTHS})\b)"),
+        # a number stays with what it counts: "Six / people" parted at a line
+        # end on About (v7); a word of three letters or more, so "one at a
+        # time" is left free
+        re.compile(r"\b((?:[Oo]ne|[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine|[Tt]en|"
+                   r"[Ee]leven|[Tt]welve|[Ff]ifteen|[Tt]wenty|\d{1,3})) (?=[a-z]{3,9}\b)"),
         re.compile(rf"\b((?:{_MONTHS})) (?=\d{{4}}\b)"),
         re.compile(rf"\b({_TIME}) (?=to {_TIME})"),
         re.compile(rf"\b({_TIME}[ \u00a0]to) (?={_TIME})"),
+        # a year stays with "since" (chief designer v7 round 5: "since / 2024" at 390)
+        re.compile(r"\b([Ss]ince) (?=\d{4}\b)"),
     ],
     "ko": [
         re.compile(rf"(?<![가-힣])({_KO_NUM}) (?={_KO_COUNT}(?![가-힣])|{_KO_COUNT}{_KO_PART})"),
@@ -616,6 +634,14 @@ _TIES = {
         re.compile(r"(국립) (?=콘서트홀)"),
         re.compile(r"(\S+에) (?=관한|대한)"),
         re.compile(r"(더블린) (?=\d+구)"),
+        # a city stays with its district, also a district named in English
+        # (「더블린 / Dolphin's Barn」, chief designer v7 round 5)
+        re.compile(r"(더블린|\d+구) (?=[A-Z])"),
+        # and a county with its 주 (「위클로 / 주」 in the phone record, v7 round 5)
+        re.compile(r"(위클로|미스|웨스트미스|킬데어|코크|골웨이) (?=주(?![가-힣]))"),
+        # an auxiliary verb stays with the verb it follows (「알아 / 가는」, 「알려 / 드립니다」):
+        # a verb's -아/-어 form (not the particle 와) and the helper after it
+        re.compile(r"(?<![가-힣])([가-힣]*[아어여려워해겨져쳐]) (?=(?:가|갑|간|오|온|왔|보|봐|주|줘|줍|드리|드립|드려|두|놓)[가-힣]{0,4}(?![가-힣]))"),
         re.compile(r"(\d{4}년) (?=\d{1,2}월)"),
         re.compile(r"(\d{1,2}월) (?=\d{1,2}일)"),
         re.compile(r"(오전|오후|아침|낮|저녁|밤) (?=\d)"),
@@ -626,7 +652,7 @@ _TIES = {
 # A Korean dependent noun stays with the word that governs it (할 수 있습니다,
 # 준비할 것, 읽을 줄, 있을 때): the governing word ends in a syllable with a
 # final ㄹ or ㄴ, which needs the syllable's final consonant, hence a function.
-_KO_DEP = re.compile(r"([가-힣]+) (?=(?:것|줄|때|데|뿐)(?:[이가을를은는도에만의로와과입]|[\s.,:]|$)|수 (?:있|없))")
+_KO_DEP = re.compile(r"([가-힣]+) (?=(?:것|줄|때|데|뿐|분들|분)(?:[이가을를은는도에만의로와과입]|[\s.,:]|$)|수 (?:있|없))")
 _KO_SU = re.compile("(?<=[가-힣][ \u00a0])(수) (?=있|없)")
 
 
@@ -641,6 +667,17 @@ def _ko_dependent(text):
 
 # two-word names balance used to split ("Presentation / Sisters", "South /
 # Dublin Live"); UKAAF: keep a name, a date or a number on one line
+# the Korean places are blocks at any length: a district or county after them moves
+# down whole instead ("마리아의 프란치스코 선교 / 수녀회", chief designer v7)
+KO_PLACES = ("마리아의 프란치스코 선교 수녀회", "성 골롬반 외방선교 수녀회", "관덕정 순교기념관",
+             # v7 round 5: 「은퇴한 Presentation / 수녀님…」 in the phone timeline
+             "Presentation 수녀회", "Presentation 수녀님")
+# on Korean pages the two long English venues are blocks too (chief designer v7 round 5:
+# 「Tallaght University / Hospital」 and 「Methodist / Centenary Church에서」 in the phone record and
+# timeline, where a Korean sentence cannot simply end or begin on them); English pages keep the v6
+# rule (their sentences end or begin on the name)
+KO_BLOCKS = ("Tallaght University Hospital", "Methodist Centenary Church")
+_NAMES_KO = re.compile("(" + "|".join(re.escape(n) for n in KO_BLOCKS) + ")")
 NAMES = ("Presentation Sisters", "Letters Ensemble", "Community Centre", "Concert Hall", "TU Dublin",
          "Dublin Live", "Royal Albert Hall", "Clondalkin Lodge", "Dalgan Park", "BBC Proms", "Rua Red",
          # the scheme's name ("South / Dublin Live 2026" broke in the timeline, CD v6); with
@@ -650,8 +687,89 @@ NAMES = ("Presentation Sisters", "Letters Ensemble", "Community Centre", "Concer
          # (the whole name, 19 letters, did not fit a 320px column and broke inside)
          "Seohyeon Kim",
          # the base, in the footer's copyright line and on Contact ("Dublin, / Ireland")
-         "Dublin, Ireland")
-_NAMES = re.compile("|".join(re.escape(n) for n in sorted(NAMES, key=len, reverse=True)))
+         "Dublin, Ireland",
+         # v7: names the desks saw split at a line end ("성 / 파트리치오" at 1440, "Carmelite /
+         # Community Centre" in the talks record, "Dolphin's / Barn", "the Sally / Gardens")
+         # (the long venues, 26 and 27 letters, are not tied: R12 keeps a tie near 20, and tied they
+         # broke inside a word on phones; their sentences end or begin on them instead, v6)
+         "성 파트리치오", "성 골롬반", "Dolphin&rsquo;s Barn", "Sally Gardens", "아일랜드 더블린",
+         # the name of what we do, in running text too ("talks on Classical / Music" on a phone,
+         # v7); the master line's own span (.cm) keeps its 200% release, so it is left alone
+         "Classical Music",
+         # v7, chief designer: "a National / Concert Hall series", "RTÉ / Concert Orchestra",
+         # "European / Economic Area", 「커뮤니티 / 센터를」, 「국립 / 교향악단」, 「복장 / 규정」,
+         # 「요청 / 시」, 「단체 / 소개」 (a link), 「Down by / the Sally Gardens」 (a song's title)
+         "National Concert Hall", "RT&Eacute; Concert Orchestra", "European Economic Area",
+         "커뮤니티 센터", "국립 교향악단", "RT&Eacute; 콘서트 오케스트라", "복장 규정", "요청 시", "단체 소개",
+         "Down by the Sally Gardens", "가장 최근",
+         # v7, chief designer round 3: the record's long places ("Missionary Sisters of / St
+         # Columban" at 1440), the card's title ("Getting to / Know Classical Music"), the
+         # orchestra's whole name ("the TU Dublin / Philharmonic")
+         "Franciscan Missionaries of Mary", "Missionary Sisters of St Columban",
+         "Gwandukjeong Martyrs Memorial Centre", "Blessed Sacrament Chapel", "Rua Red Performance Space",
+         "TU Dublin Philharmonic", "Getting to Know") + KO_PLACES
+# a name and the article before it ("the Presentation Sisters"): the article
+# stays with the name (v7, kinsoku: "the / Letters Ensemble" at 320px, where
+# the article rule counted the comma after the name and let it go)
+_NAMES = re.compile("(?:\\b((?:[Aa]n?|[Tt]he) ))?(" + "|".join(re.escape(n) for n in sorted(NAMES, key=len, reverse=True)) + ")")
+# A name longer than a tie should be (R12: about 20 letters) is kept whole by
+# an inline block instead of no-break spaces: it moves to the next line whole
+# when it fits there, and only in a column narrower than itself wraps, between
+# its words (v7: tied with no-break spaces, "National Concert Hall." was wider
+# than the 320px timeline column and broke inside "Hall"). The build marks it
+# while the other ties run, so they see it as one word, then writes the span.
+_TN_OPEN, _TN_CLOSE, _TN_SP = "\ue011", "\ue012", "\ue010"   # not the highlight's \ue000 \ue001
+
+
+# what may not part from a long name: before it an article and an opening
+# quote or bracket; after it a closing quote or bracket, a joined Korean
+# particle or ending (after a word joiner) or "'s", and punctuation
+_TN_BEFORE = re.compile("((?:\\b(?:[Aa]n?|[Tt]he)[ \u00a0])?(?:&lsquo;|&ldquo;|[\u2018\u201c\u300c\u300e(])?)" + _TN_OPEN)
+_TN_AFTER = re.compile(_TN_CLOSE + "((?:&rsquo;|&rdquo;|[\u2019\u201d\u300d\u300f)])?\u2060?"
+                       "(?:&rsquo;s|\u2019s|[\uac00-\ud7a3]+)?(?:[,.;:!?](?:&rsquo;|&rdquo;|[\u2019\u201d)])?)?)")
+
+
+def _name_tie(m):
+    """A name over 20 letters, or a name with its article, becomes a block (it
+    keeps whole where it fits and wraps only between its words where the
+    column is narrower: "the Letters Ensemble." tied with no-break spaces was
+    wider than the 320px timeline column and broke inside "Ensemble"); a short
+    bare name is tied with no-break spaces (a link's underline does not run
+    under a block)."""
+    art, name = m.group(1) or "", m.group(2)
+    if art or name in KO_PLACES or len(re.sub(r"&[a-zA-Z]+;", "x", name)) > 20:
+        return _TN_OPEN + (art + name).replace(" ", _TN_SP) + _TN_CLOSE
+    return name.replace(" ", NBSP)
+
+
+def _name_heading(m):
+    """In a title: a short bare name tied, a long one or one with its article
+    left to the title's balanced wrap."""
+    art, name = m.group(1) or "", m.group(2)
+    if not art and len(re.sub(r"&[a-zA-Z]+;", "x", name)) <= 20:
+        return name.replace(" ", NBSP)
+    return m.group(0)
+
+
+def _name_nbsp(m):
+    """Inside a drawing (an SVG title) there are no blocks: no-break spaces."""
+    return (m.group(1) or "") + m.group(2).replace(" ", NBSP)
+# phrases that read as one (chief designer v7 round 5: "for / example", "one / at a time",
+# "access / needs", "Our Lady / of Dolours" and the quoted question at 390; "care homes" was
+# tied and let go: on the home card it could not make three lines and pushed every card's
+# status down, a fresh reviewer);
+# a name's own tie may already have joined part of one, hence the [ \u00a0]
+_PHRASES = re.compile("|".join(
+    p.replace(" ", "[ \u00a0]") for p in (
+        r"\bfor example\b", r"\bone at a time\b", r"\baccess needs\b",
+        r"\breligious communities\b",
+        r"\bOur Lady of Dolours\b", r"&lsquo;what is Classical Music\?&rsquo;")))
+
+
+def _phrase_tie(m):
+    return re.sub("[ \u00a0]", NBSP, m.group(0))
+
+
 # a Korean list dot never starts a line ("세이프가딩 / ·돌봄"): a word joiner
 # before it forbids that break and leaves the break after it
 _KO_DOT = re.compile("(?<=[^\\s\u00a0\u2060])·")
@@ -674,8 +792,11 @@ def _ko_determiners(text, prev):
 # An English article goes with the word after it ("the / Data Protection
 # Commission" ended a line), also when that word opens a link, and with a
 # tied name as long as the whole run stays within 20 characters (R12).
-_ARTICLE = re.compile(r"\b(a|an|the|A|An|The) (?=\S)")
-_ARTICLE_END = re.compile(r"\b(a|an|the|A|An|The) $")
+# (and "this"/"these" and a sentence's "We", which ended a line the same way: "Once our company
+# is registered, this / independent volunteer board", "Public liability insurance. We / show the
+# certificate", a fresh reviewer, v7)
+_ARTICLE = re.compile(r"\b(a|an|the|A|An|The|this|This|these|These|We) (?=\S)")
+_ARTICLE_END = re.compile(r"\b(a|an|the|A|An|The|this|This|these|These|We) $")
 _INLINE_OPEN = re.compile(r"<(a|strong|em|b|i|span)\b")
 
 
@@ -701,7 +822,12 @@ _KO_LAST = re.compile(r"([^\s<]+) ((?:[^\s<]+\u00a0)*[^\s<]+?[.!?](?:[”’」�
 _KO_CLOSE = re.compile("([」』’”)\\]])(?=[가-힣])")
 
 
-def _ko_sentence_ends(text, limit=8):
+# the last syllables that close a phrase (a particle or a connecting ending): a
+# word ending otherwise is taken for a bare noun
+_KO_PHRASE_END = set("이가를의에서와과도만로고며면게지야요께랑나")
+
+
+def _ko_sentence_ends(text, limit=8, attached=False):
     def bind(m):
         n = len(re.sub(r"[^가-힣A-Za-z0-9]", "", m.group(1) + m.group(2)))
         # the word before may already be tied to the words before it (a
@@ -713,6 +839,20 @@ def _ko_sentence_ends(text, limit=8):
         run = len(re.sub(r"[^가-힣A-Za-z0-9]", "", m.string[k:m.start(1)]))
         if n + run > limit + 2:
             return m.group(0)
+        # nor when the first word is a particle glued to the element before it
+        # (「<a>sby05034@gmail.com</a>으로 보내 주세요.」): the tie would hold the
+        # whole address with it, wider than a phone's line (v7, 320 and 360px)
+        if attached and k == 0:
+            return m.group(0)
+        # a third word joins a tail of two only if the word before it is neither
+        # a modifier (-는 -은 -을 -던) nor a bare noun: the tie would part a noun
+        # from its modifier at the line end (「짚는 / 법을 하나씩 익힙니다」,
+        # 「좌석 / 고르기도 알려 드립니다」, chief designer v7)
+        if "\u00a0" in m.group(2):
+            prev = re.split(r"[\s\u00a0>]", m.string[:m.start(1)].rstrip())[-1:] or [""]
+            last = prev[0][-1:]
+            if last and "\uac00" <= last <= "\ud7a3" and (last in "는은을던" or last not in _KO_PHRASE_END):
+                return m.group(0)
         # eight syllables in a heading: one set large on a 320px phone cannot
         # hold a longer tied run; ten in running text, as in the leads (v6:
         # 「공동체 음악가입니다.」 and 「준비를 시작했습니다.」 left one word on a
@@ -755,12 +895,19 @@ _HEAD_CLOSE = re.compile(r"</h[1-6]>")
 
 def _tie(markup, lang):
     parts = re.split(r"(<[^>]+>)", markup)
-    prev, heading = "", False
+    prev, heading, in_svg = "", False, False
     for i in range(0, len(parts), 2):
         if i:
             tag = parts[i - 1]
             heading = True if _HEAD_OPEN.match(tag) else False if _HEAD_CLOSE.match(tag) else heading
-        parts[i] = _NAMES.sub(lambda m: m.group(0).replace(" ", NBSP), parts[i])
+        if i:
+            tag = parts[i - 1]
+            in_svg = True if tag.startswith("<svg") else False if tag.startswith("</svg") else in_svg
+        if not (i and parts[i - 1].startswith('<span class="cm"')):
+            parts[i] = _NAMES.sub(_name_nbsp if in_svg else _name_heading if heading else _name_tie, parts[i])
+        if lang == "ko" and not (heading or in_svg):
+            parts[i] = _NAMES_KO.sub(lambda m: _TN_OPEN + m.group(1).replace(" ", _TN_SP) + _TN_CLOSE, parts[i])
+        parts[i] = _PHRASES.sub(_phrase_tie, parts[i])
         before_tag = i + 1 < len(parts) and bool(_INLINE_OPEN.match(parts[i + 1]))
         parts[i] = _articles(parts[i], before_tag)
         for pat in _TIES["en"] + (_TIES["ko"] if lang == "ko" else []):
@@ -770,13 +917,20 @@ def _tie(markup, lang):
             # the dependent noun first (할 수 있습니다), so the sentence's last
             # word is that whole run and the word before can join it
             parts[i] = _ko_dependent(parts[i])
-            parts[i] = _ko_sentence_ends(parts[i], 8 if heading else 10)
+            glued = bool(i and parts[i - 1].startswith("</") and parts[i][:1] not in ("", " ", "\n", "\t"))
+            parts[i] = _ko_sentence_ends(parts[i], 8 if heading else 10, glued)
             parts[i] = _KO_CLOSE.sub("\\1\u2060", parts[i])
             parts[i] = _KO_DOT.sub("\u2060·", parts[i])
             # nor does a range part at its tilde (7시 / ~8시, 7시~ / 8시)
             parts[i] = re.sub("(?<=\\S)~(?=\\d)", "\u2060~\u2060", parts[i])
-        if parts[i].strip():
-            prev = parts[i].rstrip()[-1]
+        if _TN_OPEN in parts[i]:
+            parts[i] = _TN_BEFORE.sub(lambda m: _TN_OPEN + m.group(1), parts[i])
+            parts[i] = _TN_AFTER.sub(lambda m: m.group(1) + _TN_CLOSE, parts[i])
+            parts[i] = (parts[i].replace(_TN_OPEN, '<span class="tn">').replace(_TN_CLOSE, "</span>")
+                        .replace(_TN_SP, " "))
+        text = re.sub(r"<[^>]+>", "", parts[i]).rstrip()
+        if text:
+            prev = text[-1]
     return "".join(parts)
 
 

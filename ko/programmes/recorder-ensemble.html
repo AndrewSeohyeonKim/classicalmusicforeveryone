@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 <header class="site-header">
@@ -111,6 +111,7 @@
       <img src="../../assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="../../programmes/recorder-ensemble.html" hreflang="en" lang="en" rel="alternate" translate="no">English</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="주 메뉴">
@@ -118,16 +119,13 @@
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>홈</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>소개</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>프로그램<span class="nav-mark" aria-hidden="true"></span></a>
-          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>클래식 음악과 친해지기</a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>찾아가는 음악회</a></li><li><a href="../programmes/recorder-ensemble.html" aria-current="page"><span class="ns-n" aria-hidden="true">03</span>커뮤니티 리코더 앙상블 클래스</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>함께하는 음악여행</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">클래식 음악과 친해지기</span></a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">찾아가는 음악회</span></a></li><li><a href="../programmes/recorder-ensemble.html" aria-current="page"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">커뮤니티 리코더 앙상블 클래스<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, 진행 중</span></span></a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">함께하는 음악여행</span></a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>함께하기</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>소식·기록</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="../contact.html">문의</a>
-      <div class="lang-switch" role="group" aria-label="언어">
-        <span aria-current="true">한국어</span>
-        <a href="../../programmes/recorder-ensemble.html" hreflang="en" lang="en">EN</a>
-      </div>
+      <a class="btn btn-nav" href="../contact.html">문의</a>
     </nav>
+    <a class="lang lang-wide" href="../../programmes/recorder-ensemble.html" hreflang="en" lang="en" rel="alternate" translate="no">English</a>
   </div>
 </header>
 <main id="main">
@@ -140,10 +138,10 @@
       <div class="pp-intro">
         <p class="eyebrow lift"><i class="dot" aria-hidden="true"></i>배움</p>
         <h1 class="pp-title"><span class="ln"><span>커뮤니티 리코더 앙상블 클래스</span></span></h1>
-        <p class="lead lift lift-3"><span class="sl">악기를 한 번도 다뤄 보지 않은 어른이 매주 함께 배웁니다.</span> <span class="sl"><mark>첫 주에</mark> 첫 소리를 냅니다.</span></p>
+        <p class="lead lift lift-3"><span class="sl">악기를 한 번도 다뤄 보지 않은 어른이 매주 함께 배웁니다.</span> <span class="sl"><mark>첫 주에</mark> 첫 소리를 냅니다.</span></p>
         <div class="pp-now is-live lift lift-4">
-          <p><span class="tag tag-live">진행 중</span><span class="pp-say"><strong>매주 수요일 저녁 7시⁠~⁠8시</strong> · Mulhuddart Community Centre, 더블린 15구</span></p>
-          <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%EB%A6%AC%EC%BD%94%EB%8D%94%20%EC%95%99%EC%83%81%EB%B8%94%20%ED%81%B4%EB%9E%98%EC%8A%A4&amp;body=%EC%9D%B4%EB%A6%84%3A%20%0D%0A%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%20%28%EC%84%A0%ED%83%9D%29%3A%20%0D%0A%EC%95%85%EA%B8%B0%EB%A5%BC%20%EB%B0%B0%EC%9B%8C%20%EB%B3%B8%20%EC%A0%81%EC%9D%B4%20%EC%9E%88%EB%8A%94%EC%A7%80%3A%20%0D%0A%EB%A6%AC%EC%BD%94%EB%8D%94%EB%A5%BC%20%EB%B9%8C%EB%A6%AC%EA%B3%A0%20%EC%8B%B6%EC%9D%80%EC%A7%80%3A%20%0D%0A%EC%B0%B8%EC%97%AC%EC%97%90%20%EB%8F%84%EC%9B%80%EC%9D%B4%20%ED%95%84%EC%9A%94%ED%95%9C%20%EC%A0%90%20%28%EC%84%A0%ED%83%9D%29%3A%20%0D%0A">클래스 문의하기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">함께하는 방법 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+          <p><span class="tag tag-live">진행 중</span><span class="sr-only">, </span><span class="pp-say"><strong>매주 수요일 저녁 7시⁠~⁠8시</strong><span class="sr-only">, </span><span class="pp-where">Mulhuddart Community Centre</span></span></p>
+          <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%EB%A6%AC%EC%BD%94%EB%8D%94%20%EC%95%99%EC%83%81%EB%B8%94%20%ED%81%B4%EB%9E%98%EC%8A%A4&amp;body=%EC%9D%B4%EB%A6%84%3A%20%0D%0A%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%20%28%EC%84%A0%ED%83%9D%29%3A%20%0D%0A%EC%95%85%EA%B8%B0%EB%A5%BC%20%EB%B0%B0%EC%9B%8C%20%EB%B3%B8%20%EC%A0%81%EC%9D%B4%20%EC%9E%88%EB%8A%94%EC%A7%80%3A%20%0D%0A%EB%A6%AC%EC%BD%94%EB%8D%94%EB%A5%BC%20%EB%B9%8C%EB%A6%AC%EA%B3%A0%20%EC%8B%B6%EC%9D%80%EC%A7%80%3A%20%0D%0A%EC%B0%B8%EC%97%AC%EC%97%90%20%EB%8F%84%EC%9B%80%EC%9D%B4%20%ED%95%84%EC%9A%94%ED%95%9C%20%EC%A0%90%20%28%EC%84%A0%ED%83%9D%29%3A%20%0D%0A">클래스 문의하기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">참여하는 방법 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
       <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">첫 소리 · 악보 읽기 · 화음</span></div></div>
@@ -162,17 +160,17 @@
       <li style="--i:0">
         <span class="step-n" aria-hidden="true">1</span>
         <h3>첫 소리</h3>
-        <p>리코더를 잡고, 숨을 쉬고, 불어 봅니다.</p>
+        <p class="step-t">리코더를 잡고, 숨을&nbsp;쉬고, 불어 봅니다.</p>
       </li>
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
         <h3>악보는 처음부터</h3>
-        <p>음과 손가락 짚는 법을 하나씩 익힙니다. 악보는 저희가 클래스에 맞춰 만듭니다.</p>
+        <p class="step-t"><span class="sl">음과 손가락 짚는 법을 하나씩 익힙니다.</span> <span class="sl">악보는 저희가 클래스에 맞춰 만듭니다.</span></p>
       </li>
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
         <h3>나만의 성부</h3>
-        <p>한 사람이 한 성부씩 맡아 화음을 냅니다. 학기 끝에는 우리들의 <mark>작은 음악회를</mark> 엽니다.</p>
+        <p class="step-t"><span class="sl">한 사람이 한 성부씩 맡아 화음을 냅니다.</span> <span class="sl">학기 끝에는 우리들의 <mark>작은 음악회를</mark> 엽니다.</span></p>
       </li>
     </ol>
   </div>
@@ -181,21 +179,21 @@
 <section id="expect">
   <div class="wrap">
     <header class="sh sh-split">
-      <p class="eyebrow section-label" aria-hidden="true"><span class="no">02</span>미리 알아 두실 것</p>
-      <div><h2><span class="sr-only">미리 알아 두실 것: </span>첫 수업 전에.</h2></div>
+      <p class="eyebrow section-label" aria-hidden="true"><span class="no">02</span>미리 알아 두실 것</p>
+      <div><h2><span class="sr-only">미리 알아 두실 것: </span>첫 수업 전에.</h2></div>
     </header>
     <dl class="qa rv-stagger">
       <div>
         <dt>리코더가 없어도 되나요?</dt>
-        <dd><strong>네.</strong> 리코더는 <mark>빌려 드립니다</mark>.</dd>
+        <dd class="qa-a"><strong>네.</strong> 리코더는 <mark>빌려 드립니다</mark>.</dd>
       </div>
       <div>
         <dt>악보를 읽을 줄 알아야 하나요?</dt>
-        <dd><strong>아니요.</strong> <mark>연주하면서</mark> 악보 읽기도 처음부터 조금씩 배웁니다.</dd>
+        <dd class="qa-a"><strong>아니요.</strong> <mark>연주하면서</mark> 악보 읽기도 처음부터 조금씩 배웁니다.</dd>
       </div>
       <div>
         <dt>이 클래스는 어떻게 시작됐나요?</dt>
-        <dd><mark>10주 파일럿에서</mark> 시작했습니다. 은퇴한 Presentation 수녀님 일곱 분이 함께했고, 아래 영상이 그 모임입니다.</dd>
+        <dd class="qa-a"><span class="sl"><mark>10주 파일럿에서</mark> 시작했습니다.</span> <span class="sl">은퇴한 <span class="tn">Presentation 수녀님</span> 일곱 분이 함께했고, 아래 영상이 그 모임입니다.</span></dd>
       </div>
     </dl>
   </div>
@@ -207,7 +205,7 @@
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">03</span>그 자리에서</p>
       <div><h2><span class="sr-only">그 자리에서: </span>클래스가 시작된 곳.</h2></div>
     </header>
-    <div class="room rv"><figure class="video"><iframe class="video-frame" title="영상: 커뮤니티 리코더 앙상블 클래스" loading="lazy" src="https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;rel=0" srcdoc="&lt;style&gt;*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;background:#1D2430}img{width:100%;height:100%;object-fit:cover;opacity:.88}i{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;background:#FAF5EE;box-shadow:0 0 0 1px #B8893A}i::before{content:&#x27;&#x27;;position:absolute;left:29px;top:24px;border-left:20px solid #1D2430;border-top:12px solid transparent;border-bottom:12px solid transparent}b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}a:focus{outline:none}a:focus-visible{box-shadow:inset 0 0 0 4px #1D2430,inset 0 0 0 7px #FAF5EE}a:focus-visible i{box-shadow:0 0 0 3px #1D2430,0 0 0 6px #FAF5EE}&lt;/style&gt;&lt;a href=&#x27;https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;amp;rel=0&#x27;&gt;&lt;img src=&#x27;https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/recorders-800.jpg&#x27; alt=&#x27;&#x27;&gt;&lt;i&gt;&lt;/i&gt;&lt;b&gt;영상 재생&lt;/b&gt;&lt;/a&gt;" allow="autoplay; fullscreen; picture-in-picture"></iframe><figcaption><span class="cap-label">파일럿 앙상블</span><span>은퇴한 Presentation 수녀님들의 리코더 합주입니다. <a class="link" href="https://www.youtube.com/watch?v=i7skwGKWSYY">YouTube에서 보기</a></span></figcaption></figure></div>
+    <div class="room rv"><figure class="video"><iframe class="video-frame" title="영상: 커뮤니티 리코더 앙상블 클래스" loading="lazy" src="https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;rel=0" srcdoc="&lt;html lang=&#x27;ko&#x27;&gt;&lt;style&gt;*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;background:#1D2430}img{width:100%;height:100%;object-fit:cover;opacity:.88}i{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;background:#FAF5EE;box-shadow:0 0 0 1px #B8893A}i::before{content:&#x27;&#x27;;position:absolute;left:29px;top:24px;border-left:20px solid #1D2430;border-top:12px solid transparent;border-bottom:12px solid transparent}b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}a:focus{outline:none}a:focus-visible{box-shadow:inset 0 0 0 4px #1D2430,inset 0 0 0 7px #FAF5EE}a:focus-visible i{box-shadow:0 0 0 3px #1D2430,0 0 0 6px #FAF5EE}&lt;/style&gt;&lt;a href=&#x27;https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;amp;rel=0&#x27;&gt;&lt;img src=&#x27;https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/recorders-800.jpg&#x27; alt=&#x27;&#x27;&gt;&lt;i&gt;&lt;/i&gt;&lt;b&gt;영상 재생&lt;/b&gt;&lt;/a&gt;" allow="autoplay; fullscreen; picture-in-picture"></iframe><figcaption><span class="cap-label">파일럿 앙상블</span><span>은퇴한 <span class="tn">Presentation 수녀님들의</span> 리코더 합주입니다. <a class="link" href="https://www.youtube.com/watch?v=i7skwGKWSYY">YouTube에서 보기</a></span></figcaption></figure></div>
   </div>
 </section>
 
@@ -218,29 +216,29 @@
       <div><h2><span class="sr-only">기록: </span>이 클래스가 생겨나기까지.</h2>
       <p class="sh-lead">음악회에서 나온 질문 하나에서 시작합니다.</p></div>
     </header>
-    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="이 프로그램의 기록 6건을 2024년부터 2026년까지 달마다 표시했다."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>2024년 11월 23일 · 성 골롬반 축일 음악회 · 성 골롬반 외방선교 수녀회, 위클로 주</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>2025년 10월–12월 · 은퇴 수도자 앙상블. 준비 · Presentation 수녀회와 함께, 더블린</title><rect class="s-span s-on" x="428.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:2"><title>2026년 1월 15일–3월 17일 · 은퇴 수도자 앙상블. 10주 연습 · Warrenmount, 더블린 8구</title><rect class="s-span s-on" x="488.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:3"><title>2026년 4월 · 부활 음악회: Presentation 수녀회 리코더 앙상블 · Clondalkin Lodge, 더블린</title><circle class="s-open" cx="556.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>2026년 4월–8월 29일 · 은퇴 수도자 앙상블. 이어진 모임 · Warrenmount, 더블린 8구</title><rect class="s-span s-on" x="548.0" y="55" width="96.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:5"><title>2026년 가을 · 커뮤니티 리코더 앙상블 클래스 시작 · Mulhuddart Community Centre, 더블린 15구</title><circle class="s-on" cx="656.0" cy="59.0" r="4.4"/></g></svg>
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>배움</span><span><i class="o" aria-hidden="true"></i>나눔</span><span>점 하나가 모임 하나, 막대는 여러 달에 걸친 것입니다.</span></figcaption>
+    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="이 프로그램의 기록 6건을 2024년부터 2026년까지 달마다 표시했습니다."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>2024년 11월 23일 · 성 골롬반 축일 음악회 · 성 골롬반 외방선교 수녀회, 위클로 주</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>2025년 10월⁠~⁠12월 · 은퇴 수도자 앙상블: 준비 · Presentation 수녀회와 함께, 더블린</title><rect class="s-span s-on" x="428.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:2"><title>2026년 1월 15일⁠~⁠3월 17일 · 은퇴 수도자 앙상블: 10주 연습 · Warrenmount, 더블린 8구</title><rect class="s-span s-on" x="488.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:3"><title>2026년 4월 · 부활 음악회: Presentation 수녀회 리코더 앙상블 · Clondalkin Lodge, 더블린</title><circle class="s-open" cx="556.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>2026년 4월⁠~⁠8월 · 은퇴 수도자 앙상블: 이어진 모임 · Warrenmount, 더블린 8구</title><rect class="s-span s-on" x="548.0" y="55" width="96.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:5"><title>2026년 가을 · 커뮤니티 리코더 앙상블 클래스 시작 · Mulhuddart Community Centre, 더블린 15구</title><circle class="s-on" cx="656.0" cy="59.0" r="4.4"/></g></svg>
+      <figcaption class="strip-key"><span><i aria-hidden="true"></i>배움</span><span><i class="o" aria-hidden="true"></i>나눔</span><span>점 하나가 하루입니다. 막대는 여러 달에 걸친 것입니다.</span></figcaption>
     </figure>
     <ol class="rec rec-short rv">
         <li>
           <span class="rec-when">2024년 11월 23일</span>
-          <span class="rec-what"><b>성 골롬반 축일 음악회</b><span>성 골롬반 외방선교 수녀회, 위클로 주</span><small>리코더 앙상블이 시작된 자리 · 다시 연주하고 싶다는 수녀님의 질문</small></span>
+          <span class="rec-what"><b>성 골롬반 축일 음악회</b><span><span class="tn">성 골롬반 외방선교 수녀회,</span> 위클로 주</span><small>리코더 앙상블이 시작된 자리</small><small>다시 연주하고 싶다는 수녀님의 질문</small></span>
         </li>
         <li>
-          <span class="rec-when">2025년 10월&ndash;12월</span>
-          <span class="rec-what"><b>은퇴 수도자 앙상블. 준비</b><span>Presentation 수녀회와 함께, 더블린</span><small>필요 조사, 개별 레슨, 한 사람마다 성부 배정</small></span>
+          <span class="rec-when">2025년 10월⁠~⁠12월</span>
+          <span class="rec-what"><b>은퇴 수도자 앙상블: 준비</b><span><span class="tn">Presentation 수녀회와</span> 함께, 더블린</span><small>필요 조사, 개별 레슨, 한 사람마다 성부 배정</small></span>
         </li>
         <li>
-          <span class="rec-when">2026년 1월 15일&ndash;3월 17일</span>
-          <span class="rec-what"><b>은퇴 수도자 앙상블. 10주 연습</b><span>Warrenmount, 더블린 8구</span><small>목요일 1시간 · 은퇴한 Presentation 수녀님 일곱 분 · 일곱 분 모두 끝까지</small></span>
+          <span class="rec-when">2026년 1월 15일⁠~⁠3월 17일</span>
+          <span class="rec-what"><b>은퇴 수도자 앙상블: 10주 연습</b><span>Warrenmount, 더블린 8구</span><small>목요일 1시간</small><small>은퇴한 <span class="tn">Presentation 수녀님</span> 일곱 분</small><small>일곱 분 모두 끝까지</small></span>
         </li>
         <li>
           <span class="rec-when">2026년 4월</span>
-          <span class="rec-what"><b>부활 음악회: Presentation 수녀회 리코더 앙상블</b><span>Clondalkin Lodge, 더블린</span><small>앙상블의 첫 공개 연주 · 아홉 곡</small></span>
+          <span class="rec-what"><b>부활 음악회: <span class="tn">Presentation 수녀회</span> 리코더 앙상블</b><span>Clondalkin Lodge, 더블린</span><small>앙상블의 첫 공개 연주</small><small>아홉 곡</small></span>
         </li>
         <li>
-          <span class="rec-when">2026년 4월&ndash;8월 29일</span>
-          <span class="rec-what"><b>은퇴 수도자 앙상블. 이어진 모임</b><span>Warrenmount, 더블린 8구</span><small>8월에 공동체가 마무리를 택할 때까지 매주. 완료된 파일럿</small></span>
+          <span class="rec-when">2026년 4월⁠~⁠8월</span>
+          <span class="rec-what"><b>은퇴 수도자 앙상블: 이어진 모임</b><span>Warrenmount, 더블린 8구</span><small>8월에 공동체가 마무리를 택할 때까지 매주</small></span>
         </li>
         <li>
           <span class="rec-when">2026년 가을</span>
@@ -254,11 +252,12 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">05</span>함께하기</p>
-      <div><h2><span class="sr-only">함께하기: </span>클래스에 함께하세요.</h2></div>
+      <div><h2><span class="sr-only">함께하기: </span>클래스에 함께하세요.</h2>
+      <p class="sh-lead"><strong>매주 수요일 저녁 7시⁠~⁠8시</strong>, Mulhuddart에서 열립니다.</p></div>
     </header>
     <div class="join-body rv">
-      <p class="join-hint"><span class="sl sl-n">한 줄이면 됩니다.</span> <span class="sl sl-n">이런 것을 적어 주시면 도움이 됩니다:</span></p>
-      <ul class="join-fields"><li>이름</li><li>전화번호 (선택)</li><li>악기를 배워 본 적이 있는지</li><li>리코더를 빌리고 싶은지</li><li>참여에 도움이 필요한 점 (선택)</li></ul>
+      <p class="join-hint"><span class="sl sl-n">한 줄이면 됩니다.</span> <span class="sl sl-n">이런 것을 적어 주시면 도움이 됩니다:</span></p>
+      <ol class="join-fields"><li>이름</li><li>전화번호 (선택)</li><li>악기를 배워 본 적이 있는지</li><li>리코더를 빌리고 싶은지</li><li>참여에 도움이 필요한 점 (선택)</li></ol>
       <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%20%EB%A6%AC%EC%BD%94%EB%8D%94%20%EC%95%99%EC%83%81%EB%B8%94%20%ED%81%B4%EB%9E%98%EC%8A%A4&amp;body=%EC%9D%B4%EB%A6%84%3A%20%0D%0A%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%20%28%EC%84%A0%ED%83%9D%29%3A%20%0D%0A%EC%95%85%EA%B8%B0%EB%A5%BC%20%EB%B0%B0%EC%9B%8C%20%EB%B3%B8%20%EC%A0%81%EC%9D%B4%20%EC%9E%88%EB%8A%94%EC%A7%80%3A%20%0D%0A%EB%A6%AC%EC%BD%94%EB%8D%94%EB%A5%BC%20%EB%B9%8C%EB%A6%AC%EA%B3%A0%20%EC%8B%B6%EC%9D%80%EC%A7%80%3A%20%0D%0A%EC%B0%B8%EC%97%AC%EC%97%90%20%EB%8F%84%EC%9B%80%EC%9D%B4%20%ED%95%84%EC%9A%94%ED%95%9C%20%EC%A0%90%20%28%EC%84%A0%ED%83%9D%29%3A%20%0D%0A">클래스 문의하기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       <p class="mail-alt"><span>또는</span> <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a> <a href="tel:+353830780635">+353 83 078 0635</a></p>
     </div>
@@ -269,10 +268,10 @@
   <div class="wrap">
     <h2 class="eyebrow section-label">다른 프로그램</h2>
     <ul class="others">
-      <li><a href="../programmes/getting-to-know.html"><span class="toc-n">01</span><b>클래식 음악과 친해지기</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n">02</span><b>찾아가는 음악회</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/concert-companion.html"><span class="toc-n">05</span><b>함께하는 음악여행</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/getting-to-know.html"><span class="toc-n" aria-hidden="true">01</span><b>클래식 음악과 친해지기</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n" aria-hidden="true">02</span><b>찾아가는 음악회</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n" aria-hidden="true">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/concert-companion.html"><span class="toc-n" aria-hidden="true">05</span><b>함께하는 음악여행</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
     </ul>
     <div class="btn-row"><a class="go" href="../programmes.html">프로그램 다섯 가지 모두 보기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
   </div>
@@ -313,14 +312,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="../contact.html">문의</a></li>
-          <li><a href="../../index.html" hreflang="en" lang="en">EN</a></li>
+          <li><a href="../../programmes/recorder-ensemble.html" hreflang="en" lang="en" rel="alternate" translate="no">English</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · 아일랜드 더블린</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
-      <span>갱신 2026년 10월 4일 · <a href="../contact.html#privacy">개인정보 처리방침</a></span>
+      <span>© 2026 Classical Music for Everyone · 아일랜드 더블린</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
+      <span>갱신 2026년 10월 5일 · <a href="../contact.html#privacy">개인정보 처리방침</a></span>
     </div>
   </div>
 </footer>

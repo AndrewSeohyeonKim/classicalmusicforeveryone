@@ -46,7 +46,7 @@ ROWS = [
      dict(att=6, flag=("the first talk", "첫 강의"))),
     (2024, 2, 25, "lecture",
      "Together (1)", "함께하기 (1)",
-     "Our Lady of Dolours Church, Dolphin&rsquo;s Barn", "Our Lady of Dolours 성당",
+     "Our Lady of Dolours Church, Dolphin&rsquo;s Barn", "Our Lady of Dolours 성당, 더블린 Dolphin&rsquo;s Barn",
      dict(att=6)),
     (2024, 3, 16, "ensemble",
      "St Patrick&rsquo;s Day Concert", "성 파트리치오 축일 음악회",
@@ -83,12 +83,12 @@ ROWS = [
      dict(bmsp=True, flag=("clarinet solo · retired missionaries", "클라리넷 독주 · 은퇴 선교사들"))),
     (2024, 10, 28, "outreach",
      "K-Expo Paris", "K-엑스포 파리",
-     "Palais Brongniart, Paris", "Palais Brongniart, 파리",
+     "Palais Brongniart, Paris, France", "Palais Brongniart, 파리, 프랑스",
      dict(flag=("clarinet solo", "클라리넷 독주"))),
     (2024, 11, 8, "lecture",
      "Getting Closer + Together (1)", "친해지기 + 함께하기 (1)",
-     "TU Dublin, Grangegorman", "TU Dublin",
-     dict(att=12, flag=("the series moves to TU Dublin", "강의가 TU 더블린으로"))),
+     "TU Dublin, Grangegorman", "TU Dublin Grangegorman",
+     dict(att=12, flag=("the series moves to TU Dublin", "강의가 TU Dublin으로"))),
     (2024, 11, 15, "lecture",
      "Getting Closer + Together (2)", "친해지기 + 함께하기 (2)",
      "TU Dublin", "TU Dublin",
@@ -162,12 +162,12 @@ ROWS = [
      "TU Dublin", "TU Dublin",
      dict(att=11)),
     (2025, 9, 30, "companion",
-     "NCH International Series: Chineke! Orchestra", "NCH 인터내셔널 시리즈. 치네케! 오케스트라",
+     "NCH International Series: Chineke! Orchestra", "NCH 인터내셔널 시리즈: 치네케! 오케스트라",
      "National Concert Hall, Dublin", "국립 콘서트홀, 더블린",
      dict(flag=("introduced to participants, group attendance organised", "참가자에게 안내, 단체 관람 준비"))),
     (2025, 10, 7, "companion",
      "NCH International Series: Stephen Hough and Viano Quartet",
-     "NCH 인터내셔널 시리즈. 스티븐 허프와 비아노 4중주단",
+     "NCH 인터내셔널 시리즈: 스티븐 허프와 비아노 4중주단",
      "National Concert Hall, Dublin", "국립 콘서트홀, 더블린",
      dict(flag=("introduced to participants, group attendance organised", "참가자에게 안내, 단체 관람 준비"))),
     (2025, 10, 11, "companion",
@@ -175,8 +175,9 @@ ROWS = [
      "TU Dublin Concert Hall", "TU Dublin 콘서트홀",
      dict(flag=("introduced to participants, group attendance organised", "참가자에게 안내, 단체 관람 준비"))),
     (2025, 10, 0, "course",
-     "Ensemble for retired religious: preparation", "은퇴 수도자 앙상블. 준비",
-     "With the Presentation Sisters, Dublin", "Presentation 수녀회와 함께, 더블린",
+     "Ensemble for retired religious: preparation", "은퇴 수도자 앙상블: 준비",
+     # the place first, so the sisters' name (a block) ends the line, not "Dublin" alone (v7, 320px)
+     "Dublin, with the Presentation Sisters", "Presentation 수녀회와 함께, 더블린",
      dict(until=(12, 0), flag=("needs survey, permissions, vetting, individual lessons, part allocation",
                                 "필요 조사, 허가, 신원조회, 개별 레슨, 파트 배정"),
           pub=("a needs survey, individual lessons and parts for each player",
@@ -192,7 +193,7 @@ ROWS = [
     (2025, 11, 22, "outreach",
      "Remembrance Gathering", "추모 모임",
      "TU Dublin, Dublin 7", "TU Dublin, 더블린 7구",
-     dict(flag=("clarinet, piano and harp", "클라리넷, 피아노, 하프"))),
+     dict(flag=("clarinet, piano and harp", "클라리넷·피아노·하프"))),
     (2025, 11, 23, "outreach",
      "St Columban&rsquo;s Day Concert", "성 골롬반 축일 음악회",
      "Missionary Sisters of St Columban, Co. Wicklow", "성 골롬반 외방선교 수녀회, 위클로 주",
@@ -202,22 +203,25 @@ ROWS = [
      "Franciscan Missionaries of Mary, Dublin 5", "마리아의 프란치스코 선교 수녀회, 더블린 5구",
      dict(bmsp=True, flag=("clarinet solo", "클라리넷 독주"))),
     (2025, 12, 5, "lecture",
-     "Together (1): a concert, attended together", "함께하기 (1): 함께 간 연주회",
+     "Together (1): a concert, attended together", "함께하기 (1): 함께 간 음악회",
      "National Concert Hall, Dublin", "국립 콘서트홀, 더블린",
      dict(att=6, progs=("concert-companion",),
           flag=("the fifteenth session was an outing, not a lecture",
                 "열다섯 번째 회차는 강의 대신 동행 관람"),
-          pub=("the fifteenth session, at a concert", "열다섯 번째 모임, 공연장에서"))),
+          pub=("the fifteenth session, at a concert", "열다섯 번째 모임, 공연장에서"),
+          as_in={"concert-companion": (("A concert, attended together", "함께 간 음악회"),
+                                       ("six people from the Getting to Know talks",
+                                        "클래식 음악과 친해지기에서 여섯 명"))})),
     (2025, 12, 20, "ensemble",
      "Christmas Concert", "성탄 음악회",
      "Clondalkin Lodge, Dublin", "Clondalkin Lodge, 더블린",
      dict(bmsp=True, le=4, flag=("clarinet quartet and clarinet · residential care",
-                                 "클라리넷 4중주와 클라리넷 · 요양 시설"),
-          pub=("clarinet and string trio · residential care", "클라리넷과 현악 3중주 · 요양 시설"))),
+                                 "클라리넷 4중주와 클라리넷 · 요양시설"),
+          pub=("clarinet and string trio · residential care", "클라리넷과 현악 3중주 · 요양시설"))),
 
     # ---- 2026 ---------------------------------------------------------------
     (2026, 1, 15, "course",
-     "Ensemble for retired religious: ten weekly rehearsals", "은퇴 수도자 앙상블. 10주 연습",
+     "Ensemble for retired religious: ten weekly rehearsals", "은퇴 수도자 앙상블: 10주 연습",
      "Warrenmount, Dublin 8", "Warrenmount, 더블린 8구",
      dict(until=(3, 17), att=7, flag=("Thursdays, one hour · seven retired Presentation Sisters · all seven completed",
                                       "목요일 1시간 · 프레젠테이션 수녀회 은퇴 수녀 7명 · 7명 전원 수료"),
@@ -248,10 +252,12 @@ ROWS = [
           flag=("the ensemble&rsquo;s first public sharing · nine pieces",
                 "앙상블의 첫 공개 연주 · 아홉 곡"))),
     (2026, 4, 0, "course",
-     "Ensemble for retired religious: continuation", "은퇴 수도자 앙상블. 이어진 모임",
+     "Ensemble for retired religious: continuation", "은퇴 수도자 앙상블: 이어진 모임",
      "Warrenmount, Dublin 8", "Warrenmount, 더블린 8구",
      dict(until=(8, 29), flag=("weekly until the community chose to conclude in August: a completed pilot",
-                               "8월에 공동체가 마무리를 택할 때까지 매주. 완료된 파일럿"))),
+                               "8월에 공동체가 마무리를 택할 때까지 매주. 완료된 파일럿"),
+          pub=("weekly until the community chose to conclude in August",
+               "8월에 공동체가 마무리를 택할 때까지 매주"))),
     (2026, 8, 20, "concert",
      "Shared Voices of Care", "Shared Voices of Care",
      "Tallaght University Hospital", "Tallaght University Hospital",
@@ -305,13 +311,17 @@ def when(row, lang):
     if "until" in note:
         m2, d2 = note["until"]
         mon2 = MONTH[lang][m2 - 1]
+        # a range whose start has no day gives no day at its end either
+        # ("Apr–29 Aug 2026" mixed two precisions, v7)
+        d2 = d2 if d else 0
         if lang == "en":
             a = f"{d} {mon}" if d else mon
             b = f"{d2} {mon2}" if d2 else mon2
             return f"{a}&ndash;{b} {y}"
+        # Korean ranges take the tilde (R6; the word joiners keep it off a line's start)
         a = f"{mon} {d}일" if d else mon
         b = f"{mon2} {d2}일" if d2 else mon2
-        return f"{y}년 {a}&ndash;{b}"
+        return f"{y}년 {a}\u2060~\u2060{b}"
     if lang == "en":
         return f"{d} {mon} {y}" if d else f"{mon} {y}"
     return f"{y}년 {mon} {d}일" if d else f"{y}년 {mon}"

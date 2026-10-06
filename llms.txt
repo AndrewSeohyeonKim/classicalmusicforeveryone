@@ -1,6 +1,6 @@
 # Classical Music for Everyone
 
-> Classical Music for Everyone gives Classical Music talks, brings live concerts to care homes, hospitals, religious houses and community settings in Dublin, Ireland, and teaches adults to play together.
+> Classical Music for Everyone gives Classical Music talks, brings live concerts to care homes, hospitals, religious communities and community settings in Dublin, Ireland, and teaches adults to play together.
 
 Founded January 2024 in Dublin. Classical Music for Everyone is a not-for-profit community music initiative, forming a company limited by guarantee. It is not yet a registered charity. Founder & Artistic Director: Andrew Seohyeon Kim.
 Five programmes: Getting to Know Classical Music (talks), Outreach Concerts, the Community Recorder Ensemble Class, the Letters Ensemble, and Concert Guide & Companion (going to concerts together). Musicians and artists from any field can register interest at any time; from 2027 it plans paid, mentored performances for emerging musicians (CMFE Artists).
@@ -15,7 +15,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 - [Programmes](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html): Five programmes: Getting to Know Classical Music, Outreach Concerts, the Community Recorder Ensemble Class, the Letters Ensemble and Concert Guide & Companion.
 - [Get involved](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/get-involved.html): Join a programme, bring a concert to your place, register interest as a musician or artist, or join the founding board.
 - [News & archive](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html): What is new, the forty talks and performances on the record from 2024 to September 2026, a dated timeline and photographs.
-- [Contact](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/contact.html): Email, phone and where we travel to. We answer every message.
+- [Contact](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/contact.html): Choose a topic and write to us, or email or call. Who answers, where we travel, and how we look after your details.
 
 ## Programme pages (English)
 
@@ -28,11 +28,11 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 ## Pages (Korean)
 
 - [Classical Music for Everyone](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/): 더블린의 비영리 공동체 음악 단체. 찾아가는 음악회와 강의, 어른을 위한 리코더 클래스를 엽니다.
-- [소개](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html): 2024년부터의 이야기, 창립자 김서현, 운영 방식, 그리고 연주하고 가르쳐 온 곳.
+- [소개](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html): 2024년에 시작한 이야기, 창립자 김서현, 운영 방식, 연주하고 가르쳐 온 곳.
 - [프로그램](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html): 다섯 프로그램: 클래식 음악과 친해지기, 찾아가는 음악회, 커뮤니티 리코더 앙상블 클래스, Letters Ensemble, 함께하는 음악여행.
 - [함께하기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/get-involved.html): 프로그램 참여, 음악회 초청, CMFE Artists 참여 신청, 창립 이사회.
-- [소식·기록](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html): 새 소식, 2024년부터 2026년 9월까지 기록된 강의와 연주 마흔 번, 연표, 그리고 사진.
-- [문의](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/contact.html): 이메일, 전화, 활동 지역. 보내 주신 메일에는 모두 답장합니다.
+- [소식·기록](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html): 새 소식, 2024년부터 2026년 9월까지 기록된 강의와 연주 마흔 번, 연표와 사진.
+- [문의](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/contact.html): 주제를 골라 메일을 쓰시거나 이메일·전화로 연락하세요. 답하는 사람, 찾아가는 곳, 개인정보 처리방침.
 
 ## Programme pages (Korean)
 

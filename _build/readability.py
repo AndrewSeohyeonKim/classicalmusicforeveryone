@@ -225,6 +225,10 @@ class _Blocks(HTMLParser):
             self.other_lang += 1
         if self.cur is not None:
             self.cur[2].append(" ")
+            # a part drawn on a line of its own (the live class's place, under
+            # its time) is read, and measured, as its own run (v7)
+            if "pp-where" in cls:
+                self.cur[2].append("\u00b7 ")
         if self.main and not self.skip and tag in BLOCK and self.cur is None:
             marks = set()
             for t, cs, _ in self.stack:

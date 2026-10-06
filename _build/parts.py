@@ -227,7 +227,7 @@ def played(label, examples):
     sep = '<span class="sr-only">, </span>'
     rows = "".join(f'<li style="--i:{k}"><span class="played-when">{c}</span>{sep}<b class="played-name">{a}</b>'
                    f'{sep}<span class="played-who">{b}</span></li>' for k, (a, b, c) in enumerate(reversed(examples)))
-    return f'<h3 class="played-label">{label}</h3><ol class="played">{rows}</ol>'
+    return f'<h3 class="played-label">{label}</h3><ol class="played" style="--n:{len(examples)}">{rows}</ol>'
 
 
 # a 40 x 21 drawing: the seats stand 6.75/40 of its width from the centre
@@ -256,8 +256,12 @@ def table(roles, roles_label, cond):
         pts.append((k, r, a, dx, dy, side, dy - above, dy + below))
     up = max(TABLE_R, -min(p[6] for p in pts)) + TABLE_CLEAR
     h = up + max(TABLE_R, max(p[7] for p in pts)) + TABLE_CLEAR
+    # on a phone the names stand in a column and the table's edge is half an
+    # ellipse through their ticks: --b is how far out the curve is at each row
+    # (0 at the ends, 1 in the middle), so each tick starts on it
+    m = (len(roles) - 1) / 2 or 1
     seats = "".join(f'<li class="seat seat-{side}" style="--x:{50 + dx:.2f}%;--y:{(up + dy) / h * 100:.2f}%;'
-                    f'--a:{math.degrees(a):.0f}deg;--i:{k}">{r}</li>'
+                    f'--a:{math.degrees(a):.0f}deg;--b:{math.sqrt(max(0, 1 - ((k - m) / m) ** 2)):.3f};--i:{k}">{r}</li>'
                     for k, r, a, dx, dy, side, _, _ in pts)
     return (f'<div class="table-wrap"><p class="seats-label" id="board-roles">{roles_label}</p>'
             f'<div class="table-box"><div class="table" style="--th:{h:.2f};--cy:{up / h * 100:.2f}%">'
@@ -306,7 +310,7 @@ def now_line(p, cls=""):
     when, where = g["glance"][2][1], g["glance"][1][1]
     c = f"now-line {cls}".strip()
     return (f'<div class="{c}">'
-            f'<p class="now-head">{status_tag(g["now"][0], True)}'
+            f'<p class="now-head">{status_tag(g["now"][0], True)}{SEP}'
             f'<a class="now-name" href="programmes/{p["slug"]}.html">{p["name"]} {ARROW}</a></p>'
             f'<p class="now-when"><strong>{when}</strong><span class="sr-only">, </span>'
             f'<span>{where}</span></p></div>')
@@ -314,7 +318,7 @@ def now_line(p, cls=""):
 
 def title_lines(lines):
     """A page heading broken where the copy breaks, each line its own mask."""
-    return "".join(f'<span class="ln"><span>{ln}</span></span>' for ln in lines)
+    return " ".join(f'<span class="ln"><span>{ln}</span></span>' for ln in lines)
 
 
 # ---------------------------------------------------------------------------
@@ -447,12 +451,21 @@ def prog_card(i, p, pillars):
       </a></li>"""
 
 
+# EB Garamond 400, lining tabular figures: each digit's left side bearing (em),
+# measured at 400px (v7, chief designer: the band's numerals stood 2 to 4px
+# inside the line the dots start on)
+DIGIT_LSB = {"0": .045, "1": .09, "2": .03, "3": .05, "4": .0175, "5": .07, "6": .045, "7": .035, "8": .065,
+             "9": .0525}
+
+
 def _fig(n, label, period, plus=False):
     # The real number is in the markup; where the counter can run it is
     # hidden and the counter prints instead. The "+" is never part of the
     # counted span, so it is printed exactly once either way.
     suffix = '<span class="plus">+</span>' if plus else ""
-    return (f'      <div class="fig"><b><span class="count" style="--n:{n}"><span>{n}</span></span>{suffix}</b>'
+    # a small figure is not counted up: 0 to 4 says nothing the 4 does not (v7)
+    num = (f'<span class="count" style="--n:{n}"><span>{n}</span></span>' if n >= 10 else f"<span>{n}</span>")
+    return (f'      <div class="fig"><b style="--hang:{DIGIT_LSB[str(n)[0]]}em">{num}{suffix}</b>'
             f'<span class="fig-label">{label}</span>'
             f'<span class="fig-period">{period}</span></div>')
 
@@ -512,17 +525,17 @@ def home(t, programmes, pillars, lang):
 
 <section class="band-ink figs-band" id="record">
   <div class="wrap">
-    {eyebrow(nb["label"], "II", "section-label")}
-    <h2 class="sr-only">{nb["sr"]}</h2>
+    <h2 class="eyebrow section-label"><span class="no">II.</span>{nb["label"]}</h2>
     <div class="figs" style="--figs:{len(nb["figs"])}">
 {figs}
     </div>
     {artifacts.forty(lang, nb["forty"])}
     <p class="figs-note">{nb["note"]}</p>
+    <div class="btn-row">{go(*nb["link"])}</div>
   </div>
 </section>
 
-<section class="manifesto band-white" aria-labelledby="why-h">
+<section class="manifesto band-white">
   <div class="wrap why">
     {eyebrow(w["label"], "III", "section-label")}
     <div>
@@ -548,11 +561,12 @@ def _places(pl, lang):
     groups = []
     for title, rows in pl["groups"]:
         items = "".join(f'<li><span class="pl-name">{a}</span><small>{b}</small></li>' for a, b in rows)
-        groups.append(f'<div class="places-group"><h3>{title}<span class="pl-n">{len(rows)}</span></h3>'
-                      f'<ul>{items}</ul></div>')
+        unit = pl["map"]["count"].format(n=len(rows))
+        groups.append(f'<div class="places-group"><h3>{title}<span class="sr-only">, {unit}</span>'
+                      f'<span class="pl-n" aria-hidden="true">{len(rows)}</span></h3><ul>{items}</ul></div>')
     m = pl["map"]
     return f"""<div class="places rv">
-      <figure class="places-map">{artifacts.ireland(m["labels"], m)}<figcaption>{m["caption"]}</figcaption></figure>
+      <figure class="places-map">{artifacts.ireland(m["labels"], m)}<figcaption class="map-cap">{m["caption"]}</figcaption></figure>
       <div class="places-list">{"".join(groups)}</div>
     </div>"""
 
@@ -576,6 +590,9 @@ def about(t, lang):
 
 """
     if r.get("items"):
+        # a bold lead-in and its sentence (a fresh reviewer, v7: the question-
+        # beside-answer table set its answers on a line nothing else uses, with
+        # gaps after the short labels, and pushed the links to the next screen)
         trust = f"    {leadins(r['items'], 'rv')}"
     else:
         trust = '    <div class="trust rv-stagger">\n' + "\n".join(f"""      <div>
@@ -715,23 +732,50 @@ def _record(slug, lang, t):
     row's name over its place; an outreach row prints its place and what was
     played (ledger.TITLED says why). Only public notes are printed."""
     rows = ledger.for_programme(slug)
+    i = 0 if lang == "en" else 1
     items = []
     for r in rows:
-        title = r[4] if lang == "en" else r[5]
-        venue = r[6] if lang == "en" else r[7]
+        title, venue = r[4 + i], r[6 + i]
         q = ledger.qualifier(r, lang)
+        # a row may read differently on one programme's page: the one outing on
+        # the record is a talk on the talks' page and an outing on the
+        # Companion's (ledger as_in)
+        own = r[8].get("as_in", {}).get(slug)
+        if own:
+            title, q = own[0][i], own[1][i]
+        # each part of a note on its own line: joined by dots, a line-up was
+        # left at a line end ("…2026 · / clarinet, piano and soprano", v7)
+        notes = q.split(" · ") if q else []
         att = r[8].get("att")
-        extra = (f'<span class="rec-att">{t["people"].format(n=att)}</span>'
-                 if att and slug == "getting-to-know" else "")
+        if att and slug == "getting-to-know":
+            # the count is the row's small line, as "more than five people" is:
+            # a column of counts narrowed the place ("Carmelite / Community Centre", v7)
+            notes.append(t["people"].format(n=att))
         if slug in ledger.TITLED:
-            what = f"<b>{title}</b><span>{venue}</span>" + (f"<small>{q}</small>" if q else "")
+            what = f"<b>{title}</b><span>{venue}</span>" + "".join(f"<small>{x}</small>" for x in notes)
         else:
-            what = f"<b>{venue}</b>" + (f"<span>{q}</span>" if q else "")
+            # an outreach row is its place and what was played; the Letters
+            # Ensemble's own concerts say it was the ensemble (v7)
+            who = '<span class="rec-who">Letters Ensemble</span>' if r[3] == "ensemble" else ""
+            what = f"<b>{venue}</b>{who}" + "".join(f"<span>{x}</span>" for x in notes)
         items.append(f"""        <li>
-          <span class="rec-when">{ledger.when(r, lang)}</span>
-          <span class="rec-what">{what}</span>{extra}
+          <span class="rec-when">{_when_read(r, lang)}</span>
+          <span class="rec-what">{what}</span>
         </li>""")
     return len(rows), items
+
+
+def _when_read(r, lang):
+    """A record's date as drawn ("28 Jan 2024"), and in full for a screen
+    reader ("28 January 2024"); Korean months are already words."""
+    short = ledger.when(r, lang)
+    if lang != "en":
+        return short
+    full = re.sub(r"\b(" + "|".join(ledger.MONTH["en"]) + r")\b",
+                  lambda m: MONTH_NAME["en"][ledger.MONTH["en"].index(m.group(1))], short)
+    if full == short:
+        return short
+    return f'<span aria-hidden="true">{short}</span><span class="sr-only">{full}</span>'
 
 
 # A long record shows its newest rows and folds the earlier ones (4th pass,
@@ -769,18 +813,25 @@ def programme_page(t, i, p, programmes, pillars, lang):
     steps = "\n".join(f"""      <li style="--i:{k}">
         <span class="step-n" aria-hidden="true">{k + 1}</span>
         <h3>{a}</h3>
-        <p>{b}</p>
+        <p class="step-t">{b}</p>
       </li>""" for k, (a, b) in enumerate(g["steps"]))
     faq = "\n".join(f"""      <div>
         <dt>{q}</dt>
-        <dd>{a}</dd>
+        <dd class="qa-a">{a}</dd>
       </div>""" for q, a in g["faq"])
     n, record = _record(p["slug"], lang, t)
     reclist = record_list(n, record, t)
     rows = ledger.for_programme(p["slug"])
+    st = t["strip"]
+    key = []
+    if any(r[3] in ledger.LEARN for r in rows):
+        key.append(f'<span><i aria-hidden="true"></i>{st["learn"]}</span>')
+    if any(r[3] not in ledger.LEARN for r in rows):
+        key.append(f'<span><i class="o" aria-hidden="true"></i>{st["share"]}</span>')
+    note = st["dot"][p["slug"]] + (f' {st["bar"]}' if any("until" in r[8] for r in rows) else "")
     strip = f"""
-    <figure class="strip rv">{artifacts.strip(rows, lang, t["strip"])}
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>{t["strip"]["learn"]}</span><span><i class="o" aria-hidden="true"></i>{t["strip"]["share"]}</span><span>{t["strip"]["note"]}</span></figcaption>
+    <figure class="strip rv">{artifacts.strip(rows, lang, st)}
+      <figcaption class="strip-key">{"".join(key)}<span>{note}</span></figcaption>
     </figure>"""
     chart = ""
     if p["slug"] == "getting-to-know":
@@ -790,7 +841,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
       <figcaption class="att-head"><b>{a["h3"]}</b><span>{a["lead"]}</span></figcaption>
       <div class="att-plot">{artifacts.attendance(lang, a)}</div>
     </figure>"""
-    vid = artifacts.video(g.get("video"), t["video_label"].format(name=p["name"]), t["play"])
+    vid = artifacts.video(g.get("video"), t["video_label"].format(name=p["name"]), t["play"], lang)
     has_room = g.get("room", True) or bool(vid)
     # the sections are numbered in the margin, in reading order, with no gap
     # where a page has no "In the room". The programme's own number is not in
@@ -825,7 +876,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
   </div>
 </section>"""
     # a programme running now says so here too, so every page points to it
-    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n">{k + 1:02d}</span><b>{q["name"]}</b>{status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
+    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n" aria-hidden="true">{k + 1:02d}</span><b>{q["name"]}</b>{status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
                        for k, q in enumerate(programmes) if q["slug"] != p["slug"])
     return f"""<section class="pp-head">
   <div class="wrap">
@@ -838,7 +889,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
         <h1 class="pp-title">{title_lines([p["name"]])}</h1>
         <p class="lead lift lift-3">{g["lead"]}</p>
         <div class="pp-now{" is-live" if g.get("live") else ""} lift lift-4">
-          <p>{status_tag(g["now"][0], g.get("live"))}<span class="pp-say">{g["now"][1]}</span></p>
+          <p>{status_tag(g["now"][0], g.get("live"))}{SEP}<span class="pp-say">{g["now"][1]}</span></p>
           <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}{go("#join", t["how_join"])}</div>
         </div>
       </div>
@@ -878,7 +929,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
 {sh(t["join_label"], g["join_h2"], g.get("join_text") or None, no=no_join, split=True)}
     <div class="join-body rv">
       <p class="join-hint">{t["mail_hint"]}</p>
-      <ul class="join-fields">{"".join(f"<li>{x}</li>" for x in g["mail_fields"])}</ul>
+      <ol class="join-fields">{"".join(f"<li>{x}</li>" for x in g["mail_fields"])}</ol>
       <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}</div>
       {mail_alt(t)}
     </div>
@@ -913,7 +964,7 @@ def get_involved(t, icon):
         visit = "\n".join(f"""        <li style="--i:{k}">
           <span class="step-n" aria-hidden="true">{k + 1}</span>
           <h3>{a}</h3>
-          <p>{b}</p>
+          <p class="step-t">{b}</p>
         </li>""" for k, (a, b) in enumerate(inv["steps"]))
         invite_body = f"""      <ol class="steps steps-compact rv-stagger">
 {visit}
@@ -939,7 +990,7 @@ def get_involved(t, icon):
       </div>""" for h in sup["helps"])
         support = f"""<section class="band-white" id="support">
   <div class="wrap">
-{sh(sup["label"], sup["h2"], sup["lead"], no="03", split=True)}
+{sh(sup["label"], sup["h2"], sup["lead"], split=True)}
     <div class="helps rv-stagger">
 {helps}
     </div>
@@ -952,7 +1003,7 @@ def get_involved(t, icon):
         b = sup["board"]
         support = f"""<section class="band-white" id="support">
   <div class="wrap" id="board">
-{sh(sup["label"], b["h2"], b["lead"], no="03", split=True)}
+{sh(sup["label"], b["h2"], b["lead"], split=True)}
     <div class="board rv">
       {table(b["roles"], b["facts"][0][0], b["facts"][1])}
       <div class="board-act">
@@ -986,7 +1037,7 @@ def get_involved(t, icon):
 
 <section class="band-white" id="invite">
   <div class="wrap">
-{sh(inv["label"], inv["h2"], inv.get("lead") or inv.get("text"), no="01", split=True)}
+{sh(inv["label"], inv["h2"], inv.get("lead") or inv.get("text"), split=True)}
     <div class="invite rv">
 {invite_body}
       <div class="invite-act">
@@ -999,7 +1050,7 @@ def get_involved(t, icon):
 
 <section id="play">
   <div class="wrap">
-{sh(play["label"], play["h2"], play["lead"], no="02", split=True)}
+{sh(play["label"], play["h2"], play["lead"], split=True)}
     <div class="play rv">
 {play_body}
     </div>
@@ -1071,7 +1122,8 @@ def record_years(lang, t):
                 cls = "ry-t" if talk else "ry-p"
                 kind = t["row_talk"] if talk else t["row_perf"]
                 what, where = _rec_lines(r, lang)
-                where_ = f'{SEP}<span>{where}</span>' if where else ""
+                # a part a line, as on the programme pages ("· atrium and / chapel ·", v7)
+                where_ = "".join(f'{SEP}<span>{x}</span>' for x in where.split(" · ")) if where else ""
                 evs.append(f'              <li class="{cls}"><span class="ry-what">'
                            f'<span class="sr-only">{kind}: </span><b>{what}</b>{where_}</span></li>')
             short = ledger.MONTH[lang][m - 1]
@@ -1079,7 +1131,11 @@ def record_years(lang, t):
             name = short if full == short else f'<span aria-hidden="true">{short}</span><span class="sr-only">{full}</span>'
             months.append(f'          <li class="ry-mo"><span class="ry-m">{name}</span>\n'
                           f'            <ol class="ry-list">\n' + "\n".join(evs) + "\n            </ol>\n          </li>")
-        head = f'{y}{SEP}<span class="ry-n">{t["year_count"].format(n=len(mine))}</span>'
+        nt = sum(1 for r in mine if r[3] == "lecture")
+        split_ = (f'<span class="ry-k"><i class="dot" aria-hidden="true"></i>{t["year_talks"][nt != 1].format(n=nt)}</span>'
+                  f'{SEP}<span class="ry-k"><i class="dot dot-open" aria-hidden="true"></i>'
+                  f'{t["year_perf"][len(mine) - nt != 1].format(n=len(mine) - nt)}</span>')
+        head = f'{y}{SEP}<span class="ry-n">{split_}</span>'
         body = '        <ol class="ry-months">\n' + "\n".join(months) + "\n        </ol>"
         if y != years[-1]:
             # a past year folds on a phone (Andrew, 4 Oct 2026: the record ran
@@ -1266,6 +1322,15 @@ def news(t, lang, programmes=()):
 # CONTACT, with the privacy notice
 # ---------------------------------------------------------------------------
 
+# The form's one line of script (v7, QA: a GET form writes a space as "+", and
+# mail apps show it: "Taking+part"). It builds the same address with %20 and
+# CRLF line ends (RFC 6068); with scripts off the form still opens the mail app.
+FORM_JS = ("event.preventDefault();var f=this,s=f.querySelector('input[name=subject]:checked'),q=[];"
+           "if(s)q.push('subject='+encodeURIComponent(s.value));"
+           "var b=f.elements.body.value.replace(/\\r?\\n/g,'\\r\\n');if(b)q.push('body='+encodeURIComponent(b));"
+           "location.href=f.action+(q.length?'?'+q.join('&amp;'):'')")
+
+
 def contact_form(f, email):
     """One contact form (Andrew, 2 Oct 2026 evening), with no server: a mailto
     form. Six radios named "subject" (their values are the subject lines the
@@ -1282,10 +1347,10 @@ def contact_form(f, email):
         if not prompts:
             return ""
         items = "".join(f"<li>{x}</li>" for x in prompts)
-        return f'<div class="ct-hint t-{key}"><p>{f["helps"]}</p><ol class="ct-fields">{items}</ol></div>'
+        return f'<div class="ct-hint t-{key}"><p class="ct-help">{f["helps"]}</p><ol class="ct-fields">{items}</ol></div>'
     hints = "".join(hint(key, prompts) for key, _, _, prompts in f["topics"])
     rows = (len(f["topics"]) + 1) // 2
-    return f"""    <form class="ct-form rv" action="mailto:{email}" method="get">
+    return f"""    <form class="ct-form rv" action="mailto:{email}" method="get" onsubmit="{FORM_JS}">
       <fieldset class="ct-topics">
         <legend>{f["topic_label"]}</legend>
         <div class="ct-options" style="--rows:{rows}">
@@ -1298,7 +1363,7 @@ def contact_form(f, email):
         <textarea id="ct-msg" name="body" rows="7" aria-describedby="ct-hint ct-how"></textarea>
       </div>
       <div class="ct-act">
-        <button class="btn btn-primary" type="submit">{f["button"]} {ARROW}</button>
+        <button class="btn btn-primary" type="submit" aria-describedby="ct-how">{f["button"]} {ARROW}</button>
         <p class="ct-how" id="ct-how">{f["note"]} <a class="link" href="mailto:{email}">{email}</a></p>
       </div>
     </form>"""
@@ -1311,17 +1376,17 @@ def contact(t):
         services and rights read faster as lists), with an optional closing
         sentence. The old two-part form (title, paragraph) still works."""
         if len(b) == 2:
-            title, body = b[0], f"<p>{b[1]}</p>"
+            title, body = b[0], f'<p class="cl-t">{b[1]}</p>'
         else:
             title, kind, content, after = b
             if kind == "list":
                 body = '<ul class="clause-list">' + "".join(f"<li>{x}</li>" for x in content) + "</ul>"
             elif kind == "rows":
-                body = facts(content, "facts-plain facts-rows")
+                body = facts(content, "facts-plain facts-rows").replace("<dd>", '<dd class="cl-t">')
             else:
-                body = f"<p>{content}</p>"
+                body = f'<p class="cl-t">{content}</p>'
             if after:
-                body += f"<p>{after}</p>"
+                body += f'<p class="cl-t">{after}</p>'
         return f"""      <li>
         <h3>{title}</h3>
         {body}
@@ -1349,7 +1414,7 @@ def contact(t):
   <div class="wrap prose-split">
 {sh(pv["label"], pv["h2"])}
     <div class="notice-text rv">
-      <p>{pv["intro"]}</p>
+      <p class="pv-intro">{pv["intro"]}</p>
       <dl class="none-glance">{none}</dl>
       <ol class="notice-list">
 {blocks}

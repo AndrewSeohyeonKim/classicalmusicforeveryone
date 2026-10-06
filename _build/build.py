@@ -45,7 +45,7 @@ PAGES = [
      "A not-for-profit community music initiative in Dublin since 2024: our story, our founder, "
      "how we are run and where we have played and taught.",
      "소개 · Classical Music for Everyone",
-     "2024년부터의 이야기, 창립자 김서현, 운영 방식, 그리고 연주하고 가르쳐 온 곳.",
+     "2024년에 시작한 이야기, 창립자 김서현, 운영 방식, 연주하고 가르쳐 온 곳.",
      en.ABOUT, ko.ABOUT),
 
     ("programmes.html",
@@ -70,14 +70,15 @@ PAGES = [
      "What is new, the forty talks and performances on the record from 2024 to September 2026, "
      "a dated timeline and photographs.",
      "소식·기록 · Classical Music for Everyone",
-     "새 소식, 2024년부터 2026년 9월까지 기록된 강의와 연주 마흔 번, 연표, 그리고 사진.",
+     "새 소식, 2024년부터 2026년 9월까지 기록된 강의와 연주 마흔 번, 연표와 사진.",
      en.NEWS, ko.NEWS),
 
     ("contact.html",
      "Contact · Classical Music for Everyone",
-     "Email, phone and where we travel to. We answer every message.",
+     "Choose a topic and write to us, or email or call. Who answers, where we travel, and how we look "
+     "after your details.",
      "문의 · Classical Music for Everyone",
-     "이메일, 전화, 활동 지역. 보내 주신 메일에는 모두 답장합니다.",
+     "주제를 골라 메일을 쓰시거나 이메일·전화로 연락하세요. 답하는 사람, 찾아가는 곳, 개인정보 처리방침.",
      en.CONTACT, ko.CONTACT),
 ]
 
@@ -304,7 +305,7 @@ def build_llms():
     Facts only; nothing here that is not on the site or in the canonical set."""
     lines = ["# Classical Music for Everyone", "",
              "> Classical Music for Everyone gives Classical Music talks, brings live concerts to "
-             "care homes, hospitals, religious houses and community settings in Dublin, Ireland, and "
+             "care homes, hospitals, religious communities and community settings in Dublin, Ireland, and "
              "teaches adults to play together.", "",
              "Founded January 2024 in Dublin. Classical Music for Everyone is a not-for-profit "
              "community music initiative, forming a company limited by guarantee. It is not yet a "

@@ -94,7 +94,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -103,6 +103,7 @@
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="ko/index.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="Main">
@@ -110,16 +111,13 @@
         <li><a class="nav-link" href="index.html" aria-current="page"><span class="nav-n" aria-hidden="true">01</span>Home<span class="nav-mark" aria-hidden="true"></span></a></li>
         <li><a class="nav-link" href="about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="programmes.html"><span class="nav-n" aria-hidden="true">03</span>Programmes</a>
-          <ul class="nav-sub"><li><a href="programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">Getting to Know Classical Music</span></a></li><li><a href="programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">Outreach Concerts</span></a></li><li><a href="programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">Community Recorder Ensemble Class<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, running now</span></span></a></li><li><a href="programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">Concert Guide &amp; Companion</span></a></li></ul></li>
         <li><a class="nav-link" href="get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="contact.html">Contact</a>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <span aria-current="true">EN</span>
-        <a href="ko/index.html" hreflang="ko" lang="ko">한국어</a>
-      </div>
+      <a class="btn btn-nav" href="contact.html">Contact</a>
     </nav>
+    <a class="lang lang-wide" href="ko/index.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
   </div>
 </header>
 <main id="main">
@@ -127,17 +125,17 @@
   <div class="wrap">
     <p class="eyebrow lift">Community music · Dublin, Ireland</p>
     <hgroup class="hero-head">
-      <h1 class="hero-title"><span class="ln"><span>Classical Music,</span></span><span class="ln"><span><span class="for">for </span><em>Everyone.</em></span></span></h1>
+      <h1 class="hero-title"><span class="ln"><span>Classical Music,</span></span> <span class="ln"><span><span class="for">for </span><em>Everyone.</em></span></span></h1>
       <p class="hero-sub lift lift-2">Bringing <span class="cm">Classical Music</span> <em>where it&rsquo;s needed!</em></p>
     </hgroup>
     <div class="hero-body">
       <div class="hero-copy">
-        <div class="now-line lift lift-3"><p class="now-head"><span class="tag tag-live">Running now</span><a class="now-name" href="programmes/recorder-ensemble.html">Community Recorder Ensemble Class <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></p><p class="now-when"><strong>Wednesday evenings, 7pm to 8pm, autumn 2026</strong><span class="sr-only">, </span><span>Mulhuddart, Dublin 15</span></p></div>
-        <div class="btn-row hero-cta lift lift-4"><a class="btn btn-primary" href="#programmes">See the programmes <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="programmes/outreach-concerts.html">Invite us to play <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+        <div class="now-line lift lift-3"><p class="now-head"><span class="tag tag-live">Running now</span><span class="sr-only">, </span><a class="now-name" href="programmes/recorder-ensemble.html">Community Recorder Ensemble Class <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></p><p class="now-when"><strong>Wednesday evenings, 7pm to 8pm, autumn 2026</strong><span class="sr-only">, </span><span>Mulhuddart, Dublin 15</span></p></div>
+        <div class="btn-row hero-cta lift lift-4"><a class="btn btn-primary" href="#programmes">See the programmes <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="get-involved.html#invite">Invite us to play <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       </div>
       <figure class="hero-figure open" data-first>
         <span class="rings" aria-hidden="true"></span>
-        <div class="photo photo-4x3"><img fetchpriority="high" decoding="async" src="images/hero-outreach.jpg" srcset="images/hero-outreach-800.jpg 800w, images/hero-outreach.jpg 1800w" sizes="(max-width:55em) 100vw, 54vw" width="1800" height="1350" alt="The Letters Ensemble and their conductor playing a St Patrick&rsquo;s Day concert in a hall"></div>
+        <div class="photo photo-4x3"><img fetchpriority="high" decoding="async" src="images/hero-outreach.jpg" srcset="images/hero-outreach-800.jpg 800w, images/hero-outreach.jpg 1800w" sizes="(max-width:55em) 100vw, 54vw" width="1800" height="1350" alt="Four string players, seated and playing, and their conductor in a hall hung with Irish flags and shamrocks"></div>
         <figcaption><span class="cap-label">Letters Ensemble</span><span>St Patrick&rsquo;s Day concert</span></figcaption>
       </figure>
     </div>
@@ -149,16 +147,16 @@
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">I.</span>What we do</p>
       <div><h2><span class="sr-only">What we do: </span>Five programmes.</h2>
-      <p class="sh-lead">Three help you listen and play; two take live music out to people.</p></div>
+      <p class="sh-lead">Three help you listen and play; two bring music to people.</p></div>
     </header>
     <ul class="progs rv-stagger">
       <li><a class="pc" href="programmes/getting-to-know.html">
         <div class="cover" style="view-transition-name:prog-getting-to-know;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">01</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect pathLength="1" x="9.3" y="2.4" width="13.8" height="11" rx="1"/><path pathLength="1" d="M12.89 10.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/><path pathLength="1" d="M18.59 9.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/><path pathLength="1" d="M14.31 10.18V5.88l5.7-1v4.3"/><path pathLength="1" d="M4.7 11.2c1.22 0 2.2.98 2.2 2.2s-.98 2.2-2.2 2.2-2.2-.98-2.2-2.2.98-2.2 2.2-2.2z"/><path pathLength="1" d="M.9 22c0-2.1 1.7-3.8 3.8-3.8s3.8 1.7 3.8 3.8"/><path pathLength="1" d="M7.69 19.66l4.43-3.46"/></svg><span class="cover-line">Music history · Theory · Stories</span></div>
         <div class="pc-body">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
-          <div class="pc-name"><h3>Getting to Know Classical Music</h3>
+          <div class="pc-name"><h3>Getting to Know Classical Music</h3>
           <p class="pc-topics">Music history · Theory · Stories</p></div>
-          <p>Talks with live music, for anyone curious about Classical Music.</p>
+          <p>Talks with live music, for anyone curious about Classical Music.</p>
           <span class="tag">On request</span>
         </div>
       </a></li>
@@ -168,7 +166,7 @@
           <span class="kicker"><i class="dot dot-open" aria-hidden="true"></i>Sharing</span>
           <div class="pc-name"><h3>Outreach Concerts</h3>
           <p class="pc-topics">Day room · Chapel · Atrium</p></div>
-          <p>Live Classical Music in care homes, hospitals, parishes and community centres.</p>
+          <p>Live Classical Music in care homes, hospitals, parishes and community centres.</p>
           <span class="tag">Taking invitations</span>
         </div>
       </a></li>
@@ -212,18 +210,19 @@
 
 <section class="band-ink figs-band" id="record">
   <div class="wrap">
-    <p class="eyebrow section-label"><span class="no">II.</span>On the record</p>
-    <h2 class="sr-only">In numbers</h2>
-    <div class="figs" style="--figs:2">
-      <div class="fig"><b><span class="count" style="--n:40"><span>40</span></span><span class="plus">+</span></b><span class="fig-label">talks and performances</span><span class="fig-period">since 2024</span></div>
-      <div class="fig"><b><span class="count" style="--n:4"><span>4</span></span></b><span class="fig-label">countries: Ireland, France, the UK and Korea</span><span class="fig-period">since 2024</span></div>
+    <h2 class="eyebrow section-label"><span class="no">II.</span>On the record</h2>
+    <div class="figs" style="--figs:3">
+      <div class="fig"><b style="--hang:0.0175em"><span class="count" style="--n:40"><span>40</span></span><span class="plus">+</span></b><span class="fig-label">talks and performances</span><span class="fig-period">since 2024</span></div>
+      <div class="fig"><b style="--hang:0.03em"><span class="count" style="--n:22"><span>22</span></span></b><span class="fig-label">places where we have played and taught</span><span class="fig-period">since 2024</span></div>
+      <div class="fig"><b style="--hang:0.0175em"><span>4</span></b><span class="fig-label">countries: Ireland, France, the UK and Korea</span><span class="fig-period">since 2024</span></div>
     </div>
-    <figure class="forty"><div class="forty-row" role="img" aria-label="The 40 talks and performances on the record to September 2026, one square each: 17 talks and 23 performances."><span class="f-on" style="--i:0" title="28 Jan 2024 · Getting Closer · Sandyford, Dublin 18"></span><span class="f-on" style="--i:1" title="25 Feb 2024 · Together (1) · Our Lady of Dolours Church, Dolphin’s Barn"></span><span class="f-open" style="--i:2" title="16 Mar 2024 · St Patrick’s Day Concert · Dalgan Park, Co. Meath"></span><span class="f-on" style="--i:3" title="23 Mar 2024 · Together (2) · Our Lady of Dolours Church"></span><span class="f-on" style="--i:4" title="14 Apr 2024 · My Taste (1) · Our Lady of Dolours Church"></span><span class="f-on" style="--i:5" title="27 Apr 2024 · My Taste (2) · Our Lady of Dolours Church"></span><span class="f-open" style="--i:6" title="5 May 2024 · Rathgar Parish Concert · Church of the Three Patrons, Rathgar"></span><span class="f-on" style="--i:7" title="22 Jun 2024 · Summer Festivals · Our Lady of Dolours Church"></span><span class="f-open" style="--i:8" title="4 Aug 2024 · London Korean Catholic Church, United Kingdom · clarinet and organ"></span><span class="f-open" style="--i:9" title="27 Oct 2024 · Missions Étrangères de Paris, France · clarinet solo · retired missionaries"></span><span class="f-open" style="--i:10" title="28 Oct 2024 · Palais Brongniart, Paris · clarinet solo"></span><span class="f-on" style="--i:11" title="8 Nov 2024 · Getting Closer + Together (1) · TU Dublin, Grangegorman"></span><span class="f-on" style="--i:12" title="15 Nov 2024 · Getting Closer + Together (2) · TU Dublin"></span><span class="f-open" style="--i:13" title="23 Nov 2024 · St Columban’s Day Concert · Missionary Sisters of St Columban, Co. Wicklow"></span><span class="f-open" style="--i:14" title="28 Dec 2024 · Gwandukjeong Martyrs Memorial Centre, Daegu, Korea · clarinet and piano"></span><span class="f-on" style="--i:15" title="21 Feb 2025 · Getting Closer + Together (1) · TU Dublin"></span><span class="f-on" style="--i:16" title="7 Mar 2025 · Getting Closer + Together (2) · TU Dublin"></span><span class="f-open" style="--i:17" title="16 Mar 2025 · Dalgan Park, Co. Meath · Korean traditional ensemble and clarinet"></span><span class="f-on" style="--i:18" title="11 Apr 2025 · My Taste · TU Dublin"></span><span class="f-open" style="--i:19" title="17 Apr 2025 · HSE EVE Goirtin Hub, Dublin 7 · clarinet solo · a day service"></span><span class="f-open" style="--i:20" title="17 Apr 2025 · Blessed Sacrament Chapel, Dublin 1 · organ and clarinet"></span><span class="f-open" style="--i:21" title="18 Apr 2025 · Dysart Parish, Co. Westmeath · clarinet solo"></span><span class="f-open" style="--i:22" title="27 May 2025 · Kilmessan Church, Co. Meath · organ and clarinet"></span><span class="f-open" style="--i:23" title="4 Jun 2025 · Dalgan Park, Co. Meath"></span><span class="f-on" style="--i:24" title="21 Jul 2025 · BBC Proms · Carmelite Community Centre, Dublin"></span><span class="f-open" style="--i:25" title="21 Jul 2025 · Morning Star Hostel, Dublin 7 · organ and clarinet · a homeless hostel"></span><span class="f-on" style="--i:26" title="26 Sep 2025 · Getting Closer + Together (1) · TU Dublin"></span><span class="f-on" style="--i:27" title="17 Oct 2025 · Getting Closer + Together (2) · TU Dublin"></span><span class="f-open" style="--i:28" title="20 Nov 2025 · TU Dublin, Dublin 7 · organ and clarinet"></span><span class="f-open" style="--i:29" title="22 Nov 2025 · TU Dublin, Dublin 7 · clarinet, piano and harp"></span><span class="f-open" style="--i:30" title="23 Nov 2025 · Missionary Sisters of St Columban, Co. Wicklow · clarinet solo"></span><span class="f-open" style="--i:31" title="30 Nov 2025 · Franciscan Missionaries of Mary, Dublin 5 · clarinet solo"></span><span class="f-on" style="--i:32" title="5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin"></span><span class="f-open" style="--i:33" title="20 Dec 2025 · Christmas Concert · Clondalkin Lodge, Dublin"></span><span class="f-on" style="--i:34" title="23 Jan 2026 · My Taste (1) · East Quad, TU Dublin Grangegorman"></span><span class="f-on" style="--i:35" title="Feb 2026 · My Taste (2) · East Quad, TU Dublin Grangegorman"></span><span class="f-open" style="--i:36" title="Apr 2026 · Easter Concert: Presentation Sisters Recorder Ensemble · Clondalkin Lodge, Dublin"></span><span class="f-open" style="--i:37" title="20 Aug 2026 · Tallaght University Hospital · our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player"></span><span class="f-open" style="--i:38" title="29 Aug 2026 · Rua Red Performance Space, Tallaght · our founder was selected for South Dublin Live 2026 · clarinet, piano and soprano"></span><span class="f-open" style="--i:39" title="19 Sep 2026 · Methodist Centenary Church, Ranelagh, Dublin 6 · soprano, haegeum, clarinet and piano"></span></div><figcaption><span><i aria-hidden="true"></i>Talk (17)</span><span><i class="o" aria-hidden="true"></i>Performance (23)</span><span>On the record to September 2026, one square each</span></figcaption></figure>
-    <p class="figs-note"><span class="sl">Our founder was selected for South Dublin Live 2026.</span> <span class="sl"><a class="link" href="news.html#record">See the record, year by year</a></span></p>
+    <figure class="forty"><div class="forty-groups"><div class="forty-g" style="--n:17"><div class="forty-row" aria-hidden="true"><span class="f-on" style="--i:0"></span><span class="f-on" style="--i:1"></span><span class="f-on" style="--i:2"></span><span class="f-on" style="--i:3"></span><span class="f-on" style="--i:4"></span><span class="f-on" style="--i:5"></span><span class="f-on" style="--i:6"></span><span class="f-on" style="--i:7"></span><span class="f-on" style="--i:8"></span><span class="f-on" style="--i:9"></span><span class="f-on" style="--i:10"></span><span class="f-on" style="--i:11"></span><span class="f-on" style="--i:12"></span><span class="f-on" style="--i:13"></span><span class="f-on" style="--i:14"></span><span class="f-on" style="--i:15"></span><span class="f-on" style="--i:16"></span></div><p class="forty-n">17 talks</p></div><div class="forty-g" style="--n:23"><div class="forty-row" aria-hidden="true"><span class="f-open" style="--i:17"></span><span class="f-open" style="--i:18"></span><span class="f-open" style="--i:19"></span><span class="f-open" style="--i:20"></span><span class="f-open" style="--i:21"></span><span class="f-open" style="--i:22"></span><span class="f-open" style="--i:23"></span><span class="f-open" style="--i:24"></span><span class="f-open" style="--i:25"></span><span class="f-open" style="--i:26"></span><span class="f-open" style="--i:27"></span><span class="f-open" style="--i:28"></span><span class="f-open" style="--i:29"></span><span class="f-open" style="--i:30"></span><span class="f-open" style="--i:31"></span><span class="f-open" style="--i:32"></span><span class="f-open" style="--i:33"></span><span class="f-open" style="--i:34"></span><span class="f-open" style="--i:35"></span><span class="f-open" style="--i:36"></span><span class="f-open" style="--i:37"></span><span class="f-open" style="--i:38"></span><span class="f-open" style="--i:39"></span></div><p class="forty-n">23 performances</p></div></div><figcaption>On the record to September 2026, one dot each</figcaption></figure>
+    <p class="figs-note">Our founder was selected for South Dublin Live 2026.</p>
+    <div class="btn-row"><a class="go" href="news.html#record">See the record, year by year <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
   </div>
 </section>
 
-<section class="manifesto band-white" aria-labelledby="why-h">
+<section class="manifesto band-white">
   <div class="wrap why">
     <p class="eyebrow section-label"><span class="no">III.</span>Why we exist</p>
     <div>
@@ -260,8 +259,8 @@
           <li><a href="news.html">News &amp; archive</a></li>
         </ul>
       </nav>
-      <nav aria-label="Take part">
-        <h2>Take part</h2>
+      <nav aria-label="Get involved">
+        <h2>Get involved</h2>
         <ul>
           <li><a href="get-involved.html#invite">Invite us to play</a></li>
           <li><a href="get-involved.html#play">Perform with us</a></li>
@@ -274,14 +273,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="ko/index.html" hreflang="ko" lang="ko">한국어</a></li>
+          <li><a href="ko/index.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 4 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 5 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

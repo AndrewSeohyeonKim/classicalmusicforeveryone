@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -111,6 +111,7 @@
       <img src="../assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="../ko/programmes/recorder-ensemble.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="Main">
@@ -118,16 +119,13 @@
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
-          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="../programmes/recorder-ensemble.html" aria-current="page"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">Getting to Know Classical Music</span></a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">Outreach Concerts</span></a></li><li><a href="../programmes/recorder-ensemble.html" aria-current="page"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">Community Recorder Ensemble Class<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, running now</span></span></a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">Concert Guide &amp; Companion</span></a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="../contact.html">Contact</a>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <span aria-current="true">EN</span>
-        <a href="../ko/programmes/recorder-ensemble.html" hreflang="ko" lang="ko">한국어</a>
-      </div>
+      <a class="btn btn-nav" href="../contact.html">Contact</a>
     </nav>
+    <a class="lang lang-wide" href="../ko/programmes/recorder-ensemble.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
   </div>
 </header>
 <main id="main">
@@ -142,13 +140,13 @@
         <h1 class="pp-title"><span class="ln"><span>Community Recorder Ensemble Class</span></span></h1>
         <p class="lead lift lift-3"><span class="sl">For adults who have never played an instrument.</span> <span class="sl">You play your first notes <mark>in week one</mark>.</span></p>
         <div class="pp-now is-live lift lift-4">
-          <p><span class="tag tag-live">Running now</span><span class="pp-say"><strong>Wednesday evenings, 7pm to 8pm</strong>, Mulhuddart Community Centre, Dublin 15.</span></p>
+          <p><span class="tag tag-live">Running now</span><span class="sr-only">, </span><span class="pp-say"><strong>Wednesday evenings, 7pm to 8pm</strong><span class="sr-only">, </span><span class="pp-where">Mulhuddart Community Centre</span></span></p>
           <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Community%20Recorder%20Ensemble%20Class&amp;body=Your%20name%3A%20%0D%0AA%20phone%20number%20%28optional%29%3A%20%0D%0AHave%20you%20played%20an%20instrument%20before%3F%20%0D%0ADo%20you%20need%20a%20recorder%3F%20%0D%0AAny%20access%20needs%20%28optional%29%3A%20%0D%0A">Ask about the class <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">How to take part <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
       <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-recorder-ensemble;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">03</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g transform="rotate(-45 12 12)"><path pathLength="1" d="M9.5 6.54V1.6l1.2-3.64h2.6l1.2 3.64v4.94"/><path pathLength="1" d="M11.8 2.3h.4"/><path pathLength="1" d="M9.4 6.54h5.2"/><path pathLength="1" d="M9.7 6.54l.1 13.26h4.4l.1-13.26"/><path pathLength="1" d="M9.8 19.8l-1 4.55h6.4l-1-4.55"/><path pathLength="1" d="M12 9.53h.01M12 12h.01M12 14.47h.01M12 16.94h.01"/></g></svg><span class="cover-line">First notes · Scores · Harmony</span></div></div>
     </div>
-    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Adults who have never played an instrument</dd></div><div><dt>Where</dt><dd>Mulhuddart, Dublin 15</dd></div><div><dt>When</dt><dd>Wednesday evenings, 7pm to 8pm, autumn 2026</dd></div><div><dt>What you need</dt><dd>No instrument and no music reading</dd></div></dl>
+    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Adults who have never played an instrument</dd></div><div><dt>Where</dt><dd>Mulhuddart, Dublin 15</dd></div><div><dt>When</dt><dd>Wednesday evenings, 7pm to 8pm, autumn 2026</dd></div><div><dt>What you need</dt><dd>No instrument, and no need to read music</dd></div></dl>
   </div>
 </section>
 
@@ -162,17 +160,17 @@
       <li style="--i:0">
         <span class="step-n" aria-hidden="true">1</span>
         <h3>Your first notes</h3>
-        <p>Hold the recorder, breathe and play.</p>
+        <p class="step-t">Hold the recorder, breathe and play.</p>
       </li>
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
-        <h3>Reading from zero</h3>
-        <p>Notes and fingering, one at a time, with music we prepare for the class.</p>
+        <h3>Reading from scratch</h3>
+        <p class="step-t">Notes and fingering, one at a time, with music we prepare for the class.</p>
       </li>
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
         <h3>Your own part</h3>
-        <p>The group plays in harmony. The term ends with <mark>a small concert</mark> of our own.</p>
+        <p class="step-t"><span class="sl">The group plays in harmony.</span> <span class="sl">The term ends with <mark>a small concert</mark> of our own.</span></p>
       </li>
     </ol>
   </div>
@@ -187,15 +185,15 @@
     <dl class="qa rv-stagger">
       <div>
         <dt>Do I need my own recorder?</dt>
-        <dd><strong>No.</strong> We can <mark>lend you one</mark>.</dd>
+        <dd class="qa-a"><strong>No.</strong> We can <mark>lend you one</mark>.</dd>
       </div>
       <div>
         <dt>Do I need to read music?</dt>
-        <dd><strong>No.</strong> You learn to read a few notes at a time, <mark>as you play</mark>.</dd>
+        <dd class="qa-a"><strong>No.</strong> You learn to read a few notes at a time, <mark>as you play</mark>.</dd>
       </div>
       <div>
         <dt>Where did the class come from?</dt>
-        <dd>From <mark>a ten-week pilot</mark> with seven retired Presentation Sisters, shown in the video below.</dd>
+        <dd class="qa-a">From <mark>a ten-week pilot</mark> with seven retired Presentation Sisters, shown in the video below.</dd>
       </div>
     </dl>
   </div>
@@ -207,7 +205,7 @@
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">03</span>In the room</p>
       <div><h2><span class="sr-only">In the room: </span>Where the class began.</h2></div>
     </header>
-    <div class="room rv"><figure class="video"><iframe class="video-frame" title="Video: Community Recorder Ensemble Class" loading="lazy" src="https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;rel=0" srcdoc="&lt;style&gt;*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;background:#1D2430}img{width:100%;height:100%;object-fit:cover;opacity:.88}i{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;background:#FAF5EE;box-shadow:0 0 0 1px #B8893A}i::before{content:&#x27;&#x27;;position:absolute;left:29px;top:24px;border-left:20px solid #1D2430;border-top:12px solid transparent;border-bottom:12px solid transparent}b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}a:focus{outline:none}a:focus-visible{box-shadow:inset 0 0 0 4px #1D2430,inset 0 0 0 7px #FAF5EE}a:focus-visible i{box-shadow:0 0 0 3px #1D2430,0 0 0 6px #FAF5EE}&lt;/style&gt;&lt;a href=&#x27;https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;amp;rel=0&#x27;&gt;&lt;img src=&#x27;https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/recorders-800.jpg&#x27; alt=&#x27;&#x27;&gt;&lt;i&gt;&lt;/i&gt;&lt;b&gt;Play the video&lt;/b&gt;&lt;/a&gt;" allow="autoplay; fullscreen; picture-in-picture"></iframe><figcaption><span class="cap-label">The pilot ensemble</span><span>Retired Presentation Sisters playing the recorder together. <a class="link" href="https://www.youtube.com/watch?v=i7skwGKWSYY">Watch on YouTube</a></span></figcaption></figure></div>
+    <div class="room rv"><figure class="video"><iframe class="video-frame" title="Video: Community Recorder Ensemble Class" loading="lazy" src="https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;rel=0" srcdoc="&lt;html lang=&#x27;en&#x27;&gt;&lt;style&gt;*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;background:#1D2430}img{width:100%;height:100%;object-fit:cover;opacity:.88}i{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;background:#FAF5EE;box-shadow:0 0 0 1px #B8893A}i::before{content:&#x27;&#x27;;position:absolute;left:29px;top:24px;border-left:20px solid #1D2430;border-top:12px solid transparent;border-bottom:12px solid transparent}b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}a:focus{outline:none}a:focus-visible{box-shadow:inset 0 0 0 4px #1D2430,inset 0 0 0 7px #FAF5EE}a:focus-visible i{box-shadow:0 0 0 3px #1D2430,0 0 0 6px #FAF5EE}&lt;/style&gt;&lt;a href=&#x27;https://www.youtube-nocookie.com/embed/i7skwGKWSYY?autoplay=1&amp;amp;rel=0&#x27;&gt;&lt;img src=&#x27;https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/recorders-800.jpg&#x27; alt=&#x27;&#x27;&gt;&lt;i&gt;&lt;/i&gt;&lt;b&gt;Play the video&lt;/b&gt;&lt;/a&gt;" allow="autoplay; fullscreen; picture-in-picture"></iframe><figcaption><span class="cap-label">The pilot ensemble</span><span>Retired Presentation Sisters playing the recorder together. <a class="link" href="https://www.youtube.com/watch?v=i7skwGKWSYY">Watch on YouTube</a></span></figcaption></figure></div>
   </div>
 </section>
 
@@ -216,31 +214,31 @@
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">04</span>On the record</p>
       <div><h2><span class="sr-only">On the record: </span>The story so far.</h2>
-      <p class="sh-lead">How the class came about, step by step.</p></div>
+      <p class="sh-lead">It began with one question, asked at a concert.</p></div>
     </header>
-    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="6 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>23 Nov 2024 · St Columban’s Day Concert · Missionary Sisters of St Columban, Co. Wicklow</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>Oct–Dec 2025 · Ensemble for retired religious: preparation · With the Presentation Sisters, Dublin</title><rect class="s-span s-on" x="428.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:2"><title>15 Jan–17 Mar 2026 · Ensemble for retired religious: ten weekly rehearsals · Warrenmount, Dublin 8</title><rect class="s-span s-on" x="488.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:3"><title>Apr 2026 · Easter Concert: Presentation Sisters Recorder Ensemble · Clondalkin Lodge, Dublin</title><circle class="s-open" cx="556.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>Apr–29 Aug 2026 · Ensemble for retired religious: continuation · Warrenmount, Dublin 8</title><rect class="s-span s-on" x="548.0" y="55" width="96.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:5"><title>Autumn 2026 · Community Recorder Ensemble Class begins · Mulhuddart Community Centre, Dublin 15</title><circle class="s-on" cx="656.0" cy="59.0" r="4.4"/></g></svg>
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>Learning</span><span><i class="o" aria-hidden="true"></i>Sharing</span><span>A dot is one session; a bar spans several months.</span></figcaption>
+    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="6 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>23 Nov 2024 · St Columban’s Day Concert · Missionary Sisters of St Columban, Co. Wicklow</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>Oct–Dec 2025 · Ensemble for retired religious: preparation · Dublin, with the Presentation Sisters</title><rect class="s-span s-on" x="428.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:2"><title>15 Jan–17 Mar 2026 · Ensemble for retired religious: ten weekly rehearsals · Warrenmount, Dublin 8</title><rect class="s-span s-on" x="488.0" y="55" width="56.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:3"><title>Apr 2026 · Easter Concert: Presentation Sisters Recorder Ensemble · Clondalkin Lodge, Dublin</title><circle class="s-open" cx="556.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>Apr–Aug 2026 · Ensemble for retired religious: continuation · Warrenmount, Dublin 8</title><rect class="s-span s-on" x="548.0" y="55" width="96.0" height="7" rx="3.5"/></g><g class="s-ev" style="--i:5"><title>Autumn 2026 · Community Recorder Ensemble Class begins · Mulhuddart Community Centre, Dublin 15</title><circle class="s-on" cx="656.0" cy="59.0" r="4.4"/></g></svg>
+      <figcaption class="strip-key"><span><i aria-hidden="true"></i>Learning</span><span><i class="o" aria-hidden="true"></i>Sharing</span><span>A dot is one date. A bar spans several months.</span></figcaption>
     </figure>
     <ol class="rec rec-short rv">
         <li>
-          <span class="rec-when">23 Nov 2024</span>
-          <span class="rec-what"><b>St Columban&rsquo;s Day Concert</b><span>Missionary Sisters of St Columban, Co. Wicklow</span><small>where the recorder ensemble began: a sister asked to play again</small></span>
+          <span class="rec-when"><span aria-hidden="true">23 Nov 2024</span><span class="sr-only">23 November 2024</span></span>
+          <span class="rec-what"><b>St Columban&rsquo;s Day Concert</b><span><span class="tn">Missionary Sisters of St Columban,</span> Co. Wicklow</span><small>where the recorder ensemble began: a sister asked to play again</small></span>
         </li>
         <li>
-          <span class="rec-when">Oct&ndash;Dec 2025</span>
-          <span class="rec-what"><b>Ensemble for retired religious: preparation</b><span>With the Presentation Sisters, Dublin</span><small>a needs survey, individual lessons and parts for each player</small></span>
+          <span class="rec-when"><span aria-hidden="true">Oct&ndash;Dec 2025</span><span class="sr-only">October&ndash;December 2025</span></span>
+          <span class="rec-what"><b>Ensemble for retired religious: preparation</b><span>Dublin, with <span class="tn">the Presentation Sisters</span></span><small>a needs survey, individual lessons and parts for each player</small></span>
         </li>
         <li>
-          <span class="rec-when">15 Jan&ndash;17 Mar 2026</span>
-          <span class="rec-what"><b>Ensemble for retired religious: ten weekly rehearsals</b><span>Warrenmount, Dublin 8</span><small>Thursdays, one hour · seven retired Presentation Sisters · all seven stayed to the end</small></span>
+          <span class="rec-when"><span aria-hidden="true">15 Jan&ndash;17 Mar 2026</span><span class="sr-only">15 January&ndash;17 March 2026</span></span>
+          <span class="rec-what"><b>Ensemble for retired religious: ten weekly rehearsals</b><span>Warrenmount, Dublin 8</span><small>Thursdays, one hour</small><small>seven retired Presentation Sisters</small><small>all seven stayed to the end</small></span>
         </li>
         <li>
-          <span class="rec-when">Apr 2026</span>
-          <span class="rec-what"><b>Easter Concert: Presentation Sisters Recorder Ensemble</b><span>Clondalkin Lodge, Dublin</span><small>the ensemble&rsquo;s first public sharing · nine pieces</small></span>
+          <span class="rec-when"><span aria-hidden="true">Apr 2026</span><span class="sr-only">April 2026</span></span>
+          <span class="rec-what"><b>Easter Concert: Presentation Sisters Recorder Ensemble</b><span>Clondalkin Lodge, Dublin</span><small>the ensemble&rsquo;s first public sharing</small><small>nine pieces</small></span>
         </li>
         <li>
-          <span class="rec-when">Apr&ndash;29 Aug 2026</span>
-          <span class="rec-what"><b>Ensemble for retired religious: continuation</b><span>Warrenmount, Dublin 8</span><small>weekly until the community chose to conclude in August: a completed pilot</small></span>
+          <span class="rec-when"><span aria-hidden="true">Apr&ndash;Aug 2026</span><span class="sr-only">April&ndash;August 2026</span></span>
+          <span class="rec-what"><b>Ensemble for retired religious: continuation</b><span>Warrenmount, Dublin 8</span><small>weekly until the community chose to conclude in August</small></span>
         </li>
         <li>
           <span class="rec-when">Autumn 2026</span>
@@ -254,11 +252,12 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">05</span>Take part</p>
-      <div><h2><span class="sr-only">Take part: </span>Join the class.</h2></div>
+      <div><h2><span class="sr-only">Take part: </span>Join the class.</h2>
+      <p class="sh-lead"><strong>Wednesday evenings, 7pm to 8pm</strong>, in Mulhuddart.</p></div>
     </header>
     <div class="join-body rv">
-      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
-      <ul class="join-fields"><li>Your name</li><li>A phone number (optional)</li><li>Have you played an instrument before?</li><li>Do you need a recorder?</li><li>Any access needs (optional)</li></ul>
+      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
+      <ol class="join-fields"><li>Your name</li><li>A phone number (optional)</li><li>Have you played an instrument before?</li><li>Do you need a recorder?</li><li>Any access needs (optional)</li></ol>
       <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Community%20Recorder%20Ensemble%20Class&amp;body=Your%20name%3A%20%0D%0AA%20phone%20number%20%28optional%29%3A%20%0D%0AHave%20you%20played%20an%20instrument%20before%3F%20%0D%0ADo%20you%20need%20a%20recorder%3F%20%0D%0AAny%20access%20needs%20%28optional%29%3A%20%0D%0A">Ask about the class <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       <p class="mail-alt"><span>Or write to</span> <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a> <a href="tel:+353830780635">+353 83 078 0635</a></p>
     </div>
@@ -269,10 +268,10 @@
   <div class="wrap">
     <h2 class="eyebrow section-label">The other programmes</h2>
     <ul class="others">
-      <li><a href="../programmes/getting-to-know.html"><span class="toc-n">01</span><b>Getting to Know Classical Music</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n">02</span><b>Outreach Concerts</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/concert-companion.html"><span class="toc-n">05</span><b>Concert Guide &amp; Companion</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/getting-to-know.html"><span class="toc-n" aria-hidden="true">01</span><b>Getting to Know Classical Music</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n" aria-hidden="true">02</span><b>Outreach Concerts</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n" aria-hidden="true">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/concert-companion.html"><span class="toc-n" aria-hidden="true">05</span><b>Concert Guide &amp; Companion</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
     </ul>
     <div class="btn-row"><a class="go" href="../programmes.html">All five programmes <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
   </div>
@@ -299,8 +298,8 @@
           <li><a href="../news.html">News &amp; archive</a></li>
         </ul>
       </nav>
-      <nav aria-label="Take part">
-        <h2>Take part</h2>
+      <nav aria-label="Get involved">
+        <h2>Get involved</h2>
         <ul>
           <li><a href="../get-involved.html#invite">Invite us to play</a></li>
           <li><a href="../get-involved.html#play">Perform with us</a></li>
@@ -313,14 +312,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="../contact.html">Contact</a></li>
-          <li><a href="../ko/index.html" hreflang="ko" lang="ko">한국어</a></li>
+          <li><a href="../ko/programmes/recorder-ensemble.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 4 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 5 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

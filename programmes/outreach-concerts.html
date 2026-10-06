@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -111,6 +111,7 @@
       <img src="../assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="../ko/programmes/outreach-concerts.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="Main">
@@ -118,16 +119,13 @@
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
-          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="../programmes/outreach-concerts.html" aria-current="page"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">Getting to Know Classical Music</span></a></li><li><a href="../programmes/outreach-concerts.html" aria-current="page"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">Outreach Concerts</span></a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">Community Recorder Ensemble Class<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, running now</span></span></a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">Concert Guide &amp; Companion</span></a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="../contact.html">Contact</a>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <span aria-current="true">EN</span>
-        <a href="../ko/programmes/outreach-concerts.html" hreflang="ko" lang="ko">한국어</a>
-      </div>
+      <a class="btn btn-nav" href="../contact.html">Contact</a>
     </nav>
+    <a class="lang lang-wide" href="../ko/programmes/outreach-concerts.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
   </div>
 </header>
 <main id="main">
@@ -140,15 +138,15 @@
       <div class="pp-intro">
         <p class="eyebrow lift"><i class="dot dot-open" aria-hidden="true"></i>Sharing</p>
         <h1 class="pp-title"><span class="ln"><span>Outreach Concerts</span></span></h1>
-        <p class="lead lift lift-3"><span class="sl">We play in the rooms <mark>where people already are</mark>.</span> <span class="sl">We explain the music as we go.</span></p>
+        <p class="lead lift lift-3"><span class="sl">We play in the rooms where <mark>people already are</mark>.</span> <span class="sl">We explain the music as we go.</span></p>
         <div class="pp-now lift lift-4">
-          <p><span class="tag">Taking invitations</span><span class="pp-say">Write with your room and a few dates that suit.</span></p>
+          <p><span class="tag">Taking invitations</span><span class="sr-only">, </span><span class="pp-say">Write with your room and a few dates that suit.</span></p>
           <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Concert%20invitation&amp;body=Organisation%20and%20town%3A%20%0D%0AThe%20room%20%28and%20piano%2C%20if%20any%29%3A%20%0D%0AWho%20will%20listen%2C%20and%20how%20many%3A%20%0D%0ADates%20or%20times%20that%20suit%3A%20%0D%0AContact%20name%20and%20phone%20number%3A%20%0D%0A">Invite us <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">How to take part <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
       <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-outreach-concerts;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">02</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 11.4h12.4c3.6 0 6 1.2 6 3.2 0 .4-.3.6-.9.6H3z"/><path pathLength="1" d="M5.8 11.4l11.4-8.7"/><path pathLength="1" d="M15 11.4V4.38"/><path pathLength="1" d="M5 15.2V21"/><path pathLength="1" d="M18.2 15.2V21"/><path pathLength="1" d="M1.6 21h20.8"/></svg><span class="cover-line">Day room · Chapel · Atrium</span></div></div>
     </div>
-    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Care homes, hospitals, parishes and community groups</dd></div><div><dt>Where</dt><dd>Your own room, in Dublin and further by arrangement</dd></div><div class="is-when"><dt>When</dt><dd>By arrangement</dd></div><div><dt>What you need</dt><dd>A room, a date and a contact person</dd></div></dl>
+    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Care homes, hospitals, religious communities, parishes and community centres</dd></div><div><dt>Where</dt><dd>Your own room, in Dublin and further by arrangement</dd></div><div class="is-when"><dt>When</dt><dd>A date we agree with you</dd></div><div><dt>What you need</dt><dd>A room, a date and a contact person</dd></div></dl>
   </div>
 </section>
 
@@ -156,23 +154,23 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">01</span>How it works</p>
-      <div><h2><span class="sr-only">How it works: </span>Three steps to a concert in your room.</h2></div>
+      <div><h2><span class="sr-only">How it works: </span>Three steps to a concert in your room.</h2></div>
     </header>
     <ol class="steps steps-outreach-concerts rv-stagger">
       <li style="--i:0">
         <span class="step-n" aria-hidden="true">1</span>
         <h3>You tell us</h3>
-        <p>Write with the room, a date and who will be listening.</p>
+        <p class="step-t">Write with the room, a date and who will be listening.</p>
       </li>
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
-        <h3>We plan the music</h3>
-        <p>We choose pieces people can <mark>enjoy on first hearing</mark>, for your listeners.</p>
+        <h3>We plan the music</h3>
+        <p class="step-t">We choose pieces people can enjoy <mark>on first hearing</mark>, for your listeners.</p>
       </li>
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
-        <h3>We come and play</h3>
-        <p>Musicians, instruments and stands come with us, and we play in your room.</p>
+        <h3>We come and play</h3>
+        <p class="step-t">Musicians, instruments and stands come with us, and we play in your room.</p>
       </li>
     </ol>
   </div>
@@ -187,15 +185,15 @@
     <dl class="qa rv-stagger">
       <div>
         <dt>Who plays?</dt>
-        <dd>Andrew Seohyeon Kim, <mark>our founder</mark>, plays clarinet and organ, alone or with musicians he invites. Our Letters Ensemble gives some concerts.</dd>
+        <dd class="qa-a"><span class="sl">Andrew Seohyeon Kim, <mark>our founder</mark>, plays clarinet and organ, alone or with musicians he invites.</span> <span class="sl">Our Letters Ensemble gives some concerts.</span></dd>
       </div>
       <div>
         <dt>Who can listen?</dt>
-        <dd><mark>Everyone in the room</mark>: residents or patients, family and staff. There is no dress code.</dd>
+        <dd class="qa-a"><span class="sl"><mark>Everyone in the room</mark>: residents or patients, family and staff.</span> <span class="sl">There is no dress code.</span></dd>
       </div>
       <div>
         <dt>Where have you played?</dt>
-        <dd>A hospital, a care home, religious communities and parishes, <mark>in four countries</mark>. See <a class="link" href="../about.html#places">all 22 places where we have played and taught</a>.</dd>
+        <dd class="qa-a"><span class="sl">A hospital, a care home, religious communities and parishes, <mark>in four countries</mark>.</span> <span class="sl">See <a class="link" href="../about.html#places">all 22 places where we have played and taught</a>.</span></dd>
       </div>
     </dl>
   </div>
@@ -207,7 +205,7 @@
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">03</span>In the room</p>
       <div><h2><span class="sr-only">In the room: </span>Where it happens.</h2></div>
     </header>
-    <div class="room rv"><figure class="plate room-plate"><div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/care-christmas.jpg" srcset="../images/care-christmas-800.jpg 800w, ../images/care-christmas.jpg 1400w" sizes="(max-width:55em) 92vw, min(65vw, 880px)" width="1400" height="1050" alt="A clarinettist and three string players performing in a care setting at Christmas"></div><figcaption><span class="cap-label">Outreach concert</span><span>Christmas 2025</span></figcaption></figure></div>
+    <div class="room rv"><figure class="plate room-plate"><div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/care-christmas.jpg" srcset="../images/care-christmas-800.jpg 800w, ../images/care-christmas.jpg 1400w" sizes="(max-width:55em) 92vw, min(65vw, 880px)" width="1400" height="1050" alt="A clarinettist and three string players performing in a care setting at Christmas"></div><figcaption><span class="cap-label">Clarinet and string trio</span><span>Christmas 2025</span></figcaption></figure></div>
   </div>
 </section>
 
@@ -216,55 +214,55 @@
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">04</span>On the record</p>
       <div><h2><span class="sr-only">On the record: </span>Concerts so far.</h2>
-      <p class="sh-lead">Every outreach concert on the record, with its date, place and music.</p></div>
+      <p class="sh-lead">Every outreach concert, with its date, place and music.</p></div>
     </header>
-    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="22 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>16 Mar 2024 · St Patrick’s Day Concert · Dalgan Park, Co. Meath</title><circle class="s-open" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>5 May 2024 · Rathgar Parish Concert · Church of the Three Patrons, Rathgar</title><circle class="s-open" cx="96.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>4 Aug 2024 · London Korean Catholic Church, United Kingdom · clarinet and organ</title><circle class="s-open" cx="156.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>27 Oct 2024 · Missions Étrangères de Paris, France · clarinet solo · retired missionaries</title><circle class="s-open" cx="196.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>28 Oct 2024 · Palais Brongniart, Paris · clarinet solo</title><circle class="s-open" cx="196.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>23 Nov 2024 · St Columban’s Day Concert · Missionary Sisters of St Columban, Co. Wicklow</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>28 Dec 2024 · Gwandukjeong Martyrs Memorial Centre, Daegu, Korea · clarinet and piano</title><circle class="s-open" cx="236.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>16 Mar 2025 · Dalgan Park, Co. Meath · Korean traditional ensemble and clarinet</title><circle class="s-open" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>17 Apr 2025 · HSE EVE Goirtin Hub, Dublin 7 · clarinet solo · a day service</title><circle class="s-open" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>17 Apr 2025 · Blessed Sacrament Chapel, Dublin 1 · organ and clarinet</title><circle class="s-open" cx="316.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>18 Apr 2025 · Dysart Parish, Co. Westmeath · clarinet solo</title><circle class="s-open" cx="316.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>27 May 2025 · Kilmessan Church, Co. Meath · organ and clarinet</title><circle class="s-open" cx="336.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>4 Jun 2025 · Dalgan Park, Co. Meath</title><circle class="s-open" cx="356.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>21 Jul 2025 · Morning Star Hostel, Dublin 7 · organ and clarinet · a homeless hostel</title><circle class="s-open" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>20 Nov 2025 · TU Dublin, Dublin 7 · organ and clarinet</title><circle class="s-open" cx="456.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>22 Nov 2025 · TU Dublin, Dublin 7 · clarinet, piano and harp</title><circle class="s-open" cx="456.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>23 Nov 2025 · Missionary Sisters of St Columban, Co. Wicklow · clarinet solo</title><circle class="s-open" cx="456.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:17"><title>30 Nov 2025 · Franciscan Missionaries of Mary, Dublin 5 · clarinet solo</title><circle class="s-open" cx="456.0" cy="17.0" r="4.4"/></g><g class="s-ev" style="--i:18"><title>20 Dec 2025 · Christmas Concert · Clondalkin Lodge, Dublin</title><circle class="s-open" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:19"><title>20 Aug 2026 · Tallaght University Hospital · our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player</title><circle class="s-open" cx="636.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:20"><title>29 Aug 2026 · Rua Red Performance Space, Tallaght · our founder was selected for South Dublin Live 2026 · clarinet, piano and soprano</title><circle class="s-open" cx="636.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:21"><title>19 Sep 2026 · Methodist Centenary Church, Ranelagh, Dublin 6 · soprano, haegeum, clarinet and piano</title><circle class="s-open" cx="656.0" cy="59.0" r="4.4"/></g></svg>
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>Learning</span><span><i class="o" aria-hidden="true"></i>Sharing</span><span>A dot is one session; a bar spans several months.</span></figcaption>
+    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="22 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>16 Mar 2024 · St Patrick’s Day Concert · Dalgan Park, Co. Meath</title><circle class="s-open" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>5 May 2024 · Rathgar Parish Concert · Church of the Three Patrons, Rathgar</title><circle class="s-open" cx="96.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>4 Aug 2024 · London Korean Catholic Church, United Kingdom · clarinet and organ</title><circle class="s-open" cx="156.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>27 Oct 2024 · Missions Étrangères de Paris, France · clarinet solo · retired missionaries</title><circle class="s-open" cx="196.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>28 Oct 2024 · Palais Brongniart, Paris, France · clarinet solo</title><circle class="s-open" cx="196.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>23 Nov 2024 · St Columban’s Day Concert · Missionary Sisters of St Columban, Co. Wicklow</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>28 Dec 2024 · Gwandukjeong Martyrs Memorial Centre, Daegu, Korea · clarinet and piano</title><circle class="s-open" cx="236.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>16 Mar 2025 · Dalgan Park, Co. Meath · Korean traditional ensemble and clarinet</title><circle class="s-open" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>17 Apr 2025 · HSE EVE Goirtin Hub, Dublin 7 · clarinet solo · a day service</title><circle class="s-open" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>17 Apr 2025 · Blessed Sacrament Chapel, Dublin 1 · organ and clarinet</title><circle class="s-open" cx="316.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>18 Apr 2025 · Dysart Parish, Co. Westmeath · clarinet solo</title><circle class="s-open" cx="316.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>27 May 2025 · Kilmessan Church, Co. Meath · organ and clarinet</title><circle class="s-open" cx="336.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>4 Jun 2025 · Dalgan Park, Co. Meath</title><circle class="s-open" cx="356.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>21 Jul 2025 · Morning Star Hostel, Dublin 7 · organ and clarinet · a homeless hostel</title><circle class="s-open" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>20 Nov 2025 · TU Dublin, Dublin 7 · organ and clarinet</title><circle class="s-open" cx="456.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>22 Nov 2025 · TU Dublin, Dublin 7 · clarinet, piano and harp</title><circle class="s-open" cx="456.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>23 Nov 2025 · Missionary Sisters of St Columban, Co. Wicklow · clarinet solo</title><circle class="s-open" cx="456.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:17"><title>30 Nov 2025 · Franciscan Missionaries of Mary, Dublin 5 · clarinet solo</title><circle class="s-open" cx="456.0" cy="17.0" r="4.4"/></g><g class="s-ev" style="--i:18"><title>20 Dec 2025 · Christmas Concert · Clondalkin Lodge, Dublin</title><circle class="s-open" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:19"><title>20 Aug 2026 · Tallaght University Hospital · our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player</title><circle class="s-open" cx="636.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:20"><title>29 Aug 2026 · Rua Red Performance Space, Tallaght · our founder was selected for South Dublin Live 2026 · clarinet, piano and soprano</title><circle class="s-open" cx="636.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:21"><title>19 Sep 2026 · Methodist Centenary Church, Ranelagh, Dublin 6 · soprano, haegeum, clarinet and piano</title><circle class="s-open" cx="656.0" cy="59.0" r="4.4"/></g></svg>
+      <figcaption class="strip-key"><span><i class="o" aria-hidden="true"></i>Sharing</span><span>A dot is one concert.</span></figcaption>
     </figure>
     <div class="rec-wrap rv">
-    <details class="fold rec-fold"><summary>Earlier: 16 more</summary><ol class="rec rec-long">
+    <details class="fold rec-fold"><summary>Show 16 earlier</summary><ol class="rec rec-long">
         <li>
-          <span class="rec-when">16 Mar 2024</span>
-          <span class="rec-what"><b>Dalgan Park, Co. Meath</b><span>string quartet and clarinet · retired missionaries</span></span>
+          <span class="rec-when"><span aria-hidden="true">16 Mar 2024</span><span class="sr-only">16 March 2024</span></span>
+          <span class="rec-what"><b>Dalgan Park, Co. Meath</b><span class="rec-who">Letters Ensemble</span><span>string quartet and clarinet</span><span>retired missionaries</span></span>
         </li>
         <li>
           <span class="rec-when">5 May 2024</span>
-          <span class="rec-what"><b>Church of the Three Patrons, Rathgar</b><span>string trio and organ</span></span>
+          <span class="rec-what"><b>Church of the Three Patrons, Rathgar</b><span class="rec-who">Letters Ensemble</span><span>string trio and organ</span></span>
         </li>
         <li>
-          <span class="rec-when">4 Aug 2024</span>
+          <span class="rec-when"><span aria-hidden="true">4 Aug 2024</span><span class="sr-only">4 August 2024</span></span>
           <span class="rec-what"><b>London Korean Catholic Church, United Kingdom</b><span>clarinet and organ</span></span>
         </li>
         <li>
-          <span class="rec-when">27 Oct 2024</span>
-          <span class="rec-what"><b>Missions &Eacute;trang&egrave;res de Paris, France</b><span>clarinet solo · retired missionaries</span></span>
+          <span class="rec-when"><span aria-hidden="true">27 Oct 2024</span><span class="sr-only">27 October 2024</span></span>
+          <span class="rec-what"><b>Missions &Eacute;trang&egrave;res de Paris, France</b><span>clarinet solo</span><span>retired missionaries</span></span>
         </li>
         <li>
-          <span class="rec-when">28 Oct 2024</span>
-          <span class="rec-what"><b>Palais Brongniart, Paris</b><span>clarinet solo</span></span>
+          <span class="rec-when"><span aria-hidden="true">28 Oct 2024</span><span class="sr-only">28 October 2024</span></span>
+          <span class="rec-what"><b>Palais Brongniart, Paris, France</b><span>clarinet solo</span></span>
         </li>
         <li>
-          <span class="rec-when">23 Nov 2024</span>
-          <span class="rec-what"><b>Missionary Sisters of St Columban, Co. Wicklow</b><span>where the recorder ensemble began: a sister asked to play again</span></span>
+          <span class="rec-when"><span aria-hidden="true">23 Nov 2024</span><span class="sr-only">23 November 2024</span></span>
+          <span class="rec-what"><b><span class="tn">Missionary Sisters of St Columban,</span> Co. Wicklow</b><span class="rec-who">Letters Ensemble</span><span>where the recorder ensemble began: a sister asked to play again</span></span>
         </li>
         <li>
-          <span class="rec-when">28 Dec 2024</span>
-          <span class="rec-what"><b>Gwandukjeong Martyrs Memorial Centre, Daegu, Korea</b><span>clarinet and piano</span></span>
+          <span class="rec-when"><span aria-hidden="true">28 Dec 2024</span><span class="sr-only">28 December 2024</span></span>
+          <span class="rec-what"><b><span class="tn">Gwandukjeong Martyrs Memorial Centre,</span> Daegu, Korea</b><span>clarinet and piano</span></span>
         </li>
         <li>
-          <span class="rec-when">16 Mar 2025</span>
+          <span class="rec-when"><span aria-hidden="true">16 Mar 2025</span><span class="sr-only">16 March 2025</span></span>
           <span class="rec-what"><b>Dalgan Park, Co. Meath</b><span>Korean traditional ensemble and clarinet</span></span>
         </li>
         <li>
-          <span class="rec-when">17 Apr 2025</span>
-          <span class="rec-what"><b>HSE EVE Goirtin Hub, Dublin 7</b><span>clarinet solo · a day service</span></span>
+          <span class="rec-when"><span aria-hidden="true">17 Apr 2025</span><span class="sr-only">17 April 2025</span></span>
+          <span class="rec-what"><b>HSE EVE Goirtin Hub, Dublin 7</b><span>clarinet solo</span><span>a day service</span></span>
         </li>
         <li>
-          <span class="rec-when">17 Apr 2025</span>
-          <span class="rec-what"><b>Blessed Sacrament Chapel, Dublin 1</b><span>organ and clarinet</span></span>
+          <span class="rec-when"><span aria-hidden="true">17 Apr 2025</span><span class="sr-only">17 April 2025</span></span>
+          <span class="rec-what"><b><span class="tn">Blessed Sacrament Chapel,</span> Dublin 1</b><span>organ and clarinet</span></span>
         </li>
         <li>
-          <span class="rec-when">18 Apr 2025</span>
+          <span class="rec-when"><span aria-hidden="true">18 Apr 2025</span><span class="sr-only">18 April 2025</span></span>
           <span class="rec-what"><b>Dysart Parish, Co. Westmeath</b><span>clarinet solo</span></span>
         </li>
         <li>
@@ -272,45 +270,45 @@
           <span class="rec-what"><b>Kilmessan Church, Co. Meath</b><span>organ and clarinet</span></span>
         </li>
         <li>
-          <span class="rec-when">4 Jun 2025</span>
+          <span class="rec-when"><span aria-hidden="true">4 Jun 2025</span><span class="sr-only">4 June 2025</span></span>
           <span class="rec-what"><b>Dalgan Park, Co. Meath</b></span>
         </li>
         <li>
-          <span class="rec-when">21 Jul 2025</span>
-          <span class="rec-what"><b>Morning Star Hostel, Dublin 7</b><span>organ and clarinet · a homeless hostel</span></span>
+          <span class="rec-when"><span aria-hidden="true">21 Jul 2025</span><span class="sr-only">21 July 2025</span></span>
+          <span class="rec-what"><b>Morning Star Hostel, Dublin 7</b><span>organ and clarinet</span><span>a homeless hostel</span></span>
         </li>
         <li>
-          <span class="rec-when">20 Nov 2025</span>
+          <span class="rec-when"><span aria-hidden="true">20 Nov 2025</span><span class="sr-only">20 November 2025</span></span>
           <span class="rec-what"><b>TU Dublin, Dublin 7</b><span>organ and clarinet</span></span>
         </li>
         <li>
-          <span class="rec-when">22 Nov 2025</span>
+          <span class="rec-when"><span aria-hidden="true">22 Nov 2025</span><span class="sr-only">22 November 2025</span></span>
           <span class="rec-what"><b>TU Dublin, Dublin 7</b><span>clarinet, piano and harp</span></span>
         </li>
     </ol></details>
     <ol class="rec rec-long">
         <li>
-          <span class="rec-when">23 Nov 2025</span>
-          <span class="rec-what"><b>Missionary Sisters of St Columban, Co. Wicklow</b><span>clarinet solo</span></span>
+          <span class="rec-when"><span aria-hidden="true">23 Nov 2025</span><span class="sr-only">23 November 2025</span></span>
+          <span class="rec-what"><b><span class="tn">Missionary Sisters of St Columban,</span> Co. Wicklow</b><span>clarinet solo</span></span>
         </li>
         <li>
-          <span class="rec-when">30 Nov 2025</span>
-          <span class="rec-what"><b>Franciscan Missionaries of Mary, Dublin 5</b><span>clarinet solo</span></span>
+          <span class="rec-when"><span aria-hidden="true">30 Nov 2025</span><span class="sr-only">30 November 2025</span></span>
+          <span class="rec-what"><b><span class="tn">Franciscan Missionaries of Mary,</span> Dublin 5</b><span>clarinet solo</span></span>
         </li>
         <li>
-          <span class="rec-when">20 Dec 2025</span>
-          <span class="rec-what"><b>Clondalkin Lodge, Dublin</b><span>clarinet and string trio · residential care</span></span>
+          <span class="rec-when"><span aria-hidden="true">20 Dec 2025</span><span class="sr-only">20 December 2025</span></span>
+          <span class="rec-what"><b>Clondalkin Lodge, Dublin</b><span class="rec-who">Letters Ensemble</span><span>clarinet and string trio</span><span>residential care</span></span>
         </li>
         <li>
-          <span class="rec-when">20 Aug 2026</span>
-          <span class="rec-what"><b>Tallaght University Hospital</b><span>our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player</span></span>
+          <span class="rec-when"><span aria-hidden="true">20 Aug 2026</span><span class="sr-only">20 August 2026</span></span>
+          <span class="rec-what"><b>Tallaght University Hospital</b><span>our founder was selected for South Dublin Live 2026</span><span>atrium and chapel</span><span>with a guest haegeum player</span></span>
         </li>
         <li>
-          <span class="rec-when">29 Aug 2026</span>
-          <span class="rec-what"><b>Rua Red Performance Space, Tallaght</b><span>our founder was selected for South Dublin Live 2026 · clarinet, piano and soprano</span></span>
+          <span class="rec-when"><span aria-hidden="true">29 Aug 2026</span><span class="sr-only">29 August 2026</span></span>
+          <span class="rec-what"><b><span class="tn">Rua Red Performance Space,</span> Tallaght</b><span>our founder was selected for South Dublin Live 2026</span><span>clarinet, piano and soprano</span></span>
         </li>
         <li>
-          <span class="rec-when">19 Sep 2026</span>
+          <span class="rec-when"><span aria-hidden="true">19 Sep 2026</span><span class="sr-only">19 September 2026</span></span>
           <span class="rec-what"><b>Methodist Centenary Church, Ranelagh, Dublin 6</b><span>soprano, haegeum, clarinet and piano</span></span>
         </li>
     </ol>
@@ -325,8 +323,8 @@
       <div><h2><span class="sr-only">Take part: </span>Invite us to play.</h2></div>
     </header>
     <div class="join-body rv">
-      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
-      <ul class="join-fields"><li>Organisation and town</li><li>The room (and piano, if any)</li><li>Who will listen, and how many</li><li>Dates or times that suit</li><li>Contact name and phone number</li></ul>
+      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
+      <ol class="join-fields"><li>Organisation and town</li><li>The room (and piano, if any)</li><li>Who will listen, and how many</li><li>Dates or times that suit</li><li>Contact name and phone number</li></ol>
       <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Concert%20invitation&amp;body=Organisation%20and%20town%3A%20%0D%0AThe%20room%20%28and%20piano%2C%20if%20any%29%3A%20%0D%0AWho%20will%20listen%2C%20and%20how%20many%3A%20%0D%0ADates%20or%20times%20that%20suit%3A%20%0D%0AContact%20name%20and%20phone%20number%3A%20%0D%0A">Invite us <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       <p class="mail-alt"><span>Or write to</span> <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a> <a href="tel:+353830780635">+353 83 078 0635</a></p>
     </div>
@@ -337,10 +335,10 @@
   <div class="wrap">
     <h2 class="eyebrow section-label">The other programmes</h2>
     <ul class="others">
-      <li><a href="../programmes/getting-to-know.html"><span class="toc-n">01</span><b>Getting to Know Classical Music</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n">03</span><b>Community Recorder Ensemble Class</b><span class="tag tag-live">Running now</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/concert-companion.html"><span class="toc-n">05</span><b>Concert Guide &amp; Companion</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/getting-to-know.html"><span class="toc-n" aria-hidden="true">01</span><b>Getting to Know Classical Music</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n" aria-hidden="true">03</span><b>Community Recorder Ensemble Class</b><span class="tag tag-live">Running now</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n" aria-hidden="true">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/concert-companion.html"><span class="toc-n" aria-hidden="true">05</span><b>Concert Guide &amp; Companion</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
     </ul>
     <div class="btn-row"><a class="go" href="../programmes.html">All five programmes <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
   </div>
@@ -367,8 +365,8 @@
           <li><a href="../news.html">News &amp; archive</a></li>
         </ul>
       </nav>
-      <nav aria-label="Take part">
-        <h2>Take part</h2>
+      <nav aria-label="Get involved">
+        <h2>Get involved</h2>
         <ul>
           <li><a href="../get-involved.html#invite">Invite us to play</a></li>
           <li><a href="../get-involved.html#play">Perform with us</a></li>
@@ -381,14 +379,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="../contact.html">Contact</a></li>
-          <li><a href="../ko/index.html" hreflang="ko" lang="ko">한국어</a></li>
+          <li><a href="../ko/programmes/outreach-concerts.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 4 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 5 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

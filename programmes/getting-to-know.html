@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://andrewseohyeonkim.github.io/classicalmusicforeveryone/images/lecture-recital.jpg">
 <meta property="og:image:width" content="1050">
 <meta property="og:image:height" content="1400">
-<meta property="og:image:alt" content="A talk in progress, with live playing">
+<meta property="og:image:alt" content="Our founder giving a talk, with a slide about the BBC Proms on the screen">
 <meta property="og:locale" content="en_IE">
 <meta property="og:locale:alternate" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -111,6 +111,7 @@
       <img src="../assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="../ko/programmes/getting-to-know.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="Main">
@@ -118,37 +119,34 @@
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
-          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html" aria-current="page"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html" aria-current="page"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">Getting to Know Classical Music</span></a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">Outreach Concerts</span></a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">Community Recorder Ensemble Class<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, running now</span></span></a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">Concert Guide &amp; Companion</span></a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="../contact.html">Contact</a>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <span aria-current="true">EN</span>
-        <a href="../ko/programmes/getting-to-know.html" hreflang="ko" lang="ko">한국어</a>
-      </div>
+      <a class="btn btn-nav" href="../contact.html">Contact</a>
     </nav>
+    <a class="lang lang-wide" href="../ko/programmes/getting-to-know.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
   </div>
 </header>
 <main id="main">
 <section class="pp-head">
   <div class="wrap">
     <nav class="crumbs lift" aria-label="Breadcrumb">
-      <ol><li><a href="../programmes.html">Programmes</a></li><li><span aria-current="page">Getting to Know</span></li></ol>
+      <ol><li><a href="../programmes.html">Programmes</a></li><li><span aria-current="page">Getting to Know</span></li></ol>
     </nav>
     <div class="pp-top">
       <div class="pp-intro">
         <p class="eyebrow lift"><i class="dot" aria-hidden="true"></i>Learning</p>
-        <h1 class="pp-title"><span class="ln"><span>Getting to Know Classical Music</span></span></h1>
-        <p class="lead lift lift-3"><span class="sl">We give talks on Classical Music, with <mark>live playing</mark>.</span> <span class="sl">They are for anyone curious to hear more.</span></p>
+        <h1 class="pp-title"><span class="ln"><span>Getting to Know Classical Music</span></span></h1>
+        <p class="lead lift lift-3"><span class="sl">We give talks on Classical Music, with <mark>live playing</mark>.</span> <span class="sl">They are for anyone curious to hear more.</span></p>
         <div class="pp-now lift lift-4">
-          <p><span class="tag">On request</span><span class="pp-say"><span class="sl sl-n">Write to us.</span> <span class="sl sl-n">We will plan a talk with your group.</span></span></p>
+          <p><span class="tag">On request</span><span class="sr-only">, </span><span class="pp-say">Write to us, on your own or as a group.</span></p>
           <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Getting%20to%20Know%20Classical%20Music&amp;body=Your%20name%3A%20%0D%0AYour%20group%20or%20organisation%20%28if%20any%29%3A%20%0D%0AWhere%20you%20could%20meet%3A%20%0D%0ARoughly%20how%20many%20people%3A%20%0D%0ADates%20or%20times%20that%20suit%3A%20%0D%0A">Ask about a talk <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">How to take part <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
       <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-getting-to-know;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">01</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect pathLength="1" x="9.3" y="2.4" width="13.8" height="11" rx="1"/><path pathLength="1" d="M12.89 10.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/><path pathLength="1" d="M18.59 9.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/><path pathLength="1" d="M14.31 10.18V5.88l5.7-1v4.3"/><path pathLength="1" d="M4.7 11.2c1.22 0 2.2.98 2.2 2.2s-.98 2.2-2.2 2.2-2.2-.98-2.2-2.2.98-2.2 2.2-2.2z"/><path pathLength="1" d="M.9 22c0-2.1 1.7-3.8 3.8-3.8s3.8 1.7 3.8 3.8"/><path pathLength="1" d="M7.69 19.66l4.43-3.46"/></svg><span class="cover-line">Music history · Theory · Stories</span></div></div>
     </div>
-    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Anyone curious about Classical Music</dd></div><div><dt>Where</dt><dd>Dublin</dd></div><div><dt>When</dt><dd>On request</dd></div><div><dt>What you need</dt><dd>No knowledge of music</dd></div></dl>
+    <dl class="pp-glance lift lift-5"><div><dt>For</dt><dd>Anyone curious about Classical Music</dd></div><div><dt>Where</dt><dd>Dublin</dd></div><div><dt>When</dt><dd>A date we agree with you</dd></div><div><dt>What you need</dt><dd>No knowledge of music</dd></div></dl>
   </div>
 </section>
 
@@ -156,23 +154,23 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">01</span>How it works</p>
-      <div><h2><span class="sr-only">How it works: </span>Three stages, from first listening to your own taste.</h2></div>
+      <div><h2><span class="sr-only">How it works: </span>Three stages, from first listening to your own taste.</h2></div>
     </header>
     <ol class="steps steps-getting-to-know rv-stagger">
       <li style="--i:0">
         <span class="step-n" aria-hidden="true">1</span>
         <h3>Getting Closer</h3>
-        <p>What Classical Music is, by period and by instrument, with recordings and live playing.</p>
+        <p class="step-t">What Classical Music is, by period and by instrument, with recordings and live playing.</p>
       </li>
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
         <h3>Together</h3>
-        <p>Orchestras and performers, including Ireland&rsquo;s own. How to book a ticket and choose a seat.</p>
+        <p class="step-t"><span class="sl">Orchestras and performers, including Ireland&rsquo;s own.</span> <span class="sl">How to book a ticket and choose a seat.</span></p>
       </li>
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
         <h3>My Taste</h3>
-        <p><mark>Finding what you like</mark>, for example by hearing one piece played by five pianists.</p>
+        <p class="step-t">Finding <mark>what you like</mark>, for example by hearing one piece played by five pianists.</p>
       </li>
     </ol>
   </div>
@@ -187,15 +185,15 @@
     <dl class="qa rv-stagger">
       <div>
         <dt>Do I need to know anything first?</dt>
-        <dd><strong>No.</strong> We start from &lsquo;what is Classical Music?&rsquo; and <mark>explain every piece</mark> we play.</dd>
+        <dd class="qa-a"><strong>No.</strong> We start from &lsquo;what is Classical Music?&rsquo; and <mark>explain every piece</mark> we play.</dd>
       </div>
       <div>
         <dt>How many people come?</dt>
-        <dd><mark>Six to fourteen people</mark> came to each talk we counted. The chart below shows those counts.</dd>
+        <dd class="qa-a"><span class="sl">Between <mark>six and fourteen</mark> people came to each talk we counted.</span> <span class="sl">The chart below shows those counts.</span></dd>
       </div>
       <div>
         <dt>Can our group ask for a talk?</dt>
-        <dd><strong>Yes.</strong> That is how talks are arranged now.</dd>
+        <dd class="qa-a"><strong>Yes.</strong> Tell us your group, roughly how many people and where you could meet.</dd>
       </div>
     </dl>
   </div>
@@ -207,7 +205,7 @@
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">03</span>In the room</p>
       <div><h2><span class="sr-only">In the room: </span>Where it happens.</h2></div>
     </header>
-    <div class="room rv"><figure class="plate room-plate room-portrait"><div class="photo photo-4x5"><img loading="lazy" decoding="async" src="../images/lecture-recital.jpg" srcset="../images/lecture-recital-800.jpg 800w, ../images/lecture-recital.jpg 1050w" sizes="(max-width:55em) 92vw, 460px" width="1050" height="1400" alt="A talk in progress, with live playing"></div></figure></div>
+    <div class="room rv"><figure class="plate room-plate room-portrait"><div class="photo photo-4x5"><img loading="lazy" decoding="async" src="../images/lecture-recital.jpg" srcset="../images/lecture-recital-800.jpg 800w, ../images/lecture-recital.jpg 1050w" sizes="(max-width:55em) 92vw, 460px" width="1050" height="1400" alt="Our founder giving a talk, with a slide about the BBC Proms on the screen"></div><figcaption><span class="cap-label">A talk on <span class="tn">the BBC Proms</span></span><span>Dublin</span></figcaption></figure></div>
   </div>
 </section>
 
@@ -218,84 +216,84 @@
       <div><h2><span class="sr-only">On the record: </span>Talks so far.</h2>
       <p class="sh-lead">Every talk on the record, with its date, topic and place.</p></div>
     </header>
-    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="17 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>28 Jan 2024 · Getting Closer · Sandyford, Dublin 18</title><circle class="s-on" cx="16.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>25 Feb 2024 · Together (1) · Our Lady of Dolours Church, Dolphin’s Barn</title><circle class="s-on" cx="36.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>23 Mar 2024 · Together (2) · Our Lady of Dolours Church</title><circle class="s-on" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>14 Apr 2024 · My Taste (1) · Our Lady of Dolours Church</title><circle class="s-on" cx="76.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>27 Apr 2024 · My Taste (2) · Our Lady of Dolours Church</title><circle class="s-on" cx="76.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>22 Jun 2024 · Summer Festivals · Our Lady of Dolours Church</title><circle class="s-on" cx="116.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>8 Nov 2024 · Getting Closer + Together (1) · TU Dublin, Grangegorman</title><circle class="s-on" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>15 Nov 2024 · Getting Closer + Together (2) · TU Dublin</title><circle class="s-on" cx="216.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>21 Feb 2025 · Getting Closer + Together (1) · TU Dublin</title><circle class="s-on" cx="276.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>7 Mar 2025 · Getting Closer + Together (2) · TU Dublin</title><circle class="s-on" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>11 Apr 2025 · My Taste · TU Dublin</title><circle class="s-on" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>21 Jul 2025 · BBC Proms · Carmelite Community Centre, Dublin</title><circle class="s-on" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>26 Sep 2025 · Getting Closer + Together (1) · TU Dublin</title><circle class="s-on" cx="416.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>17 Oct 2025 · Getting Closer + Together (2) · TU Dublin</title><circle class="s-on" cx="436.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin</title><circle class="s-on" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>23 Jan 2026 · My Taste (1) · East Quad, TU Dublin Grangegorman</title><circle class="s-on" cx="496.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>Feb 2026 · My Taste (2) · East Quad, TU Dublin Grangegorman</title><circle class="s-on" cx="516.0" cy="59.0" r="4.4"/></g></svg>
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>Learning</span><span><i class="o" aria-hidden="true"></i>Sharing</span><span>A dot is one session; a bar spans several months.</span></figcaption>
+    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="17 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>28 Jan 2024 · Getting Closer · Sandyford, Dublin 18</title><circle class="s-on" cx="16.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>25 Feb 2024 · Together (1) · Our Lady of Dolours Church, Dolphin’s Barn</title><circle class="s-on" cx="36.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>23 Mar 2024 · Together (2) · Our Lady of Dolours Church</title><circle class="s-on" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>14 Apr 2024 · My Taste (1) · Our Lady of Dolours Church</title><circle class="s-on" cx="76.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>27 Apr 2024 · My Taste (2) · Our Lady of Dolours Church</title><circle class="s-on" cx="76.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>22 Jun 2024 · Summer Festivals · Our Lady of Dolours Church</title><circle class="s-on" cx="116.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>8 Nov 2024 · Getting Closer + Together (1) · TU Dublin, Grangegorman</title><circle class="s-on" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>15 Nov 2024 · Getting Closer + Together (2) · TU Dublin</title><circle class="s-on" cx="216.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>21 Feb 2025 · Getting Closer + Together (1) · TU Dublin</title><circle class="s-on" cx="276.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>7 Mar 2025 · Getting Closer + Together (2) · TU Dublin</title><circle class="s-on" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>11 Apr 2025 · My Taste · TU Dublin</title><circle class="s-on" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>21 Jul 2025 · BBC Proms · Carmelite Community Centre, Dublin</title><circle class="s-on" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>26 Sep 2025 · Getting Closer + Together (1) · TU Dublin</title><circle class="s-on" cx="416.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>17 Oct 2025 · Getting Closer + Together (2) · TU Dublin</title><circle class="s-on" cx="436.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin</title><circle class="s-on" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>23 Jan 2026 · My Taste (1) · East Quad, TU Dublin Grangegorman</title><circle class="s-on" cx="496.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>Feb 2026 · My Taste (2) · East Quad, TU Dublin Grangegorman</title><circle class="s-on" cx="516.0" cy="59.0" r="4.4"/></g></svg>
+      <figcaption class="strip-key"><span><i aria-hidden="true"></i>Learning</span><span>A dot is one talk.</span></figcaption>
     </figure>
     <figure class="att rv">
       <figcaption class="att-head"><b>How many came</b><span>Attendance at each talk where it was recorded.</span></figcaption>
-      <div class="att-plot"><svg class="att-svg" viewBox="0 0 486 214" role="img" aria-label="Attendance at 15 talks where it was recorded: from 6 to 14 people."><line class="c-grid" x1="30" x2="480" y1="174.5" y2="174.5"/><text class="c-tick" x="22" y="178" text-anchor="end">0</text><line class="c-grid" x1="30" x2="480" y1="124.5" y2="124.5"/><text class="c-tick" x="22" y="128" text-anchor="end">5</text><line class="c-grid" x1="30" x2="480" y1="74.5" y2="74.5"/><text class="c-tick" x="22" y="78" text-anchor="end">10</text><line class="c-grid" x1="30" x2="480" y1="24.5" y2="24.5"/><text class="c-tick" x="22" y="28" text-anchor="end">15</text><g class="c-col" style="--i:0"><title>28 Jan 2024 · Getting Closer · Sandyford, Dublin 18 · 6 people</title><rect class="c-hit" x="30" y="24" width="30" height="150"/><path class="c-bar" d="M37.0,174.0V118.0Q37.0,114.0 41.0,114.0H49.0Q53.0,114.0 53.0,118.0V174.0Z"/></g><text class="c-val" x="45.0" y="107" text-anchor="middle">6</text><g class="c-col" style="--i:1"><title>25 Feb 2024 · Together (1) · Our Lady of Dolours Church, Dolphin&rsquo;s Barn · 6 people</title><rect class="c-hit" x="60" y="24" width="30" height="150"/><path class="c-bar" d="M67.0,174.0V118.0Q67.0,114.0 71.0,114.0H79.0Q83.0,114.0 83.0,118.0V174.0Z"/></g><g class="c-col" style="--i:2"><title>23 Mar 2024 · Together (2) · Our Lady of Dolours Church · 8 people</title><rect class="c-hit" x="90" y="24" width="30" height="150"/><path class="c-bar" d="M97.0,174.0V98.0Q97.0,94.0 101.0,94.0H109.0Q113.0,94.0 113.0,98.0V174.0Z"/></g><g class="c-col" style="--i:3"><title>14 Apr 2024 · My Taste (1) · Our Lady of Dolours Church · 7 people</title><rect class="c-hit" x="120" y="24" width="30" height="150"/><path class="c-bar" d="M127.0,174.0V108.0Q127.0,104.0 131.0,104.0H139.0Q143.0,104.0 143.0,108.0V174.0Z"/></g><g class="c-col" style="--i:4"><title>27 Apr 2024 · My Taste (2) · Our Lady of Dolours Church · 7 people</title><rect class="c-hit" x="150" y="24" width="30" height="150"/><path class="c-bar" d="M157.0,174.0V108.0Q157.0,104.0 161.0,104.0H169.0Q173.0,104.0 173.0,108.0V174.0Z"/></g><g class="c-col" style="--i:5"><title>22 Jun 2024 · Summer Festivals · Our Lady of Dolours Church · 10 people</title><rect class="c-hit" x="180" y="24" width="30" height="150"/><path class="c-bar" d="M187.0,174.0V78.0Q187.0,74.0 191.0,74.0H199.0Q203.0,74.0 203.0,78.0V174.0Z"/></g><g class="c-col" style="--i:6"><title>8 Nov 2024 · Getting Closer + Together (1) · TU Dublin, Grangegorman · 12 people</title><rect class="c-hit" x="210" y="24" width="30" height="150"/><path class="c-bar" d="M217.0,174.0V58.0Q217.0,54.0 221.0,54.0H229.0Q233.0,54.0 233.0,58.0V174.0Z"/></g><g class="c-col" style="--i:7"><title>15 Nov 2024 · Getting Closer + Together (2) · TU Dublin · 12 people</title><rect class="c-hit" x="240" y="24" width="30" height="150"/><path class="c-bar" d="M247.0,174.0V58.0Q247.0,54.0 251.0,54.0H259.0Q263.0,54.0 263.0,58.0V174.0Z"/></g><g class="c-col" style="--i:8"><title>21 Feb 2025 · Getting Closer + Together (1) · TU Dublin · 10 people</title><rect class="c-hit" x="270" y="24" width="30" height="150"/><path class="c-bar" d="M277.0,174.0V78.0Q277.0,74.0 281.0,74.0H289.0Q293.0,74.0 293.0,78.0V174.0Z"/></g><g class="c-col" style="--i:9"><title>7 Mar 2025 · Getting Closer + Together (2) · TU Dublin · 10 people</title><rect class="c-hit" x="300" y="24" width="30" height="150"/><path class="c-bar" d="M307.0,174.0V78.0Q307.0,74.0 311.0,74.0H319.0Q323.0,74.0 323.0,78.0V174.0Z"/></g><g class="c-col" style="--i:10"><title>11 Apr 2025 · My Taste · TU Dublin · 14 people</title><rect class="c-hit" x="330" y="24" width="30" height="150"/><path class="c-bar" d="M337.0,174.0V38.0Q337.0,34.0 341.0,34.0H349.0Q353.0,34.0 353.0,38.0V174.0Z"/></g><text class="c-val" x="345.0" y="27" text-anchor="middle">14</text><g class="c-col" style="--i:11"><title>21 Jul 2025 · BBC Proms · Carmelite Community Centre, Dublin · 13 people</title><rect class="c-hit" x="360" y="24" width="30" height="150"/><path class="c-bar" d="M367.0,174.0V48.0Q367.0,44.0 371.0,44.0H379.0Q383.0,44.0 383.0,48.0V174.0Z"/></g><g class="c-col" style="--i:12"><title>26 Sep 2025 · Getting Closer + Together (1) · TU Dublin · 11 people</title><rect class="c-hit" x="390" y="24" width="30" height="150"/><path class="c-bar" d="M397.0,174.0V68.0Q397.0,64.0 401.0,64.0H409.0Q413.0,64.0 413.0,68.0V174.0Z"/></g><g class="c-col" style="--i:13"><title>17 Oct 2025 · Getting Closer + Together (2) · TU Dublin · 11 people</title><rect class="c-hit" x="420" y="24" width="30" height="150"/><path class="c-bar" d="M427.0,174.0V68.0Q427.0,64.0 431.0,64.0H439.0Q443.0,64.0 443.0,68.0V174.0Z"/></g><g class="c-col" style="--i:14"><title>5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin · 6 people</title><rect class="c-hit" x="450" y="24" width="30" height="150"/><path class="c-bar" d="M457.0,174.0V118.0Q457.0,114.0 461.0,114.0H469.0Q473.0,114.0 473.0,118.0V174.0Z"/></g><text class="c-val" x="465.0" y="107" text-anchor="middle">6</text><text class="c-year" x="150.0" y="200" text-anchor="middle">2024</text><text class="c-year" x="375.0" y="200" text-anchor="middle">2025</text><line class="c-sep" x1="270.5" x2="270.5" y1="180" y2="206"/></svg></div>
+      <div class="att-plot"><svg class="att-svg" viewBox="0 0 486 214" role="img" aria-label="Attendance at 15 talks where it was recorded: from 6 to 14 people."><line class="c-grid" x1="30" x2="480" y1="174.5" y2="174.5"/><text class="c-tick" x="22" y="178" text-anchor="end">0</text><line class="c-grid" x1="30" x2="480" y1="124.5" y2="124.5"/><text class="c-tick" x="22" y="128" text-anchor="end">5</text><line class="c-grid" x1="30" x2="480" y1="74.5" y2="74.5"/><text class="c-tick" x="22" y="78" text-anchor="end">10</text><line class="c-grid" x1="30" x2="480" y1="24.5" y2="24.5"/><text class="c-tick" x="22" y="28" text-anchor="end">15</text><g class="c-col" style="--i:0"><title>28 Jan 2024 · Getting Closer · Sandyford, Dublin 18 · 6 people</title><rect class="c-hit" x="30" y="24" width="30" height="150"/><path class="c-bar" d="M37.0,174.0V118.0Q37.0,114.0 41.0,114.0H49.0Q53.0,114.0 53.0,118.0V174.0Z"/></g><text class="c-val" x="45.0" y="107" text-anchor="middle">6</text><g class="c-col" style="--i:1"><title>25 Feb 2024 · Together (1) · Our Lady of Dolours Church, Dolphin&rsquo;s Barn · 6 people</title><rect class="c-hit" x="60" y="24" width="30" height="150"/><path class="c-bar" d="M67.0,174.0V118.0Q67.0,114.0 71.0,114.0H79.0Q83.0,114.0 83.0,118.0V174.0Z"/></g><g class="c-col" style="--i:2"><title>23 Mar 2024 · Together (2) · Our Lady of Dolours Church · 8 people</title><rect class="c-hit" x="90" y="24" width="30" height="150"/><path class="c-bar" d="M97.0,174.0V98.0Q97.0,94.0 101.0,94.0H109.0Q113.0,94.0 113.0,98.0V174.0Z"/></g><g class="c-col" style="--i:3"><title>14 Apr 2024 · My Taste (1) · Our Lady of Dolours Church · 7 people</title><rect class="c-hit" x="120" y="24" width="30" height="150"/><path class="c-bar" d="M127.0,174.0V108.0Q127.0,104.0 131.0,104.0H139.0Q143.0,104.0 143.0,108.0V174.0Z"/></g><g class="c-col" style="--i:4"><title>27 Apr 2024 · My Taste (2) · Our Lady of Dolours Church · 7 people</title><rect class="c-hit" x="150" y="24" width="30" height="150"/><path class="c-bar" d="M157.0,174.0V108.0Q157.0,104.0 161.0,104.0H169.0Q173.0,104.0 173.0,108.0V174.0Z"/></g><g class="c-col" style="--i:5"><title>22 Jun 2024 · Summer Festivals · Our Lady of Dolours Church · 10 people</title><rect class="c-hit" x="180" y="24" width="30" height="150"/><path class="c-bar" d="M187.0,174.0V78.0Q187.0,74.0 191.0,74.0H199.0Q203.0,74.0 203.0,78.0V174.0Z"/></g><g class="c-col" style="--i:6"><title>8 Nov 2024 · Getting Closer + Together (1) · TU Dublin, Grangegorman · 12 people</title><rect class="c-hit" x="210" y="24" width="30" height="150"/><path class="c-bar" d="M217.0,174.0V58.0Q217.0,54.0 221.0,54.0H229.0Q233.0,54.0 233.0,58.0V174.0Z"/></g><g class="c-col" style="--i:7"><title>15 Nov 2024 · Getting Closer + Together (2) · TU Dublin · 12 people</title><rect class="c-hit" x="240" y="24" width="30" height="150"/><path class="c-bar" d="M247.0,174.0V58.0Q247.0,54.0 251.0,54.0H259.0Q263.0,54.0 263.0,58.0V174.0Z"/></g><g class="c-col" style="--i:8"><title>21 Feb 2025 · Getting Closer + Together (1) · TU Dublin · 10 people</title><rect class="c-hit" x="270" y="24" width="30" height="150"/><path class="c-bar" d="M277.0,174.0V78.0Q277.0,74.0 281.0,74.0H289.0Q293.0,74.0 293.0,78.0V174.0Z"/></g><g class="c-col" style="--i:9"><title>7 Mar 2025 · Getting Closer + Together (2) · TU Dublin · 10 people</title><rect class="c-hit" x="300" y="24" width="30" height="150"/><path class="c-bar" d="M307.0,174.0V78.0Q307.0,74.0 311.0,74.0H319.0Q323.0,74.0 323.0,78.0V174.0Z"/></g><g class="c-col" style="--i:10"><title>11 Apr 2025 · My Taste · TU Dublin · 14 people</title><rect class="c-hit" x="330" y="24" width="30" height="150"/><path class="c-bar" d="M337.0,174.0V38.0Q337.0,34.0 341.0,34.0H349.0Q353.0,34.0 353.0,38.0V174.0Z"/></g><text class="c-val" x="345.0" y="27" text-anchor="middle">14</text><g class="c-col" style="--i:11"><title>21 Jul 2025 · BBC Proms · Carmelite Community Centre, Dublin · 13 people</title><rect class="c-hit" x="360" y="24" width="30" height="150"/><path class="c-bar" d="M367.0,174.0V48.0Q367.0,44.0 371.0,44.0H379.0Q383.0,44.0 383.0,48.0V174.0Z"/></g><g class="c-col" style="--i:12"><title>26 Sep 2025 · Getting Closer + Together (1) · TU Dublin · 11 people</title><rect class="c-hit" x="390" y="24" width="30" height="150"/><path class="c-bar" d="M397.0,174.0V68.0Q397.0,64.0 401.0,64.0H409.0Q413.0,64.0 413.0,68.0V174.0Z"/></g><g class="c-col" style="--i:13"><title>17 Oct 2025 · Getting Closer + Together (2) · TU Dublin · 11 people</title><rect class="c-hit" x="420" y="24" width="30" height="150"/><path class="c-bar" d="M427.0,174.0V68.0Q427.0,64.0 431.0,64.0H439.0Q443.0,64.0 443.0,68.0V174.0Z"/></g><g class="c-col" style="--i:14"><title>5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin · 6 people</title><rect class="c-hit" x="450" y="24" width="30" height="150"/><path class="c-bar" d="M457.0,174.0V118.0Q457.0,114.0 461.0,114.0H469.0Q473.0,114.0 473.0,118.0V174.0Z"/></g><text class="c-val" x="465.0" y="107" text-anchor="middle">6</text><text class="c-year" x="150.0" y="200" text-anchor="middle">2024</text><text class="c-year" x="375.0" y="200" text-anchor="middle">2025</text><line class="c-sep" x1="270.5" x2="270.5" y1="180" y2="206"/></svg></div>
     </figure>
     <div class="rec-wrap rv">
-    <details class="fold rec-fold"><summary>Earlier: 11 more</summary><ol class="rec rec-long">
+    <details class="fold rec-fold"><summary>Show 11 earlier</summary><ol class="rec rec-long">
         <li>
-          <span class="rec-when">28 Jan 2024</span>
-          <span class="rec-what"><b>Getting Closer</b><span>Sandyford, Dublin 18</span><small>the first talk</small></span><span class="rec-att">6 people</span>
+          <span class="rec-when"><span aria-hidden="true">28 Jan 2024</span><span class="sr-only">28 January 2024</span></span>
+          <span class="rec-what"><b>Getting Closer</b><span>Sandyford, Dublin 18</span><small>the first talk</small><small>6 people</small></span>
         </li>
         <li>
-          <span class="rec-when">25 Feb 2024</span>
-          <span class="rec-what"><b>Together (1)</b><span>Our Lady of Dolours Church, Dolphin&rsquo;s Barn</span></span><span class="rec-att">6 people</span>
+          <span class="rec-when"><span aria-hidden="true">25 Feb 2024</span><span class="sr-only">25 February 2024</span></span>
+          <span class="rec-what"><b>Together (1)</b><span>Our Lady of Dolours Church, Dolphin&rsquo;s Barn</span><small>6 people</small></span>
         </li>
         <li>
-          <span class="rec-when">23 Mar 2024</span>
-          <span class="rec-what"><b>Together (2)</b><span>Our Lady of Dolours Church</span></span><span class="rec-att">8 people</span>
+          <span class="rec-when"><span aria-hidden="true">23 Mar 2024</span><span class="sr-only">23 March 2024</span></span>
+          <span class="rec-what"><b>Together (2)</b><span>Our Lady of Dolours Church</span><small>8 people</small></span>
         </li>
         <li>
-          <span class="rec-when">14 Apr 2024</span>
-          <span class="rec-what"><b>My Taste (1)</b><span>Our Lady of Dolours Church</span></span><span class="rec-att">7 people</span>
+          <span class="rec-when"><span aria-hidden="true">14 Apr 2024</span><span class="sr-only">14 April 2024</span></span>
+          <span class="rec-what"><b>My Taste (1)</b><span>Our Lady of Dolours Church</span><small>7 people</small></span>
         </li>
         <li>
-          <span class="rec-when">27 Apr 2024</span>
-          <span class="rec-what"><b>My Taste (2)</b><span>Our Lady of Dolours Church</span></span><span class="rec-att">7 people</span>
+          <span class="rec-when"><span aria-hidden="true">27 Apr 2024</span><span class="sr-only">27 April 2024</span></span>
+          <span class="rec-what"><b>My Taste (2)</b><span>Our Lady of Dolours Church</span><small>7 people</small></span>
         </li>
         <li>
-          <span class="rec-when">22 Jun 2024</span>
-          <span class="rec-what"><b>Summer Festivals</b><span>Our Lady of Dolours Church</span></span><span class="rec-att">10 people</span>
+          <span class="rec-when"><span aria-hidden="true">22 Jun 2024</span><span class="sr-only">22 June 2024</span></span>
+          <span class="rec-what"><b>Summer Festivals</b><span>Our Lady of Dolours Church</span><small>10 people</small></span>
         </li>
         <li>
-          <span class="rec-when">8 Nov 2024</span>
-          <span class="rec-what"><b>Getting Closer + Together (1)</b><span>TU Dublin, Grangegorman</span><small>the series moves to TU Dublin</small></span><span class="rec-att">12 people</span>
+          <span class="rec-when"><span aria-hidden="true">8 Nov 2024</span><span class="sr-only">8 November 2024</span></span>
+          <span class="rec-what"><b>Getting Closer + Together (1)</b><span>TU Dublin, Grangegorman</span><small>the series moves to TU Dublin</small><small>12 people</small></span>
         </li>
         <li>
-          <span class="rec-when">15 Nov 2024</span>
-          <span class="rec-what"><b>Getting Closer + Together (2)</b><span>TU Dublin</span></span><span class="rec-att">12 people</span>
+          <span class="rec-when"><span aria-hidden="true">15 Nov 2024</span><span class="sr-only">15 November 2024</span></span>
+          <span class="rec-what"><b>Getting Closer + Together (2)</b><span>TU Dublin</span><small>12 people</small></span>
         </li>
         <li>
-          <span class="rec-when">21 Feb 2025</span>
-          <span class="rec-what"><b>Getting Closer + Together (1)</b><span>TU Dublin</span></span><span class="rec-att">10 people</span>
+          <span class="rec-when"><span aria-hidden="true">21 Feb 2025</span><span class="sr-only">21 February 2025</span></span>
+          <span class="rec-what"><b>Getting Closer + Together (1)</b><span>TU Dublin</span><small>10 people</small></span>
         </li>
         <li>
-          <span class="rec-when">7 Mar 2025</span>
-          <span class="rec-what"><b>Getting Closer + Together (2)</b><span>TU Dublin</span></span><span class="rec-att">10 people</span>
+          <span class="rec-when"><span aria-hidden="true">7 Mar 2025</span><span class="sr-only">7 March 2025</span></span>
+          <span class="rec-what"><b>Getting Closer + Together (2)</b><span>TU Dublin</span><small>10 people</small></span>
         </li>
         <li>
-          <span class="rec-when">11 Apr 2025</span>
-          <span class="rec-what"><b>My Taste</b><span>TU Dublin</span><small>the largest attendance to date</small></span><span class="rec-att">14 people</span>
+          <span class="rec-when"><span aria-hidden="true">11 Apr 2025</span><span class="sr-only">11 April 2025</span></span>
+          <span class="rec-what"><b>My Taste</b><span>TU Dublin</span><small>the largest attendance to date</small><small>14 people</small></span>
         </li>
     </ol></details>
     <ol class="rec rec-long">
         <li>
-          <span class="rec-when">21 Jul 2025</span>
-          <span class="rec-what"><b>BBC Proms</b><span>Carmelite Community Centre, Dublin</span></span><span class="rec-att">13 people</span>
+          <span class="rec-when"><span aria-hidden="true">21 Jul 2025</span><span class="sr-only">21 July 2025</span></span>
+          <span class="rec-what"><b>BBC Proms</b><span>Carmelite Community Centre, Dublin</span><small>13 people</small></span>
         </li>
         <li>
-          <span class="rec-when">26 Sep 2025</span>
-          <span class="rec-what"><b>Getting Closer + Together (1)</b><span>TU Dublin</span></span><span class="rec-att">11 people</span>
+          <span class="rec-when"><span aria-hidden="true">26 Sep 2025</span><span class="sr-only">26 September 2025</span></span>
+          <span class="rec-what"><b>Getting Closer + Together (1)</b><span>TU Dublin</span><small>11 people</small></span>
         </li>
         <li>
-          <span class="rec-when">17 Oct 2025</span>
-          <span class="rec-what"><b>Getting Closer + Together (2)</b><span>TU Dublin</span></span><span class="rec-att">11 people</span>
+          <span class="rec-when"><span aria-hidden="true">17 Oct 2025</span><span class="sr-only">17 October 2025</span></span>
+          <span class="rec-what"><b>Getting Closer + Together (2)</b><span>TU Dublin</span><small>11 people</small></span>
         </li>
         <li>
-          <span class="rec-when">5 Dec 2025</span>
-          <span class="rec-what"><b>Together (1): a concert, attended together</b><span>National Concert Hall, Dublin</span><small>the fifteenth session, at a concert</small></span><span class="rec-att">6 people</span>
+          <span class="rec-when"><span aria-hidden="true">5 Dec 2025</span><span class="sr-only">5 December 2025</span></span>
+          <span class="rec-what"><b>Together (1): a concert, attended together</b><span><span class="tn">National Concert Hall,</span> Dublin</span><small>the fifteenth session, at a concert</small><small>6 people</small></span>
         </li>
         <li>
-          <span class="rec-when">23 Jan 2026</span>
-          <span class="rec-what"><b>My Taste (1)</b><span>East Quad, TU Dublin Grangegorman</span><small>more than five people</small></span>
+          <span class="rec-when"><span aria-hidden="true">23 Jan 2026</span><span class="sr-only">23 January 2026</span></span>
+          <span class="rec-what"><b>My Taste (1)</b><span>East Quad, TU Dublin Grangegorman</span><small>more than five people</small></span>
         </li>
         <li>
-          <span class="rec-when">Feb 2026</span>
-          <span class="rec-what"><b>My Taste (2)</b><span>East Quad, TU Dublin Grangegorman</span><small>more than five people</small></span>
+          <span class="rec-when"><span aria-hidden="true">Feb 2026</span><span class="sr-only">February 2026</span></span>
+          <span class="rec-what"><b>My Taste (2)</b><span>East Quad, TU Dublin Grangegorman</span><small>more than five people</small></span>
         </li>
     </ol>
     </div>
@@ -306,12 +304,11 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">05</span>Take part</p>
-      <div><h2><span class="sr-only">Take part: </span>Ask for a talk.</h2>
-      <p class="sh-lead">Write even if you are <mark>on your own</mark>.</p></div>
+      <div><h2><span class="sr-only">Take part: </span>Ask for a talk.</h2></div>
     </header>
     <div class="join-body rv">
-      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
-      <ul class="join-fields"><li>Your name</li><li>Your group or organisation (if any)</li><li>Where you could meet</li><li>Roughly how many people</li><li>Dates or times that suit</li></ul>
+      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
+      <ol class="join-fields"><li>Your name</li><li>Your group or organisation (if any)</li><li>Where you could meet</li><li>Roughly how many people</li><li>Dates or times that suit</li></ol>
       <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Getting%20to%20Know%20Classical%20Music&amp;body=Your%20name%3A%20%0D%0AYour%20group%20or%20organisation%20%28if%20any%29%3A%20%0D%0AWhere%20you%20could%20meet%3A%20%0D%0ARoughly%20how%20many%20people%3A%20%0D%0ADates%20or%20times%20that%20suit%3A%20%0D%0A">Ask about a talk <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       <p class="mail-alt"><span>Or write to</span> <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a> <a href="tel:+353830780635">+353 83 078 0635</a></p>
     </div>
@@ -322,10 +319,10 @@
   <div class="wrap">
     <h2 class="eyebrow section-label">The other programmes</h2>
     <ul class="others">
-      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n">02</span><b>Outreach Concerts</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n">03</span><b>Community Recorder Ensemble Class</b><span class="tag tag-live">Running now</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/concert-companion.html"><span class="toc-n">05</span><b>Concert Guide &amp; Companion</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n" aria-hidden="true">02</span><b>Outreach Concerts</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n" aria-hidden="true">03</span><b>Community Recorder Ensemble Class</b><span class="tag tag-live">Running now</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n" aria-hidden="true">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/concert-companion.html"><span class="toc-n" aria-hidden="true">05</span><b>Concert Guide &amp; Companion</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
     </ul>
     <div class="btn-row"><a class="go" href="../programmes.html">All five programmes <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
   </div>
@@ -352,8 +349,8 @@
           <li><a href="../news.html">News &amp; archive</a></li>
         </ul>
       </nav>
-      <nav aria-label="Take part">
-        <h2>Take part</h2>
+      <nav aria-label="Get involved">
+        <h2>Get involved</h2>
         <ul>
           <li><a href="../get-involved.html#invite">Invite us to play</a></li>
           <li><a href="../get-involved.html#play">Perform with us</a></li>
@@ -366,14 +363,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="../contact.html">Contact</a></li>
-          <li><a href="../ko/index.html" hreflang="ko" lang="ko">한국어</a></li>
+          <li><a href="../ko/programmes/getting-to-know.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 4 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 5 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

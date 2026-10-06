@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -111,6 +111,7 @@
       <img src="../assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="../ko/programmes/concert-companion.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="Main">
@@ -118,16 +119,13 @@
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
-          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html" aria-current="page"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">Getting to Know Classical Music</span></a></li><li><a href="../programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">Outreach Concerts</span></a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">Community Recorder Ensemble Class<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, running now</span></span></a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="../programmes/concert-companion.html" aria-current="page"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">Concert Guide &amp; Companion</span></a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="../contact.html">Contact</a>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <span aria-current="true">EN</span>
-        <a href="../ko/programmes/concert-companion.html" hreflang="ko" lang="ko">한국어</a>
-      </div>
+      <a class="btn btn-nav" href="../contact.html">Contact</a>
     </nav>
+    <a class="lang lang-wide" href="../ko/programmes/concert-companion.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
   </div>
 </header>
 <main id="main">
@@ -140,9 +138,9 @@
       <div class="pp-intro">
         <p class="eyebrow lift"><i class="dot" aria-hidden="true"></i>Learning</p>
         <h1 class="pp-title"><span class="ln"><span>Concert Guide &amp; Companion</span></span></h1>
-        <p class="lead lift lift-3"><span class="sl">For people who would rather not go to a concert alone.</span> <span class="sl">We prepare, <mark>go together</mark>, then talk it over.</span></p>
+        <p class="lead lift lift-3"><span class="sl">For people who would rather not go to a concert alone.</span> <span class="sl">We prepare, <mark>go together</mark>, then talk it over.</span></p>
         <div class="pp-now lift lift-4">
-          <p><span class="tag">Dates by email</span><span class="pp-say"><span class="sl sl-n">Write to us.</span> <span class="sl sl-n">We will tell you about the next outing.</span></span></p>
+          <p><span class="tag">Dates by email</span><span class="sr-only">, </span><span class="pp-say"><span class="sl sl-n">Write to us.</span> <span class="sl sl-n">We will tell you about the next outing.</span></span></p>
           <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Concert%20Guide%20%26%20Companion&amp;body=Your%20name%3A%20%0D%0ADays%20and%20times%20that%20suit%20you%3A%20%0D%0AMusic%20you%20like%20%28optional%29%3A%20%0D%0AAny%20access%20needs%20%28optional%29%3A%20%0D%0ALanguage%20you%20prefer%3A%20English%20or%20Korean%20%0D%0A">Ask about an outing <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">How to take part <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
@@ -162,17 +160,17 @@
       <li style="--i:0">
         <span class="step-n" aria-hidden="true">1</span>
         <h3>Prepare beforehand</h3>
-        <p>We choose a concert. Then we go through the music and what happens in the hall.</p>
+        <p class="step-t"><span class="sl">We choose a concert.</span> <span class="sl">Then we go through the music and what happens in the hall.</span></p>
       </li>
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
         <h3>Go as a group</h3>
-        <p>The group goes together, with a guide during the concert.</p>
+        <p class="step-t">The group goes together, with a guide during the concert.</p>
       </li>
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
         <h3>Talk it over</h3>
-        <p>Afterwards we talk about what we heard. There is <mark>no wrong answer</mark>.</p>
+        <p class="step-t"><span class="sl">Afterwards we talk about what we heard.</span> <span class="sl">There is <mark>no wrong answer</mark>.</span></p>
       </li>
     </ol>
   </div>
@@ -187,15 +185,15 @@
     <dl class="qa rv-stagger">
       <div>
         <dt>Which concerts have you suggested?</dt>
-        <dd>The National Symphony Orchestra, the TU Dublin Philharmonic and a National Concert Hall series, among others.</dd>
+        <dd class="qa-a">The National Symphony Orchestra, <span class="tn">the TU Dublin Philharmonic</span> and <span class="tn">a National Concert Hall</span> series, among others.</dd>
       </div>
       <div>
         <dt>How big is a group?</dt>
-        <dd>In December 2025, <mark>six people</mark> went together to the National Concert Hall.</dd>
+        <dd class="qa-a">In December 2025, <mark>six people</mark> went together to <span class="tn">the National Concert Hall.</span></dd>
       </div>
       <div>
-        <dt>New to Ireland. Is this for me?</dt>
-        <dd><strong>Yes.</strong> People new to Ireland are welcome, and we work in <mark>English and Korean</mark>.</dd>
+        <dt>New to Ireland. Is this for me?</dt>
+        <dd class="qa-a"><strong>Yes.</strong> People new to Ireland are welcome, and we work in <mark>English and Korean</mark>.</dd>
       </div>
     </dl>
   </div>
@@ -207,7 +205,7 @@
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">03</span>In the room</p>
       <div><h2><span class="sr-only">In the room: </span>The hall, from the seats.</h2></div>
     </header>
-    <div class="room rv"><figure class="plate room-plate"><div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/proms-hall.jpg" srcset="../images/proms-hall-800.jpg 800w, ../images/proms-hall.jpg 1400w" sizes="(max-width:55em) 92vw, min(65vw, 880px)" width="1400" height="933" alt="A full Royal Albert Hall during a BBC Prom, seen from high in the audience: the orchestra on a lit stage, beams of light and the acoustic discs overhead"></div><figcaption><span class="cap-label">BBC Proms, Royal Albert Hall</span><span>London · September 2023 · seen from the audience by our founder</span></figcaption></figure></div>
+    <div class="room rv"><figure class="plate room-plate"><div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../images/proms-hall.jpg" srcset="../images/proms-hall-800.jpg 800w, ../images/proms-hall.jpg 1400w" sizes="(max-width:55em) 92vw, min(65vw, 880px)" width="1400" height="933" alt="A full Royal Albert Hall during a BBC Prom, seen from high in the audience: the orchestra on a lit stage, beams of light and the acoustic discs overhead"></div><figcaption><span class="cap-label">BBC Proms, Royal Albert Hall</span><span>London · September 2023</span><span class="cap-credit">photo: our founder, from the audience</span></figcaption></figure></div>
   </div>
 </section>
 
@@ -216,31 +214,31 @@
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">04</span>On the record</p>
       <div><h2><span class="sr-only">On the record: </span>Concerts suggested so far.</h2>
-      <p class="sh-lead">Concerts we introduced to participants, and the one we attended together.</p></div>
+      <p class="sh-lead">Concerts we introduced, and one we attended together.</p></div>
     </header>
-    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="5 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>30 Sep 2025 · NCH International Series: Chineke! Orchestra · National Concert Hall, Dublin</title><circle class="s-on" cx="416.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>7 Oct 2025 · NCH International Series: Stephen Hough and Viano Quartet · National Concert Hall, Dublin</title><circle class="s-on" cx="436.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>11 Oct 2025 · TU Dublin Philharmonic · TU Dublin Concert Hall</title><circle class="s-on" cx="436.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin</title><circle class="s-on" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>Jan–Feb 2026 · National Symphony Orchestra, RIAM piano series, RTÉ Concert Orchestra · National Concert Hall and RIAM, Dublin</title><rect class="s-span s-on" x="488.0" y="55" width="36.0" height="7" rx="3.5"/></g></svg>
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>Learning</span><span><i class="o" aria-hidden="true"></i>Sharing</span><span>A dot is one session; a bar spans several months.</span></figcaption>
+    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="5 entries on the record for this programme, shown month by month from 2024 to 2026."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>30 Sep 2025 · NCH International Series: Chineke! Orchestra · National Concert Hall, Dublin</title><circle class="s-on" cx="416.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>7 Oct 2025 · NCH International Series: Stephen Hough and Viano Quartet · National Concert Hall, Dublin</title><circle class="s-on" cx="436.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>11 Oct 2025 · TU Dublin Philharmonic · TU Dublin Concert Hall</title><circle class="s-on" cx="436.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>5 Dec 2025 · Together (1): a concert, attended together · National Concert Hall, Dublin</title><circle class="s-on" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>Jan–Feb 2026 · National Symphony Orchestra, RIAM piano series, RTÉ Concert Orchestra · National Concert Hall and RIAM, Dublin</title><rect class="s-span s-on" x="488.0" y="55" width="36.0" height="7" rx="3.5"/></g></svg>
+      <figcaption class="strip-key"><span><i aria-hidden="true"></i>Learning</span><span>A dot is one concert. A bar spans several months.</span></figcaption>
     </figure>
     <ol class="rec rec-short rv">
         <li>
-          <span class="rec-when">30 Sep 2025</span>
-          <span class="rec-what"><b>NCH International Series: Chineke! Orchestra</b><span>National Concert Hall, Dublin</span><small>introduced to participants, group attendance organised</small></span>
+          <span class="rec-when"><span aria-hidden="true">30 Sep 2025</span><span class="sr-only">30 September 2025</span></span>
+          <span class="rec-what"><b>NCH International Series: Chineke! Orchestra</b><span><span class="tn">National Concert Hall,</span> Dublin</span><small>introduced to participants, group attendance organised</small></span>
         </li>
         <li>
-          <span class="rec-when">7 Oct 2025</span>
-          <span class="rec-what"><b>NCH International Series: Stephen Hough and Viano Quartet</b><span>National Concert Hall, Dublin</span><small>introduced to participants, group attendance organised</small></span>
+          <span class="rec-when"><span aria-hidden="true">7 Oct 2025</span><span class="sr-only">7 October 2025</span></span>
+          <span class="rec-what"><b>NCH International Series: Stephen Hough and Viano Quartet</b><span><span class="tn">National Concert Hall,</span> Dublin</span><small>introduced to participants, group attendance organised</small></span>
         </li>
         <li>
-          <span class="rec-when">11 Oct 2025</span>
-          <span class="rec-what"><b>TU Dublin Philharmonic</b><span>TU Dublin Concert Hall</span><small>introduced to participants, group attendance organised</small></span>
+          <span class="rec-when"><span aria-hidden="true">11 Oct 2025</span><span class="sr-only">11 October 2025</span></span>
+          <span class="rec-what"><b><span class="tn">TU Dublin Philharmonic</span></b><span>TU Dublin Concert Hall</span><small>introduced to participants, group attendance organised</small></span>
         </li>
         <li>
-          <span class="rec-when">5 Dec 2025</span>
-          <span class="rec-what"><b>Together (1): a concert, attended together</b><span>National Concert Hall, Dublin</span><small>the fifteenth session, at a concert</small></span>
+          <span class="rec-when"><span aria-hidden="true">5 Dec 2025</span><span class="sr-only">5 December 2025</span></span>
+          <span class="rec-what"><b>A concert, attended together</b><span><span class="tn">National Concert Hall,</span> Dublin</span><small>six people from <span class="tn">the Getting to Know</span> talks</small></span>
         </li>
         <li>
-          <span class="rec-when">Jan&ndash;Feb 2026</span>
-          <span class="rec-what"><b>National Symphony Orchestra, RIAM piano series, RT&Eacute; Concert Orchestra</b><span>National Concert Hall and RIAM, Dublin</span><small>concerts introduced to participants, group attendance organised</small></span>
+          <span class="rec-when"><span aria-hidden="true">Jan&ndash;Feb 2026</span><span class="sr-only">January&ndash;February 2026</span></span>
+          <span class="rec-what"><b>National Symphony Orchestra, RIAM piano series, <span class="tn">RT&Eacute; Concert Orchestra</span></b><span><span class="tn">National Concert Hall</span> and RIAM, Dublin</span><small>concerts introduced to participants, group attendance organised</small></span>
         </li>
     </ol>
   </div>
@@ -253,8 +251,8 @@
       <div><h2><span class="sr-only">Take part: </span>Join an outing.</h2></div>
     </header>
     <div class="join-body rv">
-      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
-      <ul class="join-fields"><li>Your name</li><li>Days and times that suit you</li><li>Music you like (optional)</li><li>Any access needs (optional)</li><li>Language you prefer: English or Korean</li></ul>
+      <p class="join-hint"><span class="sl sl-n">One line is enough.</span> <span class="sl sl-n">If it helps, tell us:</span></p>
+      <ol class="join-fields"><li>Your name</li><li>Days and times that suit you</li><li>Music you like (optional)</li><li>Any access needs (optional)</li><li>Language you prefer: English or Korean</li></ol>
       <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=Concert%20Guide%20%26%20Companion&amp;body=Your%20name%3A%20%0D%0ADays%20and%20times%20that%20suit%20you%3A%20%0D%0AMusic%20you%20like%20%28optional%29%3A%20%0D%0AAny%20access%20needs%20%28optional%29%3A%20%0D%0ALanguage%20you%20prefer%3A%20English%20or%20Korean%20%0D%0A">Ask about an outing <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       <p class="mail-alt"><span>Or write to</span> <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a> <a href="tel:+353830780635">+353 83 078 0635</a></p>
     </div>
@@ -265,10 +263,10 @@
   <div class="wrap">
     <h2 class="eyebrow section-label">The other programmes</h2>
     <ul class="others">
-      <li><a href="../programmes/getting-to-know.html"><span class="toc-n">01</span><b>Getting to Know Classical Music</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n">02</span><b>Outreach Concerts</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n">03</span><b>Community Recorder Ensemble Class</b><span class="tag tag-live">Running now</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/getting-to-know.html"><span class="toc-n" aria-hidden="true">01</span><b>Getting to Know Classical Music</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/outreach-concerts.html"><span class="toc-n" aria-hidden="true">02</span><b>Outreach Concerts</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n" aria-hidden="true">03</span><b>Community Recorder Ensemble Class</b><span class="tag tag-live">Running now</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n" aria-hidden="true">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
     </ul>
     <div class="btn-row"><a class="go" href="../programmes.html">All five programmes <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
   </div>
@@ -295,8 +293,8 @@
           <li><a href="../news.html">News &amp; archive</a></li>
         </ul>
       </nav>
-      <nav aria-label="Take part">
-        <h2>Take part</h2>
+      <nav aria-label="Get involved">
+        <h2>Get involved</h2>
         <ul>
           <li><a href="../get-involved.html#invite">Invite us to play</a></li>
           <li><a href="../get-involved.html#play">Perform with us</a></li>
@@ -309,14 +307,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="../contact.html">Contact</a></li>
-          <li><a href="../ko/index.html" hreflang="ko" lang="ko">한국어</a></li>
+          <li><a href="../ko/programmes/concert-companion.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 4 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 5 October 2026 · <a href="../contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">본문으로 건너뛰기</a>
 <header class="site-header">
@@ -111,6 +111,7 @@
       <img src="../../assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="../../programmes/outreach-concerts.html" hreflang="en" lang="en" rel="alternate" translate="no">English</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="메뉴" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="주 메뉴">
@@ -118,16 +119,13 @@
         <li><a class="nav-link" href="../index.html"><span class="nav-n" aria-hidden="true">01</span>홈</a></li>
         <li><a class="nav-link" href="../about.html"><span class="nav-n" aria-hidden="true">02</span>소개</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="../programmes.html" aria-current="true"><span class="nav-n" aria-hidden="true">03</span>프로그램<span class="nav-mark" aria-hidden="true"></span></a>
-          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>클래식 음악과 친해지기</a></li><li><a href="../programmes/outreach-concerts.html" aria-current="page"><span class="ns-n" aria-hidden="true">02</span>찾아가는 음악회</a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>커뮤니티 리코더 앙상블 클래스</a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>함께하는 음악여행</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="../programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">클래식 음악과 친해지기</span></a></li><li><a href="../programmes/outreach-concerts.html" aria-current="page"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">찾아가는 음악회</span></a></li><li><a href="../programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">커뮤니티 리코더 앙상블 클래스<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, 진행 중</span></span></a></li><li><a href="../programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="../programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">함께하는 음악여행</span></a></li></ul></li>
         <li><a class="nav-link" href="../get-involved.html"><span class="nav-n" aria-hidden="true">04</span>함께하기</a></li>
         <li><a class="nav-link" href="../news.html"><span class="nav-n" aria-hidden="true">05</span>소식·기록</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="../contact.html">문의</a>
-      <div class="lang-switch" role="group" aria-label="언어">
-        <span aria-current="true">한국어</span>
-        <a href="../../programmes/outreach-concerts.html" hreflang="en" lang="en">EN</a>
-      </div>
+      <a class="btn btn-nav" href="../contact.html">문의</a>
     </nav>
+    <a class="lang lang-wide" href="../../programmes/outreach-concerts.html" hreflang="en" lang="en" rel="alternate" translate="no">English</a>
   </div>
 </header>
 <main id="main">
@@ -142,13 +140,13 @@
         <h1 class="pp-title"><span class="ln"><span>찾아가는 음악회</span></span></h1>
         <p class="lead lift lift-3"><span class="sl">사람들이 <mark>이미 계신 방으로</mark> 찾아가 연주합니다.</span> <span class="sl">곡마다 이야기를 곁들입니다.</span></p>
         <div class="pp-now lift lift-4">
-          <p><span class="tag">초청받는 중</span><span class="pp-say">방과 가능한 날짜를 적어 메일을 주세요.</span></p>
-          <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=%EC%B0%BE%EC%95%84%EA%B0%80%EB%8A%94%20%EC%9D%8C%EC%95%85%ED%9A%8C%20%EC%B4%88%EC%B2%AD&amp;body=%EA%B8%B0%EA%B4%80%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%3A%20%0D%0A%EC%97%B0%EC%A3%BC%ED%95%A0%20%EB%B0%A9%2C%20%ED%94%BC%EC%95%84%EB%85%B8%EA%B0%80%20%EC%9E%88%EB%8A%94%EC%A7%80%3A%20%0D%0A%EB%93%A4%EC%9C%BC%EC%8B%A4%20%EB%B6%84%EB%93%A4%EA%B3%BC%20%EB%8C%80%EB%9E%B5%EC%9D%98%20%EC%9D%B8%EC%9B%90%3A%20%0D%0A%EA%B0%80%EB%8A%A5%ED%95%9C%20%EB%82%A0%EC%A7%9C%EB%82%98%20%EC%8B%9C%EA%B0%84%3A%20%0D%0A%EB%8B%B4%EB%8B%B9%EC%9E%90%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%3A%20%0D%0A">음악회 초청하기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">함께하는 방법 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
+          <p><span class="tag">초청받는 중</span><span class="sr-only">, </span><span class="pp-say">방과 가능한 날짜를 적어 메일을 주세요.</span></p>
+          <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=%EC%B0%BE%EC%95%84%EA%B0%80%EB%8A%94%20%EC%9D%8C%EC%95%85%ED%9A%8C%20%EC%B4%88%EC%B2%AD&amp;body=%EA%B8%B0%EA%B4%80%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%3A%20%0D%0A%EC%97%B0%EC%A3%BC%ED%95%A0%20%EB%B0%A9%2C%20%ED%94%BC%EC%95%84%EB%85%B8%EA%B0%80%20%EC%9E%88%EB%8A%94%EC%A7%80%3A%20%0D%0A%EB%93%A4%EC%9C%BC%EC%8B%A4%20%EB%B6%84%EB%93%A4%EA%B3%BC%20%EB%8C%80%EB%9E%B5%EC%9D%98%20%EC%9D%B8%EC%9B%90%3A%20%0D%0A%EA%B0%80%EB%8A%A5%ED%95%9C%20%EB%82%A0%EC%A7%9C%EB%82%98%20%EC%8B%9C%EA%B0%84%3A%20%0D%0A%EB%8B%B4%EB%8B%B9%EC%9E%90%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%3A%20%0D%0A">음악회 초청하기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a><a class="go" href="#join">참여하는 방법 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
         </div>
       </div>
-      <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-outreach-concerts;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">02</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 11.4h12.4c3.6 0 6 1.2 6 3.2 0 .4-.3.6-.9.6H3z"/><path pathLength="1" d="M5.8 11.4l11.4-8.7"/><path pathLength="1" d="M15 11.4V4.38"/><path pathLength="1" d="M5 15.2V21"/><path pathLength="1" d="M18.2 15.2V21"/><path pathLength="1" d="M1.6 21h20.8"/></svg><span class="cover-line">휴게실 · 경당 · 로비</span></div></div>
+      <div class="pp-cover lift lift-2"><div class="cover" style="view-transition-name:prog-outreach-concerts;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">02</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path pathLength="1" d="M3 11.4h12.4c3.6 0 6 1.2 6 3.2 0 .4-.3.6-.9.6H3z"/><path pathLength="1" d="M5.8 11.4l11.4-8.7"/><path pathLength="1" d="M15 11.4V4.38"/><path pathLength="1" d="M5 15.2V21"/><path pathLength="1" d="M18.2 15.2V21"/><path pathLength="1" d="M1.6 21h20.8"/></svg><span class="cover-line">휴게실 · 경당 · 아트리움</span></div></div>
     </div>
-    <dl class="pp-glance lift lift-5"><div><dt>대상</dt><dd>요양시설, 병원, 본당, 지역 모임</dd></div><div><dt>장소</dt><dd>초청하신 방, 더블린과 그 밖은 협의</dd></div><div class="is-when"><dt>언제</dt><dd>협의해서 정합니다</dd></div><div><dt>준비물</dt><dd>방 하나와 날짜, 연락할 담당자 한 분</dd></div></dl>
+    <dl class="pp-glance lift lift-5"><div><dt>대상</dt><dd>요양시설, 병원, 수도 공동체, 본당, 커뮤니티 센터</dd></div><div><dt>장소</dt><dd>초청하신 방, 더블린과 그 밖은 협의</dd></div><div class="is-when"><dt>언제</dt><dd>함께 정하는 날</dd></div><div><dt>준비물</dt><dd>방 하나와 날짜, 연락할 담당자 한 분</dd></div></dl>
   </div>
 </section>
 
@@ -161,18 +159,18 @@
     <ol class="steps steps-outreach-concerts rv-stagger">
       <li style="--i:0">
         <span class="step-n" aria-hidden="true">1</span>
-        <h3>알려 주세요</h3>
-        <p>어느 방에서, 언제쯤, 어떤 분들이 들으실지 메일로 알려 주세요.</p>
+        <h3>알려 주세요</h3>
+        <p class="step-t">어느 방에서, 언제쯤, 어떤 분들이 들으실지 메일로 알려 주세요.</p>
       </li>
       <li style="--i:1">
         <span class="step-n" aria-hidden="true">2</span>
         <h3>곡을 고릅니다</h3>
-        <p><mark>처음 들어도</mark> 즐길 수 있는 곡을 그 방과 듣는 분들에 맞춰 고릅니다.</p>
+        <p class="step-t"><mark>처음 들어도</mark> 즐길 수 있는 곡을 그 방과 듣는 분들에 맞춰 고릅니다.</p>
       </li>
       <li style="--i:2">
         <span class="step-n" aria-hidden="true">3</span>
         <h3>찾아가 연주합니다</h3>
-        <p>연주자와 악기, 보면대까지 저희가 챙겨 갑니다.</p>
+        <p class="step-t">연주자와 악기, 보면대까지 저희가 챙겨 갑니다.</p>
       </li>
     </ol>
   </div>
@@ -181,21 +179,21 @@
 <section id="expect">
   <div class="wrap">
     <header class="sh sh-split">
-      <p class="eyebrow section-label" aria-hidden="true"><span class="no">02</span>미리 알아 두실 것</p>
-      <div><h2><span class="sr-only">미리 알아 두실 것: </span>초청하시기 전에.</h2></div>
+      <p class="eyebrow section-label" aria-hidden="true"><span class="no">02</span>미리 알아 두실 것</p>
+      <div><h2><span class="sr-only">미리 알아 두실 것: </span>초청하시기 전에.</h2></div>
     </header>
     <dl class="qa rv-stagger">
       <div>
         <dt>누가 연주하나요?</dt>
-        <dd><mark>창립자 김서현이</mark> 클라리넷과 오르간으로 혼자, 또는 연주자를 불러 함께 연주합니다. Letters Ensemble이 맡는 음악회도 있습니다.</dd>
+        <dd class="qa-a"><span class="sl"><mark>창립자 김서현이</mark> 클라리넷과 오르간으로 혼자, 또는 연주자를 불러 함께 연주합니다.</span> <span class="sl">Letters Ensemble이 맡는 음악회도 있습니다.</span></dd>
       </div>
       <div>
         <dt>누가 들을 수 있나요?</dt>
-        <dd>입주자나 환자, 가족, 직원까지 그 방에 계신 분 <mark>누구나</mark> 들으실 수 있습니다. 복장 규정은 없습니다.</dd>
+        <dd class="qa-a"><span class="sl">입주자나 환자, 가족, 직원까지 그 방에 계신 분 <mark>누구나</mark> 들으실 수 있습니다.</span> <span class="sl">복장 규정은 없습니다.</span></dd>
       </div>
       <div>
-        <dt>어디에서 연주해 왔나요?</dt>
-        <dd>가르친 곳까지 <mark>4개국</mark> 22곳입니다. 요양시설과 수도 공동체, 본당, 병원 등 모든 곳이 <a class="link" href="../about.html#places">단체 소개</a>에 있습니다.</dd>
+        <dt>어디에서 연주해 왔나요?</dt>
+        <dd class="qa-a"><span class="sl">가르친 곳까지 <mark>4개국</mark> 22곳입니다.</span> <span class="sl">요양시설과 수도 공동체, 본당, 병원 등 모든 곳이 <a class="link" href="../about.html#places">단체 소개</a>에 있습니다.</span></dd>
       </div>
     </dl>
   </div>
@@ -207,7 +205,7 @@
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">03</span>그 자리에서</p>
       <div><h2><span class="sr-only">그 자리에서: </span>음악이 있는 곳.</h2></div>
     </header>
-    <div class="room rv"><figure class="plate room-plate"><div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../../images/care-christmas.jpg" srcset="../../images/care-christmas-800.jpg 800w, ../../images/care-christmas.jpg 1400w" sizes="(max-width:55em) 92vw, min(65vw, 880px)" width="1400" height="1050" alt="성탄절 요양시설에서 연주하는 클라리넷과 현악 연주자 세 명"></div><figcaption><span class="cap-label">찾아가는 음악회</span><span>2025년 성탄</span></figcaption></figure></div>
+    <div class="room rv"><figure class="plate room-plate"><div class="photo photo-3x2"><img loading="lazy" decoding="async" src="../../images/care-christmas.jpg" srcset="../../images/care-christmas-800.jpg 800w, ../../images/care-christmas.jpg 1400w" sizes="(max-width:55em) 92vw, min(65vw, 880px)" width="1400" height="1050" alt="성탄절 요양시설에서 연주하는 클라리넷과 현악 연주자 세 명"></div><figcaption><span class="cap-label">클라리넷과 현악 3중주</span><span>2025년 성탄</span></figcaption></figure></div>
   </div>
 </section>
 
@@ -215,21 +213,21 @@
   <div class="wrap">
     <header class="sh sh-split">
       <p class="eyebrow section-label" aria-hidden="true"><span class="no">04</span>기록</p>
-      <div><h2><span class="sr-only">기록: </span>지금까지의 음악회.</h2>
+      <div><h2><span class="sr-only">기록: </span>지금까지의 음악회.</h2>
       <p class="sh-lead">기록에 남은 음악회를 날짜와 장소, 편성과 함께 모았습니다.</p></div>
     </header>
-    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="이 프로그램의 기록 22건을 2024년부터 2026년까지 달마다 표시했다."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>2024년 3월 16일 · 성 파트리치오 축일 음악회 · Dalgan Park, 미스 주</title><circle class="s-open" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>2024년 5월 5일 · Rathgar 본당 음악회 · Church of the Three Patrons, 더블린 Rathgar</title><circle class="s-open" cx="96.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>2024년 8월 4일 · 런던 한인 천주교회, 영국 · 클라리넷과 오르간</title><circle class="s-open" cx="156.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>2024년 10월 27일 · 파리 외방전교회, 프랑스 · 클라리넷 독주 · 은퇴 선교사들</title><circle class="s-open" cx="196.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>2024년 10월 28일 · Palais Brongniart, 파리 · 클라리넷 독주</title><circle class="s-open" cx="196.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>2024년 11월 23일 · 성 골롬반 축일 음악회 · 성 골롬반 외방선교 수녀회, 위클로 주</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>2024년 12월 28일 · 관덕정 순교기념관, 대구 · 클라리넷과 피아노</title><circle class="s-open" cx="236.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>2025년 3월 16일 · Dalgan Park, 미스 주 · 국악 앙상블과 클라리넷</title><circle class="s-open" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>2025년 4월 17일 · HSE EVE Goirtin Hub, 더블린 7구 · 클라리넷 독주 · 주간 돌봄 서비스</title><circle class="s-open" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>2025년 4월 17일 · Blessed Sacrament Chapel, 더블린 1구 · 오르간과 클라리넷</title><circle class="s-open" cx="316.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>2025년 4월 18일 · Dysart 본당, 웨스트미스 주 · 클라리넷 독주</title><circle class="s-open" cx="316.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>2025년 5월 27일 · Kilmessan 성당, 미스 주 · 오르간과 클라리넷</title><circle class="s-open" cx="336.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>2025년 6월 4일 · Dalgan Park, 미스 주</title><circle class="s-open" cx="356.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>2025년 7월 21일 · Morning Star Hostel, 더블린 7구 · 오르간과 클라리넷 · 노숙인 쉼터</title><circle class="s-open" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>2025년 11월 20일 · TU Dublin, 더블린 7구 · 오르간과 클라리넷</title><circle class="s-open" cx="456.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>2025년 11월 22일 · TU Dublin, 더블린 7구 · 클라리넷, 피아노, 하프</title><circle class="s-open" cx="456.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>2025년 11월 23일 · 성 골롬반 외방선교 수녀회, 위클로 주 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:17"><title>2025년 11월 30일 · 마리아의 프란치스코 선교 수녀회, 더블린 5구 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="17.0" r="4.4"/></g><g class="s-ev" style="--i:18"><title>2025년 12월 20일 · 성탄 음악회 · Clondalkin Lodge, 더블린</title><circle class="s-open" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:19"><title>2026년 8월 20일 · Tallaght University Hospital · 창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</title><circle class="s-open" cx="636.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:20"><title>2026년 8월 29일 · Rua Red, 더블린 Tallaght · 창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</title><circle class="s-open" cx="636.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:21"><title>2026년 9월 19일 · Methodist Centenary Church, 더블린 6구 Ranelagh · 소프라노⁠·해금⁠·클라리넷⁠·피아노</title><circle class="s-open" cx="656.0" cy="59.0" r="4.4"/></g></svg>
-      <figcaption class="strip-key"><span><i aria-hidden="true"></i>배움</span><span><i class="o" aria-hidden="true"></i>나눔</span><span>점 하나가 모임 하나, 막대는 여러 달에 걸친 것입니다.</span></figcaption>
+    <figure class="strip rv"><svg class="strip-svg" viewBox="0 0 732 104" role="img" aria-label="이 프로그램의 기록 22건을 2024년부터 2026년까지 달마다 표시했습니다."><line class="s-axis" x1="6" x2="726" y1="70.5" y2="70.5"/><line class="s-year-tick" x1="6.5" x2="6.5" y1="64" y2="82"/><text class="s-year" x="126" y="97" text-anchor="middle">2024</text><line class="s-year-tick" x1="246.5" x2="246.5" y1="64" y2="82"/><text class="s-year" x="366" y="97" text-anchor="middle">2025</text><line class="s-year-tick" x1="486.5" x2="486.5" y1="64" y2="82"/><text class="s-year" x="606" y="97" text-anchor="middle">2026</text><g class="s-ev" style="--i:0"><title>2024년 3월 16일 · 성 파트리치오 축일 음악회 · Dalgan Park, 미스 주</title><circle class="s-open" cx="56.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:1"><title>2024년 5월 5일 · Rathgar 본당 음악회 · Church of the Three Patrons, 더블린 Rathgar</title><circle class="s-open" cx="96.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:2"><title>2024년 8월 4일 · 런던 한인 천주교회, 영국 · 클라리넷과 오르간</title><circle class="s-open" cx="156.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:3"><title>2024년 10월 27일 · 파리 외방전교회, 프랑스 · 클라리넷 독주 · 은퇴 선교사들</title><circle class="s-open" cx="196.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:4"><title>2024년 10월 28일 · Palais Brongniart, 파리, 프랑스 · 클라리넷 독주</title><circle class="s-open" cx="196.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:5"><title>2024년 11월 23일 · 성 골롬반 축일 음악회 · 성 골롬반 외방선교 수녀회, 위클로 주</title><circle class="s-open" cx="216.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:6"><title>2024년 12월 28일 · 관덕정 순교기념관, 대구 · 클라리넷과 피아노</title><circle class="s-open" cx="236.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:7"><title>2025년 3월 16일 · Dalgan Park, 미스 주 · 국악 앙상블과 클라리넷</title><circle class="s-open" cx="296.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:8"><title>2025년 4월 17일 · HSE EVE Goirtin Hub, 더블린 7구 · 클라리넷 독주 · 주간 돌봄 서비스</title><circle class="s-open" cx="316.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:9"><title>2025년 4월 17일 · Blessed Sacrament Chapel, 더블린 1구 · 오르간과 클라리넷</title><circle class="s-open" cx="316.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:10"><title>2025년 4월 18일 · Dysart 본당, 웨스트미스 주 · 클라리넷 독주</title><circle class="s-open" cx="316.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:11"><title>2025년 5월 27일 · Kilmessan 성당, 미스 주 · 오르간과 클라리넷</title><circle class="s-open" cx="336.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:12"><title>2025년 6월 4일 · Dalgan Park, 미스 주</title><circle class="s-open" cx="356.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:13"><title>2025년 7월 21일 · Morning Star Hostel, 더블린 7구 · 오르간과 클라리넷 · 노숙인 쉼터</title><circle class="s-open" cx="376.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:14"><title>2025년 11월 20일 · TU Dublin, 더블린 7구 · 오르간과 클라리넷</title><circle class="s-open" cx="456.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:15"><title>2025년 11월 22일 · TU Dublin, 더블린 7구 · 클라리넷⁠·피아노⁠·하프</title><circle class="s-open" cx="456.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:16"><title>2025년 11월 23일 · 성 골롬반 외방선교 수녀회, 위클로 주 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="31.0" r="4.4"/></g><g class="s-ev" style="--i:17"><title>2025년 11월 30일 · 마리아의 프란치스코 선교 수녀회, 더블린 5구 · 클라리넷 독주</title><circle class="s-open" cx="456.0" cy="17.0" r="4.4"/></g><g class="s-ev" style="--i:18"><title>2025년 12월 20일 · 성탄 음악회 · Clondalkin Lodge, 더블린</title><circle class="s-open" cx="476.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:19"><title>2026년 8월 20일 · Tallaght University Hospital · 창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</title><circle class="s-open" cx="636.0" cy="59.0" r="4.4"/></g><g class="s-ev" style="--i:20"><title>2026년 8월 29일 · Rua Red, 더블린 Tallaght · 창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</title><circle class="s-open" cx="636.0" cy="45.0" r="4.4"/></g><g class="s-ev" style="--i:21"><title>2026년 9월 19일 · Methodist Centenary Church, 더블린 6구 Ranelagh · 소프라노⁠·해금⁠·클라리넷⁠·피아노</title><circle class="s-open" cx="656.0" cy="59.0" r="4.4"/></g></svg>
+      <figcaption class="strip-key"><span><i class="o" aria-hidden="true"></i>나눔</span><span>점 하나가 음악회 하나입니다.</span></figcaption>
     </figure>
     <div class="rec-wrap rv">
     <details class="fold rec-fold"><summary>이전 기록 16건 보기</summary><ol class="rec rec-long">
         <li>
           <span class="rec-when">2024년 3월 16일</span>
-          <span class="rec-what"><b>Dalgan Park, 미스 주</b><span>현악 4중주와 클라리넷 · 은퇴 선교사들</span></span>
+          <span class="rec-what"><b>Dalgan Park, 미스 주</b><span class="rec-who">Letters Ensemble</span><span>현악 4중주와 클라리넷</span><span>은퇴 선교사들</span></span>
         </li>
         <li>
           <span class="rec-when">2024년 5월 5일</span>
-          <span class="rec-what"><b>Church of the Three Patrons, 더블린 Rathgar</b><span>현악 3중주와 오르간</span></span>
+          <span class="rec-what"><b>Church of the Three Patrons, 더블린 Rathgar</b><span class="rec-who">Letters Ensemble</span><span>현악 3중주와 오르간</span></span>
         </li>
         <li>
           <span class="rec-when">2024년 8월 4일</span>
@@ -237,47 +235,47 @@
         </li>
         <li>
           <span class="rec-when">2024년 10월 27일</span>
-          <span class="rec-what"><b>파리 외방전교회, 프랑스</b><span>클라리넷 독주 · 은퇴 선교사들</span></span>
+          <span class="rec-what"><b>파리 외방전교회, 프랑스</b><span>클라리넷 독주</span><span>은퇴 선교사들</span></span>
         </li>
         <li>
           <span class="rec-when">2024년 10월 28일</span>
-          <span class="rec-what"><b>Palais Brongniart, 파리</b><span>클라리넷 독주</span></span>
+          <span class="rec-what"><b>Palais Brongniart, 파리, 프랑스</b><span>클라리넷 독주</span></span>
         </li>
         <li>
           <span class="rec-when">2024년 11월 23일</span>
-          <span class="rec-what"><b>성 골롬반 외방선교 수녀회, 위클로 주</b><span>리코더 앙상블이 시작된 자리 · 다시 연주하고 싶다는 수녀님의 질문</span></span>
+          <span class="rec-what"><b><span class="tn">성 골롬반 외방선교 수녀회,</span> 위클로 주</b><span class="rec-who">Letters Ensemble</span><span>리코더 앙상블이 시작된 자리</span><span>다시 연주하고 싶다는 수녀님의 질문</span></span>
         </li>
         <li>
           <span class="rec-when">2024년 12월 28일</span>
-          <span class="rec-what"><b>관덕정 순교기념관, 대구</b><span>클라리넷과 피아노</span></span>
+          <span class="rec-what"><b><span class="tn">관덕정 순교기념관,</span> 대구</b><span>클라리넷과 피아노</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 3월 16일</span>
-          <span class="rec-what"><b>Dalgan Park, 미스 주</b><span>국악 앙상블과 클라리넷</span></span>
+          <span class="rec-what"><b>Dalgan Park, 미스 주</b><span>국악 앙상블과 클라리넷</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 4월 17일</span>
-          <span class="rec-what"><b>HSE EVE Goirtin Hub, 더블린 7구</b><span>클라리넷 독주 · 주간 돌봄 서비스</span></span>
+          <span class="rec-what"><b>HSE EVE Goirtin Hub, 더블린 7구</b><span>클라리넷 독주</span><span>주간 돌봄 서비스</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 4월 17일</span>
-          <span class="rec-what"><b>Blessed Sacrament Chapel, 더블린 1구</b><span>오르간과 클라리넷</span></span>
+          <span class="rec-what"><b><span class="tn">Blessed Sacrament Chapel,</span> 더블린 1구</b><span>오르간과 클라리넷</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 4월 18일</span>
-          <span class="rec-what"><b>Dysart 본당, 웨스트미스 주</b><span>클라리넷 독주</span></span>
+          <span class="rec-what"><b>Dysart 본당, 웨스트미스 주</b><span>클라리넷 독주</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 5월 27일</span>
-          <span class="rec-what"><b>Kilmessan 성당, 미스 주</b><span>오르간과 클라리넷</span></span>
+          <span class="rec-what"><b>Kilmessan 성당, 미스 주</b><span>오르간과 클라리넷</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 6월 4일</span>
-          <span class="rec-what"><b>Dalgan Park, 미스 주</b></span>
+          <span class="rec-what"><b>Dalgan Park, 미스 주</b></span>
         </li>
         <li>
           <span class="rec-when">2025년 7월 21일</span>
-          <span class="rec-what"><b>Morning Star Hostel, 더블린 7구</b><span>오르간과 클라리넷 · 노숙인 쉼터</span></span>
+          <span class="rec-what"><b>Morning Star Hostel, 더블린 7구</b><span>오르간과 클라리넷</span><span>노숙인 쉼터</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 11월 20일</span>
@@ -285,33 +283,33 @@
         </li>
         <li>
           <span class="rec-when">2025년 11월 22일</span>
-          <span class="rec-what"><b>TU Dublin, 더블린 7구</b><span>클라리넷, 피아노, 하프</span></span>
+          <span class="rec-what"><b>TU Dublin, 더블린 7구</b><span>클라리넷⁠·피아노⁠·하프</span></span>
         </li>
     </ol></details>
     <ol class="rec rec-long">
         <li>
           <span class="rec-when">2025년 11월 23일</span>
-          <span class="rec-what"><b>성 골롬반 외방선교 수녀회, 위클로 주</b><span>클라리넷 독주</span></span>
+          <span class="rec-what"><b><span class="tn">성 골롬반 외방선교 수녀회,</span> 위클로 주</b><span>클라리넷 독주</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 11월 30일</span>
-          <span class="rec-what"><b>마리아의 프란치스코 선교 수녀회, 더블린 5구</b><span>클라리넷 독주</span></span>
+          <span class="rec-what"><b><span class="tn">마리아의 프란치스코 선교 수녀회,</span> 더블린 5구</b><span>클라리넷 독주</span></span>
         </li>
         <li>
           <span class="rec-when">2025년 12월 20일</span>
-          <span class="rec-what"><b>Clondalkin Lodge, 더블린</b><span>클라리넷과 현악 3중주 · 요양 시설</span></span>
+          <span class="rec-what"><b>Clondalkin Lodge, 더블린</b><span class="rec-who">Letters Ensemble</span><span>클라리넷과 현악 3중주</span><span>요양시설</span></span>
         </li>
         <li>
           <span class="rec-when">2026년 8월 20일</span>
-          <span class="rec-what"><b>Tallaght University Hospital</b><span>창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원</span></span>
+          <span class="rec-what"><b><span class="tn">Tallaght University Hospital</span></b><span>창립자가 South Dublin Live 2026에 선정</span><span>아트리움과 경당</span><span>해금 객원</span></span>
         </li>
         <li>
           <span class="rec-when">2026년 8월 29일</span>
-          <span class="rec-what"><b>Rua Red, 더블린 Tallaght</b><span>창립자가 South Dublin Live 2026에 선정 · 클라리넷⁠·피아노⁠·소프라노</span></span>
+          <span class="rec-what"><b>Rua Red, 더블린 Tallaght</b><span>창립자가 South Dublin Live 2026에 선정</span><span>클라리넷⁠·피아노⁠·소프라노</span></span>
         </li>
         <li>
           <span class="rec-when">2026년 9월 19일</span>
-          <span class="rec-what"><b>Methodist Centenary Church, 더블린 6구 Ranelagh</b><span>소프라노⁠·해금⁠·클라리넷⁠·피아노</span></span>
+          <span class="rec-what"><b><span class="tn">Methodist Centenary Church,</span> 더블린 6구 Ranelagh</b><span>소프라노⁠·해금⁠·클라리넷⁠·피아노</span></span>
         </li>
     </ol>
     </div>
@@ -325,8 +323,8 @@
       <div><h2><span class="sr-only">함께하기: </span>음악회를 초청해 주세요.</h2></div>
     </header>
     <div class="join-body rv">
-      <p class="join-hint"><span class="sl sl-n">한 줄이면 됩니다.</span> <span class="sl sl-n">이런 것을 적어 주시면 도움이 됩니다:</span></p>
-      <ul class="join-fields"><li>기관 이름과 지역</li><li>연주할 방, 피아노가 있는지</li><li>들으실 분들과 대략의 인원</li><li>가능한 날짜나 시간</li><li>담당자 이름과 전화번호</li></ul>
+      <p class="join-hint"><span class="sl sl-n">한 줄이면 됩니다.</span> <span class="sl sl-n">이런 것을 적어 주시면 도움이 됩니다:</span></p>
+      <ol class="join-fields"><li>기관 이름과 지역</li><li>연주할 방, 피아노가 있는지</li><li>들으실 분들과 대략의 인원</li><li>가능한 날짜나 시간</li><li>담당자 이름과 전화번호</li></ol>
       <div class="btn-row"><a class="btn btn-primary" href="mailto:sby05034@gmail.com?subject=%EC%B0%BE%EC%95%84%EA%B0%80%EB%8A%94%20%EC%9D%8C%EC%95%85%ED%9A%8C%20%EC%B4%88%EC%B2%AD&amp;body=%EA%B8%B0%EA%B4%80%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A7%80%EC%97%AD%3A%20%0D%0A%EC%97%B0%EC%A3%BC%ED%95%A0%20%EB%B0%A9%2C%20%ED%94%BC%EC%95%84%EB%85%B8%EA%B0%80%20%EC%9E%88%EB%8A%94%EC%A7%80%3A%20%0D%0A%EB%93%A4%EC%9C%BC%EC%8B%A4%20%EB%B6%84%EB%93%A4%EA%B3%BC%20%EB%8C%80%EB%9E%B5%EC%9D%98%20%EC%9D%B8%EC%9B%90%3A%20%0D%0A%EA%B0%80%EB%8A%A5%ED%95%9C%20%EB%82%A0%EC%A7%9C%EB%82%98%20%EC%8B%9C%EA%B0%84%3A%20%0D%0A%EB%8B%B4%EB%8B%B9%EC%9E%90%20%EC%9D%B4%EB%A6%84%EA%B3%BC%20%EC%A0%84%ED%99%94%EB%B2%88%ED%98%B8%3A%20%0D%0A">음악회 초청하기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
       <p class="mail-alt"><span>또는</span> <a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a> <a href="tel:+353830780635">+353 83 078 0635</a></p>
     </div>
@@ -337,10 +335,10 @@
   <div class="wrap">
     <h2 class="eyebrow section-label">다른 프로그램</h2>
     <ul class="others">
-      <li><a href="../programmes/getting-to-know.html"><span class="toc-n">01</span><b>클래식 음악과 친해지기</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n">03</span><b>커뮤니티 리코더 앙상블 클래스</b><span class="tag tag-live">진행 중</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
-      <li><a href="../programmes/concert-companion.html"><span class="toc-n">05</span><b>함께하는 음악여행</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/getting-to-know.html"><span class="toc-n" aria-hidden="true">01</span><b>클래식 음악과 친해지기</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/recorder-ensemble.html"><span class="toc-n" aria-hidden="true">03</span><b>커뮤니티 리코더 앙상블 클래스</b><span class="tag tag-live">진행 중</span><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/letters-ensemble.html"><span class="toc-n" aria-hidden="true">04</span><b>Letters Ensemble</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
+      <li><a href="../programmes/concert-companion.html"><span class="toc-n" aria-hidden="true">05</span><b>함께하는 음악여행</b><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></li>
     </ul>
     <div class="btn-row"><a class="go" href="../programmes.html">프로그램 다섯 가지 모두 보기 <span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></a></div>
   </div>
@@ -381,14 +379,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="../contact.html">문의</a></li>
-          <li><a href="../../index.html" hreflang="en" lang="en">EN</a></li>
+          <li><a href="../../programmes/outreach-concerts.html" hreflang="en" lang="en" rel="alternate" translate="no">English</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · 아일랜드 더블린</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
-      <span>갱신 2026년 10월 4일 · <a href="../contact.html#privacy">개인정보 처리방침</a></span>
+      <span>© 2026 Classical Music for Everyone · 아일랜드 더블린</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다.</span> <span class="sl">아직 등록된 자선단체는 아닙니다.</span></span>
+      <span>갱신 2026년 10월 5일 · <a href="../contact.html#privacy">개인정보 처리방침</a></span>
     </div>
   </div>
 </footer>

@@ -115,7 +115,7 @@
 }
 </script>
 </head>
-<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),h=document.activeElement&amp;&amp;document.activeElement.closest('.has-sub');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');h.querySelector('.nav-link').focus()}}">
+<body onpageshow="var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle');if(n){n.setAttribute('data-open','false')}if(b){b.setAttribute('aria-expanded','false')}" onkeydown="if(event.key==='Escape'){var n=document.getElementById('nav'),b=document.querySelector('.menu-toggle'),a=document.activeElement,f=a&amp;&amp;a.closest('.has-sub'),h=f||document.querySelector('.has-sub:hover');if(n&amp;&amp;n.getAttribute('data-open')==='true'){n.setAttribute('data-open','false');b.setAttribute('aria-expanded','false');b.focus()}else if(h){h.setAttribute('data-shut','');if(f)h.querySelector('.nav-link').focus()}}">
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to main content</a>
 <header class="site-header">
@@ -124,6 +124,7 @@
       <img src="assets/logo-horizontal.svg" alt="Classical Music for Everyone"
            width="120" height="46" decoding="async">
     </a>
+    <a class="lang lang-bar" href="ko/programmes.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav"
             aria-label="Menu" onclick="var n=document.getElementById('nav');var o=n.getAttribute('data-open')!==&quot;true&quot;;n.setAttribute('data-open',o);this.setAttribute('aria-expanded',o)"><i></i><i></i></button>
     <nav class="nav" id="nav" data-open="false" aria-label="Main">
@@ -131,16 +132,13 @@
         <li><a class="nav-link" href="index.html"><span class="nav-n" aria-hidden="true">01</span>Home</a></li>
         <li><a class="nav-link" href="about.html"><span class="nav-n" aria-hidden="true">02</span>About</a></li>
         <li class="has-sub" onmouseleave="this.removeAttribute('data-shut')" onfocusout="if(!this.contains(event.relatedTarget))this.removeAttribute('data-shut')"><a class="nav-link" href="programmes.html" aria-current="page"><span class="nav-n" aria-hidden="true">03</span>Programmes<span class="nav-mark" aria-hidden="true"></span></a>
-          <ul class="nav-sub"><li><a href="programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span>Getting to Know Classical Music</a></li><li><a href="programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span>Outreach Concerts</a></li><li><a href="programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span>Community Recorder Ensemble Class</a></li><li><a href="programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span>Letters Ensemble</a></li><li><a href="programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span>Concert Guide &amp; Companion</a></li></ul></li>
+          <ul class="nav-sub"><li><a href="programmes/getting-to-know.html"><span class="ns-n" aria-hidden="true">01</span><span class="ns-name">Getting to Know Classical Music</span></a></li><li><a href="programmes/outreach-concerts.html"><span class="ns-n" aria-hidden="true">02</span><span class="ns-name">Outreach Concerts</span></a></li><li><a href="programmes/recorder-ensemble.html"><span class="ns-n" aria-hidden="true">03</span><span class="ns-name">Community Recorder Ensemble Class<span class="ns-live" aria-hidden="true"></span><span class="sr-only">, running now</span></span></a></li><li><a href="programmes/letters-ensemble.html"><span class="ns-n" aria-hidden="true">04</span><span class="ns-name">Letters Ensemble</span></a></li><li><a href="programmes/concert-companion.html"><span class="ns-n" aria-hidden="true">05</span><span class="ns-name">Concert Guide &amp; Companion</span></a></li></ul></li>
         <li><a class="nav-link" href="get-involved.html"><span class="nav-n" aria-hidden="true">04</span>Get involved</a></li>
         <li><a class="nav-link" href="news.html"><span class="nav-n" aria-hidden="true">05</span>News &amp; archive</a></li>
       </ul>
-      <a class="btn btn-primary btn-nav" href="contact.html">Contact</a>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <span aria-current="true">EN</span>
-        <a href="ko/programmes.html" hreflang="ko" lang="ko">한국어</a>
-      </div>
+      <a class="btn btn-nav" href="contact.html">Contact</a>
     </nav>
+    <a class="lang lang-wide" href="ko/programmes.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a>
   </div>
 </header>
 <main id="main">
@@ -162,8 +160,8 @@
         <div class="cover cover-sm" style="view-transition-name:prog-getting-to-know;view-transition-class:prog-cover" aria-hidden="true"><span class="cover-no">01</span><svg class="cover-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect pathLength="1" x="9.3" y="2.4" width="13.8" height="11" rx="1"/><path pathLength="1" d="M12.89 10.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/><path pathLength="1" d="M18.59 9.82a.78 .4-24 0 1 1.42-.64 .78 .4-24 0 1-1.42 .64z"/><path pathLength="1" d="M14.31 10.18V5.88l5.7-1v4.3"/><path pathLength="1" d="M4.7 11.2c1.22 0 2.2.98 2.2 2.2s-.98 2.2-2.2 2.2-2.2-.98-2.2-2.2.98-2.2 2.2-2.2z"/><path pathLength="1" d="M.9 22c0-2.1 1.7-3.8 3.8-3.8s3.8 1.7 3.8 3.8"/><path pathLength="1" d="M7.69 19.66l4.43-3.46"/></svg><span class="cover-line">Music history · Theory · Stories</span></div>
         <div class="pi-main">
           <span class="kicker"><i class="dot" aria-hidden="true"></i>Learning</span>
-          <h2><a href="programmes/getting-to-know.html">Getting to Know Classical Music</a></h2>
-          <p>Talks with <mark>live music</mark>, for anyone curious about Classical Music.</p>
+          <h2><a href="programmes/getting-to-know.html">Getting to Know Classical Music</a></h2>
+          <p>Talks with <mark>live music</mark>, for anyone curious about Classical Music.</p>
         </div>
         <div class="pi-state"><span class="tag">On request</span></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></div>
@@ -173,9 +171,9 @@
         <div class="pi-main">
           <span class="kicker"><i class="dot dot-open" aria-hidden="true"></i>Sharing</span>
           <h2><a href="programmes/outreach-concerts.html">Outreach Concerts</a></h2>
-          <p>Live Classical Music in <mark>care homes, hospitals</mark>, parishes and community centres.</p>
+          <p>Live Classical Music in <mark>care homes</mark>, hospitals, parishes and community centres.</p>
         </div>
-        <div class="pi-state"><span class="tag">Taking invitations</span><dl class="pi-facts"><div><dt>When</dt><dd>By arrangement</dd></div></dl></div>
+        <div class="pi-state"><span class="tag">Taking invitations</span><dl class="pi-facts"><div><dt>When</dt><dd>A date we agree with you</dd></div></dl></div>
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></div>
       </li>
       <li class="pi" id="recorder-ensemble">
@@ -209,7 +207,7 @@
         <div class="pi-end"><span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" focusable="false"><path d="M2.4 9h10.4M9.4 5.4 13 9l-3.6 3.6"/><path d="M-18.4 9h10.4M-11.4 5.4-7.8 9l-3.6 3.6"/></svg></i></span></div>
       </li>
     </ol>
-    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">For artists</span><span class="pi-text"><span class="sl">From any field, <a class="link" href="get-involved.html#play">register interest</a> any time.</span> <span class="sl">CMFE Artists is planned for 2027.</span></span></p>
+    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">For artists</span><span class="pi-text"><span class="sl">From any field, <a class="link" href="get-involved.html#play">register&nbsp;interest</a> any time.</span> <span class="sl">CMFE Artists is planned for 2027.</span></span></p>
   </div>
 </section>
 </main>
@@ -234,8 +232,8 @@
           <li><a href="news.html">News &amp; archive</a></li>
         </ul>
       </nav>
-      <nav aria-label="Take part">
-        <h2>Take part</h2>
+      <nav aria-label="Get involved">
+        <h2>Get involved</h2>
         <ul>
           <li><a href="get-involved.html#invite">Invite us to play</a></li>
           <li><a href="get-involved.html#play">Perform with us</a></li>
@@ -248,14 +246,14 @@
           <li><a href="mailto:sby05034@gmail.com">sby05034@gmail.com</a></li>
           <li><a href="tel:+353830780635">+353 83 078 0635</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="ko/index.html" hreflang="ko" lang="ko">한국어</a></li>
+          <li><a href="ko/programmes.html" hreflang="ko" lang="ko" rel="alternate" translate="no">한국어</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
-      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
-      <span>Updated 4 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
+      <span>© 2026 Classical Music for Everyone · Dublin, Ireland</span>
+      <span class="footer-status"><span class="sl">Classical Music for Everyone is a <span class="nowrap">not-for-profit</span> community music initiative, forming a company limited by guarantee.</span> <span class="sl">It is not yet a registered charity.</span></span>
+      <span>Updated 5 October 2026 · <a href="contact.html#privacy">Privacy notice</a></span>
     </div>
   </div>
 </footer>

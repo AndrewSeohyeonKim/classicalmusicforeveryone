@@ -157,16 +157,23 @@ FORTY_KINDS = ("lecture", "outreach", "ensemble", "concert")
 
 
 def forty(lang, t):
+    """The forty in two blocks, talks then performances, each labelled where
+    it stands (v7, art direction: one row of 13px squares in date order read
+    as a dotted rule under 138px numerals, and its key sat in a legend). The
+    squares are drawn for the eye; the two labels and the caption say it."""
     rows = [r for r in ledger.ROWS if r[3] in FORTY_KINDS and ledger.counted(r)]
-    talks = sum(1 for r in rows if r[3] == "lecture")
-    sq = "".join(f'<span class="{"f-on" if r[3] == "lecture" else "f-open"}" style="--i:{i}" '
-                 f'title="{html.escape(html.unescape(ledger.public_label(r, lang)))}"></span>'
-                 for i, r in enumerate(rows))
-    aria = t["aria"].format(n=len(rows), talks=talks, perf=len(rows) - talks)
-    return (f'<figure class="forty"><div class="forty-row" role="img" aria-label="{html.escape(aria)}">{sq}</div>'
-            f'<figcaption><span><i aria-hidden="true"></i>{t["talks"].format(n=talks)}</span>'
-            f'<span><i class="o" aria-hidden="true"></i>{t["perf"].format(n=len(rows) - talks)}</span>'
-            f'<span>{t["period"]}</span></figcaption></figure>')
+    talks = [r for r in rows if r[3] == "lecture"]
+    perf = [r for r in rows if r[3] != "lecture"]
+    def block(rs, cls, label, start):
+        sq = "".join(f'<span class="{cls}" style="--i:{start + i}"></span>' for i in range(len(rs)))
+        return (f'<div class="forty-g" style="--n:{len(rs)}"><div class="forty-row" aria-hidden="true">{sq}</div>'
+                f'<p class="forty-n">{label.format(n=len(rs))}</p></div>')
+    # one strip across the band, the talks then the performances, each as wide as its
+    # count (styles.css; two fresh reviewers, v7: set on the figures' columns the open
+    # dots read as the 22 places, and under "40+" alone they left the band two-thirds empty)
+    return (f'<figure class="forty"><div class="forty-groups">'
+            f'{block(talks, "f-on", t["talks"], 0)}{block(perf, "f-open", t["perf"], len(talks))}</div>'
+            f'<figcaption>{t["period"]}</figcaption></figure>')
 
 
 # ---------------------------------------------------------------------------
@@ -290,7 +297,7 @@ def watch_url(v):
     return "Vimeo", f"https://vimeo.com/{v['id']}"
 
 
-def video(v, label, play):
+def video(v, label, play, lang="en"):
     if not v:
         return ""
     if v["kind"] == "file":
@@ -305,7 +312,7 @@ def video(v, label, play):
     small = v["poster"][:-4] + "-800.jpg"
     name = small if os.path.exists(os.path.join(ROOT, "images", small)) else v["poster"]
     poster = f"{SITE_URL}/images/{name}"
-    doc = ("<style>*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;"
+    doc = (f"<html lang='{lang}'>" "<style>*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;"
            "background:#1D2430}img{width:100%;height:100%;object-fit:cover;opacity:.88}"
            "i{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;"
            "background:#FAF5EE;box-shadow:0 0 0 1px #B8893A}i::before{content:'';position:absolute;"
