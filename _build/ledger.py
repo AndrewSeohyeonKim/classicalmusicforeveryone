@@ -223,7 +223,7 @@ ROWS = [
     (2026, 1, 15, "course",
      "Ensemble for retired religious: ten weekly rehearsals", "은퇴 수도자 앙상블: 10주 연습",
      "Warrenmount, Dublin 8", "Warrenmount, 더블린 8구",
-     dict(until=(3, 17), att=7, flag=("Thursdays, one hour · seven retired Presentation Sisters · all seven completed",
+     dict(until=(3, 19), att=7, flag=("Thursdays, one hour · seven retired Presentation Sisters · all seven completed",
                                       "목요일 1시간 · 프레젠테이션 수녀회 은퇴 수녀 7명 · 7명 전원 수료"),
           pub=("Thursdays, one hour · seven retired Presentation Sisters · all seven stayed to the end",
                "목요일 1시간 · 은퇴한 Presentation 수녀님 일곱 분 · 일곱 분 모두 끝까지"))),

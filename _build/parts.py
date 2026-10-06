@@ -175,7 +175,9 @@ def leadins(items, cls=""):
 
 # One icon per line of "You provide / We bring", by position and the same in
 # both languages; the build stops if a list and its icons differ in length.
-MEET_ICONS = ((("room", "calendar", "person"), ("people", "stand", "score")),
+# insurance is the certificate, as on Contact (never a shield); the audience's safety is the
+# hand of care (Andrew, 6 Oct 2026: a room with a socket, a date, a contact, the audience looked after)
+MEET_ICONS = ((("room", "calendar", "person", "hand"), ("people", "stand", "score", "certificate")),
               (("room", "person", "announce"), ("recorder", "score")))
 
 

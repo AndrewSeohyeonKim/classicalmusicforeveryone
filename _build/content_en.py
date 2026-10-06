@@ -145,8 +145,8 @@ PROGRAMMES_DATA = [
                    "<mark>explain every piece</mark> we play."),
                   ("How many people come?",
                    "Between <mark>six and fourteen</mark> people came to each talk we counted. The chart below shows those counts."),
-                  ("Can our group ask for a talk?",
-                   "<strong>Yes.</strong> Tell us your group, roughly how many people and where you could meet.")],
+                  # Andrew, 6 Oct 2026 (a group asks through the status line and the join section)
+                  ("Which language are the talks in?", "English or Korean, depending on the talk.")],
              record_h2="Talks so far.",
              record_lead="Every talk on the record, with its date, topic and place.",
              join_h2="Ask for a talk.",
@@ -170,8 +170,9 @@ PROGRAMMES_DATA = [
              cap=("Clarinet and string trio", "Christmas 2025"),
              glance=[("For", "Care homes, hospitals, religious communities, parishes and community centres"),
                      ("Where", "Your own room, in Dublin and further by arrangement"),
-                     ("When", "A date we agree with you"),
-                     ("What you need", "A room, a date and a contact person")],
+                     # Andrew, 6 Oct 2026: one to two hours; a room with a socket, a piano welcome
+                     ("When", "A date we agree with you, for one to two hours"),
+                     ("What you need", "A room with a power socket; a piano is welcome")],
              now=("Taking invitations", "Write with your room and a few dates that suit."),
              how_h2="Three steps to a concert in your room.",
              steps=[("You tell us", "Write with the room, a date and who will be listening."),
@@ -218,18 +219,19 @@ PROGRAMMES_DATA = [
                                  "<span class=\"pp-where\">Mulhuddart Community Centre</span>"),
              live=True,
              how_h2="From a first note to your own part.",
-             steps=[("Your first notes", "Hold the recorder, breathe and play."),
+             # Andrew, 6 Oct 2026: he leads the class (in the join line it folded into two half lines)
+             steps=[("Your first notes", "Our founder shows you how to hold the recorder, breathe and play."),
                     ("Reading from scratch",
                      "Notes and fingering, one at a time, with music we prepare for the class."),
                     ("Your own part",
                      "The group plays in harmony. The term ends with <mark>a small concert</mark> of our own.")],
              expect_h2="Before your first class.",
+             # Andrew, 6 Oct 2026: join during the term; step-free; he leads the class (reading music is
+             # in the glance and the steps, the pilot in the video and the record)
              faq=[("Do I need my own recorder?", "<strong>No.</strong> We can <mark>lend you one</mark>."),
-                  ("Do I need to read music?",
-                   "<strong>No.</strong> You learn to read a few notes at a time, <mark>as you play</mark>."),
-                  ("Where did the class come from?",
-                   "From <mark>a ten-week pilot</mark> with seven retired Presentation Sisters, shown in the video "
-                   "below.")],
+                  ("Can I join during the term?", "<strong>Yes.</strong> You can start <mark>any Wednesday</mark>."),
+                  ("Is the centre step-free?",
+                   "<strong>Yes.</strong> Mulhuddart Community Centre has <mark>step-free access</mark>.")],
              record_h2="The story so far.",
              record_lead="It began with one question, asked at a concert.",
              join_h2="Join the class.",
@@ -444,8 +446,9 @@ ABOUT_T = dict(
         line="Andrew is a clarinettist, organist and community musician in Dublin.",
         facts=[("Training", "BMus (Hons) in Performance, TU Dublin Conservatoire"),
                ("Parish", "Music Director, Our Lady of Dolours, Dolphin&rsquo;s Barn"),
-               ("Recorder pilot",
-                "Seven retired Presentation Sisters, ten weeks; all seven stayed to the end")],
+               # Andrew, 6 Oct 2026: the pilot was his BMus research, and all seven played the Easter concert
+               ("Graduation research",
+                "Recorder pilot: seven retired Presentation Sisters; all seven played the Easter concert")],
     ),
     run=dict(
         label="How we are run",
@@ -544,8 +547,9 @@ GET_INVOLVED_T = dict(
         lead="Care homes, hospitals, religious communities, parishes and community centres <mark>can invite us</mark>.",
         pair_labels=("You provide", "We bring"),
         pairs=[("A concert",
-                ["A room", "A date", "A contact person"],
-                ["The musicians", "Instruments and stands", "Music chosen for your listeners"]),
+                ["A room with a power socket", "A date", "A contact person", "Care for the audience&rsquo;s safety"],
+                ["The musicians", "Instruments and stands", "Music chosen for your listeners",
+                 "Public liability insurance"]),
                ("A recorder class",
                 ["A warm room each week", "A contact person", "Help letting local people know"],
                 ["Recorders to lend", "Music and teaching, as funding allows"])],
@@ -757,7 +761,7 @@ CONTACT_T = dict(
         title=["Write to us."],
         # each sentence fits its column on a laptop (chief designer, typography
         # pass: the old pair folded into four half lines); now as the Korean says
-        lead="Choose a topic below, or simply write. We answer <mark>every message</mark>.",
+        lead="Choose a topic below, or simply write. We reply <mark>as soon as we can</mark>.",
     ),
     # one form, a topic to choose (Andrew, 2 Oct 2026, evening). It is a mailto form: the
     # visitor's own email app opens with the subject and the message; nothing passes through

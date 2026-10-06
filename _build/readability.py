@@ -170,7 +170,8 @@ STATUS = {
 BANNED = {
     "en": [
         (r"—", "em dash"),
-        (r"\bfree( of charge)?\b|\bno fee\b|\bno charge\b|\bnothing to pay\b|\bno tickets?\b", "cost word"),
+        # "step-free" is access, not price (the class page, Andrew 6 Oct 2026): only that compound passes
+        (r"(?<!step-)\bfree( of charge)?\b|\bno fee\b|\bno charge\b|\bnothing to pay\b|\bno tickets?\b", "cost word"),
         (r"\bcharit(y|ies|able)\b", "'charity' outside the status sentence"),
         (r"\bacross Ireland\b", "'across Ireland'"),
         # "wherever music is needed" is a need, not a territory (2 Oct 2026 night)

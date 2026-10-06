@@ -762,7 +762,7 @@ def _name_nbsp(m):
 _PHRASES = re.compile("|".join(
     p.replace(" ", "[ \u00a0]") for p in (
         r"\bfor example\b", r"\bone at a time\b", r"\baccess needs\b",
-        r"\breligious communities\b",
+        r"\breligious communities\b", r"\ball seven\b",
         r"\bOur Lady of Dolours\b", r"&lsquo;what is Classical Music\?&rsquo;")))
 
 
