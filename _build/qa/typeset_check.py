@@ -473,18 +473,19 @@ MARKS = """(() => { const out = [];
     const tops = new Set([...r].map(x => Math.round(x.top)));
     if (tops.size > 1) out.push(t); }
   return out; })()"""
-GALLERY = """(() => { const g = document.querySelector('.gallery'); if (!g) return [];
+GALLERY = """(() => { const out = [];
+  for (const g of document.querySelectorAll('.gallery')) { if (g.getBoundingClientRect().height < 1) continue;
   const W = g.getBoundingClientRect().width, gap = parseFloat(getComputedStyle(g).columnGap) || 0;
   const rows = new Map();
   // every photograph drawn (a capture once showed alt text where a file was slow)
-  const out = [...g.querySelectorAll('img')].filter(i => !(i.complete && i.naturalWidth > 0)).map(i => ({missing: i.getAttribute('src')}));
+  out.push(...[...g.querySelectorAll('img')].filter(i => !(i.complete && i.naturalWidth > 0)).map(i => ({missing: i.getAttribute('src')})));
   for (const li of g.children) { const r = li.getBoundingClientRect(), p = li.querySelector('.photo').getBoundingClientRect();
     const k = Math.round(r.top); if (!rows.has(k)) rows.set(k, []); rows.get(k).push({w: r.width, h: p.height}); }
   for (const [top, items] of rows) {
     const span = items.reduce((a, x) => a + x.w, 0) + gap * (items.length - 1);
     const hs = items.map(x => x.h);
     if (Math.abs(span - W) > 1) out.push({row: top, n: items.length, span: Math.round(span), width: Math.round(W)});
-    if (Math.max(...hs) - Math.min(...hs) > 1) out.push({row: top, heights: hs.map(Math.round)}); }
+    if (Math.max(...hs) - Math.min(...hs) > 1) out.push({row: top, heights: hs.map(Math.round)}); } }
   return out; })()"""
 
 
@@ -524,7 +525,7 @@ STEPS = r"""((sel) => { const out = [];
     for (const e of blocks) {
       const r = document.createRange(); r.selectNodeContents(e);
       const lines = [];
-      for (const x of [...r.getClientRects()].filter(x => x.width > .5).sort((a, b) => a.top - b.top)) {
+      for (const x of [...r.getClientRects()].filter(x => x.width > 2 && x.height > 2).sort((a, b) => a.top - b.top)) {
         const cy = (x.top + x.bottom) / 2, l = lines.find(v => Math.abs(v.cy - cy) < 6);
         if (l) { l.a = Math.min(l.a, x.left); l.b = Math.max(l.b, x.right); } else lines.push({cy, a: x.left, b: x.right}); }
       const ws = lines.map(v => v.b - v.a);
@@ -815,7 +816,7 @@ UNSEEN = """(() => { const out = [];
   for (const e of document.querySelectorAll('main *')) {
     if (e.closest('.arrow, .sr-only, [hidden]')) continue;
     const fold = e.closest('details:not([open])'); if (fold && !e.closest('summary') && getComputedStyle(fold).display !== 'none'
-        && !e.closest('.ry-fold')) continue;
+        && getComputedStyle(fold, '::details-content').contentVisibility !== 'visible') continue;
     const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden') continue;
     const b = e.getBoundingClientRect(); if (b.width < 1 || b.height < 1) continue;
     if (parseFloat(cs.opacity) < .99) out.push((e.className && e.className.baseVal === undefined ? e.className : e.tagName) + ' ' + cs.opacity); }
@@ -830,13 +831,87 @@ UNSEEN = """(() => { const out = [];
   return [...new Set(out)].slice(0, 12); })()"""
 
 
+# --- v8 ---------------------------------------------------------------------------------------
+# coverfield (art direction v8): a cover's emblem stands in the middle of the field its number and
+# its words leave, the space above and below it within 35% of the larger (centred on the whole tile
+# it stood 45px under the number and 94px over the edge once the words were hidden)
+COVERFIELD = r"""(() => { const out = [];
+  for (const c of document.querySelectorAll('.cover')) { const cb = c.getBoundingClientRect(); if (cb.width < 20) continue;
+    const no = c.querySelector('.cover-no').getBoundingClientRect(), m = c.querySelector('.cover-mark').getBoundingClientRect();
+    const line = c.querySelector('.cover-line'), pad = parseFloat(getComputedStyle(c).paddingBottom);
+    const lv = line && getComputedStyle(line).display !== 'none' ? line.getBoundingClientRect() : null;
+    const foot = lv ? lv.top : cb.bottom - pad, above = m.top - no.bottom, below = foot - m.bottom, big = Math.max(above, below);
+    if (big > 4 && Math.abs(above - below) > Math.max(2, .35 * big))
+      out.push({cover: c.querySelector('.cover-no').textContent, w: Math.round(cb.width), above: Math.round(above), below: Math.round(below)}); }
+  return out; })()"""
+# vtnames (v8): at rest no cover is named on Home or the index (five flew at once), a programme page
+# names its own cover once, and no name is used twice on a page (a duplicate cancels the transition)
+VTNAMES = r"""(() => { const out = [], seen = {};
+  for (const e of document.querySelectorAll('*')) { const n = getComputedStyle(e).viewTransitionName;
+    if (!n || n === 'none' || n === 'auto') continue; if (seen[n]) out.push('twice: ' + n); seen[n] = 1; }
+  const covers = Object.keys(seen).filter(n => n.startsWith('prog-')), pp = !!document.querySelector('.pp-cover');
+  const moving = matchMedia('(prefers-reduced-motion: no-preference)').matches;
+  if (pp && moving ? covers.length !== 1 : covers.length) out.push('covers named: ' + (covers.join(' ') || 'none'));
+  return out; })()"""
+# labelline (UX v8): in the record lists a month's or a date's label stands on the first baseline of
+# its title (a long name kept whole by an inline block took its baseline from its last line and
+# pulled "DEC" a line down beside "Gwandukjeong Martyrs / Memorial Centre"); measured with every
+# fold open, from 1024
+LABELLINE = r"""(() => { const out = [];
+  document.querySelectorAll('details').forEach(d => d.open = true);
+  const base = el => { if (!el) return null;
+    const t = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {acceptNode: n => /\S/.test(n.nodeValue) && !n.parentElement.closest('.sr-only') ? 1 : 2}).nextNode();
+    if (!t) return null; const p = document.createElement('span'); p.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
+    t.parentNode.insertBefore(p, t); const y = p.getBoundingClientRect().bottom; p.remove(); return y; };
+  for (const row of document.querySelectorAll('.ry-mo')) { const a = base(row.querySelector('.ry-m')), b = base(row.querySelector('.ry-what'));
+    if (a !== null && b !== null && Math.abs(a - b) > 1) out.push({row: row.querySelector('.ry-m').textContent.slice(0, 12), d: +(a - b).toFixed(1)}); }
+  for (const li of document.querySelectorAll('.rec > li')) { const a = base(li.querySelector('.rec-when')), b = base(li.querySelector('.rec-what'));
+    if (a !== null && b !== null && Math.abs(a - b) > 1) out.push({row: li.querySelector('.rec-when').textContent.slice(0, 14), d: +(a - b).toFixed(1)}); }
+  return out.slice(0, 12); })()"""
+# fortyrows (art direction v8): the home's forty are dots of one size, and each kind is one row
+# (on a phone 23 performances broke 20 + 3 and the two counts no longer compared by length)
+FORTYROWS = r"""(() => { const out = [], ws = [];
+  for (const r of document.querySelectorAll('.forty-row')) { const tops = new Set();
+    for (const s of r.children) { const b = s.getBoundingClientRect(); ws.push(b.width); tops.add(Math.round(b.top)); }
+    if (tops.size > 1) out.push({rows: tops.size, n: r.children.length}); }
+  if (ws.length && Math.max(...ws) - Math.min(...ws) > .5) out.push({widths: [Math.min(...ws), Math.max(...ws)].map(x => +x.toFixed(1))});
+  return out; })()"""
+# piarrow (UX v8): on the Programmes index the row's arrow stands on the name's first line
+# (centred on the row, it fell 13px under the name where a value took three lines), from 1024
+PIARROW = r"""(() => [...document.querySelectorAll('.pi')].map(p => { const a = p.querySelector('.pi-end .arrow'), h = p.querySelector('.pi-main h2');
+  if (!a || !a.getClientRects().length) return null; const ab = a.getBoundingClientRect(), hb = h.getBoundingClientRect();
+  const d = (ab.top + ab.bottom) / 2 - (hb.top + parseFloat(getComputedStyle(h).lineHeight) / 2);
+  return Math.abs(d) > 2 ? {row: p.id, d: +d.toFixed(1)} : null; }).filter(Boolean))()"""
+# herophoto (art direction v8): the home photograph is a 16:10 plate whose top is on the first
+# laptop screen with the players in view
+HEROPHOTO = r"""(() => { const p = document.querySelector('.hero-figure .photo'); if (!p) return null; const b = p.getBoundingClientRect();
+  return {ratio: +(b.width / b.height).toFixed(3), visible: Math.round(innerHeight - b.top)}; })()"""
+# settle (motion desk v8): walked down a screen at a time, the way a reader scrolls, and given time
+# to arrive, everything wholly on screen has arrived: full opacity, nothing moved, scaled or turned.
+# Walking to the end first (the motion check) would have fired the last trigger and hidden a trigger
+# tier whose names were not scoped (every arrival waiting for the last one)
+SETTLE = r"""(async () => { const out = [], H = innerHeight, step = Math.round(H * .9);
+  const sel = '.rv,.rv-stagger>*,.cover,.lt,.doors-pair a,.plate img,.sh h2,.forty-row span,.meet-ico,.d-ring,.route-mark';
+  const look = y => { for (const e of document.querySelectorAll(sel)) { const b = e.getBoundingClientRect();
+      if (b.top < 0 || b.bottom > H || b.height < 1 || e.closest('details:not([open])')) continue;
+      const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+      const name = (typeof e.className === 'string' ? e.className : '') || e.tagName;
+      if (parseFloat(cs.opacity) < .99) out.push({y, el: name, opacity: cs.opacity});
+      for (const p of ['translate', 'scale', 'rotate']) if (cs[p] !== 'none' && !/^0px( 0px)?$/.test(cs[p])) out.push({y, el: name, [p]: cs[p]}); } };
+  for (let y = 0; y < document.documentElement.scrollHeight - H / 2; y += step) {
+    scrollTo(0, y); await new Promise(r => setTimeout(r, 1300)); look(y); }
+  scrollTo(0, 0); await new Promise(r => setTimeout(r, 900)); look(0);
+  return [...new Map(out.map(o => [JSON.stringify(o).slice(0, 90), o])).values()].slice(0, 12); })()"""
+
+
 def main(strict=False):
     httpd, base = serve()
     found = {"fold": [], "tail": [], "tie": [], "hero": [], "axis": [], "width": [], "group": [], "meet": [],
              "leader": [], "names": [], "rings": [], "faces": [], "twins": [], "marks": [], "gallery": [],
              "years": [], "venues": [], "yearline": [], "motion": [], "wide": [], "lang": [], "dots": [],
              "titlegap": [], "inword": [], "sentences": [], "herorings": [], "kinsoku": [], "colline": [],
-             "lone": [], "phrings": [], "shsize": [], "steps": []}
+             "lone": [], "phrings": [], "shsize": [], "steps": [],
+             "coverfield": [], "vtnames": [], "labelline": [], "fortyrows": [], "herophoto": [], "settle": [], "piarrow": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -846,7 +921,7 @@ def main(strict=False):
                         c.viewport(w, h, 2 if mobile else 1, mobile)
                         c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
                         c.js("Promise.race([document.fonts.ready.then(()=>1),new Promise(r=>setTimeout(()=>r(0),5000))])")
-                        r = c.js(f"({JS})({json.dumps(LEADS)}, {json.dumps(SHORT)}, {'true' if w >= 1024 else 'false'})")
+                        r = c.js(f"({JS})({json.dumps(LEADS + (',.step-t' if w >= 1200 else ''))}, {json.dumps(SHORT)}, {'true' if w >= 1024 else 'false'})")
                         found["fold"] += [(lang, pg, w, x) for x in r["fold"]]
                         found["tail"] += [(lang, pg, w, x) for x in r["tail"]
                                           if not any(pg == a and w == b and c in x["text"] for a, b, c in ACCEPT_TAIL)]
@@ -875,6 +950,15 @@ def main(strict=False):
                             found["phrings"] += [(lang, w, x) for x in c.js(PHRINGS)]
                         if lang == "en" and w >= 1024:
                             found["venues"] += [(pg, w, x) for x in c.js(f"({VENUES_JS})({json.dumps(VENUES)})")]
+                        found["coverfield"] += [(lang, pg, w, x) for x in c.js(COVERFIELD)]
+                        found["vtnames"] += [(lang, pg, w, x) for x in c.js(VTNAMES)]
+                        if pg == "programmes" and w >= 1024:
+                            found["piarrow"] += [(lang, w, x) for x in c.js(PIARROW)]
+                        if pg == "index":
+                            found["fortyrows"] += [(lang, w, x) for x in c.js(FORTYROWS)]
+                        # last: it opens every fold
+                        if w >= 1024:
+                            found["labelline"] += [(lang, pg, w, x) for x in c.js(LABELLINE)]
                 for w, h in ((1440, 789), (1366, 768), (1280, 720), (1024, 768), (820, 1180), (768, 1024), (390, 844)):
                     c.viewport(w, h, 2 if w < 700 else 1, w < 700)
                     c.goto(base + ("" if lang == "en" else "ko/") + "index.html", settle=0.8)
@@ -889,6 +973,10 @@ def main(strict=False):
                     axis = c.js(AXIS)
                     if axis["spread"] > 1:
                         found["axis"].append((lang, w, h, axis))
+                    if w >= 1001:
+                        ph = c.js(HEROPHOTO)
+                        if ph and (abs(ph["ratio"] - 1.6) > .02 or ph["visible"] < 240):
+                            found["herophoto"].append((lang, w, h, ph))
                     width = c.js(WIDTH)
                     if (width["lines"] == 1 and abs(width["d"]) > 3) or (width["lines"] > 1 and width["sub"] > width["title"] + 1):
                         found["width"].append((lang, w, h, width))
@@ -975,6 +1063,8 @@ def main(strict=False):
                     for w in (1440, 390):
                         c.viewport(w, 900 if w > 700 else 844, 2 if w < 700 else 1, w < 700)
                         c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.4)
+                        found["settle"] += [(lang, pg, w, x) for x in c.js(SETTLE)]
+                        found["vtnames"] += [(lang, pg, w, "motion", x) for x in c.js(VTNAMES)]
                         c.js(WALK)
                         found["motion"] += [(lang, pg, w, x) for x in c.js(UNSEEN)]
                         if pg == "news":

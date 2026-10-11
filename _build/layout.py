@@ -42,8 +42,14 @@ FONTS_EN = FONTS.replace("&family=Noto+Sans+KR:wght@400;700", "")
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
-UPDATED = {"en": "5 October 2026", "ko": "2026년 10월 5일"}
-UPDATED_ISO = "2026-10-05"
+UPDATED = {"en": "11 October 2026", "ko": "2026년 10월 11일"}
+UPDATED_ISO = "2026-10-11"
+
+
+def _parts_line(text):
+    """The footer's parts, one a line on a phone (parts.parts_line, which this
+    module cannot import: parts imports layout)."""
+    return '<span class="cs"> · </span>'.join(f'<span class="cp">{b}</span>' for b in text.split(" · "))
 
 # Six pages and the language switch (2026-09-30: five pages, then News &
 # archive added back when the organisation was restructured). Five plain
@@ -163,8 +169,9 @@ RESET_JS = ("var n=document.getElementById('nav'),b=document.querySelector('.men
 # version from the messaging guide (kit 27), then its status sentence. It used
 # to take each page's own description, so the contact page described the
 # organisation as "email, phone and where we travel to".
-ORG_DESC = ("Classical Music for Everyone brings live Classical Music, talks and a recorder class to "
-            "people in Dublin who find it hard to get to concerts. Classical Music for Everyone is a "
+ORG_DESC = ("Classical Music for Everyone runs five programmes in Dublin: Classical Music talks, outreach "
+            "concerts, a recorder class for adults, the Letters Ensemble and concert outings. "
+            "Classical Music for Everyone is a "
             "not-for-profit community music initiative, forming a company limited by guarantee. It is "
             "not yet a registered charity.")
 
@@ -418,9 +425,9 @@ def footer(lang, slug="index.html"):
       </div>
     </div>
     <div class="footer-bottom">
-      <span>{s['f_legal']}</span>
+      <span>{_parts_line(s['f_legal'])}</span>
       <span class="footer-status">{s['f_status']}</span>
-      <span>{s['f_updated']} {UPDATED[lang]} · <a href="{p}contact.html#privacy">{s['f_privacy']}</a></span>
+      <span><span class="cp">{s['f_updated']} {UPDATED[lang]}</span><span class="cs"> · </span><span class="cp"><a href="{p}contact.html#privacy">{s['f_privacy']}</a></span></span>
     </div>
   </div>
 </footer>"""
@@ -724,7 +731,10 @@ _TN_OPEN, _TN_CLOSE, _TN_SP = "\ue011", "\ue012", "\ue010"   # not the highlight
 # what may not part from a long name: before it an article and an opening
 # quote or bracket; after it a closing quote or bracket, a joined Korean
 # particle or ending (after a word joiner) or "'s", and punctuation
-_TN_BEFORE = re.compile("((?:\\b(?:[Aa]n?|[Tt]he)[ \u00a0])?(?:&lsquo;|&ldquo;|[\u2018\u201c\u300c\u300e(])?)" + _TN_OPEN)
+# v8: a short preposition before the name goes with it too ("Dublin 6, at /
+# Methodist Centenary Church" left "at" at a line end on a phone)
+_TN_BEFORE = re.compile("((?:\\b(?:[Aa]t|[Ii]n|[Tt]o|[Ff]rom|[Ww]ith)[ \u00a0])?(?:\\b(?:[Aa]n?|[Tt]he)[ \u00a0])?"
+                        "(?:&lsquo;|&ldquo;|[\u2018\u201c\u300c\u300e(])?)" + _TN_OPEN)
 _TN_AFTER = re.compile(_TN_CLOSE + "((?:&rsquo;|&rdquo;|[\u2019\u201d\u300d\u300f)])?\u2060?"
                        "(?:&rsquo;s|\u2019s|[\uac00-\ud7a3]+)?(?:[,.;:!?](?:&rsquo;|&rdquo;|[\u2019\u201d)])?)?)")
 
@@ -762,7 +772,7 @@ def _name_nbsp(m):
 _PHRASES = re.compile("|".join(
     p.replace(" ", "[ \u00a0]") for p in (
         r"\bfor example\b", r"\bone at a time\b", r"\baccess needs\b",
-        r"\breligious communities\b", r"\ball seven\b",
+        r"\breligious communities\b", r"\ball seven\b", r"\bagree with you\b",
         r"\bOur Lady of Dolours\b", r"&lsquo;what is Classical Music\?&rsquo;")))
 
 
@@ -803,7 +813,10 @@ _INLINE_OPEN = re.compile(r"<(a|strong|em|b|i|span)\b")
 def _articles(text, before_tag):
     def bind(m):
         run = re.match(r"[^ \t\n\r<]+", text[m.end():])
-        if len(m.group(1)) + 1 + len(run.group(0) if run else "") <= 20:
+        # a highlight kept whole (layout._mark_whole) may run to 24 letters: the article before it
+        # still goes with it ("registered, this / independent volunteer board", a fresh reviewer, v8)
+        limit = 28 if run and run.group(0).startswith(_MARK_OPEN) else 20
+        if len(m.group(1)) + 1 + len(run.group(0) if run else "") <= limit:
             return m.group(1) + NBSP
         return m.group(0)
     text = _ARTICLE.sub(bind, text)
@@ -875,7 +888,8 @@ def _mark_whole(m):
         return m.group(0)
     text = inner.replace(NBSP, " ")
     ko = len(re.findall("[가-힣]", text))
-    short = (ko + len(re.findall("[A-Za-z0-9]", text)) <= 10) if ko else len(text) <= 20
+    # v8: 24 letters, 12 syllables ("independent volunteer", "seven retired" ran in two bands on a phone)
+    short = (ko + len(re.findall("[A-Za-z0-9]", text)) <= 12) if ko else len(text) <= 24
     return m.group(1) + (inner.replace(" ", NBSP) if short else inner) + m.group(3)
 
 

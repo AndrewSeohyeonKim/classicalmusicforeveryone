@@ -83,6 +83,12 @@
 @font-face{font-family:"Garamond fallback mac";font-style:italic;src:local("Iowan Old Style Italic");size-adjust:97%}
 @font-face{font-family:"Garamond fallback win";src:local("Georgia");size-adjust:85.8%}
 @font-face{font-family:"Garamond fallback win";font-style:italic;src:local("Georgia Italic");size-adjust:82%}
+/* the same for Hangul (QA v8): Apple SD Gothic Neo sets a Korean sentence 4.9% narrower than
+   Noto Sans KR (measured: 1910 against 2002 at 100px), so a lead line drawn before the web
+   font came took two lines once it came and pushed the page down 30px on a slow phone (CLS
+   0.13). At 105% the two widths agree within 0.2%. Android falls back to Noto itself. */
+@font-face{font-family:"Noto fallback mac";src:local("Apple SD Gothic Neo"),local("AppleSDGothicNeo-Regular");size-adjust:105%}
+@font-face{font-family:"Noto fallback mac";font-weight:700;src:local("AppleSDGothicNeo-Bold");size-adjust:105%}
 
 /* ==========================================================================
    2. SEMANTIC · roles. Components read these, never the primitives.
@@ -158,8 +164,8 @@
 
   /* --- type -------------------------------------------------------------- */
   --font-display:'EB Garamond','Garamond fallback mac','Garamond fallback win','Times New Roman',serif;
-  --font-body:'Plus Jakarta Sans','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --font-kr:'Noto Sans KR','Plus Jakarta Sans',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --font-body:'Plus Jakarta Sans','Noto Sans KR','Noto fallback mac',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --font-kr:'Noto Sans KR','Plus Jakarta Sans','Noto fallback mac',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
 
   /* One fluid scale, in rem so that a reader's own default size is honoured
      (SEED rootage/font-size.yaml). No content file writes a font-size. */
@@ -201,14 +207,16 @@
   --col4-w:calc(75% - var(--gap) * .75);
   --section:clamp(88px,10.5vw,168px);
   --section-tight:clamp(56px,6.5vw,104px);
-  /* radii: photographs and panels are nearly square, which is what makes
-     them read as printed plates rather than app cards; only controls are
-     round */
+  /* radii by role (v8): photographs, the map and the logo plate are nearly
+     square (2px), which is what makes them read as printed plates rather than
+     app cards; a field and the one overlay 4px; an object you press (a cover, a
+     white panel) 8px; controls are round */
   --radius-xs:2px;
   --radius-sm:4px;
   --radius:8px;
   --radius-pill:999px;
-  /* elevation is reserved for the one overlay (the mobile menu) */
+  /* elevation: the one overlay (the Programmes panel), a panel that answers the
+     pointer, and a cover lifted off the page (v8, below) */
   --shadow-overlay:0 24px 48px rgb(29 36 48 / .14),0 0 18px rgb(29 36 48 / .06);
   /* a panel that offers an action, answering the pointer (home doors) */
   --shadow-raise:0 10px 24px rgb(29 36 48 / .08),0 1px 3px rgb(29 36 48 / .06);
@@ -223,6 +231,29 @@
   --ease-enter-expressive:cubic-bezier(.03,.4,.1,1);
   /* one beat: the stagger between things that arrive in sequence */
   --beat:var(--dur-2);
+  /* v8 (motion desk): a settle and a small spring. They fall back to the SEED
+     curve, because a var() that resolves to a timing function a browser cannot
+     read voids the whole animation; linear() replaces them where it is known */
+  --ease-settle:var(--ease-enter);
+  --ease-spring:var(--ease-enter);
+  /* an ink object lifted off the paper, and set back on it (v8); a key and an
+     ambient shadow, the key's offset about half its blur (Fluent) */
+  --shadow-lift:0 14px 26px -12px rgb(29 36 48 / .38),0 3px 8px -3px rgb(29 36 48 / .14);
+  --shadow-set:0 1px 2px rgb(29 36 48 / .18);
+}
+@supports (transition-timing-function:linear(0,1)){
+  :root{
+    /* a settle: a critically damped spring, no overshoot; 90% of the way at 37%
+       of its time (arrivals, things carried from page to page, data) */
+    --ease-settle:linear(0, 0.227 5.6%, 0.355 9%, 0.476 12.6%, 0.579 16.2%, 0.67 20%, 0.747 24%, 0.81 28.2%,
+      0.861 32.6%, 0.9 37.2%, 0.932 42.4%, 0.956 48.2%, 0.974 54.8%, 0.986 62.4%, 0.993 71.6%, 1);
+    /* a small spring: 2.8% over, settled by two thirds of its time; only on the
+       translate, rotate or scale of a small control or ring, never on data,
+       text, colour, opacity or the page */
+    --ease-spring:linear(0, 0.052 1.2%, 0.119 2.6%, 0.4 8%, 0.519 10.4%, 0.625 12.8%, 0.718 15.2%, 0.808 18%,
+      0.846 19.4%, 0.883 21%, 0.939 24%, 0.981 27.4%, 1.001 29.8%, 1.016 32.6%, 1.025 35.4%, 1.028 38.8%,
+      1.002 66.6%, 1);
+  }
 }
 /* Korean: Noto Sans KR is spaced for text already; more leading, a
    narrower measure (about 40 syllables a line) */
@@ -407,7 +438,7 @@ mark{
 .band-ink mark{--highlight:var(--highlight-inverse)}
 /* Noto Sans KR's box is taller and its letters sit higher, so the band rides
    higher to sit under the same part of the letters */
-html[lang^="ko"] :is(mark,.ct-option input:checked+span){
+html[lang^="ko"] :is(mark,.ct-option>span){
   background-image:linear-gradient(transparent 40%,var(--highlight) 40%,var(--highlight) 80%,transparent 80%)}
 @media (forced-colors:active){mark{background:Mark;color:MarkText;forced-color-adjust:none}}
 @media print{
@@ -430,7 +461,9 @@ html[lang^="ko"] :is(mark,.ct-option input:checked+span){
    never inside one (v7: "National Concert Hall." broke inside "Hall" at 320px).
    anywhere: with text at 200% on a small phone a single word of it can be wider
    than the column, and the block must not stand out of the screen (R27) */
-.tn{display:inline-block;overflow-wrap:anywhere}
+/* top, not baseline: an inline block's baseline is its last line, so a name
+   that wrapped pulled its row's month or date one line down (v8, News 1440) */
+.tn{display:inline-block;vertical-align:top;overflow-wrap:anywhere}
 /* The build ties names, dates and counters with no-break spaces
    (layout.tie). If a tied run is ever wider than its line (text at 200% on
    a 320px screen), it may still break rather than spill out of its box.
@@ -522,12 +555,14 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
 @keyframes ink-fill{to{background-size:100% 100%,100% 100%}}
 @keyframes mark-draw{from{background-size:0% 100%}to{background-size:100% 100%}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-@keyframes header-solid{
-  to{background-color:var(--surface);border-bottom-color:var(--line);}
-}
 @keyframes progress-grow{from{scale:0 1}to{scale:1 1}}
 @keyframes vt-out{to{opacity:0;translate:0 -12px}}
 @keyframes vt-in{from{opacity:0;translate:0 18px}}
+/* the page left behind steps back as it fades (v8: depth as order, the cover
+   the reader took is nearer than the page they left; 1.5%, never a zoom) */
+@keyframes vt-recede{to{opacity:0;scale:.985}}
+@keyframes vt-fade{to{opacity:0}}
+@keyframes cover-set{from{translate:0 -6px;filter:drop-shadow(0 12px 12px rgb(29 36 48 / .28))}to{translate:none;filter:none}}
 
 /* reading progress, a hairline of gold across the very top */
 .progress{
@@ -555,10 +590,10 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
      photograph developing one beat after the title. The clip box of a line
      reaches below the baseline far enough for the tails of y, g and p. */
   .ln{overflow:clip;padding:.12em 0 .3em;margin:-.12em 0 -.3em}
-  .ln>span{animation:line-up var(--dur-slower) var(--ease-enter-expressive) both}
+  .ln>span{animation:line-up var(--dur-slower) var(--ease-enter-expressive) backwards}
   .ln:nth-child(2)>span{animation-delay:var(--beat)}
   .ln:nth-child(3)>span{animation-delay:calc(var(--beat) * 2)}
-  .lift{animation:rise var(--dur-slow) var(--ease-enter) both}
+  .lift{animation:rise var(--dur-slow) var(--ease-settle) backwards}
   .lift-1{animation-delay:var(--beat)}
   .lift-2,.lift-3{animation-delay:calc(var(--beat) * 2)}
   .lift-4{animation-delay:calc(var(--beat) * 3)}
@@ -566,35 +601,50 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
   .lift-6{animation-delay:calc(var(--beat) * 5)}
   /* backwards, not both: once developed, the picture is back in the hands
      of its own styles (the hover scale) */
-  .open .photo>img{animation:develop var(--dur-slow) var(--ease-enter) var(--beat) backwards}
+  .open .photo>img{animation:develop var(--dur-slow) var(--ease-settle) var(--beat) backwards}
 
-  /* --- page to page ------------------------------------------------------ */
-  ::view-transition-old(root){animation:vt-out var(--dur-4) var(--ease-exit) both}
-  ::view-transition-new(root){animation:vt-in var(--dur-6) var(--ease-enter) both}
-  /* The gold mark under the current page glides to the next page's link,
-     and a programme's cover, followed from the home page or the index,
-     grows into the cover at the head of its own page: the same object,
-     carried rather than replaced. */
-  .nav-mark{view-transition-name:nav-current}
-  ::view-transition-group(nav-current),::view-transition-group(*.prog-cover){
-    animation-duration:var(--dur-slow);animation-timing-function:var(--ease-enter-expressive)}
-  ::view-transition-old(*.prog-cover),::view-transition-new(*.prog-cover){height:100%;object-fit:cover}
-  /* the header and the mark are the same objects on the next page, so they
-     are carried across rather than faded out and back in */
+  /* --- page to page (v8) --------------------------------------------------
+     The page left behind steps back and fades in 200ms; the next rises 18px in
+     300ms. The header is the frame and does not move, so a plain navigation is
+     done in about 310ms (it held 680 to 750ms while the header's group ran
+     620ms for nothing). The gold mark glides to the next page's link in 300ms.
+     Only the cover the reader takes is carried: on Home and the index the one
+     under the pointer or the focus as the page is left, on a programme page its
+     own; it grows into the cover at the head of its page, the same object
+     carried rather than replaced (five covers flew at once before, v8). What
+     hangs from the header, the open phone menu and the Programmes panel, is
+     captured on its own and leaves at once: inside the header's snapshot it
+     hung frozen over the next page for 620ms. */
+  ::view-transition-old(root){animation:vt-recede var(--dur-4) var(--ease-exit) both}
+  ::view-transition-new(root){animation:vt-in var(--dur-6) var(--ease-settle) both}
   .site-header{view-transition-name:site-header}
-  ::view-transition-group(site-header){animation-duration:var(--dur-slow)}
-  ::view-transition-old(site-header),::view-transition-new(site-header){animation:none}
+  ::view-transition-group(site-header),::view-transition-old(site-header),
+  ::view-transition-new(site-header){animation:none}
+  .nav-mark{view-transition-name:nav-current}
+  ::view-transition-group(nav-current){animation-duration:var(--dur-6);animation-timing-function:var(--ease-settle)}
+  @media (min-width:62.5625em){.has-sub:is(:hover,:focus-within):not([data-shut]) .nav-sub{view-transition-name:nav-panel}}
+  ::view-transition-group(nav-panel){animation-duration:var(--dur-3)}
+  @media (max-width:62.5em){.nav[data-open="true"]{view-transition-name:nav-drawer}}
+  /* the menu goes at once: fading for 100ms, its words lay over the arriving page (a fresh reviewer) */
+  ::view-transition-old(nav-drawer){animation:none;opacity:0}
+  :is(.pc:is(:hover,:focus),.pi:is(:hover,:focus-within),.pp-cover) .cover{view-transition-name:var(--vtn)}
+  ::view-transition-group(*.prog-cover){animation-duration:var(--dur-slow);animation-timing-function:var(--ease-settle)}
+  /* the two pictures of the cover hand over in the first 250ms, then the one cover grows on into
+     its place (crossing over the whole 620ms, the small number and the large one showed twice) */
+  ::view-transition-old(*.prog-cover),::view-transition-new(*.prog-cover){height:100%;object-fit:cover;
+    animation-duration:var(--dur-5)}
+  ::view-transition-old(*.prog-cover):not(:only-child){z-index:1;mix-blend-mode:normal;animation:vt-fade var(--dur-2) linear both}
+  ::view-transition-new(*.prog-cover):not(:only-child){mix-blend-mode:normal;animation:none}
+  /* a cover with no partner on the other page leaves with its page; one that arrives without one
+     (a pick from the menu or the panel) is set down on its page, solid, from 6px (chief designer
+     v8: fading in, it was a grey slab over the page being left) */
+  ::view-transition-old(*.prog-cover):only-child{animation:vt-recede var(--dur-4) var(--ease-exit) both}
+  ::view-transition-new(*.prog-cover):only-child{animation:cover-set var(--dur-6) var(--ease-settle) both}
+  /* the head's cover is the card's cover carried over: drawn, never redrawn under the morph */
+  .pp-cover .cover-mark *{animation:none}
 
   @supports (animation-timeline:scroll()){
     .progress{animation:progress-grow linear both;animation-timeline:scroll(root block)}
-    /* the header is clear over the top of the page and takes on its paper
-       and its rule only once the page has moved under it */
-    .site-header{
-      background-color:color-mix(in srgb,var(--surface) 0%,transparent);
-      border-bottom-color:transparent;
-      animation:header-solid linear both;
-      animation-timeline:scroll(root block);animation-range:0 120px;
-    }
   }
 
   @supports (animation-timeline:view()){
@@ -604,14 +654,14 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
        stay faded until its top reached the top of the screen; the range
        ends 180px in, or sooner for a short block. */
     .rv{
-      animation:rise linear both;animation-timeline:view();
+      animation:rise linear backwards;animation-timeline:view();
       animation-range:entry 0% entry 100%;
       animation-range:entry 0% entry min(100%, 180px);
     }
     /* A list staggers on the list's own arrival, so the fourth card in a
        one-column phone layout is already there when it is scrolled to. */
     .rv-stagger{view-timeline:--stagger block}
-    .rv-stagger>*{animation:rise linear both;animation-timeline:--stagger;animation-range:entry 0% entry 36%}
+    .rv-stagger>*{animation:rise linear backwards;animation-timeline:--stagger;animation-range:entry 0% entry 36%}
     .rv-stagger>*:nth-child(2){animation-range:entry 6% entry 42%}
     .rv-stagger>*:nth-child(3){animation-range:entry 12% entry 48%}
     .rv-stagger>*:nth-child(4){animation-range:entry 18% entry 54%}
@@ -620,7 +670,7 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
 
     /* section headings are wiped up from their baseline, quickly */
     .sh h2,.mark h2,.founder h2{
-      animation:mask-up linear both;animation-timeline:view();
+      animation:mask-up linear backwards;animation-timeline:view();
       animation-range:entry 10% entry 60%;
     }
 
@@ -630,34 +680,36 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
        container. */
     .plate{view-timeline:--plate-tl block}
     .plate .photo>img{animation:develop linear backwards;animation-timeline:--plate-tl;
-      animation-range:entry 0% entry min(60%, 160px)}
+      animation-range:entry 0% entry 60%;animation-range:entry 0% entry min(60%, 160px)}
 
     /* a highlighter mark is drawn across its words as they come on screen,
        finished by the time the line is fully in view */
-    mark{animation:mark-draw linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+    mark{animation:mark-draw linear backwards;animation-timeline:view();animation-range:entry 0% entry 100%}
 
     /* a cover's emblem draws itself in as the cover arrives */
     .cover{view-timeline:--cover block}
-    .cover-mark *{animation:stroke-in linear both;animation-timeline:--cover;
+    .cover-mark *{animation:stroke-in linear backwards;animation-timeline:--cover;
       animation-range:entry 20% entry 90%}
 
     /* the steps: each station's line draws to the next */
-    .steps li::before{animation:draw-x linear both;animation-timeline:view();animation-range:entry 40% entry 100%}
+    .steps li::before{animation:draw-x linear backwards;animation-timeline:view();animation-range:entry 40% entry 100%}
+    /* under 75em the line between the stations runs down: it draws down (R37) */
+    @media (max-width:75em){.steps li::before{transform-origin:50% 0;animation-name:draw-y}}
 
 
     /* charts and the map: marks appear in their order across the first part
        of the drawing's arrival, so a drawing on screen is always complete */
     .forty{view-timeline:--forty block}
-    .forty-row span{animation:pop linear both;animation-timeline:--forty;
+    .forty-row span{animation:pop linear backwards;animation-timeline:--forty;
       animation-range:entry calc(10% + var(--i) * 1.4%) entry calc(30% + var(--i) * 1.6%)}
     .strip{view-timeline:--strip block}
-    .strip .s-ev{transform-box:fill-box;transform-origin:50% 50%;animation:pop linear both;animation-timeline:--strip;
+    .strip .s-ev{transform-box:fill-box;transform-origin:50% 50%;animation:pop linear backwards;animation-timeline:--strip;
       animation-range:entry calc(20% + var(--i) * 2%) entry calc(45% + var(--i) * 2%)}
     .att{view-timeline:--att block}
-    .att .c-bar{transform-box:fill-box;transform-origin:50% 100%;animation:grow-y linear both;animation-timeline:--att;
+    .att .c-bar{transform-box:fill-box;transform-origin:50% 100%;animation:grow-y linear backwards;animation-timeline:--att;
       animation-range:entry calc(15% + var(--i) * 2%) entry calc(40% + var(--i) * 2.4%)}
     .places-map{view-timeline:--map block}
-    .map-svg :is(.m-dot,.m-halo){transform-box:fill-box;transform-origin:50% 50%;animation:pop linear both;
+    .map-svg :is(.m-dot,.m-halo){transform-box:fill-box;transform-origin:50% 50%;animation:pop linear backwards;
       animation-timeline:--map;animation-range:entry 30% entry 70%}
   }
 
@@ -667,22 +719,24 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
      left half done because the reader stopped. A trigger name is global
      unless scoped, so each is scoped to the element that declares it, and
      an element with two roles declares both names in one rule. */
-  @supports (timeline-trigger:--t view()) and (animation-trigger:--t play-once){
+  /* and only where trigger names can be scoped: unscoped, the 53 --rv names on a
+     page would be one name, and every arrival would wait for the last (v8) */
+  @supports (timeline-trigger:--t view()) and (animation-trigger:--t play-once) and (trigger-scope:--t){
     .rv{
       trigger-scope:--rv;timeline-trigger:--rv view() entry 0% exit 100%;
-      animation:rise var(--dur-slow) var(--ease-enter) both;
+      animation:rise var(--dur-slow) var(--ease-settle) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--rv play-once;
     }
     .rv-stagger{trigger-scope:--rvs;timeline-trigger:--rvs view() entry 0% exit 100%}
     .rv-stagger>*,.rv-stagger>*:nth-child(n){
-      animation:rise var(--dur-slow) var(--ease-enter) both;
+      animation:rise var(--dur-slow) var(--ease-settle) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--rvs play-once;
       animation-delay:calc((min(sibling-index(), 6) - 1) * var(--beat));
     }
     /* a plate develops once 15% of it is on screen */
     .plate{trigger-scope:--plate;timeline-trigger:--plate view() entry 15% exit 100%}
     .plate .photo>img{
-      animation:develop var(--dur-slow) var(--ease-enter) backwards;
+      animation:develop var(--dur-slow) var(--ease-settle) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--plate play-once;
     }
     /* a section heading comes up out of its baseline the way a page title
@@ -695,43 +749,44 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
     /* the rule from each station to the next draws a beat after it lands */
     .rv-stagger.steps>li::before{
       transform-origin:0 50%;
-      animation:draw-x var(--dur-slower) var(--ease) both;animation-timeline:auto;animation-range:normal;
+      animation:draw-x var(--dur-slower) var(--ease) backwards;animation-timeline:auto;animation-range:normal;
       animation-trigger:--rvs play-once;animation-delay:calc(min(sibling-index(), 6) * var(--beat));
     }
+    @media (max-width:75em){.rv-stagger.steps>li::before{transform-origin:50% 0;animation-name:draw-y}}
     /* a cover's emblem draws in once the cover is a fifth on screen */
     .cover{trigger-scope:--cv;timeline-trigger:--cv view() entry 20% exit 100%}
-    .cover-mark *{animation:stroke-in var(--dur-slower) var(--ease) both;animation-timeline:auto;
+    .cover-mark *{animation:stroke-in var(--dur-slower) var(--ease) backwards;animation-timeline:auto;
       animation-range:normal;animation-trigger:--cv play-once;animation-delay:var(--beat)}
     /* drawings: the figure fires as soon as any of it is on screen, then
        its marks are set down in order, a quarter beat apart */
     .forty{trigger-scope:--forty;timeline-trigger:--forty view() entry 0% exit 100%}
-    .forty-row span{animation:pop var(--dur-5) var(--ease-enter) both;animation-timeline:auto;animation-range:normal;
-      animation-trigger:--forty play-once;animation-delay:calc(var(--beat) * 2 + var(--i) * var(--beat) / 4)}
+    .forty-row span{animation:pop var(--dur-5) var(--ease-settle) backwards;animation-timeline:auto;animation-range:normal;
+      animation-trigger:--forty play-once;animation-delay:calc(var(--beat) * 2 + var(--i) * var(--beat) / 8)}
     .strip.rv{trigger-scope:--rv,--strip;
       timeline-trigger:--rv view() entry 0% exit 100%,--strip view() entry 0% exit 100%}
-    .strip .s-ev{animation:pop var(--dur-5) var(--ease-enter) both;animation-timeline:auto;animation-range:normal;
-      animation-trigger:--strip play-once;animation-delay:calc(var(--beat) * 2 + var(--i) * var(--beat) / 2)}
+    .strip .s-ev{animation:pop var(--dur-5) var(--ease-settle) backwards;animation-timeline:auto;animation-range:normal;
+      animation-trigger:--strip play-once;animation-delay:calc(var(--beat) * 2 + var(--i) * var(--beat) / 4)}
     .att.rv{trigger-scope:--rv,--att;
       timeline-trigger:--rv view() entry 0% exit 100%,--att view() entry 0% exit 100%}
-    .att .c-bar{animation:grow-y var(--dur-6) var(--ease-enter) both;animation-timeline:auto;animation-range:normal;
-      animation-trigger:--att play-once;animation-delay:calc(var(--beat) * 2 + var(--i) * var(--beat) / 2)}
+    .att .c-bar{animation:grow-y var(--dur-6) var(--ease-settle) backwards;animation-timeline:auto;animation-range:normal;
+      animation-trigger:--att play-once;animation-delay:calc(var(--beat) * 2 + var(--i) * var(--beat) / 4)}
     .places-map{trigger-scope:--map;timeline-trigger:--map view() entry 0% exit 100%}
-    .map-svg :is(.m-dot,.m-halo){animation:pop var(--dur-5) var(--ease-enter) both;animation-timeline:auto;
+    .map-svg :is(.m-dot,.m-halo){animation:pop var(--dur-5) var(--ease-enter) backwards;animation-timeline:auto;
       animation-range:normal;animation-trigger:--map play-once;animation-delay:calc(var(--beat) * 3)}
     /* the drawings on Get involved (art direction v2): each fires once 10% of
        it is on screen; its stations, rings and seats are set down half a beat
        apart, the dates on the line of time a beat apart, the event fades in.
        A seat is placed with translate, so it pops and never rises. */
     .meet,.route,.route-plan,.played,.table{trigger-scope:--draw;timeline-trigger:--draw view() entry 10% exit 100%}
-    :is(.meet-ico,.route-mark){animation:pop var(--dur-5) var(--ease-enter) both;animation-timeline:auto;
+    :is(.meet-ico,.route-mark){animation:pop var(--dur-6) var(--ease-spring) backwards;animation-timeline:auto;
       animation-range:normal;animation-trigger:--draw play-once;
       animation-delay:calc(var(--beat) * 2 + var(--i,0) * var(--beat) / 2)}
-    .seat{animation:fade var(--dur-slow) var(--ease-enter) both;animation-timeline:auto;
+    .seat{animation:fade var(--dur-slow) var(--ease-enter) backwards;animation-timeline:auto;
       animation-range:normal;animation-trigger:--draw play-once;
       animation-delay:calc(var(--beat) * 2 + var(--i,0) * var(--beat) / 2)}
-    .played li{animation:rise-sm var(--dur-slow) var(--ease-enter) both;animation-timeline:auto;
+    .played li{animation:rise-sm var(--dur-slow) var(--ease-enter) backwards;animation-timeline:auto;
       animation-range:normal;animation-trigger:--draw play-once;animation-delay:calc(var(--beat) + var(--i,0) * var(--beat))}
-    .meet-hub{animation:fade var(--dur-slow) var(--ease-enter) both;animation-timeline:auto;animation-range:normal;
+    .meet-hub{animation:fade var(--dur-slow) var(--ease-enter) backwards;animation-timeline:auto;animation-range:normal;
       animation-trigger:--draw play-once}
     /* the four doors and the facts on Contact (art direction v3): their
        stations and the Dublin mark are set down half a beat apart once the
@@ -744,10 +799,11 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
        for every reader with motion on, v6) */
     .latest.rv-stagger{trigger-scope:--rvs,--draw;
       timeline-trigger:--rvs view() entry 0% exit 100%,--draw view() entry 10% exit 100%}
-    :is(.wa-ring,.d-ring,.wa-svg .m-dot,.wa-svg .m-halo){animation:pop var(--dur-5) var(--ease-enter) both;
+    :is(.wa-ring,.d-ring,.wa-svg .m-dot,.wa-svg .m-halo){animation:pop var(--dur-5) var(--ease-enter) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--draw play-once;
       animation-delay:calc(var(--beat) * 2 + var(--i,0) * var(--beat) / 2)}
     .wa-svg :is(.m-dot,.m-halo){transform-box:fill-box;transform-origin:50% 50%}
+    :is(.wa-ring,.d-ring){animation-duration:var(--dur-6);animation-timing-function:var(--ease-spring)}
     /* v7 (art direction A2): a drawing's lines draw, in the direction they
        mean. A station's tick goes out to its bracket, the bracket runs down,
        the stem runs to the event, and the event is set down last; a route
@@ -756,35 +812,35 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
        tick reaches the table, which is set down first. All inside the
        drawings' own --draw scope, once, about a second. */
     @media (min-width:45.0625em){
-      .meet-list li::after,.meet-list::after{animation:draw-x var(--dur-slow) var(--ease) both;
+      .meet-list li::after,.meet-list::after{animation:draw-x var(--dur-slow) var(--ease) backwards;
         animation-timeline:auto;animation-range:normal;animation-trigger:--draw play-once}
       :is(.meet-give li::after,.meet-give .meet-list::after){transform-origin:0 50%}
       :is(.meet-bring li::after,.meet-bring .meet-list::after){transform-origin:100% 50%}
       .meet-list li::after{animation-delay:calc(var(--beat) * 2.5 + var(--i,0) * var(--beat) / 2)}
-      .meet-list li:not(:last-child)::before{transform-origin:50% 0;animation:draw-y var(--dur-slow) var(--ease) both;
+      .meet-list li:not(:last-child)::before{transform-origin:50% 0;animation:draw-y var(--dur-slow) var(--ease) backwards;
         animation-timeline:auto;animation-range:normal;animation-trigger:--draw play-once;
         animation-delay:calc(var(--beat) * 4.5)}
       .meet-list::after{animation-delay:calc(var(--beat) * 6)}
       .meet-hub{animation-delay:calc(var(--beat) * 7)}
     }
-    .route-st:not(:last-child)::before{transform-origin:0 50%;animation:draw-x var(--dur-slow) var(--ease) both;
+    .route-st:not(:last-child)::before{transform-origin:0 50%;animation:draw-x var(--dur-slow) var(--ease) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--draw play-once;
       animation-delay:calc(var(--beat) * 2.5 + var(--i,0) * var(--beat) / 2)}
     @media (max-width:68.75em){.route-st:not(:last-child)::before{transform-origin:50% 0;animation-name:draw-y}}
-    .played::before{transform-origin:0 50%;animation:draw-x var(--dur-slower) var(--ease) both;
+    .played::before{transform-origin:0 50%;animation:draw-x var(--dur-slower) var(--ease) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--draw play-once;animation-delay:calc(var(--beat) * .5)}
-    .wa-based dt::before{transform-origin:0 50%;animation:draw-x var(--dur-slow) var(--ease) both;
+    .wa-based dt::before{transform-origin:0 50%;animation:draw-x var(--dur-slow) var(--ease) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--draw play-once;animation-delay:calc(var(--beat) * 3)}
     @container board (min-width:34rem){
-      .seats::before{animation:pop var(--dur-5) var(--ease-enter) both;animation-timeline:auto;
+      .seats::before{animation:pop var(--dur-5) var(--ease-enter) backwards;animation-timeline:auto;
         animation-range:normal;animation-trigger:--draw play-once;animation-delay:var(--beat)}
-      .seat::after{animation:draw-x var(--dur-slow) var(--ease) both;animation-timeline:auto;animation-range:normal;
+      .seat::after{animation:draw-x var(--dur-slow) var(--ease) backwards;animation-timeline:auto;animation-range:normal;
         animation-trigger:--draw play-once;animation-delay:calc(var(--beat) * 3 + var(--i,0) * var(--beat) / 2)}
     }
     /* a highlight is drawn across its words once, a beat after its line is a
        third on screen, and never left half drawn because the reader stopped */
     mark{trigger-scope:--mk;timeline-trigger:--mk view() entry 30% exit 100%;
-      animation:mark-draw var(--dur-slower) var(--ease) both;animation-timeline:auto;animation-range:normal;
+      animation:mark-draw var(--dur-slower) var(--ease) backwards;animation-timeline:auto;animation-range:normal;
       animation-trigger:--mk play-once;animation-delay:var(--beat)}
   }
 }
@@ -867,14 +923,19 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
   .nav-sub{
     position:absolute;top:calc(100% + 29px);left:-11px;z-index:60;width:max-content;min-width:18rem;max-width:24rem;
     padding:8px;background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius-sm);
-    box-shadow:var(--shadow-overlay);opacity:0;visibility:hidden;translate:0 -4px;
+    box-shadow:var(--shadow-overlay);opacity:0;visibility:hidden;translate:0 -4px;scale:.985;transform-origin:24px 0;
     transition:opacity var(--dur-3) var(--ease) var(--dur-2),translate var(--dur-3) var(--ease) var(--dur-2),
-               visibility 0s linear calc(var(--dur-3) + var(--dur-2));
+               scale var(--dur-3) var(--ease) var(--dur-2),visibility 0s linear calc(var(--dur-3) + var(--dur-2));
   }
+  /* hover intent (v8): a pointer passing over "Programmes" for less than a beat
+     no longer flashes the panel; one that stays opens it in 200ms, the panel
+     coming forward a step from the header. A keyboard reader gets it at once. */
   .has-sub:is(:hover,:focus-within):not([data-shut]) .nav-sub{
-    opacity:1;visibility:visible;translate:0 0;
-    transition:opacity var(--dur-3) var(--ease),translate var(--dur-3) var(--ease),visibility 0s;
+    opacity:1;visibility:visible;translate:none;scale:none;
+    transition:opacity var(--dur-4) var(--ease-enter) var(--dur-2),translate var(--dur-4) var(--ease-settle) var(--dur-2),
+               scale var(--dur-4) var(--ease-settle) var(--dur-2),visibility 0s linear var(--dur-2);
   }
+  .has-sub:focus-within:not([data-shut]) .nav-sub{transition-delay:0s}
   .nav-sub a{display:flex;align-items:baseline;gap:12px;min-height:44px;padding:11px 14px;border-radius:calc(var(--radius-sm) - 1px);
     font-size:.9375rem;font-weight:500;line-height:1.35;color:var(--fg);transition:background-color var(--dur-3) var(--ease),color var(--dur-3) var(--ease)}
   .nav-sub a:hover{background:var(--surface-sunken);color:var(--accent-ink)}
@@ -931,14 +992,16 @@ html[lang^="ko"] .nav-sub a{font-family:var(--font-kr)}
 .menu-toggle:hover{border-color:var(--fg)}
 .menu-toggle i{
   position:absolute;left:10px;width:22px;height:1.5px;background:currentColor;border-radius:2px;
-  transition:translate var(--dur-6) var(--ease-enter),rotate var(--dur-6) var(--ease-enter),width var(--dur-6) var(--ease-enter),
-    left var(--dur-6) var(--ease-enter);
+  transition:translate var(--dur-6) var(--ease-spring),rotate var(--dur-6) var(--ease-spring),
+    scale var(--dur-6) var(--ease-settle);
 }
 .menu-toggle i:first-child{top:17px}
-.menu-toggle i:last-child{top:25px;width:15px;left:13.5px}
+/* the short stroke is the long one drawn to 15/22 about its middle: the same
+   13.5 to 28.5px stroke, scaled rather than resized (v8) */
+.menu-toggle i:last-child{top:25px;scale:.682 1}
 .menu-toggle[aria-expanded="true"] i:first-child{translate:0 4px;rotate:45deg}
-.menu-toggle[aria-expanded="true"] i:last-child{translate:0 -4px;rotate:-45deg;width:22px;left:10px}
-.menu-toggle:hover i:last-child{width:22px;left:10px}
+.menu-toggle[aria-expanded="true"] i:last-child{translate:0 -4px;rotate:-45deg;scale:none}
+.menu-toggle:hover i:last-child{scale:none}
 
 
 /* ==========================================================================
@@ -1097,6 +1160,19 @@ html[lang^="ko"] .fold>summary{font-weight:700}
 .fold>summary::before{content:"";flex:0 0 auto;width:8px;height:8px;border:solid var(--accent-ink);border-width:0 1.5px 1.5px 0;
   rotate:45deg;translate:0 -3px;transition:rotate var(--dur-4) var(--ease),translate var(--dur-4) var(--ease)}
 .fold[open]>summary::before{rotate:225deg;translate:0 2px}
+.fold[open]>summary .f-show,.fold:not([open])>summary .f-hide{display:none}
+/* a fold opens and closes rather than jumping (v8): 250ms, where the browser
+   can animate to its natural height; elsewhere it opens at once, as before */
+@media (prefers-reduced-motion:no-preference){
+  @supports (interpolate-size:allow-keywords) and selector(::details-content){
+    .fold{interpolate-size:allow-keywords}
+    .fold::details-content{block-size:0;overflow-y:clip;
+      transition:block-size var(--dur-5) var(--ease-settle),content-visibility var(--dur-5);
+      transition-behavior:allow-discrete}
+    .fold[open]::details-content{block-size:auto}
+  }
+  .fold>summary::before{transition:rotate var(--dur-6) var(--ease-spring),translate var(--dur-6) var(--ease-spring)}
+}
 .fold>summary:hover{color:var(--accent-ink)}
 .band-ink .fold>summary{color:var(--fg-inverse)}
 .band-ink .fold>summary::before{border-color:var(--accent-inverse)}
@@ -1192,6 +1268,12 @@ html[lang^="ko"] :is(.meet-t,.route dd,.route-plan dd,.played-name,.played-who,.
   outline:1px solid color-mix(in srgb,var(--stroke) 35%,transparent);outline-offset:.5rem;
   font-size:var(--t-h3);line-height:1.2;text-align:center;text-wrap:balance;overflow-wrap:anywhere}
 html[lang^="ko"] .meet-hub{font-size:1.3rem;line-height:1.4;letter-spacing:-.01em}
+/* how long, under the event's name, in the text face on a line of its own (R33) */
+.meet-in{display:flex;flex-direction:column;align-items:center;gap:4px}
+.meet-len{font-family:var(--font-body);font-size:var(--t-caption);font-weight:400;line-height:1.3;letter-spacing:0;
+  color:var(--fg-muted)}
+html[lang^="ko"] .meet-len{font-family:var(--font-kr)}
+@media (max-width:45em){.meet-in{align-items:flex-start}}
 /* Hangul wants more leading than 1.4; the station padding follows it */
 html[lang^="ko"] .meet{--lh-item:1.55}
 /* R18: the stem leaves the list at 50%, so 50% must be the bracket's middle
@@ -1518,6 +1600,12 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
 /* the photograph bleeds off the right edge of the screen */
 .hero-figure{position:relative;margin-inline-end:calc((min(100vw,var(--wrap)) - 100vw) / 2 - var(--gutter))}
 .hero-figure .photo{border-radius:var(--radius-xs) 0 0 var(--radius-xs)}
+/* 16:10, its top trimmed more than its foot (v8, art direction: at 4:3 the
+   first laptop screen showed the hall's vault and the players stood at the
+   fold; 12% off the top is vault and window, 5% off the foot tablecloth, no
+   face is cut and the alt text stays true) */
+.hero-figure .photo{aspect-ratio:16/10}
+.hero-figure .photo>img{object-position:50% 72%}
 .hero-figure figcaption{padding-inline-end:var(--gutter)}
 
 /* Sound leaves the room in rings. Faint and still behind the photograph;
@@ -1540,13 +1628,20 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
    screen's width and ends sooner, clear of the subtitle and the now line. */
 .hero-figure{container-type:inline-size}
 @supports (mask-composite:intersect){
-  .hero-figure::before{top:0;margin-top:37.5%;
+  .hero-figure::before{top:0;margin-top:31.25%;
     -webkit-mask-image:radial-gradient(circle at center,#000 22%,transparent var(--ring-end,64%)),
-      linear-gradient(#000 calc(50% + 37.5cqw - 110px),transparent calc(50% + 37.5cqw));
+      linear-gradient(#000 calc(50% + 31.25cqw - 110px),transparent calc(50% + 31.25cqw));
     mask-image:radial-gradient(circle at center,#000 22%,transparent var(--ring-end,64%)),
-      linear-gradient(#000 calc(50% + 37.5cqw - 110px),transparent calc(50% + 37.5cqw));
+      linear-gradient(#000 calc(50% + 31.25cqw - 110px),transparent calc(50% + 31.25cqw));
     -webkit-mask-composite:source-in;mask-composite:intersect}
-  @media (max-width:75em){.hero-figure::before{--ring-end:56%;width:min(100vw,1180px)}}
+  /* below 75em the field sits as it did before the plate became 16:10 (centred
+     6.25% lower than the photograph's middle, so its upper rings stay clear of
+     the subtitle at 1024), and still fades out above the photograph's foot */
+  @media (max-width:75em){.hero-figure::before{--ring-end:56%;width:min(100vw,1180px);margin-top:37.5%;
+    -webkit-mask-image:radial-gradient(circle at center,#000 22%,transparent var(--ring-end,64%)),
+      linear-gradient(#000 calc(50% + 25cqw - 110px),transparent calc(50% + 25cqw));
+    mask-image:radial-gradient(circle at center,#000 22%,transparent var(--ring-end,64%)),
+      linear-gradient(#000 calc(50% + 25cqw - 110px),transparent calc(50% + 25cqw))}}
 }
 /* On a phone (v7, Andrew 5 Oct: "the laptop has curves and feels softer; the
    phone is all corners"): the rings rise from the photograph's top edge into
@@ -1563,8 +1658,8 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
 .rings{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .rings::before,.rings::after{width:min(70vw,760px);border:1px solid var(--accent);opacity:0}
 @media (prefers-reduced-motion:no-preference){
-  .rings::before{animation:ripple calc(var(--dur-slower) * 2) var(--ease-enter) calc(var(--beat) * 3) both}
-  .rings::after{animation:ripple calc(var(--dur-slower) * 2) var(--ease-enter) calc(var(--beat) * 9) both}
+  .rings::before{animation:ripple calc(var(--dur-slower) * 2) var(--ease-enter) calc(var(--beat) * 3) backwards}
+  .rings::after{animation:ripple calc(var(--dur-slower) * 2) var(--ease-enter) calc(var(--beat) * 9) backwards}
 }
 
 /* a short laptop screen (1366x768, 1280x720): the now line and both
@@ -1653,16 +1748,12 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
   position:relative;overflow:clip;isolation:isolate;border-radius:var(--radius-xs);
   background:var(--surface-sunken);
 }
-.photo>img{
-  width:100%;height:100%;object-fit:cover;
-  transition:scale var(--dur-6) var(--ease);
-}
+.photo>img{width:100%;height:100%;object-fit:cover}
 .photo-3x2{aspect-ratio:3/2}
 .photo-4x3{aspect-ratio:4/3}
 .photo-4x5{aspect-ratio:4/5}
 .photo-1x1{aspect-ratio:1/1}
 .photo-16x9{aspect-ratio:16/9}
-@media (hover:hover) and (pointer:fine){a:hover .photo>img{scale:1.03}}
 
 figcaption{
   margin-top:14px;font-size:var(--t-caption);line-height:1.5;color:var(--fg-muted);
@@ -1690,28 +1781,62 @@ figcaption>span:not(.cap-label){max-width:36em}
    overlap and some are not needed"). Its corners are 8px, not a photograph's
    2px: on a phone five ink tiles one under another read as hard blocks
    (Andrew, 5 Oct 2026: "the phone is all corners"). */
-.cover{position:relative;isolation:isolate;overflow:clip;aspect-ratio:4/5;display:grid;grid-template-rows:auto 1fr auto;
-  container-type:inline-size;
-  padding:clamp(14px,1.4vw,22px);border-radius:var(--radius);background:var(--surface-inverse);color:var(--fg-inverse);
+.cover{--cv-pad:clamp(14px,1.4vw,22px);--cv-no:clamp(1.5rem,2.1vw,2.05rem);--cv-line:clamp(.85rem,1.05vw,.98rem);
+  position:relative;isolation:isolate;overflow:clip;aspect-ratio:4/5;display:grid;grid-template-rows:auto 1fr auto;
+  container-type:inline-size;view-transition-class:prog-cover;
+  padding:var(--cv-pad);border-radius:var(--radius);background:var(--surface-inverse);color:var(--fg-inverse);
   transition:background-color var(--dur-5) var(--ease)}
-.cover-no{font-family:var(--font-display);font-size:clamp(1.5rem,2.1vw,2.05rem);line-height:1;color:var(--accent-inverse);
+html[lang^="ko"] .cover{--cv-line:.875rem}
+.cover-no{font-family:var(--font-display);font-size:var(--cv-no);line-height:1;color:var(--accent-inverse);
   font-variant-numeric:lining-nums}
-.cover-mark{position:absolute;inset:0;margin:auto;width:38%;height:auto;overflow:visible;
+/* the emblem stands in the middle of the field the number and the words leave
+   (v8, art direction: centred on the whole tile it stood 45px under the number
+   and 94px over the edge once the words were hidden, 10px and 44px on a phone) */
+.cover-mark{position:absolute;inset:calc(var(--cv-pad) + var(--cv-no)) 0 calc(var(--cv-pad) + var(--cv-line) * 1.3);
+  margin:auto;width:38%;height:auto;overflow:visible;
   fill:none;stroke:var(--accent-inverse);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
-.cover-line{grid-row:3;font-family:var(--font-display);font-style:italic;font-size:clamp(.85rem,1.05vw,.98rem);line-height:1.3;
+.cover-line{grid-row:3;font-family:var(--font-display);font-style:italic;font-size:var(--cv-line);line-height:1.3;
   color:var(--fg-inverse-body)}
-html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;font-size:.875rem;letter-spacing:-.01em}
-@container (max-width:180px){.cover-line{display:none}.cover-mark{width:44%}}
-.cover-sm{padding:8px 9px;grid-template-rows:auto 1fr}
-.cover-sm .cover-no{font-size:1.05rem}
+html[lang^="ko"] .cover-line{font-family:var(--font-kr);font-style:normal;letter-spacing:-.01em}
+/* where the words are not drawn, the field runs down to the padding */
+:is(.pc,.cover-sm) .cover-mark{inset-block-end:var(--cv-pad)}
+@container (max-width:180px){.cover-line{display:none}.cover-mark{width:44%;inset-block-end:var(--cv-pad)}}
+.cover-sm{--cv-pad:8px;--cv-no:1.05rem;padding:8px 9px;grid-template-rows:auto 1fr}
+.cover-sm .cover-no{font-size:var(--cv-no)}
 .cover-sm .cover-mark{width:46%}
 .cover-sm .cover-line{display:none}
+/* --- the programme you pick up (v8) -------------------------------------
+   Andrew asked for depth. The house is a printed programme, so the depth is
+   the paper's: under a mouse a cover is lifted off the page, 4px with an ink
+   shadow (2px in the index rows), its emblem a step nearer (4%), and set
+   down when pressed; then only that cover is carried to its page (section 4).
+   The link stays still and only the cover moves; at rest nothing is
+   transformed, so no text sits on a raised layer. A touch screen gets the
+   press only; with less motion asked for, the cover answers in colour. */
+@media (prefers-reduced-motion:no-preference){
+  .cover{--lift:-4px;transition:translate var(--dur-3) var(--ease),box-shadow var(--dur-3) var(--ease),
+    background-color var(--dur-5) var(--ease)}
+  .cover-sm{--lift:-2px;--shadow-lift:0 8px 14px -7px rgb(29 36 48 / .36),0 2px 5px -2px rgb(29 36 48 / .14)}
+  .cover-mark{transition:scale var(--dur-3) var(--ease)}
+  @media (hover:hover) and (pointer:fine){
+    :is(.pc,.pi):hover .cover{translate:0 var(--lift);box-shadow:var(--shadow-lift);
+      transition:translate var(--dur-5) var(--ease-settle),box-shadow var(--dur-5) var(--ease),
+        background-color var(--dur-5) var(--ease)}
+    :is(.pc,.pi):hover .cover-mark{scale:1.04;transition:scale var(--dur-5) var(--ease-settle)}
+  }
+  .pc:focus-visible .cover,.pi:has(:focus-visible) .cover{translate:0 var(--lift);box-shadow:var(--shadow-lift)}
+  :is(.pc,.pi):active .cover{translate:0 -1px;box-shadow:var(--shadow-set);transition-duration:var(--dur-1)}
+  @media (hover:none){:is(.pc,.pi):active .cover{translate:none;scale:.98;transition-duration:var(--dur-2)}}
+}
+/* a tap answers in the house's colour, not the system's grey or blue box (v8) */
+a,button,summary,label{-webkit-tap-highlight-color:color-mix(in srgb,var(--gold-light) 28%,transparent)}
+:is(.band-ink,.site-footer) a{-webkit-tap-highlight-color:rgb(255 255 255 / .12)}
 
 /* --- five cards on the home page: the cover, then the words -------------- */
 .progs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(14px,1.6vw,24px);list-style:none;margin:0;padding:0}
 .pc{display:flex;flex-direction:column;height:100%;color:var(--fg-body)}
 .pc:hover{color:var(--fg-body)}
-.pc:hover .cover{background:var(--soft-navy)}
+@media (prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){:is(.pc,.pi):hover .cover{background:var(--soft-navy)}}
 .pc-body{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:18px;flex:1}
 .pc .kicker{display:inline-flex;align-items:center;gap:8px}
 .pc h3{font-size:var(--t-h3);line-height:1.2;transition:color var(--dur-3) var(--ease)}
@@ -1766,7 +1891,7 @@ html[lang^="ko"] .pc .pc-topics{font-family:var(--font-kr);font-style:normal;fon
   html[lang^="ko"] .pc .tag-live::before{margin-top:calc(.5lh - 2.5px)}
 }
 /* the pillar dot: filled for Learning, open for Sharing; always the same size */
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:0 0 auto;background:var(--accent-mark)}
+.dot{display:inline-block;width:max(8px,.5em);height:max(8px,.5em);border-radius:50%;flex:0 0 auto;background:var(--accent-mark)}
 .dot-open{background:transparent;box-shadow:inset 0 0 0 1.5px var(--accent-mark)}
 /* the five stay in one row down to 62.5em, then become a list of the same
    cards, cover beside words, so no card is ever left alone on a row */
@@ -1783,8 +1908,7 @@ html[lang^="ko"] .pc .pc-topics{font-family:var(--font-kr);font-style:normal;fon
    on its programme, and a row arrived at that way says so in gold. */
 .prog-index{list-style:none;margin:0;padding:0}
 .pi{position:relative;display:grid;grid-template-columns:4.6rem minmax(0,1fr) 15.5rem auto;
-  gap:10px clamp(20px,3vw,48px);align-items:center;padding:clamp(20px,2.4vw,30px) 0;scroll-margin-top:110px;
-  transition:background-color var(--dur-4) var(--ease)}
+  gap:10px clamp(20px,3vw,48px);align-items:start;padding:clamp(20px,2.4vw,30px) 0;scroll-margin-top:110px}
 .pi-main .kicker{display:inline-flex;align-items:center;gap:8px}
 .pi h2{margin-top:8px;font-size:var(--t-h2-sm);line-height:1.12}
 html[lang^="ko"] .pi h2{font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.36}
@@ -1796,7 +1920,12 @@ html[lang^="ko"] .pi h2{font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.36}
 .pi-facts dt{color:var(--accent-ink)}
 .pi-facts dd{margin:5px 0 0;font-family:var(--font-display);font-size:1.12rem;font-weight:600;line-height:1.35;color:var(--fg)}
 html[lang^="ko"] .pi-facts dd{font-family:var(--font-kr);font-weight:700;font-size:1rem}
-.pi-end{display:flex;align-items:center;justify-content:flex-end}
+/* the arrow on the name's first line, whatever the row's tallest column (UX v8: centred on the
+   row, it stood 13px under the name where the When value took three lines). The name's line
+   starts 37px under the row's top (Korean 38.5px), measured; the name's line box follows */
+.pi-end{display:flex;align-items:center;justify-content:flex-end;align-self:start;
+  padding-top:37px;height:calc(37px + var(--t-h2-sm) * 1.12);box-sizing:border-box}
+html[lang^="ko"] .pi-end{padding-top:38.5px;height:calc(38.5px + clamp(1.35rem,2.2vw,1.85rem) * 1.36)}
 .pi .cover-sm{align-self:start}
 .pi .arrow{color:var(--accent-ink)}
 .pi::before{content:"";position:absolute;inset-inline:0;top:-1px;height:1px;background:var(--accent);
@@ -1805,6 +1934,15 @@ html[lang^="ko"] .pi-facts dd{font-family:var(--font-kr);font-weight:700;font-si
 .pi:hover h2 a{color:var(--accent-ink)}
 .pi:hover .arrow i{translate:1.3em 0}
 .pi:target .cover{background:var(--soft-navy)}
+/* a tap on a card or a row answers before the next page paints (v8) */
+@media (hover:none){
+  .pc:active .cover{background:var(--soft-navy)}
+  :is(.pc:active h3,.others a:active b){color:var(--accent-ink)}
+  .pi:has(h2 a:active)::before{scale:1 1;transition-duration:var(--dur-1)}
+  .pi:has(h2 a:active) h2 a{color:var(--accent-ink)}
+}
+/* arriving at a row by its address, its gold rule is drawn once (v8) */
+@media (prefers-reduced-motion:no-preference){.pi:target::before{animation:draw-x var(--dur-slow) var(--ease-settle) var(--dur-4) backwards}}
 .pi:target::before{content:"";position:absolute;inset-inline:0;top:-1px;height:2px;background:var(--accent);scale:1 1}
 .pi-note{display:grid;grid-template-columns:4.6rem minmax(0,1fr);column-gap:clamp(20px,3vw,48px);row-gap:6px;
   margin:28px 0 0;font-size:var(--t-small);color:var(--fg);scroll-margin-top:110px}
@@ -1903,8 +2041,14 @@ html[lang^="ko"] .why-resolve em{font-style:normal}
       -webkit-background-clip:text;background-clip:text;
       animation:ink-fill linear both;animation-timeline:view();animation-range:entry 0% entry 80%;
     }
+    /* the block owns the timeline and the line reads it (an inline box's own
+       view timeline is not given by every engine, v8) */
+    .why-premise{view-timeline:--premise block}
+    .ink{animation-timeline:--premise}
   }
 }
+/* more contrast asked for: the premise in full ink from the start */
+@media (prefers-contrast:more){.ink{color:inherit !important;background:none !important;animation:none !important}}
 
 
 /* ==========================================================================
@@ -1972,7 +2116,10 @@ html[lang^="ko"] .fig b{font-family:var(--font-display)}
 @media (min-width:55.0625em){
   .figs-band>.wrap{display:grid;grid-template-columns:3fr 9fr;column-gap:var(--gap);align-items:start}
   .figs-band>.wrap>*{grid-column:2}
-  .figs-band>.wrap>.eyebrow{grid-column:1;grid-row:1;margin:0;padding-top:clamp(20px,2.4vw,32px)}
+  /* the band starts as close to its numbers as it ends under its link (v8:
+     204px over, 162px under) */
+  .figs-band>.wrap>.eyebrow{grid-column:1;grid-row:1;margin:0;padding-top:0}
+  .figs-band .fig{padding-top:0}
 }
 
 /* the forty on the record in two blocks, the talks filled and the
@@ -1994,7 +2141,9 @@ html[lang^="ko"] .fig b{font-family:var(--font-display)}
 @media (max-width:48em){
   .forty-groups{flex-direction:column}
   .forty-g{flex:none}
-  .forty-row{grid-template-columns:repeat(20,minmax(0,1fr));gap:5px}
+  /* one pitch for both kinds, as on a laptop: 17 against 23, read by length,
+     and no row of three left over (v8) */
+  .forty-row{grid-template-columns:repeat(23,minmax(0,1fr));gap:clamp(2px,.9vw,5px);max-width:34rem}
 }
 .forty-n{margin:12px 0 0;font-size:var(--t-small);line-height:1.4;color:var(--fg-inverse);font-variant-numeric:lining-nums}
 .forty figcaption{margin-top:20px;font-size:var(--t-caption);color:var(--fg-inverse-body)}
@@ -2034,7 +2183,9 @@ html[lang^="ko"] .glance dd small{font-family:var(--font-kr);font-weight:400;let
 /* a portrait in a half column stays a comfortable size */
 :is(.founder,.now)>.plate{max-width:480px}
 .founder-ko{display:block;margin-top:8px;font-size:var(--t-h3);line-height:1.3}
-@media (min-width:22.5em){.founder h2 .nm{white-space:nowrap}}
+/* whole where it fits, between its words where it cannot (with the text
+   spacing a reader may set, nowrap ran the name past its column, v8) */
+.founder h2 .nm{display:inline-block}
 .founder-role{margin-top:max(20px,min(33px,calc((var(--t-h2) - 32px) * 1.6 + 20px)));color:var(--fg);font-weight:600}
 .founder-line{margin:22px 0 0;font-size:var(--t-lead);line-height:var(--lh-lead);color:var(--fg);max-width:var(--measure-lead)}
 .founder .facts-plain{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:26px}
@@ -2059,7 +2210,8 @@ html[lang^="ko"] .founder-role{font-weight:700}
 .map-svg .m-halo{fill:none;stroke:var(--accent-mark);stroke-width:1}
 .map-svg .m-lead{fill:none;stroke:var(--accent-mark);stroke-width:.8}
 .map-svg .m-label{fill:var(--fg);font-family:var(--font-display);font-size:19px}
-.map-svg .m-sub{fill:var(--fg-muted);font-family:var(--font-body);font-size:15px}
+/* ink-70, not slate: 「Dysart」 is drawn over the land, where slate is 4.49:1 (v8) */
+.map-svg .m-sub{fill:var(--fg-muted-sunken);font-family:var(--font-body);font-size:15px}
 html[lang^="ko"] .map-svg :is(.m-label,.m-sub){font-family:var(--font-kr)}
 html[lang^="ko"] .map-svg .m-label{font-size:17px;font-weight:700}
 /* where the map is drawn small (a phone, or the narrow column of a small
@@ -2188,8 +2340,8 @@ html[lang^="ko"] .d-go{font-family:var(--font-kr);font-weight:400}
 .doors.doors-pair a{
   flex:1 1 auto;display:grid;grid-template-columns:var(--st) minmax(0,1fr) 2.75rem;align-items:center;
   column-gap:clamp(16px,1.8vw,24px);min-width:0;padding:clamp(18px,2vw,26px) clamp(18px,2.2vw,30px);
-  background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius-sm);color:var(--fg);
-  transition:border-color var(--dur-3) var(--ease),box-shadow var(--dur-4) var(--ease),translate var(--dur-3) var(--ease-enter);
+  background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius);color:var(--fg);
+  transition:border-color var(--dur-3) var(--ease),box-shadow var(--dur-6) var(--ease),translate var(--dur-6) var(--ease-settle);
 }
 .doors.doors-pair .d-ring{width:var(--st);height:var(--st)}
 .doors.doors-pair .d-glyph{width:1.6rem;height:1.6rem}
@@ -2203,10 +2355,9 @@ html[lang^="ko"] .doors.doors-pair .d-note{text-wrap:pretty}
 .doors.doors-pair .d-cta{display:grid;place-items:center;width:2.75rem;height:2.75rem;border:1px solid var(--accent-mark);
   border-radius:50%;color:var(--accent-ink);font-size:1.15rem;
   transition:background-color var(--dur-3) var(--ease),color var(--dur-3) var(--ease),border-color var(--dur-3) var(--ease)}
-.doors.doors-pair a:hover{border-color:var(--accent-mark);box-shadow:var(--shadow-raise);translate:0 -1px}
+.doors.doors-pair a:hover{border-color:var(--accent-mark)}
 .doors.doors-pair a:hover .d-cta{background:var(--accent);border-color:var(--accent);color:var(--ink-navy)}
 .doors.doors-pair a:hover .d-title{color:var(--accent-ink)}
-.doors.doors-pair a:active{translate:0 0;box-shadow:none}
 .doors.doors-pair a:focus-visible{outline-offset:4px}
 @media (max-width:40em){
   .doors.doors-pair a{grid-template-columns:var(--st) minmax(0,1fr);row-gap:14px}
@@ -2247,6 +2398,11 @@ html[lang^="ko"] .doors.doors-pair .d-note{text-wrap:pretty}
 .invite :is(.steps,.meets){grid-column:2}
 .invite-act{grid-column:2;margin-top:8px}
 .invite-act .btn-row{margin-top:20px}
+/* inside the drawings (v8): 28px under the concert's drawing, the class's
+   drawing a new group after it, its own quiet line 28px under it (R1) */
+.meets>.invite-act{grid-column:auto;margin-top:calc(28px - clamp(48px,5.2vw,72px))}
+.meets>.invite-act .btn-row{margin-top:0}
+.meets>.invite-more{margin-top:calc(28px - clamp(48px,5.2vw,72px))}
 .play{margin-inline-start:var(--col4)}
 .board{display:grid;grid-template-columns:3fr 9fr;gap:var(--gap)}
 .board>*{grid-column:2}
@@ -2307,13 +2463,19 @@ html[lang^="ko"] .help h3{font-size:1.28rem}
    10px less than its top. */
 .lt{position:relative;display:flex;flex-direction:column;min-width:0;
   padding:clamp(20px,2.2vw,28px) clamp(20px,2.2vw,28px) calc(clamp(20px,2.2vw,28px) - 10px);
-  background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius-sm);
-  transition:border-color var(--dur-3) var(--ease),box-shadow var(--dur-4) var(--ease),translate var(--dur-3) var(--ease-enter)}
+  background:var(--surface-raised);border:1px solid var(--line);border-radius:var(--radius);
+  transition:border-color var(--dur-3) var(--ease),box-shadow var(--dur-6) var(--ease),translate var(--dur-6) var(--ease-settle)}
 .lt .go::after{content:"";position:absolute;inset:0;border-radius:inherit}
 .lt .go{scroll-margin-top:clamp(240px,28vw,340px)}
-.lt:has(.go:hover){border-color:var(--accent-mark);box-shadow:var(--shadow-raise);translate:0 -1px}
+.lt:has(.go:hover){border-color:var(--accent-mark)}
 .lt:has(.go:hover) h3{color:var(--accent-ink)}
-.lt:has(.go:active){translate:0 0;box-shadow:none}
+/* one physics for everything you press (v8): a white panel rises 2px under a
+   mouse and is set down when pressed, on the clock the covers use; a touch
+   screen keeps no hover (it would stay lifted after Back), so it gets the press */
+@media (hover:hover) and (pointer:fine){:is(.doors.doors-pair a:hover,.lt:has(.go:hover)){box-shadow:var(--shadow-raise)}}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  :is(.doors.doors-pair a:hover,.lt:has(.go:hover)){translate:0 -2px}}
+:is(.doors.doors-pair a:active,.lt:has(.go:active)){translate:none;box-shadow:var(--shadow-set);transition-duration:var(--dur-1)}
 @supports selector(:has(*)){
   .lt:has(.go:focus-visible){outline:2px solid var(--focus-ring);outline-offset:4px;box-shadow:0 0 0 6px var(--focus-halo)}
   .lt .go:focus-visible{outline:none;box-shadow:none}
@@ -2479,10 +2641,22 @@ html[lang^="ko"] .ry-what b{font-family:var(--font-kr);font-weight:700;font-size
 @supports selector(::details-content){
   @media (min-width:40.0625em){
     .ry-fold>summary{display:none}
-    .ry-fold::details-content{content-visibility:visible;display:block}
+    .ry-fold::details-content{content-visibility:visible;display:block;block-size:auto;transition:none}
   }
 }
 @media (max-width:40em){.ry-fold[open]>summary{margin-bottom:12px}}
+/* the gallery folds the same way on a phone, after its first row (v8, UX: News
+   was sixteen phone screens, eight of them photographs); from 40em it is all
+   open, the second list a row gap under the first */
+.gal-fold{margin:0}
+@supports selector(::details-content){
+  @media (min-width:40.0625em){
+    .gal-fold>summary{display:none}
+    .gal-fold::details-content{content-visibility:visible;display:block;block-size:auto;transition:none}
+  }
+}
+.gal-fold>.gallery{margin-top:clamp(24px,2.6vw,36px)}
+@media (max-width:40em){.gal-fold{margin-top:28px}.gal-fold[open]>summary{margin-bottom:4px}}
 /* the figures above are the list's key: each label wears its rows' dot */
 .mini-figs dt .dot{margin-inline-end:8px;vertical-align:.1em}
 /* a wrapped label hangs past its dot, as the record's titles do */
@@ -2572,10 +2746,13 @@ html[lang^="ko"] .pp-glance .is-when dd{font-weight:700}
   .pp-head .pp-intro{display:contents}
   .pp-head .pp-intro>*{grid-column:1 / -1}
   .pp-head .pp-intro>.eyebrow{grid-column:2;grid-row:1;margin:0}
+  /* where the small cover leaves the label too little room (text at 200% on a
+     small phone: "LEARNIN", QA v8), the label goes under the cover */
+  @media (max-width:12em){.pp-head .pp-intro>.eyebrow{grid-column:1 / -1;grid-row:2;margin-top:12px}}
   .pp-head .pp-cover{display:block;grid-column:1;grid-row:1;width:4.2rem;max-width:none;justify-self:start}
-  .pp-head .pp-cover .cover{padding:8px 9px;grid-template-rows:auto 1fr}
-  .pp-head .pp-cover .cover-no{font-size:1.05rem}
-  .pp-head .pp-cover .cover-mark{width:46%}
+  .pp-head .pp-cover .cover{--cv-pad:8px;--cv-no:1.05rem;padding:8px 9px;grid-template-rows:auto 1fr}
+  .pp-head .pp-cover .cover-no{font-size:var(--cv-no)}
+  .pp-head .pp-cover .cover-mark{width:46%;inset-block-end:var(--cv-pad)}
   .pp-head .pp-cover .cover-line{display:none}
 }
 @media (max-width:30em){.pp-glance{grid-template-columns:minmax(0,1fr);row-gap:20px}}
@@ -2596,7 +2773,7 @@ html[lang^="ko"] .pp-now strong{font-weight:700}
 .pp-now .btn-row{margin-top:22px}
 /* on a phone the two actions stack, as in the hero: side by side or one under the other by the
    length of the label read as two layouts (chief designer v7 round 5) */
-@media (max-width:30em){.pp-now .btn-row{flex-direction:column;align-items:flex-start}}
+@media (max-width:30em){:is(.pp-now .btn-row,.btn-row:has(>.btn + .go)){flex-direction:column;align-items:flex-start}}
 /* the address and phone under a mail button: a mail link alone does nothing
    on a shared desk or a tablet with no mail app */
 /* an action, not a caption: 16px, the label quiet, the address and phone ink */
@@ -2816,16 +2993,24 @@ html[lang^="ko"] :is(.ct-topics legend,.ct-label){font-family:var(--font-kr);fon
   width:24px;height:24px;margin:0;border:1.5px solid var(--line-interactive);border-radius:50%;
   background:var(--surface-raised);cursor:pointer;transition:border-color var(--dur-3) var(--ease)}
 .ct-option input::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent-ink);
-  scale:0;transition:scale var(--dur-3) var(--ease)}
+  scale:0;transition:scale var(--dur-5) var(--ease-spring)}
 .ct-option input:checked{border-color:var(--accent-ink)}
 .ct-option input:checked::before{scale:1}
 .ct-option:hover input{border-color:var(--accent-ink)}
 /* a two-line option ends on two words, not one (R21) */
 .ct-option>span{text-wrap:balance}
 html[lang^="ko"] .ct-option>span{text-wrap:pretty}
-.ct-option input:checked+span{background-image:linear-gradient(transparent 50%,var(--highlight) 50%,
-  var(--highlight) 94%,transparent 94%);-webkit-box-decoration-break:clone;box-decoration-break:clone;
+/* the chosen topic is marked as a highlight is: the band waits at no width and
+   is drawn across the words, and moves when the choice moves (v8) */
+.ct-option>span{background-image:linear-gradient(transparent 50%,var(--highlight) 50%,var(--highlight) 94%,transparent 94%);
+  background-repeat:no-repeat;background-size:0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;
   padding-inline:.1em;margin-inline:-.1em}
+.ct-option input:checked+span{background-size:100% 100%}
+@media (prefers-reduced-motion:no-preference){
+  .ct-option>span{transition:background-size var(--dur-5) var(--ease-settle)}
+  .ct-hint{transition:opacity var(--dur-5) var(--ease-enter)}
+  @starting-style{.ct-form:has(.ct-options input:checked) .ct-hint{opacity:0}}
+}
 .ct-option input:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px;box-shadow:0 0 0 3px var(--focus-halo)}
 /* label, hint, field (GOV.UK order); the hint is the "tell us" list of the
    programme pages, numbered in gold */
@@ -2852,6 +3037,9 @@ html[lang^="ko"] .ct-hint>p{font-weight:400}
   border-radius:var(--radius-sm);background:var(--surface-raised);color:var(--fg);font:inherit;font-size:var(--t-body);
   line-height:var(--lh-text);resize:vertical;transition:border-color var(--dur-3) var(--ease)}
 .ct-field textarea:hover{border-color:var(--fg)}
+/* it grows with what is written, to a point (v8): on a phone the whole message
+   and the caret stay in view rather than scrolling inside the box */
+@supports (field-sizing:content){.ct-field textarea{field-sizing:content;max-height:24lh;overflow-y:auto}}
 .ct-field textarea:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;box-shadow:0 0 0 5px var(--focus-halo)}
 .ct-act{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
 .ct-how{flex:1 1 18rem;margin:0;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:var(--measure)}
@@ -3040,7 +3228,16 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
   .footer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .footer-grid>:first-child{grid-column:1/-1}
 }
-@media (max-width:35em){.footer-grid{grid-template-columns:1fr;gap:28px}}
+/* a phone sets Explore beside Get involved (v8: one column of twelve links was
+   1.45 screens); the logo and Connect, with the long address, keep the row;
+   under 22.5em (320px, or text at 200%) one column, as before */
+@media (max-width:35em){.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}
+  .footer-grid>:first-child,.footer-grid>:last-child{grid-column:1/-1}}
+@media (max-width:22.5em){.footer-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:40em){
+  :is(figcaption,.footer-bottom) .cp{display:block}
+  :is(figcaption,.footer-bottom) .cs{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+}
 /* every small link is at least 24px square with any pointer (WCAG 2.5.8);
    on a touch screen the rules below make them 44px */
 .site-footer li a{min-inline-size:24px}
@@ -3067,16 +3264,17 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
      order, so focus cannot wander onto things hidden under the drawer. Both
      rules live here: a window widened past 62.5em with the drawer open gets
      the ordinary header back and a page that scrolls. */
-  html:has(.nav[data-open="true"]){overflow:hidden}
+  html:has(.nav[data-open="true"]){overflow:hidden;scrollbar-gutter:stable}
   html:has(.nav[data-open="true"]) :is(main,.site-footer){visibility:hidden}
   .menu-toggle{display:block}
   .header-inner{min-height:68px}
   .brand{--brand-h:42px}
-  /* The drawer hangs from the bottom of the header. It cannot be
-     position:fixed: the header's backdrop-filter makes the header the
-     containing block of any fixed descendant, which collapsed the drawer
-     to nothing. Absolute, against the sticky header, with the rest of the
-     screen as its height, does the same job without that trap. */
+  /* The drawer hangs from the bottom of the header, absolute against the
+     sticky header with the rest of the screen as its height. (It was made so
+     when the header had a backdrop-filter, which makes the header the
+     containing block of a fixed descendant and collapsed a fixed drawer; the
+     header is plain paper since v7, but nothing on the header may ever take a
+     filter, a transform or will-change again: D5 C1, v8.) */
   .nav{
     position:absolute;top:100%;left:0;right:0;z-index:190;height:calc(100dvh - 68px);
     display:none;flex-direction:column;align-items:stretch;gap:0;
@@ -3090,7 +3288,10 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
   /* one numbering in the drawer, the pages' own: a programme's cover number
      beside "04 Get involved" read as a second list (CD v6). Programme names
      are Garamond, as everywhere (R5); the current one is gold. */
-  .nav-sub{margin:-8px 0 14px;padding-inline-start:calc(2.2em * .8125 + 18px)}
+  /* the five programmes start on the edge of the word "Programmes" over them: its number's
+     1.6em and the 18px gap (they stood 14px to the left of it, a fresh reviewer v8) */
+  .nav-sub{margin:-8px 0 14px;padding-inline-start:calc(clamp(1.7rem,7vw,2.3rem) * 1.6 + 18px)}
+  html[lang^="ko"] .nav-sub{padding-inline-start:calc(clamp(1.35rem,5.6vw,1.8rem) * 1.6 + 18px)}
   .nav-sub a{display:flex;align-items:baseline;min-height:44px;padding:6px 0;font-family:var(--font-display);
     font-size:1.25rem;font-weight:500;line-height:1.3;color:var(--fg);text-wrap:balance}
   html[lang^="ko"] .nav-sub a{font-family:var(--font-kr);font-size:1.0625rem;font-weight:500}
@@ -3116,18 +3317,28 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
   .header-inner{column-gap:8px}
   /* the drawer is open: the skip link would jump into the hidden page */
   html:has(.nav[data-open="true"]) .skip{display:none}
+  /* v8: the drawer is paper from its first frame and settles 8px down into place
+     in 200ms while its rows rise in after it, all in by about half a second (they
+     took 870ms). It is never seen through: fading the whole drawer laid its words
+     over the page's for a moment. It goes at once when closed; a pick from it
+     leaves in 100ms, captured on its own (section 4). */
   @media (prefers-reduced-motion:no-preference){
-    .nav[data-open="true"] .nav-list>li{animation:rise-sm var(--dur-slow) var(--ease-enter-expressive) both}
-    .nav[data-open="true"] .nav-list>li:nth-child(2){animation-delay:calc(var(--beat) * .5)}
-    .nav[data-open="true"] .nav-list>li:nth-child(3){animation-delay:calc(var(--beat) * 1)}
-    .nav[data-open="true"] .nav-list>li:nth-child(4){animation-delay:calc(var(--beat) * 1.5)}
-    .nav[data-open="true"] .nav-list>li:nth-child(5){animation-delay:calc(var(--beat) * 2)}
-    .nav[data-open="true"] .btn-nav{animation:fade var(--dur-slow) var(--ease) calc(var(--beat) * 2.5) both}
+    .nav[data-open="true"]{transition:translate var(--dur-4) var(--ease-settle)}
+    @starting-style{.nav[data-open="true"]{translate:0 -8px}}
+    .nav[data-open="true"] .nav-list>li{animation:rise-sm var(--dur-6) var(--ease-settle) backwards}
+    .nav[data-open="true"] .nav-list>li:nth-child(2){animation-delay:30ms}
+    .nav[data-open="true"] .nav-list>li:nth-child(3){animation-delay:60ms}
+    .nav[data-open="true"] .nav-list>li:nth-child(4){animation-delay:90ms}
+    .nav[data-open="true"] .nav-list>li:nth-child(5){animation-delay:120ms}
+    .nav[data-open="true"] .btn-nav{animation:fade var(--dur-4) var(--ease) 150ms backwards}
   }
 }
 @media (max-width:62.5em) and (max-height:46em){.nav-link{min-height:52px}.nav .btn-nav{margin-top:18px}}
 @media (max-width:23.75em){
   :is(h1,h2,h3,.hero-title,.footer-line,.others b,.others-line,.rec-what,.rec-what>*,.d-title,.pp-glance dd,.pl-name){overflow-wrap:anywhere}
+  /* a compound kept whole in a title may part at its hyphens where the title is wider than the
+     screen (text at 200%: "not-for-profit" ran 35px past a 320px phone, v8) */
+  :is(h1,h2,h3) .nowrap{white-space:normal}
   .pc{grid-template-columns:minmax(0,1fr)}
   .pc .cover{max-width:160px}
   .pc-body{padding-top:14px}
@@ -3174,6 +3385,18 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
   .cover{border:1px solid CanvasText}
   .cover-mark{stroke:CanvasText}
   :is(.strip,.att,.map-svg,.wa-svg) :is(circle,rect,path){forced-color-adjust:none}
+  /* the drawings keep their marks but take the theme's two colours (v8): filled
+     is CanvasText, open is Canvas ringed in CanvasText, the land Canvas with a
+     CanvasText coast, the words CanvasText (their own gold and cream inverted
+     or vanished on a contrast theme's ground) */
+  :is(.strip,.att,.map-svg,.wa-svg) :is(text,line){forced-color-adjust:none}
+  :is(.strip,.att,.map-svg) text{fill:CanvasText !important}
+  .strip :is(.s-axis,.s-year-tick),.att :is(.c-grid,.c-sep){stroke:GrayText !important}
+  .strip :is(.s-on,.s-span.s-on),.att .c-bar,:is(.map-svg,.wa-svg) .m-dot{fill:CanvasText !important}
+  .strip .s-open{fill:Canvas !important;stroke:CanvasText !important}
+  :is(.map-svg,.wa-svg) .m-land{fill:Canvas !important;stroke:CanvasText !important}
+  :is(.map-svg,.wa-svg) :is(.m-halo,.m-lead){stroke:CanvasText !important}
+  .strip-key i.o{background:Canvas;box-shadow:inset 0 0 0 1.5px CanvasText}
 }
 
 
@@ -3191,7 +3414,8 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
   .site-footer .logo-screen{display:none !important}
   .site-footer .logo-print{display:block !important}
   .band-ink,.band-ink *,.site-footer,.site-footer *{color:#222 !important;border-color:#bbb !important}
-  .cover{background:none !important;border:1px solid #999;color:#222}
+  .cover{background:none !important;border:1px solid #999;color:#222;translate:none !important;box-shadow:none !important}
+  .cover-mark{scale:none !important}
   .cover-mark{stroke:#333 !important}
   .cover-no,.cover-line{color:#222 !important}
   .forty-row span{background:#333 !important}
@@ -3204,6 +3428,6 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
   .count>span{position:static !important;width:auto !important;height:auto !important;
     overflow:visible !important;clip-path:none !important;white-space:normal !important}
   /* what is folded on screen is printed */
-  details::details-content{content-visibility:visible !important;display:block !important}
+  details::details-content{content-visibility:visible !important;display:block !important;block-size:auto !important}
   .fold>summary::before{display:none}
 }

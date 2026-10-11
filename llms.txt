@@ -5,12 +5,12 @@
 Founded January 2024 in Dublin. Classical Music for Everyone is a not-for-profit community music initiative, forming a company limited by guarantee. It is not yet a registered charity. Founder & Artistic Director: Andrew Seohyeon Kim.
 Five programmes: Getting to Know Classical Music (talks), Outreach Concerts, the Community Recorder Ensemble Class, the Letters Ensemble, and Concert Guide & Companion (going to concerts together). Musicians and artists from any field can register interest at any time; from 2027 it plans paid, mentored performances for emerging musicians (CMFE Artists).
 Now running: the Community Recorder Ensemble Class at Mulhuddart Community Centre, Dublin 15, Wednesday evenings 7pm to 8pm, autumn 2026.
-Record: 40+ talks and performances since 2024, in four countries: Ireland, France, the United Kingdom and Korea. The forty on the record from January 2024 to September 2026 are 17 talks, 20 outreach performances, one pilot concert and two South Dublin Live 2026 concerts (our founder was selected for South Dublin Live 2026). In a ten-week pilot recorder ensemble, all seven retired Presentation Sisters stayed to the end.
+Record: 40+ talks and performances since 2024, in four countries: Ireland, France, the United Kingdom and Korea. The forty on the record from January 2024 to September 2026 are 17 talks, 20 outreach performances, one pilot concert and two South Dublin Live 2026 concerts (our founder was selected for South Dublin Live 2026). In a ten-week pilot recorder ensemble, all seven retired Presentation Sisters stayed to the end and played the Easter concert.
 Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: English, Korean.
 
 ## Pages (English)
 
-- [Classical Music for Everyone](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/): Not-for-profit community music in Dublin: Classical Music talks, live concerts in care homes and hospitals, and a recorder class for adults learning to play.
+- [Classical Music for Everyone](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/): Not-for-profit community music in Dublin: Classical Music talks, outreach concerts, a recorder class for adults, the Letters Ensemble and concert outings.
 - [About](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html): A not-for-profit community music initiative in Dublin since 2024: our story, our founder, how we are run and where we have played and taught.
 - [Programmes](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html): Five programmes: Getting to Know Classical Music, Outreach Concerts, the Community Recorder Ensemble Class, the Letters Ensemble and Concert Guide & Companion.
 - [Get involved](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/get-involved.html): Join a programme, bring a concert to your place, register interest as a musician or artist, or join the founding board.
@@ -19,7 +19,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 ## Programme pages (English)
 
-- [Getting to Know Classical Music](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/getting-to-know.html): We give talks on Classical Music, with live playing. They are for anyone curious to hear more.
+- [Getting to Know Classical Music](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/getting-to-know.html): Talks for anyone unsure where to begin. We use stories, recordings and live playing.
 - [Outreach Concerts](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/outreach-concerts.html): We play in the rooms where people already are. We explain the music as we go.
 - [Community Recorder Ensemble Class](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html): For adults who have never played an instrument. You play your first notes in week one.
 - [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/letters-ensemble.html): Amateur musicians in Dublin, together since 2024. We play Irish, Korean and sacred music.
@@ -27,7 +27,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 ## Pages (Korean)
 
-- [Classical Music for Everyone](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/): 더블린의 비영리 공동체 음악 단체. 찾아가는 음악회와 강의, 어른을 위한 리코더 클래스를 엽니다.
+- [Classical Music for Everyone](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/): 더블린의 비영리 공동체 음악 단체입니다. 강의와 찾아가는 음악회, 어른을 위한 리코더 클래스, Letters Ensemble, 함께하는 음악여행.
 - [소개](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html): 2024년에 시작한 이야기, 창립자 김서현, 운영 방식, 연주하고 가르쳐 온 곳.
 - [프로그램](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html): 다섯 프로그램: 클래식 음악과 친해지기, 찾아가는 음악회, 커뮤니티 리코더 앙상블 클래스, Letters Ensemble, 함께하는 음악여행.
 - [함께하기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/get-involved.html): 프로그램 참여, 음악회 초청, CMFE Artists 참여 신청, 창립 이사회.
@@ -37,7 +37,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 ## Programme pages (Korean)
 
 - [클래식 음악과 친해지기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/getting-to-know.html): 어디서부터 들어야 할지 모르는 분을 위한 강의입니다. 이야기와 녹음, 실황 연주로 클래식과 친해집니다.
-- [찾아가는 음악회](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html): 사람들이 이미 계신 방으로 찾아가 연주합니다. 곡마다 이야기를 곁들입니다.
+- [찾아가는 음악회](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html): 듣는 분들이 이미 계신 방으로 찾아가 연주합니다. 곡마다 이야기를 곁들입니다.
 - [커뮤니티 리코더 앙상블 클래스](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/recorder-ensemble.html): 악기를 한 번도 다뤄 보지 않은 어른이 매주 함께 배웁니다. 첫 주에 첫 소리를 냅니다.
 - [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html): 2024년 1월 더블린에서 생긴 아마추어 앙상블입니다. 아일랜드와 한국의 전통 음악, 성가를 연주합니다.
 - [함께하는 음악여행](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/concert-companion.html): 혼자 공연장에 가기 망설여지는 분을 위한 프로그램입니다. 미리 준비하고, 함께 가고, 다녀와서 이야기합니다.

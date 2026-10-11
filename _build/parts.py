@@ -35,19 +35,34 @@ ARROW = ('<span class="arrow" aria-hidden="true"><i><svg viewBox="0 0 16 16" foc
 # small pieces
 # ---------------------------------------------------------------------------
 
+def _mail_note(href, label):
+    """For a screen reader, an action that opens the email app says so: its arrow
+    is the one that means \"to a page\" (accessibility v8, WCAG 3.2.4)."""
+    if not href.startswith("mailto:"):
+        return ""
+    ko = re.search("[\uac00-\ud7a3]", label)
+    return f'<span class="sr-only">{", 메일 앱이 열립니다" if ko else ", opens your email app"}</span>'
+
+
 def btn(href, label, kind="quiet"):
-    return f'<a class="btn btn-{kind}" href="{href}">{label} {ARROW}</a>'
+    note = _mail_note(href, label)
+    # one flex item with its note: on its own, the hidden note took a second gap and the button
+    # grew 12px (QA v8)
+    text = f'<span class="btn-t">{label}{note}</span>' if note else label
+    return f'<a class="btn btn-{kind}" href="{href}">{text} {ARROW}</a>'
 
 
 def go(href, label):
-    return f'<a class="go" href="{href}">{label} {ARROW}</a>'
+    note = _mail_note(href, label)
+    text = f'<span class="btn-t">{label}{note}</span>' if note else label
+    return f'<a class="go" href="{href}">{text} {ARROW}</a>'
 
 
 def eyebrow(text, no=None, cls="", hidden=False):
     # a Roman numeral takes a full stop, as in a concert programme ("I. What
     # we do"): at the label's size a bare "I" could be read as the word
     # (chief designer v2, P3-3)
-    n = f'<span class="no">{no}{"." if no and not no.strip("IVX") else ""}</span>' if no else ""
+    n = f'<span class="no" aria-hidden="true">{no}{"." if no and not no.strip("IVX") else ""}</span>' if no else ""
     c = f"eyebrow {cls}".strip()
     h = ' aria-hidden="true"' if hidden else ""
     return f'<p class="{c}"{h}>{n}{text}</p>'
@@ -93,8 +108,12 @@ def _srcset(src, w, sizes):
     small = src[:-4] + "-800.jpg"
     if not sizes or w <= 800 or not os.path.exists(os.path.join(ROOT, "images", small)):
         return ""
+    # a 1200px step where there is one (QA v8: a phone at three times its pixels asked for
+    # the 1800px home photograph, 449 KB, because 800 was too small; the step is 252 KB)
+    mid = src[:-4] + "-1200.jpg"
+    mid_ = f"images/{mid} 1200w, " if w > 1250 and os.path.exists(os.path.join(ROOT, "images", mid)) else ""
     # a key of SIZES, or a sizes list worked out for one photograph (the gallery)
-    return f' srcset="images/{small} 800w, images/{src} {w}w" sizes="{SIZES.get(sizes, sizes)}"'
+    return f' srcset="images/{small} 800w, {mid_}images/{src} {w}w" sizes="{SIZES.get(sizes, sizes)}"'
 
 
 def photo(img, ratio="", sizes=None):
@@ -111,13 +130,22 @@ def photo(img, ratio="", sizes=None):
 _CREDIT = re.compile(r"\s·\s((?:photo|사진):\s.+)$")
 
 
+def parts_line(text):
+    """A line of parts joined by middle dots: each part its own span, so that
+    on a phone each stands on a line of its own and no dot is left at the end
+    of a line (v8: "Haegeum · Tallaght University Hospital · / August 2026");
+    the dot stays for a screen reader as a pause."""
+    bits = text.split(" · ")
+    return '<span class="cs"> · </span>'.join(f'<span class="cp">{b}</span>' for b in bits)
+
+
 def _credited(text):
     """The photographer's credit on a line of its own, without the dot that
     joined it ("…August 2026 · / photo: …" broke at the dot, CD v6)."""
     m = _CREDIT.search(text)
     if not m:
-        return f"<span>{text}</span>"
-    return f'<span>{text[:m.start()]}</span><span class="cap-credit">{m.group(1)}</span>'
+        return f"<span>{parts_line(text)}</span>"
+    return f'<span>{parts_line(text[:m.start()])}</span><span class="cap-credit">{m.group(1)}</span>'
 
 
 def caption(cap):
@@ -127,9 +155,9 @@ def caption(cap):
     if isinstance(cap, tuple):
         label, text = cap
         return f'<figcaption><span class="cap-label">{label}</span>{_credited(text)}</figcaption>'
-    if _CREDIT.search(cap):
-        return f"<figcaption>{_credited(cap)}</figcaption>"
-    return f"<figcaption>{cap}</figcaption>"
+    # every caption by the same rule (v8, a fresh reviewer: on a phone the credited captions
+    # stood a part a line and the others stayed one dotted line)
+    return f"<figcaption>{_credited(cap)}</figcaption>"
 
 
 def plate(img, ratio="", cap=None, cls="", sizes="half"):
@@ -181,7 +209,7 @@ MEET_ICONS = ((("room", "calendar", "person", "hand"), ("people", "stand", "scor
               (("room", "person", "announce"), ("recorder", "score")))
 
 
-def meet(k, title, give, bring, labels):
+def meet(k, title, give, bring, labels, note=None):
     """What a host provides and what we bring, drawn: two columns of stations
     bracketed into one stem each, meeting at the event (a concert, a class).
     The DOM reads the event, then each side with its list."""
@@ -193,7 +221,9 @@ def meet(k, title, give, bring, labels):
                        f'{glyph(i, "meet-glyph")}</span><span class="meet-t">{x}</span></li>'
                        for j, (x, i) in enumerate(zip(xs, ic)))
     return (f'<div class="meet">'
-            f'<h3 class="meet-hub" id="meet-{k}">{title}</h3>'
+            f'<h3 class="meet-hub" id="meet-{k}">'
+            + (f'<span class="meet-in"><span>{title}</span>{SEP}<small class="meet-len">{note}</small></span>'
+               if note else title) + '</h3>'
             f'<div class="meet-side meet-give"><p class="meet-label" id="meet-{k}-g">{labels[0]}</p>'
             f'<ul class="meet-list" aria-labelledby="meet-{k}-g">{li(give, gi, 0)}</ul></div>'
             f'<div class="meet-side meet-bring"><p class="meet-label" id="meet-{k}-b">{labels[1]}</p>'
@@ -298,11 +328,19 @@ def whereabouts(rows):
             f'<dl class="wa-who">{st}</dl></div>')
 
 
-def fold(summary, inner, cls=""):
+def fold_label(show, hide=None):
+    """A fold's summary: what is inside and how many while it is shut, and how to
+    shut it once open (chief designer v8: an open fold still said "Show 11")."""
+    if not hide:
+        return show
+    return f'<span class="f-show">{show}</span><span class="f-hide">{hide}</span>'
+
+
+def fold(summary, inner, cls="", hide=None):
     """Reference most readers do not need, folded: the summary says what is
     inside and how many. Never used for when, where, status or the action."""
     c = f"fold {cls}".strip()
-    return f'<details class="{c}"><summary>{summary}</summary>{inner}</details>'
+    return f'<details class="{c}"><summary>{fold_label(summary, hide)}</summary>{inner}</details>'
 
 
 def now_line(p, cls=""):
@@ -353,15 +391,18 @@ def page_head(t):
 # ---------------------------------------------------------------------------
 
 def cover(i, p, size=""):
-    """A programme's cover: its number, its emblem inside rings, and three
+    """A programme's cover: its number, its emblem, and three
     words of its own vocabulary, on ink. The five covers replace the five
     programme photographs as the matched set (there is no truthful photograph
     of Concert Guide & Companion, and a set of four photographs and a gap is
     not a set). Decorative: the card or heading beside it carries the name.
-    The cover carries the view-transition name, so the cover a reader follows
-    from the home page or the index opens their programme's page."""
+    The build writes the cover's view-transition name as a property and the
+    stylesheet gives it only to the cover being taken (the one under the
+    pointer or the focus, or the head's own), so the cover a reader follows
+    grows into their programme's page and the other four stay where they are
+    (v8: an inline name on all five carried five at once)."""
     c = f" cover-{size}" if size else ""
-    return (f'<div class="cover{c}" style="view-transition-name:prog-{p["slug"]};view-transition-class:prog-cover" '
+    return (f'<div class="cover{c}" style="--vtn:prog-{p["slug"]}" '
             f'aria-hidden="true">'
             f'<span class="cover-no">{i + 1:02d}</span>{glyph(p["icon"])}'
             f'<span class="cover-line">{_vocab(p["vocab"])}</span></div>')
@@ -527,7 +568,7 @@ def home(t, programmes, pillars, lang):
 
 <section class="band-ink figs-band" id="record">
   <div class="wrap">
-    <h2 class="eyebrow section-label"><span class="no">II.</span>{nb["label"]}</h2>
+    <h2 class="eyebrow section-label"><span class="no" aria-hidden="true">II.</span>{nb["label"]}</h2>
     <div class="figs" style="--figs:{len(nb["figs"])}">
 {figs}
     </div>
@@ -792,7 +833,7 @@ def record_list(n, items, t):
         return f'    <ol class="rec rec-short rv">\n{rows}\n    </ol>'
     early, late = "\n".join(items[:-REC_OPEN]), "\n".join(items[-REC_OPEN:])
     inner = f'<ol class="rec rec-long">\n{early}\n    </ol>'
-    return (f'    <div class="rec-wrap rv">\n    {fold(t.get("earlier", "Earlier: {n} more").format(n=n - REC_OPEN), inner, "rec-fold")}\n'
+    return (f'    <div class="rec-wrap rv">\n    {fold(t.get("earlier", "Earlier: {n} more").format(n=n - REC_OPEN), inner, "rec-fold", t.get("earlier_hide"))}\n'
             f'    <ol class="rec rec-long">\n{late}\n    </ol>\n    </div>')
 
 
@@ -805,6 +846,8 @@ def mail_alt(t):
 
 
 def programme_page(t, i, p, programmes, pillars, lang):
+    # the head's cover is the object carried here from its card: it is set down, it does not
+    # rise and fade in with the head (it was half transparent under the morph, v8)
     g = p["page"]
     label, dot = pillars[p["pillar"]]
     # the third fact is always When, the one people scan for; it is bolded
@@ -843,7 +886,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
       <figcaption class="att-head"><b>{a["h3"]}</b><span>{a["lead"]}</span></figcaption>
       <div class="att-plot">{artifacts.attendance(lang, a)}</div>
     </figure>"""
-    vid = artifacts.video(g.get("video"), t["video_label"].format(name=p["name"]), t["play"], lang)
+    vid = artifacts.video(g.get("video"), (g.get("video") or {}).get("title") or t["video_label"].format(name=p["name"]), t["play"], lang)
     has_room = g.get("room", True) or bool(vid)
     # the sections are numbered in the margin, in reading order, with no gap
     # where a page has no "In the room". The programme's own number is not in
@@ -878,7 +921,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
   </div>
 </section>"""
     # a programme running now says so here too, so every page points to it
-    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n" aria-hidden="true">{k + 1:02d}</span><b>{q["name"]}</b>{status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
+    others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n" aria-hidden="true">{k + 1:02d}</span><b>{q["name"]}</b>{SEP + status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
                        for k, q in enumerate(programmes) if q["slug"] != p["slug"])
     return f"""<section class="pp-head">
   <div class="wrap">
@@ -895,7 +938,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
           <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}{go("#join", t["how_join"])}</div>
         </div>
       </div>
-      <div class="pp-cover lift lift-2">{cover(i, p)}</div>
+      <div class="pp-cover">{cover(i, p)}</div>
     </div>
     <dl class="pp-glance lift lift-5">{glance}</dl>
   </div>
@@ -958,10 +1001,18 @@ def get_involved(t, icon):
     if inv.get("pairs"):
         # what a host gives and what we bring (4th pass, 2 Oct 2026); the
         # steps of a visit live on the Outreach Concerts page, one click away
-        invite_body = ('      <div class="meets">'
-                       + "".join(meet(k, a, b, c, inv["pair_labels"]) for k, (a, b, c) in enumerate(inv["pairs"]))
-                       + "</div>")
+        # the concert's action straight under the concert: below the class
+        # drawing it read as part of the class offer (UX v8: "a warm room each
+        # week" taken as a concert ask); the class keeps a quiet line of its own
         more_href = "programmes/outreach-concerts.html#how"
+        notes = inv.get("hub_notes") or [None] * len(inv["pairs"])
+        drawn = [meet(k, a, b, c, inv["pair_labels"], notes[k]) for k, (a, b, c) in enumerate(inv["pairs"])]
+        act = (f'<div class="invite-act"><div class="btn-row">{btn(inv["href"], inv["btn"], "primary")}'
+               f'{go(more_href, inv["more"])}</div>{mail_alt(t["alt"])}</div>')
+        more = (f'<div class="btn-row invite-more">{go(inv["class_href"], inv["class_go"])}</div>'
+                if inv.get("class_href") else "")
+        invite_body = '      <div class="meets">' + drawn[0] + act + "".join(drawn[1:]) + more + "</div>"
+        invite_act = ""
     else:
         visit = "\n".join(f"""        <li style="--i:{k}">
           <span class="step-n" aria-hidden="true">{k + 1}</span>
@@ -972,6 +1023,11 @@ def get_involved(t, icon):
 {visit}
       </ol>"""
         more_href = "programmes/outreach-concerts.html"
+        invite_act = f"""
+      <div class="invite-act">
+        <div class="btn-row">{btn(inv["href"], inv["btn"], "primary")}{go(more_href, inv["more"])}</div>
+        {mail_alt(t["alt"])}
+      </div>"""
     # interest is taken freely, from any field (Andrew, 2 Oct 2026): who it
     # is for, how to begin and what a venue may ask, as facts; then what a
     # performance with us has looked like, from the record, in place of the
@@ -1041,11 +1097,7 @@ def get_involved(t, icon):
   <div class="wrap">
 {sh(inv["label"], inv["h2"], inv.get("lead") or inv.get("text"), split=True)}
     <div class="invite rv">
-{invite_body}
-      <div class="invite-act">
-        <div class="btn-row">{btn(inv["href"], inv["btn"], "primary")}{go(more_href, inv["more"])}</div>
-        {mail_alt(t["alt"])}
-      </div>
+{invite_body}{invite_act}
     </div>
   </div>
 </section>
@@ -1143,7 +1195,7 @@ def record_years(lang, t):
             # a past year folds on a phone (Andrew, 4 Oct 2026: the record ran
             # to about 4,150px there); from 40em it is always open and the
             # summary is not drawn (styles.css, ::details-content)
-            more = t["year_more"].format(n=len(mine), y=y)
+            more = fold_label(t["year_more"].format(n=len(mine), y=y), t.get("year_less", "").format(y=y))
             body = f'        <details class="fold ry-fold"><summary>{more}</summary>\n{body}\n        </details>'
         out.append(f'      <div class="ry">\n        <h3 class="ry-y">{head}</h3>\n{body}\n      </div>')
     return '<div class="record-years rv">\n' + "\n".join(out) + "\n    </div>"
@@ -1193,15 +1245,17 @@ def _timeline(tm):
     rows [(date, title, text)] is drawn as before."""
     # each sentence its own line (layout.SENTENCE_BLOCKS "tl-text"): the Korean
     # rows turned mid-sentence (「첫 강의에 / 여섯 명이」, CD v6)
-    item = ('{i}<li class="tl-item">\n{i}  <span class="tl-date">{a}</span>\n'
-            '{i}  <div><h3>{b}</h3><p class="tl-text">{c}</p></div>\n{i}</li>')
+    # the year and month are drawn for the eye and said in the heading for a
+    # reader who jumps from heading to heading (accessibility v8)
+    item = ('{i}<li class="tl-item">\n{i}  <span class="tl-date" aria-hidden="true">{a}</span>\n'
+            '{i}  <div><h3><span class="sr-only">{y}{a}: </span>{b}</h3><p class="tl-text">{c}</p></div>\n{i}</li>')
     if "years" not in tm:
-        rows = "\n".join(item.format(i="      ", a=a, b=b, c=c) for a, b, c in tm["rows"])
+        rows = "\n".join(item.format(i="      ", y="", a=a, b=b, c=c) for a, b, c in tm["rows"])
         return '    <ol class="timeline">\n' + rows + "\n    </ol>"
     years = []
     for y, rows in tm["years"]:
-        items = "\n".join(item.format(i="          ", a=a, b=b, c=c) for a, b, c in rows)
-        years.append(f'      <li class="tl-year"><span class="tl-y">{y}</span>\n'
+        items = "\n".join(item.format(i="          ", y=f"{y}, ", a=a, b=b, c=c) for a, b, c in rows)
+        years.append(f'      <li class="tl-year"><span class="tl-y" aria-hidden="true">{y}</span>\n'
                      f'        <ol class="tl-items">\n{items}\n        </ol>\n      </li>')
     return '    <ol class="timeline timeline-years">\n' + "\n".join(years) + "\n    </ol>"
 
@@ -1269,8 +1323,19 @@ def news(t, lang, programmes=()):
         room = min(280, (582 - (n2 - 1) * 14) * w2, (1090 - (n - 1) * 19) * w)
         items.append(f'      <li style="--ar:{ars[k]:.4f};--w:{w:.5f};--n:{n};--w2:{w2:.5f};--n2:{n2}">'
                      f'{plate(img, "", _whole_parts(cap, room), sizes=sz)}</li>')
-    gal = "\n".join(items)
     c, tm, g = t["chart"], t["timeline"], t["gallery"]
+    # on a phone the gallery is one photograph a row, eight screens of News
+    # (UX v8): it shows its first row and folds the rest, as the record folds its
+    # past years; from 40em it is all open with no control. The fold falls where
+    # a row ends in both cuts, so every row still fills the measure.
+    ends = {b for _, b in _gallery_rows(ars, (3, 4), 1168, 24)} & {b for _, b in _gallery_rows(ars, (2, 3), 930, 18)}
+    cut = min((b for b in ends if 3 <= b <= len(items) - 3), default=None)
+    if cut and g.get("more"):
+        gal = ("\n".join(items[:cut]) + '\n    </ul>\n    <details class="fold gal-fold">'
+               f'<summary>{fold_label(g["more"].format(n=len(items) - cut), g.get("less"))}</summary>\n    <ul class="gallery">\n'
+               + "\n".join(items[cut:]) + "\n    </ul>\n    </details>")
+    else:
+        gal = "\n".join(items) + "\n    </ul>"
     figs = ""
     if c.get("figs"):
         # the forty in four figures with their period (4th pass): the counts
@@ -1315,7 +1380,6 @@ def news(t, lang, programmes=()):
 {sh(g["label"], g["h2"], g["lead"], split=True)}
     <ul class="gallery">
 {gal}
-    </ul>
   </div>
 </section>"""
 

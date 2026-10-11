@@ -34,10 +34,10 @@ PAGES = [
     #                     en body,        ko body
     ("index.html",
      "Classical Music for Everyone · community music in Dublin, Ireland",
-     "Not-for-profit community music in Dublin: Classical Music talks, live concerts in care "
-     "homes and hospitals, and a recorder class for adults learning to play.",
+     "Not-for-profit community music in Dublin: Classical Music talks, outreach concerts, a recorder "
+     "class for adults, the Letters Ensemble and concert outings.",
      "Classical Music for Everyone · 아일랜드 더블린의 공동체 음악",
-     "더블린의 비영리 공동체 음악 단체. 찾아가는 음악회와 강의, 어른을 위한 리코더 클래스를 엽니다.",
+     "더블린의 비영리 공동체 음악 단체입니다. 강의와 찾아가는 음악회, 어른을 위한 리코더 클래스, Letters Ensemble, 함께하는 음악여행.",
      en.INDEX, ko.INDEX),
 
     ("about.html",
@@ -171,8 +171,8 @@ OG = {
                           "A clarinettist and three string players in a care setting at Christmas",
                           "성탄절 요양시설에서 연주하는 클라리넷과 현악 연주자 세 명"),
     "news.html": ("ruared-trio.jpg",
-                  "Clarinet, soprano and piano taking a bow on the Rua Red stage",
-                  "Rua Red 무대에서 인사하는 클라리넷·소프라노·피아노"),
+                  "A clarinettist, a soprano and a pianist standing together on the Rua Red stage",
+                  "Rua Red 무대에 함께 선 클라리넷 연주자, 소프라노, 피아니스트"),
     "contact.html": ("letters-ensemble.jpg",
                      "The Letters Ensemble with their instruments",
                      "악기를 든 Letters Ensemble 단원들"),
@@ -322,7 +322,7 @@ def build_llms():
              "September 2026 are 17 talks, 20 outreach performances, one pilot concert "
              "and two South Dublin Live 2026 concerts (our founder was selected for South Dublin "
              "Live 2026). In a ten-week pilot recorder ensemble, all seven retired Presentation "
-             "Sisters stayed to the end.",
+             "Sisters stayed to the end and played the Easter concert.",
              f"Contact: {EMAIL} · {PHONE_INTL} · Dublin, Ireland. Languages: English, Korean.", "",
              "## Pages (English)", ""]
     for slug, en_title, en_desc, *_ in PAGES:

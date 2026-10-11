@@ -147,7 +147,10 @@ class Chrome:
         self.events = []
         for m in ("Page.enable", "Runtime.enable", "Network.enable"):
             self.call(m)
-        self.call("Network.setCacheDisabled", cacheDisabled=True)
+        # CMFE_CDP_CACHE=1 keeps the cache for one run (a fresh profile each run, so nothing is
+        # older than the run): on a flaky connection the web fonts are then fetched once, not on
+        # every page, and the font check stops a run less often (v8). Off by default.
+        self.call("Network.setCacheDisabled", cacheDisabled=os.environ.get("CMFE_CDP_CACHE") != "1")
         self.viewport(width, height, dpr, mobile)
         self.motion(not reduce_motion)
 

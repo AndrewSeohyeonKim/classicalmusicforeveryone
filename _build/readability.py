@@ -191,6 +191,10 @@ BANNED = {
         (r"전국|아일랜드 곳곳|아일랜드 어디든", "전국 범위"),
         (r"\bCMFE\b(?! Artists)", "단독 CMFE"),
         (r"\b(?:classical [Mm]usic|Classical music)\b", "'Classical Music' without its capitals"),
+        # one name for one thing (copy desk v8): the email app is 「메일 앱」 everywhere, a talk
+        # is never a 「모임」, and 「함께하기」 names the Get involved page, not a section
+        (r"이메일 앱", "「메일 앱」이라고 쓴다"),
+        (r"번째 모임", "강의는 「강의」"),
     ],
 }
 

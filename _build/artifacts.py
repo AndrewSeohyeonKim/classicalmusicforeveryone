@@ -308,10 +308,14 @@ def video(v, label, play, lang="en"):
         src = f"https://www.youtube-nocookie.com/embed/{v['id']}?autoplay=1&amp;rel=0"
     else:
         src = f"https://player.vimeo.com/video/{v['id']}?autoplay=1&amp;dnt=1"
-    # the 800px copy where there is one: the frame is never wider than that
-    small = v["poster"][:-4] + "-800.jpg"
-    name = small if os.path.exists(os.path.join(ROOT, "images", small)) else v["poster"]
-    poster = f"{SITE_URL}/images/{name}"
+    # the 1200px copy where there is one (the frame is about 850px wide, twice that on a
+    # sharp screen: the 800px copy was soft there, QA v8), else the 800px copy
+    small = next((v["poster"][:-4] + s for s in ("-1200.jpg", "-800.jpg")
+                  if os.path.exists(os.path.join(ROOT, "images", v["poster"][:-4] + s))), v["poster"])
+    name = small
+    # relative to the programme page (a srcdoc frame resolves against its parent page, v8 QA): the
+    # copy is found before the site is published too, and on the live site it is the same file
+    poster = ("../" if lang == "en" else "../../") + f"images/{name}"
     doc = (f"<html lang='{lang}'>" "<style>*{margin:0}html,body{height:100%}a{position:relative;display:block;height:100%;"
            "background:#1D2430}img{width:100%;height:100%;object-fit:cover;opacity:.88}"
            "i{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;"
@@ -319,7 +323,12 @@ def video(v, label, play, lang="en"):
            "left:29px;top:24px;border-left:20px solid #1D2430;border-top:12px solid transparent;"
            "border-bottom:12px solid transparent}b{position:absolute;width:1px;height:1px;overflow:hidden;"
            "clip-path:inset(50%)}a:focus{outline:none}a:focus-visible{box-shadow:inset 0 0 0 4px #1D2430,"
-           "inset 0 0 0 7px #FAF5EE}a:focus-visible i{box-shadow:0 0 0 3px #1D2430,0 0 0 6px #FAF5EE}</style>"
+           "inset 0 0 0 7px #FAF5EE}a:focus-visible i{box-shadow:0 0 0 3px #1D2430,0 0 0 6px #FAF5EE}"
+           # the still answers a press before the player loads (v8; the frame cannot read the
+           # page's tokens: --dur-5, --dur-6, --ease, --ease-enter written out)
+           "@media (prefers-reduced-motion:no-preference){img{transition:opacity .25s cubic-bezier(.35,0,.35,1)}"
+           "i{transition:scale .3s cubic-bezier(0,0,.15,1)}}a:hover img{opacity:1}a:hover i{scale:1.06}"
+           "a:active i{scale:.96}a:active img{opacity:.72}</style>"
            f"<a href='{src}'><img src='{poster}' alt=''><i></i><b>{play}</b></a>")
     return (f'<iframe class="video-frame" title="{label}" loading="lazy" src="{src}" '
             f'srcdoc="{html.escape(doc)}" allow="autoplay; fullscreen; picture-in-picture"></iframe>')

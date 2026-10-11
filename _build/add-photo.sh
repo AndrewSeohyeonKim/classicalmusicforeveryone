@@ -25,8 +25,17 @@ sips -Z "$edge" -s format jpeg -s formatOptions 68 "$out" --out "$out" > /dev/nu
 
 small="${out%.jpg}-800.jpg"
 sips --resampleWidth 800 -s formatOptions 70 "$out" --out "$small" > /dev/null
-# sips writes its own small EXIF block on save; take it off both files
-python3 "$here/strip-meta.py" "$out" "$small" > /dev/null
+# a 1200px step for a photograph wider than that (v8: a phone at three times its
+# pixels otherwise loads the full file); the build adds it to srcset when it exists
+mid="${out%.jpg}-1200.jpg"
+width=$(sips -g pixelWidth "$out" | awk '/pixelWidth/{print $2}')
+if [ "$width" -gt 1250 ]; then
+  sips --resampleWidth 1200 -s formatOptions 70 "$out" --out "$mid" > /dev/null
+else
+  mid=""
+fi
+# sips writes its own small EXIF block on save; take it off every file
+python3 "$here/strip-meta.py" "$out" "$small" ${mid:+"$mid"} > /dev/null
 
 read -r w h < <(sips -g pixelWidth -g pixelHeight "$out" | awk '/pixel/{printf "%s ", $2} END{print ""}')
 size=$(du -h "$out" | cut -f1)
