@@ -601,7 +601,7 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
   .lift-6{animation-delay:calc(var(--beat) * 5)}
   /* backwards, not both: once developed, the picture is back in the hands
      of its own styles (the hover scale) */
-  .open .photo>img{animation:develop var(--dur-slow) var(--ease-settle) var(--beat) backwards}
+  .open .photo img{animation:develop var(--dur-slow) var(--ease-settle) var(--beat) backwards}
 
   /* --- page to page (v8) --------------------------------------------------
      The page left behind steps back and fades in 200ms; the next rises 18px in
@@ -679,7 +679,7 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
        anonymous view() inside the frame would look for the nearest scroll
        container. */
     .plate{view-timeline:--plate-tl block}
-    .plate .photo>img{animation:develop linear backwards;animation-timeline:--plate-tl;
+    .plate .photo img{animation:develop linear backwards;animation-timeline:--plate-tl;
       animation-range:entry 0% entry 60%;animation-range:entry 0% entry min(60%, 160px)}
 
     /* a highlighter mark is drawn across its words as they come on screen,
@@ -735,7 +735,7 @@ html[lang^="ko"] :is(.lead,.ph-lead,.sh-lead,.figs-note,.join-hint,.pi-text,.fou
     }
     /* a plate develops once 15% of it is on screen */
     .plate{trigger-scope:--plate;timeline-trigger:--plate view() entry 15% exit 100%}
-    .plate .photo>img{
+    .plate .photo img{
       animation:develop var(--dur-slow) var(--ease-settle) backwards;
       animation-timeline:auto;animation-range:normal;animation-trigger:--plate play-once;
     }
@@ -1605,7 +1605,7 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
    fold; 12% off the top is vault and window, 5% off the foot tablecloth, no
    face is cut and the alt text stays true) */
 .hero-figure .photo{aspect-ratio:16/10}
-.hero-figure .photo>img{object-position:50% 72%}
+.hero-figure .photo img{object-position:50% 72%}
 .hero-figure figcaption{padding-inline-end:var(--gutter)}
 
 /* Sound leaves the room in rings. Faint and still behind the photograph;
@@ -1748,7 +1748,8 @@ html[lang^="ko"] .hero-body{margin-top:max(56px,calc(var(--hero-fs) * .62))}
   position:relative;overflow:clip;isolation:isolate;border-radius:var(--radius-xs);
   background:var(--surface-sunken);
 }
-.photo>img{width:100%;height:100%;object-fit:cover}
+.photo picture{display:contents}
+.photo img{width:100%;height:100%;object-fit:cover}
 .photo-3x2{aspect-ratio:3/2}
 .photo-4x3{aspect-ratio:4/3}
 .photo-4x5{aspect-ratio:4/5}
@@ -2677,7 +2678,7 @@ html[lang^="ko"] .ry-what b{font-family:var(--font-kr);font-weight:700;font-size
 .gallery>li{flex:1 1 calc((100% - (var(--n2) - 1) * var(--g)) * var(--w2) - .5px);min-width:0;margin:0}
 @media (min-width:75em){.gallery>li{flex-basis:calc((100% - (var(--n) - 1) * var(--g)) * var(--w) - .5px)}}
 .gallery .photo{aspect-ratio:var(--ar)}
-.gallery .photo>img{width:100%;height:100%;object-fit:cover}
+.gallery .photo img{width:100%;height:100%;object-fit:cover}
 /* one a line under 40em: a row's share was too narrow there for a caption's place
    name (parts._whole_parts keeps it whole) */
 @media (max-width:40em){.gallery>li{flex-basis:100%}}

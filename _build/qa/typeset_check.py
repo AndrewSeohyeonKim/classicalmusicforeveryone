@@ -453,7 +453,18 @@ class _Quiet(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+def fresh_css():
+    """The pages read styles.min.css, which the build writes from styles.css (v8): a check run
+    on a stale copy would measure yesterday's rules."""
+    import hashlib
+    src = open(os.path.join(ROOT, "styles.css"), "rb").read()
+    head = open(os.path.join(ROOT, "styles.min.css"), encoding="utf-8").readline()
+    if hashlib.sha1(src).hexdigest()[:12] not in head:
+        sys.exit("styles.min.css is older than styles.css: run python3 _build/build.py first")
+
+
 def serve():
+    fresh_css()
     handler = functools.partial(_Quiet, directory=ROOT)
     httpd = socketserver.TCPServer(("127.0.0.1", 0), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()

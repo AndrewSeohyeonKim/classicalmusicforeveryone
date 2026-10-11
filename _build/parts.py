@@ -116,6 +116,22 @@ def _srcset(src, w, sizes):
     return f' srcset="images/{small} 800w, {mid_}images/{src} {w}w" sizes="{SIZES.get(sizes, sizes)}"'
 
 
+def _avif_srcset(src, w, sizes):
+    """The same photograph in AVIF, where the build has it (v8: about 40% of the JPEG's
+    weight at the same look, quality 60 measured by eye against the JPEG at three times
+    its size); a browser that cannot read AVIF takes the JPEG <img> as before."""
+    base = src[:-4]
+    if not os.path.exists(os.path.join(ROOT, "images", base + ".avif")):
+        return ""
+    steps = [(base + s, n) for s, n in (("-800.avif", 800), ("-1200.avif", 1200))
+             if n < w and (n == 800 or w > 1250) and os.path.exists(os.path.join(ROOT, "images", base + s))]
+    steps.append((base + ".avif", w))
+    if not sizes or len(steps) == 1:
+        return f' srcset="images/{base}.avif"'
+    return (' srcset="' + ", ".join(f"images/{f} {n}w" for f, n in steps) + '"'
+            f' sizes="{SIZES.get(sizes, sizes)}"')
+
+
 def photo(img, ratio="", sizes=None):
     """img is (src, width, height, alt). The ratio class is optional where the
     component sets the shape. sizes is a key of SIZES. Since 2026-10-01 a
@@ -123,8 +139,11 @@ def photo(img, ratio="", sizes=None):
     (cover() below), so what travels between pages is the same drawing."""
     src, w, h, alt = img
     r = f" photo-{ratio}" if ratio else ""
-    return (f'<div class="photo{r}"><img src="images/{src}"{_srcset(src, w, sizes)} '
-            f'width="{w}" height="{h}" alt="{alt}"></div>')
+    tag = f'<img src="images/{src}"{_srcset(src, w, sizes)} width="{w}" height="{h}" alt="{alt}">'
+    av = _avif_srcset(src, w, sizes)
+    if av:
+        tag = f'<picture><source type="image/avif"{av}>{tag}</picture>'
+    return f'<div class="photo{r}">{tag}</div>'
 
 
 _CREDIT = re.compile(r"\s·\s((?:photo|사진):\s.+)$")

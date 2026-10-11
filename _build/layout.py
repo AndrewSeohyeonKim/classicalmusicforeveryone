@@ -42,8 +42,8 @@ FONTS_EN = FONTS.replace("&family=Noto+Sans+KR:wght@400;700", "")
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
-UPDATED = {"en": "11 October 2026", "ko": "2026년 10월 11일"}
-UPDATED_ISO = "2026-10-11"
+UPDATED = {"en": "12 October 2026", "ko": "2026년 10월 12일"}
+UPDATED_ISO = "2026-10-12"
 
 
 def _parts_line(text):
@@ -295,7 +295,7 @@ def _images(body, eager_first):
 # a new sub-page cannot end up with a broken path in one language only.
 # ---------------------------------------------------------------------------
 
-SHARED = ("images/", "assets/", "styles.css")
+SHARED = ("images/", "assets/", "styles.css", "styles.min.css")
 
 
 def _here(slug):
@@ -1014,7 +1014,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS_EN if lang == 'en' and slug != '404.html' else FONTS}">
-<link rel="stylesheet" href="{r}styles.css">
+<link rel="stylesheet" href="{r}styles.min.css">
 <link rel="expect" href="#main" blocking="render">
 {jsonld}
 </head>

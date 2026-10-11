@@ -228,13 +228,13 @@ PROGRAMMES_DATA = [
              # Andrew, 6 Oct 2026: join during the term; step-free; he leads the class (reading music is
              # in the glance and the steps, the pilot in the video and the record)
              faq=[("Do I need my own recorder?", "<strong>No.</strong> We can <mark>lend you one</mark>."),
-                  ("Can I join during the term?", "<strong>Yes.</strong> You can start <mark>any Wednesday</mark>."),
+                  ("Can I join during the term?", "<strong>Yes.</strong> Just come along <mark>any Wednesday</mark> at 7pm."),
                   ("Is the centre step-free?",
                    "<strong>Yes.</strong> Mulhuddart Community Centre has <mark>step-free access</mark>.")],
              record_h2="The story so far.",
              record_lead="It began with one question, asked at a concert.",
              join_h2="Join the class.",
-             join_text="<strong>Wednesday evenings, 7pm to 8pm</strong>, in Mulhuddart.",
+             join_text="<strong>Wednesday evenings, 7pm to 8pm</strong>, in Mulhuddart: just come along any week.",
              join_btn="Ask about the class",
              mail_subject="Community Recorder Ensemble Class",
              mail_fields=["Your name",
@@ -815,7 +815,7 @@ CONTACT_T = dict(
     privacy=dict(
         label="Privacy notice",
         h2="How we look after your details.",
-        intro="How we use the details you send, and your rights. Last updated 5 October 2026.",
+        intro="How we use the details you send, and your rights. Last updated 12 October 2026.",
         # what this website does not have, said once and plainly
         # the contact form is a mailto form: it sends nothing itself (2 Oct 2026)
         none=[("Forms", "One, and it only opens your email app"), ("Cookies", "None of ours"),
@@ -830,7 +830,6 @@ CONTACT_T = dict(
                  "list",
                  ["We use what you send <mark>only to reply</mark> and to do what you asked.",
                   "We <mark>never sell it</mark>, and only the services listed below handle it for us.",
-                  "We keep artists&rsquo; details for up to two years, to offer them concerts.",
                   "Telling us about access needs is optional."],
                  ""),
                 ("Who else handles it",

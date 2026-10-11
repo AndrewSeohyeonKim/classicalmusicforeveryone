@@ -14,7 +14,10 @@ _build/add-photo.sh ~/Pictures/IMG_1234.JPG images/outreach-wicklow.jpg
 That turns a portrait the phone stored on its side, removes the camera metadata (EXIF,
 XMP, IPTC: **the GPS position**, the camera, the time), resizes to 1400px on the long edge at
 quality 68, writes an 800px copy beside it (`outreach-wicklow-800.jpg`, the file cards and
-phones load), and prints the tuple to paste. Keep each file under about 500 KB.
+phones load) and, for a photograph wider than 1250px, a 1200px copy (`-1200.jpg`, what a phone
+at three times its pixels loads), then the same steps in AVIF at quality 60 (`.avif`,
+`-800.avif`, `-1200.avif`: the same look at about 40% of the weight; v8, 2026-10-11), and
+prints the tuple to paste. Keep each JPEG under about 500 KB.
 
 **Never copy a phone photograph into `images/` by hand.** Phone pictures carry the GPS
 position where they were taken; on 2026-10-01 several published files still did, some of them
@@ -23,7 +26,8 @@ folder: `python3 _build/strip-meta.py images/<name>.jpg`.
 
 Then reference it from `_build/content_en.py` and `_build/content_ko.py` as an img tuple,
 `("outreach-wicklow.jpg", 1400, 933, "An outreach concert in a Co. Wicklow nursing home")`.
-The markup (`.photo` wrapper, `srcset` with the 800px copy, `sizes`) comes from
+The markup (`.photo` wrapper, a `<picture>` whose AVIF source comes first, `srcset` with the
+800px and 1200px copies, `sizes`) comes from
 `_build/parts.py`; `loading`, `decoding` and `fetchpriority` are added at build time. Do not
 write any of them by hand.
 

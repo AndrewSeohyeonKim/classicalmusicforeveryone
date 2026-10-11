@@ -116,7 +116,7 @@ def build_redirects():
             anchor = target[len(tpath):]
             abs_url = (f"{SITE_URL}/" + ("" if lang == "en" else "ko/")
                        + ("" if tpath == "index.html" else tpath) + anchor)
-            css = "../" * (slug.count("/") + (0 if lang == "en" else 1)) + "styles.css"
+            css = "../" * (slug.count("/") + (0 if lang == "en" else 1)) + "styles.min.css"
             title, msg, go = REDIRECT_TEXT[lang]
             html = f"""<!DOCTYPE html>
 <html lang="{'en-IE' if lang == 'en' else 'ko'}">
@@ -378,7 +378,42 @@ def build_manifest():
         fh.write("\n")
 
 
+def minify_css():
+    """styles.css is the source, written and commented by hand; the pages read styles.min.css,
+    the same rules with the comments and the indentation taken out (v8, QA: 30 of its 55 KB
+    gzipped were comments, all of it render-blocking). Strings are copied as they are. The
+    first line names the source's hash, so a check can tell when the copy is stale."""
+    import hashlib
+    src = open(os.path.join(ROOT, "styles.css"), encoding="utf-8").read()
+    out, i, n, q = [], 0, len(src), None
+    while i < n:
+        ch = src[i]
+        if q:
+            out.append(ch)
+            if ch == "\\" and i + 1 < n:
+                out.append(src[i + 1]); i += 1
+            elif ch == q:
+                q = None
+        elif ch in "\"'":
+            q = ch; out.append(ch)
+        elif src.startswith("/*", i):
+            j = src.find("*/", i + 2)
+            i = n if j < 0 else j + 2
+            continue
+        else:
+            out.append(ch)
+        i += 1
+    lines = [ln.strip() for ln in "".join(out).split("\n")]
+    body = "\n".join(ln for ln in lines if ln)
+    digest = hashlib.sha1(src.encode("utf-8")).hexdigest()[:12]
+    head = f"/* generated from styles.css {digest} by _build/build.py: edit styles.css, then build */\n"
+    with open(os.path.join(ROOT, "styles.min.css"), "w", encoding="utf-8") as fh:
+        fh.write(head + body + "\n")
+    print(f"wrote styles.min.css ({len(src) // 1024} KB source, {len(head + body) // 1024} KB served)")
+
+
 def main():
+    minify_css()
     written = []
     for slug, en_title, en_desc, ko_title, ko_desc, en_body, ko_body in PAGES:
         og, og_en, og_ko = OG[slug]

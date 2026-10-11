@@ -36,6 +36,13 @@ else
 fi
 # sips writes its own small EXIF block on save; take it off every file
 python3 "$here/strip-meta.py" "$out" "$small" ${mid:+"$mid"} > /dev/null
+# and the same steps in AVIF, quality 60 (v8: the same look at about 40% of the weight; the build
+# offers them first in a <picture> and keeps the JPEG for browsers without AVIF). They are made
+# from the cleaned JPEG, so they carry no camera metadata.
+base="${out%.jpg}"
+sips -s format avif -s formatOptions 60 "$out" --out "$base.avif" > /dev/null
+sips --resampleWidth 800 -s format avif -s formatOptions 60 "$out" --out "$base-800.avif" > /dev/null
+[ -n "$mid" ] && sips --resampleWidth 1200 -s format avif -s formatOptions 60 "$out" --out "$base-1200.avif" > /dev/null
 
 read -r w h < <(sips -g pixelWidth -g pixelHeight "$out" | awk '/pixel/{printf "%s ", $2} END{print ""}')
 size=$(du -h "$out" | cut -f1)
