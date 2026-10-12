@@ -297,6 +297,15 @@ def watch_url(v):
     return "Vimeo", f"https://vimeo.com/{v['id']}"
 
 
+def _poster(jpg):
+    """The still in AVIF where the build has it, the JPEG for every other browser (v8)."""
+    avif = jpg[:-4] + ".avif"
+    name = avif.rsplit("/", 1)[-1]
+    if os.path.exists(os.path.join(ROOT, "images", name)):
+        return f"<picture><source type='image/avif' srcset='{avif}'><img src='{jpg}' alt=''></picture>"
+    return f"<img src='{jpg}' alt=''>"
+
+
 def video(v, label, play, lang="en"):
     if not v:
         return ""
@@ -328,7 +337,7 @@ def video(v, label, play, lang="en"):
            # page's tokens: --dur-5, --dur-6, --ease, --ease-enter written out)
            "@media (prefers-reduced-motion:no-preference){img{transition:opacity .25s cubic-bezier(.35,0,.35,1)}"
            "i{transition:scale .3s cubic-bezier(0,0,.15,1)}}a:hover img{opacity:1}a:hover i{scale:1.06}"
-           "a:active i{scale:.96}a:active img{opacity:.72}</style>"
-           f"<a href='{src}'><img src='{poster}' alt=''><i></i><b>{play}</b></a>")
+           "a:active i{scale:.96}a:active img{opacity:.72}picture{display:contents}</style>"
+           f"<a href='{src}'>{_poster(poster)}<i></i><b>{play}</b></a>")
     return (f'<iframe class="video-frame" title="{label}" loading="lazy" src="{src}" '
             f'srcdoc="{html.escape(doc)}" allow="autoplay; fullscreen; picture-in-picture"></iframe>')

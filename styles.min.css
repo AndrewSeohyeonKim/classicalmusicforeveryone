@@ -1,4 +1,4 @@
-/* generated from styles.css 5447993fcf9c by _build/build.py: edit styles.css, then build */
+/* generated from styles.css 6a14b6ab66a9 by _build/build.py: edit styles.css, then build */
 @view-transition { navigation: auto; }
 :root{
 --ink-navy:#1D2430;
@@ -25,8 +25,8 @@
 @font-face{font-family:"Garamond fallback mac";font-style:italic;src:local("Iowan Old Style Italic");size-adjust:97%}
 @font-face{font-family:"Garamond fallback win";src:local("Georgia");size-adjust:85.8%}
 @font-face{font-family:"Garamond fallback win";font-style:italic;src:local("Georgia Italic");size-adjust:82%}
-@font-face{font-family:"Noto fallback mac";src:local("Apple SD Gothic Neo"),local("AppleSDGothicNeo-Regular");size-adjust:105%}
-@font-face{font-family:"Noto fallback mac";font-weight:700;src:local("AppleSDGothicNeo-Bold");size-adjust:105%}
+@font-face{font-family:"Noto fallback mac";src:local("Apple SD Gothic Neo"),local("AppleSDGothicNeo-Regular");size-adjust:105%;unicode-range:U+1100-11FF,U+3130-318F,U+A960-A97F,U+AC00-D7AF,U+D7B0-D7FF}
+@font-face{font-family:"Noto fallback mac";font-weight:700;src:local("AppleSDGothicNeo-Bold");size-adjust:105%;unicode-range:U+1100-11FF,U+3130-318F,U+A960-A97F,U+AC00-D7AF,U+D7B0-D7FF}
 :root{
 color-scheme:light;
 --surface:var(--warm-cream);

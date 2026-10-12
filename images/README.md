@@ -19,6 +19,11 @@ at three times its pixels loads), then the same steps in AVIF at quality 60 (`.a
 `-800.avif`, `-1200.avif`: the same look at about 40% of the weight; v8, 2026-10-11), and
 prints the tuple to paste. Keep each JPEG under about 500 KB.
 
+**Every AVIF has even sides.** Chrome draws an AVIF that sips wrote with an odd width or height
+as a transparent box (2026-10-12: 8 of 42 photographs were blank in Chrome and fine in Safari).
+The script takes one pixel off an odd side; the build stops if an AVIF with an odd side is in
+this folder. Do not make AVIF files any other way.
+
 **Never copy a phone photograph into `images/` by hand.** Phone pictures carry the GPS
 position where they were taken; on 2026-10-01 several published files still did, some of them
 taken in private houses. To clean a file already in the

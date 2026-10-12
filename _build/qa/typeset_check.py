@@ -823,6 +823,29 @@ DOTS = r"""(() => { const tl = document.querySelector('.timeline'); if (!tl) ret
     }
     r(out); }, 900)); })()"""
 
+# painted (v8): every photograph a page offers, in every format and size its srcset names, the
+# video still in the player's srcdoc included, decodes to an opaque picture. Chrome drew the AVIF
+# that sips wrote with an odd side as a transparent box (8 of 42 files): naturalWidth was right,
+# so the gallery check passed, and a reader saw an empty plate.
+PAINTED = r"""(async () => { const urls = new Set(), base = document.baseURI;
+  const add = (u, b) => { if (u && /\.(jpe?g|avif|webp|png)(\?|$)/i.test(u)) urls.add(new URL(u, b).href); };
+  const scan = (d, b) => { for (const s of d.querySelectorAll('source[srcset],img[srcset]'))
+      for (const part of s.getAttribute('srcset').split(',')) add(part.trim().split(/\s+/)[0], b);
+    for (const i of d.querySelectorAll('img[src]')) add(i.getAttribute('src'), b); };
+  scan(document, base);
+  for (const f of document.querySelectorAll('iframe[srcdoc]'))
+    scan(new DOMParser().parseFromString(f.getAttribute('srcdoc'), 'text/html'), base);
+  const out = [];
+  for (const u of urls) { let i = null;
+    // twice: the local server drops a request now and then
+    for (let t = 0; t < 2 && !i; t++) { const j = new Image(); j.src = u + (t ? '?again' : ''); try { await j.decode(); i = j; } catch (e) {} }
+    if (!i) { out.push({file: u.replace(location.origin, ''), error: 'does not decode'}); continue; }
+    const c = document.createElement('canvas'); c.width = c.height = 8; const x = c.getContext('2d');
+    x.drawImage(i, 0, 0, 8, 8); const d = x.getImageData(0, 0, 8, 8).data; let a = 0;
+    for (let k = 3; k < d.length; k += 4) a += d[k];
+    if (a / 64 < 250) out.push({file: u.replace(location.origin, ''), alpha: Math.round(a / 64)}); }
+  return out; })()"""
+
 UNSEEN = """(() => { const out = [];
   for (const e of document.querySelectorAll('main *')) {
     if (e.closest('.arrow, .sr-only, [hidden]')) continue;
@@ -922,7 +945,7 @@ def main(strict=False):
              "years": [], "venues": [], "yearline": [], "motion": [], "wide": [], "lang": [], "dots": [],
              "titlegap": [], "inword": [], "sentences": [], "herorings": [], "kinsoku": [], "colline": [],
              "lone": [], "phrings": [], "shsize": [], "steps": [],
-             "coverfield": [], "vtnames": [], "labelline": [], "fortyrows": [], "herophoto": [], "settle": [], "piarrow": []}
+             "coverfield": [], "vtnames": [], "labelline": [], "fortyrows": [], "herophoto": [], "settle": [], "piarrow": [], "painted": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -961,6 +984,8 @@ def main(strict=False):
                             found["phrings"] += [(lang, w, x) for x in c.js(PHRINGS)]
                         if lang == "en" and w >= 1024:
                             found["venues"] += [(pg, w, x) for x in c.js(f"({VENUES_JS})({json.dumps(VENUES)})")]
+                        if w == 1440:  # once a page: it reads every file the page names, at any width
+                            found["painted"] += [(lang, pg, x) for x in c.js(PAINTED)]
                         found["coverfield"] += [(lang, pg, w, x) for x in c.js(COVERFIELD)]
                         found["vtnames"] += [(lang, pg, w, x) for x in c.js(VTNAMES)]
                         if pg == "programmes" and w >= 1024:

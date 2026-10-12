@@ -412,7 +412,30 @@ def minify_css():
     print(f"wrote styles.min.css ({len(src) // 1024} KB source, {len(head + body) // 1024} KB served)")
 
 
+def check_avif():
+    """Every AVIF has even sides (v8): Chrome draws an AVIF that sips wrote with an odd side
+    as a transparent box, so 8 of 42 photographs were blank there while Safari showed them.
+    The sizes are read from the file's ispe boxes (the image and its tiles)."""
+    import struct
+    bad = []
+    folder = os.path.join(ROOT, "images")
+    for name in sorted(os.listdir(folder)):
+        if not name.endswith(".avif"):
+            continue
+        head = open(os.path.join(folder, name), "rb").read(8192)
+        sizes, at = [], head.find(b"ispe")
+        while at > 0:
+            sizes.append(struct.unpack(">II", head[at + 8:at + 16]))
+            at = head.find(b"ispe", at + 4)
+        if not sizes or any(w % 2 or h % 2 for w, h in sizes):
+            bad.append(f"{name} {sizes}")
+    if bad:
+        sys.exit("AVIF with an odd side (Chrome shows it blank); make it with _build/add-photo.sh:\n  "
+                 + "\n  ".join(bad))
+
+
 def main():
+    check_avif()
     minify_css()
     written = []
     for slug, en_title, en_desc, ko_title, ko_desc, en_body, ko_body in PAGES:

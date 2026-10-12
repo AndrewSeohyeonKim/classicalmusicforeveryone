@@ -40,9 +40,18 @@ python3 "$here/strip-meta.py" "$out" "$small" ${mid:+"$mid"} > /dev/null
 # offers them first in a <picture> and keeps the JPEG for browsers without AVIF). They are made
 # from the cleaned JPEG, so they carry no camera metadata.
 base="${out%.jpg}"
-sips -s format avif -s formatOptions 60 "$out" --out "$base.avif" > /dev/null
-sips --resampleWidth 800 -s format avif -s formatOptions 60 "$out" --out "$base-800.avif" > /dev/null
-[ -n "$mid" ] && sips --resampleWidth 1200 -s format avif -s formatOptions 60 "$out" --out "$base-1200.avif" > /dev/null
+# Every side even: Chrome draws an AVIF from sips with an odd side as a transparent box
+# (v8, 8 of 42 photographs were blank there and fine in Safari). The odd side loses one
+# pixel, which no one can see; the build refuses an AVIF with an odd side.
+avif() {  # avif OUT [WIDTH]
+  read -r aw ah < <(sips -g pixelWidth -g pixelHeight "$out" | awk '/pixel/{printf "%s ", $2} END{print ""}')
+  if [ -n "$2" ]; then nh=$(( (ah * $2 * 2 + aw) / (2 * aw) )); nw=$2; else nw=$aw; nh=$ah; fi
+  nw=$(( nw - nw % 2 )); nh=$(( nh - nh % 2 ))
+  sips -z "$nh" "$nw" -s format avif -s formatOptions 60 "$out" --out "$1" > /dev/null
+}
+avif "$base.avif"
+avif "$base-800.avif" 800
+[ -n "$mid" ] && avif "$base-1200.avif" 1200
 
 read -r w h < <(sips -g pixelWidth -g pixelHeight "$out" | awk '/pixel/{printf "%s ", $2} END{print ""}')
 size=$(du -h "$out" | cut -f1)

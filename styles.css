@@ -86,9 +86,11 @@
 /* the same for Hangul (QA v8): Apple SD Gothic Neo sets a Korean sentence 4.9% narrower than
    Noto Sans KR (measured: 1910 against 2002 at 100px), so a lead line drawn before the web
    font came took two lines once it came and pushed the page down 30px on a slow phone (CLS
-   0.13). At 105% the two widths agree within 0.2%. Android falls back to Noto itself. */
-@font-face{font-family:"Noto fallback mac";src:local("Apple SD Gothic Neo"),local("AppleSDGothicNeo-Regular");size-adjust:105%}
-@font-face{font-family:"Noto fallback mac";font-weight:700;src:local("AppleSDGothicNeo-Bold");size-adjust:105%}
+   0.13). At 105% the two widths agree within 0.2%. Android falls back to Noto itself. Hangul
+   only (unicode-range): taking the Latin letters too, it set the English About lead a line
+   shorter until Plus Jakarta Sans came, and that page shifted instead. */
+@font-face{font-family:"Noto fallback mac";src:local("Apple SD Gothic Neo"),local("AppleSDGothicNeo-Regular");size-adjust:105%;unicode-range:U+1100-11FF,U+3130-318F,U+A960-A97F,U+AC00-D7AF,U+D7B0-D7FF}
+@font-face{font-family:"Noto fallback mac";font-weight:700;src:local("AppleSDGothicNeo-Bold");size-adjust:105%;unicode-range:U+1100-11FF,U+3130-318F,U+A960-A97F,U+AC00-D7AF,U+D7B0-D7FF}
 
 /* ==========================================================================
    2. SEMANTIC · roles. Components read these, never the primitives.
