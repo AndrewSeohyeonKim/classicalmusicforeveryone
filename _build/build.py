@@ -116,7 +116,10 @@ def build_redirects():
             anchor = target[len(tpath):]
             abs_url = (f"{SITE_URL}/" + ("" if lang == "en" else "ko/")
                        + ("" if tpath == "index.html" else tpath) + anchor)
-            css = "../" * (slug.count("/") + (0 if lang == "en" else 1)) + "styles.min.css"
+            # the site root from this file (v8 cut the icon's path out of the stylesheet's by its
+            # length, and styles.min.css is four letters longer: "../stylassets/")
+            root = "../" * (slug.count("/") + (0 if lang == "en" else 1))
+            css = root + "styles.min.css"
             title, msg, go = REDIRECT_TEXT[lang]
             html = f"""<!DOCTYPE html>
 <html lang="{'en-IE' if lang == 'en' else 'ko'}">
@@ -126,7 +129,7 @@ def build_redirects():
 <title>{title} · Classical Music for Everyone</title>
 <meta name="robots" content="noindex">
 <meta http-equiv="refresh" content="0; url={rel}">
-<link rel="icon" href="{css[:-10]}assets/app-icon-512.png" type="image/png">
+<link rel="icon" href="{root}assets/app-icon-512.png" type="image/png">
 <link rel="stylesheet" href="{css}">
 <style>@view-transition{{navigation:none}}</style>
 </head>
@@ -434,6 +437,36 @@ def check_avif():
                  + "\n  ".join(bad))
 
 
+def check_links(written):
+    """Every local href, src and srcset in the pages the build wrote names a file that is
+    there (v8: the forwarding pages pointed their icon at "../stylassets/" for a day, and
+    only a check outside the build saw it). The 404 page's absolute paths count from the
+    site root; anchors and queries are left to the static check."""
+    base = urlparse(SITE_URL).path.rstrip("/") + "/"
+    bad = []
+    for page in [w for w in written if w.endswith(".html")]:
+        folder = os.path.dirname(os.path.join(ROOT, page))
+        with open(os.path.join(ROOT, page), encoding="utf-8") as fh:
+            markup = fh.read()
+        refs = re.findall(r'\b(?:href|src)="([^"]+)"', markup)
+        refs += [c.split()[0] for s in re.findall(r'\bsrcset="([^"]+)"', markup) for c in s.split(",")]
+        for ref in refs:
+            if re.match(r"(https?:|mailto:|tel:|data:|#|javascript:)", ref):
+                continue
+            path = ref.split("#")[0].split("?")[0]
+            if not path:
+                continue
+            full = (os.path.join(ROOT, path[len(base):]) if path.startswith(base)
+                    else os.path.normpath(os.path.join(folder, path)))
+            if os.path.isdir(full):
+                full = os.path.join(full, "index.html")
+            if not os.path.exists(full):
+                bad.append(f"{page}: {ref}")
+    if bad:
+        sys.exit(f"{len(bad)} links to files that are not there:\n  " + "\n  ".join(sorted(set(bad))[:40]))
+    print(f"links: every local href, src and srcset in {len(written)} files is there")
+
+
 def main():
     check_avif()
     minify_css()
@@ -458,6 +491,7 @@ def main():
     for path in written:
         print("wrote", path)
     print(f"\n{len(written)} files.\n")
+    check_links(written)
     # the reading budget (readability.py): a block over budget stops the
     # build, as a missing string does. CMFE_LINT=warn reports and goes on.
     faults = readability.report(ROOT)

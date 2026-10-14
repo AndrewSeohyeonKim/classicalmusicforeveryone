@@ -815,7 +815,7 @@ CONTACT_T = dict(
     privacy=dict(
         label="Privacy notice",
         h2="How we look after your details.",
-        intro="How we use the details you send, and your rights. Last updated 12 October 2026.",
+        intro="How we use the details you send, and your rights. Last updated 13 October 2026.",
         # what this website does not have, said once and plainly
         # the contact form is a mailto form: it sends nothing itself (2 Oct 2026)
         none=[("Forms", "One, and it only opens your email app"), ("Cookies", "None of ours"),
@@ -835,7 +835,6 @@ CONTACT_T = dict(
                 ("Who else handles it",
                  "rows",
                  [("GitHub", "Hosts this site and records IP addresses for security"),
-                  ("Google Fonts", "Supplies our typefaces and receives your IP address"),
                   ("Google", "Runs our email"),
                   ("YouTube", "If you play the class video, it receives your IP and may set cookies")],
                  "These services may handle data outside the European Economic Area, under safeguards "

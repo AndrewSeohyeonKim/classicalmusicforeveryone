@@ -227,13 +227,14 @@ class Chrome:
     # system's faces, Iowan, the system sans and Apple SD Gothic Neo, because the wait gave up after
     # 5s and the run carried on; round 5: a page whose Google Fonts sheet never arrived has no EB
     # Garamond face at all, and the old guard took that for "a page without the site's fonts").
-    # Now: a page that links fonts.googleapis.com needs that sheet loaded, each family declared,
+    # Now: a page that links the font sheets needs them loaded, each family declared,
     # and every face the site uses to pass document.fonts.check (Garamond 400 500 600, italic 400
     # 500; Jakarta 400 600 700; on Korean pages Noto Sans KR 400 700).
     FONTS_OK = """(async () => { if (!document.fonts) return true;
-      const link = [...document.querySelectorAll('link[rel="stylesheet"]')].find(l => (l.href || '').includes('fonts.googleapis.com'));
-      if (!link) return true;   // a page that does not ask for the site's fonts
-      if (!link.sheet) return false;   // the Google Fonts sheet did not arrive
+      // the font sheets: fonts/latin.css and fonts/korean.css since 2026-10-13 (Google Fonts before)
+      const links = [...document.querySelectorAll('link[rel="stylesheet"]')].filter(l => /fonts\\.googleapis\\.com|\\/fonts\\/[\\w-]+\\.css/.test(l.href || ''));
+      if (!links.length) return true;   // a page that does not ask for the site's fonts
+      if (links.some(l => !l.sheet)) return false;   // a font sheet did not arrive
       const ko = (document.documentElement.lang || '').startsWith('ko');
       const faces = [['400', 'EB Garamond', 'a'], ['500', 'EB Garamond', 'a'], ['600', 'EB Garamond', 'a'],
                      ['italic 400', 'EB Garamond', 'a'], ['italic 500', 'EB Garamond', 'a'],

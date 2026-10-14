@@ -27,23 +27,26 @@ PHONE_TEL = "+353830780635"
 # Garamond is calm at any size and is the same lineage as the wordmark's
 # Cormorant Garamond, so the headings now rhyme with the logo instead of
 # arguing with it.
-FONTS = ("https://fonts.googleapis.com/css2?"
-         "family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500"
-         "&family=Plus+Jakarta+Sans:wght@400;500;600;700"
-         "&family=Noto+Sans+KR:wght@400;700&display=swap")
+#
+# The three families are served from this site (fonts/, 2026-10-13), Google Fonts'
+# own files and rules with the addresses made local: no request reaches Google,
+# and a phone opens two connections fewer. _build/fetch-fonts.py writes them.
 # An English page carries two Korean words (the language switch) and no
 # Korean text, so it does not wait for the Korean family: those two words
 # take the system's Korean face. The 404 page is in both languages.
-FONTS_EN = FONTS.replace("&family=Noto+Sans+KR:wght@400;700", "")
 # Korean is set in two weights only, 400 and 700 (QA, 1 Oct 2026: three
 # weights meant 15-19 font files and a slow first paint on a phone).
+def font_links(lang, slug, r):
+    korean = lang == "ko" or slug == "404.html"
+    return (f'<link rel="stylesheet" href="{r}fonts/latin.css">\n'
+            + (f'<link rel="stylesheet" href="{r}fonts/korean.css">\n' if korean else ""))
 
 # The date the copy was last checked against the canonical set and the kit,
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
-UPDATED = {"en": "12 October 2026", "ko": "2026년 10월 12일"}
-UPDATED_ISO = "2026-10-12"
+UPDATED = {"en": "13 October 2026", "ko": "2026년 10월 13일"}
+UPDATED_ISO = "2026-10-13"
 
 
 def _parts_line(text):
@@ -295,7 +298,7 @@ def _images(body, eager_first):
 # a new sub-page cannot end up with a broken path in one language only.
 # ---------------------------------------------------------------------------
 
-SHARED = ("images/", "assets/", "styles.css", "styles.min.css")
+SHARED = ("images/", "assets/", "fonts/", "styles.css", "styles.min.css")
 
 
 def _here(slug):
@@ -1011,10 +1014,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
 <link rel="icon" href="{r}assets/app-icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">
 <link rel="manifest" href="{r}site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="{FONTS_EN if lang == 'en' and slug != '404.html' else FONTS}">
-<link rel="stylesheet" href="{r}styles.min.css">
+{font_links(lang, slug, r)}<link rel="stylesheet" href="{r}styles.min.css">
 <link rel="expect" href="#main" blocking="render">
 {jsonld}
 </head>
