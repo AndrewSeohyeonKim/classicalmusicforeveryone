@@ -49,31 +49,48 @@ For a full-bleed band, put the `<img>` directly inside `<section class="band-pho
 with `alt=""` (it is decorative; the heading carries the meaning) and let the
 gradient do the work.
 
-## Current set (2026-10-01, evening)
+## Consent first (2026-10-14)
 
-Since the evening of 1 October 2026 the site leans on drawn things more than on photographs
-(Andrew: too many photographs, several unrelated to the text beside them). The five programmes are
-shown by typographic **covers** (`parts.cover`), not photographs; each programme's own page shows its
-one photograph under "In the room". Outside the News contact sheet there are now four photographs.
+Andrew, 14 October 2026: there is **no consent on record from the Letters Ensemble players**.
+Consent and permission are on record only for the South Dublin Live performers and for the
+photographs by Ben Ryan (SDCC) and Tallaght University Hospital. So the set now leans on the
+founder alone and on players seen from behind, and where a Letters Ensemble player's face shows,
+it is **softly blurred** before the file is made (`_build/face-blur.swift`: Vision finds the faces,
+a feathered ellipse blurs them, hair and instruments stay sharp; then `add-photo.sh` on the
+blurred file).
 
-| File | Used on | Shows |
-|---|---|---|
-| `hero-outreach.jpg` | Home hero · News gallery | The Letters Ensemble and their conductor, St Patrick's Day concert (one non-performer at the back right, seen from behind and not recognisable; kept) |
-| `recorders.jpg` | Home "Now running" · News gallery · the still behind the video on the Community Recorder Ensemble Class page | Six recorders of different sizes in a row, Nov 2025 (cropped to the instruments; see below) |
-| `columban-ensemble.jpg` | About page head (3:2 over the text columns) · News gallery | Four string players of the Letters Ensemble and their conductor, Missionary Sisters of St Columban, 23 Nov 2024 |
-| `founder-playing.jpg` | About `#founder` | The founder playing the clarinet in the chapel of Tallaght University Hospital, 20 Aug 2026 (from the TUH set; added 1 Oct 2026 through `add-photo.sh`, metadata stripped) · photo: Tallaght University Hospital |
-| `lecture-recital.jpg` | Getting to Know Classical Music page | A lecture-recital in progress |
-| `care-christmas.jpg` | Outreach Concerts page · News gallery | A clarinettist and three string players in a care setting at Christmas (20 Dec 2025) |
-| `letters-ensemble.jpg` | Letters Ensemble page · News gallery | The Letters Ensemble with their instruments |
-| `dalgan-hall.jpg` | News gallery | The hall at Dalgan Park set for a concert, 16 Mar 2024; no people |
-| `proms-hall.jpg` | Concert Guide & Companion page ("In the room") and its share card | A full Royal Albert Hall during a BBC Prom, from high in the audience. A frame of the founder's own phone video (it sits in the BBC Proms lecture deck), cropped to the hall, stage and distant crowd so that no one close by is in it; added 1 Oct 2026 through `add-photo.sh`, metadata stripped. The year is not known, so the caption gives none. It is the founder's own view, not a group outing, and the caption says so |
-| `tuh-trio.jpg` | News gallery · Programmes share card | Soprano, piano and clarinet in the TUH atrium. **Cropped on 1 Oct 2026 (1236×787)** to take out the back of an audience member's head at the bottom right · photo: Tallaght University Hospital |
-| `tuh-atrium.jpg` | News gallery | Clarinet, haegeum and keyboard in the **chapel** at Tallaght University Hospital, 20 Aug 2026 · photo: Tallaght University Hospital |
-| `tuh-haegeum.jpg` | News gallery | A haegeum player in the TUH atrium · photo: Tallaght University Hospital |
-| `ruared-trio.jpg` | News gallery · News share card | The trio taking a bow at Rua Red · photo: Ben Ryan / SDCC |
-| `church-aisle.jpg` | News gallery | A clarinet held up before the altar, Dysart parish church, Good Friday 2025; no people |
-| `score-stand.jpg` | News gallery | A string trio rehearsing behind a part on a stand, Dec 2025 |
-| `two-clarinets.jpg` | News gallery | Two clarinets on a piano lid (caption: "Instruments · two clarinets") |
+**`_build/photos.py` is the consent register.** Every photograph in this folder is listed there
+with the reason it may be shown (`founder`, `sdcc`, `blurred`, `nobody`, `crowd`); the build stops
+on a file that is not listed, on a listed file no page uses (an unused file is still public by its
+address), and on a withdrawn name. The five unblurred files published until 14 October 2026
+(`hero-outreach`, `columban-ensemble`, `letters-ensemble`, `care-christmas`, `score-stand`) were
+moved to `_retired/images/` and their names never come back.
+
+## Current set (2026-10-14)
+
+| File | Used on | Shows | Register |
+|---|---|---|---|
+| `ruared-duo.jpg` | Home hero (1800px) · home share card · JSON-LD image | Clarinet and piano on the Rua Red stage, Aug 2026 · photo: Ben Ryan / SDCC (Ben Ryan 04) | sdcc |
+| `christmas-conducting.jpg` | About page head · About share card · News gallery | The founder in a Santa hat conducting a violinist and a violist (both blurred), Christmas concert, Clondalkin Lodge, 20 Dec 2025 (IMG_9044) | blurred |
+| `goirtin-solo.jpg` | Outreach Concerts page ("In the room", 4:5) · News gallery | The founder's clarinet solo at the HSE day service in Dublin 7, 17 Apr 2025, before a screen reading "Thank you". The one listener at the left edge is cropped out (IMG_8505) | founder |
+| `letters-stpatricks.jpg` | Letters Ensemble page ("In the room") · News gallery | Four string players (faces blurred) and the founder conducting, St Patrick's Day concert (IMG_5452) | blurred |
+| `rehearsal-stand.jpg` | News gallery | The founder's view over the stand at a string trio rehearsal, Dec 2025; the violist and the half face at the left edge blurred, the cellist's face is behind a hand (IMG_9012) | blurred |
+| `ruared-back.jpg` | News gallery · Get involved share card | The founder from behind, playing towards the soprano, Rua Red, Aug 2026 · photo: Ben Ryan / SDCC (Ben Ryan 22) | sdcc |
+| `founder-playing.jpg` | About `#founder` | The founder playing the clarinet in the TUH chapel, 20 Aug 2026 · photo: Tallaght University Hospital | founder |
+| `lecture-recital.jpg` | Getting to Know Classical Music page | The founder giving a talk, a BBC Proms slide behind | founder |
+| `recorders.jpg` | Recorder class page (video still) · News gallery | Six recorders in a row, Nov 2025 | nobody |
+| `proms-hall.jpg` | Concert Guide & Companion page | The Royal Albert Hall from high in the audience (the founder's own video frame) | crowd |
+| `tuh-trio.jpg` `tuh-atrium.jpg` `tuh-haegeum.jpg` | News gallery · Programmes share card (trio) · Contact share card (chapel) | South Dublin Live at Tallaght University Hospital, Aug 2026 · photo: TUH | sdcc |
+| `ruared-trio.jpg` | News gallery · News share card | The trio taking a bow at Rua Red · photo: Ben Ryan / SDCC | sdcc |
+| `church-aisle.jpg` | News gallery | The founder's hand holding a clarinet before the altar, Dysart, Good Friday 2025 | founder |
+| `dalgan-hall.jpg` | News gallery | The hall at Dalgan Park set for a concert, Mar 2024; no people | nobody |
+| `two-clarinets.jpg` | News gallery | Two clarinets on a piano lid | nobody |
+
+Left out on purpose when the set was chosen again (14 Oct 2026): posed group photographs of the
+Letters Ensemble (four blurred faces facing the camera read as a warning, not a photograph); the
+Goirtin Hub frames with the day-service users, even from behind; the Advent concert frames whose
+audience, seen from behind, looks like school pupils (the `ruared-stage` rule: no children); and
+the frames from a funeral (Dalgan Park, June 2025).
 
 The News gallery shows every frame at its own shape (portrait stays portrait), newest first.
 
@@ -90,12 +107,12 @@ what may be a child seen from behind. `founder-portrait.jpg`, `founder-hall.jpg`
 `tuh-andrew.jpg`, `clarinet.jpg`, `organ.jpg`, `community-room.jpg`, `church-concert.jpg` and
 `fingering-chart.jpg` belonged to pages that no longer exist.
 
-**Consent and permission are on record** (confirmed 1 October 2026): web consent from the
-performers shown, including the Letters Ensemble and the South Dublin Live performers, and
-permission to use the photographs by Ben Ryan Photography for South Dublin County Council and by
-Tallaght University Hospital. A new photograph of anyone else still needs written consent first.
-The site's own line is: "We show performers, instruments and empty rooms. Anyone else who can be
-recognised appears only with their written consent."
+**Consent and permission on record** (corrected 14 October 2026): the South Dublin Live
+performers, and permission to use the photographs by Ben Ryan Photography for South Dublin County
+Council and by Tallaght University Hospital. **Not** the Letters Ensemble players: their faces are
+blurred (above). A new photograph of anyone else still needs written consent first, or a blurred
+face. The site's own line is: "We show performers, instruments and empty rooms. Anyone else who
+can be recognised appears only with their written consent."
 
 The nine files added on 2026-09-13 (`columban-ensemble` `founder-hall` `founder-sea` `two-clarinets`
 `recorders` `fingering-chart` `score-stand` `dalgan-hall` `church-aisle`) came from
@@ -130,9 +147,9 @@ hero once shipped on the Korean home page.
 
 ## Two rules that are not negotiable
 
-1. **Consent.** Use photographs in which participants' or audience members' faces are
-   identifiable only where consent is on record. If you are not sure, do not use it:
-   there are plenty of shots of the performers.
+1. **Consent.** Use photographs in which anyone's face is identifiable, performers included,
+   only where consent is on record (`_build/photos.py`). Without it, blur the face or do not use
+   the photograph. If you are not sure, do not use it: there are plenty of shots of the founder.
 2. **Captions must be true.** Do not name an event, venue or date in a caption unless
    it is confirmed. A vaguer caption is better than a wrong one. Write `alt` text from the
    photograph itself, not from its file name: count the players and name the instruments

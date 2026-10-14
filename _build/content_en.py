@@ -73,9 +73,14 @@ _MAIL_EOI = _mail("CMFE Artists: expression of interest", _fields(EOI_FIELDS))
 PILLARS = {"learn": ("Learning", "dot"), "share": ("Sharing", "dot dot-open")}
 
 # Photographs that appear in more than one place keep one description.
-# care-christmas: one clarinettist and three string players (08 §3, 20 Dec 2025).
+# Players who have not given consent are shown with their faces softly blurred, and
+# the set leans on the founder and on players seen from behind (Andrew, 14 Oct 2026).
+# christmas-conducting: the founder conducting two string players (20 Dec 2025).
+# goirtin-solo: the founder's clarinet solo at a day service (17 Apr 2025).
 # tuh-atrium: despite the file name, the chapel set, with its cross and lectern.
-CARE_ALT = "A clarinettist and three string players performing in a care setting at Christmas"
+XMAS_ALT = "A conductor in a Santa hat leading two string players in a care home decorated for Christmas"
+GOIRTIN_ALT = "A clarinettist playing in a bright room at a day service, before a screen that reads Thank you"
+STPAT_ALT = "Four string players, seated and playing, and their conductor in a hall hung with Irish flags and shamrocks"
 TUH_CHAPEL_ALT = "Clarinet, haegeum and keyboard in the chapel of Tallaght University Hospital"
 RECORDERS_ALT = "Six recorders of different sizes standing in a row"
 
@@ -159,13 +164,13 @@ PROGRAMMES_DATA = [
          # the grand piano is the sign of a concert, not a list of what we bring
          # (pianos are on the record: clarinet and piano, the autumn concert)
          icon="piano", vocab="Day room · Chapel · Atrium",
-         img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
+         img=("goirtin-solo.jpg", 1120, 1400, GOIRTIN_ALT),
          line="Live Classical Music in <mark>care homes</mark>, hospitals, parishes and community centres.",
          page=dict(
              # each lead sentence fits its column on a laptop (typeset_check:
              # the longer first sentences folded into half lines)
              lead="We play in the rooms where <mark>people already are</mark>. We explain the music as we go.",
-             cap=("Clarinet and string trio", "Christmas 2025"),
+             cap=("Clarinet solo", "A day service, Dublin 7 · April 2025"),
              glance=[("For", "Care homes, hospitals, religious communities, parishes and community centres"),
                      ("Where", "Your own room, in Dublin and further by arrangement"),
                      # Andrew, 6 Oct 2026: one to two hours; a room with a socket, a piano welcome
@@ -246,11 +251,11 @@ PROGRAMMES_DATA = [
     dict(slug="letters-ensemble", pillar="share", name="Letters Ensemble",
          short="Letters Ensemble",
          icon="strings", vocab="Irish · Korean · Sacred",
-         img=("letters-ensemble.jpg", 1400, 1050, "Four string players and their conductor standing with their instruments in a hall hung with Irish flags and shamrocks"),
+         img=("letters-stpatricks.jpg", 1400, 1050, STPAT_ALT),
          line="<mark>Amateur musicians</mark> in Dublin who play for communities.",
          page=dict(
              lead="<mark>Amateur musicians</mark> in&nbsp;Dublin, together since 2024. We play Irish, Korean and sacred music.",
-             cap=("Letters Ensemble", "Four string players and their conductor"),
+             cap=("Letters Ensemble", "St Patrick&rsquo;s Day concert"),
              glance=[("For", "Amateur players of any background"),
                      ("Where", "Dublin"),
                      ("When", "Ask us for rehearsal times"),
@@ -355,9 +360,8 @@ HOME = dict(
         # layout.STR, the same string the footer sets, so the two cannot drift
         cta=("#programmes", "See the programmes"),
         more=("get-involved.html#invite", "Invite us to play"),
-        img=("hero-outreach.jpg", 1800, 1350,
-             "Four string players, seated and playing, and their conductor in a hall hung with Irish flags and shamrocks"),
-        cap=("Letters Ensemble", "St Patrick&rsquo;s Day concert"),
+        img=("ruared-duo.jpg", 1800, 1200, "A clarinettist and a pianist performing on the Rua Red stage"),
+        cap=("Clarinet and piano", "Rua Red, Tallaght · August 2026 · photo: Ben Ryan / SDCC"),
     ),
     # the ways in, as the contents line of a programme (no boxes, no tint):
     # taking part comes first, because most visitors come to join something
@@ -415,9 +419,8 @@ ABOUT_T = dict(
         title=["About us."],
         # kit 27, positioning: who, and how
         lead="A community music initiative in Dublin. We play and teach <mark>where music is needed</mark>.",
-        img=("columban-ensemble.jpg", 1400, 1050,
-             "Four string players of the Letters Ensemble and their conductor in a bright yellow room"),
-        cap=("Letters Ensemble", "Missionary Sisters of St Columban, Co. Wicklow · November 2024"),
+        img=("christmas-conducting.jpg", 1400, 1050, XMAS_ALT),
+        cap=("Christmas concert", "Clondalkin Lodge, Dublin · December 2025"),
     ),
     glance=[("Founded", "January 2024", "Dublin, Ireland"),
             ("What we run", "Five programmes", "in Learning and Sharing"),
@@ -727,26 +730,25 @@ NEWS_T = dict(
              "Haegeum · Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital"),
             (("ruared-trio.jpg", 1400, 933, "A clarinettist, a soprano and a pianist standing together on the Rua Red stage"),
              "Clarinet, soprano and piano · Rua Red, Tallaght · August 2026 · photo: Ben Ryan / SDCC"),
-            (("care-christmas.jpg", 1400, 1050, CARE_ALT),
-             "Clarinet and string trio · Christmas 2025"),
-            (("score-stand.jpg", 1050, 1400, "A string trio rehearsing behind a part on a music stand"),
+            (("ruared-back.jpg", 1400, 933,
+              "A clarinettist, seen from behind, playing towards a soprano on the Rua Red stage"),
+             "Clarinet and soprano · Rua Red, Tallaght · August 2026 · photo: Ben Ryan / SDCC"),
+            (("christmas-conducting.jpg", 1400, 1050, XMAS_ALT),
+             "Conducting · Christmas 2025"),
+            (("rehearsal-stand.jpg", 1050, 1400, "A string trio rehearsing behind a part on a music stand"),
              "Rehearsal · Christmas 2025"),
             (("recorders.jpg", 1343, 1400, RECORDERS_ALT),
              "Recorders · November 2025"),
             (("church-aisle.jpg", 1050, 1400,
               "A clarinet held up before the altar of a parish church in Co. Westmeath"),
              "Clarinet before the altar · Dysart, Co. Westmeath · 2025"),
-            (("columban-ensemble.jpg", 1400, 1050,
-              "Four string players of the Letters Ensemble and their conductor in a bright yellow room"),
-             "Letters Ensemble · Missionary Sisters of St Columban, Co. Wicklow · November 2024"),
+            (("goirtin-solo.jpg", 1120, 1400, GOIRTIN_ALT),
+             "Clarinet solo · a day service, Dublin 7 · April 2025"),
             (("dalgan-hall.jpg", 1400, 1050,
               "A hall set out with chairs and music stands before a concert, with no one there yet"),
              "The hall before the concert · Dalgan Park, Co. Meath · March 2024"),
-            (("hero-outreach.jpg", 1800, 1350,
-              "Four string players, seated and playing, and their conductor in a hall hung with Irish flags and shamrocks"),
+            (("letters-stpatricks.jpg", 1400, 1050, STPAT_ALT),
              "Letters Ensemble · St Patrick&rsquo;s Day concert"),
-            (("letters-ensemble.jpg", 1400, 1050, "Four string players and their conductor standing with their instruments in a hall hung with Irish flags and shamrocks"),
-             "Letters Ensemble · four string players and their conductor"),
             (("two-clarinets.jpg", 1050, 1400, "Two clarinets resting on the lid of a piano"),
              "Two clarinets on a piano"),
         ],

@@ -185,7 +185,7 @@ ORG_NODE = """    {{
       "alternateName": "CMFE",
       "url": "{site}/",
       "logo": {{"@type": "ImageObject", "url": "{site}/assets/logo-horizontal.png"}},
-      "image": "{site}/images/hero-outreach.jpg",
+      "image": "{site}/images/ruared-duo.jpg",
       "description": "{org_desc}",
       "foundingDate": "2024-01",
       "founder": {{"@type": "Person", "@id": "{site}/about.html#founder",
@@ -973,7 +973,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
     ld_lang = "en-IE" if lang == "en" else "ko"
     # a page shares its own photograph, not the site-wide hero, so a link to
     # a programme page previews that programme
-    image = f"{SITE_URL}/images/{og_image}" if og_image else f"{SITE_URL}/images/hero-outreach.jpg"
+    image = f"{SITE_URL}/images/{og_image}" if og_image else f"{SITE_URL}/images/ruared-duo.jpg"
     jsonld = _graph([
         ORG_NODE.format(site=SITE_URL, org_desc=ORG_DESC, email=EMAIL, phone=PHONE_INTL),
         SITE_NODE.format(site=SITE_URL),

@@ -45,7 +45,7 @@ base="${out%.jpg}"
 # pixel, which no one can see; the build refuses an AVIF with an odd side.
 avif() {  # avif OUT [WIDTH]
   read -r aw ah < <(sips -g pixelWidth -g pixelHeight "$out" | awk '/pixel/{printf "%s ", $2} END{print ""}')
-  if [ -n "$2" ]; then nh=$(( (ah * $2 * 2 + aw) / (2 * aw) )); nw=$2; else nw=$aw; nh=$ah; fi
+  if [ -n "${2:-}" ]; then nh=$(( (ah * $2 * 2 + aw) / (2 * aw) )); nw=$2; else nw=$aw; nh=$ah; fi
   nw=$(( nw - nw % 2 )); nh=$(( nh - nh % 2 ))
   sips -z "$nh" "$nw" -s format avif -s formatOptions 60 "$out" --out "$1" > /dev/null
 }

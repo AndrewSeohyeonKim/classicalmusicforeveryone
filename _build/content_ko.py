@@ -59,9 +59,13 @@ _MAIL_EOI = _mail("CMFE Artists 참여 신청", _fields(EOI_FIELDS))
 # 항목·순서가 모두 같고 대표는 없다(CLAUDE.md §2.1). 프로그램마다 사진은 하나다.
 PILLARS = {"learn": ("배움", "dot"), "share": ("나눔", "dot dot-open")}
 
-# 여러 곳에 쓰는 사진은 설명을 하나로 둔다. care-christmas는 클라리넷 1명과 현악 3명
-# (08 §3, 2025-12-20). tuh-atrium은 파일 이름과 달리 십자가와 독서대가 있는 경당이다.
-CARE_ALT = "성탄절 요양시설에서 연주하는 클라리넷과 현악 연주자 세 명"
+# 여러 곳에 쓰는 사진은 설명을 하나로 둔다. 동의하지 않은 연주자는 얼굴을 옅게 흐리고, 창립자와
+# 뒷모습 사진을 중심으로 쓴다(Andrew, 2026-10-14). christmas-conducting은 창립자가 현악 연주자 둘을
+# 지휘하는 장면(2025-12-20), goirtin-solo는 주간 돌봄 서비스의 클라리넷 독주(2025-04-17).
+# tuh-atrium은 파일 이름과 달리 십자가와 독서대가 있는 경당이다.
+XMAS_ALT = "성탄 장식을 한 요양시설에서 산타 모자를 쓰고 현악 연주자 두 명을 지휘하는 지휘자"
+GOIRTIN_ALT = "주간 돌봄 서비스의 밝은 방에서 연주하는 클라리넷 연주자, 뒤 화면에 「Thank you」"
+STPAT_ALT = "아일랜드 국기와 클로버로 꾸민 홀에서 앉아 연주하는 현악 연주자 네 명과 지휘자"
 TUH_CHAPEL_ALT = "Tallaght University Hospital 경당에서 연주하는 클라리넷·해금·키보드"
 RECORDERS_ALT = "나란히 세워 둔 크기가 다른 리코더 여섯 대"
 
@@ -141,11 +145,11 @@ PROGRAMMES_DATA = [
     dict(slug="outreach-concerts", pillar="share", name="찾아가는 음악회",
          short="찾아가는 음악회",
          icon="piano", vocab="휴게실 · 경당 · 아트리움",
-         img=("care-christmas.jpg", 1400, 1050, CARE_ALT),
+         img=("goirtin-solo.jpg", 1120, 1400, GOIRTIN_ALT),
          line="<mark>요양시설과 병원</mark>, 본당과 커뮤니티 센터로 갑니다.",
          page=dict(
              lead="듣는 분들이 <mark>이미 계신 방으로</mark> 찾아가 연주합니다. 곡마다 이야기를 곁들입니다.",
-             cap=("클라리넷과 현악 3중주", "2025년 성탄"),
+             cap=("클라리넷 독주", "주간 돌봄 서비스, 더블린 7구 · 2025년 4월"),
              glance=[("대상", "요양시설, 병원, 수도 공동체, 본당, 커뮤니티 센터"),
                      ("장소", "초청하신 방, 더블린 (그 밖은 협의)"),
                      # Andrew, 2026-10-06
@@ -223,12 +227,12 @@ PROGRAMMES_DATA = [
     dict(slug="letters-ensemble", pillar="share", name="Letters Ensemble",
          short="Letters Ensemble",
          icon="strings", vocab="아일랜드 · 한국 · 성가",
-         img=("letters-ensemble.jpg", 1400, 1050, "아일랜드 국기와 클로버로 꾸민 홀에서 악기를 들고 선 현악 연주자 네 명과 지휘자"),
+         img=("letters-stpatricks.jpg", 1400, 1050, STPAT_ALT),
          line="더블린의 <mark>아마추어</mark> 연주자들이 공동체를&nbsp;위해 연주합니다.",
          page=dict(
              lead="2024년 1월 더블린에서 생긴 <mark>아마추어</mark> 앙상블입니다. 아일랜드와 한국의 전통 음악, 성가를 "
                   "연주합니다.",
-             cap=("Letters Ensemble", "현악 연주자 네 명과 지휘자"),
+             cap=("Letters Ensemble", "성 파트리치오 축일 음악회"),
              glance=[("대상", "악기를 연주하는 아마추어 누구나"),
                      ("장소", "더블린"),
                      ("언제", "연습 시간은 문의해 주세요"),
@@ -324,9 +328,8 @@ HOME = dict(
         # 태그라인은 번역하지 않는다(06 §5, 키트 27)
         cta=("#programmes", "프로그램 보기"),
         more=("get-involved.html#invite", "음악회 초청"),
-        img=("hero-outreach.jpg", 1800, 1350,
-             "아일랜드 국기와 클로버로 꾸민 홀에서 앉아 연주하는 현악 연주자 네 명과 지휘자"),
-        cap=("Letters Ensemble", "성 파트리치오 축일 음악회"),
+        img=("ruared-duo.jpg", 1800, 1200, "Rua Red 무대에서 연주하는 클라리넷 연주자와 피아니스트"),
+        cap=("클라리넷과 피아노", "Rua Red · 2026년 8월 · 사진: Ben Ryan / SDCC"),
     ),
     # 함께하는 길을 연주회 프로그램의 차례처럼(상자도 색도 없이). 대부분은 무언가에
     # 참여하러 오므로 참여가 맨 앞이다
@@ -377,9 +380,8 @@ ABOUT_T = dict(
         eyebrow="소개",
         title=["단체 소개."],
         lead="더블린에서 활동하는 공동체 음악 단체입니다. <mark>음악이 필요한 곳을</mark> 찾아가 연주하고 가르칩니다.",
-        img=("columban-ensemble.jpg", 1400, 1050,
-             "노란 방에서 악기를 든 Letters Ensemble 현악 연주자 네 명과 지휘자"),
-        cap=("Letters Ensemble", "성 골롬반 외방선교 수녀회, 위클로 주 · 2024년 11월"),
+        img=("christmas-conducting.jpg", 1400, 1050, XMAS_ALT),
+        cap=("성탄 음악회", "Clondalkin Lodge, 더블린 · 2025년 12월"),
     ),
     glance=[("창립", "2024년 1월", "아일랜드 더블린"),
             ("운영하는 것", "프로그램 다섯", "배움과 나눔"),
@@ -665,24 +667,22 @@ NEWS_T = dict(
              "해금 · Tallaght University Hospital · 2026년 8월 · 사진: Tallaght University Hospital"),
             (("ruared-trio.jpg", 1400, 933, "Rua Red 무대에 함께 선 클라리넷 연주자, 소프라노, 피아니스트"),
              "클라리넷·소프라노·피아노 · Rua Red · 2026년 8월 · 사진: Ben Ryan / SDCC"),
-            (("care-christmas.jpg", 1400, 1050, CARE_ALT),
-             "클라리넷과 현악 3중주 · 2025년 성탄"),
-            (("score-stand.jpg", 1050, 1400, "보면대 위 파트 악보 너머로 연습하는 현악 3중주"),
+            (("ruared-back.jpg", 1400, 933, "Rua Red 무대에서 소프라노를 향해 연주하는 클라리넷 연주자의 뒷모습"),
+             "클라리넷과 소프라노 · Rua Red · 2026년 8월 · 사진: Ben Ryan / SDCC"),
+            (("christmas-conducting.jpg", 1400, 1050, XMAS_ALT),
+             "지휘 · 2025년 성탄"),
+            (("rehearsal-stand.jpg", 1050, 1400, "보면대 위 파트 악보 너머로 연습하는 현악 3중주"),
              "리허설 · 2025년 성탄"),
             (("recorders.jpg", 1343, 1400, RECORDERS_ALT),
              "리코더 · 2025년 11월"),
             (("church-aisle.jpg", 1050, 1400, "웨스트미스 주 본당 제대 앞에서 들어 보인 클라리넷"),
              "제대 앞의 클라리넷 · Dysart, 웨스트미스 주 · 2025년"),
-            (("columban-ensemble.jpg", 1400, 1050,
-              "노란 방에서 악기를 든 Letters Ensemble 현악 연주자 네 명과 지휘자"),
-             "Letters Ensemble · 성 골롬반 외방선교 수녀회, 위클로 주 · 2024년 11월"),
+            (("goirtin-solo.jpg", 1120, 1400, GOIRTIN_ALT),
+             "클라리넷 독주 · 주간 돌봄 서비스, 더블린 7구 · 2025년 4월"),
             (("dalgan-hall.jpg", 1400, 1050, "음악회를 앞두고 의자와 보면대를 놓아 둔, 아직 아무도 없는 홀"),
              "음악회를 앞둔 홀 · Dalgan Park, 미스 주 · 2024년 3월"),
-            (("hero-outreach.jpg", 1800, 1350,
-              "아일랜드 국기와 클로버로 꾸민 홀에서 앉아 연주하는 현악 연주자 네 명과 지휘자"),
+            (("letters-stpatricks.jpg", 1400, 1050, STPAT_ALT),
              "Letters Ensemble · 성 파트리치오 축일 음악회"),
-            (("letters-ensemble.jpg", 1400, 1050, "아일랜드 국기와 클로버로 꾸민 홀에서 악기를 들고 선 현악 연주자 네 명과 지휘자"),
-             "Letters Ensemble · 현악 연주자 네 명과 지휘자"),
             (("two-clarinets.jpg", 1050, 1400, "피아노 뚜껑 위에 놓인 클라리넷 두 대"), "피아노 위의 클라리넷 두 대"),
         ],
     ),

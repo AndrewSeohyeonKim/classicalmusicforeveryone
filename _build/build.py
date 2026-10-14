@@ -26,6 +26,7 @@ import content_en as en          # noqa: E402
 import content_ko as ko          # noqa: E402
 import notfound                  # noqa: E402
 import readability               # noqa: E402
+import photos                    # noqa: E402
 from layout import (ROOT, SITE_URL, EMAIL, PHONE_INTL, UPDATED_ISO, breadcrumb, page, write, _here)   # noqa: E402
 
 PAGES = [
@@ -160,25 +161,25 @@ def build_redirects():
 
 # which photograph each page hands to a social card
 OG = {
-    "index.html": ("hero-outreach.jpg",
-                   "The Letters Ensemble playing a St Patrick's Day concert",
-                   "성 파트리치오 축일 음악회에서 연주하는 Letters Ensemble"),
+    "index.html": ("ruared-duo.jpg",
+                   "A clarinettist and a pianist performing on the Rua Red stage",
+                   "Rua Red 무대에서 연주하는 클라리넷 연주자와 피아니스트"),
     "programmes.html": ("tuh-trio.jpg",
                         "Soprano, piano and clarinet in the atrium of Tallaght University Hospital",
                         "Tallaght University Hospital 아트리움의 소프라노·피아노·클라리넷"),
-    "about.html": ("columban-ensemble.jpg",
-                   "Four string players of the Letters Ensemble and their conductor",
-                   "Letters Ensemble 현악 연주자 네 명과 지휘자"),
+    "about.html": ("christmas-conducting.jpg",
+                   "A conductor leading two string players at a Christmas concert in a care home",
+                   "요양시설 성탄 음악회에서 현악 연주자 두 명을 지휘하는 모습"),
     # a share card is landscape; the church photograph is a portrait
-    "get-involved.html": ("care-christmas.jpg",
-                          "A clarinettist and three string players in a care setting at Christmas",
-                          "성탄절 요양시설에서 연주하는 클라리넷과 현악 연주자 세 명"),
+    "get-involved.html": ("ruared-back.jpg",
+                          "A clarinettist, seen from behind, playing towards a soprano on the Rua Red stage",
+                          "Rua Red 무대에서 소프라노를 향해 연주하는 클라리넷 연주자의 뒷모습"),
     "news.html": ("ruared-trio.jpg",
                   "A clarinettist, a soprano and a pianist standing together on the Rua Red stage",
                   "Rua Red 무대에 함께 선 클라리넷 연주자, 소프라노, 피아니스트"),
-    "contact.html": ("letters-ensemble.jpg",
-                     "The Letters Ensemble with their instruments",
-                     "악기를 든 Letters Ensemble 단원들"),
+    "contact.html": ("tuh-atrium.jpg",
+                     "Clarinet, haegeum and keyboard in the chapel of Tallaght University Hospital",
+                     "Tallaght University Hospital 경당에서 연주하는 클라리넷·해금·키보드"),
 }
 
 CRUMB_ROOT = {"en": "Home", "ko": "홈"}
@@ -467,6 +468,32 @@ def check_links(written):
     print(f"links: every local href, src and srcset in {len(written)} files is there")
 
 
+def check_photos(written):
+    """Every photograph in images/ is in the consent register (_build/photos.py) and is used by
+    a page the build wrote, and no withdrawn name is back (Andrew, 14 Oct 2026: unblurred
+    photographs of players without consent had been published). A file nobody links to is
+    still public by its address, so an unused photograph stops the build too."""
+    folder = os.path.join(ROOT, "images")
+    base = lambda name: re.sub(r"(-800|-1200)?\.(jpg|avif)$", "", name)
+    files = {base(n) for n in os.listdir(folder) if re.search(r"\.(jpg|avif)$", n)}
+    used = set()
+    for path in written:
+        with open(os.path.join(ROOT, path), encoding="utf-8") as fh:
+            used |= {base(m) for m in re.findall(r"images/([a-z0-9-]+\.(?:jpg|avif))", fh.read())}
+    bad = [f"withdrawn, must not be published: images/{n}.*" for n in sorted(files & photos.WITHDRAWN)]
+    bad += [f"not in the consent register (_build/photos.py): images/{n}.*"
+            for n in sorted(files - set(photos.PHOTOS) - photos.WITHDRAWN)]
+    bad += [f"in the register but no page uses it (move it to _retired/images/): images/{n}.*"
+            for n in sorted(files & set(photos.PHOTOS) - used)]
+    bad += [f"a page uses a photograph that is not in the register: images/{n}.*"
+            for n in sorted(used - set(photos.PHOTOS))]
+    if bad:
+        sys.exit("photographs:\n  " + "\n  ".join(bad))
+    blurred = sum(1 for n in files if photos.PHOTOS[n][0] == "blurred")
+    print(f"photographs: {len(files)} in images/, all in the consent register and used "
+          f"({blurred} with faces blurred)")
+
+
 def main():
     check_avif()
     minify_css()
@@ -492,6 +519,7 @@ def main():
         print("wrote", path)
     print(f"\n{len(written)} files.\n")
     check_links(written)
+    check_photos(written)
     # the reading budget (readability.py): a block over budget stops the
     # build, as a missing string does. CMFE_LINT=warn reports and goes on.
     faults = readability.report(ROOT)
