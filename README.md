@@ -74,9 +74,10 @@ plays at a fixed tempo; elsewhere it is tied to a short stretch of scrolling
 between steps, the squares and columns of a chart in order. A programme's cover carries over to
 its own page with a cross-document View Transition. Nothing loops. Everything sits behind `@supports`
 and `prefers-reduced-motion`, so a browser without support, or a reader who asks for less motion,
-gets the finished page with nothing hidden. The only script on the site belongs to the mobile
-menu: it opens and closes it, closes it on Escape, and shuts it again on a page brought back with
-the Back button.
+gets the finished page with nothing hidden. The site has two small scripts and no other: the mobile
+menu's (it opens and closes the menu, closes it on Escape, and shuts it again on a page brought back
+with the Back button) and the contact form's one line, which writes the email address with the
+spaces a mail app expects (the form still opens the mail app without it).
 
 **Numbers.** Every figure carries the period it covers, and the real number is in the HTML.
 Where the browser supports it, the figure counts up as it scrolls into view (a registered custom
@@ -113,7 +114,8 @@ Then open <http://localhost:4173/classicalmusicforeveryone/>.
   needs to trust us. Plans that are not yet happening and internal matters stay off it.
 - **Brand:** Ink Navy `#1D2430`, Gold Bronze `#B8893A`, Warm Cream `#FAF5EE`. No fourth
   typeface, and the logo is never recoloured.
-- **No name or face without consent.** Photographs show performers, instruments and empty rooms;
-  anyone else who can be recognised appears only with written consent.
+- **No name or face without consent.** Photographs show the founder, performers who have agreed,
+  instruments and empty rooms; where someone has not agreed, their face is blurred
+  (`_build/photos.py` is the register, and the build stops on a photograph that is not in it).
 - **Spelling:** Irish/British throughout: organisation, programme, centre.
 - Both languages stay in step.

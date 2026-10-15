@@ -45,8 +45,8 @@ def font_links(lang, slug, r):
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
-UPDATED = {"en": "13 October 2026", "ko": "2026년 10월 13일"}
-UPDATED_ISO = "2026-10-13"
+UPDATED = {"en": "15 October 2026", "ko": "2026년 10월 15일"}
+UPDATED_ISO = "2026-10-15"
 
 
 def _parts_line(text):
@@ -951,7 +951,11 @@ def _tie(markup, lang):
     return "".join(parts)
 
 
-def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og_alt=None, og_size=(1800, 1350)):
+# a page with no photograph of its own (the 404) borrows the home hero, 1800 by 1200, and says what it shows
+HOME_OG_ALT = "A clarinettist and a pianist performing on the Rua Red stage"
+
+
+def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og_alt=None, og_size=(1800, 1200)):
     """extra_nodes: already-rendered JSON-LD nodes to add to this page's graph
     (a breadcrumb, an event) — see build.py."""
     p, r = _here(slug), _root(lang, slug)
@@ -1005,7 +1009,7 @@ def page(lang, slug, title, description, body, og_image=None, extra_nodes=(), og
 <meta property="og:image" content="{image}">
 <meta property="og:image:width" content="{og_size[0]}">
 <meta property="og:image:height" content="{og_size[1]}">
-<meta property="og:image:alt" content="{og_alt or title}">
+<meta property="og:image:alt" content="{og_alt or (title if og_image else HOME_OG_ALT)}">
 <meta property="og:locale" content="{'en_IE' if lang == 'en' else 'ko_KR'}">
 <meta property="og:locale:alternate" content="{'ko_KR' if lang == 'en' else 'en_IE'}">
 <meta name="twitter:card" content="summary_large_image">
@@ -1045,7 +1049,7 @@ def jpeg_size(path):
 def write(lang, slug, title, description, body, og_image=None, extra_nodes=(), og_alt=None):
     out = os.path.join(ROOT, "" if lang == "en" else "ko", slug)
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    size = jpeg_size(os.path.join(ROOT, "images", og_image)) if og_image else (1800, 1350)
+    size = jpeg_size(os.path.join(ROOT, "images", og_image or "ruared-duo.jpg"))
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(page(lang, slug, title, description, body, og_image, extra_nodes, og_alt, size))
     return os.path.relpath(out, ROOT)

@@ -22,20 +22,20 @@ PHOTOS = {
     # the founder, and SDCC performers who gave consent
     "ruared-duo": ("sdcc", "clarinet and piano on the Rua Red stage, Aug 2026 (home hero)"),
     "ruared-back": ("sdcc", "the founder from behind, playing towards the soprano, Aug 2026"),
-    "ruared-trio": ("sdcc", "the trio taking a bow at Rua Red, Aug 2026"),
+    "ruared-trio": ("sdcc", "the trio taking a bow at Rua Red, Aug 2026; the back of one audience head, out of focus"),
     "tuh-trio": ("sdcc", "soprano, piano and clarinet in the TUH atrium, Aug 2026"),
     "tuh-atrium": ("sdcc", "clarinet, haegeum and keyboard in the TUH chapel, Aug 2026"),
     "tuh-haegeum": ("sdcc", "the haegeum player in the TUH atrium, Aug 2026"),
     "founder-playing": ("founder", "clarinet in the TUH chapel, Aug 2026, photo TUH"),
     "goirtin-solo": ("founder", "clarinet solo at a day service, Dublin 7, Apr 2025; the one listener "
                                 "at the left edge is cropped out"),
-    "lecture-recital": ("founder", "a talk on the BBC Proms; the slide shows a press photograph"),
+    "lecture-recital": ("blurred", "a talk on the BBC Proms; the founder alone, the press portrait on the slide blurred (10-15)"),
     "church-aisle": ("founder", "the founder's hand and clarinet before the altar, Dysart, Apr 2025"),
     # players without consent: faces softly blurred
     "christmas-conducting": ("blurred", "the founder conducting; the violinist and violist blurred, "
                                         "Clondalkin Lodge, Dec 2025"),
     "letters-stpatricks": ("blurred", "the founder conducting; the four string players blurred, "
-                                      "St Patrick's Day concert"),
+                                      "St Patrick's Day concert; one non-player in the background, from behind"),
     "rehearsal-stand": ("blurred", "the founder's view over the stand; the violist and the violinist "
                                    "at the left edge blurred (the cellist's face is behind a hand)"),
     # no one, or no one who can be picked out

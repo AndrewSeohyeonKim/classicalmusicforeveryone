@@ -233,6 +233,7 @@ def meet(k, title, give, bring, labels, note=None):
     bracketed into one stem each, meeting at the event (a concert, a class).
     The DOM reads the event, then each side with its list."""
     gi, bi = MEET_ICONS[k]
+    hub = (f'<span class="meet-hub-ico" aria-hidden="true">{glyph(HUB_ICONS[k], "meet-glyph")}</span>')
     if len(gi) != len(give) or len(bi) != len(bring):
         raise ValueError(f"meet {k}: one icon per line")
     def li(xs, ic, start):
@@ -240,7 +241,7 @@ def meet(k, title, give, bring, labels, note=None):
                        f'{glyph(i, "meet-glyph")}</span><span class="meet-t">{x}</span></li>'
                        for j, (x, i) in enumerate(zip(xs, ic)))
     return (f'<div class="meet">'
-            f'<h3 class="meet-hub" id="meet-{k}">'
+            f'<h3 class="meet-hub" id="meet-{k}">{hub}'
             + (f'<span class="meet-in"><span>{title}</span>{SEP}<small class="meet-len">{note}</small></span>'
                if note else title) + '</h3>'
             f'<div class="meet-side meet-give"><p class="meet-label" id="meet-{k}-g">{labels[0]}</p>'
@@ -249,6 +250,11 @@ def meet(k, title, give, bring, labels, note=None):
             f'<ul class="meet-list" aria-labelledby="meet-{k}-b">{li(bring, bi, len(give))}</ul></div>'
             f'</div>')
 
+
+# the event in the middle of each meeting drawing, drawn on a phone where the
+# hub becomes a ring beside its name: the concert's piano, the class's recorder
+# (the covers and the News panels already pair them so, R17)
+HUB_ICONS = ("piano", "recorder")
 
 ROUTE_ICONS = ("people", "mail", "building")   # For, How, Garda vetting; the last station shows its year
 
@@ -448,7 +454,7 @@ def doors(items, label):
         f'<span class="d-label">{lab}</span>{sep}<b class="d-title">{title}</b>{sep}'
         f'<span class="d-go"><span class="d-act">{act}</span> {ARROW}</span></a></li>'
         for k, (href, lab, title, act) in enumerate(items))
-    return f'<nav class="doors" aria-label="{label}">\n    <ul>\n{cells}\n    </ul>\n  </nav>'
+    return f'<div class="doors">\n    <ul>\n{cells}\n    </ul>\n  </div>'
 
 
 # The same doors, two of them, under the five programmes on the home page:
@@ -501,12 +507,13 @@ def _unmark(text):
 def prog_card(i, p, pillars):
     label, dot = pillars[p["pillar"]]
     pg = p["page"]
+    sep = '<span class="sr-only">, </span>'
     return f"""      <li><a class="pc" href="programmes/{p["slug"]}.html">
         {cover(i, p)}
         <div class="pc-body">
-          <span class="kicker"><i class="{dot}" aria-hidden="true"></i>{label}</span>
-          <div class="pc-name"><h3>{p["name"]}</h3>
-          <p class="pc-topics">{_vocab(p["vocab"])}</p></div>
+          <span class="kicker"><i class="{dot}" aria-hidden="true"></i>{label}{sep}</span>
+          <div class="pc-name"><h3>{p["name"]}{sep}</h3>
+          <p class="pc-topics">{_vocab(p["vocab"])}{sep}</p></div>
           <p>{_unmark(p["line"])}</p>
           {status_tag(pg["now"][0], pg.get("live"))}
         </div>
@@ -535,7 +542,7 @@ def _fig(n, label, period, plus=False):
 def _vocab(words):
     """A cover's three words: each stays whole, the line may turn only after a
     dot ("Your / own part" split on the home card)."""
-    return " · ".join(w.replace(" ", "\u00a0") for w in words.split(" · "))
+    return '<span class="vs"> · </span>'.join(f'<span class="vw">{w.replace(" ", "\u00a0")}</span>' for w in words.split(" · "))
 
 
 def home(t, programmes, pillars, lang):
@@ -557,7 +564,7 @@ def home(t, programmes, pillars, lang):
     # cannot drift
     return f"""<section class="hero">
   <div class="wrap">
-    <p class="eyebrow lift">{h["eyebrow"]}</p>
+    <p class="eyebrow lift"><span class="eb-parts">{parts_line(h["eyebrow"])}</span></p>
     <hgroup class="hero-head">
       <h1 class="hero-title">{title_lines(h["title"])}</h1>
       <p class="hero-sub lift lift-2">{STR[lang]["tagline"]}</p>
@@ -599,14 +606,14 @@ def home(t, programmes, pillars, lang):
 
 <section class="manifesto band-white">
   <div class="wrap why">
-    {eyebrow(w["label"], "III", "section-label")}
+    {eyebrow(w["label"], "III", "section-label", hidden=True)}
     <div>
-      <h2 class="why-premise" id="why-h"><span class="ink">{w["premise"]}</span></h2>
+      <h2 class="why-premise" id="why-h"><span class="sr-only">{w["label"]}: </span><span class="ink">{w["premise"]}</span></h2>
       <ul class="why-reasons rv-stagger">
 {reasons}
       </ul>
       <p class="why-resolve">{w["resolve"]}</p>
-      <div class="btn-row">{go("about.html", w["link"])}</div>
+      <div class="btn-row">{go(*w["link"])}</div>
     </div>
   </div>
 </section>"""
@@ -690,8 +697,8 @@ def about(t, lang):
   <div class="wrap founder">
     {plate(f["img"], "", f.get("cap"), sizes="founder")}
     <div class="rv">
-      {eyebrow(f["label"], cls="section-label")}
-      <h2>{f["name"]}</h2>
+      {eyebrow(f["label"], cls="section-label", hidden=True)}
+      <h2><span class="sr-only">{f["label"]}: </span>{f["name"]}</h2>
       <p class="founder-role">{f["role"]}</p>
       {fbody}
     </div>
@@ -718,8 +725,8 @@ def about(t, lang):
 <section id="identity">
   <div class="wrap mark">
     <div class="rv">
-      {eyebrow(idn["label"], cls="section-label")}
-      <h2>{idn["h2"]}</h2>
+      {eyebrow(idn["label"], cls="section-label", hidden=True)}
+      <h2><span class="sr-only">{idn["label"]}: </span>{idn["h2"]}</h2>
       <p class="lead mt-3">{idn["text"]}</p>
     </div>
     <figure class="mark-plate rv">
@@ -754,11 +761,10 @@ def prog_row(i, p, pillars):
         {cover(i, p, "sm")}
         <div class="pi-main">
           <span class="kicker"><i class="{dot}" aria-hidden="true"></i>{label}</span>
-          <h2><a href="programmes/{p["slug"]}.html">{p["name"]}</a></h2>
+          <h2><a href="programmes/{p["slug"]}.html">{p["name"]}&nbsp;{ARROW}</a></h2>
           <p>{p["line"]}</p>
         </div>
         <div class="pi-state">{status_tag(pg["now"][0], pg.get("live"))}{facts_}</div>
-        <div class="pi-end">{ARROW}</div>
       </li>"""
 
 
@@ -918,10 +924,16 @@ def programme_page(t, i, p, programmes, pillars, lang):
     room = ""
     if has_room:
         ph = p["img"]
-        portrait = ph[2] > ph[1] * 1.1
-        pic = plate(ph, "4x5" if portrait else "3x2", g.get("cap"),
+        # a portrait that can be cut to 4:3 without losing what it shows takes the full content width,
+        # as the landscape plates do (r9, art F5: the talk photograph, slide and speaker kept, the
+        # carpet cut); a page's room_focus names the window
+        focus = g.get("room_focus")
+        portrait = ph[2] > ph[1] * 1.1 and not focus
+        pic = plate(ph, "4x5" if portrait else ("4x3" if focus else "3x2"), g.get("cap"),
                     "room-plate" + (" room-portrait" if portrait else ""),
                     sizes="room-portrait" if portrait else "room")
+        if focus:
+            pic = pic.replace('<figure class="plate room-plate">', f'<figure class="plate room-plate" style="--focus:{focus}">', 1)
         body = pic
         if vid:
             v = g["video"]
@@ -992,7 +1004,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
   <div class="wrap">
 {sh(t["join_label"], g["join_h2"], g.get("join_text") or None, no=no_join, split=True)}
     <div class="join-body rv">
-      <p class="join-hint">{t["mail_hint"]}</p>
+      <p class="join-hint">{g.get("mail_hint", t["mail_hint"])}</p>
       <ol class="join-fields">{"".join(f"<li>{x}</li>" for x in g["mail_fields"])}</ol>
       <div class="btn-row">{btn(g["mail"], g["join_btn"], "primary")}</div>
       {mail_alt(t)}
@@ -1054,8 +1066,7 @@ def get_involved(t, icon):
     play_body = f"""      {route(play["facts"])}
       {played(play["examples_label"], play["examples"])}
       <div class="btn-row">{btn(play["href"], play["btn"], "primary")}</div>
-      {mail_alt(t["alt"])}
-      <p class="small play-note">{play["note"]}</p>"""
+      {mail_alt(t["alt"])}"""
     if sup.get("helps"):
         # giving is open: three ways to help, side by side, and the promise
         helps = "\n".join(f"""      <div class="help" id="{h["id"]}">
@@ -1086,7 +1097,6 @@ def get_involved(t, icon):
       <div class="board-act">
         <div class="btn-row">{btn(b["href"], b["btn"], "primary")}</div>
         {mail_alt(t["alt"])}
-        <p class="small mt-3">{sup["gifts"]}</p>
       </div>
     </div>
   </div>
@@ -1484,7 +1494,7 @@ def contact(t):
   <div class="wrap">
     <h2 class="sr-only">{t["form"]["h2"]}</h2>
 {contact_form(t["form"], t["email"])}
-    <p class="direct rv"><span class="kicker">{t["direct_label"]}</span><span class="direct-links"><a href="{t["email_href"]}">{t["email"]}</a><a href="tel:{t["tel_href"]}">{t["tel"]}</a></span></p>
+    <p class="direct rv"><span class="kicker">{t["direct_label"]}</span><span class="direct-links"><a href="tel:{t["tel_href"]}">{t["tel"]}</a></span></p>
   </div>
 </section>
 

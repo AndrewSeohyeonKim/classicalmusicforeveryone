@@ -11,8 +11,8 @@ BODY = """<section class="ph ph-plain">
     <p class="eyebrow lift">404</p>
     <div class="ph-head">
       <h1 class="ph-title"><span class="ln"><span>That page has moved, or never existed.</span></span></h1>
-      <p class="ph-lead lift lift-3">Nothing is broken on your side. Pick up the thread from one of these.
-         <span lang="ko">찾으시는 페이지가 없습니다. 아래에서 이어 가세요.</span></p>
+      <p class="ph-lead lift lift-3">Try one of these pages instead.
+         <span lang="ko">찾으시는 페이지가 없습니다. 아래에서 골라 주세요.</span></p>
     </div>
   </div>
 </section>
@@ -21,17 +21,21 @@ BODY = """<section class="ph ph-plain">
   <div class="wrap">
     <h2 class="sr-only">Where to go next</h2>
     <ul class="nf-list rv">
-      <li><a href="/classicalmusicforeveryone/"><span class="kicker">English</span><b>Home</b>
+      <li><a href="/classicalmusicforeveryone/"><span class="kicker">English</span><span class="sr-only">: </span><b>Home</b><span class="sr-only">, </span>
         <span>Who we are, the five programmes and what is running now.</span></a></li>
-      <li><a href="/classicalmusicforeveryone/get-involved.html"><span class="kicker">English</span><b>Get involved</b>
+      <li><a href="/classicalmusicforeveryone/programmes.html"><span class="kicker">English</span><span class="sr-only">: </span><b>Programmes</b><span class="sr-only">, </span>
+        <span>The five programmes and how to start.</span></a></li>
+      <li><a href="/classicalmusicforeveryone/get-involved.html"><span class="kicker">English</span><span class="sr-only">: </span><b>Get involved</b><span class="sr-only">, </span>
         <span>Join a programme, bring a concert to your place, register interest as a musician or artist, or join the founding board.</span></a></li>
-      <li><a href="/classicalmusicforeveryone/contact.html"><span class="kicker">English</span><b>Contact</b>
+      <li><a href="/classicalmusicforeveryone/contact.html"><span class="kicker">English</span><span class="sr-only">: </span><b>Contact</b><span class="sr-only">, </span>
         <span>We reply as soon as we can.</span></a></li>
-      <li lang="ko"><a href="/classicalmusicforeveryone/ko/"><span class="kicker">한국어</span><b>홈</b>
+      <li lang="ko"><a href="/classicalmusicforeveryone/ko/"><span class="kicker">한국어</span><span class="sr-only">: </span><b>홈</b><span class="sr-only">, </span>
         <span>저희가 누구인지, 다섯 프로그램, 지금 진행 중인 프로그램.</span></a></li>
-      <li lang="ko"><a href="/classicalmusicforeveryone/ko/get-involved.html"><span class="kicker">한국어</span><b>함께하기</b>
+      <li lang="ko"><a href="/classicalmusicforeveryone/ko/programmes.html"><span class="kicker">한국어</span><span class="sr-only">: </span><b>프로그램</b><span class="sr-only">, </span>
+        <span>다섯 프로그램과 시작하는 방법.</span></a></li>
+      <li lang="ko"><a href="/classicalmusicforeveryone/ko/get-involved.html"><span class="kicker">한국어</span><span class="sr-only">: </span><b>함께하기</b><span class="sr-only">, </span>
         <span>프로그램 참여, 음악회 초청, 함께 연주하기, 창립 이사회.</span></a></li>
-      <li lang="ko"><a href="/classicalmusicforeveryone/ko/contact.html"><span class="kicker">한국어</span><b>문의</b>
+      <li lang="ko"><a href="/classicalmusicforeveryone/ko/contact.html"><span class="kicker">한국어</span><span class="sr-only">: </span><b>문의</b><span class="sr-only">, </span>
         <span>최대한 빠르게 답장해 드리겠습니다.</span></a></li>
     </ul>
   </div>

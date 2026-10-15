@@ -130,6 +130,11 @@ time: this Mac sits near its open-file limit). It reports:
          before a longer line (a step), and the long venues stay on one line there, in
          both languages (chief designer v7 round 5: 「Methodist / Centenary Church에서 /
          열었습니다.」 in a 246px column)
+  frame  nothing inside main leaves the content frame (the wrap's content box) on
+         either side, except full-width section bands and decoration with no
+         pointer events (Andrew 10-15: the home photograph bled off the right edge
+         while every block below stopped at the content edge), every page at the
+         eight viewports and at 1728 and 1920; scroll containers count as one box
   wide   text at 200% the way a reader sets it, the browser's own text size
          doubled (so em media and container queries move too, unlike a
          doubled root size): no page scrolls sideways and nothing sticks
@@ -165,7 +170,8 @@ PAGES = ["index", "about", "programmes", "get-involved", "news", "contact",
 VIEWPORTS = [(320, 700), (360, 740), (390, 844), (820, 1180), (1024, 768), (1180, 820), (1440, 789), (1512, 945)]
 LEADS = (".lead,.ph-lead,.sh-lead,.figs-note,.pi-text,.founder-line,.play-note,"
          ".pp-say,.join-hint")
-SHORT = (".pc p,.pi p,.steps p,.qa dt,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,"
+# r9: a card's three words stack one to a line where five cards stand narrow (1001 to 1279px): a list, not a sentence
+SHORT = (".pc p:not(.pc-topics),.pi p,.steps p,.qa dt,.qa dd,.tl-item p,.latest p,.clause-list li,.notice-text p,.leadins li,"
          ".facts dd,.pp-glance dd,.pi-facts dd,.rec-what>span,.meet-t,.route dd,.route-plan dd,"
          ".played-name,.played-who,.seat,.table-top dd,.ct-option>span")
 ALLOW = ("–",)  # a tied run may break after an en dash (a range in a narrow column)
@@ -176,7 +182,10 @@ ACCEPT_TAIL = (("programmes/getting-to-know", 320, "Carmelite"), ("about", 390, 
                # v7 round 5: the Korean September line starts on the church's name, a block as wide
                # as the phone's timeline column, so its verb takes the next line alone
                ("news", 320, "Centenary Church에서"), ("news", 360, "Centenary Church에서"),
-               ("news", 390, "Centenary Church에서"))
+               ("news", 390, "Centenary Church에서"),
+               # r9: the class's first step stands on its own line under the time and the place (Andrew 10-12)
+               ("programmes/recorder-ensemble", 1180, "그냥"), ("programmes/recorder-ensemble", 1440, "그냥"),
+               ("programmes/recorder-ensemble", 1512, "그냥"), ("programmes/recorder-ensemble", 1024, "그냥"))
 
 JS = r"""((LEADS, SHORT, wide) => {
   const out = {fold: [], tail: [], tie: []};
@@ -315,7 +324,9 @@ LEADER = r"""(() => { const dt = document.querySelector('.wa-based dt'); if (!dt
 WIDE = r"""(() => { const W = document.documentElement.clientWidth, out = [];
   for (const el of document.querySelectorAll('main *, .site-footer *, .site-header *')) {
     const r = el.getBoundingClientRect(); if (!r.width || !r.height) continue;
-    if (el.closest('.sr-only,.hero-figure') || getComputedStyle(el).position === 'fixed') continue;
+    // .arrow: its second path waits outside the arrow's clipped box for the hover (an arrow at a line's
+    // start puts it past the screen's edge, unseen)
+    if (el.closest('.sr-only,.hero-figure,.arrow') || getComputedStyle(el).position === 'fixed') continue;
     if (r.right > W + 1 || r.left < -1) out.push(el.tagName.toLowerCase() + '.' + [...el.classList].join('.'));
   }
   const scroll = document.documentElement.scrollWidth - W;
@@ -667,7 +678,8 @@ TN = r"""(() => { const out = [];
   return out; })()"""
 
 KINSOKU = r"""(() => { const out = [], ko = document.documentElement.lang.startsWith('ko');
-  const START = /[,.;:!?)\u2019\u201d\u300d\u300f]/, END = /[(\u2018\u201c\u300c\u300e]/;
+  // r9: no line ends on a middle dot either (the gallery captions at laptop widths, a Korean list in a narrow column)
+  const START = /[,.;:!?)\u2019\u201d\u300d\u300f]/, END = /[(\u2018\u201c\u300c\u300e\u00b7]/;
   const blockOf = el => { let b = el; while (b && getComputedStyle(b).display.startsWith('inline')) b = b.parentElement; return b; };
   const groups = new Map();
   for (const root of document.querySelectorAll('main, .site-footer')) {
@@ -912,10 +924,14 @@ FORTYROWS = r"""(() => { const out = [], ws = [];
   return out; })()"""
 # piarrow (UX v8): on the Programmes index the row's arrow stands on the name's first line
 # (centred on the row, it fell 13px under the name where a value took three lines), from 1024
-PIARROW = r"""(() => [...document.querySelectorAll('.pi')].map(p => { const a = p.querySelector('.pi-end .arrow'), h = p.querySelector('.pi-main h2');
-  if (!a || !a.getClientRects().length) return null; const ab = a.getBoundingClientRect(), hb = h.getBoundingClientRect();
-  const d = (ab.top + ab.bottom) / 2 - (hb.top + parseFloat(getComputedStyle(h).lineHeight) / 2);
-  return Math.abs(d) > 2 ? {row: p.id, d: +d.toFixed(1)} : null; }).filter(Boolean))()"""
+# piarrow (r9): the arrow follows the name inside its link, on the name's last line and beside it (R2: an
+# arrow stands within a line length of the word it points to; at the row's far end it stood 770px off)
+PIARROW = r"""(() => [...document.querySelectorAll('.pi')].map(p => { const a = p.querySelector('.pi-main h2 .arrow'), h = p.querySelector('.pi-main h2 a');
+  if (!a || !a.getClientRects().length) return {row: p.id, arrow: 'missing'}; const ab = a.getBoundingClientRect();
+  const lines = [...h.getClientRects()], last = lines[lines.length - 1];
+  const d = (ab.top + ab.bottom) / 2 - (last.top + last.bottom) / 2, gap = ab.left - (lines.length > 1 ? last.left : h.getBoundingClientRect().left);
+  const fs = parseFloat(getComputedStyle(h).fontSize);
+  return Math.abs(d) > .16 * fs || ab.left - last.right > 2 || gap > 33 * fs ? {row: p.id, d: +d.toFixed(1)} : null; }).filter(Boolean))()"""
 # herophoto (art direction v8): the home photograph is a 16:10 plate whose top is on the first
 # laptop screen with the players in view
 HEROPHOTO = r"""(() => { const p = document.querySelector('.hero-figure .photo'); if (!p) return null; const b = p.getBoundingClientRect();
@@ -938,6 +954,37 @@ SETTLE = r"""(async () => { const out = [], H = innerHeight, step = Math.round(H
   return [...new Map(out.map(o => [JSON.stringify(o).slice(0, 90), o])).values()].slice(0, 12); })()"""
 
 
+# frame (10-15): every box in main stays inside the wrap's content box; a probe .wrap gives the edges
+FRAME = r"""(() => { const out = [];
+  const t = document.createElement('div'); t.className = 'wrap';
+  t.style.cssText = 'position:absolute;left:0;right:0;top:0;height:0;visibility:hidden'; document.body.appendChild(t);
+  const r = t.getBoundingClientRect(), s = getComputedStyle(t);
+  const L = r.left + parseFloat(s.paddingLeft), R = r.right - parseFloat(s.paddingRight); t.remove();
+  const seen = new Set();
+  const skip = e => { for (let a = e; a && a.tagName !== 'MAIN'; a = a.parentElement) {
+      if (a.classList.contains('sr-only') || seen.has(a)) return true;
+      const cs = getComputedStyle(a);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return true;
+      // a scroll or clip box inside the frame holds its children in; a full-width band that clips
+      // (the hero's overflow-x:clip) does not keep them in the frame, so it does not excuse them
+      if (a !== e && /auto|scroll|hidden|clip/.test(cs.overflowX)) { const ab = a.getBoundingClientRect();
+        if (ab.left >= L - 3 && ab.right <= R + 3) return true; }
+      if (/absolute|fixed/.test(cs.position) && cs.pointerEvents === 'none') return true; }
+    return false; };
+  for (const e of document.querySelectorAll('main *')) {
+    if (/^(SECTION|ARTICLE|ASIDE|DIV)$/.test(e.tagName) && e.matches('section,article,aside,[class*="band"],.wrap,.wrap-mid,.wrap-narrow')) continue;
+    // a title line's mask box: its .12em padding is paid back by its margin and the ink stands on the edge (R28, axis)
+    if (e.closest('.ln')) continue;
+    const b = e.getBoundingClientRect(); if (b.width < 1 || b.height < 1) continue;
+    // 3px: a display letter's ink may hang by its side bearing (R28), a figure by its own (DIGIT_LSB)
+    const over = Math.max(L - b.left, b.right - R); if (over <= 3) continue;
+    if (skip(e)) continue;
+    seen.add(e);
+    const cls = typeof e.className === 'string' ? e.className.trim().split(/\s+/).slice(0, 2).join('.') : '';
+    out.push({el: e.tagName.toLowerCase() + (cls ? '.' + cls : ''), left: Math.round(b.left - L), right: Math.round(b.right - R)}); }
+  return out.slice(0, 8); })()"""
+
+
 def main(strict=False):
     httpd, base = serve()
     found = {"fold": [], "tail": [], "tie": [], "hero": [], "axis": [], "width": [], "group": [], "meet": [],
@@ -945,7 +992,7 @@ def main(strict=False):
              "years": [], "venues": [], "yearline": [], "motion": [], "wide": [], "lang": [], "dots": [],
              "titlegap": [], "inword": [], "sentences": [], "herorings": [], "kinsoku": [], "colline": [],
              "lone": [], "phrings": [], "shsize": [], "steps": [],
-             "coverfield": [], "vtnames": [], "labelline": [], "fortyrows": [], "herophoto": [], "settle": [], "piarrow": [], "painted": []}
+             "coverfield": [], "vtnames": [], "labelline": [], "fortyrows": [], "herophoto": [], "settle": [], "piarrow": [], "painted": [], "frame": []}
     try:
         with Chrome(port=9371, width=1440, height=900) as c:
             for lang in ("en", "ko"):
@@ -986,6 +1033,7 @@ def main(strict=False):
                             found["venues"] += [(pg, w, x) for x in c.js(f"({VENUES_JS})({json.dumps(VENUES)})")]
                         if w == 1440:  # once a page: it reads every file the page names, at any width
                             found["painted"] += [(lang, pg, x) for x in c.js(PAINTED)]
+                        found["frame"] += [(lang, pg, w, x) for x in c.js(FRAME)]
                         found["coverfield"] += [(lang, pg, w, x) for x in c.js(COVERFIELD)]
                         found["vtnames"] += [(lang, pg, w, x) for x in c.js(VTNAMES)]
                         if pg == "programmes" and w >= 1024:
@@ -1088,6 +1136,12 @@ def main(strict=False):
                           return (i.complete && i.naturalWidth) ? 1 : new Promise(r => { i.onload = i.onerror = r; }); })),
                           new Promise(r => setTimeout(r, 8000))])""")
                     found["gallery"] += [(lang, w, x) for x in c.js(GALLERY)]
+                # the frame on wide screens too: a bleed grows with the screen (376px at 1920)
+                for pg in PAGES:
+                    for w in (1728, 1920):
+                        c.viewport(w, 1000, 1, False)
+                        c.goto(base + ("" if lang == "en" else "ko/") + pg + ".html", settle=0.3)
+                        found["frame"] += [(lang, pg, w, x) for x in c.js(FRAME)]
                 # the years on wide screens too (the timeline's grew to 2.1rem)
                 for w in (1512, 1728):
                     c.viewport(w, 900, 1, False)

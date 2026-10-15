@@ -337,7 +337,9 @@ def video(v, label, play, lang="en"):
            # page's tokens: --dur-5, --dur-6, --ease, --ease-enter written out)
            "@media (prefers-reduced-motion:no-preference){img{transition:opacity .25s cubic-bezier(.35,0,.35,1)}"
            "i{transition:scale .3s cubic-bezier(0,0,.15,1)}}a:hover img{opacity:1}a:hover i{scale:1.06}"
-           "a:active i{scale:.96}a:active img{opacity:.72}picture{display:contents}</style>"
+           "a:active i{scale:.96}a:active img{opacity:.72}picture{display:contents}"
+           # a contrast theme drops box-shadow: the focus keeps a ring (r9, WCAG 2.4.7)
+           "@media (forced-colors:active){a:focus-visible{outline:3px solid CanvasText;outline-offset:-8px}}</style>"
            f"<a href='{src}'>{_poster(poster)}<i></i><b>{play}</b></a>")
     return (f'<iframe class="video-frame" title="{label}" loading="lazy" src="{src}" '
             f'srcdoc="{html.escape(doc)}" allow="autoplay; fullscreen; picture-in-picture"></iframe>')

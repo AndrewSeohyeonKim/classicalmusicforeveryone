@@ -35,10 +35,11 @@ PAGES = [
     #                     en body,        ko body
     ("index.html",
      "Classical Music for Everyone · community music in Dublin, Ireland",
-     "Not-for-profit community music in Dublin: Classical Music talks, outreach concerts, a recorder "
+     "Community music in Dublin: Classical Music talks, concerts in care homes and hospitals, a recorder "
      "class for adults, the Letters Ensemble and concert outings.",
      "Classical Music for Everyone · 아일랜드 더블린의 공동체 음악",
-     "더블린의 비영리 공동체 음악 단체입니다. 강의와 찾아가는 음악회, 어른을 위한 리코더 클래스, Letters Ensemble, 함께하는 음악여행.",
+     "더블린의 비영리 공동체 음악 단체입니다. 클래식 음악 강의, 요양시설과 병원으로 찾아가는 음악회, 어른을 위한 리코더 "
+     "클래스, Letters Ensemble, 함께하는 음악여행.",
      en.INDEX, ko.INDEX),
 
     ("about.html",
@@ -46,7 +47,7 @@ PAGES = [
      "A not-for-profit community music initiative in Dublin since 2024: our story, our founder, "
      "how we are run and where we have played and taught.",
      "소개 · Classical Music for Everyone",
-     "2024년에 시작한 이야기, 창립자 김서현, 운영 방식, 연주하고 가르쳐 온 곳.",
+     "더블린의 비영리 공동체 음악 단체를 소개합니다. 2024년부터의 이야기, 창립자 김서현, 운영 방식, 연주하고 가르쳐 온 곳.",
      en.ABOUT, ko.ABOUT),
 
     ("programmes.html",
@@ -60,10 +61,10 @@ PAGES = [
 
     ("get-involved.html",
      "Get involved · Classical Music for Everyone",
-     "Join a programme, bring a concert to your place, register interest as a musician or artist, "
-     "or join the founding board.",
+     "Four ways into community music in Dublin: join a programme, invite us to play, register interest "
+     "as an artist, or join the founding board.",
      "함께하기 · Classical Music for Everyone",
-     "프로그램 참여, 음악회 초청, CMFE Artists 참여 신청, 창립 이사회.",
+     "더블린의 공동체 음악에 함께하는 네 가지 길: 프로그램 참여, 음악회 초청, 예술가 참여 신청, 창립 이사회.",
      en.GET_INVOLVED, ko.GET_INVOLVED),
 
     ("news.html",
@@ -79,7 +80,7 @@ PAGES = [
      "Choose a topic and write to us, or email or call. Who answers, where we travel, and how we look "
      "after your details.",
      "문의 · Classical Music for Everyone",
-     "주제를 골라 메일을 쓰시거나 이메일·전화로 연락하세요. 답하는 사람, 찾아가는 곳, 개인정보 처리방침.",
+     "문의 양식에서 주제를 고르시거나, 이메일·전화로 바로 연락하세요. 답하는 사람, 찾아가는 곳, 개인정보 처리방침.",
      en.CONTACT, ko.CONTACT),
 ]
 
@@ -161,15 +162,15 @@ def build_redirects():
 
 # which photograph each page hands to a social card
 OG = {
-    "index.html": ("ruared-duo.jpg",
-                   "A clarinettist and a pianist performing on the Rua Red stage",
-                   "Rua Red 무대에서 연주하는 클라리넷 연주자와 피아니스트"),
-    "programmes.html": ("tuh-trio.jpg",
-                        "Soprano, piano and clarinet in the atrium of Tallaght University Hospital",
-                        "Tallaght University Hospital 아트리움의 소프라노·피아노·클라리넷"),
+    "index.html": ("tuh-trio.jpg",
+                   "Soprano, piano and clarinet in the atrium of Tallaght University Hospital",
+                   "Tallaght University Hospital 아트리움의 소프라노·피아노·클라리넷"),
+    "programmes.html": ("ruared-duo.jpg",
+                        "A clarinettist and a pianist performing on the Rua Red stage",
+                        "Rua Red 무대에서 연주하는 클라리넷 연주자와 피아니스트"),
     "about.html": ("christmas-conducting.jpg",
-                   "A conductor leading two string players at a Christmas concert in a care home",
-                   "요양시설 성탄 음악회에서 현악 연주자 두 명을 지휘하는 모습"),
+                   "Our founder conducting two string players at a Christmas concert in a care home",
+                   "요양시설 성탄 음악회에서 현악 연주자 두 명을 지휘하는 창립자"),
     # a share card is landscape; the church photograph is a portrait
     "get-involved.html": ("ruared-back.jpg",
                           "A clarinettist, seen from behind, playing towards a soprano on the Rua Red stage",
@@ -207,10 +208,12 @@ def programme_pages():
             # programme's name is the same in both (Letters Ensemble); the page's
             # own lead describes it (the card line leaves out what the card's
             # three words say, so Letters lost "Irish, Korean and sacred")
-            en_title=f"{_plain(pe['name'])} · Programmes · Classical Music for Everyone",
-            en_desc=_plain(pe["page"]["lead"]),
+            # English drops "Programmes" so the name and the brand fit a results page (r9);
+            # the Korean keeps 「프로그램」, which still keeps the two Letters titles apart
+            en_title=f"{_plain(pe['name'])} · Classical Music for Everyone",
+            en_desc=_plain(pe["page"].get("meta") or pe["page"]["lead"]),
             ko_title=f"{_plain(pk['name'])} · 프로그램 · Classical Music for Everyone",
-            ko_desc=_plain(pk["page"]["lead"]),
+            ko_desc=_plain(pk["page"].get("meta") or pk["page"]["lead"]),
             en_body=en.PROGRAMME_PAGES[pe["slug"]], ko_body=ko.PROGRAMME_PAGES[pk["slug"]],
             img=pe["img"][0], en_alt=pe["img"][3], ko_alt=pk["img"][3],
             en_name=pe["name"], ko_name=pk["name"]))
@@ -291,6 +294,7 @@ def build_sitemap():
                 f"    <priority>{priority}</priority>\n"
                 f'    <xhtml:link rel="alternate" hreflang="en" href="{alt_en}"/>\n'
                 f'    <xhtml:link rel="alternate" hreflang="ko" href="{alt_ko}"/>\n'
+                f'    <xhtml:link rel="alternate" hreflang="x-default" href="{alt_en}"/>\n'
                 "  </url>"
             )
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -371,10 +375,10 @@ def build_manifest():
     """A minimal web app manifest so a home-screen shortcut carries the mark."""
     import json
     m = {"name": "Classical Music for Everyone", "short_name": "CMFE",
-         "description": "Community music in Dublin: we bring live Classical Music to the places it "
-                        "rarely reaches, and invite people to play as well as listen.",
+         "description": "Community music in Dublin: Classical Music talks, concerts in care homes and "
+                        "hospitals, a recorder class for adults, the Letters Ensemble and concert outings.",
          "start_url": urlparse(SITE_URL).path.rstrip("/") + "/", "display": "browser",
-         "background_color": "#FAF5EE", "theme_color": "#1D2430", "lang": "en-IE",
+         "background_color": "#FAF5EE", "theme_color": "#FAF5EE", "lang": "en-IE",
          "icons": [{"src": "assets/app-icon-512.png", "sizes": "512x512", "type": "image/png"},
                    {"src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"}]}
     with open(os.path.join(ROOT, "site.webmanifest"), "w", encoding="utf-8") as fh:
@@ -520,6 +524,7 @@ def main():
     print(f"\n{len(written)} files.\n")
     check_links(written)
     check_photos(written)
+    check_machine_text(written)
     # the reading budget (readability.py): a block over budget stops the
     # build, as a missing string does. CMFE_LINT=warn reports and goes on.
     faults = readability.report(ROOT)
@@ -527,6 +532,59 @@ def main():
         print("\nThe pages were written, but some text is over its reading budget. Split it into "
               "a pattern (facts, steps, a list) or shorten it; see _build/readability.py.")
         sys.exit(1)
+
+
+_HEAD_TEXT = re.compile(r'<title>(.*?)</title>|<meta (?:name|property)="(?:description|og:title|og:description|'
+                        r'og:image:alt|twitter:title|twitter:description)" content="([^"]*)"', re.S)
+_LD = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
+# keys whose values are addresses or names given elsewhere, not prose: the acronym is allowed in
+# alternateName (and in the manifest's short_name, which is not read here)
+_LD_SKIP = {"@id", "@type", "@context", "url", "item", "email", "logo", "image", "sameAs", "alternateName",
+            "telephone", "inLanguage", "foundingDate", "contentUrl", "thumbnailUrl", "embedUrl"}
+
+
+def _ld_strings(node, out):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k not in _LD_SKIP:
+                _ld_strings(v, out)
+    elif isinstance(node, list):
+        for v in node:
+            _ld_strings(v, out)
+    elif isinstance(node, str):
+        out.append(node)
+
+
+def check_machine_text(written):
+    """The banned words in what a search engine, a share card or an assistant reads and a visitor
+    may never see: <title>, the meta and Open Graph descriptions, image alt for share cards, every
+    JSON-LD string, llms.txt (its house-rules section quotes the banned words on purpose) and the
+    manifest description (marketing r9: the reading check saw only the body)."""
+    import json
+    faults = []
+    for path in written:
+        if not path.endswith(".html"):
+            continue
+        lang = "ko" if path.startswith("ko/") else "en"
+        page_ = open(os.path.join(ROOT, path), encoding="utf-8").read()
+        head = page_.split("</head>")[0]
+        texts = [html.unescape(a or b) for a, b in _HEAD_TEXT.findall(head)]
+        for blob in _LD.findall(head):
+            _ld_strings(json.loads(blob), texts)
+        for t in texts:
+            faults += [(path, why, ctx) for why, ctx in readability._banned(lang, t)]
+    llms = open(os.path.join(ROOT, "llms.txt"), encoding="utf-8").read().split("## House rules")[0]
+    faults += [("llms.txt", why, ctx) for why, ctx in readability._banned("en", llms)]
+    man = json.load(open(os.path.join(ROOT, "site.webmanifest"), encoding="utf-8"))
+    faults += [("site.webmanifest", why, ctx) for why, ctx in readability._banned("en", man["description"])]
+    if faults:
+        print("\nBANNED WORDS in titles, metas, structured data, llms.txt or the manifest:")
+        for path, why, ctx in faults[:30]:
+            print(f"  {path} · {why}: {ctx}")
+        if os.environ.get("CMFE_LINT") != "warn":
+            sys.exit(1)
+    else:
+        print("machine-read text: titles, metas, JSON-LD, llms.txt and the manifest have no banned words")
 
 
 if __name__ == "__main__":

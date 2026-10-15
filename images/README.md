@@ -111,8 +111,8 @@ what may be a child seen from behind. `founder-portrait.jpg`, `founder-hall.jpg`
 performers, and permission to use the photographs by Ben Ryan Photography for South Dublin County
 Council and by Tallaght University Hospital. **Not** the Letters Ensemble players: their faces are
 blurred (above). A new photograph of anyone else still needs written consent first, or a blurred
-face. The site's own line is: "We show performers, instruments and empty rooms. Anyone else who
-can be recognised appears only with their written consent."
+face. The site's own line (About, since 15 Oct 2026) is: "We show our founder, performers who have
+agreed, instruments and empty rooms. Where someone has not agreed, we blur their face."
 
 The nine files added on 2026-09-13 (`columban-ensemble` `founder-hall` `founder-sea` `two-clarinets`
 `recorders` `fingering-chart` `score-stand` `dalgan-hall` `church-aisle`) came from
