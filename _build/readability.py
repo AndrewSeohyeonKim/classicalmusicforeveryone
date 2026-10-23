@@ -314,9 +314,16 @@ def measure(text, lang):
     return units(text, lang), len(sents), max((units(r, lang) for r in runs), default=0)
 
 
+# the one other place "charity" may stand: when the site says gifts wait for registration
+# (canon v1.7, Charities Act 2009 s.41)
+PERMITTED = ("after charity registration",)
+
+
 def _banned(lang, text):
     """Banned words in a page's visible text, the status sentence excepted."""
     text = " ".join(text.split()).replace(" ".join(STATUS[lang].split()), "")
+    for ok in PERMITTED:
+        text = re.sub(re.escape(ok), "", text, flags=re.I)
     found = []
     for pat, why in BANNED[lang]:
         exact = why in ("the bare acronym", "'Classical Music' without its capitals")

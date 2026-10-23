@@ -56,6 +56,16 @@ _MAIL_BOARD = _mail("Founding board: Classical Music for Everyone",
                     "The role that interests me (chair, treasurer, secretary, safeguarding and care "
                     "lead, community lead): \r\nA few lines about me: \r\n")
 
+# Working with us (22 Oct 2026): a company, practical help, and the host of a recorder class
+_MAIL_CO = _mail("Working with a company: Classical Music for Everyone",
+                 _fields(["Company and town",
+                          "What interests you (a workplace concert, volunteering, a venue, help in kind, advice)",
+                          "Contact name and phone number"]))
+_MAIL_INTEREST = _mail("Interest: Classical Music for Everyone",
+                       _fields(["Your name", "What you would like to hear about"]))
+_MAIL_HOST = _mail("Hosting a recorder class", _fields(["Organisation and town", "The room you could use",
+                                                        "Contact name and phone number"]))
+
 # CMFE Artists: interest is taken freely (Andrew, 2 Oct 2026). Four prompts
 # in place of the kit 15 form: whoever writes can say the rest in their own words.
 EOI_FIELDS = ["Your name", "Instrument, voice or art form", "A link to your work (optional)",
@@ -245,6 +255,42 @@ PROGRAMMES_DATA = [
                   ("Can I join during the term?", "<strong>Yes.</strong> Just come along <mark>any Wednesday</mark> at 7pm."),
                   ("Is the centre step-free?",
                    "<strong>Yes.</strong> Mulhuddart Community Centre has <mark>step-free access</mark>.")],
+             # For hosts (22 Oct 2026): the programme model, from CMFE_Recorder_Ensemble_Model. The class
+             # runs 7pm to 8pm; the model's "about 75 minutes" is not repeated. "Nine enrolled, seven
+             # completed" is the canonical pilot sentence (canon 2).
+             model=dict(
+                 label="For hosts",
+                 h2="A ten-week term, for your place.",
+                 lead="For centres, parishes, day centres, libraries and schools: <mark>what a host agrees to</mark>.",
+                 facts=[("Shape", "Ten weekly sessions, then a short presentation"),
+                        ("Group", "Up to ten adults"),
+                        ("Instruments", "Recorders lent, with large-print music and alternatives"),
+                        ("Led by", "A named facilitator, with the host&rsquo;s contact at the first session")],
+                 pilot="The model comes from our pilot with retired Presentation Sisters in Dublin 8. Nine sisters "
+                       "enrolled and seven completed the study&rsquo;s final questionnaire. A costed proposal is "
+                       "available on request.",
+                 weeks_summary="The ten weeks", weeks_hide="Hide the ten weeks",
+                 weeks=[("Week 1 · First sounds.", "Names, a welcome circle, holding the instrument, breath, a first familiar tune on three notes."),
+                        ("Week 2 · Playing together.", "A steady pulse, listening to each other, two more familiar tunes."),
+                        ("Week 3 · Widening the range.", "New notes and short phrases. Groups often begin their own practice about now."),
+                        ("Week 4 · Accompaniment.", "Playing with a piano, finding the beat in a fuller sound."),
+                        ("Week 5 · Two parts.", "A melody and a second line, and a first look at dynamics."),
+                        ("Week 6 · Pieces we chose.", "The programme takes shape from the group&rsquo;s request cards."),
+                        ("Week 7 · A community piece.", "One piece from the host community&rsquo;s own tradition."),
+                        ("Week 8 · Shaping.", "Beginnings, endings, who plays where, the running order."),
+                        ("Week 9 · Rehearsal in the room.", "A run-through where the presentation will be, and invitations to guests."),
+                        ("Week 10 · Full run.", "The whole programme, with time to talk about what comes next."),
+                        ("Presentation.", "A short, relaxed concert for friends, family and neighbours, led by the participants.")],
+                 host_summary="What a host provides", host_hide="Hide what a host provides",
+                 host=[("A room.", "Warm, accessible, ideally on the ground floor, at the same time each week."),
+                       ("A contact.", "A named person who helps invite people. We supply a flyer and a one-page description."),
+                       ("Storage.", "Space for the instruments between sessions, or we take them each time."),
+                       ("Safeguarding.", "We follow the venue&rsquo;s own arrangements and provide what the host asks for."),
+                       ("Numbers.", "Up to ten participants, with a short waiting list if more are interested."),
+                       ("How we begin.", "A call, a visit to the room, agreed dates, a written agreement, then the first session.")],
+                 href=_MAIL_HOST, btn="Ask about hosting a class",
+                 doc=("assets/docs/CMFE_Recorder_Ensemble_Model.pdf", "Programme model (PDF)"),
+             ),
              record_h2="How the class came about.",
              record_lead="",
              join_h2="Join the class.",
@@ -476,13 +522,28 @@ ABOUT_T = dict(
                 "Once the company is registered, an independent volunteer board will run it. We are "
                 "looking for its first members now."),
                ("Money.",
-                "We are not asking for or accepting gifts yet. We will never ask you to pay into "
-                "<mark>a personal account</mark>."),
+                "We do not ask for or accept gifts or pledges. Gifts open only after charity registration. "
+                "We will never ask you to pay into <mark>a personal account</mark>."),
                ("Photographs.",
                 "We show our founder, performers who have agreed, instruments and empty rooms. Where "
                 "someone has not agreed, we blur their face."),
                # facts.md l.59, word for word, where families and partners decide (v7)
                ("Public liability insurance.", "We show the certificate on request.")],
+    ),
+    # Our plan (22 Oct 2026): the roadmap 2027 to 2030 in three lines. Dates are plans. The board, not
+    # the founder, decides on a first employee. No amounts, no hospital or funder names.
+    plan=dict(
+        label="Our plan",
+        h2="Three stages, from late 2026.",
+        lead="Dates are plans, not promises.",
+        steps=[("Late 2026 to 2027 · Establish",
+                "Form the company with an independent, unpaid board. The board decides on a first employee."),
+               ("2028 · Hold",
+                "The first visiting circuits begin: about eight settings each, with paid musicians."),
+               ("2030 · Grow",
+                "Circuits reach all four Dublin council areas, with an outside evaluation by a university.")],
+        link=("get-involved.html#support", "How to help now"),
+        doc=("assets/docs/CMFE_Business_Plan_Summary_2027.pdf", "Business plan summary (PDF)"),
     ),
     places=dict(
         label="Places",
@@ -557,7 +618,7 @@ GET_INVOLVED_T = dict(
     # the address and phone under each mail button
     alt=dict(or_write="Or write to", email=EMAIL, tel="+353 83 078 0635", tel_href="+353830780635"),
     invite=dict(
-        label="Partner venues",
+        label="Venues",
         h2="Bring a concert to your place.",
         lead="Care homes, hospitals, religious communities, parishes and community centres <mark>can invite us</mark>.",
         pair_labels=("You provide", "We bring"),
@@ -573,9 +634,41 @@ GET_INVOLVED_T = dict(
         href=MAIL_INVITE, btn="Invite us", more="How a concert works",
         # Andrew, 2026-10-06 (Q4): one to two hours
         hub_notes=["1 to 2 hours", None],
-        class_href=_mail("Hosting a recorder class", _fields(["Organisation and town", "The room you could use",
-                                                              "Contact name and phone number"])),
+        class_href=_MAIL_HOST,
         class_go="Ask about hosting a class",
+    ),
+    # Partner with us (22 Oct 2026): the corporate menu, summarised. No amounts: quotations on request.
+    # "partner" only where a written agreement exists; gifts and matched giving wait for registration
+    # (Charities Act 2009 s.41). Nine options: six open now, three later.
+    companies=dict(
+        label="Partner with us",
+        h2="Work with us as a company.",
+        lead="Nine ways to take part, <mark>six open now</mark>, each agreed in writing first.",
+        items=[("Workplace concert.",
+                "A 45-&#8288;minute lunchtime talk with live playing, under a written service agreement. Quotation on request."),
+               ("Staff volunteering.", "Welcome and seat audiences at public concerts and class presentations."),
+               ("Promotion.", "Share accurate wording and consented photographs through your own channels.")],
+        later="Concert sponsorship and series partnerships follow once our company bank account is open. "
+              "Gifts and matched giving wait until after charity registration.",
+        menu_summary="All nine options", menu_hide="Hide the nine options",
+        menu=[("Workplace concert.", "A lunchtime talk with live playing at your workplace. Open now."),
+              ("Concert sponsorship.",
+               "Your company supports one visit or concert and is named in the programme. Not yet open: it needs our "
+               "bank account and written terms."),
+              ("Series partner.",
+               "A season of visits at one setting, with recognition agreed in writing. We talk now, so a season "
+               "can begin in 2028."),
+              ("Staff volunteering.", "Real tasks at public concerts. Open now."),
+              ("In kind.", "Instruments, printing, tuning, refreshments or equipment hire. Open now."),
+              ("A venue.", "Your space for rehearsals, classes or public concerts. Open now."),
+              ("Promotion.", "Your newsletter and notice boards. We do not buy advertising. Open now."),
+              ("Pro bono advice.", "Accounting or legal help, with a written brief, one contact and an end date. Open now."),
+              ("Matched giving.", "Opens only after charity registration.")],
+        how_summary="How we work with companies", how_hide="Hide how we work",
+        how=[("The programme is ours and the host&rsquo;s.", "A company does not choose the performers or who takes part."),
+             ("No selling.", "Companies do not promote products to the people we play for."),
+             ("Writing first.", "Terms are signed for the company by two directors.")],
+        href=_MAIL_CO, btn="Ask about working together",
     ),
     # Andrew, 2 Oct 2026: take interest freely, from any field, at any time;
     # vetting depends on the venue; show example programmes (from the record)
@@ -597,8 +690,36 @@ GET_INVOLVED_T = dict(
                    "March 2025")],
         href=_MAIL_EOI, btn="Register your interest",
     ),
+    # Support (22 Oct 2026, canon v1.7 0-3 no. 11): before registration only what is not a gift. We call an
+    # organisation a partner only once there is a written agreement.
+    # Prepared, not shown: layout.OPEN_DOCS is False until Andrew decides which PDFs go public (22 Oct 2026).
+    docs=dict(
+        label="Read more",
+        h2="The plans in full.",
+        lead="Short documents for councils, funders, companies and hosts.",
+        summary="The six documents", hide="Hide the documents",
+        items=[("assets/docs/CMFE_One_Page_Summary.pdf", "One-page summary", "What we do, who we work with, how to take part."),
+               ("assets/docs/CMFE_Business_Plan_Summary_2027.pdf", "Business plan summary 2027", "How it runs, how it is governed, how we measure it."),
+               ("assets/docs/CMFE_Corporate_Support_Menu.pdf", "Corporate support menu", "Nine ways for a company to take part."),
+               ("assets/docs/CMFE_Support_Proposal_2027.pdf", "Support proposal 2027", "What we ask now, and what waits for registration."),
+               ("assets/docs/CMFE_Development_Roadmap_2027-2030.pdf", "Development roadmap 2027 to 2030", "Three stages and what each needs."),
+               ("assets/docs/CMFE_Recorder_Ensemble_Model.pdf", "Recorder ensemble model", "The ten-week programme, for hosts.")],
+    ),
     support=dict(
-        label="Help us build it",
+        label="Support",
+        h2="Help now, in practical ways.",
+        lead="<mark>Rooms, skills and introductions</mark> help most while we set up.",
+        routes=[("Programme partner.", "Host a season of visits or a class, under a written agreement."),
+                ("Service agreement.", "Commission music education or visiting concerts. Quotations on request."),
+                ("A room.", "Lend a step-free space for a class or a concert."),
+                ("In kind.", "Instruments, printing, tuning, storage or volunteer hosts."),
+                ("Your skill.", "Pro bono law, accounting, safeguarding, evaluation or translation."),
+                ("An introduction.", "To a care setting, a council arts officer or a hospital arts team."),
+                ("Register interest.", "Contact only. We ask for nothing more.")],
+        note="We call an organisation a partner only once the agreement is written. We do not ask for or accept "
+             "gifts or pledges. Gifts open only after charity registration.",
+        href=_MAIL_INTEREST, btn="Register your interest",
+        board_label="Help us build it",
         board=dict(
             h2="Join the founding board.",
             lead="Once our company is registered, this <mark>independent volunteer</mark> board will run it.",
@@ -792,6 +913,8 @@ CONTACT_T = dict(
         topics=[("part", "Taking part", "Taking part in a programme",
                  ["Which programme interests you", "How we can reach you"]),
                 ("venue", "Concert invitation", "A venue: invite us to play", INVITE_FIELDS),
+                ("work", "Working with a company: Classical Music for Everyone", "A company or organisation: work with us",
+                 ["Company or organisation and town", "What interests you", "Contact name and phone number"]),
                 ("artist", "CMFE Artists: expression of interest", "An artist: register interest", EOI_FIELDS),
                 ("board", "Founding board: Classical Music for Everyone", "The founding board",
                  ["Which role interests you", "A few lines about you"]),

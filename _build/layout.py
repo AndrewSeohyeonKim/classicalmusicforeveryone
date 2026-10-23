@@ -76,6 +76,18 @@ PROG_MENU = {"en": [], "ko": []}
 # The giving sections are not in this repository; True needs giving_en.py and
 # giving_ko.py beside this file, and a decision to open them.
 OPEN_GIVING = False
+# Charities Act 2009 s.41 (canon v1.7, 0-3 no. 11, 2026-10-22): until the Charities Regulator has registered
+# the company, nobody advertises for, asks for or accepts gifts or pledges in its name. The pages say so;
+# giving_en.py and giving_ko.py (Friends pledges "until the account opens") describe a thing that is not
+# allowed before registration. Stop a build that switches giving on by accident.
+if OPEN_GIVING:
+    raise SystemExit("layout.OPEN_GIVING is True: giving may open only after registration as a charity "
+                     "(Charities Act 2009, s.41). Rewrite giving_en.py and giving_ko.py first.")
+
+# The downloadable summaries (plan, one page, support proposal, company menu, roadmap, recorder model).
+# False: nothing is shown and no file is needed. True: copy the PDFs to assets/docs/ (names in
+# content_*.DOCS) and the links and their section appear. The decision to publish them is Andrew's.
+OPEN_DOCS = False
 
 STR = {
     "en": {

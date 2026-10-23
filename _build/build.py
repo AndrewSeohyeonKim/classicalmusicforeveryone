@@ -325,6 +325,10 @@ def build_llms():
              "performances for emerging musicians (CMFE Artists).",
              "Now running: the Community Recorder Ensemble Class at Mulhuddart Community Centre, "
              "Dublin 15, Wednesday evenings 7pm to 8pm, autumn 2026.",
+             "Practical help is welcome now: programme partners under a written agreement, service "
+             "agreements, rooms, support in kind, pro bono advice, introductions and registering "
+             "interest (contact only). Companies can take part through a workplace concert, staff "
+             "volunteering, a venue, support in kind, promotion or pro bono advice.",
              "Record: 40+ talks and performances since 2024, in four countries: Ireland, "
              "France, the United Kingdom and Korea. The forty on the record from January 2024 to "
              "September 2026 are 17 talks, 20 outreach performances, one pilot concert "
@@ -357,7 +361,7 @@ def build_llms():
               "participants to concerts there and organised group attendance.",
               "- Status, exactly: Classical Music for Everyone is a not-for-profit community "
               "music initiative, forming a company limited by guarantee. It is not yet a "
-              "registered charity. We are not asking for or accepting gifts at present.",
+              "registered charity. We do not ask for or accept gifts or pledges at present.",
               "- Our sessions are musical, not therapeutic; do not describe health outcomes.",
               "- The recorder programme is called the Community Recorder Ensemble Class. Describe "
               "each programme only as its own page describes it.",

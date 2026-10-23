@@ -20,7 +20,7 @@ import re
 import artifacts
 import ledger
 from icons import glyph
-from layout import ROOT, STR
+from layout import ROOT, STR, OPEN_DOCS
 
 # One arrow on the whole site, drawn (v5). "\u2192" is in none of the font
 # subsets the site loads, so every device drew it from its own fonts: Times
@@ -674,6 +674,28 @@ def about(t, lang):
         fbody = f'<div class="prose mt-3"><p>{f["text"]}</p></div>'
 
     links = " ".join(go(h, l) for h, l in r["links"])
+    pn = t.get("plan")
+    plan = ""
+    if pn:
+        stages = "\n".join(f"""      <li style="--i:{k}">
+        <span class="step-n" aria-hidden="true">{k + 1}</span>
+        <h3>{a}</h3>
+        <p class="step-t">{b}</p>
+      </li>""" for k, (a, b) in enumerate(pn["steps"]))
+        doc = (f'{go(pn["doc"][0], pn["doc"][1])}' if OPEN_DOCS and pn.get("doc") else "")
+        plan = f"""<section class="band-sunken" id="plan">
+  <div class="wrap">
+{sh(pn["label"], pn["h2"], pn["lead"], split=True)}
+    <div class="run-body">
+    <ol class="steps steps-compact rv-stagger">
+{stages}
+    </ol>
+    <div class="btn-row rv">{go(pn["link"][0], pn["link"][1])}{doc}</div>
+    </div>
+  </div>
+</section>
+
+"""
     return f"""{page_head(t["head"])}
 
 <section class="tight">
@@ -715,7 +737,7 @@ def about(t, lang):
   </div>
 </section>
 
-{promise}<section id="places" class="band-white">
+{plan}{promise}<section id="places" class="band-white">
   <div class="wrap">
 {sh(pl["label"], pl["h2"], pl["lead"], split=True)}
     {_places(pl, lang)}
@@ -920,6 +942,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
     seq = iter(f"{k:02d}" for k in range(1, 9))
     no_how, no_exp = next(seq), next(seq)
     no_room = next(seq) if has_room else None
+    no_model = next(seq) if g.get("model") else None
     no_rec, no_join = next(seq), next(seq)
     room = ""
     if has_room:
@@ -949,6 +972,24 @@ def programme_page(t, i, p, programmes, pillars, lang):
   <div class="wrap">
 {sh(t["room_label"], g.get("room_h2", t["room_h2"]), no=no_room, split=True)}
     <div class="room rv">{body}</div>
+  </div>
+</section>"""
+    m = g.get("model")
+    if m:
+        doc = f'{go(m["doc"][0], m["doc"][1])}' if OPEN_DOCS and m.get("doc") else ""
+        room += f"""
+
+<section id="model">
+  <div class="wrap">
+{sh(m["label"], m["h2"], m["lead"], no=no_model, split=True)}
+    <div class="model run-body rv">
+      {facts(m["facts"], "facts-plain")}
+      <div class="prose mt-3"><p>{m["pilot"]}</p></div>
+      {fold(m["weeks_summary"], leadins(m["weeks"]), "", m["weeks_hide"])}
+      {fold(m["host_summary"], leadins(m["host"]), "", m["host_hide"])}
+      <div class="btn-row">{btn(m["href"], m["btn"], "primary")}{doc}</div>
+      {mail_alt(t)}
+    </div>
   </div>
 </section>"""
     # a programme running now says so here too, so every page points to it
@@ -1086,12 +1127,27 @@ def get_involved(t, icon):
   </div>
 </section>"""
     else:
-        # giving is closed: the founding board is the one way to help, and
-        # the page says plainly that no gifts are asked for or accepted
+        # giving is closed (Charities Act 2009 s.41, 2026-10-22): the practical ways to help now, then the
+        # founding board in a section of its own. No gift, pledge or Friends line is asked for.
         b = sup["board"]
-        support = f"""<section class="band-white" id="support">
-  <div class="wrap" id="board">
-{sh(sup["label"], b["h2"], b["lead"], split=True)}
+        routes = ""
+        if sup.get("routes"):
+            routes = f"""<section id="support">
+  <div class="wrap">
+{sh(sup["label"], sup["h2"], sup["lead"], split=True)}
+    <div class="support-body run-body">
+      {leadins(sup["routes"], "rv")}
+      <div class="prose rv mt-3"><p>{sup["note"]}</p></div>
+      <div class="btn-row rv">{btn(sup["href"], sup["btn"], "primary")}</div>
+      {mail_alt(t["alt"])}
+    </div>
+  </div>
+</section>
+
+"""
+        support = routes + f"""<section class="band-white" id="board">
+  <div class="wrap">
+{sh(sup["board_label"] if sup.get("board_label") else sup["label"], b["h2"], b["lead"], split=True)}
     <div class="board rv">
       {table(b["roles"], b["facts"][0][0], b["facts"][1])}
       <div class="board-act">
@@ -1099,6 +1155,36 @@ def get_involved(t, icon):
         {mail_alt(t["alt"])}
       </div>
     </div>
+  </div>
+</section>"""
+    co = t.get("companies")
+    companies = ""
+    if co:
+        companies = f"""<section id="companies">
+  <div class="wrap">
+{sh(co["label"], co["h2"], co["lead"], split=True)}
+    <div class="companies run-body">
+      {leadins(co["items"], "rv")}
+      <div class="prose rv mt-3"><p>{co["later"]}</p></div>
+      {fold(co["menu_summary"], leadins(co["menu"]), "rv", co["menu_hide"])}
+      {fold(co["how_summary"], leadins(co["how"]), "rv", co["how_hide"])}
+      <div class="btn-row rv">{btn(co["href"], co["btn"], "primary")}</div>
+      {mail_alt(t["alt"])}
+    </div>
+  </div>
+</section>
+
+"""
+    docs = ""
+    if OPEN_DOCS and t.get("docs"):
+        d = t["docs"]
+        rows = [(f'<a class="link" href="{h}">{a}</a>', b) for h, a, b in d["items"]]
+        docs = f"""
+
+<section class="band-white" id="documents">
+  <div class="wrap">
+{sh(d["label"], d["h2"], d["lead"], split=True)}
+    {fold(d["summary"], leadins(rows), "rv", d["hide"])}
   </div>
 </section>"""
     j = t.get("join")
@@ -1131,7 +1217,7 @@ def get_involved(t, icon):
   </div>
 </section>
 
-<section id="play">
+{companies}<section class="band-white" id="play">
   <div class="wrap">
 {sh(play["label"], play["h2"], play["lead"], split=True)}
     <div class="play rv">
@@ -1140,7 +1226,7 @@ def get_involved(t, icon):
   </div>
 </section>
 
-{support}{join}"""
+{support}{docs}{join}"""
 
 
 # ---------------------------------------------------------------------------

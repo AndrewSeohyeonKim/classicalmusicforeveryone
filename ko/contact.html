@@ -143,9 +143,10 @@
     <form class="ct-form rv" action="mailto:sby05034@gmail.com" method="get" onsubmit="event.preventDefault();var f=this,s=f.querySelector('input[name=subject]:checked'),q=[];if(s)q.push('subject='+encodeURIComponent(s.value));var b=f.elements.body.value.replace(/\r?\n/g,'\r\n');if(b)q.push('body='+encodeURIComponent(b));location.href=f.action+(q.length?'?'+q.join('&amp;'):'')">
       <fieldset class="ct-topics">
         <legend>어떤 일로 연락하시나요?</legend>
-        <div class="ct-options" style="--rows:3">
+        <div class="ct-options" style="--rows:4">
           <label class="ct-option"><input type="radio" name="subject" value="프로그램 참여 문의" class="t-part"><span>프로그램 참여</span></label>
           <label class="ct-option"><input type="radio" name="subject" value="찾아가는 음악회 초청" class="t-venue"><span>기관: 음악회 초청</span></label>
+          <label class="ct-option"><input type="radio" name="subject" value="기업과 함께하기 문의" class="t-work"><span>기업⁠·기관: 함께 일하기</span></label>
           <label class="ct-option"><input type="radio" name="subject" value="CMFE Artists 참여 신청" class="t-artist"><span>예술가: 참여 신청</span></label>
           <label class="ct-option"><input type="radio" name="subject" value="창립 이사회 문의" class="t-board"><span>창립 이사회</span></label>
           <label class="ct-option"><input type="radio" name="subject" value="개인정보 요청" class="t-data"><span>내 정보 보기⁠·고치기⁠·지우기</span></label>
@@ -154,7 +155,7 @@
       </fieldset>
       <div class="ct-field">
         <label for="ct-msg" class="ct-label">보내실 내용</label>
-        <div class="ct-hints" id="ct-hint"><p class="ct-hint is-general"><span class="sl sl-n">몇 줄이면 됩니다.</span> <span class="sl sl-n">주제를 고르시면 무엇을 적으면 좋을지 보여 드립니다.</span></p><div class="ct-hint t-part"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>관심 있는 프로그램</li><li>연락받을 방법</li></ol></div><div class="ct-hint t-venue"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>기관 이름과 지역</li><li>연주할 방, 피아노가 있는지</li><li>들으실 분들과 대략의 인원</li><li>가능한 날짜나 시간</li><li>담당자 이름과 전화번호</li></ol></div><div class="ct-hint t-artist"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>이름</li><li>악기⁠·성악⁠·분야</li><li>연주나 작업 링크 (있다면)</li><li>자기소개 몇 줄</li></ol></div><div class="ct-hint t-board"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>관심 있는 역할</li><li>자기소개 몇 줄</li></ol></div><div class="ct-hint t-data"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>보기, 고치기, 지우기 중 원하시는 것</li></ol></div></div>
+        <div class="ct-hints" id="ct-hint"><p class="ct-hint is-general"><span class="sl sl-n">몇 줄이면 됩니다.</span> <span class="sl sl-n">주제를 고르시면 무엇을 적으면 좋을지 보여 드립니다.</span></p><div class="ct-hint t-part"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>관심 있는 프로그램</li><li>연락받을 방법</li></ol></div><div class="ct-hint t-venue"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>기관 이름과 지역</li><li>연주할 방, 피아노가 있는지</li><li>들으실 분들과 대략의 인원</li><li>가능한 날짜나 시간</li><li>담당자 이름과 전화번호</li></ol></div><div class="ct-hint t-work"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>회사나 기관 이름과 지역</li><li>관심 있는 것</li><li>담당자 이름과 전화번호</li></ol></div><div class="ct-hint t-artist"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>이름</li><li>악기⁠·성악⁠·분야</li><li>연주나 작업 링크 (있다면)</li><li>자기소개 몇 줄</li></ol></div><div class="ct-hint t-board"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>관심 있는 역할</li><li>자기소개 몇 줄</li></ol></div><div class="ct-hint t-data"><p class="ct-help">이런 것을 적어 주시면 도움이 됩니다:</p><ol class="ct-fields"><li>보기, 고치기, 지우기 중 원하시는 것</li></ol></div></div>
         <textarea id="ct-msg" name="body" rows="7" aria-describedby="ct-hint ct-how"></textarea>
       </div>
       <div class="ct-act">
