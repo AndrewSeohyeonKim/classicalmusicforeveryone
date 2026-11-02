@@ -1324,7 +1324,7 @@ html[lang^="ko"] .meet{--lh-item:1.55}
 }
 
 
-/* --- 4a. THE ROUTE (CMFE Artists): for, how, vetting; then the plan -------
+/* --- 4a. THE ROUTE (CMFE Artist Services): for, how, vetting; then the plan
    The stations of the steps (44px ring, a line to the next), with an icon
    for each fact that is true now. The plan is not on the route: a line into
    2027 read as "register and it leads to paid concerts" (R19). Its year
@@ -1821,7 +1821,7 @@ figcaption>span:not(.cap-label){max-width:36em}
 /* --- the programme covers ------------------------------------------------
    Five typographic covers in place of five photographs: the number, the
    programme's emblem and three words of its own vocabulary, on ink. They are
-   a matched set because they are drawn, and Concert Guide & Companion, which
+   a matched set because they are drawn, and Concert Companion, which
    has no truthful photograph, stands with the other four. The emblem stands
    alone: the ring ground behind it (a repeating gradient) ran through every
    emblem and broke into stray arcs on screen (Andrew, 3 Oct 2026: "the lines
@@ -2007,6 +2007,11 @@ html[lang^="ko"] .pi h2 .arrow{vertical-align:.1em}
 .pi-note>span:not(.kicker){max-width:var(--measure)}
 @media (max-width:62.5em){.pi-note{grid-template-columns:4.2rem minmax(0,1fr);column-gap:16px}}
 @media (max-width:40em){.pi-note{display:block}.pi-note .kicker{display:flex;margin-bottom:6px}}
+/* the lines planned for 2027 (request 20): their own section after the five, on the content line, a group
+   for each pillar under its dot and its own line (R17, request 19 no. 4); no line joins them to the five (R19) */
+.plan-lines{display:grid;gap:clamp(28px,3vw,40px)}
+.plan-g{scroll-margin-top:110px}
+.plan-g h3{display:flex;align-items:center;gap:8px;margin:0 0 16px}
 @media (max-width:22em){
   .pi{grid-template-columns:minmax(0,1fr) !important}
   .pi .cover-sm{width:4.2rem}
@@ -2883,6 +2888,13 @@ html[lang^="ko"] .step-n{font-family:var(--font-kr);font-size:1.125rem}
   .steps li::before{display:block;top:52px;bottom:6px;left:22px;right:auto;width:1px;height:auto}
   .steps li:last-child::before{display:none}
 }
+/* the plan's four stages on About (request 20, the Strategy 2027-2030: Foundation, Build, Widen, Across
+   Ireland): from 75em one station on each of the four lines the glance stands on, the first at the page
+   edge (R43: three columns on the content line held three stages, not four); stacked below that, on the
+   content line like the text around them. The goals and the link that follow keep the content line. */
+@media (min-width:55.0625em) and (max-width:75em){.steps-4{margin-inline-start:var(--col4)}}
+@media (min-width:75.0625em){.steps.steps-4{grid-template-columns:calc(var(--col4) - var(--col-gap)) repeat(3,minmax(0,1fr))}}
+.steps-4+.run-body{margin-top:16px}
 
 /* three practical answers as rows: the question beside its answer, so the
    answer has a measure (in three columns it ran 23 to 29 characters) */

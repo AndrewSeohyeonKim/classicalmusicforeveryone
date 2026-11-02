@@ -1,4 +1,4 @@
-/* generated from styles.css abda650392d5 by _build/build.py: edit styles.css, then build */
+/* generated from styles.css 01ed33e1bc8e by _build/build.py: edit styles.css, then build */
 @view-transition { navigation: auto; }
 :root{
 --ink-navy:#1D2430;
@@ -1169,6 +1169,9 @@ margin:28px 0 0;font-size:var(--t-small);color:var(--fg);scroll-margin-top:110px
 .pi-note>span:not(.kicker){max-width:var(--measure)}
 @media (max-width:62.5em){.pi-note{grid-template-columns:4.2rem minmax(0,1fr);column-gap:16px}}
 @media (max-width:40em){.pi-note{display:block}.pi-note .kicker{display:flex;margin-bottom:6px}}
+.plan-lines{display:grid;gap:clamp(28px,3vw,40px)}
+.plan-g{scroll-margin-top:110px}
+.plan-g h3{display:flex;align-items:center;gap:8px;margin:0 0 16px}
 @media (max-width:22em){
 .pi{grid-template-columns:minmax(0,1fr) !important}
 .pi .cover-sm{width:4.2rem}
@@ -1734,6 +1737,9 @@ html[lang^="ko"] .step-n{font-family:var(--font-kr);font-size:1.125rem}
 .steps li::before{display:block;top:52px;bottom:6px;left:22px;right:auto;width:1px;height:auto}
 .steps li:last-child::before{display:none}
 }
+@media (min-width:55.0625em) and (max-width:75em){.steps-4{margin-inline-start:var(--col4)}}
+@media (min-width:75.0625em){.steps.steps-4{grid-template-columns:calc(var(--col4) - var(--col-gap)) repeat(3,minmax(0,1fr))}}
+.steps-4+.run-body{margin-top:16px}
 .qa{margin:0}
 .qa>div{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:var(--col-gap);align-items:baseline}
 .qa>div+div{margin-top:clamp(24px,3vw,36px)}

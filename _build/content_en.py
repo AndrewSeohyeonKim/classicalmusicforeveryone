@@ -22,10 +22,16 @@ from layout import OPEN_GIVING, PROG_MENU
 L = "en"
 EMAIL = "sby05034@gmail.com"
 
-# The status sentence (kit 27), word for word wherever the site says what we are.
-STATUS = ('<span class="brandname">Classical Music for Everyone</span> is a not-for-profit community '
-          "music initiative, forming a company limited by guarantee. It is not yet a registered "
-          "charity.")
+# The status sentence, word for word wherever the site says what we are (canon v2.0, 0-4 no. 1,
+# 2026-10-31; request 20, 2 Nov 2026). The old sentence ("…a not-for-profit community music
+# initiative, forming a company limited by guarantee. It is not yet a registered charity.") is retired:
+# no "not yet" line about ourselves (Andrew).
+STATUS = ('<span class="brandname">Classical Music for Everyone</span> is preparing to run as a '
+          "not-for-profit social enterprise from&nbsp;2027, as a company limited by guarantee.")
+
+# The two pillars' own lines (request 19 no. 4 and the Strategy 2027-2030): on each programme page's
+# eyebrow and over the lines planned for 2027 on Programmes
+PILLAR_LINES = {"learn": "We open the door", "share": "We take the music out"}
 
 
 def _mail(subject, body=""):
@@ -53,8 +59,8 @@ INVITE_FIELDS = ["Organisation and town",
 MAIL_INVITE = _mail("Concert invitation", _fields(INVITE_FIELDS))
 _MAIL_INVITE = MAIL_INVITE
 _MAIL_BOARD = _mail("Founding board: Classical Music for Everyone",
-                    "The role that interests me (chair, treasurer, secretary, safeguarding and care "
-                    "lead, community lead): \r\nA few lines about me: \r\n")
+                    "The role that interests me (chair, treasurer, secretary, safeguarding and care, "
+                    "community): \r\nA few lines about me: \r\n")
 
 # Working with us (22 Oct 2026): a company, practical help, and the host of a recorder class
 _MAIL_CO = _mail("Working with a company: Classical Music for Everyone",
@@ -66,11 +72,12 @@ _MAIL_INTEREST = _mail("Interest: Classical Music for Everyone",
 _MAIL_HOST = _mail("Hosting a recorder class", _fields(["Organisation and town", "The room you could use",
                                                         "Contact name and phone number"]))
 
-# CMFE Artists: interest is taken freely (Andrew, 2 Oct 2026). Four prompts
-# in place of the kit 15 form: whoever writes can say the rest in their own words.
+# CMFE Artist Services (the canon's name for line B since v7; "CMFE Artists" until 1 Nov 2026):
+# interest is taken freely (Andrew, 2 Oct 2026). Four prompts in place of the kit 15 form: whoever
+# writes can say the rest in their own words.
 EOI_FIELDS = ["Your name", "Instrument, voice or art form", "A link to your work (optional)",
               "A few lines about you"]
-_MAIL_EOI = _mail("CMFE Artists: expression of interest", _fields(EOI_FIELDS))
+_MAIL_EOI = _mail("CMFE Artist Services: expression of interest", _fields(EOI_FIELDS))
 
 
 # ---------------------------------------------------------------------------
@@ -133,13 +140,13 @@ PROGRAMMES_DATA = [
          short="Getting to Know",
          # what the talks cover, in Andrew's words (3 Oct 2026); the stage names stay on the page
          icon="lesson", vocab="Music history · Theory · Stories",
-         img=("lecture-recital.jpg", 1050, 1400, "Our founder giving a talk, with a slide about the BBC Proms on the screen"),
+         img=("lecture-recital.jpg", 1050, 1400, "Our founder teaching a Classical Music class, with a slide about the BBC Proms on the screen"),
          line="Talks with <mark>live music</mark>, for anyone curious about Classical Music.",
          page=dict(
              lead="Talks for anyone unsure where to begin. We use stories, recordings and <mark>live playing</mark>.",
              # the search result and share card: where, when, for whom (marketing r9)
              meta="Classical Music talks in Dublin for anyone unsure where to begin: music history, theory and stories, with live playing. Ask for a talk, alone or as a group.",
-             cap=("A talk on the BBC Proms", "Dublin"),
+             cap=("A Classical Music class on the BBC Proms", "Dublin"),  # Andrew 2026-10-29: this photo is a class
              room_h2="At a talk.",
              room_focus="50% 41%",
              glance=[("For", "Anyone curious about Classical Music"),
@@ -345,8 +352,9 @@ PROGRAMMES_DATA = [
                           "When you last played",
                           "Days and times that suit you"],
          )),
-    dict(slug="concert-companion", pillar="learn", name="Concert Guide &amp; Companion",
-         short="Concert Guide &amp; Companion",
+    # the canon's name since v7 (0-4 no. 11; "Concert Guide & Companion" until 1 Nov 2026)
+    dict(slug="concert-companion", pillar="learn", name="Concert Companion",
+         short="Concert Companion",
          icon="ticket", vocab="Before · During · After",
          img=("proms-hall.jpg", 1400, 933,
               "A full Royal Albert Hall during a BBC Prom, seen from high in the audience: the orchestra on a lit stage, beams of light and the acoustic discs overhead"),
@@ -383,7 +391,7 @@ PROGRAMMES_DATA = [
              join_h2="Join an outing.",
              join_text="",
              join_btn="Ask about an outing",
-             mail_subject="Concert Guide & Companion",
+             mail_subject="Concert Companion",
              mail_fields=["Your name",
                           "Days and times that suit you",
                           "Music you like (optional)",
@@ -391,6 +399,14 @@ PROGRAMMES_DATA = [
                           "Language you prefer: English or Korean"],
          )),
 ]
+
+# The five in the canon's order and numbers (v7, 0-4 no. 11; request 20, 2 Nov 2026): 1 Getting to Know
+# Classical Music, 2 Concert Companion, 3 the Community Recorder Ensemble Class, 4 Letters Ensemble,
+# 5 Outreach Concerts. The covers' 01 to 05 are these numbers, so the site and the Strategy 2027-2030 and
+# At a Glance 2027 number a programme the same way, and the three of Learning come before the two of Sharing.
+# The lines planned for 2027 (A, B, C) are not programmes with a page: PROGRAMMES_T["planned"].
+ORDER = ("getting-to-know", "concert-companion", "recorder-ensemble", "letters-ensemble", "outreach-concerts")
+PROGRAMMES_DATA.sort(key=lambda q: ORDER.index(q["slug"]))
 
 
 # Each page's email is written from the prompts it lists, so the two cannot
@@ -429,7 +445,7 @@ HOME = dict(
         # the two ways in the cards do not cover, as two doors (Andrew, 3 Oct
         # 2026: inside two sentences they did not read as actions): the labels
         # of the doors on Get involved, and the action each leads to. Kit 27,
-        # message 3: CMFE Artists is a plan, so the one thing open now is to
+        # message 3: CMFE Artist Services is a plan, so the one thing open now is to
         # register interest (parts.door_pair)
         others=[("get-involved.html#play", "Artists", "Register your interest",
                  "Musicians and artists from any field, any time."),
@@ -452,11 +468,14 @@ HOME = dict(
         label="On the record",
         sr="In numbers",
         # what we did, where, how far (v7: the places are counted from About's list, never typed)
-        figs=[(40, "talks and performances", "since 2024", True),
+        # canon v2.0 0-4 no. 3 (request 20): "40+ community music programmes since 2024", never
+        # "40+ talks and performances"; the dots are one a programme (the canon's own line), and the
+        # site's dot grammar stays (R17: filled for the talks of Learning, open for the performances)
+        figs=[(40, "community music programmes", "since 2024", True),
               (N_PLACES, "places where we have played and taught", "since 2024", False),
               (4, "countries: Ireland, France, the UK and Korea", "since 2024", False)],
         forty=dict(talks="{n} talks", perf="{n} performances",
-                   period="On the record to September 2026, one dot each"),
+                   period="On the record to October 2026, one dot for each programme"),
         # kit 27: a selection of the founder, said as such; the one outside
         # selection on the site, so it is not the quietest line in the band (v7)
         note="Our founder was selected for South Dublin Live 2026.",
@@ -474,23 +493,25 @@ ABOUT_T = dict(
     head=dict(
         eyebrow="About",
         title=["About us."],
-        # kit 27, positioning: who, and how
-        lead="A community music initiative in Dublin. We play and teach <mark>where music is needed</mark>.",
+        # who, and how (request 20: "initiative" went with the old status sentence)
+        lead="Community music in Dublin since 2024. We play and teach <mark>where music is needed</mark>.",
         img=("christmas-conducting.jpg", 1400, 1050, XMAS_ALT),
         cap=("Christmas concert", "Clondalkin Lodge, Dublin · December 2025"),
     ),
     glance=[("Started", "January 2024", "Dublin, Ireland"),
             ("What we run", "Five programmes", "in Learning and Sharing"),
             ("Where we have played", "Four countries", "Ireland, France, the UK, Korea"),
-            ("Status", "Not-for-profit", "Forming a company limited by guarantee")],
+            # the status sentence in a cell (canon v2.0 0-4 no. 1): what we are preparing to be, and from when;
+            # the sentence itself leads "How we are run" below
+            ("From 2027", "Social enterprise", "Not-for-profit, a company limited by guarantee")],
     story=dict(
         label="Our story",
         h2="Since 2024.",
-        # the site counts from the founding, January 2024 (Andrew, 1 Oct 2026)
+        # the site counts from the founding, January 2024 (Andrew, 1 Oct 2026). The canon's activity
+        # sentence (0-4 no. 3) without its "more than 25 places": About counts its own list (N_PLACES)
         text=["We started in Dublin in January 2024, with our Letters Ensemble. Six people came to our "
               "first talk.",
-              "By September 2026 there were <mark>forty talks and performances</mark> on the record. A pilot with seven "
-              "retired Presentation Sisters led to our recorder class in Mulhuddart."],
+              "Since 2024 we have run more than 40 <mark>community music programmes</mark>."],
         link="The full timeline",
     ),
     founder=dict(
@@ -501,15 +522,27 @@ ABOUT_T = dict(
         cap=("Clarinet", "Chapel, Tallaght University Hospital · August 2026 · photo: Tallaght University Hospital"),
         label="The founder",
         name='<span class="nm">Andrew Seohyeon Kim</span>',
-        role="Founder &amp; Artistic Director",
+        # the canon's contact line: "Founder and Artistic Director" (v2.0 §1)
+        role="Founder and Artistic Director",
         line="Andrew is a clarinettist, organist and community musician in Dublin.",
-        facts=[("Training", "BMus (Hons) in Performance, TU Dublin Conservatoire"),
-               ("Parish", "Music Director, Our Lady of Dolours, Dolphin&rsquo;s Barn"),
-               # Andrew, 6 Oct 2026: the pilot was his BMus research, and all seven played the Easter concert
-               ("Graduation research",
-                "Recorder pilot: all seven retired Presentation Sisters played the Easter concert"),
+        # request 20 (canon v2.0 0-4 no. 5 and the Strategy 2027-2030): his two parishes as Music Director;
+        # the pilot as the Strategy cites his dissertation (nine sisters enrolled, so not "all seven")
+        facts=[("Degree", "BMus (Hons) in Performance, TU Dublin Conservatoire"),
+               # a parish a line (a dot between them was left at a line end at 1440)
+               ("Music Director", '<span class="sl">Our Lady of Dolours, Dolphin&rsquo;s Barn<span class="sr-only">;</span></span> '
+                                  '<span class="sl">St Columbanus, Loughlinstown</span>'),
+               ("Graduation research", "A ten-week recorder pilot with retired Presentation Sisters, 2026"),
                # kit 25 / 27: the one outside selection, said as a selection of the founder (d4 r9)
                ("Selected for", "South Dublin Live 2026")],
+        # the courses he completed and the one he took part in (canon v2.0 0-4 no. 5), folded as reference so
+        # the page keeps its reading budget; Venture Lab is "took part", never "completed"
+        courses=("Courses, 2024 to 2026", "Hide the courses",
+                 # a course a line (in one run "Safeguarding / Vulnerable Adults" parted at 1440)
+                 [("Completed, 2026",
+                   '<span class="sl">Introduction to Children First<span class="sr-only">;</span></span> '
+                   '<span class="sl">Safeguarding Vulnerable Adults<span class="sr-only">;</span></span> '
+                   '<span class="sl">Creating a Social Enterprise</span>'),
+                  ("Took part", "Venture Lab start-up programme, TU Dublin, 2024&ndash;25")]),
     ),
     run=dict(
         label="How we are run",
@@ -518,9 +551,9 @@ ABOUT_T = dict(
         lead=STATUS,
         links=[("get-involved.html#board", "Join the founding board"),
                ("contact.html#privacy", "How we handle your details")],
+        # canon v2.0 0-4 no. 8: three founding directors (chair, treasurer, secretary), five in 2027
         items=[("Who decides.",
-                "Once the company is registered, an independent volunteer board will run it. We are "
-                "looking for its first members now."),
+                "An independent, unpaid board: three founding directors, then five in 2027."),
                ("Money.",
                 "We do not ask for or accept gifts or pledges. Gifts open only after charity registration. "
                 "We will never ask you to pay into <mark>a personal account</mark>."),
@@ -530,18 +563,55 @@ ABOUT_T = dict(
                # facts.md l.59, word for word, where families and partners decide (v7)
                ("Public liability insurance.", "We show the certificate on request.")],
     ),
-    # Our plan (22 Oct 2026): the roadmap 2027 to 2030 in three lines. Dates are plans. The board, not
-    # the founder, decides on a first employee. No amounts, no hospital or funder names.
+    # Our mission (request 20, canon v2.0 0-4 no. 2): the mission in its parts, each under the commitment it
+    # serves (the Strategy's own pairing, canon §1); the vision and the five values folded as reference, so
+    # the page keeps its reading budget (readability.PAGE_BUDGET)
+    mission=dict(
+        label="Our mission",
+        h2="What we are here to do.",
+        items=[("We bring live music to you.",
+                "To care settings, schools, parishes and community spaces."),
+               ("Anyone can play, at any age.", "People of any ability learn and play together."),
+               ("Musicians and communities meet here.", "We pay our musicians fairly.")],
+        more_summary="Our vision and five values", more_hide="Hide the vision and values",
+        more=[("Vision.", "Live Classical Music is part of ordinary life in every community on the island of "
+                          "Ireland, for people of any age, ability or background."),
+              ("Dignity.", "Every person is met as a listener and a musician."),
+              ("Accessibility.", "Music comes to people, at a time, place and price that work for them."),
+              ("Accompaniment.", "We come back, and we go with people to music."),
+              ("Community.", "Music is made together, so people meet and belong."),
+              ("Hope.", "Regular music gives people something to look forward to.")],
+    ),
+    # Our plan (request 20, canon v2.0 0-4 nos. 7, 9 and 13; the Strategy 2027-2030's roadmap): the four
+    # stages by their names, one station on each line of the page (styles.css .steps-4). The company in
+    # November-December 2026, the board three then five (How we are run), charitable status applied for in
+    # 2027, a first paid post from September 2027 only if agreements and grants cover it. "Across Ireland"
+    # is the 2030 stage's name and is said as a target (readability.PERMITTED). No amounts: the budget
+    # totals are in the Strategy, the site keeps the work. The six goals are folded under the stages.
     plan=dict(
         label="Our plan",
-        h2="Three stages, from late 2026.",
-        lead="Dates are plans, not promises.",
-        steps=[("Late 2026 to 2027 · Establish",
-                "Form the company with an independent, unpaid board. The board decides on a first employee."),
-               ("2028 · Hold",
-                "The first visiting circuits begin: about eight settings each, with paid musicians."),
-               ("2030 · Grow",
-                "Circuits reach all four Dublin council areas, with an outside evaluation by a university.")],
+        h2="A foundation year, then three years of growth.",
+        # one line on a laptop (R10: "Our company is to be formed / in November–December 2026." folded)
+        lead="We form the company in November&ndash;December 2026.",
+        steps=[("2027 · Foundation",
+                "Charitable status applied for. A first paid post from September, if agreements and grants "
+                "cover it."),
+               ("2028 · Build", "Full care-visit circuits in Dublin, and our first annual report."),
+               ("2029 · Widen",
+                "All four Dublin council areas and eight counties. A coordinator and our first impact report."),
+               ("2030 · Across Ireland",
+                "Our target: concerts in twelve or more counties, and an external evaluation.")],
+        goals_summary="Six goals for 2027 to 2030", goals_hide="Hide the six goals",
+        goals=[("Presence.", "Live Classical Music in care settings, hospitals, parishes and counties, under "
+                             "written agreements."),
+               ("Participation.", "Groups where adults of any age, and from September 2027 pupils, learn and "
+                                  "play together."),
+               ("Inclusion and voice.", "Access and participants&rsquo; voices built into every programme."),
+               ("Fair work for musicians.", "A paid, trained musician panel, and more performing work for "
+                                            "musicians who need it."),
+               ("Partnerships and income.", "Written agreements and a balanced mix of income."),
+               ("Governance and accountability.", "A skilled independent board, sound policies and public "
+                                                  "reporting.")],
         link=("get-involved.html#support", "How to help now"),
         doc=("assets/docs/CMFE_Business_Plan_Summary_2027.pdf", "Business plan summary (PDF)"),
     ),
@@ -586,17 +656,40 @@ PROGRAMMES_T = dict(
         lead="Most programmes <mark>need no experience</mark>. <a class=\"link\" href=\"contact.html\">Write to us</a>, and we will tell you how to start.",
     ),
     list_sr="The five programmes",
-    # kit 27, message 3: a plan, said as a plan, with the one thing open now
-    artists=dict(
-        label="For artists",
-        text='Whatever your field, <a class="link" href="get-involved.html#play">register your interest</a> '
-             "any time. CMFE Artists is planned for 2027.",
+    # The lines planned for 2027 (request 20, canon v2.0 0-4 no. 11 and §5; request 19 no. 4): a section of
+    # their own after the five, grouped by pillar under each pillar's line, joined to no running programme
+    # (R19). A Music for Inclusive Classrooms, B CMFE Artist Services, C The Channel, the two strands of
+    # Outreach Concerts (5a, 5b) and the second recorder class. The old "For artists" note ("CMFE Artists
+    # is planned for 2027") lives on in line B, with the one thing open now: registering interest.
+    planned=dict(
+        # the Strategy's own heading for this page: "Projects in preparation for 2027"
+        label="In preparation",
+        h2="Planned for 2027.",
+        pillar_lines=PILLAR_LINES,
+        groups=[("learn", [
+                    ("A second recorder class.",
+                     "A weekly class for adults at St Columbanus, Loughlinstown, from January."),
+                    ("Music for Inclusive Classrooms.",
+                     "From September 2027: music in mainstream schools for pupils who learn differently, "
+                     "planned with the class teacher.")]),
+                ("share", [
+                    ("Hope Concerts.",
+                     "Within Outreach Concerts: regular visits to hospitals and care homes, under an "
+                     "agreement with each."),
+                    ("Ceol le Chéile (Music Together, in Every County).",
+                     "Within Outreach Concerts, from September 2027: a day of music in counties where live "
+                     "Classical Music is rare."),
+                    ("CMFE Artist Services.",
+                     'Concerts we plan and produce for musicians and amateur groups. <a class="link" '
+                     'href="get-involved.html#play">Register your interest</a> any time.'),
+                    ("The Channel.",
+                     "From January 2027: weekly concert listings, a newsletter and a monthly magazine.")])],
     ),
 )
 
 
 # ---------------------------------------------------------------------------
-# GET INVOLVED. Anchors: #invite (old Partner page), #play (CMFE Artists),
+# GET INVOLVED. Anchors: #invite (old Partner page), #play (CMFE Artist Services),
 # #support and #board (old Support page), #join. #friends and #sponsor exist
 # only while giving is open (layout.OPEN_GIVING).
 # ---------------------------------------------------------------------------
@@ -653,8 +746,9 @@ GET_INVOLVED_T = dict(
         menu_summary="All nine options", menu_hide="Hide the nine options",
         menu=[("Workplace concert.", "A lunchtime talk with live playing at your workplace. Open now."),
               ("Concert sponsorship.",
-               "Your company supports one visit or concert and is named in the programme. Not yet open: it needs our "
-               "bank account and written terms."),
+               # request 20: no "not yet" line about ourselves; what it waits for, said forward
+               "Your company supports one visit or concert and is named in the programme. Opens once our "
+               "bank account and written terms are in place."),
               ("Series partner.",
                "A season of visits at one setting, with recognition agreed in writing. We talk now, so a season "
                "can begin in 2028."),
@@ -672,14 +766,20 @@ GET_INVOLVED_T = dict(
     ),
     # Andrew, 2 Oct 2026: take interest freely, from any field, at any time;
     # vetting depends on the venue; show example programmes (from the record)
+    # the canon's name for line B (v7, 0-4 no. 11); what is planned for 2027 is the Strategy's: a paid panel of
+    # 15 musicians (G4) and concerts planned and produced for musicians (line B). Still a plan on the site
+    # (request 20): the 2026 concerts the Strategy lists under it were the founder's own selection (canon §2)
     play=dict(
-        label="CMFE Artists",
+        # the margin label in its short form (at 1024 "CMFE Artist Services" ran within 60px of the heading, one
+        # phrase in two faces, typeset_check faces); the full name is the plan line's and the mail subject's
+        label="Artist Services",
         h2="Perform with us.",
         lead="We are ready to work with musicians and artists <mark>from any field</mark>, at any time.",
         facts=[("For", "Students, emerging, amateur and professional artists"),
                ("How", "A few lines about you, and a link to your work"),
                ("Garda vetting", "May be needed, depending on the venue"),
-               ("Planned<span class=\"sr-only\"> for 2027</span>", "Paid, mentored performances for emerging musicians")],
+               ("Planned<span class=\"sr-only\"> for 2027</span>",
+                "A paid panel of 15 musicians, and concerts we plan and produce")],
         examples_label="Example programmes",
         # each one is on the record (ledger.py, public labels): the kind of
         # place, never a liturgy or a private occasion; newest first
@@ -720,13 +820,18 @@ GET_INVOLVED_T = dict(
              "gifts or pledges. Gifts open only after charity registration.",
         href=_MAIL_INTEREST, btn="Register your interest",
         board_label="Help us build it",
+        # canon v2.0 0-4 no. 8 (request 20): three founding directors (chair, treasurer, secretary) in 2026,
+        # five in 2027 with the safeguarding and care seat and the community seat; unpaid; two to four hours a
+        # month (the Strategy 2027-2030). The seats are counted now that the canon counts them (R19 kept:
+        # the drawing shows the five seats the sentence names). No candidate is ever named.
         board=dict(
             h2="Join the founding board.",
-            lead="Once our company is registered, this <mark>independent volunteer</mark> board will run it.",
-            facts=[("Roles", "Chair, treasurer, secretary, safeguarding and care lead, community lead"),
-                   ("Conditions", "Unpaid, with reasonable expenses")],
-            # the same roles, one a seat at the drawn table (parts.table); no number of seats is said
-            roles=["Chair", "Treasurer", "Secretary", "Safeguarding and care lead", "Community lead"],
+            lead="Three founding directors in 2026, then five in 2027: an <mark>independent, unpaid</mark> board.",
+            facts=[("Roles", "Chair, treasurer and secretary; from 2027, safeguarding and care, and community"),
+                   # the Founding Board Invitation: "2 to 4 hours a month"; "Reasonable expenses are reimbursed"
+                   ("Conditions", "Unpaid, two to four hours a month, with reasonable expenses")],
+            # the same roles, one a seat at the drawn table (parts.table): the Strategy's five seats
+            roles=["Chair", "Treasurer", "Secretary", "Safeguarding and care", "Community"],
             href=_MAIL_BOARD, btn="Ask about a role",
         ),
     ),
@@ -747,6 +852,7 @@ if OPEN_GIVING:
 # ---------------------------------------------------------------------------
 
 PROGRAMME_T = dict(
+    pillar_lines=PILLAR_LINES,
     crumbs_label="Breadcrumb", crumb="Programmes",
     how_label="How it works", expect_label="What to expect", record_label="On the record",
     join_label="Take part", others_label="The other programmes", all_label="All five programmes",
@@ -784,7 +890,7 @@ NEWS_T = dict(
     head=dict(
         eyebrow="News &amp; archive",
         title=["News and the record."],
-        # 40+ since 2024; the forty on the record to September 2026 are 17 + 20 + 1 + 2 (03 §1)
+        # 40+ since 2024; the forty-two on the record to October 2026 are 18 + 20 + 1 + 3 (Andrew, 29 Oct 2026)
         lead="<mark>Every talk and performance</mark> since 2024.",
     ),
     latest_sr="Latest",
@@ -805,13 +911,13 @@ NEWS_T = dict(
              "All outreach concerts")],
     chart=dict(
         label="The record",
-        h2="Forty, by year.",
+        h2="Forty-two, by year.",
         lead="Every talk and performance, with what it was and where.",
-        figs=[(17, "talks", "talk"),
+        figs=[(18, "talks", "talk"),
               (20, "outreach performances", "perf"),
               (1, "pilot concert", "perf"),
-              (2, "South Dublin Live 2026 concerts", "perf")],
-        period="January 2024 &ndash; September 2026",
+              (3, "South Dublin Live 2026 concerts", "perf")],
+        period="January 2024 &ndash; October 2026",
         year_count="{n} talks and performances",
         year_talks=("{n} talk", "{n} talks"),
         year_perf=("{n} performance", "{n} performances"),
@@ -830,16 +936,18 @@ NEWS_T = dict(
                           "Concerts at a day service, a homeless hostel and a care home."),
                          ("Autumn", "Introducing concerts",
                           "We started introducing concerts to participants and organising group attendance."),
+                         # canon v2.0 0-4 no. 4 and §2: nine enrolled, seven completed the final questionnaire
                          ("October", "Preparing the recorder pilot",
-                          "With <mark>seven retired Presentation Sisters</mark>: individual lessons and a part for "
-                          "each player."),
+                          # one sentence: "Nine retired" alone made a short first line on a phone (typeset_check steps)
+                          "With retired Presentation Sisters: <mark>nine enrolled</mark>, each with individual "
+                          "lessons and her own part."),
                          ("December", "At the National Concert Hall",
                           "The fifteenth&nbsp;talk was a concert we heard together.")]),
-               ("2026", [("January to&nbsp;April", "All seven, to the end",
+               ("2026", [("January to&nbsp;April", "The recorder pilot",
                           "Ten weekly rehearsals at Warrenmount, then <mark>an Easter concert</mark> at Clondalkin "
                           "Lodge."),
                          ("August", "South Dublin Live",
-                          "Our founder was selected. We played twice in Tallaght."),
+                          "Our founder was selected. Two concerts at the hospital, one at Rua Red."),
                          ("September", "An autumn concert",
                           "In Ranelagh, Dublin 6, at Methodist Centenary Church."),
                          ("Autumn", "Open to the public",
@@ -915,7 +1023,7 @@ CONTACT_T = dict(
                 ("venue", "Concert invitation", "A venue: invite us to play", INVITE_FIELDS),
                 ("work", "Working with a company: Classical Music for Everyone", "A company or organisation: work with us",
                  ["Company or organisation and town", "What interests you", "Contact name and phone number"]),
-                ("artist", "CMFE Artists: expression of interest", "An artist: register interest", EOI_FIELDS),
+                ("artist", "CMFE Artist Services: expression of interest", "An artist: register interest", EOI_FIELDS),
                 ("board", "Founding board: Classical Music for Everyone", "The founding board",
                  ["Which role interests you", "A few lines about you"]),
                 ("data", "Personal data request", "Your details: see, correct or delete",
@@ -946,19 +1054,20 @@ CONTACT_T = dict(
              ("Insurance", "Public liability insurance. We show the certificate on request."),
              # a signature: the name on its own line, then the role (R23)
              ("Who answers", '<span class="sl">Andrew Seohyeon Kim</span> '
-                             '<span class="sl">Founder &amp; Artistic Director</span>')],
+                             '<span class="sl">Founder and Artistic Director</span>')],
     privacy=dict(
         label="Privacy notice",
         h2="How we look after your details.",
-        intro="Last updated 15 October 2026.",
+        intro="Last updated 2 November 2026.",
         # what this website does not have, said once and plainly
         # the contact form is a mailto form: it sends nothing itself (2 Oct 2026)
         none=[("Forms", "One, and it only opens your email app"), ("Cookies", "None of ours"),
               ("Analytics", "None"), ("Advertising", "None")],
         blocks=[("Who is responsible",
                  "p",
-                 '<span class="brandname">Classical Music for Everyone</span>, a not-for-profit community '
-                 'music initiative in Dublin. For anything about your details, write to <a class="link" '
+                 # request 20: the old status wording ("a not-for-profit community music initiative") went
+                 '<span class="brandname">Classical Music for Everyone</span>, based in Dublin. For anything '
+                 'about your details, write to <a class="link" '
                  'href="mailto:sby05034@gmail.com">sby05034@gmail.com</a>.',
                  ""),
                 ("When you email us",

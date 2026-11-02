@@ -1,7 +1,7 @@
 # Classical Music for Everyone: the website
 
-The public site for Classical Music for Everyone, a not-for-profit community music initiative
-in Dublin. Static HTML and one stylesheet, hosted on GitHub Pages. No build step is needed to
+The public site for Classical Music for Everyone, community music in Dublin since 2024, preparing to
+run as a not-for-profit social enterprise from 2027. Static HTML and one stylesheet, hosted on GitHub Pages. No build step is needed to
 view the site: open any `.html` file in a browser.
 
 ## What is where

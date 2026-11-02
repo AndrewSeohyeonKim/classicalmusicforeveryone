@@ -79,7 +79,7 @@ moved to `_retired/images/` and their names never come back.
 | `founder-playing.jpg` | About `#founder` | The founder playing the clarinet in the TUH chapel, 20 Aug 2026 · photo: Tallaght University Hospital | founder |
 | `lecture-recital.jpg` | Getting to Know Classical Music page | The founder giving a talk, a BBC Proms slide behind | founder |
 | `recorders.jpg` | Recorder class page (video still) · News gallery | Six recorders in a row, Nov 2025 | nobody |
-| `proms-hall.jpg` | Concert Guide & Companion page | The Royal Albert Hall from high in the audience (the founder's own video frame) | crowd |
+| `proms-hall.jpg` | Concert Companion page | The Royal Albert Hall from high in the audience (the founder's own video frame) | crowd |
 | `tuh-trio.jpg` `tuh-atrium.jpg` `tuh-haegeum.jpg` | News gallery · Programmes share card (trio) · Contact share card (chapel) | South Dublin Live at Tallaght University Hospital, Aug 2026 · photo: TUH | sdcc |
 | `ruared-trio.jpg` | News gallery · News share card | The trio taking a bow at Rua Red · photo: Ben Ryan / SDCC | sdcc |
 | `church-aisle.jpg` | News gallery | The founder's hand holding a clarinet before the altar, Dysart, Good Friday 2025 | founder |

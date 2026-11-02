@@ -101,9 +101,11 @@ WARN_ONLY = {"row", "list-item"}
 
 # Text that must be quoted word for word wherever it appears (kit 27,
 # facts.md) is measured but never stops the build.
+# The status sentence of canon v2.0 0-4 no. 1 (request 20, 2 Nov 2026): one sentence of 21 words, quoted
+# word for word as the lead of About's "How we are run" (a section lead's budget is 16).
 ALLOW = (
-    "is a not-for-profit community music initiative, forming a company limited by guarantee",
-    "보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 단체입니다",
+    "is preparing to run as a not-for-profit social enterprise from 2027, as a company limited by guarantee",
+    "2027년부터 비영리 사회적 기업으로 운영하기 위해 보증유한회사 설립을 준비하고 있습니다",
 )
 
 # Which component a block belongs to: the first rule whose marks (classes
@@ -162,10 +164,10 @@ PAGES = ["index.html", "about.html", "programmes.html", "get-involved.html", "ne
 
 # --- words the site never uses (visible text) -------------------------------
 STATUS = {
-    "en": ("Classical Music for Everyone is a not-for-profit community music initiative, forming a "
-           "company limited by guarantee. It is not yet a registered charity."),
-    "ko": ("Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 비영리 공동체 음악 "
-           "단체입니다. 아직 등록된 자선단체는 아닙니다."),
+    "en": ("Classical Music for Everyone is preparing to run as a not-for-profit social enterprise from 2027, "
+           "as a company limited by guarantee."),
+    "ko": ("Classical Music for Everyone은 2027년부터 비영리 사회적 기업으로 운영하기 위해 보증유한회사 설립을 "
+           "준비하고 있습니다."),
 }
 BANNED = {
     "en": [
@@ -177,7 +179,9 @@ BANNED = {
         # "wherever music is needed" is a need, not a territory (2 Oct 2026 night)
         (r"\b(nationwide|all over Ireland|throughout Ireland|anywhere in Ireland|every county)\b",
          "a nationwide claim"),
-        (r"\bCMFE\b(?! Artists)", "the bare acronym"),
+        # the one name with the acronym in it: line B, CMFE Artist Services (canon v7, request 20; the old
+        # "CMFE Artists" is no longer allowed, so it cannot come back)
+        (r"\bCMFE\b(?! Artist Services)", "the bare acronym"),
         (r"\b(organiz\w*|cent(er|ers)\b|colors?\b|favorite|traveled|catalog\b|program\b)",
          "US spelling"),
         # Andrew, 2 Oct 2026: always a capital C and M
@@ -189,7 +193,7 @@ BANNED = {
         (r"자선\s?단체", "지위 문장 밖의 「자선단체」"),
         (r"아일랜드 전역", "「아일랜드 전역」"),
         (r"전국|아일랜드 곳곳|아일랜드 어디든", "전국 범위"),
-        (r"\bCMFE\b(?! Artists)", "단독 CMFE"),
+        (r"\bCMFE\b(?! Artist Services)", "단독 CMFE"),
         (r"\b(?:classical [Mm]usic|Classical music)\b", "'Classical Music' without its capitals"),
         # one name for one thing (copy desk v8): the email app is 「메일 앱」 everywhere, a talk
         # is never a 「모임」, and 「함께하기」 names the Get involved page, not a section
@@ -316,7 +320,18 @@ def measure(text, lang):
 
 # the one other place "charity" may stand: when the site says gifts wait for registration
 # (canon v1.7, Charities Act 2009 s.41)
-PERMITTED = ("after charity registration",)
+# Request 20 (2 Nov 2026), each as narrow as its reason:
+#   "charitable status" / 「자선단체 지위」: the plan's 2027 stage, "charitable status applied for" (canon v2.0
+#     0-4 no. 7 and the Strategy 2027-2030, sent to sixteen bodies on 1 Nov). It names a step, not a status we hold.
+#   "2030 · Across Ireland" / 「2030년 · 아일랜드 전역」: the name of the 2030 stage (canon v2.0 0-4 no. 13), set as
+#     the stage's heading and said as a target in its line. The ban on describing today's reach stays.
+#   「아일랜드 전역의 모든 공동체」: the canon's Korean vision (0-4 no. 2), folded on About; the English says
+#     "every community on the island of Ireland", which no rule stops.
+#   "Music Together, in Every County": the canon's English gloss of Ceol le Chéile (0-4 no. 11), a strand's
+#     name on its first mention, not a claim about where we work.
+PERMITTED = ("after charity registration", "charitable status", "자선단체 지위",
+             "2030 · Across Ireland", "2030년 · 아일랜드 전역", "아일랜드 전역의 모든 공동체",
+             "Music Together, in Every County")
 
 
 def _banned(lang, text):

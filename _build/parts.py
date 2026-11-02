@@ -260,7 +260,7 @@ ROUTE_ICONS = ("people", "mail", "building")   # For, How, Garda vetting; the la
 
 
 def route(rows):
-    """The facts of CMFE Artists as a route of stations: who, how and what a
+    """The facts of CMFE Artist Services as a route of stations: who, how and what a
     venue may ask, which are true now. The plan (a row whose name holds a
     year) is not on the route: a line into it read as "register now and it
     leads to paid concerts in 2027" (chief designer v2, R19). It stands
@@ -419,7 +419,7 @@ def cover(i, p, size=""):
     """A programme's cover: its number, its emblem, and three
     words of its own vocabulary, on ink. The five covers replace the five
     programme photographs as the matched set (there is no truthful photograph
-    of Concert Guide & Companion, and a set of four photographs and a gap is
+    of Concert Companion, and a set of four photographs and a gap is
     not a set). Decorative: the card or heading beside it carries the name.
     The build writes the cover's view-transition name as a property and the
     stylesheet gives it only to the cover being taken (the one under the
@@ -670,10 +670,31 @@ def about(t, lang):
       </div>""" for a, b in r["cols"]) + "\n    </div>"
     if f.get("facts"):
         fbody = f'<p class="founder-line">{f["line"]}</p>\n      {facts(f["facts"], "facts-plain")}'
+        # the founder's courses, folded under the facts as reference (request 20, canon v2.0 0-4 no. 5)
+        if f.get("courses"):
+            show, hide, rows = f["courses"]
+            fbody += f'\n      {fold(show, facts(rows, "facts-plain"), "founder-courses", hide)}'
     else:
         fbody = f'<div class="prose mt-3"><p>{f["text"]}</p></div>'
 
     links = " ".join(go(h, l) for h, l in r["links"])
+    # Our mission (request 20, canon v2.0 0-4 no. 2): the mission in its parts, each under the commitment it
+    # serves, then the vision and the five values folded as reference (they keep the page's reading budget)
+    ms = t.get("mission")
+    mission = ""
+    if ms:
+        more = (f'\n      {fold(ms["more_summary"], leadins(ms["more"]), "rv", ms.get("more_hide"))}'
+                if ms.get("more") else "")
+        mission = f"""<section class="band-white" id="mission">
+  <div class="wrap">
+{sh(ms["label"], ms["h2"], ms.get("lead"), split=True)}
+    <div class="run-body">
+      {leadins(ms["items"], "rv")}{more}
+    </div>
+  </div>
+</section>
+
+"""
     pn = t.get("plan")
     plan = ""
     if pn:
@@ -683,15 +704,29 @@ def about(t, lang):
         <p class="step-t">{b}</p>
       </li>""" for k, (a, b) in enumerate(pn["steps"]))
         doc = (f'{go(pn["doc"][0], pn["doc"][1])}' if OPEN_DOCS and pn.get("doc") else "")
+        goals = (f'\n    {fold(pn["goals_summary"], leadins(pn["goals"]), "rv", pn.get("goals_hide"))}'
+                 if pn.get("goals") else "")
+        act = f'\n    <div class="btn-row rv">{go(pn["link"][0], pn["link"][1])}{doc}</div>'
+        # four stages (the Strategy's 2027 to 2030, request 20) stand from 75em one on each of the four lines
+        # the glance stands on, the first at the page edge (styles.css .steps-4, R43: three in a row on the
+        # content line could not hold a fourth), and stack on the content line below that; the goals and the
+        # link keep the content line. Three stages keep the old layout.
+        if len(pn["steps"]) == 4:
+            body = f"""    <ol class="steps steps-compact steps-4 rv-stagger">
+{stages}
+    </ol>
+    <div class="run-body">{goals}{act}
+    </div>"""
+        else:
+            body = f"""    <div class="run-body">
+    <ol class="steps steps-compact rv-stagger">
+{stages}
+    </ol>{goals}{act}
+    </div>"""
         plan = f"""<section class="band-sunken" id="plan">
   <div class="wrap">
 {sh(pn["label"], pn["h2"], pn["lead"], split=True)}
-    <div class="run-body">
-    <ol class="steps steps-compact rv-stagger">
-{stages}
-    </ol>
-    <div class="btn-row rv">{go(pn["link"][0], pn["link"][1])}{doc}</div>
-    </div>
+{body}
   </div>
 </section>
 
@@ -737,7 +772,7 @@ def about(t, lang):
   </div>
 </section>
 
-{plan}{promise}<section id="places" class="band-white">
+{mission}{plan}{promise}<section id="places" class="band-white">
   <div class="wrap">
 {sh(pl["label"], pl["h2"], pl["lead"], split=True)}
     {_places(pl, lang)}
@@ -792,7 +827,31 @@ def prog_row(i, p, pillars):
 
 def programmes(t, programmes_, pillars):
     rows = "\n".join(prog_row(i, p, pillars) for i, p in enumerate(programmes_))
-    a = t["artists"]
+    a = t.get("artists")
+    note = (f'\n    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">{a["label"]}</span>'
+            f'<span class="pi-text">{a["text"]}</span></p>' if a else "")
+    pl = t.get("planned")
+    planned = ""
+    if pl:
+        # the lines planned for 2027 (request 20): a section of their own after the five, a group for each
+        # pillar under the pillar's own line (request 19 no. 4), each line a lead-in and a sentence; no line
+        # joins them to a running programme (R19). The old "For artists" note's address lands on the
+        # Sharing group, where CMFE Artist Services now stands.
+        groups = "\n".join(
+            f"""      <div class="plan-g" id="{"cmfe-artists" if k == "share" else "planned-" + k}">
+        <h3 class="kicker"><i class="{pillars[k][1]}" aria-hidden="true"></i>{pillars[k][0]} · {pl["pillar_lines"][k]}</h3>
+        {leadins(items)}
+      </div>""" for k, items in pl["groups"])
+        planned = f"""
+
+<section class="band-white" id="planned">
+  <div class="wrap">
+{sh(pl["label"], pl["h2"], pl.get("lead"), split=True)}
+    <div class="run-body plan-lines rv-stagger">
+{groups}
+    </div>
+  </div>
+</section>"""
     return f"""{page_head(t["head"])}
 
 <section class="tight pi-section">
@@ -800,10 +859,9 @@ def programmes(t, programmes_, pillars):
     <h2 class="sr-only">{t["list_sr"]}</h2>
     <ol class="prog-index rv-stagger">
 {rows}
-    </ol>
-    <p class="pi-note rv" id="cmfe-artists"><span class="kicker">{a["label"]}</span><span class="pi-text">{a["text"]}</span></p>
+    </ol>{note}
   </div>
-</section>"""
+</section>{planned}"""
 
 
 # ---------------------------------------------------------------------------
@@ -897,6 +955,10 @@ def programme_page(t, i, p, programmes, pillars, lang):
     # rise and fade in with the head (it was half transparent under the morph, v8)
     g = p["page"]
     label, dot = pillars[p["pillar"]]
+    # the pillar and its own line on the eyebrow, as the Strategy sets it ("Learning · We open the door",
+    # request 19 no. 4, request 20); the cards and the index keep the bare pillar
+    line = t.get("pillar_lines", {}).get(p["pillar"])
+    pillar = f"{label} · {line}" if line else label
     # the third fact is always When, the one people scan for; it is bolded
     # unless the head already bolds the time or the status already says it
     bold_when = "<strong>" not in g["now"][1] and p["slug"] not in WHEN_IN_STATUS
@@ -1002,7 +1064,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
     </nav>
     <div class="pp-top">
       <div class="pp-intro">
-        <p class="eyebrow lift"><i class="{dot}" aria-hidden="true"></i>{label}</p>
+        <p class="eyebrow lift"><i class="{dot}" aria-hidden="true"></i>{pillar}</p>
         <h1 class="pp-title">{title_lines([p["name"]])}</h1>
         <p class="lead lift lift-3">{g["lead"]}</p>
         <div class="pp-now{" is-live" if g.get("live") else ""} lift lift-4">

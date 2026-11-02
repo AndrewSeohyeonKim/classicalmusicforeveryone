@@ -45,8 +45,9 @@ def font_links(lang, slug, r):
 # printed in every footer (24: the website is a trust document, and a reader
 # should see when it was last looked at). Change it by hand when the content
 # is reviewed, not on every rebuild.
-UPDATED = {"en": "15 October 2026", "ko": "2026년 10월 15일"}
-UPDATED_ISO = "2026-10-15"
+# request 20 (2 Nov 2026): the copy checked against the canon v2.0 and the Strategy 2027-2030 (v7)
+UPDATED = {"en": "2 November 2026", "ko": "2026년 11월 2일"}
+UPDATED_ISO = "2026-11-02"
 
 
 def _parts_line(text):
@@ -109,8 +110,9 @@ STR = {
         "f_record": "Get involved",
         "f_connect": "Connect",
         "f_legal": "© 2026 Classical Music for Everyone · Dublin, Ireland",
-        "f_status": ("Classical Music for Everyone is a not-for-profit community music initiative, "
-                     "forming\u00a0a\u00a0company limited by guarantee. It is not yet a registered charity."),
+        # the status sentence, word for word (canon v2.0 0-4 no. 1; request 20)
+        "f_status": ("Classical Music for Everyone is preparing to run as a not-for-profit social enterprise "
+                     "from\u00a02027, as\u00a0a\u00a0company limited by guarantee."),
         "f_updated": "Updated",
         "f_privacy": "Privacy notice",
         "nav_label": "Main",
@@ -139,8 +141,9 @@ STR = {
         "f_record": "함께하기",
         "f_connect": "연락",
         "f_legal": "© 2026 Classical Music for Everyone · 아일랜드 더블린",
-        "f_status": ("Classical Music for Everyone은 보증유한회사(CLG) 설립을 준비하고 있는 "
-                     "비영리\u00a0공동체\u00a0음악\u00a0단체입니다. 아직 등록된 자선단체는 아닙니다."),
+        # 지위 문장 그대로(정본 v2.0 0-4절 1번, 요청 20)
+        "f_status": ("Classical Music for Everyone은 2027년부터 비영리\u00a0사회적\u00a0기업으로 운영하기 위해 "
+                     "보증유한회사 설립을 준비하고 있습니다."),
         "f_updated": "갱신",
         "f_privacy": "개인정보 처리방침",
         "nav_label": "주 메뉴",
@@ -184,11 +187,11 @@ RESET_JS = ("var n=document.getElementById('nav'),b=document.querySelector('.men
 # version from the messaging guide (kit 27), then its status sentence. It used
 # to take each page's own description, so the contact page described the
 # organisation as "email, phone and where we travel to".
-ORG_DESC = ("Classical Music for Everyone runs five programmes in Dublin: Classical Music talks, outreach "
-            "concerts, a recorder class for adults, the Letters Ensemble and concert outings. "
-            "Classical Music for Everyone is a "
-            "not-for-profit community music initiative, forming a company limited by guarantee. It is "
-            "not yet a registered charity.")
+# (request 20: the five in the canon's order, then the status sentence of canon v2.0 0-4 no. 1)
+ORG_DESC = ("Classical Music for Everyone runs five programmes in Dublin: Classical Music talks, concert "
+            "outings, a recorder class for adults, the Letters Ensemble and outreach concerts. "
+            "Classical Music for Everyone is preparing to run as a not-for-profit social enterprise from 2027, "
+            "as a company limited by guarantee.")
 
 ORG_NODE = """    {{
       "@type": "Organization",
@@ -457,7 +460,8 @@ def footer(lang, slug="index.html"):
 # new lead cannot slip through unsplit.
 # ---------------------------------------------------------------------------
 # and a value of two sentences on Contact (the insurance line), a line each,
-# and the status sentence in the footer ("…guarantee. It / is not yet…")
+# and the status sentence in the footer (one sentence since request 20; its old second sentence once
+# broke "…guarantee. It / is not yet…")
 SENTENCE_BLOCKS = ("lead", "ph-lead", "sh-lead", "figs-note", "pi-text", "wa-v", "footer-status", "tl-text",
                    # v7, chief designer: the answers on About and the programme pages
                    # ("gifts yet. We / will never ask"), and the privacy notice's intro

@@ -223,10 +223,14 @@ ROWS = [
     (2026, 1, 15, "course",
      "Recorder pilot: ten weekly rehearsals", "리코더 파일럿: 10주 연습",
      "Warrenmount, Dublin 8", "Warrenmount, 더블린 8구",
-     dict(until=(3, 19), att=7, flag=("Thursdays, one hour · seven retired Presentation Sisters · all seven completed",
-                                      "목요일 1시간 · 프레젠테이션 수녀회 은퇴 수녀 7명 · 7명 전원 수료"),
-          pub=("Thursdays, one hour · seven retired Presentation Sisters · all seven stayed to the end",
-               "목요일 1시간 · 은퇴한 Presentation 수녀님 일곱 분 · 일곱 분 모두 끝까지"))),
+     # canon v2.0 0-4 no. 4 and §2 (request 20): nine enrolled, a study sample of eight, seven completed the
+     # final questionnaire (dissertation pp. 9-10); "all seven" read as a group of seven
+     dict(until=(3, 19), att=7, flag=("Thursdays, one hour · nine enrolled, a study sample of eight, seven completed "
+                                      "the final questionnaire",
+                                      "목요일 1시간 · 등록 9명, 연구 표본 8명, 최종 설문 7명"),
+          pub=("Thursdays, one hour · nine retired Presentation Sisters enrolled · seven completed the study&rsquo;s "
+               "final questionnaire",
+               "목요일 1시간 · 은퇴한 Presentation 수녀님 아홉 분 등록 · 일곱 분이 연구의 최종 설문 완료"))),
     (2026, 1, 23, "lecture",
      "My Taste (1)", "내 취향 찾기 (1)",
      "East Quad, TU Dublin Grangegorman", "East Quad, TU Dublin Grangegorman",
@@ -251,9 +255,10 @@ ROWS = [
      dict(bmsp=True, progs=("recorder-ensemble",),
           flag=("the ensemble&rsquo;s first public sharing · nine pieces",
                 "앙상블의 첫 공개 연주 · 아홉 곡"),
-          # Andrew, 2026-10-06 (Q2): all seven played the Easter concert
-          pub=("the ensemble&rsquo;s first public performance · all seven played · nine pieces",
-               "앙상블의 첫 공개 연주 · 일곱 분 모두 연주 · 아홉 곡"))),
+          # Andrew, 2026-10-06 (Q2): seven sisters played the Easter concert ("all seven" until request 20:
+          # nine had enrolled, canon v2.0 0-4 no. 4)
+          pub=("the ensemble&rsquo;s first public performance · seven sisters played · nine pieces",
+               "앙상블의 첫 공개 연주 · 수녀님 일곱 분이 연주 · 아홉 곡"))),
     (2026, 4, 0, "course",
      "Recorder pilot: continuation", "리코더 파일럿: 이어진 모임",
      "Warrenmount, Dublin 8", "Warrenmount, 더블린 8구",
@@ -261,14 +266,24 @@ ROWS = [
                                "8월에 공동체가 마무리를 택할 때까지 매주. 완료된 파일럿"),
           pub=("weekly until the sisters&rsquo; community chose to finish in August",
                "수녀회가 8월에 마치기로 할 때까지 매주"))),
+    # Andrew, 29 Oct 2026: South Dublin Live was three concerts, two at the
+    # hospital on the same day (atrium, then chapel) and one at Rua Red
     (2026, 8, 20, "concert",
-     "Shared Voices of Care", "Shared Voices of Care",
-     "Tallaght University Hospital", "Tallaght University Hospital",
+     "Shared Voices of Care (1)", "Shared Voices of Care (1)",
+     "Tallaght University Hospital, atrium", "Tallaght University Hospital 아트리움",
      dict(progs=("outreach-concerts",),
-          flag=("South Dublin Live 2026 · acoustic, drop-in · atrium and chapel · guest haegeum artist",
-                "South Dublin Live 2026 · 어쿠스틱 · 아트리움과 경당 · 해금 객원"),
-          pub=("our founder was selected for South Dublin Live 2026 · atrium and chapel · with a guest haegeum player",
-               "창립자가 South Dublin Live 2026에 선정 · 아트리움과 경당 · 해금 객원"))),
+          flag=("South Dublin Live 2026 · acoustic, drop-in · atrium · guest haegeum artist",
+                "South Dublin Live 2026 · 어쿠스틱 · 아트리움 · 해금 객원"),
+          pub=("our founder was selected for South Dublin Live 2026 · in the atrium · with a guest haegeum player",
+               "창립자가 South Dublin Live 2026에 선정 · 아트리움 · 해금 객원"))),
+    (2026, 8, 20, "concert",
+     "Shared Voices of Care (2)", "Shared Voices of Care (2)",
+     "Tallaght University Hospital, chapel", "Tallaght University Hospital 경당",
+     dict(progs=("outreach-concerts",),
+          flag=("South Dublin Live 2026 · the same day, in the chapel · guest haegeum artist",
+                "South Dublin Live 2026 · 같은 날 경당 · 해금 객원"),
+          pub=("our founder was selected for South Dublin Live 2026 · the same day, in the chapel",
+               "창립자가 South Dublin Live 2026에 선정 · 같은 날 경당"))),
     (2026, 8, 29, "concert",
      "Shared Voices of Classical Tradition", "Shared Voices of Classical Tradition",
      "Rua Red Performance Space, Tallaght", "Rua Red, 더블린 Tallaght",
@@ -285,13 +300,17 @@ ROWS = [
      "An Autumn Concert", "가을 음악회",
      "Methodist Centenary Church, Ranelagh, Dublin 6", "Methodist Centenary Church, 더블린 6구 Ranelagh",
      dict(flag=("soprano, haegeum, clarinet and piano", "소프라노·해금·클라리넷·피아노"))),
+    (2026, 10, 22, "lecture",
+     "Getting to Know Classical Music", "클래식 음악과 친해지기",
+     "Academic Hub, TU Dublin Grangegorman", "Academic Hub, TU Dublin Grangegorman",
+     dict(att=6, flag=("six people", "여섯 명"), pub=("six people", "여섯 명"))),
 ]
 
 KIND = {
-    "en": {"lecture": "Lecture-recital", "companion": "Concert Guide &amp; Companion",
+    "en": {"lecture": "Lecture-recital", "companion": "Concert Companion",
            "outreach": "Outreach concert", "ensemble": "Letters Ensemble concert",
            "concert": "Concert", "course": "Course"},
-    "ko": {"lecture": "강의·연주", "companion": "함께하는 음악여행",
+    "ko": {"lecture": "강의·연주", "companion": "함께 관람하기",
            "outreach": "찾아가는 음악회", "ensemble": "Letters Ensemble 음악회",
            "concert": "음악회", "course": "과정"},
 }
@@ -355,7 +374,7 @@ def counts():
 # Ensemble's concerts are both outreach performances (the twenty of 03 §1
 # include the ensemble's four), and the ensemble's concerts are also its own
 # record; courses are the recorder class and the pilot before it; outings
-# are Concert Guide & Companion. Then a row's note can add a programme
+# are Concert Companion. Then a row's note can add a programme
 # (progs) or take one away (not_in). The South Dublin Live concerts, a
 # selection of the founder (kit 25, 27), are on the Outreach Concerts record
 # and say so in their own line (Andrew, 1 Oct 2026). A row marked scheduled,
