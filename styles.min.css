@@ -1,4 +1,4 @@
-/* generated from styles.css 01ed33e1bc8e by _build/build.py: edit styles.css, then build */
+/* generated from styles.css 9aad5d8a75a7 by _build/build.py: edit styles.css, then build */
 @view-transition { navigation: auto; }
 :root{
 --ink-navy:#1D2430;
@@ -1291,7 +1291,7 @@ counter-reset:n var(--c);animation:count-up linear both;animation-timeline:--fig
 @media (max-width:48em){
 .forty-groups{flex-direction:column}
 .forty-g{flex:none}
-.forty-row{grid-template-columns:repeat(23,minmax(0,1fr));gap:clamp(2px,.9vw,5px);max-width:34rem}
+.forty-row{grid-template-columns:repeat(var(--nmax,24),minmax(0,1fr));gap:clamp(2px,.9vw,5px);max-width:34rem}
 }
 .forty-n{margin:12px 0 0;font-size:var(--t-small);line-height:1.4;color:var(--fg-inverse);font-variant-numeric:lining-nums}
 .forty figcaption{margin-top:20px;font-size:var(--t-caption);color:var(--fg-inverse-body)}

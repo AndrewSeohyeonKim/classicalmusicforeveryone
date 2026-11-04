@@ -2,7 +2,7 @@
 
 > Classical Music for Everyone gives Classical Music talks, brings live concerts to care homes, hospitals, religious communities and community settings in Dublin, Ireland, and teaches adults to play together.
 
-Started January 2024 in Dublin. Classical Music for Everyone is preparing to run as a not-for-profit social enterprise from 2027, as a company limited by guarantee. Founder and Artistic Director: Andrew Seohyeon Kim.
+Started January 2024 in Dublin. Classical Music for Everyone is preparing to run as a not-for-profit social enterprise from 2027, as a company limited by guarantee. Founder and Artistic Director: Andrew Seohyeon Kim. His BMus dissertation won first prize in the CHMHE Undergraduate Dissertation Competition 2025–26.
 Mission: we bring live Classical Music to care settings, schools, parishes and community spaces, help people of any age and ability to learn and play together, and pay our musicians fairly. Values: dignity, accessibility, accompaniment, community and hope.
 Five programmes in two pillars. Learning, we open the door: Getting to Know Classical Music (talks), Concert Companion (going to concerts together) and the Community Recorder Ensemble Class. Sharing, we take the music out: the Letters Ensemble and Outreach Concerts.
 Planned for 2027: a second recorder class at St Columbanus, Loughlinstown; Music for Inclusive Classrooms, from September 2027; within Outreach Concerts, Hope Concerts in hospitals and care homes and Ceol le Chéile (Music Together, in Every County); CMFE Artist Services, which plans and produces concerts for musicians and amateur groups; and The Channel, from January 2027, with weekly concert listings, a newsletter and a monthly magazine. Musicians and artists from any field can register interest at any time.
@@ -23,11 +23,11 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 ## Programme pages (English)
 
-- [Getting to Know Classical Music](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/getting-to-know.html): Classical Music talks in Dublin for anyone unsure where to begin: music history, theory and stories, with live playing. Ask for a talk, alone or as a group.
-- [Concert Companion](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/concert-companion.html): Go to concerts in Dublin with a small group and a guide. We prepare first, go together and talk it over afterwards, in English or Korean.
+- [Getting to Know Classical Music](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/getting-to-know.html): Classical Music talks in Dublin for care settings, libraries, parishes and community groups: music history, theory and stories, with live playing. 45 to 60 minutes.
+- [Concert Companion](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/concert-companion.html): Go to concerts in Dublin with a small group and a guide, especially if you have never been. Centres and community groups can ask for an outing.
 - [Community Recorder Ensemble Class](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/recorder-ensemble.html): A recorder class for adults who have never played an instrument. Wednesday evenings, 7pm to 8pm, Mulhuddart Community Centre, Dublin 15. Recorders lent.
 - [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/letters-ensemble.html): An amateur ensemble in Dublin since 2024, open to players of any background. We play Irish, Korean and sacred music for parishes and religious communities.
-- [Outreach Concerts](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/outreach-concerts.html): Live Classical Music in care homes, hospitals, religious communities, parishes and community centres in Dublin. One to two hours, in your own room.
+- [Outreach Concerts](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes/outreach-concerts.html): Live Classical Music in care settings, hospitals, parishes, religious communities, libraries, workplaces and community venues in Dublin, in your own room.
 
 ## Pages (Korean)
 
@@ -40,11 +40,11 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 
 ## Programme pages (Korean)
 
-- [클래식 음악과 친해지기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/getting-to-know.html): 더블린에서 여는 클래식 음악 강의입니다. 음악사와 이론, 뒷이야기를 실황 연주와 함께 처음부터 들려 드립니다. 혼자서든 모임으로든 요청하시면 엽니다.
-- [함께 관람하기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/concert-companion.html): 더블린의 공연장에 혼자 가기 망설여지는 분과 소그룹으로 함께 갑니다. 미리 준비하고, 함께 가고, 다녀와서 이야기합니다. 영어와 한국어로 진행합니다.
+- [클래식 음악과 친해지기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/getting-to-know.html): 더블린의 돌봄 시설과 도서관, 본당, 지역 모임에서 여는 클래식 음악 강의입니다. 음악사와 이론, 뒷이야기를 실황 연주와 함께 45~60분 동안 들려 드립니다.
+- [함께 관람하기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/concert-companion.html): 공연장에 처음 가는 분, 혼자 가기 망설여지는 분과 더블린의 공연에 소그룹으로 함께 갑니다. 센터와 지역 모임도 관람을 요청하실 수 있습니다.
 - [커뮤니티 리코더 앙상블 클래스](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/recorder-ensemble.html): 악기를 처음 잡는 어른을 위한 리코더 클래스입니다. 매주 수요일 저녁 7시~8시, 더블린 15구 Mulhuddart Community Centre에서 열리고 리코더는 빌려 드립니다.
 - [Letters Ensemble](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/letters-ensemble.html): 2024년 1월 더블린에서 생긴 아마추어 앙상블입니다. 누구나 함께할 수 있고, 아일랜드와 한국의 전통 음악과 성가를 본당과 수도 공동체에서 연주합니다.
-- [찾아가는 음악회](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html): 더블린의 요양시설과 병원, 수도 공동체, 본당, 커뮤니티 센터로 찾아가 1~2시간 클래식 음악을 연주합니다. 콘센트가 있는 방 하나면 됩니다.
+- [찾아가는 음악회](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes/outreach-concerts.html): 더블린의 돌봄 시설과 병원, 본당, 수도 공동체, 도서관, 직장, 지역 공간으로 찾아가 클래식 음악을 연주합니다. 콘센트가 있는 방 하나면 됩니다.
 
 ## House rules for quoting us
 

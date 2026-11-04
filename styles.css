@@ -2205,7 +2205,7 @@ html[lang^="ko"] .fig b{font-family:var(--font-display)}
   .forty-g{flex:none}
   /* one pitch for both kinds, as on a laptop: 17 against 23, read by length,
      and no row of three left over (v8) */
-  .forty-row{grid-template-columns:repeat(23,minmax(0,1fr));gap:clamp(2px,.9vw,5px);max-width:34rem}
+  .forty-row{grid-template-columns:repeat(var(--nmax,24),minmax(0,1fr));gap:clamp(2px,.9vw,5px);max-width:34rem}
 }
 .forty-n{margin:12px 0 0;font-size:var(--t-small);line-height:1.4;color:var(--fg-inverse);font-variant-numeric:lining-nums}
 .forty figcaption{margin-top:20px;font-size:var(--t-caption);color:var(--fg-inverse-body)}

@@ -225,6 +225,7 @@ PERSON_NODE = """    {{
       "alternateName": "김서현",
       "description": "Clarinettist, organist and community musician in Dublin; founder of Classical Music for Everyone and the Letters Ensemble.",
       "alumniOf": {{"@type": "CollegeOrUniversity", "name": "TU Dublin Conservatoire"}},
+      "award": "First Prize, CHMHE Undergraduate Dissertation Competition 2025–26",
       "sameAs": [{same_as}],
       "email": "{email}",
       "url": "{site}/about.html#founder"

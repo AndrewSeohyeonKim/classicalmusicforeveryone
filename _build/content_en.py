@@ -145,13 +145,14 @@ PROGRAMMES_DATA = [
          page=dict(
              lead="Talks for anyone unsure where to begin. We use stories, recordings and <mark>live playing</mark>.",
              # the search result and share card: where, when, for whom (marketing r9)
-             meta="Classical Music talks in Dublin for anyone unsure where to begin: music history, theory and stories, with live playing. Ask for a talk, alone or as a group.",
+             meta="Classical Music talks in Dublin for care settings, libraries, parishes and community groups: music history, theory and stories, with live playing. 45 to 60 minutes.",
              cap=("A Classical Music class on the BBC Proms", "Dublin"),  # Andrew 2026-10-29: this photo is a class
              room_h2="At a talk.",
              room_focus="50% 41%",
-             glance=[("For", "Anyone curious about Classical Music"),
-                     ("Where", "Dublin"),
-                     ("When", "A date we agree with you"),
+             # the Strategy 2027-2030 (p.11) and the Service Catalogue (4 Nov 2026): who, where and how long
+             glance=[("For", "Anyone who loves music, especially older people"),
+                     ("Where", "Care settings, libraries, parishes and community groups in Dublin"),
+                     ("When", "A date we agree with you, for 45 to 60 minutes"),
                      ("What you need", "No knowledge of music")],
              now=("On request", "Write to us, on your own or as a group."),
              # 02 §4: three stages, in this order; 08 §1 for what each covers
@@ -191,11 +192,12 @@ PROGRAMMES_DATA = [
              # each lead sentence fits its column on a laptop (typeset_check:
              # the longer first sentences folded into half lines)
              lead="We play in the rooms where <mark>people already are</mark>. We explain the music as we go.",
-             meta="Live Classical Music in care homes, hospitals, religious communities, parishes and community centres in Dublin. One to two hours, in your own room.",
+             meta="Live Classical Music in care settings, hospitals, parishes, religious communities, libraries, workplaces and community venues in Dublin, in your own room.",
              cap=("Clarinet solo", "A day service, Dublin 7 · April 2025"),
              room_h2="At a day service.",
              room_focus="50% 62.5%",
-             glance=[("For", "Care homes, hospitals, religious communities, parishes and community centres"),
+             # the Strategy (p.12) adds libraries and workplaces; hospitals and care homes stay until Hope Concerts start
+             glance=[("For", "Care settings, hospitals, parishes, religious houses, libraries, workplaces and community venues"),
                      ("Where", "Your own room, in Dublin and further by arrangement"),
                      # Andrew, 6 Oct 2026: one to two hours; a room with a socket, a piano welcome
                      ("When", "A date we agree with you, for one to two hours"),
@@ -242,7 +244,7 @@ PROGRAMMES_DATA = [
              room_h2="Where the class began.",
              glance=[("For", "Adults who have never played an instrument"),
                      ("Where", "Mulhuddart, Dublin 15"),
-                     ("When", "Wednesday evenings, 7pm to 8pm, autumn 2026"),
+                     ("When", "Wednesday evenings, 7pm to 8pm, ten weeks a term"),
                      ("What you need", "No instrument, and no need to read music")],
              now=("Running now", "<strong>Wednesday evenings, 7pm to 8pm</strong><span class=\"sr-only\">, </span>"
                                  "<span class=\"pp-where\">Mulhuddart Community Centre</span>"
@@ -261,7 +263,10 @@ PROGRAMMES_DATA = [
              faq=[("Do I need my own recorder?", "<strong>No.</strong> We can <mark>lend you one</mark>."),
                   ("Can I join during the term?", "<strong>Yes.</strong> Just come along <mark>any Wednesday</mark> at 7pm."),
                   ("Is the centre step-free?",
-                   "<strong>Yes.</strong> Mulhuddart Community Centre has <mark>step-free access</mark>.")],
+                   "<strong>Yes.</strong> Mulhuddart Community Centre has <mark>step-free access</mark>."),
+                  # the Strategy's path to performing (G2-02)
+                  ("What comes after the class?",
+                   "Members who want more can join the <a class=\"link\" href=\"programmes/letters-ensemble.html\">Letters Ensemble</a> and give concerts.")],
              # For hosts (22 Oct 2026): the programme model, from CMFE_Recorder_Ensemble_Model. The class
              # runs 7pm to 8pm; the model's "about 75 minutes" is not repeated. "Nine enrolled, seven
              # completed" is the canonical pilot sentence (canon 2).
@@ -321,25 +326,26 @@ PROGRAMMES_DATA = [
              meta="An amateur ensemble in Dublin since 2024, open to players of any background. We play Irish, Korean and sacred music for parishes and religious communities.",
              cap=("Letters Ensemble", "St Patrick&rsquo;s Day concert"),
              room_h2="On St Patrick&rsquo;s Day.",
-             glance=[("For", "Amateur players of any background"),
+             glance=[("For", "Amateur players of any background, students and early-career musicians"),
                      ("Where", "Dublin"),
                      ("When", "Ask us for rehearsal times"),
                      ("What you need", "An instrument you play")],
              now=("All players welcome", "Write with your instrument; we will send rehearsal times."),
              how_h2="Rehearse in Dublin, then give concerts.",
              steps=[("Tell us your instrument",
-                     "Write with what you play. Players of <mark>any background</mark> are welcome."),
+                     "Write with what you play. <mark>Any background</mark> is welcome, including our recorder class."),
                     ("Rehearse together",
                      "We rehearse in Dublin, directed by our founder, Andrew Seohyeon Kim."),
                     ("Give a concert",
-                     "We play for religious communities, parishes and care homes, often around a feast day.")],
+                     "We give concerts for parishes, religious houses, care homes, venues and councils.")],
              expect_h2="Before you join.",
              faq=[("What does the ensemble play?",
                    "Pieces such as Mozart&rsquo;s &lsquo;Ave verum corpus&rsquo;, &lsquo;Down by the Sally Gardens&rsquo; and &lsquo;Arirang&rsquo;."),
                   ("Can I join if I stopped playing years ago?",
                    "<strong>Yes.</strong> Tell us what you play and <mark>when you last played</mark>."),
-                  ("How many concerts has it given?",
-                   "<mark>Four formal concerts</mark>, from Dalgan Park in March 2024 to Christmas 2025.")],
+                  # the name, in the Strategy's words (p.12); the four concerts are the record below
+                  ("Why &lsquo;Letters&rsquo;?",
+                   "It is named after <mark>the letters A, B, C, D</mark>.")],
              record_h2="Four concerts.",
              record_lead="",
              join_h2="Play with us.",
@@ -365,23 +371,25 @@ PROGRAMMES_DATA = [
              # the founder's own photograph from the audience at the BBC Proms; no group trip to the
              # Proms is on the record, so the caption says whose view it is. The month is the
              # recording date of the source video (Andrew, 1 Oct 2026)
-             meta="Go to concerts in Dublin with a small group and a guide. We prepare first, go together and talk it over afterwards, in English or Korean.",
+             meta="Go to concerts in Dublin with a small group and a guide, especially if you have never been. Centres and community groups can ask for an outing.",
              cap=("BBC Proms, Royal Albert Hall", "London · September 2023 · photo: our founder, from the audience"),
              room_h2="The hall, from the seats.",
-             glance=[("For", "Anyone who would rather not go alone"),
+             # the Strategy (p.11): people who have never been to a concert
+             glance=[("For", "Anyone new to concerts, or who would rather not go alone"),
                      ("Where", "Concert halls in Dublin"),
                      ("When", "As outings are planned"),
                      ("What you need", "No knowledge of music")],
              now=("Dates by email", "Write to us. We will tell you about the next outing."),
              how_h2="Before, during and after the concert.",
              steps=[("Prepare",
-                     "We choose a concert. Then we go through the music and what happens in the hall."),
+                     "We choose a concert and book seats with the venue. Then we go through the music."),
                     ("Go as a group", "A guide goes with the group and stays through the concert."),
                     ("Talk it over", "Afterwards we talk about what we heard, and there is <mark>no wrong answer</mark>.")],
              expect_h2="Before your first outing.",
-             faq=[("Which concerts have you suggested?",
-                   "The National Symphony Orchestra, the TU Dublin Philharmonic and a National Concert "
-                   "Hall series, among others."),
+             # who can ask (Strategy p.11, Catalogue); the concerts suggested are the record below
+             faq=[("Can a centre or group ask for an outing?",
+                   "<strong>Yes.</strong> Community groups and centres, including <mark>children&rsquo;s centres</mark> "
+                   "and homeless services, can ask us."),
                   ("How big is a group?",
                    "In December 2025, <mark>six people</mark> went together to the National Concert Hall."),
                   ("I am new to Ireland. Is this for me?",
@@ -532,6 +540,8 @@ ABOUT_T = dict(
                ("Music Director", '<span class="sl">Our Lady of Dolours, Dolphin&rsquo;s Barn<span class="sr-only">;</span></span> '
                                   '<span class="sl">St Columbanus, Loughlinstown</span>'),
                ("Graduation research", "A ten-week recorder pilot with retired Presentation Sisters, 2026"),
+               # request 19 (4 Nov 2026): the CHMHE letter; Cowork's standard wording, no prize money, no date
+               ("Award", "First Prize, CHMHE Undergraduate Dissertation Competition 2025&ndash;26"),
                # kit 25 / 27: the one outside selection, said as a selection of the founder (d4 r9)
                ("Selected for", "South Dublin Live 2026")],
         # the courses he completed and the one he took part in (canon v2.0 0-4 no. 5), folded as reference so
@@ -674,16 +684,17 @@ PROGRAMMES_T = dict(
                      "planned with the class teacher.")]),
                 ("share", [
                     ("Hope Concerts.",
-                     "Within Outreach Concerts: regular visits to hospitals and care homes, under an "
-                     "agreement with each."),
+                     "Within Outreach Concerts: a season of visits to hospitals and care homes, with the "
+                     "same musicians returning."),
                     ("Ceol le Chéile (Music Together, in Every County).",
-                     "Within Outreach Concerts, from September 2027: a day of music in counties where live "
-                     "Classical Music is rare."),
+                     "From September 2027, with council arts offices: a school or library visit, a visit to a "
+                     "care home and an evening concert."),
                     ("CMFE Artist Services.",
-                     'Concerts we plan and produce for musicians and amateur groups. <a class="link" '
+                     'Concerts we plan and produce for musicians, groups, parishes, councils and festivals. <a class="link" '
                      'href="get-involved.html#play">Register your interest</a> any time.'),
                     ("The Channel.",
-                     "From January 2027: weekly concert listings, a newsletter and a monthly magazine.")])],
+                     "From January 2027, on Instagram and YouTube: concert listings, a newsletter, a monthly "
+                     "magazine and learning videos.")])],
     ),
 )
 
@@ -713,7 +724,8 @@ GET_INVOLVED_T = dict(
     invite=dict(
         label="Venues",
         h2="Bring a concert to your place.",
-        lead="Care homes, hospitals, religious communities, parishes and community centres <mark>can invite us</mark>.",
+        # the Service Catalogue (4 Nov 2026): who hosts or commissions
+        lead="Care settings, parishes, libraries, schools, councils and festivals <mark>can invite us</mark>.",
         pair_labels=("You provide", "We bring"),
         pairs=[("A concert",
                 ["A room with a power socket", "A date", "A contact person", "Responsibility for audience safety"],
@@ -894,7 +906,14 @@ NEWS_T = dict(
         lead="<mark>Every talk and performance</mark> since 2024.",
     ),
     latest_sr="Latest",
-    latest=[("Board", "Autumn 2026",
+    # request 19 (4 Nov 2026, Andrew said yes to a news item): the award takes the first panel and the
+    # 19 September concert leaves the three (it stays in the record below); Cowork's wording, no money, no date of a talk
+    latest=[("Award", "November 2026",
+             "Our founder&rsquo;s recorder pilot study",
+             "First Prize, CHMHE Undergraduate Dissertation Competition 2025&ndash;26.",
+             "about.html#founder",
+             "About our founder"),
+            ("Board", "Autumn 2026",
              "A founding board",
              "We are looking for volunteers to serve on the first board.",
              "get-involved.html#board",
@@ -903,12 +922,7 @@ NEWS_T = dict(
              "Community Recorder Ensemble Class",
              "Wednesday evenings, 7pm to 8pm, at Mulhuddart Community Centre.",
              "programmes/recorder-ensemble.html",
-             "About the class"),
-            ("Concert", "19 September 2026",
-             "An autumn concert",
-             "At Methodist Centenary Church, Ranelagh, with soprano, haegeum, clarinet and piano.",
-             "programmes/outreach-concerts.html#record",
-             "All outreach concerts")],
+             "About the class")],
     chart=dict(
         label="The record",
         h2="Forty-two, by year.",
@@ -947,7 +961,8 @@ NEWS_T = dict(
                           "Ten weekly rehearsals at Warrenmount, then <mark>an Easter concert</mark> at Clondalkin "
                           "Lodge."),
                          ("August", "South Dublin Live",
-                          "Our founder was selected. Two concerts at the hospital, one at Rua Red."),
+                          # one sentence: "Our founder was selected." alone was a short first line on a phone (typeset_check steps)
+                          "Our founder was selected to play twice at the hospital, once at Rua Red."),
                          ("September", "An autumn concert",
                           "In Ranelagh, Dublin 6, at Methodist Centenary Church."),
                          ("Autumn", "Open to the public",
@@ -1020,7 +1035,7 @@ CONTACT_T = dict(
         topic_label="What is it about?",
         topics=[("part", "Taking part", "Taking part in a programme",
                  ["Which programme interests you", "How we can reach you"]),
-                ("venue", "Concert invitation", "A venue: invite us to play", INVITE_FIELDS),
+                ("venue", "Concert invitation", "A venue, school or council: invite us", INVITE_FIELDS),
                 ("work", "Working with a company: Classical Music for Everyone", "A company or organisation: work with us",
                  ["Company or organisation and town", "What interests you", "Contact name and phone number"]),
                 ("artist", "CMFE Artist Services: expression of interest", "An artist: register interest", EOI_FIELDS),

@@ -171,7 +171,9 @@ def forty(lang, t):
     # one strip across the band, the talks then the performances, each as wide as its
     # count (styles.css; two fresh reviewers, v7: set on the figures' columns the open
     # dots read as the 22 places, and under "40+" alone they left the band two-thirds empty)
-    return (f'<figure class="forty"><div class="forty-groups">'
+    # the phone's one pitch is the longer kind's count (styles.css): fixed at 23 it broke the
+    # performances into two rows once the record reached 24 (typeset_check fortyrows, Nov 2026)
+    return (f'<figure class="forty" style="--nmax:{max(len(talks), len(perf))}"><div class="forty-groups">'
             f'{block(talks, "f-on", t["talks"], 0)}{block(perf, "f-open", t["perf"], len(talks))}</div>'
             f'<figcaption>{t["period"]}</figcaption></figure>')
 

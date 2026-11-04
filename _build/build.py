@@ -319,7 +319,8 @@ def build_llms():
              # request 20 (2 Nov 2026): the canon v2.0 (0-4) and the Strategy 2027-2030 (v7)
              "Started January 2024 in Dublin. Classical Music for Everyone is preparing to run as a "
              "not-for-profit social enterprise from 2027, as a company limited by guarantee. Founder and "
-             "Artistic Director: Andrew Seohyeon Kim.",
+             "Artistic Director: Andrew Seohyeon Kim. His BMus dissertation won first prize in the CHMHE "
+             "Undergraduate Dissertation Competition 2025–26.",
              "Mission: we bring live Classical Music to care settings, schools, parishes and community "
              "spaces, help people of any age and ability to learn and play together, and pay our musicians "
              "fairly. Values: dignity, accessibility, accompaniment, community and hope.",
