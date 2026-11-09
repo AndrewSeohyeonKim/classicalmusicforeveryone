@@ -6,6 +6,7 @@ Started January 2024 in Dublin. Classical Music for Everyone is preparing to run
 Mission: we bring live Classical Music to care settings, schools, parishes and community spaces, help people of any age and ability to learn and play together, and pay our musicians fairly. Values: dignity, accessibility, accompaniment, community and hope.
 Five programmes in two pillars. Learning, we open the door: Getting to Know Classical Music (talks), Concert Companion (going to concerts together) and the Community Recorder Ensemble Class. Sharing, we take the music out: the Letters Ensemble and Outreach Concerts.
 Planned for 2027: a second recorder class at St Columbanus, Loughlinstown; Music for Inclusive Classrooms, from September 2027; within Outreach Concerts, Hope Concerts in hospitals and care homes and Ceol le Chéile (Music Together, in Every County); CMFE Artist Services, which plans and produces concerts for musicians and amateur groups; and The Channel, from January 2027, with weekly concert listings, a newsletter and a monthly magazine. Musicians and artists from any field can register interest at any time.
+Projects in preparation for 2027 (on the News page): Two Traditions: A Haegeum Week in February, a Chamber Series with Korean musicians who live in Dublin, new music for haegeum, uilleann pipes, clarinet and piano, the Loughlinstown Recorder Ensemble, Music in Dublin 15, and two recitals produced by CMFE Artist Services. Dates and places are plans and may change.
 Plan: the company is to be formed in November–December 2026 with three founding directors, and the board grows to five in 2027. Stages: 2027 · Foundation, 2028 · Build, 2029 · Widen, 2030 · Across Ireland (a target).
 Now running: the Community Recorder Ensemble Class at Mulhuddart Community Centre, Dublin 15, Wednesday evenings 7pm to 8pm, autumn 2026.
 Practical help is welcome now: programme partners under a written agreement, service agreements, rooms, support in kind, pro bono advice, introductions and registering interest (contact only). Companies can take part through a workplace concert, staff volunteering, a venue, support in kind, promotion or pro bono advice.
@@ -18,7 +19,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 - [About](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/about.html): Community music in Dublin since 2024: our story, our founder, how we are run, our mission, our plan to 2030 and where we have played and taught.
 - [Programmes](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/programmes.html): Five programmes: Getting to Know Classical Music, Concert Companion, the Community Recorder Ensemble Class, the Letters Ensemble and Outreach Concerts, and what we are preparing for 2027.
 - [Get involved](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/get-involved.html): Four ways into community music in Dublin: join a programme, invite us to play, register interest as an artist, or join the founding board.
-- [News & archive](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html): What is new, the forty-two community music programmes on the record from January 2024 to October 2026, a dated timeline and photographs.
+- [News & archive](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/news.html): What is new, projects in preparation for 2027, the forty-two community music programmes on the record from January 2024 to October 2026, a dated timeline and photographs.
 - [Contact](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/contact.html): Choose a topic and write to us, or email or call. Who answers, where we travel, and how we look after your details.
 
 ## Programme pages (English)
@@ -35,7 +36,7 @@ Contact: sby05034@gmail.com · +353 83 078 0635 · Dublin, Ireland. Languages: E
 - [소개](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/about.html): 2024년부터 더블린에서 공동체 음악을 해 온 이야기, 창립자 김서현, 운영 방식, 사명, 2030년까지의 계획, 연주하고 가르쳐 온 곳.
 - [프로그램](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/programmes.html): 다섯 프로그램: 클래식 음악과 친해지기, 함께 관람하기, 커뮤니티 리코더 앙상블 클래스, Letters Ensemble, 찾아가는 음악회. 그리고 2027년에 준비하는 것.
 - [함께하기](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/get-involved.html): 더블린의 공동체 음악에 함께하는 네 가지 길: 프로그램 참여, 음악회 초청, 예술가 참여 신청, 창립 이사회.
-- [소식·기록](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html): 새 소식, 2024년 1월부터 2026년 10월까지 기록된 커뮤니티 음악 프로그램 마흔두 번, 연표와 사진.
+- [소식·기록](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/news.html): 새 소식, 2027년을 위해 준비 중인 프로젝트, 2024년 1월부터 2026년 10월까지 기록된 커뮤니티 음악 프로그램 마흔두 번, 연표와 사진.
 - [문의](https://andrewseohyeonkim.github.io/classicalmusicforeveryone/ko/contact.html): 문의 양식에서 주제를 고르시거나, 이메일·전화로 바로 연락하세요. 답하는 사람, 찾아가는 곳, 개인정보 처리방침.
 
 ## Programme pages (Korean)

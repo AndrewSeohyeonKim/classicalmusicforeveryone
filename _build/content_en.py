@@ -152,7 +152,8 @@ PROGRAMMES_DATA = [
              # the Strategy 2027-2030 (p.11) and the Service Catalogue (4 Nov 2026): who, where and how long
              glance=[("For", "Anyone who loves music, especially older people"),
                      ("Where", "Care settings, libraries, parishes and community groups in Dublin"),
-                     ("When", "A date we agree with you, for 45 to 60 minutes"),
+                     # the Strategy 2027-2030 (11-05): "A single talk or a six-week block"; the Catalogue's 45 to 60 minutes
+                     ("When", "One talk or six weekly talks, 45 to 60 minutes each"),
                      ("What you need", "No knowledge of music")],
              now=("On request", "Write to us, on your own or as a group."),
              # 02 §4: three stages, in this order; 08 §1 for what each covers
@@ -174,6 +175,8 @@ PROGRAMMES_DATA = [
                   ("Which language are the talks in?", "English or Korean, depending on the talk.")],
              record_h2="Every talk.",
              record_lead="",
+             # the Strategy's 2027 line on each programme card (9 Nov 2026)
+             next="Ten talks across the year, for the groups who ask.",
              join_h2="Ask for a talk.",
              join_text="",
              join_btn="Ask about a talk",
@@ -199,8 +202,9 @@ PROGRAMMES_DATA = [
              # the Strategy (p.12) adds libraries and workplaces; hospitals and care homes stay until Hope Concerts start
              glance=[("For", "Care settings, hospitals, parishes, religious houses, libraries, workplaces and community venues"),
                      ("Where", "Your own room, in Dublin and further by arrangement"),
-                     # Andrew, 6 Oct 2026: one to two hours; a room with a socket, a piano welcome
-                     ("When", "A date we agree with you, for one to two hours"),
+                     # the Strategy 2027-2030 (11-05): "Two or more musicians, 45 to 60 minutes" (it replaces the
+                     # 6 Oct "one to two hours"); a room with a socket, a piano welcome (Andrew, 6 Oct 2026)
+                     ("When", "A date we agree with you, for 45 to 60 minutes"),
                      ("What you need", "A room with a power socket; a piano is welcome")],
              now=("Taking invitations", "Write with your room and a few dates that suit."),
              how_h2="From your email to a concert in your room.",
@@ -211,8 +215,8 @@ PROGRAMMES_DATA = [
                      "We bring the musicians, instruments and stands, and play in your room.")],
              expect_h2="Before you invite us.",
              faq=[("Who plays?",
-                   "Andrew Seohyeon Kim, <mark>our founder</mark>, plays clarinet and organ, alone or with musicians he "
-                   "invites. Our Letters Ensemble gives some concerts."),
+                   "<strong>Two or more musicians</strong>. <mark>Our founder</mark> plays clarinet or organ, with "
+                   "musicians he invites or our Letters Ensemble."),
                   ("Are you insured?",
                    "<strong>Yes.</strong> We have <mark>public liability insurance</mark> and show the certificate on request."),
                   ("Where have you played?",
@@ -221,6 +225,9 @@ PROGRAMMES_DATA = [
                    "taught</a>.")],
              record_h2="Every concert.",
              record_lead="",
+             next="Four or more concerts, with the Letters Ensemble and other musicians. Hope Concerts begin in "
+                  "2027, and Ceol le Chéile from September.",
+             next_link=("programmes.html#planned", "The lines planned for 2027"),
              join_h2="Invite us to play.",
              join_text="",
              join_btn="Invite us",
@@ -279,8 +286,8 @@ PROGRAMMES_DATA = [
                         ("Instruments", "Recorders lent, with large-print music and alternatives"),
                         ("Led by", "A named facilitator, with the host&rsquo;s contact at the first session")],
                  pilot="The model comes from our pilot with retired Presentation Sisters in Dublin 8. Nine sisters "
-                       "enrolled and seven completed the study&rsquo;s final questionnaire. A costed proposal is "
-                       "available on request.",
+                       "enrolled and seven completed the study&rsquo;s final questionnaire. The sisters began to practise "
+                       "every day, of their own accord.",
                  weeks_summary="The ten weeks", weeks_hide="Hide the ten weeks",
                  weeks=[("Week 1 · First sounds.", "Names, a welcome circle, holding the instrument, breath, a first familiar tune on three notes."),
                         ("Week 2 · Playing together.", "A steady pulse, listening to each other, two more familiar tunes."),
@@ -298,6 +305,7 @@ PROGRAMMES_DATA = [
                        ("A contact.", "A named person who helps invite people. We supply a flyer and a one-page description."),
                        ("Storage.", "Space for the instruments between sessions, or we take them each time."),
                        ("Safeguarding.", "We follow the venue&rsquo;s own arrangements and provide what the host asks for."),
+                       ("A proposal.", "A costed proposal is available on request."),
                        ("Numbers.", "Up to ten participants, with a short waiting list if more are interested."),
                        ("How we begin.", "A call, a visit to the room, agreed dates, a written agreement, then the first session.")],
                  href=_MAIL_HOST, btn="Ask about hosting a class",
@@ -305,6 +313,9 @@ PROGRAMMES_DATA = [
              ),
              record_h2="How the class came about.",
              record_lead="",
+             next="A second class at St Columbanus, Loughlinstown, from January. It ends in June with a concert "
+                  "with the parish choir.",
+             next_link=("news.html#preparing", "Projects in preparation"),
              join_h2="Join the class.",
              join_text="<strong>Wednesday evenings, 7pm to 8pm</strong>, in Mulhuddart: just come along any week.",
              join_btn="Ask about the class",
@@ -343,11 +354,15 @@ PROGRAMMES_DATA = [
                    "Pieces such as Mozart&rsquo;s &lsquo;Ave verum corpus&rsquo;, &lsquo;Down by the Sally Gardens&rsquo; and &lsquo;Arirang&rsquo;."),
                   ("Can I join if I stopped playing years ago?",
                    "<strong>Yes.</strong> Tell us what you play and <mark>when you last played</mark>."),
+                  # the Strategy (p.12): rehearsals planned around about five players, more welcome
+                  ("How big is the ensemble?",
+                   "We plan rehearsals for <mark>about five players</mark>, and more are welcome."),
                   # the name, in the Strategy's words (p.12); the four concerts are the record below
                   ("Why &lsquo;Letters&rsquo;?",
                    "It is named after <mark>the letters A, B, C, D</mark>.")],
              record_h2="Four concerts.",
              record_lead="",
+             next="Four concerts, one each season.",
              join_h2="Play with us.",
              join_text="",
              join_btn="Ask about joining",
@@ -396,6 +411,7 @@ PROGRAMMES_DATA = [
                    "<strong>Yes.</strong> We work in <mark>English and Korean</mark>.")],
              record_h2="Concerts we suggested.",
              record_lead="",
+             next="At least two outings, and more with the help of other organisations.",
              join_h2="Join an outing.",
              join_text="",
              join_btn="Ask about an outing",
@@ -472,6 +488,60 @@ HOME = dict(
         resolve="So we go to <em>them.</em>",
         link=("get-involved.html#invite", "Invite us to play"),
     ),
+    # The Strategy 2027-2030's three commitments (its page 2, Andrew 9 Nov 2026), each with the programmes that
+    # keep it: (name, pillar, page or None, when it begins if it is still a plan). Artist Services stays "in
+    # preparation" on the site (the Strategy calls it running; Cowork question, request 22).
+    commitments=dict(
+        label="Our promises",
+        h2="Three commitments.",
+        lead="Each programme keeps one of them.",
+        items=[("We bring live music to you.",
+                "To care homes, hospitals, parishes and counties, in the room where people already are.",
+                [("Outreach Concerts", "share", "programmes/outreach-concerts.html", None),
+                 ("Hope Concerts", "share", None, "From 2027"),
+                 ("Ceol le Chéile", "share", None, "From September 2027")]),
+               ("Anyone can play, at any age.",
+                "Classes and talks that start from the very beginning.",
+                [("Getting to Know Classical Music", "learn", "programmes/getting-to-know.html", None),
+                 ("Community Recorder Ensemble Class", "learn", "programmes/recorder-ensemble.html", None),
+                 ("Music for Inclusive Classrooms", "learn", None, "From September 2027")]),
+               ("Musicians and communities meet here.",
+                "Paid work for musicians, and a stage and a seat for everyone else.",
+                [("Letters Ensemble", "share", "programmes/letters-ensemble.html", None),
+                 ("Concert Companion", "learn", "programmes/concert-companion.html", None),
+                 ("CMFE Artist Services", "share", None, "In preparation")])],
+    ),
+    # the need in four figures, each with its source (the Strategy's page 3), and the six groups the work is
+    # for, folded (its pages 6 to 9). Public research only; no participant's age.
+    need=dict(
+        label="The need",
+        h2="Music is for everyone. Many have no way to reach it.",
+        figs=[("3", "Dublin council areas had no project in the national care-settings music scheme.",
+               "Creative Ireland, 2024"),
+              ("1 in 6", "adults went to no arts event at all in a year.", "Arts Council, Arts Insight 2024"),
+              ("1.3%", "of adults aged 50 and over go to a concert, play or film in a typical week.",
+               "TILDA, 2021"),
+              ("13.6%", "of pupils fall in the borderline range, a group no school support has named since 2017.",
+               "Wieland and Zitman, 2016")],
+        groups_summary="Six groups we work for", groups_hide="Hide the six groups",
+        groups=[("Older people in care homes and hospitals.",
+                 "In a care study, 69% of residents responded to live music and 25% to recorded music (Holmes "
+                 "2006). Outreach Concerts, Hope Concerts, Getting to Know."),
+                ("People who rarely reach a concert hall.",
+                 "Cost, time and too little choice nearby keep adults away (Arts Council 2025). Getting to Know, "
+                 "Concert Companion, Ceol le Chéile."),
+                ("Adults who never learned an instrument.",
+                 "Few groups teach an instrument from the very beginning. The Community Recorder Ensemble Class."),
+                ("Amateur and student players.",
+                 "Belonging, a skilled leader and a concert to aim for keep a group going (Pearce 2015; Lamont "
+                 "2018). Letters Ensemble, CMFE Artist Services."),
+                ("Pupils with borderline or developmental needs.",
+                 "Student-centred lessons and peer contact help inclusion in music (Mommo 2025). Music for "
+                 "Inclusive Classrooms."),
+                ("Migrants and newcomers.",
+                 "12% of people living in Ireland are not Irish citizens (CSO 2022), with few ways into local "
+                 "music. Concert Companion, the class, Letters Ensemble.")],
+    ),
     numbers=dict(
         label="On the record",
         sr="In numbers",
@@ -517,8 +587,12 @@ ABOUT_T = dict(
         h2="Since 2024.",
         # the site counts from the founding, January 2024 (Andrew, 1 Oct 2026). The canon's activity
         # sentence (0-4 no. 3) without its "more than 25 places": About counts its own list (N_PLACES)
+        # the question the class began with (the Strategy 2027-2030, page 2), without the sister's age (§2)
+        # and without "an audience became players" (Andrew, 6 Oct 2026, Q14: she was not one of the players)
         text=["We started in Dublin in January 2024, with our Letters Ensemble. Six people came to our "
               "first talk.",
+              "Our recorder class began with a question. After a concert, a retired sister asked about the "
+              "violin she played in 1950.",
               "Since 2024 we have run more than 40 <mark>community music programmes</mark>."],
         link="The full timeline",
     ),
@@ -532,23 +606,37 @@ ABOUT_T = dict(
         name='<span class="nm">Andrew Seohyeon Kim</span>',
         # the canon's contact line: "Founder and Artistic Director" (v2.0 §1)
         role="Founder and Artistic Director",
-        line="Andrew is a clarinettist, organist and community musician in Dublin.",
+        line="A clarinettist and organist, in Dublin since 2022.",
         # request 20 (canon v2.0 0-4 no. 5 and the Strategy 2027-2030): his two parishes as Music Director;
         # the pilot as the Strategy cites his dissertation (nine sisters enrolled, so not "all seven")
         facts=[("Degree", "BMus (Hons) in Performance, TU Dublin Conservatoire"),
                # a parish a line (a dot between them was left at a line end at 1440)
                ("Music Director", '<span class="sl">Our Lady of Dolours, Dolphin&rsquo;s Barn<span class="sr-only">;</span></span> '
                                   '<span class="sl">St Columbanus, Loughlinstown</span>'),
-               ("Graduation research", "A ten-week recorder pilot with retired Presentation Sisters, 2026"),
                # request 19 (4 Nov 2026): the CHMHE letter; Cowork's standard wording, no prize money, no date
                ("Award", "First Prize, CHMHE Undergraduate Dissertation Competition 2025&ndash;26"),
                # kit 25 / 27: the one outside selection, said as a selection of the founder (d4 r9)
                ("Selected for", "South Dublin Live 2026")],
-        # the courses he completed and the one he took part in (canon v2.0 0-4 no. 5), folded as reference so
-        # the page keeps its reading budget; Venture Lab is "took part", never "completed"
-        courses=("Courses, 2024 to 2026", "Hide the courses",
-                 # a course a line (in one run "Safeguarding / Vulnerable Adults" parted at 1440)
-                 [("Completed, 2026",
+        # more about him (the Strategy 2027-2030, page 3, 9 Nov 2026), folded as reference so the page keeps
+        # its reading budget: the instruments, the parishes, the teaching, the Korean community, the
+        # volunteering, the research and the courses (canon v2.0 0-4 no. 5; Venture Lab is "took part", never
+        # "completed"). Interpreting and where he lives are left out. One item a line (sl).
+        courses=("More about Andrew", "Hide",
+                 [("Graduation research", "A ten-week recorder pilot with retired Presentation Sisters, 2026"),
+                  ("Instruments", "Clarinet, organ, saxophone, piano and drums"),
+                  ("Organist", "Every week since September 2022, in three Dublin parishes"),
+                  ("Teaching", "Clarinet, saxophone, piano and theory at Greystones Music Academy"),
+                  ("Korea and Ireland",
+                   '<span class="sl">Concerts with Korean musicians in Ireland<span class="sr-only">;</span></span> '
+                   '<span class="sl">Classical Music Meet Ups in Korean</span>'),
+                  ("Volunteering", "With retired Columban missionaries at Dalgan Park, since 2022"),
+                  ("Festivals",
+                   '<span class="sl">ICA ClarinetFest 2024<span class="sr-only">;</span></span> '
+                   '<span class="sl">Veronica Dunne International Singing Competition, 2025<span class="sr-only">;</span></span> '
+                   '<span class="sl">Dublin International Piano Competition, 2025<span class="sr-only">;</span></span> '
+                   '<span class="sl">Korea Festival in Ireland, 2025</span>'),
+                  # a course a line (in one run "Safeguarding / Vulnerable Adults" parted at 1440)
+                  ("Completed, 2026",
                    '<span class="sl">Introduction to Children First<span class="sr-only">;</span></span> '
                    '<span class="sl">Safeguarding Vulnerable Adults<span class="sr-only">;</span></span> '
                    '<span class="sl">Creating a Social Enterprise</span>'),
@@ -567,11 +655,29 @@ ABOUT_T = dict(
                ("Money.",
                 "We do not ask for or accept gifts or pledges. Gifts open only after charity registration. "
                 "We will never ask you to pay into <mark>a personal account</mark>."),
-               ("Photographs.",
-                "We show our founder, performers who have agreed, instruments and empty rooms. Where "
-                "someone has not agreed, we blur their face."),
+               # the consent ledger in one sentence (_build/photos.py: founder, sdcc, blurred, nobody, crowd)
+               ("Photographs.", "Anyone you can recognise has agreed, or we blur their face."),
                # facts.md l.59, word for word, where families and partners decide (v7)
                ("Public liability insurance.", "We show the certificate on request.")],
+        # the Strategy 2027-2030, pages 21 and 22 (9 Nov 2026), as reference: who is a member, what the
+        # founder does, the advisory council (its participant seat is the 2030 goal, page 17), what the board
+        # decides, and the year's cycle. The payments rule and the committees are internal and left out.
+        more=("How the company will be run", "Hide",
+              [("Members and directors.",
+                "The members are the directors, one vote each. Directors are unpaid and give two to four hours "
+                "a month."),
+               ("The founder.",
+                "Our Founder and Artistic Director leads the programmes and brings plans and reports to every "
+                "board meeting."),
+               ("An advisory council.",
+                "Six people with music, care and community experience, meeting twice a year. A seat for a "
+                "participant is our goal for 2030."),
+               ("What the board decides.",
+                "The strategy, the annual plan and budget; the mission, values and any new programme; prices "
+                "and policies."),
+               ("Each year.",
+                "We plan in November and December, measure every session, report at every meeting and review "
+                "in October.")]),
     ),
     # Our mission (request 20, canon v2.0 0-4 no. 2): the mission in its parts, each under the commitment it
     # serves (the Strategy's own pairing, canon §1); the vision and the five values folded as reference, so
@@ -622,6 +728,46 @@ ABOUT_T = dict(
                ("Partnerships and income.", "Written agreements and a balanced mix of income."),
                ("Governance and accountability.", "A skilled independent board, sound policies and public "
                                                   "reporting.")],
+        # the Strategy 2027-2030, pages 19 and 20 (9 Nov 2026): 2027 quarter by quarter and the work area by
+        # area, folded as reference. One item a line (sl). The paid post and payroll lines are left out (§3),
+        # and so are the budget figures.
+        folds=[("2027, quarter by quarter", "Hide the quarters",
+                [("January to March.",
+                  '<span class="sl">First participant meeting</span> '
+                  '<span class="sl">Loughlinstown class begins; Mulhuddart spring term</span> '
+                  '<span class="sl">Haegeum week, 14&ndash;21 February</span> '
+                  '<span class="sl">Hope Concert, Mater Hospital</span> '
+                  '<span class="sl">Letters Ensemble spring concert</span>'),
+                 ("April to June.",
+                  '<span class="sl">Talks through the year</span> '
+                  '<span class="sl">Chamber Series; a Mater Hospital visit, May</span> '
+                  '<span class="sl">Letters Ensemble summer concert</span> '
+                  '<span class="sl">Loughlinstown concert with the parish choir, June</span>'),
+                 ("July to September.",
+                  '<span class="sl">Inclusive Classrooms: a first term in one or two schools</span> '
+                  '<span class="sl">First Ceol le Chéile counties chosen</span> '
+                  '<span class="sl">Charitable status applied for</span>'),
+                 ("October to December.",
+                  '<span class="sl">Ceol le Chéile in its first four counties</span> '
+                  '<span class="sl">Recitals by Hyelee Jung and Dr Soo-Jung Ann</span> '
+                  '<span class="sl">Letters Ensemble autumn and winter concerts</span> '
+                  '<span class="sl">The first year reviewed and the 2028 plan adopted</span>')]),
+               ("Where the work grows, area by area", "Hide the areas",
+                [("Dublin City.",
+                  "In 2027, the haegeum week, the Chamber Series and Hope Concerts. Then care-home circuits, "
+                  "school terms and a second recorder class."),
+                 ("Fingal and Dublin 15.",
+                  "In 2027, the Mulhuddart class and visits to Blanchardstown Library and Connolly Hospital. "
+                  "Then school music in Dublin 15 and a second Fingal class."),
+                 ("South Dublin.",
+                  "In 2027, visits to Tallaght University Hospital after South Dublin Live 2026. Then care "
+                  "seasons and a recorder class."),
+                 ("Dún Laoghaire-Rathdown.",
+                  "In 2027, the Loughlinstown class and its concert with the parish choir. Then care seasons and "
+                  "two recorder classes."),
+                 ("Beyond Dublin.",
+                  "From September 2027, Ceol le Chéile in four counties. Eight by 2029, and twelve or more is "
+                  "our target for 2030.")])],
         link=("get-involved.html#support", "How to help now"),
         doc=("assets/docs/CMFE_Business_Plan_Summary_2027.pdf", "Business plan summary (PDF)"),
     ),
@@ -678,23 +824,72 @@ PROGRAMMES_T = dict(
         pillar_lines=PILLAR_LINES,
         groups=[("learn", [
                     ("A second recorder class.",
-                     "A weekly class for adults at St Columbanus, Loughlinstown, from January."),
+                     "From January 2027, a weekly class for adults at St Columbanus, Loughlinstown. It ends in "
+                     "June with a concert with the parish choir."),
                     ("Music for Inclusive Classrooms.",
-                     "From September 2027: music in mainstream schools for pupils who learn differently, "
-                     "planned with the class teacher.")]),
+                     "From September 2027, in one or two mainstream schools: music for pupils who learn "
+                     "differently, planned with the class teacher."),
+                    ("Three ways to run it.",
+                     "A recorder ensemble, an instrumental ensemble, or a hands-on classroom of instruments, "
+                     "rhythm and listening.")]),
                 ("share", [
                     ("Hope Concerts.",
-                     "Within Outreach Concerts: a season of visits to hospitals and care homes, with the "
-                     "same musicians returning."),
+                     "From 2027, within Outreach Concerts: regular visits to the Mater Hospital and to care homes "
+                     "and hospitals that ask, the same musicians returning."),
                     ("Ceol le Chéile (Music Together, in Every County).",
-                     "From September 2027, with council arts offices: a school or library visit, a visit to a "
-                     "care home and an evening concert."),
+                     "From September 2027, the first four counties, with council arts offices: a school or "
+                     "library visit, a care home and an&nbsp;evening&nbsp;concert."),
                     ("CMFE Artist Services.",
-                     'Concerts we plan and produce for musicians, groups, parishes, councils and festivals. <a class="link" '
-                     'href="get-involved.html#play">Register your interest</a> any time.'),
+                     "Concerts we plan and produce for musicians and groups. First, recitals by soprano Hyelee "
+                     'Jung and pianist Dr Soo-Jung Ann. <a class="link" href="get-involved.html#play">Register '
+                     "your interest</a> any time."),
                     ("The Channel.",
-                     "From January 2027, on Instagram and YouTube: concert listings, a newsletter, a monthly "
-                     "magazine and learning videos.")])],
+                     "From January 2027, on Instagram and YouTube: weekly concert listings, a newsletter, a "
+                     "monthly magazine and learning videos.")])],
+        link=("news.html#preparing", "Projects in preparation for 2027"),
+    ),
+    # One path, many ways in (the Strategy's page 12, 9 Nov 2026): four stations, each with the programmes
+    # that open it (name, page or None, when a plan begins, what you do there); the three ways in from the
+    # side under the path. Programme numbers are left out: the cover numbers are the site's (R33).
+    path=dict(
+        # not the drawing taken off in v7 (one programme's story): every programme, as equals (§2.1)
+        label="How it fits together",
+        h2="One path, many ways in.",
+        lead="Many people first meet us at a concert, then listen, join, play and perform.",
+        stations=[("Listen", [
+                      ("Getting to Know", "programmes/getting-to-know.html", None, "A talk with live playing."),
+                      ("Concert Companion", "programmes/concert-companion.html", None, "Going to a concert together.")]),
+                  ("Join", [
+                      ("Recorder Class", "programmes/recorder-ensemble.html", None, "Start each week as a beginner."),
+                      ("Inclusive Classrooms", None, "From September 2027", "A small group in school.")]),
+                  ("Play", [
+                      ("Recorder Class", "programmes/recorder-ensemble.html", None, "Play in the ensemble and the term&rsquo;s concert."),
+                      ("Letters Ensemble", "programmes/letters-ensemble.html", None, "Rehearse with the ensemble.")]),
+                  ("Perform", [
+                      ("Letters Ensemble", "programmes/letters-ensemble.html", None, "Concerts for parishes and venues."),
+                      ("Inclusive Classrooms", None, "From September 2027", "A shared performance at the end of term.")])],
+        notes=[("We come to you.",
+                "Care homes, hospitals and parishes often meet us at an Outreach Concert, then book a talk or "
+                "host a class."),
+               ("Behind the scenes.", "CMFE Artist Services will plan and produce concerts for musicians and groups."),
+               ("Staying in touch.", "From January 2027, our channel on Instagram and YouTube points to the next concert.")],
+    ),
+    # 2027, one dot for each talk, session, concert, visit or day (the Strategy's page 13): (name, pillar,
+    # how many dots, what they are). No total: the Strategy's own total counts more than these rows.
+    year=dict(
+        label="The year ahead",
+        h2="2027, one dot each.",
+        lead="A dot is a talk, a session, a concert, a visit or a day we plan.",
+        rows=[("Getting to Know", "learn", 10, "10 talks"),
+              ("Concert Companion", "learn", 2, "2 outings or more"),
+              ("Recorder Class", "learn", 20, "20 sessions: two classes of ten a term"),
+              ("Inclusive Classrooms", "learn", 2, "Up to 2 schools, from September"),
+              ("Letters Ensemble", "share", 4, "4 concerts, one each season"),
+              ("Outreach Concerts", "share", 4, "4 concerts or more"),
+              ("Hope Concerts", "share", 9, "9 visits"),
+              ("Ceol le Chéile", "share", 4, "4 counties, from September"),
+              ("CMFE Artist Services", "share", 2, "2 recitals")],
+        note="This is our plan for 2027. Plans can change.",
     ),
 )
 
@@ -737,8 +932,9 @@ GET_INVOLVED_T = dict(
         # kit 02 §2 and 29: what a host gives, and what we can promise
         # the same three steps as the Outreach Concerts page
         href=MAIL_INVITE, btn="Invite us", more="How a concert works",
-        # Andrew, 2026-10-06 (Q4): one to two hours
-        hub_notes=["1 to 2 hours", None],
+        # the Strategy 2027-2030 (9 Nov 2026): 45 to 60 minutes, with two or more musicians (in place of
+        # Andrew's "one to two hours" of 6 Oct 2026, Q4: the newer document wins, §00 Cowork rule)
+        hub_notes=["45 to 60 minutes", None],
         class_href=_MAIL_HOST,
         class_go="Ask about hosting a class",
     ),
@@ -844,6 +1040,14 @@ GET_INVOLVED_T = dict(
                    ("Conditions", "Unpaid, two to four hours a month, with reasonable expenses")],
             # the same roles, one a seat at the drawn table (parts.table): the Strategy's five seats
             roles=["Chair", "Treasurer", "Secretary", "Safeguarding and care", "Community"],
+            # what each seat asks, and when it is filled (the Strategy 2027-2030, page 21), folded
+            needs=("What each role asks", "Hide",
+                   [("Chair, during 2026.", "Experience of leading a board, an arts organisation or a community body."),
+                    ("Treasurer, during 2026.", "Finance or accounting: budgets, accounts and controls."),
+                    ("Secretary, during 2026.", "Governance and company records: minutes, filings and policies."),
+                    ("Safeguarding and care, during 2027.",
+                     "Experience in care, health, disability or education settings."),
+                    ("Community, during 2027.", "Someone from the communities and parishes we serve.")]),
             href=_MAIL_BOARD, btn="Ask about a role",
         ),
     ),
@@ -870,6 +1074,8 @@ PROGRAMME_T = dict(
     join_label="Take part", others_label="The other programmes", all_label="All five programmes",
     room_label="In the room", room_h2="Where it happens.",
     how_join="How to take part",
+    # the Strategy's 2027 line under each record (9 Nov 2026)
+    next_label="In 2027",
     video_h="Watch", video_label="Video: {name}", play="Play the video", watch="Watch on {service}",
     people="{n} people",
     mail_hint="One line is enough. If it helps, tell us:",
@@ -923,6 +1129,46 @@ NEWS_T = dict(
              "Wednesday evenings, 7pm to 8pm, at Mulhuddart Community Centre.",
              "programmes/recorder-ensemble.html",
              "About the class")],
+    # projects in preparation for 2027 (the Strategy 2027-2030, page 14, 9 Nov 2026): each a plan, with the
+    # venues and musicians named (Andrew, 9 Nov 2026) and no grant, funder or application named; the line
+    # with the two embassies is left out (in discussion). (when, title, line, [(label, parts with " · ")])
+    preparing=dict(
+        label="Coming in 2027",
+        h2="Projects in preparation.",
+        lead="Each grows from work we have already done.",
+        items=[("14&ndash;21 February 2027", "Two Traditions: A Haegeum Week",
+                "Korean haegeum and Irish uilleann pipes on one stage, with two new pieces.",
+                [("Where", "TU Dublin Concert Hall, 16 February · Mater Hospital, 17 February · "
+                           "St Andrew&rsquo;s, Westland Row, 19 February"),
+                 ("With", "Jieun Kim, haegeum · Mark Redmond, uilleann pipes · Dr Soo-Jung Ann, piano · "
+                          "Andrew Seohyeon Kim, clarinet")]),
+               ("May and September 2027", "Chamber Series",
+                "Korean musicians who live in Dublin, playing in their own city.",
+                [("Concerts", "&lsquo;One Voice&rsquo;, Church of the Three Patrons, Rathgar · A piano recital by "
+                              "Dr Soo-Jung Ann, St Andrew&rsquo;s"),
+                 ("Visits", "Mater Hospital · Our Lady of Dolours"),
+                 ("With", "Dr Soo-Jung Ann · Hyelee Jung · Andrew Seohyeon Kim")]),
+               ("2027&ndash;28", "New music for two traditions",
+                "One Irish and one Korean composer each write a piece for haegeum, uilleann pipes, clarinet and "
+                "piano.",
+                [("Heard", "First in Dublin, then in Korea"),
+                 ("With", "Mark Redmond · Jieun Kim")]),
+               ("January to June 2027", "Loughlinstown Recorder Ensemble",
+                "A weekly class for adults from January, ending before summer in a concert.",
+                [("Where", "St Columbanus, Loughlinstown"),
+                 ("With", "The parish of St Columbanus · The parish choir and a guest trio, at the concert")]),
+               ("2027", "Music in Dublin 15",
+                "The Mulhuddart class goes on, with visiting concerts in Dublin 15.",
+                [("Where", "Blanchardstown Library, during Bealtaine · Connolly Hospital · A hospice · "
+                           "A local venue"),
+                 ("Trio", "Dr Soo-Jung Ann · Hyelee Jung · Andrew Seohyeon Kim")]),
+               ("2027", "Two recitals",
+                "Our first recitals produced by CMFE Artist Services.",
+                [("Soprano", "Hyelee Jung, with Landon Ronald&rsquo;s <cite>A Cycle of Life</cite>"),
+                 ("Piano", "Dr Soo-Jung Ann")])],
+        note="Dates and places are plans, and may change.",
+        link=("programmes.html#planned", "The lines planned for 2027"),
+    ),
     chart=dict(
         label="The record",
         h2="Forty-two, by year.",

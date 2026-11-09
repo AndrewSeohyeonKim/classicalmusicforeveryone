@@ -348,12 +348,12 @@ html[lang^="ko"] :is(h1,h2,h3,h4,p,li,dd,dt,figcaption,td,th,a,span,b,small){
    set only colour, margin and layout. */
 .eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,
 .glance dt,.facts dt,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,
-.none-glance dt,.mini-period,.ry-m,.ry-n,.lt-kind{
+.none-glance dt,.mini-period,.ry-m,.ry-n,.lt-kind,.pj-facts dt{
   font-family:var(--font-body);font-size:var(--t-label);font-weight:600;
   letter-spacing:var(--label-track);text-transform:uppercase;line-height:1.3;
   font-variant-numeric:lining-nums tabular-nums;
 }
-html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,.none-glance dt,.mini-period,.ry-m,.ry-n,.lt-kind){
+html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.pc-num,.pp-glance dt,.pi-facts dt,.places-group h3,.none-glance dt,.mini-period,.ry-m,.ry-n,.lt-kind,.pj-facts dt){
   font-family:var(--font-kr);font-size:.84rem;letter-spacing:var(--label-track-kr);font-weight:700;
 }
 /* Korean has two weights: a field label steps down to 400 so the 700 value
@@ -365,7 +365,7 @@ html[lang^="ko"] :is(.pp-glance dt,.facts-plain dt){font-weight:700}
 /* a Latin name in a Korean label keeps its written case: 「Garda 신원조회」, not 「GARDA 신원조회」 (v7) */
 html[lang^="ko"] :is(.eyebrow,.kicker,.fig-period,.cap-label,.site-footer h2,.glance dt,.facts dt,.pc-num,
     .pp-glance dt,.pi-facts dt,.places-group h3,.none-glance dt,.mini-period,.ry-m,.ry-n,.lt-kind,.meet-label,
-    .route dt,.route-plan dt,.seats-label,.table-top dt,.wa dt,.d-label){text-transform:none}
+    .route dt,.route-plan dt,.seats-label,.table-top dt,.wa dt,.d-label,.pj-facts dt){text-transform:none}
 .eyebrow{display:flex;align-items:baseline;gap:12px;margin:0 0 22px;color:var(--accent-ink)}
 /* a section number, set like a movement in a programme: in the face, size
    and weight of the words it leads, so the line is one voice (R33; Andrew,
@@ -1152,7 +1152,7 @@ html[lang^="ko"] .facts.facts-rows dt{font-family:var(--font-kr);font-weight:700
 
 
 /* three to six points, each with a lead-in */
-.leadins{list-style:none;margin:0;padding:0;display:grid;gap:clamp(16px,2vw,22px);max-width:var(--measure)}
+.leadins{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(16px,2vw,22px);max-width:var(--measure)}
 .leadins li{color:var(--fg)}
 .leadins strong{font-weight:700}
 
@@ -3363,6 +3363,141 @@ html[lang^="ko"] .footer-line{font-family:var(--font-display);font-weight:500;fo
 
 
 /* ==========================================================================
+   19b. 2027 · THE STRATEGY ON THE SITE (request 22, 9 Nov 2026)
+   Six parts, one kit: the five lines (R43), the pillar's dot (R17: filled is
+   Learning, open is Sharing), programme names in Garamond (R5), no box (L4: a
+   box is one link, and these are read), no rule between rows (R1: spacing).
+   ========================================================================== */
+
+/* a programme named in a list: its name, and under it when it starts if it
+   has not started yet (a value people look for: Jakarta 600, gold) */
+.pr-name{font-family:var(--font-display);font-size:1.12rem;font-weight:600;line-height:1.3;color:var(--fg)}
+html[lang^="ko"] .pr-name{font-family:var(--font-kr);font-weight:700;font-size:1.05rem;letter-spacing:-.01em;line-height:1.45}
+.pr-name a{color:inherit;text-decoration:underline;text-decoration-color:var(--accent-mark);
+  text-decoration-thickness:1px;text-underline-offset:.22em;transition:color var(--dur-3) var(--ease)}
+.pr-name a:hover{color:var(--accent-ink);text-decoration-color:var(--accent-ink)}
+.pr-when{display:block;margin-top:2px;font-size:var(--t-caption);font-weight:600;line-height:1.4;color:var(--accent-ink);
+  font-variant-numeric:lining-nums}
+html[lang^="ko"] .pr-when{font-weight:700}
+
+/* 1 · three commitments (home II). From 62.5em one on each of the content
+   line's three columns (452 · 755 · 1058 at 1440); between 55em and 62.5em
+   the columns are too narrow for a heading, so they stack on the content line */
+.commits{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(36px,4vw,48px)}
+@media (min-width:55.0625em){.commits{margin-inline-start:var(--col4);max-width:46rem}}
+@media (min-width:62.5625em){.commits{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--col-gap);max-width:none}}
+/* the number in the heading's face, size and weight, gold (R33), on its
+   first baseline; what follows returns to the column's edge */
+.cmt{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:.42em;align-content:start}
+.cmt-n{font-family:var(--font-display);font-size:var(--t-h3);font-weight:600;line-height:1.24;color:var(--accent-ink);
+  font-variant-numeric:lining-nums;align-self:baseline}
+.cmt h3{align-self:baseline}
+html[lang^="ko"] .cmt-n{font-family:var(--font-kr);font-weight:700}
+html[lang^="ko"] .cmt h3{font-size:1.25rem;line-height:1.45;letter-spacing:-.02em}
+html[lang^="ko"] .cmt-n{font-size:1.25rem;line-height:1.45}
+.cmt-t,.cmt-progs{grid-column:1/-1}
+.cmt-t{margin:10px 0 0;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:24em}
+.cmt-progs{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.cmt-progs li{display:grid;grid-template-columns:max(8px,.5em) minmax(0,1fr);column-gap:12px;align-items:baseline}
+.cmt-progs .dot{position:relative;top:-.1em}
+.cmt-progs :is(.pr-name,.pr-when){grid-column:2}
+
+/* 2 · the need (home IV): four figures with their sources (R7: one top
+   line for the numbers, the words under them, the source under that). From
+   75em one on each of the five lines' first four; from 55em two, on the page
+   edge and the third column line; two a row below that, one on a narrow phone */
+.need-figs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px var(--col-gap)}
+@media (min-width:55.0625em){
+  .need-figs{grid-template-columns:calc(var(--col4) - var(--col-gap)) repeat(3,minmax(0,1fr));column-gap:var(--col-gap)}
+  .need-figs>li{grid-column:span 2}
+}
+@media (min-width:75.0625em){.need-figs>li{grid-column:auto}}
+@media (max-width:26em){.need-figs{grid-template-columns:minmax(0,1fr)}}
+.need-figs>li{display:flex;flex-direction:column;min-width:0}
+.need-n{font-family:var(--font-display);font-size:clamp(2.4rem,4vw,3.4rem);font-weight:500;line-height:1;color:var(--fg);
+  font-variant-numeric:lining-nums;letter-spacing:-.01em}
+/* 「6명 중 1명」 is Hangul and figures in one phrase: the whole row is Noto 700 (R33) */
+html[lang^="ko"] .need-n{font-family:var(--font-kr);font-weight:700;font-size:clamp(2rem,3.2vw,2.75rem);letter-spacing:-.03em}
+.need-t{display:block;margin-top:12px;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:18em}
+.need-src{display:block;margin-top:8px;font-size:var(--t-caption);line-height:1.45;color:var(--fg-muted)}
+.need-figs+.run-body{margin-top:clamp(28px,3vw,40px)}
+
+/* 3 · the path (Programmes): the About plan's four stations (.steps-4), each
+   with the programmes that open it. The station rules (.steps li) reach the
+   names' own list items too: they are put back to plain rows here */
+.path .path-ways li{position:static;padding:0}
+.path .path-ways li::before{content:none;display:none}
+.path-ways{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.pw-t{display:block;margin-top:3px;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:22em}
+.path .pr-when+.pw-t{margin-top:4px}
+.steps-4.path+.run-body{margin-top:clamp(40px,4.5vw,56px)}
+
+/* 4 · the year ahead (Programmes): a row for each programme on the content
+   line, its name on the content line, its dots on the second column line, its
+   count on the third (R43); ten dots at most to a row, so twenty make two */
+/* margin-block only: the list is also .run-body, which puts it on the content line */
+.year-dots{list-style:none;margin-block:0;padding:0;display:grid;gap:18px}
+.year-dots li{display:grid;grid-template-columns:minmax(0,1fr) max-content;grid-template-areas:"n d" "c d";column-gap:20px;
+  align-items:start}
+@media (min-width:55.0625em){
+  .year-dots li{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:"n d c";column-gap:var(--col-gap)}
+}
+.yd-name{grid-area:n;font-family:var(--font-display);font-size:1.12rem;font-weight:600;line-height:1.4;color:var(--fg)}
+html[lang^="ko"] .yd-name{font-family:var(--font-kr);font-weight:700;font-size:1.05rem;letter-spacing:-.01em;line-height:1.5}
+.yd-dots{grid-area:d;display:grid;grid-template-columns:repeat(10,max(8px,.5em));gap:7px 6px;justify-content:start;
+  padding-top:calc(.7em - 4px)}
+.yd-dots i{display:block;width:max(8px,.5em);height:max(8px,.5em);border-radius:50%;background:var(--accent-mark)}
+.yd-dots i.o{background:transparent;box-shadow:inset 0 0 0 1.5px var(--accent-mark)}
+.yd-n{grid-area:c;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);font-variant-numeric:lining-nums}
+@media (max-width:55em){.yd-n{margin-top:2px}}
+.year-note{margin-top:28px;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg)}
+@media (max-width:22em){
+  .year-dots li{grid-template-columns:minmax(0,1fr);grid-template-areas:"n" "d" "c";row-gap:6px}
+}
+
+/* 5 · projects in preparation (News): three to a row on the content line's
+   three columns from 75em, two (page edge and third column line) from 55em,
+   two a row on a tablet, one on a phone. No box: nothing here is a link */
+.projects{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(36px,4vw,56px) var(--col-gap)}
+@media (min-width:40em){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:55.0625em){
+  .projects{grid-template-columns:calc(var(--col4) - var(--col-gap)) repeat(3,minmax(0,1fr))}
+  .pj{grid-column:span 2}
+}
+@media (min-width:75.0625em){
+  .projects{margin-inline-start:var(--col4);grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pj{grid-column:auto}
+}
+.pj{min-width:0}
+.pj-when{margin:0;font-size:var(--t-small);font-weight:600;line-height:1.35;color:var(--accent-ink);font-variant-numeric:lining-nums}
+html[lang^="ko"] .pj-when{font-weight:700}
+.pj h3{margin-top:8px;font-size:clamp(1.3rem,1.9vw,1.6rem);line-height:1.2}
+html[lang^="ko"] .pj h3{font-size:1.22rem;line-height:1.45;letter-spacing:-.02em}
+.pj-t{margin:10px 0 0;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg);max-width:24em}
+.pj-facts{margin:18px 0 0;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.pj-facts dt{color:var(--accent-ink)}
+.pj-facts dd{margin:5px 0 0;font-size:var(--t-small);line-height:1.5;color:var(--fg)}
+/* each part on its own line, the separator kept for a screen reader (no
+   middle dot left at a line end) */
+.pj-facts .cp{display:block}
+.pj-facts .cp+.cs+.cp{margin-top:6px}
+.pj-facts .cs{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.projects-foot{margin-top:clamp(36px,4vw,52px)}
+@media (min-width:55.0625em){.projects-foot{margin-inline-start:var(--col4)}}
+.projects-note{margin:0;font-size:var(--t-small);line-height:var(--lh-small);color:var(--fg)}
+.projects-foot .btn-row{margin-top:20px}
+
+/* 6 · next year, on a programme's page: under its record, in the ink band,
+   on the record's content line */
+.pp-next{margin-top:clamp(40px,5vw,64px);max-width:46rem}
+@media (min-width:55.0625em){.pp-next{margin-inline-start:var(--col4)}}
+.pp-next h3{font-size:var(--t-h3);color:var(--fg-inverse)}
+html[lang^="ko"] .pp-next h3{font-size:1.25rem;line-height:1.45}
+.pp-next p{margin:10px 0 0;font-size:var(--t-body);line-height:var(--lh-text);color:var(--fg-inverse);max-width:var(--measure)}
+.pp-next .btn-row{margin-top:18px}
+
+
+/* ==========================================================================
    20. THE PHONE AND THE TABLET
    Breakpoints are in em so that a larger default text size moves them too:
    a reader at 200% text zoom gets the drawer, not an overflowing header.
@@ -3488,7 +3623,9 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
 @media (forced-colors:active){
   .btn{border-color:ButtonText}
   .menu-toggle i{background:CanvasText}
-  :is(.dot,.nav-mark,.forty-row span,.strip-key i,.ns-live){forced-color-adjust:none}
+  :is(.dot,.nav-mark,.forty-row span,.strip-key i,.ns-live,.yd-dots i){forced-color-adjust:none}
+  .yd-dots i{background:CanvasText}
+  .yd-dots i.o{background:Canvas;box-shadow:inset 0 0 0 1.5px CanvasText}
   .ry-list li::before{forced-color-adjust:none;background:CanvasText}
   .ry-list li.ry-p::before{background:Canvas;box-shadow:inset 0 0 0 1.5px CanvasText}
   .tl-item::before{forced-color-adjust:none;animation:none;background:CanvasText;box-shadow:none}
@@ -3533,6 +3670,8 @@ a[href^="mailto:"]{overflow-wrap:anywhere}
   .cover-no,.cover-line{color:#222 !important}
   .forty-row span{background:#333 !important}
   .forty-row .f-open{background:none !important;box-shadow:inset 0 0 0 1.5px #333 !important}
+  .yd-dots i{background:#333 !important}
+  .yd-dots i.o{background:none !important;box-shadow:inset 0 0 0 1.5px #333 !important}
   :is(.strip,.att) :is(.s-on,.c-bar){fill:#333 !important}
   :is(.strip) .s-open{fill:#fff !important;stroke:#333 !important}
   :is(.map-svg,.wa-svg) .m-land{fill:#f2f2f2 !important;stroke:#999 !important}

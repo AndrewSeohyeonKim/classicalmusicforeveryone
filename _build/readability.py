@@ -62,6 +62,13 @@ BUDGET = {
         "list-item":    (24, 2, 22),
         "row":          (34, 3, 24),
         "other":        (24, 2, 18),
+        # the Strategy 2027-2030 on the site (9 Nov 2026). A commitment's line is one sentence, like a
+        # section lead. A need figure is a number, the sentence it ends and its source (two runs: the
+        # sentence and the citation). A project's line and its rows name venues and musicians in full
+        # ("St Andrew's, Westland Row, 19 February"), so they get a row's sentence, not a value's 12.
+        "commit":       (16, 1, 16),
+        "need":         (24, 2, 20),
+        "project":      (24, 2, 20),
     },
     "ko": {
         "hero-lead":    (48, 2, 34),
@@ -88,6 +95,9 @@ BUDGET = {
         "list-item":    (58, 2, 53),
         "row":          (82, 3, 58),
         "other":        (58, 2, 43),
+        "commit":       (38, 1, 38),
+        "need":         (58, 2, 48),
+        "project":      (58, 2, 48),
     },
 }
 
@@ -136,6 +146,13 @@ RULES = [
     ("card-line",    ("pi-main",)),
     ("value",        ("pi-facts", "dd")),
     ("news-card",    ("latest",)),
+    # the Strategy 2027-2030 on the site (9 Nov 2026): the three commitments on Home, the need in four
+    # figures, the projects in preparation on News; the founder's folded facts are reference lines, one
+    # item a line (sl), measured and never stopping the build, like the other lists
+    ("commit",       ("commits",)),
+    ("need",         ("need-figs",)),
+    ("project",      ("projects",)),
+    ("list-item",    ("founder-courses", "dd")),
     # the four doors on Get involved and the two under the home cards
     ("contents-row", ("doors",)),
     ("row",          ("now-line",)),

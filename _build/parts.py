@@ -545,6 +545,58 @@ def _vocab(words):
     return '<span class="vs"> · </span>'.join(f'<span class="vw">{w.replace(" ", "\u00a0")}</span>' for w in words.split(" · "))
 
 
+def _prog_ref(name, href, when):
+    """A programme named in a diagram: the name in Garamond (a link when it has a page), and, for a line
+    that is still a plan, when it begins on a line of its own (R33: the name and the date are two faces,
+    so two lines; R19: a plan is said as a plan, never drawn as running)."""
+    nm = f'<a href="{href}">{name}</a>' if href else name
+    w = f'<small class="pr-when">{when}</small>' if when else ""
+    return f'<span class="pr-name">{nm}</span>{w}'
+
+
+def commitments(c, pillars, no=None):
+    """The Strategy 2027-2030's three commitments (Andrew, 9 Nov 2026: the site was weaker than the
+    Strategy), each with the programmes that keep it. The dot is the programme's pillar (R17: filled,
+    Learning; open, Sharing); nothing joins the three, they stand side by side (no order)."""
+    items = []
+    for k, (h3, line, progs) in enumerate(c["items"]):
+        rows = "".join(f'<li><i class="{pillars[pl][1]}" aria-hidden="true"></i>{_prog_ref(name, href, when)}</li>'
+                       for name, pl, href, when in progs)
+        items.append(f"""      <li class="cmt" style="--i:{k}">
+        <span class="cmt-n" aria-hidden="true">{k + 1}</span>
+        <h3>{h3}</h3>
+        <p class="cmt-t">{line}</p>
+        <ul class="cmt-progs">{rows}</ul>
+      </li>""")
+    return f"""<section class="band-white" id="commitments">
+  <div class="wrap">
+{sh(c["label"], c["h2"], c.get("lead"), no=no, split=True)}
+    <ol class="commits rv-stagger">
+{chr(10).join(items)}
+    </ol>
+  </div>
+</section>"""
+
+
+def need_section(nd, no=None):
+    """The need in four figures, each with its source on a line of its own (the Strategy's page 3), then
+    the six groups the work is for, folded as reference (each: the need, what research shows, and the
+    programmes that answer it). Public research only: no participant's age, no claim of our own effect."""
+    figs = "\n".join(f"""      <li style="--i:{k}"><b class="need-n">{n}</b><span class="need-t">{text}</span><small class="need-src">{src}</small></li>"""
+                     for k, (n, text, src) in enumerate(nd["figs"]))
+    groups = ""
+    if nd.get("groups"):
+        groups = f'\n    <div class="run-body">\n      {fold(nd["groups_summary"], leadins(nd["groups"]), "rv", nd.get("groups_hide"))}\n    </div>'
+    return f"""<section id="need">
+  <div class="wrap">
+{sh(nd["label"], nd["h2"], nd.get("lead"), no=no, split=True)}
+    <ul class="need-figs rv-stagger">
+{figs}
+    </ul>{groups}
+  </div>
+</section>"""
+
+
 def home(t, programmes, pillars, lang):
     """Hero, the five programmes, the record (the page's one ink band), then
     why we exist on white, so the ink band never runs into the ink footer
@@ -559,6 +611,12 @@ def home(t, programmes, pillars, lang):
     live = [p for p in programmes if p["page"].get("live")]
     now = f"\n        {now_line(live[0], 'lift lift-3')}" if live else ""
     cta_lift = "lift-4" if live else "lift-3"
+    # the Strategy's three commitments and its need, in figures (9 Nov 2026): after the five cards (what we
+    # run comes first, §3.6), and the need before why we exist, so the page still ends on "So we go to them"
+    cm, nd = t.get("commitments"), t.get("need")
+    commits = f"{commitments(cm, pillars, 'II')}\n\n" if cm else ""
+    need = f"{need_section(nd, 'IV')}\n\n" if nd else ""
+    no_rec, no_why = ("III.", "V") if cm and nd else ("II.", "III")
     # the master line is the title's subtitle (Andrew, 2 Oct 2026 evening), in
     # the title's group; the string is the footer's (layout.STR), so the two
     # cannot drift
@@ -592,9 +650,9 @@ def home(t, programmes, pillars, lang):
   </div>
 </section>
 
-<section class="band-ink figs-band" id="record">
+{commits}<section class="band-ink figs-band" id="record">
   <div class="wrap">
-    <h2 class="eyebrow section-label"><span class="no" aria-hidden="true">II.</span>{nb["label"]}</h2>
+    <h2 class="eyebrow section-label"><span class="no" aria-hidden="true">{no_rec}</span>{nb["label"]}</h2>
     <div class="figs" style="--figs:{len(nb["figs"])}">
 {figs}
     </div>
@@ -604,9 +662,9 @@ def home(t, programmes, pillars, lang):
   </div>
 </section>
 
-<section class="manifesto band-white">
+{need}<section class="manifesto band-white">
   <div class="wrap why">
-    {eyebrow(w["label"], "III", "section-label", hidden=True)}
+    {eyebrow(w["label"], no_why, "section-label", hidden=True)}
     <div>
       <h2 class="why-premise" id="why-h"><span class="sr-only">{w["label"]}: </span><span class="ink">{w["premise"]}</span></h2>
       <ul class="why-reasons rv-stagger">
@@ -663,6 +721,10 @@ def about(t, lang):
         # beside-answer table set its answers on a line nothing else uses, with
         # gaps after the short labels, and pushed the links to the next screen)
         trust = f"    {leadins(r['items'], 'rv')}"
+        # how the company will be run (the Strategy's governance page, 9 Nov 2026), folded as reference
+        if r.get("more"):
+            show, hide, rows = r["more"]
+            trust += f"\n      {fold(show, leadins(rows), 'rv', hide)}"
     else:
         trust = '    <div class="trust rv-stagger">\n' + "\n".join(f"""      <div>
         <h3>{a}</h3>
@@ -706,6 +768,10 @@ def about(t, lang):
         doc = (f'{go(pn["doc"][0], pn["doc"][1])}' if OPEN_DOCS and pn.get("doc") else "")
         goals = (f'\n    {fold(pn["goals_summary"], leadins(pn["goals"]), "rv", pn.get("goals_hide"))}'
                  if pn.get("goals") else "")
+        # 2027 quarter by quarter, and where the work grows area by area (the Strategy, pages 20 and 21,
+        # 9 Nov 2026): reference under the goals, folded so the page keeps its reading budget
+        for show, hide, rows in pn.get("folds", ()):
+            goals += f'\n    {fold(show, leadins(rows), "rv", hide)}'
         act = f'\n    <div class="btn-row rv">{go(pn["link"][0], pn["link"][1])}{doc}</div>'
         # four stages (the Strategy's 2027 to 2030, request 20) stand from 75em one on each of the four lines
         # the glance stands on, the first at the page edge (styles.css .steps-4, R43: three in a row on the
@@ -842,14 +908,66 @@ def programmes(t, programmes_, pillars):
         <h3 class="kicker"><i class="{pillars[k][1]}" aria-hidden="true"></i>{pillars[k][0]} · {pl["pillar_lines"][k]}</h3>
         {leadins(items)}
       </div>""" for k, items in pl["groups"])
+        more = (f'\n    <div class="run-body btn-row rv">{go(pl["link"][0], pl["link"][1])}</div>'
+                if pl.get("link") else "")
+        # on cream since 9 Nov 2026: the path above it is on white (R3, the grounds alternate)
         planned = f"""
 
-<section class="band-white" id="planned">
+<section id="planned">
   <div class="wrap">
 {sh(pl["label"], pl["h2"], pl.get("lead"), split=True)}
     <div class="run-body plan-lines rv-stagger">
 {groups}
+    </div>{more}
+  </div>
+</section>"""
+    pa = t.get("path")
+    path = ""
+    if pa:
+        # One path, many ways in (the Strategy 2027-2030, page 12; Andrew, 9 Nov 2026): four stations read left
+        # to right on the four lines the glance stands on (.steps-4, R43), each with the programmes that open
+        # it; a line that is still a plan says when it begins (R19). The ways in from the side (visits, the
+        # agency, the channel) are not stations: they stand under the path as lead-ins.
+        st = "\n".join(f"""      <li style="--i:{k}">
+        <span class="step-n" aria-hidden="true">{k + 1}</span>
+        <h3>{h3}</h3>
+        <ul class="path-ways">{"".join(f'<li>{_prog_ref(name, href, when)}<span class="pw-t">{text}</span></li>' for name, href, when, text in ways)}</ul>
+      </li>""" for k, (h3, ways) in enumerate(pa["stations"]))
+        path = f"""
+
+<section class="band-white" id="path">
+  <div class="wrap">
+{sh(pa["label"], pa["h2"], pa.get("lead"), split=True)}
+    <ol class="steps steps-compact steps-4 path rv-stagger">
+{st}
+    </ol>
+    <div class="run-body">
+      {leadins(pa["notes"], "rv path-notes")}
     </div>
+  </div>
+</section>"""
+    yr = t.get("year")
+    year = ""
+    if yr:
+        # 2027, one dot for each session, visit or day (the Strategy's delivery plan, page 13): a row a line,
+        # the name on the content line, the dots on the next line of the page, the count on the last (R43);
+        # filled for Learning, open for Sharing (R17). The dots are drawn for the eye; the count says it. No
+        # total beside them: the Strategy's yearly total counts more than these rows.
+        def yd_row(name, pl_, n, label):
+            dot = '<i class="o"></i>' if pl_ == "share" else "<i></i>"
+            return (f'      <li><span class="yd-name">{name}</span>'
+                    f'<span class="yd-dots" aria-hidden="true">{dot * n}</span>'
+                    f'<span class="yd-n">{label}</span></li>')
+        yrows = "\n".join(yd_row(*r) for r in yr["rows"])
+        year = f"""
+
+<section class="band-white" id="year">
+  <div class="wrap">
+{sh(yr["label"], yr["h2"], yr.get("lead"), split=True)}
+    <ul class="year-dots run-body rv">
+{yrows}
+    </ul>
+    <p class="year-note run-body rv">{yr["note"]}</p>
   </div>
 </section>"""
     return f"""{page_head(t["head"])}
@@ -861,7 +979,7 @@ def programmes(t, programmes_, pillars):
 {rows}
     </ol>{note}
   </div>
-</section>{planned}"""
+</section>{path}{planned}{year}"""
 
 
 # ---------------------------------------------------------------------------
@@ -1054,6 +1172,12 @@ def programme_page(t, i, p, programmes, pillars, lang):
     </div>
   </div>
 </section>"""
+    # what 2027 holds for this programme (the Strategy's "2027" line on each programme card, 9 Nov 2026),
+    # under the record it grows from, on the content line; a plan, said as one (R19)
+    nextb = ""
+    if g.get("next"):
+        lk = f'<div class="btn-row">{go(*g["next_link"])}</div>' if g.get("next_link") else ""
+        nextb = f'\n    <div class="pp-next rv"><h3>{t["next_label"]}</h3><p>{g["next"]}</p>{lk}</div>'
     # a programme running now says so here too, so every page points to it
     others = "\n".join(f"""      <li><a href="programmes/{q["slug"]}.html"><span class="toc-n" aria-hidden="true">{k + 1:02d}</span><b>{q["name"]}</b>{SEP + status_tag(q["page"]["now"][0], True) if q["page"].get("live") else ""}{ARROW}</a></li>"""
                        for k, q in enumerate(programmes) if q["slug"] != p["slug"])
@@ -1099,7 +1223,7 @@ def programme_page(t, i, p, programmes, pillars, lang):
 <section class="band-ink" id="record">
   <div class="wrap">
 {sh(t["record_label"], g["record_h2"], g["record_lead"], no=no_rec, split=True)}{strip}{chart}
-{reclist}
+{reclist}{nextb}
   </div>
 </section>
 
@@ -1192,6 +1316,10 @@ def get_involved(t, icon):
         # giving is closed (Charities Act 2009 s.41, 2026-10-22): the practical ways to help now, then the
         # founding board in a section of its own. No gift, pledge or Friends line is asked for.
         b = sup["board"]
+        # what each seat asks and when it is filled (the Strategy's board table, 9 Nov 2026), folded under
+        # the round table; never a name (board candidates are not named)
+        needs = (f'\n      {fold(b["needs"][0], leadins(b["needs"][2]), "board-needs", b["needs"][1])}'
+                 if b.get("needs") else "")
         routes = ""
         if sup.get("routes"):
             routes = f"""<section id="support">
@@ -1211,7 +1339,7 @@ def get_involved(t, icon):
   <div class="wrap">
 {sh(sup["board_label"] if sup.get("board_label") else sup["label"], b["h2"], b["lead"], split=True)}
     <div class="board rv">
-      {table(b["roles"], b["facts"][0][0], b["facts"][1])}
+      {table(b["roles"], b["facts"][0][0], b["facts"][1])}{needs}
       <div class="board-act">
         <div class="btn-row">{btn(b["href"], b["btn"], "primary")}</div>
         {mail_alt(t["alt"])}
@@ -1527,6 +1655,35 @@ def news(t, lang, programmes=()):
         cells = "".join(cell(f) for f in c["figs"])
         figs = (f'\n    <div class="mini-figs rv"><dl>{cells}</dl>'
                 f'<p class="mini-period">{c["period"]}</p></div>')
+    pr = t.get("preparing")
+    prep = ""
+    if pr:
+        # the projects in preparation for 2027 (the Strategy, page 14; Andrew, 9 Nov 2026: name the venues and
+        # the musicians, say each is a plan, never name a grant or its status): three to a row on the
+        # content line's three columns (R43), one a row below 75em. Not links, so not panels (L4).
+        def pj(k, when, title, text, rows):
+            dl = "".join(f"<div><dt>{a}</dt><dd>{parts_line(b)}</dd></div>" for a, b in rows)
+            return (f'      <article class="pj" style="--i:{k}">\n'
+                    f'        <p class="pj-when">{when}</p>\n'
+                    f'        <h3>{title}</h3>\n'
+                    f'        <p class="pj-t">{text}</p>\n'
+                    f'        <dl class="pj-facts">{dl}</dl>\n'
+                    f'      </article>')
+        cards = "\n".join(pj(k, *it) for k, it in enumerate(pr["items"]))
+        lk = f'\n      <div class="btn-row">{go(pr["link"][0], pr["link"][1])}</div>' if pr.get("link") else ""
+        prep = f"""
+
+<section class="band-sunken" id="preparing">
+  <div class="wrap">
+{sh(pr["label"], pr["h2"], pr.get("lead"), split=True)}
+    <div class="projects rv-stagger">
+{cards}
+    </div>
+    <div class="projects-foot rv">
+      <p class="projects-note">{pr["note"]}</p>{lk}
+    </div>
+  </div>
+</section>"""
     return f"""{page_head(t["head"])}
 
 <section class="tight">
@@ -1536,7 +1693,7 @@ def news(t, lang, programmes=()):
 {_latest(t["latest"], programmes)}
     </div>
   </div>
-</section>
+</section>{prep}
 
 <section class="band-white" id="record">
   <div class="wrap">

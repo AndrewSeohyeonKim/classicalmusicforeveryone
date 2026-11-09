@@ -70,10 +70,11 @@ PAGES = [
 
     ("news.html",
      "News & archive · Classical Music for Everyone",
-     "What is new, the forty-two community music programmes on the record from January 2024 to "
-     "October 2026, a dated timeline and photographs.",
+     "What is new, projects in preparation for 2027, the forty-two community music programmes on the "
+     "record from January 2024 to October 2026, a dated timeline and photographs.",
      "소식·기록 · Classical Music for Everyone",
-     "새 소식, 2024년 1월부터 2026년 10월까지 기록된 커뮤니티 음악 프로그램 마흔두 번, 연표와 사진.",
+     "새 소식, 2027년을 위해 준비 중인 프로젝트, 2024년 1월부터 2026년 10월까지 기록된 커뮤니티 음악 프로그램 "
+     "마흔두 번, 연표와 사진.",
      en.NEWS, ko.NEWS),
 
     ("contact.html",
@@ -333,6 +334,10 @@ def build_llms():
              "and produces concerts for musicians and amateur groups; and The Channel, from January 2027, "
              "with weekly concert listings, a newsletter and a monthly magazine. Musicians and artists from "
              "any field can register interest at any time.",
+             "Projects in preparation for 2027 (on the News page): Two Traditions: A Haegeum Week in February, "
+             "a Chamber Series with Korean musicians who live in Dublin, new music for haegeum, uilleann pipes, "
+             "clarinet and piano, the Loughlinstown Recorder Ensemble, Music in Dublin 15, and two recitals "
+             "produced by CMFE Artist Services. Dates and places are plans and may change.",
              "Plan: the company is to be formed in November–December 2026 with three founding directors, "
              "and the board grows to five in 2027. Stages: 2027 · Foundation, 2028 · Build, 2029 · Widen, "
              "2030 · Across Ireland (a target).",
